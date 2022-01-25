@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.shiguang.product.domain.HcDO;
+import com.shiguang.stock.domain.OrderDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -69,33 +70,189 @@ public class WeiwaishujuController {
 		model.addAttribute("weiwaishuju", weiwaishuju);
 	    return "stock/weiwaishuju/edit";
 	}
-	
 	/**
 	 * 保存
 	 */
 	@ResponseBody
 	@PostMapping("/save")
 	public R save( WeiwaishujuDO weiwaishuju){
-		if (weiwaishuju.getCode()!="" && weiwaishuju.getCode()!=null){
-			String[] codeskc=weiwaishuju.getCode().split(",");
-			String codeKcs="";
-			for (int i=0;i<codeskc.length;i++){
-				codeKcs += codeskc[i]+"00000000,";
+
+		String qjtime=weiwaishuju.getTimetime();
+		if ("".equals(qjtime)){
+				return R.error("取镜时间不能为空！");
+		}
+		String number= weiwaishuju.getNumber();
+		String danjuDay= weiwaishuju.getDanjuDay();
+		String departname= weiwaishuju.getDepartname();
+		String zhidanPeople= weiwaishuju.getZhidanPeople();
+		String jpStyle= weiwaishuju.getJcStyle();
+		String timetime= weiwaishuju.getTimetime();
+		String danjuStyle= weiwaishuju.getDanjuStyle();
+		String weiwaiStyle= weiwaishuju.getWeiwaiStyle();
+		String beizhu= weiwaishuju.getBeizhu();
+
+		if("框镜订做".equals(jpStyle)){
+			String[] saleNumbers =weiwaishuju.getSaleNumber().split(",");
+			String[] nums =weiwaishuju.getNum().split(",");
+			String[] codes =weiwaishuju.getCode().split(",");
+			String[] names =weiwaishuju.getName().split(",");
+			String[] leftRights =weiwaishuju.getLeftRight().split(",");
+			String[] counts =weiwaishuju.getCount().split(",");
+			String[] yaoqius =weiwaishuju.getYaoqiu().split(",");
+			String[] sphs =weiwaishuju.getSph().split(",");
+			String[] cyls =weiwaishuju.getCyl().split(",");
+			String[] zxs =weiwaishuju.getZx().split(",");
+			String[] adds =weiwaishuju.getAdd().split(",");
+			String[] sljs =weiwaishuju.getSlj().split(",");
+			String[] jds =weiwaishuju.getJd().split(",");
+			String[] fartjs =weiwaishuju.getFartj().split(",");
+			String[] neartjs =weiwaishuju.getNeartj().split(",");
+			String[] tgs =weiwaishuju.getTg().split(",");
+			String[] gknames =weiwaishuju.getGkname().split(",");
+			String[] hyknums =weiwaishuju.getHyknum().split(",");
+			String[] phones =weiwaishuju.getPhone().split(",");
+			for(int a=0;a<nums.length;a++){
+				WeiwaishujuDO weiwaishujuDO=new WeiwaishujuDO();
+				weiwaishujuDO.setNumber(number);
+				weiwaishujuDO.setDanjuDay(danjuDay);
+				weiwaishujuDO.setDepartname(departname);
+				weiwaishujuDO.setZhidanPeople(zhidanPeople);
+				weiwaishujuDO.setJcStyle(jpStyle);
+				weiwaishujuDO.setTimetime(timetime);
+				weiwaishujuDO.setDanjuStyle(danjuStyle);
+				try {
+					String saleNumber = saleNumbers[a];
+					weiwaishujuDO.setSaleNumber(saleNumber);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setSaleNumber("");
+				}
+				weiwaishujuDO.setWeiwaiStyle(weiwaiStyle);
+				weiwaishujuDO.setBeizhu(beizhu);
+				try {
+					String sph = sphs[a];
+					weiwaishujuDO.setSph(sph);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setSph("");
+				}
+				try {
+					String cyl = cyls[a];
+					weiwaishujuDO.setCyl(cyl);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setCyl("");
+				}
+				try {
+					String zx = zxs[a];
+					weiwaishujuDO.setZx(zx);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setZx("");
+				}
+				try {
+					String add = adds[a];
+					weiwaishujuDO.setAdd(add);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setAdd("");
+				}
+				try {
+					String slj = sljs[a];
+					weiwaishujuDO.setSlj(slj);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setSlj("");
+				}
+				try {
+					String jd = jds[a];
+					weiwaishujuDO.setJd(jd);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setJd("");
+				}
+				try {
+					String fartj = fartjs[a];
+					weiwaishujuDO.setFartj(fartj);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setFartj("");
+				}
+				try {
+					String neartj = neartjs[a];
+					weiwaishujuDO.setNeartj(neartj);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setNeartj("");
+				}
+				try {
+					String tg = tgs[a];
+					weiwaishujuDO.setTg(tg);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setTg("");
+				}
+				try {
+					String num = nums[a];
+					weiwaishujuDO.setNum(num);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setNum("");
+				}
+				try {
+					String code = codes[a];
+					weiwaishujuDO.setCode(code+"00000000");
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setCode("");
+				}
+				try {
+					String name = names[a];
+					weiwaishujuDO.setName(name);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setName("");
+				}
+				try {
+					String leftRight = leftRights[a];
+					weiwaishujuDO.setLeftRight(leftRight);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setLeftRight("");
+				}
+				try {
+					String count = counts[a];
+					weiwaishujuDO.setCount(count);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setCount("");
+				}
+				try {
+					String yaoqiu = yaoqius[a];
+					weiwaishujuDO.setYaoqiu(yaoqiu);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setYaoqiu("");
+				}
+				try {
+					String gkname = gknames[a];
+					weiwaishujuDO.setGkname(gkname);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setGkname("");
+				}
+				try {
+					String hyknum = hyknums[a];
+					weiwaishujuDO.setHyknum(hyknum);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setHyknum("");
+				}
+				try {
+					String phone = phones[a];
+					weiwaishujuDO.setPhone(phone);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setPhone("");
+				}
+				weiwaishujuService.save(weiwaishujuDO);
 			}
-			weiwaishuju.setCode(codeKcs);
+		}else if ("隐形订做".equals(jpStyle)){
+			String[] numyxs =weiwaishuju.getNumyx().split(",");
+			String[] codeyxs =weiwaishuju.getCodeyx().split(",");
+			String[] nameyxs =weiwaishuju.getNameyx().split(",");
+			String[] leftRightyxs =weiwaishuju.getLeftRightYx().split(",");
+			String[] countyxs =weiwaishuju.getCountyx().split(",");
+			String[] yaoqiuyxs =weiwaishuju.getYaoqiuyx().split(",");
+			String[] sphyxs =weiwaishuju.getSphyx().split(",");
+			String[] cylyxs =weiwaishuju.getCylyx().split(",");
+			String[] zxyxs =weiwaishuju.getZxyx().split(",");
+			String[] qulvs =weiwaishuju.getQulv().split(",");
+			String[] zjs =weiwaishuju.getZj().split(",");
 		}
-		if (weiwaishuju.getCodeyx()!="" && weiwaishuju.getCodeyx() != null){
-			String[] codeskcyx=weiwaishuju.getCodeyx().split(",");
-			String codeKcsyx="";
-			for (int i=0;i<codeskcyx.length;i++){
-				codeKcsyx += codeskcyx[i]+"00000000,";
-			}
-			weiwaishuju.setCodeyx(codeKcsyx);
-		}
-		if(weiwaishujuService.save(weiwaishuju)>0){
-			return R.ok();
-		}
-		return R.error();
+
+		return R.ok();
 	}
 	/**
 	 * 修改
@@ -132,8 +289,7 @@ public class WeiwaishujuController {
 		return R.ok();
 	}
 
-
-	//得到委外数据
+//	//得到委外数据
 	@ResponseBody
 	@RequestMapping(value = "/getWeiwaiShuju")
 	public List<WeiwaishujuDO> getWeiwaiShuju(String number, Model model) {
@@ -143,6 +299,5 @@ public class WeiwaishujuController {
 		model.addAttribute("weiwaiShuju", weiwaiShuju);
 		return weiwaiShuju;
 	}
-
 
 }

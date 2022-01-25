@@ -16,6 +16,7 @@
 <form class="form-horizontal m-t" id="signupForm">
     <div class="m40 tabS msgBox">
         <h3>单据信息</h3>
+        <input id="number" name="number" type="hidden"/>
         <table border="0" cellspacing="0" cellpadding="0">
             <tr>
                 <td>单据编号：</td>
@@ -27,7 +28,7 @@
                     <select id="eyeStyle" name="eyeStyle" style="width:48%" onchange="show()">
                         <option value="">--请选择--</option>
                         <option value="3">框镜订做</option>
-                        <option value="4">隐形订做</option>
+                        <!--<option value="4">隐形订做</option>-->
                     </select>
                 </td>
             </tr>
@@ -69,16 +70,12 @@
             </tr>
 
         </table>
-        <input id="gkname" name="gkname" type="hidden"/>
-        <input id="hyknum" name="hyknum" type="hidden"/>
-        <input id="phone" name="phone" type="hidden"/>
-        <input id="salenumbery" name="salenumbery" type="hidden"/>
         <!--保存/清空-->
         <div class="BQ-btn">
             <!--<input type="button" value="内部配镜单" />-->
             <input type="button" class="empty" value="外部配镜单" onclick="waibu()"/>
             <input id="status" name="status" value="1" type="hidden"/>
-            <input id="username" name="username" value="未收货" type="hidden"/>
+            <input id="username" name="username" value="" type="hidden"/>
             <input type="button" class="H_bc" value="保存并审核" onclick="save()"/>
         </div>
     </div>
@@ -142,30 +139,14 @@
 <script type="text/javascript">
 
     $().ready(function () {
-        var number = window.localStorage.getItem("number");//销售单号
         var eyeStyle = window.localStorage.getItem("eyeStyle");//定做类型
-        // alert(eyeStyle)
         var mfrsid = window.localStorage.getItem("mfrsid");//制造商id
-        // alert(mfrsid)
         $('#mfrsid').val(mfrsid);
         var mfrsname = window.localStorage.getItem("mfrsname");//制造商名称
-        // alert(mfrsname)
         $('#mfrsName').val(mfrsname);
-
-
-        var gkname = window.localStorage.getItem("gkname");
-        // alert(gkname)
-        $('#gkname').val(gkname);
-
-        var hyknum = window.localStorage.getItem("hyknum");
-        $('#hyknum').val(hyknum);
-
-        var phone = window.localStorage.getItem("phone");
-        $('#phone').val(phone);
-
-        var salenumbery = window.localStorage.getItem("saleNumber");
-        $('#salenumbery').val(salenumbery);
-
+        var number = window.localStorage.getItem("number");//销售单号
+        $('#number').val(number);
+        // alert(number)
         if (eyeStyle == 3) {
             $("#eyeStyle").find("[value='" + eyeStyle + "']").attr("selected", true);
             $(".val2").remove();
@@ -183,144 +164,111 @@
                         // alert(JSON.stringify(xml));
 
                         for (var i = 0; i < xml.length; i++) {
-                            var str = xml[i].name;
-                            var name = str.split(",");
-                            var num = xml[i].num.split(",");
-                            var code = xml[i].code.split(",");
-                            var leftRight = xml[i].leftRight.split(",");
-                            var count = xml[i].count.split(",");
-                            var yaoqiu = xml[i].yaoqiu.split(",");
-                            var sph="";
-                            var cyl="";
-                            var axial="";
-                            var lightbelow="";
-                            var lengjing="";
-                            var diameter="";
-                            for (var a = 0; a < name.length; a++) {
-                                if (leftRight[a]=="右"){
-                                    sph=xml[i].rightsph;
-                                    cyl=xml[i].rightcyl;
-                                    axial= xml[i].rightzx;
-                                    lightbelow= xml[i].rightAdd;
-                                    lengjing=  xml[i].rightSlj ;
-                                    diameter=  xml[i].rightzj ;
-                                }else if (leftRight[a]=="左") {
-                                    sph=xml[i].leftsph;
-                                    cyl=xml[i].leftcyl;
-                                    axial= xml[i].leftzx;
-                                    lightbelow= xml[i].leftAdd;
-                                    lengjing=  xml[i].leftSlj ;
-                                    diameter=  xml[i].leftzj ;
-                                }
                                 $(".heji1").before("<tr class='val1'>" +
                                     "<td >" + xml[i].number + "</td>\n" +//0
-                                    "<input name='saleNumber' type='hidden' value='" + xml[i].number + "'>\n" +//1
+                                    "<input name='weiwaisaleNumber' type='hidden' value='" + xml[i].number + "'>\n" +//1
                                     "<td>" + xml[i].timetime + "</td>\n" +//2
                                     "<input name='mirrorTime' type='hidden' value='" + xml[i].timetime + "'>\n" +//3
-                                    "<td>" + name[a] + "</td>\n" +//2
-                                    "<input name='goodsName' type='hidden' value='" + name[a] + "'>\n" +//3
+                                    "<td>" +xml[i].name  + "</td>\n" +//2
+                                    "<input name='name' type='hidden' value='" + xml[i].name + "'>\n" +//3
                                     "<td>" + xml[i].weiwaiStyle + "</td>\n" +//2
                                     "<input name='style' type='hidden' value='" + xml[i].weiwaiStyle + "'>\n" +//3
-                                    "<td>" + leftRight[a] + "</td>\n" +//2
-                                    "<input name='rl' type='hidden' value='" + leftRight[a] + "'>\n" +//3
-                                    "<td>" + count [a] + "</td>\n" +//数量
-                                    "<input name='count' type='hidden' value='" + count [a] + "'>\n" +
-                                    "<td>" + sph + "</td>\n" +//球镜
-                                    "<input name='sph' type='hidden' value='" + sph + "'>\n" +//3
-                                    "<td>" + cyl + "</td>\n" +//zhu镜
-                                    "<input name='cyl' type='hidden' value='" + cyl+ "'>\n" +
-                                    "<td>" + axial + "</td>\n" +//zhu镜
-                                    "<input name='axial' type='hidden' value='" + axial+ "'>\n" +
-                                    "<td>" + lightbelow+ "</td>\n" +//zhu镜
-                                    "<input name='lightbelow' type='hidden' value='" + lightbelow + "'>\n" +
-                                    "<td>" + lengjing + "</td>\n" +//zhu镜
-                                    "<input name='lengjing' type='hidden' value='" +lengjing+ "'>\n" +
-                                    "<td>" + diameter + "</td>\n" +//zhu镜
-                                    "<input name='diameter' type='hidden' value='" + diameter + "'>\n" +
-                                    "<td>" + yaoqiu[a] + "</td>\n" +//zhu镜
-                                    "<input id='' name='yaoqiu' type='hidden' value='" + yaoqiu[a] + "'>\n" +
-                                    "<td style='display:none;'>" + num[a] + "</td>\n" +
-                                    "<input name='num' type='hidden' value='" + num[a] + "'>\n" +
-                                    "<input name='code' type='hidden' value='" + code[a] + "'>\n" +
+                                    "<td>" + xml[i].leftRight + "</td>\n" +//2
+                                    "<input name='rl' type='hidden' value='" + xml[i].leftRight + "'>\n" +//3
+                                    "<td>" + xml[i].count + "</td>\n" +//数量
+                                    "<input name='count' type='hidden' value='" + xml[i].count  + "'>\n" +
+                                    "<td>" + xml[i].sph + "</td>\n" +//球镜
+                                    "<input name='sph' type='hidden' value='" + xml[i].sph + "'>\n" +//3
+                                    "<td>" + xml[i].cyl + "</td>\n" +
+                                    "<input name='cyl' type='hidden' value='" + xml[i].cyl + "'>\n" +
+                                    "<td>" + xml[i].zx + "</td>\n" +
+                                    "<input name='zx' type='hidden' value='" + xml[i].zx + "'>\n" +
+                                    "<td>" + xml[i].add + "</td>\n" +
+                                    "<input name='add' type='hidden' value='" + xml[i].add  + "'>\n" +
+                                    "<td>" + xml[i].slj + "</td>\n" +
+                                    "<input name='slj' type='hidden' value='" +xml[i].slj + "'>\n" +
+                                    "<td></td>\n" +
+                                    "<input name='zj' type='hidden' value=''>\n" +
+                                    "<td>" + xml[i].yaoqiu + "</td>\n" +
+                                    "<input  name='yaoqiu' type='hidden' value='" +  xml[i].yaoqiu + "'>\n" +
+                                    "<input name='num' type='hidden' value='" +  xml[i].num + "'>\n" +
+                                    "<input name='code' type='hidden' value='" +  xml[i].code + "'>\n" +
+                                    "<input name='saleNumber' type='hidden' value='" +  xml[i].saleNumber + "'>\n" +
+                                    "<input name='gkname' type='hidden' value='" +  xml[i].gkname + "'>\n" +
+                                    "<input name='hyknum' type='hidden' value='" +  xml[i].hyknum + "'>\n" +
+                                    "<input name='phone' type='hidden' value='" +  xml[i].phone + "'>\n" +
                                     "</tr>"
                                 );//页面每个数量
                             }
-                        }
                     }
                 })
             }
-        } else if (eyeStyle == 4) {
-            $("#eyeStyle").find("[value='" + eyeStyle + "']").attr("selected", true);
-            $(".val1").remove();
-            tab1.style = "display: none";
-            tab2.style = "display: block";
-            if (number != null) {
-                $.ajax({
-                    url: '/stock/weiwaishuju/getWeiwaiShuju',
-                    type: 'post',
-                    dataType: "json",
-                    data: {
-                        'number': number,
-                    },
-                    success: function (xml) {
-                        for (var i = 0; i < xml.length; i++) {
-							var str = xml[i].nameyx;
-							var nameyx = str.split(",");
-							var numyx = xml[i].numyx.split(",");
-							var codeyx = xml[i].codeyx.split(",");
-							var leftRightYx = xml[i].leftRightYx.split(",");
-							var countyx = xml[i].countyx.split(",");
-							var yaoqiuyx = xml[i].yaoqiuyx.split(",");
-							for (var a = 0; a < nameyx.length; a++) {
-								$(".heji2").before("<tr class='val1'>" +
-										"<td >" + xml[i].number + "</td>\n" +//0
-										"<input name='saleNumber' type='hidden' value='" + xml[i].number + "'>\n" +//1
-										"<td>" + xml[i].timetime + "</td>\n" +//2
-										"<input name='mirrorTime' type='hidden' value='" + xml[i].timetime + "'>\n" +//3
-										"<td>" + nameyx[a] + "</td>\n" +//2
-										"<input name='goodsName' type='hidden' value='" + nameyx[a] + "'>\n" +//3
-										"<td>" + xml[i].weiwaiStyle + "</td>\n" +//2
-										"<input name='style' type='hidden' value='" + xml[i].weiwaiStyle + "'>\n" +//3
-										"<td>" + leftRightYx[a] + "</td>\n" +//2
-										"<input name='rl' type='hidden' value='" + leftRightYx[a] + "'>\n" +//3
-										"<td>" + countyx[a] + "</td>\n" +//数量
-										"<input name='count' type='hidden' value='" + countyx[a]+ "'>\n" +
-										"<td>" + xml[i].rightsphyx + "</td>\n" +//球镜
-										"<input name='sph' type='hidden' value='" + xml[i].rightsphyx + "'>\n" +//3
-										"<td>" + xml[i].rightcylyx + "</td>\n" +//zhu镜
-										"<input name='cyl' type='hidden' value='" + xml[i].rightcylyx + "'>\n" +
-										"<td>" + xml[i].rightzxyx + "</td>\n" +//zhu镜
-										"<input name='axial' type='hidden' value='" + xml[i].rightzxyx + "'>\n" +
-										"<td>" + xml[i].rightJd + "</td>\n" +//zhu镜
-										"<input name='jd' type='hidden' value='" + xml[i].rightJd + "'>\n" +
-										"<td>" + xml[i].rightqulv + "</td>\n" +//zhu镜
-										"<input name='curvature' type='hidden' value='" + xml[i].rightqulv + "'>\n" +
-										"<td>" + xml[i].rightzj + "</td>\n" +//zhu镜
-										"<input name='diameter' type='hidden' value='" + xml[i].rightzj + "'>\n" +
-										"<td>" + yaoqiuyx[a] + "</td>\n" +//zhu镜
-										"<input name='yaoqiu' type='hidden' value='" + yaoqiuyx[a] + "'>\n" +
-										"<td style='display:none;'>" + numyx[a] + "</td>\n" +
-										"<input name='num' type='hidden' value='" + numyx[a] + "'>\n" +
-										"<input name='code' type='hidden' value='" + codeyx[a] + "'>\n" +
-										"</tr>"
-								);
-							}
-						}
-                        }
-                    })
-            }
         }
-
-
+        // else if (eyeStyle == 4) {
+        //     $("#eyeStyle").find("[value='" + eyeStyle + "']").attr("selected", true);
+        //     $(".val1").remove();
+        //     tab1.style = "display: none";
+        //     tab2.style = "display: block";
+        //     if (number != null) {
+        //         $.ajax({
+        //             url: '/stock/weiwaishuju/getWeiwaiShuju',
+        //             type: 'post',
+        //             dataType: "json",
+        //             data: {
+        //                 'number': number,
+        //             },
+        //             success: function (xml) {
+        //                 for (var i = 0; i < xml.length; i++) {
+		// 					var str = xml[i].nameyx;
+		// 					var nameyx = str.split(",");
+		// 					var numyx = xml[i].numyx.split(",");
+		// 					var codeyx = xml[i].codeyx.split(",");
+		// 					var leftRightYx = xml[i].leftRightYx.split(",");
+		// 					var countyx = xml[i].countyx.split(",");
+		// 					var yaoqiuyx = xml[i].yaoqiuyx.split(",");
+		// 					for (var a = 0; a < nameyx.length; a++) {
+		// 						$(".heji2").before("<tr class='val1'>" +
+		// 								"<td >" + xml[i].number + "</td>\n" +//0
+		// 								"<input name='saleNumber' type='hidden' value='" + xml[i].number + "'>\n" +//1
+		// 								"<td>" + xml[i].timetime + "</td>\n" +//2
+		// 								"<input name='mirrorTime' type='hidden' value='" + xml[i].timetime + "'>\n" +//3
+		// 								"<td>" + nameyx[a] + "</td>\n" +//2
+		// 								"<input name='goodsName' type='hidden' value='" + nameyx[a] + "'>\n" +//3
+		// 								"<td>" + xml[i].weiwaiStyle + "</td>\n" +//2
+		// 								"<input name='style' type='hidden' value='" + xml[i].weiwaiStyle + "'>\n" +//3
+		// 								"<td>" + leftRightYx[a] + "</td>\n" +//2
+		// 								"<input name='rl' type='hidden' value='" + leftRightYx[a] + "'>\n" +//3
+		// 								"<td>" + countyx[a] + "</td>\n" +//数量
+		// 								"<input name='count' type='hidden' value='" + countyx[a]+ "'>\n" +
+		// 								"<td>" + xml[i].rightsphyx + "</td>\n" +//球镜
+		// 								"<input name='sph' type='hidden' value='" + xml[i].rightsphyx + "'>\n" +//3
+		// 								"<td>" + xml[i].rightcylyx + "</td>\n" +
+		// 								"<input name='cyl' type='hidden' value='" + xml[i].rightcylyx + "'>\n" +
+		// 								"<td>" + xml[i].rightzxyx + "</td>\n" +
+		// 								"<input name='axial' type='hidden' value='" + xml[i].rightzxyx + "'>\n" +
+		// 								"<td>" + xml[i].rightJd + "</td>\n" +
+		// 								"<input name='jd' type='hidden' value='" + xml[i].rightJd + "'>\n" +
+		// 								"<td>" + xml[i].rightqulv + "</td>\n" +
+		// 								"<input name='curvature' type='hidden' value='" + xml[i].rightqulv + "'>\n" +
+		// 								"<td>" + xml[i].rightzj + "</td>\n" +
+		// 								"<input name='diameter' type='hidden' value='" + xml[i].rightzj + "'>\n" +
+		// 								"<td>" + yaoqiuyx[a] + "</td>\n" +
+		// 								"<input name='yaoqiu' type='hidden' value='" + yaoqiuyx[a] + "'>\n" +
+		// 								"<td >" + numyx[a] + "</td>\n" +
+		// 								"<input name='num' type='hidden' value='" + numyx[a] + "'>\n" +
+		// 								"<input name='code' type='hidden' value='" + codeyx[a] + "'>\n" +
+		// 								"</tr>"
+		// 						);
+		// 					}
+		// 				}
+        //                 }
+        //             })
+        //     }
+        // }
         window.localStorage.removeItem("number");
         window.localStorage.removeItem("eyeStyle");
         window.localStorage.removeItem("mfrsid");
         window.localStorage.removeItem("mfrsname");
-
-        window.localStorage.removeItem("mfrsname");
-        window.localStorage.removeItem("hyknum");
-        window.localStorage.removeItem("phone");
-
     });
 
     //显示

@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author cln
  * @email bushuo@163.com
- * @date 2021-10-20 14:14:36
+ * @date 2022-01-22 15:26:34
  */
 public class WeiwaishujuDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -37,63 +37,37 @@ public class WeiwaishujuDO implements Serializable {
 	private String weiwaiStyle;
 	//备注
 	private String beizhu;
-	//球镜OD
-	private String rightsph;
-	//球镜OS
-	private String leftsph;
-	//柱镜OD
-	private String rightcyl;
-	//柱镜OS
-	private String leftcyl;
-	//轴向OD
-	private String rightzx;
-	//轴向OS
-	private String leftzx;
-	//AddOD
-	private String rightAdd;
-	//AddOS
-	private String leftAdd;
-	//三棱镜OD
-	private String rightSlj;
-	//三棱镜OS
-	private String leftSlj;
-	//基底OD
-	private String rightJd;
-	//基底OS
-	private String leftJd;
-	//远瞳距OD
-	private String rightFartj;
-	//远瞳距OS
-	private String leftFartj;
-	//近瞳距OD
-	private String rightNeartj;
-	//近瞳距OS
-	private String leftNeartj;
-	//曲率OD
-	private String rightqulv;
-	//曲率OS
-	private String leftqulv;
-	//直径OD
-	private String rightzj;
-	//直径OS
-	private String leftzj;
-	//球镜ODyx
-	private String rightsphyx;
-	//球镜OSyx
-	private String leftsphyx;
-	//柱镜ODyx
-	private String rightcylyx;
-	//柱镜OSyx
-	private String leftcylyx;
-	//轴向ODyx
-	private String rightzxyx;
-	//轴向OSyx
-	private String leftzxyx;
-
-
+	//球镜
+	private String sph;
+	//柱镜
+	private String cyl;
+	//轴向
+	private String zx;
+	//Add(下加)
+	private String add;
+	//三棱镜
+	private String slj;
+	//基底
+	private String jd;
+	//远瞳距
+	private String fartj;
+	//近瞳距
+	private String neartj;
+	//瞳高
+	private String tg;
+	//曲率
+	private String qulv;
+	//直径
+	private String zj;
+	//球镜yx
+	private String sphyx;
+	//柱镜yx
+	private String cylyx;
+	//轴向yx
+	private String zxyx;
 	//商品代码
 	private String num;
-	//条码
+	//商品条码
 	private String code;
 	//商品名称
 	private String name;
@@ -105,6 +79,7 @@ public class WeiwaishujuDO implements Serializable {
 	private String yaoqiu;
 	//商品代码yx
 	private String numyx;
+	//商品条码yx
 	private String codeyx;
 	//商品名称yx
 	private String nameyx;
@@ -120,22 +95,6 @@ public class WeiwaishujuDO implements Serializable {
 	private String hyknum;
 	//手机号
 	private String phone;
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getCodeyx() {
-		return codeyx;
-	}
-
-	public void setCodeyx(String codeyx) {
-		this.codeyx = codeyx;
-	}
 
 	/**
 	 * 设置：委外数据id
@@ -270,316 +229,172 @@ public class WeiwaishujuDO implements Serializable {
 		return beizhu;
 	}
 	/**
-	 * 设置：球镜OD
+	 * 设置：球镜
 	 */
-	public void setRightsph(String rightsph) {
-		this.rightsph = rightsph;
+	public void setSph(String sph) {
+		this.sph = sph;
 	}
 	/**
-	 * 获取：球镜OD
+	 * 获取：球镜
 	 */
-	public String getRightsph() {
-		return rightsph;
+	public String getSph() {
+		return sph;
 	}
 	/**
-	 * 设置：球镜OS
+	 * 设置：柱镜
 	 */
-	public void setLeftsph(String leftsph) {
-		this.leftsph = leftsph;
+	public void setCyl(String cyl) {
+		this.cyl = cyl;
 	}
 	/**
-	 * 获取：球镜OS
+	 * 获取：柱镜
 	 */
-	public String getLeftsph() {
-		return leftsph;
+	public String getCyl() {
+		return cyl;
 	}
 	/**
-	 * 设置：柱镜OD
+	 * 设置：轴向
 	 */
-	public void setRightcyl(String rightcyl) {
-		this.rightcyl = rightcyl;
+	public void setZx(String zx) {
+		this.zx = zx;
 	}
 	/**
-	 * 获取：柱镜OD
+	 * 获取：轴向
 	 */
-	public String getRightcyl() {
-		return rightcyl;
+	public String getZx() {
+		return zx;
 	}
 	/**
-	 * 设置：柱镜OS
+	 * 设置：Add(下加)
 	 */
-	public void setLeftcyl(String leftcyl) {
-		this.leftcyl = leftcyl;
+	public void setAdd(String add) {
+		this.add = add;
 	}
 	/**
-	 * 获取：柱镜OS
+	 * 获取：Add(下加)
 	 */
-	public String getLeftcyl() {
-		return leftcyl;
+	public String getAdd() {
+		return add;
 	}
 	/**
-	 * 设置：轴向OD
+	 * 设置：三棱镜
 	 */
-	public void setRightzx(String rightzx) {
-		this.rightzx = rightzx;
+	public void setSlj(String slj) {
+		this.slj = slj;
 	}
 	/**
-	 * 获取：轴向OD
+	 * 获取：三棱镜
 	 */
-	public String getRightzx() {
-		return rightzx;
+	public String getSlj() {
+		return slj;
 	}
 	/**
-	 * 设置：轴向OS
+	 * 设置：基底
 	 */
-	public void setLeftzx(String leftzx) {
-		this.leftzx = leftzx;
+	public void setJd(String jd) {
+		this.jd = jd;
 	}
 	/**
-	 * 获取：轴向OS
+	 * 获取：基底
 	 */
-	public String getLeftzx() {
-		return leftzx;
+	public String getJd() {
+		return jd;
 	}
 	/**
-	 * 设置：AddOD
+	 * 设置：远瞳距
 	 */
-	public void setRightAdd(String rightAdd) {
-		this.rightAdd = rightAdd;
+	public void setFartj(String fartj) {
+		this.fartj = fartj;
 	}
 	/**
-	 * 获取：AddOD
+	 * 获取：远瞳距
 	 */
-	public String getRightAdd() {
-		return rightAdd;
+	public String getFartj() {
+		return fartj;
 	}
 	/**
-	 * 设置：AddOS
+	 * 设置：近瞳距
 	 */
-	public void setLeftAdd(String leftAdd) {
-		this.leftAdd = leftAdd;
+	public void setNeartj(String neartj) {
+		this.neartj = neartj;
 	}
 	/**
-	 * 获取：AddOS
+	 * 获取：近瞳距
 	 */
-	public String getLeftAdd() {
-		return leftAdd;
+	public String getNeartj() {
+		return neartj;
 	}
 	/**
-	 * 设置：三棱镜OD
+	 * 设置：瞳高
 	 */
-	public void setRightSlj(String rightSlj) {
-		this.rightSlj = rightSlj;
+	public void setTg(String tg) {
+		this.tg = tg;
 	}
 	/**
-	 * 获取：三棱镜OD
+	 * 获取：瞳高
 	 */
-	public String getRightSlj() {
-		return rightSlj;
+	public String getTg() {
+		return tg;
 	}
 	/**
-	 * 设置：三棱镜OS
+	 * 设置：曲率
 	 */
-	public void setLeftSlj(String leftSlj) {
-		this.leftSlj = leftSlj;
+	public void setQulv(String qulv) {
+		this.qulv = qulv;
 	}
 	/**
-	 * 获取：三棱镜OS
+	 * 获取：曲率
 	 */
-	public String getLeftSlj() {
-		return leftSlj;
+	public String getQulv() {
+		return qulv;
 	}
 	/**
-	 * 设置：基底OD
+	 * 设置：直径
 	 */
-	public void setRightJd(String rightJd) {
-		this.rightJd = rightJd;
+	public void setZj(String zj) {
+		this.zj = zj;
 	}
 	/**
-	 * 获取：基底OD
+	 * 获取：直径
 	 */
-	public String getRightJd() {
-		return rightJd;
+	public String getZj() {
+		return zj;
 	}
 	/**
-	 * 设置：基底OS
+	 * 设置：球镜yx
 	 */
-	public void setLeftJd(String leftJd) {
-		this.leftJd = leftJd;
+	public void setSphyx(String sphyx) {
+		this.sphyx = sphyx;
 	}
 	/**
-	 * 获取：基底OS
+	 * 获取：球镜yx
 	 */
-	public String getLeftJd() {
-		return leftJd;
+	public String getSphyx() {
+		return sphyx;
 	}
 	/**
-	 * 设置：远瞳距OD
+	 * 设置：柱镜yx
 	 */
-	public void setRightFartj(String rightFartj) {
-		this.rightFartj = rightFartj;
+	public void setCylyx(String cylyx) {
+		this.cylyx = cylyx;
 	}
 	/**
-	 * 获取：远瞳距OD
+	 * 获取：柱镜yx
 	 */
-	public String getRightFartj() {
-		return rightFartj;
+	public String getCylyx() {
+		return cylyx;
 	}
 	/**
-	 * 设置：远瞳距OS
+	 * 设置：轴向yx
 	 */
-	public void setLeftFartj(String leftFartj) {
-		this.leftFartj = leftFartj;
+	public void setZxyx(String zxyx) {
+		this.zxyx = zxyx;
 	}
 	/**
-	 * 获取：远瞳距OS
+	 * 获取：轴向yx
 	 */
-	public String getLeftFartj() {
-		return leftFartj;
-	}
-	/**
-	 * 设置：近瞳距OD
-	 */
-	public void setRightNeartj(String rightNeartj) {
-		this.rightNeartj = rightNeartj;
-	}
-	/**
-	 * 获取：近瞳距OD
-	 */
-	public String getRightNeartj() {
-		return rightNeartj;
-	}
-	/**
-	 * 设置：近瞳距OS
-	 */
-	public void setLeftNeartj(String leftNeartj) {
-		this.leftNeartj = leftNeartj;
-	}
-	/**
-	 * 获取：近瞳距OS
-	 */
-	public String getLeftNeartj() {
-		return leftNeartj;
-	}
-	/**
-	 * 设置：曲率OD
-	 */
-	public void setRightqulv(String rightqulv) {
-		this.rightqulv = rightqulv;
-	}
-	/**
-	 * 获取：曲率OD
-	 */
-	public String getRightqulv() {
-		return rightqulv;
-	}
-	/**
-	 * 设置：曲率OS
-	 */
-	public void setLeftqulv(String leftqulv) {
-		this.leftqulv = leftqulv;
-	}
-	/**
-	 * 获取：曲率OS
-	 */
-	public String getLeftqulv() {
-		return leftqulv;
-	}
-	/**
-	 * 设置：直径OD
-	 */
-	public void setRightzj(String rightzj) {
-		this.rightzj = rightzj;
-	}
-	/**
-	 * 获取：直径OD
-	 */
-	public String getRightzj() {
-		return rightzj;
-	}
-	/**
-	 * 设置：直径OS
-	 */
-	public void setLeftzj(String leftzj) {
-		this.leftzj = leftzj;
-	}
-	/**
-	 * 获取：直径OS
-	 */
-	public String getLeftzj() {
-		return leftzj;
-	}
-	/**
-	 * 设置：球镜ODyx
-	 */
-	public void setRightsphyx(String rightsphyx) {
-		this.rightsphyx = rightsphyx;
-	}
-	/**
-	 * 获取：球镜ODyx
-	 */
-	public String getRightsphyx() {
-		return rightsphyx;
-	}
-	/**
-	 * 设置：球镜OSyx
-	 */
-	public void setLeftsphyx(String leftsphyx) {
-		this.leftsphyx = leftsphyx;
-	}
-	/**
-	 * 获取：球镜OSyx
-	 */
-	public String getLeftsphyx() {
-		return leftsphyx;
-	}
-	/**
-	 * 设置：柱镜ODyx
-	 */
-	public void setRightcylyx(String rightcylyx) {
-		this.rightcylyx = rightcylyx;
-	}
-	/**
-	 * 获取：柱镜ODyx
-	 */
-	public String getRightcylyx() {
-		return rightcylyx;
-	}
-	/**
-	 * 设置：柱镜OSyx
-	 */
-	public void setLeftcylyx(String leftcylyx) {
-		this.leftcylyx = leftcylyx;
-	}
-	/**
-	 * 获取：柱镜OSyx
-	 */
-	public String getLeftcylyx() {
-		return leftcylyx;
-	}
-	/**
-	 * 设置：轴向ODyx
-	 */
-	public void setRightzxyx(String rightzxyx) {
-		this.rightzxyx = rightzxyx;
-	}
-	/**
-	 * 获取：轴向ODyx
-	 */
-	public String getRightzxyx() {
-		return rightzxyx;
-	}
-	/**
-	 * 设置：轴向OSyx
-	 */
-	public void setLeftzxyx(String leftzxyx) {
-		this.leftzxyx = leftzxyx;
-	}
-	/**
-	 * 获取：轴向OSyx
-	 */
-	public String getLeftzxyx() {
-		return leftzxyx;
+	public String getZxyx() {
+		return zxyx;
 	}
 	/**
 	 * 设置：商品代码
@@ -592,6 +407,18 @@ public class WeiwaishujuDO implements Serializable {
 	 */
 	public String getNum() {
 		return num;
+	}
+	/**
+	 * 设置：商品条码
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+	/**
+	 * 获取：商品条码
+	 */
+	public String getCode() {
+		return code;
 	}
 	/**
 	 * 设置：商品名称
@@ -652,6 +479,18 @@ public class WeiwaishujuDO implements Serializable {
 	 */
 	public String getNumyx() {
 		return numyx;
+	}
+	/**
+	 * 设置：商品条码yx
+	 */
+	public void setCodeyx(String codeyx) {
+		this.codeyx = codeyx;
+	}
+	/**
+	 * 获取：商品条码yx
+	 */
+	public String getCodeyx() {
+		return codeyx;
 	}
 	/**
 	 * 设置：商品名称yx

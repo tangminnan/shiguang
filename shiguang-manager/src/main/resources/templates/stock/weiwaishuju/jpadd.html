@@ -140,9 +140,9 @@
 <form class="form-horizontal m-t" id="signupForm">
     <div class="main">
         <h3>单据信息</h3>
-        <input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="text"/>
-        <input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="text"/>
-        <input id="mfrsname" name="mfrsname" th:value="${mfrsname}" type="text"/>
+        <input id="eyeStyle" name="eyeStyle" th:value="${eyeStyle}" type="hidden"/>
+        <input id="mfrsid" name="mfrsid" th:value="${mfrsid}" type="hidden"/>
+        <input id="mfrsname" name="mfrsname" th:value="${mfrsname}" type="hidden"/>
         <table class="tabA" border="0" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
@@ -178,7 +178,7 @@
                 </td>
                 <td>原配镜单</td>
                 <td style="text-align:left;">
-                    <input id="saleNumber" name="saleNumber" readonly type="text" style="width:80%"/>
+                    <input id="peijingdan" name="peijingdan" readonly type="text" style="width:80%"/>
                     <input type="button" class="Xze" value="选择" onclick="PeiJing()"/>
                 </td>
                 <td>委外类型</td>
@@ -240,7 +240,7 @@
         </table>
         <h3>商品列表</h3>
         <table id="jp" class="tabC" border="0" cellspacing="0" cellpadding="0"></table>
-        <table id="tab3"   class="tabC" border="0" cellspacing="0" cellpadding="0">
+        <table id="tab2"   class="tabC" border="0" cellspacing="0" cellpadding="0">
             <tr>
                 <td width="250">商品代码</td>
                 <td width="250">商品名称</td>
@@ -285,16 +285,14 @@
                 <td><input type="text"/></td>
             </tr>
         </table>
-        <input id="gkname" name="gkname" type="hidden"/>
-        <input id="hyknum" name="hyknum" type="hidden"/>
-        <input id="phone" name="phone" type="hidden"/>
+
 
 
         <div class="allpik"><input type="button" value="保存" onclick="save()"/></div>
     </div>
 </form>
 <div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/appjs/stock/weiwaishuju/add.js"></script>
+<script type="text/javascript" src="/js/appjs/stock/weiwaishuju/jpadd.js"></script>
 <script type="text/javascript">
     //日期
     laydate.render({
@@ -302,20 +300,22 @@
         type: 'date'
     });
 
-    // var flag="";
-    // var flags="";
-    // var arr = new Array();
-    // var countarr = new Array();
+
     var numAry = new Array();
     var codeAry = new Array();
     var nameAry = new Array();
-    var lfs = new Array();
-    var mss = new Array();
-    var sls = new Array();
-    var lxs = new Array();
+    var leftRightArry = new Array();
+    var storeDescribeArry = new Array();
+    var storeCountArry = new Array();
+    var classtypeArry = new Array();
+    var processAskArry = new Array();
+    var hyNameArry = new Array();
+    var hyNumberArry = new Array();
+    var phoneArry = new Array();
 
     function PeiJing() {
         $("#tab1").remove();
+        $("#tab2").remove();
         var html = "";
         var bhtml = "";
         var xsNumber="";
@@ -336,14 +336,11 @@
         var leftJds="";
         var leftFartjs="";
         var leftNeartjs="";
+        var righttgs="";
+        var lefttgs="";
 
-        var goodsNums="";
-        var goodsCodes="";
-        var leftRights="";
-        var storeNames="";
-        var storeDescribes="";
-        var storeCounts="";
-        var classtypes="";
+
+
 
         var eyeStyle = $('#eyeStyle').val();
         var mfrsid = $('#mfrsid').val();
@@ -359,7 +356,7 @@
 
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
                 for (var i = 0; i < rows.length; i++) {
-                    $("#departname").val(rows[i].mirorAddress);
+                    $("#departname").val(rows[0].mirorAddress);
                     xsNumber += rows[i].saleNumber + ',';
                     rightsphs += rows[i].rightsph + ',';
                     rightcyls += rows[i].rightcyl + ',';
@@ -379,33 +376,26 @@
                     leftFartjs += rows[i].leftFartj + ',';
                     leftNeartjs += rows[i].leftNeartj + ',';
 
-                    // goodsNums += rows[i].goodsNum;
-                    // goodsCodes += rows[i].goodsCode;
-                    // leftRights += rows[i].leftRight;
-                    // storeNames += rows[i].storeName;
-                    // storeDescribes += rows[i].storeDescribe;
-                    // storeCounts += rows[i].storeCount;
-                    // classtypes += rows[i].classtype;
-
-
+                    // alert( rows[i].righttg);
+                    righttgs += rows[i].righttg + ',';
+                    lefttgs += rows[i].lefttg + ',';
 
                     numAry[i]=rows[i].goodsNum;
                     codeAry[i]=rows[i].goodsCode;
                     nameAry[i]=rows[i].storeName;
-                    lfs[i]=rows[i].leftRight;
-                    mss[i]=rows[i].storeDescribe;
-                    sls[i]=rows[i].storeCount;
-                    lxs[i]=rows[i].classtype;
+                    leftRightArry[i]=rows[i].leftRight;
+                    storeDescribeArry[i]=rows[i].storeDescribe;
+                    storeCountArry[i]=rows[i].storeCount;
+                    classtypeArry[i]=rows[i].classtype;
+                    processAskArry[i]=rows[i].processAsk;//镜片区分
+                    hyNameArry[i]=rows[i].name;//姓名 rows[i].name
+                    hyNumberArry[i]=rows[i].memberNumber;//卡号rows[i].memberNumber
+                    phoneArry[i]=rows[i].phone1;//电话rows[i].phone1
 
-
-
-                    //顾客信息
-                    $("#gkname").val(rows[i].name);
-                    $("#hyknum").val(rows[i].memberNumber);
-                    $("#phone").val(rows[i].phone1);
 
                 }
-                if (eyeStyle == 3) {//镜片
+                if (eyeStyle == 3) {
+                    //镜片
                     var allLength=xsNumber.split(",");//单据
 
                     var rightsph=rightsphs.split(",");
@@ -425,6 +415,9 @@
                     var leftJd=leftJds.split(",");
                     var leftFartj=leftFartjs.split(",");
                     var leftNeartj=leftNeartjs.split(",");
+                    var righttg=righttgs.split(",");
+                    var lefttg=lefttgs.split(",");
+
                     for (var b = 0; b< allLength.length-1; b++) {
                         html += "<tr>";
                         html+="<td></td>";
@@ -439,45 +432,165 @@
                         html+="</tr>";
                         html+="<tr>";
                         html+="<td>OD</td>";
-                        html+="<td><input id='rightsph"+b+"' name='rightsph' value='"+rightsph[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
-                        html+="<td><input id='rightcyl"+b+"' name='rightcyl' value='"+rightcyl[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
-                        html+="<td><input id='rightzx"+b+"' name='rightzx' value='"+rightzx[b]+"' onblur='zhouxiang(this)' type='text'/></td>";
-                        html+="<td><input id='rightAdd"+b+"' name='rightAdd' value='"+rightAdd[b]+"' type='text'/></td>";
-                        html+="<td><input id='rightSlj"+b+"' name='rightSlj' value='"+rightSlj[b]+"' type='text'/></td>";
-                        html+="<td><input id='rightJd"+b+"' name='rightJd' value='"+rightJd[b]+"' type='text'/></td>";
-                        html+="<td><input id='rightFartj"+b+"' name='rightFartj' value='"+rightFartj[b]+"' type='text'/></td>";
-                        html+="<td><input id='rightNeartj"+b+"' name='rightNeartj' value='"+rightNeartj[b]+"'  type='text'/></td>";
+                        html+="<td><input id='rightsph' value='"+rightsph[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
+                        html+="<td><input id='rightcyl'  value='"+rightcyl[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
+                        html+="<td><input id='rightzx'  value='"+rightzx[b]+"' onblur='zhouxiang(this)' type='text'/></td>";
+                        html+="<td><input id='rightAdd'  value='"+rightAdd[b]+"' type='text'/></td>";
+                        html+="<td><input id='rightSlj'  value='"+rightSlj[b]+"' type='text'/></td>";
+                        html+="<td><input id='rightJd'  value='"+rightJd[b]+"' type='text'/></td>";
+                        html+="<td><input id='rightFartj'  value='"+rightFartj[b]+"' type='text'/></td>";
+                        html+="<td><input id='rightNeartj'  value='"+rightNeartj[b]+"'  type='text'/></td>";
                         html+="</tr>";
                         html+="<tr>";
                         html+="<td>OS</td>";
-                        html+="<td><input id='leftsph"+b+"' name='leftsph' value='"+leftsph[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
-                        html+="<td><input id='leftcyl"+b+"' name='leftcyl' value='"+leftcyl[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
-                        html+="<td><input id='leftzx"+b+"'name='leftzx' value='"+leftzx[b]+"'onblur='zhouxiang(this)' type='text'/></td>";
-                        html+="<td><input id='leftAdd"+b+"' name='leftAdd' value='"+leftAdd[b]+"' type='text'/></td>";
-                        html+="<td><input id='leftSlj"+b+"' name='leftSlj' value='"+leftSlj[b]+"' type='text'/></td>";
-                        html+="<td><input id='leftJd"+b+"' name='leftJd' value='"+leftJd[b]+"' type='text'/></td>";
-                        html+="<td><input id='leftFartj"+b+"' name='leftFartj' value='"+leftFartj[b]+"' type='text'/></td>";
-                        html+="<td><input id='leftNeartj"+b+"' name='leftNeartj' value='"+leftNeartj[b]+"' type='text'/></td>";
+                        html+="<td><input id='leftsph'   value='"+leftsph[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
+                        html+="<td><input id='leftcyl'   value='"+leftcyl[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
+                        html+="<td><input id='leftzx'  value='"+leftzx[b]+"'onblur='zhouxiang(this)' type='text'/></td>";
+                        html+="<td><input id='leftAdd'   value='"+leftAdd[b]+"' type='text'/></td>";
+                        html+="<td><input id='leftSlj'   value='"+leftSlj[b]+"' type='text'/></td>";
+                        html+="<td><input id='leftJd'   value='"+leftJd[b]+"' type='text'/></td>";
+                        html+="<td><input id='leftFartj'   value='"+leftFartj[b]+"' type='text'/></td>";
+                        html+="<td><input id='leftNeartj'   value='"+leftNeartj[b]+"' type='text'/></td>";
                         html+="</tr>";
 
-                        var numss=numAry[b];
-                        var nums111=numAry[b].split(",");
-                        var codes=codeAry[b];
-                        var names=nameAry[b];
-                        alert(numss);
-                        alert(nums111+"拆分");
-                        // for(var c= 0; c< nums.length; b++){
-                        //
-                        // }
 
+                        var goodsNums=numAry[b];
+                        var goodsCodes=codeAry[b];
+                        var goodsNames=nameAry[b];
+                        var goodsLeftRights=leftRightArry[b];
+                        var goodsDescribes=storeDescribeArry[b];
+                        var goodsCounts=storeCountArry[b];
+                        var goodsClasstypes=classtypeArry[b];
+
+                        // alert(processAskArry);
+                        var processAsks= processAskArry[b];//加工要求
+                        var hyNames= hyNameArry[b];
+                        var hyNumbers= hyNumberArry[b];
+                        var phones= phoneArry[b];
+
+
+                        var goodNums=goodsNums.split(",");//代码
+                        var goodCodes=goodsCodes.split(",");//条码
+                        var leftRights=goodsLeftRights.split(",");//左右
+                        var goodNames=goodsNames.split(",");//名称
+                        var gooodDescribes = goodsDescribes.split(",");//描述
+                        var goodCounts = goodsCounts.split(",");//数量
+                        var goodClasstypes = goodsClasstypes.split(",");//定做还是成品
+                        var processAsk = processAsks;//加工要求
+                        var yaoqiu=processAsk.replaceAll(',', '!');
+                        // alert(yaoqiu);
+                        var hyName = hyNames.split(",");
+                        var hyNumber = hyNumbers.split(",");
+                        var phone = phones.split(",");
+                        // alert(goodsNums);
+                        // alert(goodNums+"拆分");
+                        // alert(goodNums.length+"长度");
+                        // alert(processAsk);
+                        bhtml += "<tr>";
+                        bhtml += "<td width='250'>商品代码</td>";
+                        bhtml += "<td width='250'>商品名称</td>";
+                        bhtml += "<td>镜片型</td>";
+                        bhtml += "<td>球镜</td>";
+                        bhtml += "<td>柱镜</td>";
+                        bhtml += "<td>轴向</td>";
+                        bhtml += "<td>下加</td>";
+                        bhtml += "<td>棱镜</td>";
+                        bhtml += "<td>基底</td>";
+                        bhtml += "<td>瞳高</td>";
+                        bhtml += "<td>数量</td>";
+                        bhtml += "<td width='300'>加工要求</td>";
+                        bhtml += "</tr>";
+                        for(var c= 0; c<goodNums.length; c++) {
+                            // alert(goodNums[c]+"？代码");
+                            // alert(goodCodes[c]+"？条码");
+                            // alert(leftRights[c]+"？左右");
+                            // alert(goodNames[c]+"？名称");
+                            // alert(gooodDescribes[c]+"？描述");
+                            // alert(goodCounts[c]+"？数量");
+                            // alert(goodClasstypes[c]+"？成品定制");
+                            // alert(processAsk);
+
+
+                            if (gooodDescribes[c] == "镜片") {
+                                if (leftRights[c] == "右") {
+                                    var sph = rightsph[b];
+                                    var cyl = rightcyl[b];
+                                    var zx = rightzx[b];
+                                    var xj = rightAdd[b];
+                                    var lj = rightSlj[b];
+                                    var jd = rightJd[b];
+                                    var tg = righttg[b];
+                                    var far = rightFartj[b];
+                                    var near = rightNeartj[b];
+                                    if (goodClasstypes[c] == "2") {
+                                        bhtml += "<tr>";
+                                        bhtml += "<td><input id='num' name='num'  value='" + goodNums[c] + "' type='text' /></td>";
+                                        bhtml += "<td><input id='name' name='name'  value='" + goodNames[c] + "' type='text' /></td>";
+                                        bhtml += "<td><input id='leftRight' name='leftRight'  value='" + leftRights[c] + "' type='text' /></td>";
+                                        bhtml += "<td><input id='sph' name='sph'  value='" + sph + "' type='text' /></td>";
+                                        bhtml += "<td><input id='cyl' name='cyl' value='" + cyl + "' type='text' /></td>";
+                                        bhtml += "<td><input id='zx'  name='zx' value='" + zx + "' type='text' /></td>";
+                                        bhtml += "<td><input id='add'  name='add' value='" + xj + "' type='text' /></td>";
+                                        bhtml += "<td><input id='slj'  name='slj' value='" + lj + "' type='text' /></td>";
+                                        bhtml += "<td><input id='jd' name='jd' value='" + jd + "' type='text' /></td>";
+                                        bhtml += "<td><input id='tg' name='tg' value='" +  tg+ "' type='text' /></td>";
+                                        bhtml += "<td style='display: none'><input id='fartj' name='fartj' value='" +  far+ "' type='text' /></td>";
+                                        bhtml += "<td style='display: none'><input id='neartj' name='neartj' value='" +  near+ "' type='text' /></td>";
+                                        bhtml += "<td><input id='count' name='count'  value='" + goodCounts[c] + "' type='text'/></td>";
+                                        bhtml += "<td><input id='yaoqiu' name='yaoqiu' value='" + yaoqiu  + "' type='text' /></td>";
+
+                                        bhtml += "<td style='display: none'><input id='code' name='code' value='" + goodCodes[c] + "' type='text' /></td>";
+                                        bhtml += "<td style='display: none'><input id='saleNumber' name='saleNumber' value='" + allLength[b] + "' type='text'/></td>";
+                                        bhtml += "<td style='display: none'><input id='gkname' name='gkname' value='" + hyName[0] + "' type='text'/></td>";
+                                        bhtml += "<td style='display: none'><input id='hyknum' name='hyknum' value='" + hyNumber[0] + "' type='text'/></td>";
+                                        bhtml += "<td style='display: none'><input id='phone' name='phone' value='" + phone[0] + "' type='text'/></td>";
+                                        bhtml += "</tr>";
+                                    }
+                                } else if (leftRights[c] == "左") {
+                                    var sph = leftsph[b];
+                                    var cyl = leftcyl[b];
+                                    var zx = leftzx[b];
+                                    var xj = leftAdd[b];
+                                    var lj = leftSlj[b];
+                                    var jd = leftJd[b];
+                                    var tg = lefttg[b];
+                                    var far = leftFartj[b];
+                                    var near = leftNeartj[b];
+                                    if (goodClasstypes[c] == "2") {
+                                        bhtml += "<tr>";
+                                        bhtml += "<td><input id='num' name='num'  value='" + goodNums[c] + "' type='text' /></td>";
+                                        bhtml += "<td><input id='name' name='name'  value='" + goodNames[c] + "' type='text' /></td>";
+                                        bhtml += "<td><input id='leftRight' name='leftRight'  value='" + leftRights[c] + "' type='text' /></td>";
+                                        bhtml += "<td><input id='sph' name='sph'  value='" + sph + "' type='text' /></td>";
+                                        bhtml += "<td><input id='cyl' name='cyl' value='" + cyl + "' type='text' /></td>";
+                                        bhtml += "<td><input id='zx'  name='zx' value='" + zx + "' type='text' /></td>";
+                                        bhtml += "<td><input id='add'  name='add' value='" + xj + "' type='text' /></td>";
+                                        bhtml += "<td><input id='slj'  name='slj' value='" + lj + "' type='text' /></td>";
+                                        bhtml += "<td><input id='jd' name='jd' value='" + jd + "' type='text' /></td>";
+                                        bhtml += "<td><input id='tg' name='tg' value='" +  tg+ "' type='text' /></td>";
+                                        bhtml += "<td style='display: none'><input id='fartj' name='fartj' value='" +  far+ "' type='text' /></td>";
+                                        bhtml += "<td style='display: none'><input id='neartj' name='neartj' value='" +  near+ "' type='text' /></td>";
+                                        bhtml += "<td><input id='count' name='count'  value='" + goodCounts[c] + "' type='text'/></td>";
+                                        bhtml += "<td><input id='yaoqiu' name='yaoqiu' value='" + yaoqiu  + "' type='text' /></td>";
+
+                                        bhtml += "<td style='display: none'><input id='code' name='code' value='" + goodCodes[c] + "' type='text' /></td>";
+                                        bhtml += "<td style='display: none'><input id='saleNumber' name='saleNumber' value='" + allLength[b] + "' type='text'/></td>";
+                                        bhtml += "<td style='display: none'><input id='gkname' name='gkname' value='" + hyName[0] + "' type='text'/></td>";
+                                        bhtml += "<td style='display: none'><input id='hyknum' name='hyknum' value='" + hyNumber[0] + "' type='text'/></td>";
+                                        bhtml += "<td style='display: none'><input id='phone' name='phone' value='" + phone[0] + "' type='text'/></td>";
+                                        bhtml += "</tr>";
+                                    }
+                                }
+
+
+                            }
+                        }
                     }
+                    $("#jp").append(bhtml);
                     $("#jpdushu").append(html);
-
-
-
-
                 }
-                $("#saleNumber").val(xsNumber);
+                var peijiang=$("#peijingdan").val();
+                $("#peijingdan").val(peijiang+xsNumber);
 
             }
         });

@@ -1,19 +1,20 @@
 package com.shiguang.stock.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 
 /**
- * 委外表
- * 
+ *
+ *
  * @author cln
  * @email bushuo@163.com
- * @date 2021-09-15 11:26:24
+ * @date 2022-01-24 10:57:24
  */
 public class WeiwaiDO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	//id
 	private Long id;
 	//单据编号
@@ -24,68 +25,38 @@ public class WeiwaiDO implements Serializable {
 	private String eyeStyle;
 	//制单人
 	private String zhidanPeople;
-	//制造商id
-	private String  mfrsid;
-	private String  mfrsname;
-	//商品品牌制造商
-	private String  goodsmfrsid;
-	//商品品牌代码
-	private String  goodsbrandnum;
-	private String  goodsbrandname;
+	//制造商代码
+	private String mfrsid;
+	//制造商名称
+	private String mfrsname;
+	//品牌代码
+	private String brandnum;
+	//品牌名称
+	private String brandname;
 	//仓位id
 	private Long positionId;
 	//仓位名称
 	private String positionName;
-
-	//厂家订单号
-	private String changjiaNumber;
 	//收货联系人
 	private String shouhuoPeople;
 	//收货联系电话
 	private String shouhuoPhone;
 	//收货地址
 	private String shouhuoAddress;
+	//厂家订单号
+	private String changjiaNumber;
 	//备注
 	private String beizhu;
-	//原配镜单
-	private String salenumbery;
-
-	public String getSalenumbery() {
-		return salenumbery;
-	}
-
-	public void setSalenumbery(String salenumbery) {
-		this.salenumbery = salenumbery;
-	}
-
-	//配镜单号
-	private String saleNumber;
+	//委外配镜单号
+	private String weiwaisaleNumber;
 	//取镜时间
 	private String mirrorTime;
-	//商品名称
-	private String goodsName;
 	//代码
 	private String num;
-	private String code;
 	//条码
-	private String QRCode;
-
-	public String getQRCode() {
-		return QRCode;
-	}
-
-	public void setQRCode(String QRCode) {
-		this.QRCode = QRCode;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
+	private String code;
+	//商品名称
+	private String name;
 	//委外方式
 	private String style;
 	//镜片类型r/l
@@ -97,67 +68,51 @@ public class WeiwaiDO implements Serializable {
 	//柱镜
 	private String cyl;
 	//轴向
-	private String axial;
+	private String zx;
 	//下加
-	private String lightbelow;
+	private String add;
 	//棱镜
-	private String lengjing;
+	private String slj;
 	//直径
-	private String diameter;
+	private String zj;
 	//加工要求
 	private String yaoqiu;
 	//基底
 	private String jd;
 	//曲率
-	private String curvature;
-
-
-
-
-	//收货状态
-	private String status;
-	//工号
-	private String username;
-	//收货时间
-	private String shTime;
+	private String qulv;
 	//顾客姓名
 	private String gkname;
 	//会员卡
 	private String hyknum;
 	//手机号
 	private String phone;
-	//配送。退回
+	//1未收货，0已收货未配送
+	private String status;
+	//工号
+	private String username;
+	//收货时间
+	private String shTime;
+	//0配送,1退回
 	private String shstatus;
-	//配送人员或者退回
+	//配送人员
 	private String psname;
-	//配送或者退回时间
+	//原配镜单
+	private String saleNumber;
+	//配送或退回时间
 	private String pstime;
 	//库存对应单据号
 	private String stockorder;
+	//条码
+	private String QRCode;
 
-	public String getStockorder() {
-		return stockorder;
+	public String getQRCode() {
+		return QRCode;
 	}
 
-	public void setStockorder(String stockorder) {
-		this.stockorder = stockorder;
+	public void setQRCode(String QRCode) {
+		this.QRCode = QRCode;
 	}
-
-	public String getPstime() {
-		return pstime;
-	}
-
-	public void setPstime(String pstime) {
-		this.pstime = pstime;
-	}
-	public String getPsname() {
-		return psname;
-	}
-
-	public void setPsname(String psname) {
-		this.psname = psname;
-	}
-
 	/**
 	 * 设置：id
 	 */
@@ -219,60 +174,59 @@ public class WeiwaiDO implements Serializable {
 		return zhidanPeople;
 	}
 	/**
-	 * 设置：制造商id
+	 * 设置：制造商代码
 	 */
 	public void setMfrsid(String mfrsid) {
 		this.mfrsid = mfrsid;
 	}
 	/**
-	 * 获取：制造商id
+	 * 获取：制造商代码
 	 */
 	public String getMfrsid() {
 		return mfrsid;
-	}/**
-	 * 设置：制造商id
+	}
+	/**
+	 * 设置：制造商名称
 	 */
 	public void setMfrsname(String mfrsname) {
 		this.mfrsname = mfrsname;
 	}
 	/**
-	 * 获取：制造商id
+	 * 获取：制造商名称
 	 */
 	public String getMfrsname() {
 		return mfrsname;
 	}
-
-	public String getGoodsmfrsid() {
-		return goodsmfrsid;
+	/**
+	 * 设置：品牌代码
+	 */
+	public void setBrandnum(String brandnum) {
+		this.brandnum = brandnum;
 	}
-
-	public void setGoodsmfrsid(String goodsmfrsid) {
-		this.goodsmfrsid = goodsmfrsid;
+	/**
+	 * 获取：品牌代码
+	 */
+	public String getBrandnum() {
+		return brandnum;
 	}
-
-	public String getGoodsbrandnum() {
-		return goodsbrandnum;
+	/**
+	 * 设置：品牌名称
+	 */
+	public void setBrandname(String brandname) {
+		this.brandname = brandname;
 	}
-
-	public void setGoodsbrandnum(String goodsbrandnum) {
-		this.goodsbrandnum = goodsbrandnum;
+	/**
+	 * 获取：品牌名称
+	 */
+	public String getBrandname() {
+		return brandname;
 	}
-
-	public String getGoodsbrandname() {
-		return goodsbrandname;
-	}
-
-	public void setGoodsbrandname(String goodsbrandname) {
-		this.goodsbrandname = goodsbrandname;
-	}
-
 	/**
 	 * 设置：仓位id
 	 */
 	public void setPositionId(Long positionId) {
 		this.positionId = positionId;
 	}
-
 	/**
 	 * 获取：仓位id
 	 */
@@ -285,24 +239,11 @@ public class WeiwaiDO implements Serializable {
 	public void setPositionName(String positionName) {
 		this.positionName = positionName;
 	}
-
 	/**
 	 * 获取：仓位名称
 	 */
 	public String getPositionName() {
 		return positionName;
-	}
-	/**
-	 * 设置：厂家订单号
-	 */
-	public void setChangjiaNumber(String changjiaNumber) {
-		this.changjiaNumber = changjiaNumber;
-	}
-	/**
-	 * 获取：厂家订单号
-	 */
-	public String getChangjiaNumber() {
-		return changjiaNumber;
 	}
 	/**
 	 * 设置：收货联系人
@@ -341,6 +282,18 @@ public class WeiwaiDO implements Serializable {
 		return shouhuoAddress;
 	}
 	/**
+	 * 设置：厂家订单号
+	 */
+	public void setChangjiaNumber(String changjiaNumber) {
+		this.changjiaNumber = changjiaNumber;
+	}
+	/**
+	 * 获取：厂家订单号
+	 */
+	public String getChangjiaNumber() {
+		return changjiaNumber;
+	}
+	/**
 	 * 设置：备注
 	 */
 	public void setBeizhu(String beizhu) {
@@ -352,21 +305,17 @@ public class WeiwaiDO implements Serializable {
 	public String getBeizhu() {
 		return beizhu;
 	}
-
-
-
-
 	/**
-	 * 设置：配镜单号
+	 * 设置：委外配镜单号
 	 */
-	public void setSaleNumber(String saleNumber) {
-		this.saleNumber = saleNumber;
+	public void setWeiwaisaleNumber(String weiwaisaleNumber) {
+		this.weiwaisaleNumber = weiwaisaleNumber;
 	}
 	/**
-	 * 获取：配镜单号
+	 * 获取：委外配镜单号
 	 */
-	public String getSaleNumber() {
-		return saleNumber;
+	public String getWeiwaisaleNumber() {
+		return weiwaisaleNumber;
 	}
 	/**
 	 * 设置：取镜时间
@@ -381,26 +330,41 @@ public class WeiwaiDO implements Serializable {
 		return mirrorTime;
 	}
 	/**
+	 * 设置：代码
+	 */
+	public void setNum(String num) {
+		this.num = num;
+	}
+	/**
+	 * 获取：代码
+	 */
+	public String getNum() {
+		return num;
+	}
+	/**
+	 * 设置：条码
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+	/**
+	 * 获取：条码
+	 */
+	public String getCode() {
+		return code;
+	}
+	/**
 	 * 设置：商品名称
 	 */
-	public void setGoodsName(String goodsName) {
-		this.goodsName = goodsName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	/**
 	 * 获取：商品名称
 	 */
-	public String getGoodsName() {
-		return goodsName;
+	public String getName() {
+		return name;
 	}
-
-	public String getNum() {
-		return num;
-	}
-
-	public void setNum(String num) {
-		this.num = num;
-	}
-
 	/**
 	 * 设置：委外方式
 	 */
@@ -464,50 +428,50 @@ public class WeiwaiDO implements Serializable {
 	/**
 	 * 设置：轴向
 	 */
-	public void setAxial(String axial) {
-		this.axial = axial;
+	public void setZx(String zx) {
+		this.zx = zx;
 	}
 	/**
 	 * 获取：轴向
 	 */
-	public String getAxial() {
-		return axial;
+	public String getZx() {
+		return zx;
 	}
 	/**
 	 * 设置：下加
 	 */
-	public void setLightbelow(String lightbelow) {
-		this.lightbelow = lightbelow;
+	public void setAdd(String add) {
+		this.add = add;
 	}
 	/**
 	 * 获取：下加
 	 */
-	public String getLightbelow() {
-		return lightbelow;
+	public String getAdd() {
+		return add;
 	}
 	/**
 	 * 设置：棱镜
 	 */
-	public void setLengjing(String lengjing) {
-		this.lengjing = lengjing;
+	public void setSlj(String slj) {
+		this.slj = slj;
 	}
 	/**
 	 * 获取：棱镜
 	 */
-	public String getLengjing() {
-		return lengjing;
+	public String getSlj() {
+		return slj;
 	}
 	/**
 	 * 设置：直径
 	 */
-	public void setDiameter(String diameter) {
-		this.diameter = diameter;
+	public void setZj(String zj) {
+		this.zj = zj;
 	}
 	/**
 	 * 获取：直径
 	 */
-	public String getDiameter() {
-		return diameter;
+	public String getZj() {
+		return zj;
 	}
 	/**
 	 * 设置：加工要求
@@ -536,192 +500,145 @@ public class WeiwaiDO implements Serializable {
 	/**
 	 * 设置：曲率
 	 */
-	public void setCurvature(String curvature) {
-		this.curvature = curvature;
+	public void setQulv(String qulv) {
+		this.qulv = qulv;
 	}
 	/**
 	 * 获取：曲率
 	 */
-	public String getCurvature() {
-		return curvature;
+	public String getQulv() {
+		return qulv;
 	}
-
-
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	private String memberNumber;
-	private String name;
-	private String phone1;
-	private String eyeType;
-	private String settleDate;
-	private String saleName;
-	private String amountMoney;
-
-	public String getAmountMoney() {
-		return amountMoney;
-	}
-
-	public void setAmountMoney(String amountMoney) {
-		this.amountMoney = amountMoney;
-	}
-
-	public String getMemberNumber() {
-		return memberNumber;
-	}
-
-	public void setMemberNumber(String memberNumber) {
-		this.memberNumber = memberNumber;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPhone1() {
-		return phone1;
-	}
-
-	public void setPhone1(String phone1) {
-		this.phone1 = phone1;
-	}
-
-	public String getEyeType() {
-		return eyeType;
-	}
-
-	public void setEyeType(String eyeType) {
-		this.eyeType = eyeType;
-	}
-
-	public String getSettleDate() {
-		return settleDate;
-	}
-
-	public void setSettleDate(String settleDate) {
-		this.settleDate = settleDate;
-	}
-
-	public String getSaleName() {
-		return saleName;
-	}
-
-	public void setSaleName(String saleName) {
-		this.saleName = saleName;
-	}
-
-	public String getGkname() {
-		return gkname;
-	}
-
+	/**
+	 * 设置：顾客姓名
+	 */
 	public void setGkname(String gkname) {
 		this.gkname = gkname;
 	}
-
-	public String getHyknum() {
-		return hyknum;
+	/**
+	 * 获取：顾客姓名
+	 */
+	public String getGkname() {
+		return gkname;
 	}
-
+	/**
+	 * 设置：会员卡
+	 */
 	public void setHyknum(String hyknum) {
 		this.hyknum = hyknum;
 	}
-
-	public String getPhone() {
-		return phone;
+	/**
+	 * 获取：会员卡
+	 */
+	public String getHyknum() {
+		return hyknum;
 	}
-
+	/**
+	 * 设置：手机号
+	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	public String getShTime() {
-		return shTime;
+	/**
+	 * 获取：手机号
+	 */
+	public String getPhone() {
+		return phone;
 	}
-
+	/**
+	 * 设置：1未收货，0已收货未配送
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	/**
+	 * 获取：1未收货，0已收货未配送
+	 */
+	public String getStatus() {
+		return status;
+	}
+	/**
+	 * 设置：工号
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	/**
+	 * 获取：工号
+	 */
+	public String getUsername() {
+		return username;
+	}
+	/**
+	 * 设置：收货时间
+	 */
 	public void setShTime(String shTime) {
 		this.shTime = shTime;
 	}
-
-	public String getShstatus() {
-		return shstatus;
+	/**
+	 * 获取：收货时间
+	 */
+	public String getShTime() {
+		return shTime;
 	}
-
+	/**
+	 * 设置：0配送,1退回
+	 */
 	public void setShstatus(String shstatus) {
 		this.shstatus = shstatus;
 	}
-
-	//远瞳距OD
-	private String rightFartj;
-	//远瞳距OS
-	private String leftFartj;
-	//近瞳距OD
-	private String rightNeartj;
-	//近瞳距OS
-	private String leftNeartj;
 	/**
-	 * 设置：远瞳距OD
+	 * 获取：0配送,1退回
 	 */
-	public void setRightFartj(String rightFartj) {
-		this.rightFartj = rightFartj;
+	public String getShstatus() {
+		return shstatus;
 	}
 	/**
-	 * 获取：远瞳距OD
+	 * 设置：配送人员
 	 */
-	public String getRightFartj() {
-		return rightFartj;
+	public void setPsname(String psname) {
+		this.psname = psname;
 	}
 	/**
-	 * 设置：远瞳距OS
+	 * 获取：配送人员
 	 */
-	public void setLeftFartj(String leftFartj) {
-		this.leftFartj = leftFartj;
+	public String getPsname() {
+		return psname;
 	}
 	/**
-	 * 获取：远瞳距OS
+	 * 设置：原配镜单
 	 */
-	public String getLeftFartj() {
-		return leftFartj;
+	public void setSaleNumber(String saleNumber) {
+		this.saleNumber = saleNumber;
 	}
 	/**
-	 * 设置：近瞳距OD
+	 * 获取：原配镜单
 	 */
-	public void setRightNeartj(String rightNeartj) {
-		this.rightNeartj = rightNeartj;
+	public String getSaleNumber() {
+		return saleNumber;
 	}
 	/**
-	 * 获取：近瞳距OD
+	 * 设置：配送或退回时间
 	 */
-	public String getRightNeartj() {
-		return rightNeartj;
+	public void setPstime(String pstime) {
+		this.pstime = pstime;
 	}
 	/**
-	 * 设置：近瞳距OS
+	 * 获取：配送或退回时间
 	 */
-	public void setLeftNeartj(String leftNeartj) {
-		this.leftNeartj = leftNeartj;
+	public String getPstime() {
+		return pstime;
 	}
 	/**
-	 * 获取：近瞳距OS
+	 * 设置：库存对应单据号
 	 */
-	public String getLeftNeartj() {
-		return leftNeartj;
+	public void setStockorder(String stockorder) {
+		this.stockorder = stockorder;
+	}
+	/**
+	 * 获取：库存对应单据号
+	 */
+	public String getStockorder() {
+		return stockorder;
 	}
 }

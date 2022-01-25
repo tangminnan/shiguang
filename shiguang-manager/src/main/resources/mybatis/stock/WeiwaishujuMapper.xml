@@ -4,24 +4,11 @@
 <mapper namespace="com.shiguang.stock.dao.WeiwaishujuDao">
 
 	<select id="get" resultType="com.shiguang.stock.domain.WeiwaishujuDO">
-		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,
-		`jc_style`,`timetime`,`danju_style`,`sale_number`,`weiwai_style`,`beizhu`,`rightsph`,
-		`leftsph`,`rightcyl`,`leftcyl`,`rightzx`,`leftzx`,`right_add`,`left_add`,`right_slj`,
-		`left_slj`,`right_jd`,`left_jd`,`right_fartj`,`left_fartj`,`right_neartj`,`left_neartj`,
-		`rightqulv`,`leftqulv`,`rightzj`,`leftzj`,`rightsphyx`,`leftsphyx`,`rightcylyx`,`leftcylyx`,
-		`rightzxyx`,`leftzxyx`,
-		`num`,`code`,`name`,`left_right`,`count`,`yaoqiu`,`numyx`,`codeyx`,`nameyx`,`left_right_yx`,
-		`countyx`,`yaoqiuyx`,`gkname`,`hyknum`,`phone` from stock_weiwaishuju where id = #{value}
+		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,`sale_number`,`weiwai_style`,`beizhu`,`sph`,`cyl`,`zx`,`add`,`slj`,`jd`,`fartj`,`neartj`,`tg`,`qulv`,`zj`,`sphyx`,`cylyx`,`zxyx`,`num`,`code`,`name`,`left_right`,`count`,`yaoqiu`,`numyx`,`codeyx`,`nameyx`,`left_right_yx`,`countyx`,`yaoqiuyx`,`gkname`,`hyknum`,`phone` from stock_weiwaishuju where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.WeiwaishujuDO">
-		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,
-		`sale_number`,`weiwai_style`,`beizhu`,`rightsph`,`leftsph`,`rightcyl`,`leftcyl`,`rightzx`,`leftzx`,
-		`right_add`,`left_add`,`right_slj`,`left_slj`,`right_jd`,`left_jd`,`right_fartj`,`left_fartj`,
-		`right_neartj`,`left_neartj`,`rightqulv`,`leftqulv`,`rightzj`,`leftzj`,`rightsphyx`,`leftsphyx`,
-		`rightcylyx`,`leftcylyx`,`rightzxyx`,`leftzxyx`,
-		`num`,`code`,`name`,`left_right`,`count`,`yaoqiu`,
-		`numyx`,`codeyx`,`nameyx`,`left_right_yx`,`countyx`,`yaoqiuyx`,`gkname`,`hyknum`,`phone` from stock_weiwaishuju
+		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,`sale_number`,`weiwai_style`,`beizhu`,`sph`,`cyl`,`zx`,`add`,`slj`,`jd`,`fartj`,`neartj`,`tg`,`qulv`,`zj`,`sphyx`,`cylyx`,`zxyx`,`num`,`code`,`name`,`left_right`,`count`,`yaoqiu`,`numyx`,`codeyx`,`nameyx`,`left_right_yx`,`countyx`,`yaoqiuyx`,`gkname`,`hyknum`,`phone` from stock_weiwaishuju
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="number != null and number != ''"> and number = #{number} </if>
@@ -34,32 +21,20 @@
 			<if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
 			<if test="weiwaiStyle != null and weiwaiStyle != ''"> and weiwai_style = #{weiwaiStyle} </if>
 			<if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
-			<if test="rightsph != null and rightsph != ''"> and rightsph = #{rightsph} </if>
-			<if test="leftsph != null and leftsph != ''"> and leftsph = #{leftsph} </if>
-			<if test="rightcyl != null and rightcyl != ''"> and rightcyl = #{rightcyl} </if>
-			<if test="leftcyl != null and leftcyl != ''"> and leftcyl = #{leftcyl} </if>
-			<if test="rightzx != null and rightzx != ''"> and rightzx = #{rightzx} </if>
-			<if test="leftzx != null and leftzx != ''"> and leftzx = #{leftzx} </if>
-			<if test="rightAdd != null and rightAdd != ''"> and right_add = #{rightAdd} </if>
-			<if test="leftAdd != null and leftAdd != ''"> and left_add = #{leftAdd} </if>
-			<if test="rightSlj != null and rightSlj != ''"> and right_slj = #{rightSlj} </if>
-			<if test="leftSlj != null and leftSlj != ''"> and left_slj = #{leftSlj} </if>
-			<if test="rightJd != null and rightJd != ''"> and right_jd = #{rightJd} </if>
-			<if test="leftJd != null and leftJd != ''"> and left_jd = #{leftJd} </if>
-			<if test="rightFartj != null and rightFartj != ''"> and right_fartj = #{rightFartj} </if>
-			<if test="leftFartj != null and leftFartj != ''"> and left_fartj = #{leftFartj} </if>
-			<if test="rightNeartj != null and rightNeartj != ''"> and right_neartj = #{rightNeartj} </if>
-			<if test="leftNeartj != null and leftNeartj != ''"> and left_neartj = #{leftNeartj} </if>
-			<if test="rightqulv != null and rightqulv != ''"> and rightqulv = #{rightqulv} </if>
-			<if test="leftqulv != null and leftqulv != ''"> and leftqulv = #{leftqulv} </if>
-			<if test="rightzj != null and rightzj != ''"> and rightzj = #{rightzj} </if>
-			<if test="leftzj != null and leftzj != ''"> and leftzj = #{leftzj} </if>
-			<if test="rightsphyx != null and rightsphyx != ''"> and rightsphyx = #{rightsphyx} </if>
-			<if test="leftsphyx != null and leftsphyx != ''"> and leftsphyx = #{leftsphyx} </if>
-			<if test="rightcylyx != null and rightcylyx != ''"> and rightcylyx = #{rightcylyx} </if>
-			<if test="leftcylyx != null and leftcylyx != ''"> and leftcylyx = #{leftcylyx} </if>
-			<if test="rightzxyx != null and rightzxyx != ''"> and rightzxyx = #{rightzxyx} </if>
-			<if test="leftzxyx != null and leftzxyx != ''"> and leftzxyx = #{leftzxyx} </if>
+			<if test="sph != null and sph != ''"> and sph = #{sph} </if>
+			<if test="cyl != null and cyl != ''"> and cyl = #{cyl} </if>
+			<if test="zx != null and zx != ''"> and zx = #{zx} </if>
+			<if test="add != null and add != ''"> and add = #{add} </if>
+			<if test="slj != null and slj != ''"> and slj = #{slj} </if>
+			<if test="jd != null and jd != ''"> and jd = #{jd} </if>
+			<if test="fartj != null and fartj != ''"> and fartj = #{fartj} </if>
+			<if test="neartj != null and neartj != ''"> and neartj = #{neartj} </if>
+			<if test="tg != null and tg != ''"> and tg = #{tg} </if>
+			<if test="qulv != null and qulv != ''"> and qulv = #{qulv} </if>
+			<if test="zj != null and zj != ''"> and zj = #{zj} </if>
+			<if test="sphyx != null and sphyx != ''"> and sphyx = #{sphyx} </if>
+			<if test="cylyx != null and cylyx != ''"> and cylyx = #{cylyx} </if>
+			<if test="zxyx != null and zxyx != ''"> and zxyx = #{zxyx} </if>
 			<if test="num != null and num != ''"> and num = #{num} </if>
 			<if test="code != null and code != ''"> and code = #{code} </if>
 			<if test="name != null and name != ''"> and name = #{name} </if>
@@ -103,32 +78,20 @@
 			<if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
 			<if test="weiwaiStyle != null and weiwaiStyle != ''"> and weiwai_style = #{weiwaiStyle} </if>
 			<if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
-			<if test="rightsph != null and rightsph != ''"> and rightsph = #{rightsph} </if>
-			<if test="leftsph != null and leftsph != ''"> and leftsph = #{leftsph} </if>
-			<if test="rightcyl != null and rightcyl != ''"> and rightcyl = #{rightcyl} </if>
-			<if test="leftcyl != null and leftcyl != ''"> and leftcyl = #{leftcyl} </if>
-			<if test="rightzx != null and rightzx != ''"> and rightzx = #{rightzx} </if>
-			<if test="leftzx != null and leftzx != ''"> and leftzx = #{leftzx} </if>
-			<if test="rightAdd != null and rightAdd != ''"> and right_add = #{rightAdd} </if>
-			<if test="leftAdd != null and leftAdd != ''"> and left_add = #{leftAdd} </if>
-			<if test="rightSlj != null and rightSlj != ''"> and right_slj = #{rightSlj} </if>
-			<if test="leftSlj != null and leftSlj != ''"> and left_slj = #{leftSlj} </if>
-			<if test="rightJd != null and rightJd != ''"> and right_jd = #{rightJd} </if>
-			<if test="leftJd != null and leftJd != ''"> and left_jd = #{leftJd} </if>
-			<if test="rightFartj != null and rightFartj != ''"> and right_fartj = #{rightFartj} </if>
-			<if test="leftFartj != null and leftFartj != ''"> and left_fartj = #{leftFartj} </if>
-			<if test="rightNeartj != null and rightNeartj != ''"> and right_neartj = #{rightNeartj} </if>
-			<if test="leftNeartj != null and leftNeartj != ''"> and left_neartj = #{leftNeartj} </if>
-			<if test="rightqulv != null and rightqulv != ''"> and rightqulv = #{rightqulv} </if>
-			<if test="leftqulv != null and leftqulv != ''"> and leftqulv = #{leftqulv} </if>
-			<if test="rightzj != null and rightzj != ''"> and rightzj = #{rightzj} </if>
-			<if test="leftzj != null and leftzj != ''"> and leftzj = #{leftzj} </if>
-			<if test="rightsphyx != null and rightsphyx != ''"> and rightsphyx = #{rightsphyx} </if>
-			<if test="leftsphyx != null and leftsphyx != ''"> and leftsphyx = #{leftsphyx} </if>
-			<if test="rightcylyx != null and rightcylyx != ''"> and rightcylyx = #{rightcylyx} </if>
-			<if test="leftcylyx != null and leftcylyx != ''"> and leftcylyx = #{leftcylyx} </if>
-			<if test="rightzxyx != null and rightzxyx != ''"> and rightzxyx = #{rightzxyx} </if>
-			<if test="leftzxyx != null and leftzxyx != ''"> and leftzxyx = #{leftzxyx} </if>
+			<if test="sph != null and sph != ''"> and sph = #{sph} </if>
+			<if test="cyl != null and cyl != ''"> and cyl = #{cyl} </if>
+			<if test="zx != null and zx != ''"> and zx = #{zx} </if>
+			<if test="add != null and add != ''"> and add = #{add} </if>
+			<if test="slj != null and slj != ''"> and slj = #{slj} </if>
+			<if test="jd != null and jd != ''"> and jd = #{jd} </if>
+			<if test="fartj != null and fartj != ''"> and fartj = #{fartj} </if>
+			<if test="neartj != null and neartj != ''"> and neartj = #{neartj} </if>
+			<if test="tg != null and tg != ''"> and tg = #{tg} </if>
+			<if test="qulv != null and qulv != ''"> and qulv = #{qulv} </if>
+			<if test="zj != null and zj != ''"> and zj = #{zj} </if>
+			<if test="sphyx != null and sphyx != ''"> and sphyx = #{sphyx} </if>
+			<if test="cylyx != null and cylyx != ''"> and cylyx = #{cylyx} </if>
+			<if test="zxyx != null and zxyx != ''"> and zxyx = #{zxyx} </if>
 			<if test="num != null and num != ''"> and num = #{num} </if>
 			<if test="code != null and code != ''"> and code = #{code} </if>
 			<if test="name != null and name != ''"> and name = #{name} </if>
@@ -150,110 +113,86 @@
 	<insert id="save" parameterType="com.shiguang.stock.domain.WeiwaishujuDO" useGeneratedKeys="true" keyProperty="id">
 		insert into stock_weiwaishuju
 		(
-			`number`,
-			`danju_day`,
-			`departname`,
-			`zhidan_people`,
-			`jc_style`,
-			`timetime`,
-			`danju_style`,
-			`sale_number`,
-			`weiwai_style`,
-			`beizhu`,
-			`rightsph`,
-			`leftsph`,
-			`rightcyl`,
-			`leftcyl`,
-			`rightzx`,
-			`leftzx`,
-			`right_add`,
-			`left_add`,
-			`right_slj`,
-			`left_slj`,
-			`right_jd`,
-			`left_jd`,
-			`right_fartj`,
-			`left_fartj`,
-			`right_neartj`,
-			`left_neartj`,
-			`rightqulv`,
-			`leftqulv`,
-			`rightzj`,
-			`leftzj`,
-			`rightsphyx`,
-			`leftsphyx`,
-			`rightcylyx`,
-			`leftcylyx`,
-			`rightzxyx`,
-			`leftzxyx`,
-			`num`,
-			`name`,
-			`code`,
-			`left_right`,
-			`count`,
-			`yaoqiu`,
-			`numyx`,
-			`codeyx`,
-			`nameyx`,
-			`left_right_yx`,
-			`countyx`,
-			`yaoqiuyx`,
-			`gkname`,
-			`hyknum`,
+			`number`, 
+			`danju_day`, 
+			`departname`, 
+			`zhidan_people`, 
+			`jc_style`, 
+			`timetime`, 
+			`danju_style`, 
+			`sale_number`, 
+			`weiwai_style`, 
+			`beizhu`, 
+			`sph`, 
+			`cyl`, 
+			`zx`, 
+			`add`, 
+			`slj`, 
+			`jd`, 
+			`fartj`, 
+			`neartj`, 
+			`tg`, 
+			`qulv`, 
+			`zj`, 
+			`sphyx`, 
+			`cylyx`, 
+			`zxyx`, 
+			`num`, 
+			`code`, 
+			`name`, 
+			`left_right`, 
+			`count`, 
+			`yaoqiu`, 
+			`numyx`, 
+			`codeyx`, 
+			`nameyx`, 
+			`left_right_yx`, 
+			`countyx`, 
+			`yaoqiuyx`, 
+			`gkname`, 
+			`hyknum`, 
 			`phone`
 		)
 		values
 		(
-			#{number},
-			#{danjuDay},
-			#{departname},
-			#{zhidanPeople},
-			#{jcStyle},
-			#{timetime},
-			#{danjuStyle},
-			#{saleNumber},
-			#{weiwaiStyle},
-			#{beizhu},
-			#{rightsph},
-			#{leftsph},
-			#{rightcyl},
-			#{leftcyl},
-			#{rightzx},
-			#{leftzx},
-			#{rightAdd},
-			#{leftAdd},
-			#{rightSlj},
-			#{leftSlj},
-			#{rightJd},
-			#{leftJd},
-			#{rightFartj},
-			#{leftFartj},
-			#{rightNeartj},
-			#{leftNeartj},
-			#{rightqulv},
-			#{leftqulv},
-			#{rightzj},
-			#{leftzj},
-			#{rightsphyx},
-			#{leftsphyx},
-			#{rightcylyx},
-			#{leftcylyx},
-			#{rightzxyx},
-			#{leftzxyx},
-			#{num},
-			#{name},
-			#{code},
-			#{leftRight},
-			#{count},
-			#{yaoqiu},
-			#{numyx},
-			#{codeyx},
-			#{nameyx},
-			#{leftRightYx},
-			#{countyx},
-			#{yaoqiuyx},
-			#{gkname},
-			#{hyknum},
+			#{number}, 
+			#{danjuDay}, 
+			#{departname}, 
+			#{zhidanPeople}, 
+			#{jcStyle}, 
+			#{timetime}, 
+			#{danjuStyle}, 
+			#{saleNumber}, 
+			#{weiwaiStyle}, 
+			#{beizhu}, 
+			#{sph}, 
+			#{cyl}, 
+			#{zx}, 
+			#{add}, 
+			#{slj}, 
+			#{jd}, 
+			#{fartj}, 
+			#{neartj}, 
+			#{tg}, 
+			#{qulv}, 
+			#{zj}, 
+			#{sphyx}, 
+			#{cylyx}, 
+			#{zxyx}, 
+			#{num}, 
+			#{code}, 
+			#{name}, 
+			#{leftRight}, 
+			#{count}, 
+			#{yaoqiu}, 
+			#{numyx}, 
+			#{codeyx}, 
+			#{nameyx}, 
+			#{leftRightYx}, 
+			#{countyx}, 
+			#{yaoqiuyx}, 
+			#{gkname}, 
+			#{hyknum}, 
 			#{phone}
 		)
 	</insert>
@@ -271,32 +210,20 @@
 			<if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
 			<if test="weiwaiStyle != null">`weiwai_style` = #{weiwaiStyle}, </if>
 			<if test="beizhu != null">`beizhu` = #{beizhu}, </if>
-			<if test="rightsph != null">`rightsph` = #{rightsph}, </if>
-			<if test="leftsph != null">`leftsph` = #{leftsph}, </if>
-			<if test="rightcyl != null">`rightcyl` = #{rightcyl}, </if>
-			<if test="leftcyl != null">`leftcyl` = #{leftcyl}, </if>
-			<if test="rightzx != null">`rightzx` = #{rightzx}, </if>
-			<if test="leftzx != null">`leftzx` = #{leftzx}, </if>
-			<if test="rightAdd != null">`right_add` = #{rightAdd}, </if>
-			<if test="leftAdd != null">`left_add` = #{leftAdd}, </if>
-			<if test="rightSlj != null">`right_slj` = #{rightSlj}, </if>
-			<if test="leftSlj != null">`left_slj` = #{leftSlj}, </if>
-			<if test="rightJd != null">`right_jd` = #{rightJd}, </if>
-			<if test="leftJd != null">`left_jd` = #{leftJd}, </if>
-			<if test="rightFartj != null">`right_fartj` = #{rightFartj}, </if>
-			<if test="leftFartj != null">`left_fartj` = #{leftFartj}, </if>
-			<if test="rightNeartj != null">`right_neartj` = #{rightNeartj}, </if>
-			<if test="leftNeartj != null">`left_neartj` = #{leftNeartj}, </if>
-			<if test="rightqulv != null">`rightqulv` = #{rightqulv}, </if>
-			<if test="leftqulv != null">`leftqulv` = #{leftqulv}, </if>
-			<if test="rightzj != null">`rightzj` = #{rightzj}, </if>
-			<if test="leftzj != null">`leftzj` = #{leftzj}, </if>
-			<if test="rightsphyx != null">`rightsphyx` = #{rightsphyx}, </if>
-			<if test="leftsphyx != null">`leftsphyx` = #{leftsphyx}, </if>
-			<if test="rightcylyx != null">`rightcylyx` = #{rightcylyx}, </if>
-			<if test="leftcylyx != null">`leftcylyx` = #{leftcylyx}, </if>
-			<if test="rightzxyx != null">`rightzxyx` = #{rightzxyx}, </if>
-			<if test="leftzxyx != null">`leftzxyx` = #{leftzxyx}, </if>
+			<if test="sph != null">`sph` = #{sph}, </if>
+			<if test="cyl != null">`cyl` = #{cyl}, </if>
+			<if test="zx != null">`zx` = #{zx}, </if>
+			<if test="add != null">`add` = #{add}, </if>
+			<if test="slj != null">`slj` = #{slj}, </if>
+			<if test="jd != null">`jd` = #{jd}, </if>
+			<if test="fartj != null">`fartj` = #{fartj}, </if>
+			<if test="neartj != null">`neartj` = #{neartj}, </if>
+			<if test="tg != null">`tg` = #{tg}, </if>
+			<if test="qulv != null">`qulv` = #{qulv}, </if>
+			<if test="zj != null">`zj` = #{zj}, </if>
+			<if test="sphyx != null">`sphyx` = #{sphyx}, </if>
+			<if test="cylyx != null">`cylyx` = #{cylyx}, </if>
+			<if test="zxyx != null">`zxyx` = #{zxyx}, </if>
 			<if test="num != null">`num` = #{num}, </if>
 			<if test="code != null">`code` = #{code}, </if>
 			<if test="name != null">`name` = #{name}, </if>
@@ -322,7 +249,6 @@
 	<delete id="removes">
 		delete from stock_weiwaishuju where number = #{value}
 	</delete>
-
 	<delete id="batchRemove">
 		delete from stock_weiwaishuju where id in
 		<foreach item="id" collection="array" open="(" separator="," close=")">
@@ -331,58 +257,7 @@
 	</delete>
 
 	<select id="getWeiwaiShuju" resultType="com.shiguang.stock.domain.WeiwaishujuDO">
-		SELECT
-		`id`,
-		`number`,
-		`danju_day`,
-		`departname`,
-		`zhidan_people`,
-		`jc_style`,
-		`timetime`,
-		`danju_style`,
-		`sale_number`,
-		`weiwai_style`,
-		`beizhu`,
-		`rightsph`,
-		`leftsph`,
-		`rightcyl`,
-		`leftcyl`,
-		`rightzx`,
-		`leftzx`,
-		`right_add`,
-		`left_add`,
-		`right_slj`,
-		`left_slj`,
-		`right_jd`,
-		`left_jd`,
-		`right_fartj`,
-		`left_fartj`,
-		`right_neartj`,
-		`left_neartj`,
-		`rightqulv`,
-		`leftqulv`,
-		`rightzj`,
-		`leftzj`,
-		`rightsphyx`,
-		`leftsphyx`,
-		`rightcylyx`,
-		`leftcylyx`,
-		`rightzxyx`,
-		`leftzxyx`,
-		`num`,
-		`code`,
-		`name`,
-		`left_right`,
-		`count`,
-		`yaoqiu`,
-		`numyx`,
-		`codeyx`,
-		`nameyx`,
-		`left_right_yx`,
-		`countyx`,
-		`yaoqiuyx`
-		FROM
-		stock_weiwaishuju
+		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,`sale_number`,`weiwai_style`,`beizhu`,`sph`,`cyl`,`zx`,`add`,`slj`,`jd`,`fartj`,`neartj`,`tg`,`qulv`,`zj`,`sphyx`,`cylyx`,`zxyx`,`num`,`code`,`name`,`left_right`,`count`,`yaoqiu`,`numyx`,`codeyx`,`nameyx`,`left_right_yx`,`countyx`,`yaoqiuyx`,`gkname`,`hyknum`,`phone` from stock_weiwaishuju
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="number != null and number != ''"> and number = #{number} </if>
@@ -395,48 +270,35 @@
 			<if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
 			<if test="weiwaiStyle != null and weiwaiStyle != ''"> and weiwai_style = #{weiwaiStyle} </if>
 			<if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
-			<if test="rightsph != null and rightsph != ''"> and rightsph = #{rightsph} </if>
-			<if test="leftsph != null and leftsph != ''"> and leftsph = #{leftsph} </if>
-			<if test="rightcyl != null and rightcyl != ''"> and rightcyl = #{rightcyl} </if>
-			<if test="leftcyl != null and leftcyl != ''"> and leftcyl = #{leftcyl} </if>
-			<if test="rightzx != null and rightzx != ''"> and rightzx = #{rightzx} </if>
-			<if test="leftzx != null and leftzx != ''"> and leftzx = #{leftzx} </if>
-			<if test="rightAdd != null and rightAdd != ''"> and right_add = #{rightAdd} </if>
-			<if test="leftAdd != null and leftAdd != ''"> and left_add = #{leftAdd} </if>
-			<if test="rightSlj != null and rightSlj != ''"> and right_slj = #{rightSlj} </if>
-			<if test="leftSlj != null and leftSlj != ''"> and left_slj = #{leftSlj} </if>
-			<if test="rightJd != null and rightJd != ''"> and right_jd = #{rightJd} </if>
-			<if test="leftJd != null and leftJd != ''"> and left_jd = #{leftJd} </if>
-			<if test="rightFartj != null and rightFartj != ''"> and right_fartj = #{rightFartj} </if>
-			<if test="leftFartj != null and leftFartj != ''"> and left_fartj = #{leftFartj} </if>
-			<if test="rightNeartj != null and rightNeartj != ''"> and right_neartj = #{rightNeartj} </if>
-			<if test="leftNeartj != null and leftNeartj != ''"> and left_neartj = #{leftNeartj} </if>
-			<if test="rightqulv != null and rightqulv != ''"> and rightqulv = #{rightqulv} </if>
-			<if test="leftqulv != null and leftqulv != ''"> and leftqulv = #{leftqulv} </if>
-			<if test="rightzj != null and rightzj != ''"> and rightzj = #{rightzj} </if>
-			<if test="leftzj != null and leftzj != ''"> and leftzj = #{leftzj} </if>
-			<if test="rightsphyx != null and rightsphyx != ''"> and rightsphyx = #{rightsphyx} </if>
-			<if test="leftsphyx != null and leftsphyx != ''"> and leftsphyx = #{leftsphyx} </if>
-			<if test="rightcylyx != null and rightcylyx != ''"> and rightcylyx = #{rightcylyx} </if>
-			<if test="leftcylyx != null and leftcylyx != ''"> and leftcylyx = #{leftcylyx} </if>
-			<if test="rightzxyx != null and rightzxyx != ''"> and rightzxyx = #{rightzxyx} </if>
-			<if test="leftzxyx != null and leftzxyx != ''"> and leftzxyx = #{leftzxyx} </if>
-
-
+			<if test="sph != null and sph != ''"> and sph = #{sph} </if>
+			<if test="cyl != null and cyl != ''"> and cyl = #{cyl} </if>
+			<if test="zx != null and zx != ''"> and zx = #{zx} </if>
+			<if test="add != null and add != ''"> and add = #{add} </if>
+			<if test="slj != null and slj != ''"> and slj = #{slj} </if>
+			<if test="jd != null and jd != ''"> and jd = #{jd} </if>
+			<if test="fartj != null and fartj != ''"> and fartj = #{fartj} </if>
+			<if test="neartj != null and neartj != ''"> and neartj = #{neartj} </if>
+			<if test="tg != null and tg != ''"> and tg = #{tg} </if>
+			<if test="qulv != null and qulv != ''"> and qulv = #{qulv} </if>
+			<if test="zj != null and zj != ''"> and zj = #{zj} </if>
+			<if test="sphyx != null and sphyx != ''"> and sphyx = #{sphyx} </if>
+			<if test="cylyx != null and cylyx != ''"> and cylyx = #{cylyx} </if>
+			<if test="zxyx != null and zxyx != ''"> and zxyx = #{zxyx} </if>
 			<if test="num != null and num != ''"> and num = #{num} </if>
-			<if test="name != null and name != ''"> and name = #{name} </if>
 			<if test="code != null and code != ''"> and code = #{code} </if>
-
+			<if test="name != null and name != ''"> and name = #{name} </if>
 			<if test="leftRight != null and leftRight != ''"> and left_right = #{leftRight} </if>
 			<if test="count != null and count != ''"> and count = #{count} </if>
 			<if test="yaoqiu != null and yaoqiu != ''"> and yaoqiu = #{yaoqiu} </if>
 			<if test="numyx != null and numyx != ''"> and numyx = #{numyx} </if>
-			<if test="nameyx != null and nameyx != ''"> and nameyx = #{nameyx} </if>
 			<if test="codeyx != null and codeyx != ''"> and codeyx = #{codeyx} </if>
+			<if test="nameyx != null and nameyx != ''"> and nameyx = #{nameyx} </if>
 			<if test="leftRightYx != null and leftRightYx != ''"> and left_right_yx = #{leftRightYx} </if>
 			<if test="countyx != null and countyx != ''"> and countyx = #{countyx} </if>
-			<if test="yaoqiuryx != null and yaoqiuryx != ''"> and yaoqiuryx = #{yaoqiuryx} </if>
-			<if test="yaoqiulyx != null and yaoqiulyx != ''"> and yaoqiulyx = #{yaoqiulyx} </if>
+			<if test="yaoqiuyx != null and yaoqiuyx != ''"> and yaoqiuyx = #{yaoqiuyx} </if>
+			<if test="gkname != null and gkname != ''"> and gkname = #{gkname} </if>
+			<if test="hyknum != null and hyknum != ''"> and hyknum = #{hyknum} </if>
+			<if test="phone != null and phone != ''"> and phone = #{phone} </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -450,7 +312,4 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-
 </mapper>
-
-

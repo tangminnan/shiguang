@@ -95,6 +95,7 @@
                             <td>棱镜</td>
                             <td>直径</td>
                             <td>加工要求</td>
+                            <td>操作</td>
                         </tr>
                     </table>
                 </td>
@@ -116,6 +117,7 @@
                             <td>曲率</td>
                             <td>直径</td>
                             <td>加工要求</td>
+                            <td>操作</td>
                         </tr>
                        
 
@@ -148,105 +150,46 @@
                 'danjuNumber': danjuNumber
             },
             success: function (xml) {
+                // alert(JSON.stringify(xml));
+                // alert(xml.length);
                 for (var i = 0; i < xml.length; i++) {
                     if (eyeStyle == '框镜订做') {
-                        var saleNumber=xml[i].saleNumber.split(',');
-                        var mirrorTime=xml[i].mirrorTime.split(',');
-                        var goodsName=xml[i].goodsName.split(',');
-                        var style=xml[i].style.split(',');
-                        var rl=xml[i].rl.split(',');
-                        var count=xml[i].count.split(',');
-                        var sph=xml[i].sph.split(',');
-                        var cyl=xml[i].cyl.split(',');
-                        var axial=xml[i].axial.split(',');
-                        var lightbelow=xml[i].lightbelow.split(',');
-                        var lengjing=xml[i].lengjing.split(',');
-                        var diameter=xml[i].diameter.split(',');
-                        var yaoqiu=xml[i].yaoqiu.split(',');
-                        for (var t=0;t<saleNumber.length;t++){
-
                             html += "<tr>";
-                            html += "<td>"+saleNumber[t]+"</td>";
-                            html += "<input id='saleNumber' name='saleNumber'   value='" + saleNumber[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+mirrorTime[t]+"</td>";
-                            html += "<input id='mirrorTime' name='mirrorTime'   value='" + mirrorTime[0] + "'  type='hidden'readonly/>";
-                            html += "<td>"+goodsName[t]+"</td>";
-                            html += "<input id='goodsName' name='goodsName'   value='" + goodsName[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+style[t]+"</td>";
-                            html += "<input id='style' name='style'   value='" + style[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+rl[t]+"</td>";
-                            html += "<input id='rl' name='rl'   value='" + rl[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+count[t]+"</td>";
-                            html += "<input id='count' name='count'   value='" + count[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+sph[t]+"</td>";
-                            html += "<input id='sph' name='sph'   value='" + sph[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+cyl[t]+"</td>";
-                            html += "<input id='cyl' name='cyl'   value='" + cyl[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+axial[t]+"</td>";
-                            html += "<input id='axial' name='axial'   value='" + axial[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+lightbelow[t]+"</td>";
-                            html += "<input id='lightbelow' name='lightbelow'   value='" + lightbelow[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+lengjing[t]+"</td>";
-                            html += "<input id='lengjing' name='lengjing'   value='" + lengjing[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+diameter[t]+"</td>";
-                            html += "<input id='diameter' name='diameter'   value='" + diameter[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+yaoqiu[t]+"</td>";
-                            html += "<input id='yaoqiu' name='yaoqiu'   value='" + yaoqiu[t]  + "'  type='hidden'readonly/>";
+                            html += "<td>"+xml[i].saleNumber+"</td>";
+                            html += "<input id='saleNumber' name='saleNumber'   value='" + xml[i].saleNumber + "'  type='hidden' readonly/>";
+                            html += "<td>"+xml[i].mirrorTime+"</td>";
+                            html += "<input id='mirrorTime' name='mirrorTime'   value='" + xml[i].mirrorTime+ "'  type='hidden' readonly/>";
+                            html += "<td>"+xml[i].name+"</td>";
+                            html += "<input id='goodsName' name='goodsName'   value='" + xml[i].name + "'  type='hidden' readonly/>";
+                            html += "<td>"+xml[i].style+"</td>";
+                            html += "<input id='style' name='style'   value='" + xml[i].style + "'  type='hidden' readonly/>";
+                            html += "<td>"+xml[i].rl+"</td>";
+                            html += "<input id='rl' name='rl'   value='" + xml[i].rl + "'  type='hidden' readonly/>";
+                            html += "<td>"+xml[i].count+"</td>";
+                            html += "<input id='count' name='count'   value='" + xml[i].count + "'  type='hidden' readonly/>";
+                            html += "<td>"+xml[i].sph+"</td>";
+                            html += "<input id='sph' name='sph'   value='" + xml[i].sph + "'  type='hidden' readonly/>";
+                            html += "<td>"+xml[i].cyl+"</td>";
+                            html += "<input id='cyl' name='cyl'   value='" + xml[i].cyl + "'  type='hidden' readonly/>";
+                            html += "<td>"+xml[i].zx+"</td>";
+                            html += "<input id='axial' name='axial'   value='" + xml[i].zx + "'  type='hidden' readonly/>";
+                            html += "<td>"+xml[i].add+"</td>";
+                            html += "<input id='lightbelow' name='lightbelow'   value='" + xml[i].add + "'  type='hidden'readonly/>";
+                            html += "<td>"+xml[i].slj+"</td>";
+                            html += "<input id='lengjing' name='lengjing'   value='" + xml[i].slj + "'  type='hidden' readonly/>";
+                            html += "<td>"+xml[i].zj+"</td>";
+                            html += "<input id='diameter' name='diameter'   value='" + xml[i].zj + "'  type='hidden' readonly/>";
+                            html += "<td>"+xml[i].yaoqiu+"</td>";
+                            html += "<input id='yaoqiu' name='yaoqiu'   value='" + xml[i].yaoqiu  + "'  type='hidden' readonly/>";
+                            html += "<td style='display: none'>"+xml[i].num+"</td>";
+                            html += "<input id='num' name='num'   value='" + xml[i].num  + "'  type='hidden' readonly/>";
+                            html+="<td><input id='"+xml[i].code+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>";
                             html += "</tr>";
-                        }
-                        $('#jp').append(html);
-                    }else if (eyeStyle =="隐形订做"){
-                        var saleNumber=xml[i].saleNumber.split(',');
-                        var mirrorTime=xml[i].mirrorTime.split(',');
-                        var goodsName=xml[i].goodsName.split(',');
-                        var style=xml[i].style.split(',');
-                        var rl=xml[i].rl.split(',');
-                        var count=xml[i].count.split(',');
-                        var sph=xml[i].sph.split(',');
-                        var cyl=xml[i].cyl.split(',');
-                        var axial=xml[i].axial.split(',');
-                        var jd=xml[i].jd.split(',');
-                        var curvature=xml[i].curvature.split(',');
-                        var diameter=xml[i].diameter.split(',');
-                        var yaoqiu=xml[i].yaoqiu.split(',');
-                        for (var t=0;t<saleNumber.length;t++){
-
-                            html += "<tr>";
-                            html += "<td>"+saleNumber[t]+"</td>";
-                            html += "<input id='saleNumber' name='saleNumber'   value='" + saleNumber[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+mirrorTime[t]+"</td>";
-                            html += "<input id='mirrorTime' name='mirrorTime'   value='" + mirrorTime[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+goodsName[t]+"</td>";
-                            html += "<input id='goodsName' name='goodsName'   value='" + goodsName[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+style[t]+"</td>";
-                            html += "<input id='style' name='style'   value='" + style[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+rl[t]+"</td>";
-                            html += "<input id='rl' name='rl'   value='" + rl[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+count[t]+"</td>";
-                            html += "<input id='count' name='count'   value='" + count[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+sph[t]+"</td>";
-                            html += "<input id='sph' name='sph'   value='" + sph[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+cyl[t]+"</td>";
-                            html += "<input id='cyl' name='cyl'   value='" + cyl[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+axial[t]+"</td>";
-                            html += "<input id='axial' name='axial'   value='" + axial[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+jd[t]+"</td>";
-                            html += "<input id='jd' name='jd'   value='" + jd[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+curvature[t]+"</td>";
-                            html += "<input id='curvature' name='curvature'   value='" + curvature[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+diameter[t]+"</td>";
-                            html += "<input id='diameter' name='diameter'   value='" + diameter[t] + "'  type='hidden'readonly/>";
-                            html += "<td>"+yaoqiu[t]+"</td>";
-                            html += "<input id='yaoqiu' name='yaoqiu'   value='" + yaoqiu[t]  + "'  type='hidden'readonly/>";
-                            html += "</tr>";
-                        }
-                        $('#yx').append(html);
                     }
-                    
                 }
-
+                $('#jp').append(html);
             }
-        })
+        });
     });
     function dayin() {
         var eyeStyle = $('#eyeStyle').val();
@@ -256,6 +199,14 @@
         } else if (eyeStyle == '隐形订做') {
             window.open("/stock/weiwai/yxPeijingdan?danjuNumber=" + danjuNumber);
         }
+    }
+
+
+    function codeDayin(object) {
+        var codeOne =object;
+        var danjuNumber = $('#danjuNumber').val();
+        window.open("/stock/weiwai/codeOne?danjuNumber="+danjuNumber+'&codeOne='+codeOne);
+
     }
 
 </script>

@@ -6,30 +6,29 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
- * 
- * @author wjl
+ *
+ *
+ * @author cln
  * @email bushuo@163.com
- * @date 2021-09-18 18:14:35
+ * @date 2022-01-22 15:26:34
  */
 public interface WeiwaishujuService {
-	
+
 	WeiwaishujuDO get(Long id);
 
 	List<WeiwaishujuDO> list(Map<String, Object> map);
-	
+
 	int count(Map<String, Object> map);
-	
+
 	int save(WeiwaishujuDO weiwaishuju);
-	
+
 	int update(WeiwaishujuDO weiwaishuju);
-	
+
 	int remove(Long id);
 	int removes(String number);
 
 	int batchRemove(Long[] ids);
 
-	//得到委外数据
 	List<WeiwaishujuDO> getWeiwaiShuju(Map<String, Object> map);
 
 }

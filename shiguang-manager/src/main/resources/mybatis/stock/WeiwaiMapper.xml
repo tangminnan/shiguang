@@ -4,89 +4,71 @@
 <mapper namespace="com.shiguang.stock.dao.WeiwaiDao">
 
     <select id="get" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`mfrsname`,`goodsmfrsid`,`goodsbrandnum`,`goodsbrandname`,`position_id`,`position_name`,
-		`changjia_number`,`shouhuo_people`,
-		`shouhuo_phone`,`shouhuo_address`,`beizhu`,
-		`sale_number`,`mirror_time`,`goods_name`,`num`,`code`,`style`,`rl`,`count`,`sph`,`cyl`,
-		`axial`,`lightbelow`,`lengjing`,`diameter`,`yaoqiu`,`jd`,`curvature`,
-		`status`,`username`,`sh_time`,`shstatus` ,`psname`,
-		`gkname`,`hyknum`,`phone`,`salenumbery`,`pstime`,`stockorder`
+		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`mfrsname`,`brandnum`,`brandname`,`position_id`,
+		`position_name`,`shouhuo_people`,`shouhuo_phone`,`shouhuo_address`,`changjia_number`,`beizhu`,`weiwaisale_number`,`mirror_time`,
+		`num`,`code`,`name`,`style`,`rl`,`count`,`sph`,`cyl`,`zx`,`add`,`slj`,`zj`,`yaoqiu`,`jd`,`qulv`,`gkname`,`hyknum`,`phone`,`status`,
+		`username`,`sh_time`,`shstatus`,`psname`,`sale_number`,`pstime`,`stockorder`
 		from stock_weiwai where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.stock.domain.WeiwaiDO">
-        select
-        s.`id`,s.`danju_number`,s.`danju_day`,s.`eye_style`,s.`zhidan_people`,s.`mfrsid`,s.`mfrsname`,s.`goodsmfrsid`,s.`goodsbrandnum`,s.`goodsbrandname`,
-        s.`position_id`,s.`position_name`,s.`changjia_number`,s. `shouhuo_people`,s.`shouhuo_phone`,s.`shouhuo_address`,s.`beizhu`,
-        s.`sale_number`,s.`mirror_time`,s.`goods_name`,s.`num`,s.`code`,
-        s.`style`,s.`rl`,s.`count`,s.`sph`,s.`cyl`,s.`axial`,s.`lightbelow`,s.`lengjing`,s.`diameter`,s.`yaoqiu`,s.`jd`,
-        s.`curvature`,s.`gkname`,s.`hyknum`,s.`phone`,
-        s.`status`,s.`username`,s.`sh_time`,s.`shstatus` ,s.`psname`,s.`salenumbery`,s.`pstime`,s.`stockorder`
+        select s.*
         from stock_weiwai s
-        left join c_position po on s.position_id=po.position_id
-        left join department d on po.depart_number= d.depart_number
+        left join c_position p on s.position_id=p.position_id
         <where>
-            <if test="id != null and id != ''">and s.id = #{id}</if>
-            <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number  LIKE concat(concat('%', #{danjuNumber}),'%')</if>
-            <if test="danjuDay != null and danjuDay != ''">and s.danju_day = #{danjuDay}</if>
-            <if test="eyeStyle != null and eyeStyle != ''">and s.eye_style = #{eyeStyle}</if>
-            <if test="zhidanPeople != null and zhidanPeople != ''">and s.zhidan_people = #{zhidanPeople}</if>
-            <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
-            <if test="mfrsname != null and mfrsname != ''">and s.mfrsname  LIKE concat(concat('%', #{mfrsname}),'%')</if>
-            <if test="goodsmfrsid != null and goodsmfrsid != ''">and s.goodsmfrsid  LIKE concat(concat('%', #{goodsmfrsid}),'%')</if>
-            <if test="goodsbrandnum != null and goodsbrandnum != ''">and s.goodsbrandnum  LIKE concat(concat('%', #{goodsbrandnum}),'%')</if>
-            <if test="goodsbrandname != null and goodsbrandname != ''">and s.goodsbrandname  LIKE concat(concat('%', #{goodsbrandname}),'%')</if>
-            <if test="positionId != null and positionId != ''">and s.position_id = #{positionId}</if>
-            <if test="positionName != null and positionName != ''">and s.position_name = #{positionName}</if>
-            <if test="changjiaNumber != null and changjiaNumber != ''">and s.changjia_number = #{changjiaNumber}</if>
-            <if test="shouhuoPeople != null and shouhuoPeople != ''">and s.shouhuo_people = #{shouhuoPeople}</if>
-            <if test="shouhuoPhone != null and shouhuoPhone != ''">and s.shouhuo_phone = #{shouhuoPhone}</if>
-            <if test="shouhuoAddress != null and shouhuoAddress != ''">and s.shouhuo_address = #{shouhuoAddress}</if>
-            <if test="beizhu != null and beizhu != ''">and s.beizhu = #{beizhu}</if>
+            <if test="id != null and id != ''"> and s.id = #{id} </if>
+            <if test="danjuNumber != null and danjuNumber != ''"> and s.danju_number = #{danjuNumber} </if>
+            <if test="danjuDay != null and danjuDay != ''"> and s.danju_day = #{danjuDay} </if>
+            <if test="eyeStyle != null and eyeStyle != ''"> and s.eye_style = #{eyeStyle} </if>
+            <if test="zhidanPeople != null and zhidanPeople != ''"> and s.zhidan_people = #{zhidanPeople} </if>
+            <if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+            <if test="mfrsname != null and mfrsname != ''"> and s.mfrsname = #{mfrsname} </if>
+            <if test="brandnum != null and brandnum != ''"> and s.brandnum = #{brandnum} </if>
+            <if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+            <if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+            <if test="positionName != null and positionName != ''"> and s.position_name = #{positionName} </if>
+            <if test="shouhuoPeople != null and shouhuoPeople != ''"> and s.shouhuo_people = #{shouhuoPeople} </if>
+            <if test="shouhuoPhone != null and shouhuoPhone != ''"> and s.shouhuo_phone = #{shouhuoPhone} </if>
+            <if test="shouhuoAddress != null and shouhuoAddress != ''"> and s.shouhuo_address = #{shouhuoAddress} </if>
+            <if test="changjiaNumber != null and changjiaNumber != ''"> and s.changjia_number = #{changjiaNumber} </if>
+            <if test="beizhu != null and beizhu != ''"> and s.beizhu = #{beizhu} </if>
+            <if test="weiwaisaleNumber != null and weiwaisaleNumber != ''"> and s.weiwaisale_number = #{weiwaisaleNumber} </if>
+            <if test="mirrorTime != null and mirrorTime != ''"> and s.mirror_time = #{mirrorTime} </if>
+            <if test="num != null and num != ''"> and s.num = #{num} </if>
+            <if test="code != null and code != ''"> and s.code = #{code} </if>
+            <if test="name != null and name != ''"> and s.name = #{name} </if>
+            <if test="style != null and style != ''"> and s.style = #{style} </if>
+            <if test="rl != null and rl != ''"> and s.rl = #{rl} </if>
+            <if test="count != null and count != ''"> and s.count = #{count} </if>
+            <if test="sph != null and sph != ''"> and s.sph = #{sph} </if>
+            <if test="cyl != null and cyl != ''"> and s.cyl = #{cyl} </if>
+            <if test="zx != null and zx != ''"> and s.zx = #{zx} </if>
+            <if test="add != null and add != ''"> and s.add = #{add} </if>
+            <if test="slj != null and slj != ''"> and s.slj = #{slj} </if>
+            <if test="zj != null and zj != ''"> and s.zj = #{zj} </if>
+            <if test="yaoqiu != null and yaoqiu != ''"> and s.yaoqiu = #{yaoqiu} </if>
+            <if test="jd != null and jd != ''"> and s.jd = #{jd} </if>
+            <if test="qulv != null and qulv != ''"> and s.qulv = #{qulv} </if>
+            <if test="gkname != null and gkname != ''"> and s.gkname = #{gkname} </if>
+            <if test="hyknum != null and hyknum != ''"> and s.hyknum = #{hyknum} </if>
+            <if test="phone != null and phone != ''"> and s.phone = #{phone} </if>
+            <if test="status != null and status != ''"> and s.status = #{status} </if>
+            <if test="username != null and username != ''"> and s.username = #{username} </if>
+            <if test="shTime != null and shTime != ''"> and s.sh_time = #{shTime} </if>
+            <if test="shstatus != null and shstatus != ''"> and s.shstatus = #{shstatus} </if>
+            <if test="psname != null and psname != ''"> and s.psname = #{psname} </if>
+            <if test="saleNumber != null and saleNumber != ''"> and s.sale_number = #{saleNumber} </if>
+            <if test="pstime != null and pstime != ''"> and s.pstime = #{pstime} </if>
+            <if test="stockorder != null and stockorder != ''"> and s.stockorder = #{stockorder} </if>
 
-            <if test="saleNumber != null and saleNumber != ''">and s.sale_number = #{saleNumber}</if>
-            <if test="mirrorTime != null and mirrorTime != ''">and s.mirror_time = #{mirrorTime}</if>
-            <if test="goodsName != null and goodsName != ''">and s.goods_name = #{goodsName}</if>
-            <if test="num != null and num != ''">and s.num = #{num}</if>
-            <if test="code != null and code != ''">and s.code = #{code}</if>
-            <if test="style != null and style != ''">and s.style = #{style}</if>
-            <if test="rl != null and rl != ''">and s.rl = #{rl}</if>
-            <if test="count != null and count != ''">and s.count = #{count}</if>
-            <if test="sph != null and sph != ''">and s.sph = #{sph}</if>
-            <if test="cyl != null and cyl != ''">and s.cyl = #{cyl}</if>
-            <if test="axial != null and axial != ''">and s.axial = #{axial}</if>
-            <if test="lightbelow != null and lightbelow != ''">and s.lightbelow = #{lightbelow}</if>
-            <if test="lengjing != null and lengjing != ''">and s.lengjing = #{lengjing}</if>
-            <if test="diameter != null and diameter != ''">and s.diameter = #{diameter}</if>
-            <if test="yaoqiu != null and yaoqiu != ''">and s.yaoqiu = #{yaoqiu}</if>
-            <if test="jd != null and jd != ''">and s.jd = #{jd}</if>
-            <if test="curvature != null and curvature != ''">and s.curvature = #{curvature}</if>
-
-
-            <if test="gkname != null and gkname != ''">and s.gkname  LIKE concat(concat('%', #{gkname}),'%')</if>
-            <if test="hyknum != null and hyknum != ''">and s.hyknum  LIKE concat(concat('%', #{hyknum}),'%')</if>
-            <if test="phone != null and phone != ''">and s.phone  LIKE concat(concat('%', #{phone}),'%')</if>
-
-            <if test="status != null and status != ''">and s.status = #{status}</if>
-            <if test="username != null and username != ''">and s.username = #{username}</if>
-            <if test="shTime != null and shTime != ''">and s.sh_time = #{shTime}</if>
-            <if test="shstatus != null and shstatus != ''">and s.shstatus = #{shstatus}</if>
-            <if test="psname != null and psname != ''">and s.psname = #{psname}</if>
-
-
-
-            <if test="salenumbery != null and salenumbery != ''">and s.salenumbery  LIKE concat(concat('%', #{salenumbery}),'%')</if>
-            <if test="pstime != null and pstime != ''">and s.pstime = #{pstime}</if>
-            <if test="stockorder != null and stockorder != ''">and s.stockorder = #{stockorder}</if>
-            <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
-            <if test="companyid != null and companyid != ''">and FIND_IN_SET(d.company_id,#{companyid})</if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(p.company_id,#{companyId})</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by id desc
+             group by s.danju_number   order by s.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -95,150 +77,137 @@
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from stock_weiwai
+        select count(*) from stock_weiwai s
+        left join c_position po on s.position_id=po.position_id
         <where>
-            <if test="id != null and id != ''">and id = #{id}</if>
-            <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
-            <if test="danjuDay != null and danjuDay != ''">and danju_day = #{danjuDay}</if>
-            <if test="eyeStyle != null and eyeStyle != ''">and eye_style = #{eyeStyle}</if>
-            <if test="zhidanPeople != null and zhidanPeople != ''">and zhidan_people = #{zhidanPeople}</if>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="mfrsname != null and mfrsname != ''">and mfrsname = #{mfrsname}</if>
-            <if test="goodsmfrsid != null and goodsmfrsid != ''">and goodsmfrsid = #{goodsmfrsid}</if>
-            <if test="goodsbrandnum != null and goodsbrandnum != ''">and goodsbrandnum = #{goodsbrandnum}</if>
-            <if test="goodsbrandname != null and goodsbrandname != ''">and goodsbrandname = #{goodsbrandname}</if>
-            <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
-            <if test="positionName != null and positionName != ''">and position_name = #{positionName}</if>
-            <if test="changjiaNumber != null and changjiaNumber != ''">and changjia_number = #{changjiaNumber}</if>
-            <if test="shouhuoPeople != null and shouhuoPeople != ''">and shouhuo_people = #{shouhuoPeople}</if>
-            <if test="shouhuoPhone != null and shouhuoPhone != ''">and shouhuo_phone = #{shouhuoPhone}</if>
-            <if test="shouhuoAddress != null and shouhuoAddress != ''">and shouhuo_address = #{shouhuoAddress}</if>
-            <if test="beizhu != null and beizhu != ''">and beizhu = #{beizhu}</if>
-
-            <if test="saleNumber != null and saleNumber != ''">and sale_number = #{saleNumber}</if>
-            <if test="mirrorTime != null and mirrorTime != ''">and mirror_time = #{mirrorTime}</if>
-            <if test="goodsName != null and goodsName != ''">and goods_name = #{goodsName}</if>
-            <if test="num != null and num != ''">and num = #{num}</if>
-            <if test="code != null and code != ''">and code = #{code}</if>
-            <if test="style != null and style != ''">and style = #{style}</if>
-            <if test="rl != null and rl != ''">and rl = #{rl}</if>
-            <if test="count != null and count != ''">and count = #{count}</if>
-            <if test="sph != null and sph != ''">and sph = #{sph}</if>
-            <if test="cyl != null and cyl != ''">and cyl = #{cyl}</if>
-            <if test="axial != null and axial != ''">and axial = #{axial}</if>
-            <if test="lightbelow != null and lightbelow != ''">and lightbelow = #{lightbelow}</if>
-            <if test="lengjing != null and lengjing != ''">and lengjing = #{lengjing}</if>
-            <if test="diameter != null and diameter != ''">and diameter = #{diameter}</if>
-            <if test="yaoqiu != null and yaoqiu != ''">and yaoqiu = #{yaoqiu}</if>
-            <if test="jd != null and jd != ''">and jd = #{jd}</if>
-            <if test="curvature != null and curvature != ''">and curvature = #{curvature}</if>
-
-
-            <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="username != null and username != ''">and username = #{username}</if>
-            <if test="shTime != null and shTime != ''">and sh_time = #{shTime}</if>
-            <if test="shstatus != null and shstatus != ''">and shstatus = #{shstatus}</if>
-            <if test="psname != null and psname != ''">and psname = #{psname}</if>
-
-            <if test="gkname != null and gkname != ''">and gkname = #{gkname}</if>
-            <if test="hyknum != null and hyknum != ''">and hyknum = #{hyknum}</if>
-            <if test="phone != null and phone != ''">and phone = #{phone}</if>
-            <if test="salenumbery != null and salenumbery != ''">and salenumbery = #{salenumbery}</if>
-            <if test="pstime != null and pstime != ''">and pstime = #{pstime}</if>
-            <if test="stockorder != null and stockorder != ''">and stockorder = #{stockorder}</if>
+            <if test="id != null and id != ''"> and s.id = #{id} </if>
+            <if test="danjuNumber != null and danjuNumber != ''"> and s.danju_number = #{danjuNumber} </if>
+            <if test="danjuDay != null and danjuDay != ''"> and s.danju_day = #{danjuDay} </if>
+            <if test="eyeStyle != null and eyeStyle != ''"> and s.eye_style = #{eyeStyle} </if>
+            <if test="zhidanPeople != null and zhidanPeople != ''"> and s.zhidan_people = #{zhidanPeople} </if>
+            <if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
+            <if test="mfrsname != null and mfrsname != ''"> and s.mfrsname = #{mfrsname} </if>
+            <if test="brandnum != null and brandnum != ''"> and s.brandnum = #{brandnum} </if>
+            <if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+            <if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
+            <if test="positionName != null and positionName != ''"> and s.position_name = #{positionName} </if>
+            <if test="shouhuoPeople != null and shouhuoPeople != ''"> and s.shouhuo_people = #{shouhuoPeople} </if>
+            <if test="shouhuoPhone != null and shouhuoPhone != ''"> and s.shouhuo_phone = #{shouhuoPhone} </if>
+            <if test="shouhuoAddress != null and shouhuoAddress != ''"> and s.shouhuo_address = #{shouhuoAddress} </if>
+            <if test="changjiaNumber != null and changjiaNumber != ''"> and s.changjia_number = #{changjiaNumber} </if>
+            <if test="beizhu != null and beizhu != ''"> and s.beizhu = #{beizhu} </if>
+            <if test="weiwaisaleNumber != null and weiwaisaleNumber != ''"> and s.weiwaisale_number = #{weiwaisaleNumber} </if>
+            <if test="mirrorTime != null and mirrorTime != ''"> and s.mirror_time = #{mirrorTime} </if>
+            <if test="num != null and num != ''"> and s.num = #{num} </if>
+            <if test="code != null and code != ''"> and s.code = #{code} </if>
+            <if test="name != null and name != ''"> and s.name = #{name} </if>
+            <if test="style != null and style != ''"> and s.style = #{style} </if>
+            <if test="rl != null and rl != ''"> and s.rl = #{rl} </if>
+            <if test="count != null and count != ''"> and s.count = #{count} </if>
+            <if test="sph != null and sph != ''"> and s.sph = #{sph} </if>
+            <if test="cyl != null and cyl != ''"> and s.cyl = #{cyl} </if>
+            <if test="zx != null and zx != ''"> and s.zx = #{zx} </if>
+            <if test="add != null and add != ''"> and s.add = #{add} </if>
+            <if test="slj != null and slj != ''"> and s.slj = #{slj} </if>
+            <if test="zj != null and zj != ''"> and s.zj = #{zj} </if>
+            <if test="yaoqiu != null and yaoqiu != ''"> and s.yaoqiu = #{yaoqiu} </if>
+            <if test="jd != null and jd != ''"> and s.jd = #{jd} </if>
+            <if test="qulv != null and qulv != ''"> and s.qulv = #{qulv} </if>
+            <if test="gkname != null and gkname != ''"> and s.gkname = #{gkname} </if>
+            <if test="hyknum != null and hyknum != ''"> and s.hyknum = #{hyknum} </if>
+            <if test="phone != null and phone != ''"> and s.phone = #{phone} </if>
+            <if test="status != null and status != ''"> and s.status = #{status} </if>
+            <if test="username != null and username != ''"> and s.username = #{username} </if>
+            <if test="shTime != null and shTime != ''"> and s.sh_time = #{shTime} </if>
+            <if test="shstatus != null and shstatus != ''"> and s.shstatus = #{shstatus} </if>
+            <if test="psname != null and psname != ''"> and s.psname = #{psname} </if>
+            <if test="saleNumber != null and saleNumber != ''"> and s.sale_number = #{saleNumber} </if>
+            <if test="pstime != null and pstime != ''"> and s.pstime = #{pstime} </if>
+            <if test="stockorder != null and stockorder != ''"> and s.stockorder = #{stockorder} </if>
         </where>
     </select>
 
-    <insert id="save" parameterType="com.shiguang.stock.domain.WeiwaiDO">
+    <insert id="save" parameterType="com.shiguang.stock.domain.WeiwaiDO" useGeneratedKeys="true" keyProperty="id">
 		insert into stock_weiwai
 		(
-			`id`, 
-			`danju_number`, 
-			`danju_day`, 
-			`eye_style`, 
-			`zhidan_people`, 
-			`mfrsid`, 
+			`danju_number`,
+			`danju_day`,
+			`eye_style`,
+			`zhidan_people`,
+			`mfrsid`,
 			`mfrsname`,
-			`goodsmfrsid`,
-			`goodsbrandnum`,
-			`goodsbrandname`,
+			`brandnum`,
+			`brandname`,
 			`position_id`,
 			`position_name`,
-			`changjia_number`,
-			`shouhuo_people`, 
-			`shouhuo_phone`, 
+			`shouhuo_people`,
+			`shouhuo_phone`,
 			`shouhuo_address`,
+			`changjia_number`,
 			`beizhu`,
-
-			`sale_number`, 
-			`mirror_time`, 
-			`goods_name`, 
+			`weiwaisale_number`,
+			`mirror_time`,
 			`num`,
 			`code`,
+			`name`,
 			`style`,
-			`rl`, 
-			`count`, 
-			`sph`, 
-			`cyl`, 
-			`axial`, 
-			`lightbelow`, 
-			`lengjing`, 
-			`diameter`, 
-			`yaoqiu`, 
+			`rl`,
+			`count`,
+			`sph`,
+			`cyl`,
+			`zx`,
+			`add`,
+			`slj`,
+			`zj`,
+			`yaoqiu`,
 			`jd`,
-			`curvature`,
-
+			`qulv`,
 			`gkname`,
 			`hyknum`,
 			`phone`,
-
 			`status`,
 			`username`,
 			`sh_time`,
 			`shstatus`,
 			`psname`,
-			`salenumbery`,
+			`sale_number`,
 			`pstime`,
 			`stockorder`
 		)
 		values
 		(
-			#{id}, 
-			#{danjuNumber}, 
-			#{danjuDay}, 
-			#{eyeStyle}, 
-			#{zhidanPeople}, 
-			#{mfrsid}, 
+			#{danjuNumber},
+			#{danjuDay},
+			#{eyeStyle},
+			#{zhidanPeople},
+			#{mfrsid},
 			#{mfrsname},
-			#{goodsmfrsid},
-			#{goodsbrandnum},
-			#{goodsbrandname},
+			#{brandnum},
+			#{brandname},
 			#{positionId},
 			#{positionName},
+			#{shouhuoPeople},
+			#{shouhuoPhone},
+			#{shouhuoAddress},
 			#{changjiaNumber},
-			#{shouhuoPeople}, 
-			#{shouhuoPhone}, 
-			#{shouhuoAddress}, 
 			#{beizhu},
-
-			#{saleNumber}, 
-			#{mirrorTime}, 
-			#{goodsName}, 
+			#{weiwaisaleNumber},
+			#{mirrorTime},
 			#{num},
 			#{code},
+			#{name},
 			#{style},
-			#{rl}, 
-			#{count}, 
-			#{sph}, 
-			#{cyl}, 
-			#{axial}, 
-			#{lightbelow}, 
-			#{lengjing}, 
-			#{diameter}, 
-			#{yaoqiu}, 
-			#{jd}, 
-			#{curvature},
-
+			#{rl},
+			#{count},
+			#{sph},
+			#{cyl},
+			#{zx},
+			#{add},
+			#{slj},
+			#{zj},
+			#{yaoqiu},
+			#{jd},
+			#{qulv},
 			#{gkname},
 			#{hyknum},
 			#{phone},
@@ -247,62 +216,57 @@
 			#{shTime},
 			#{shstatus},
 			#{psname},
-			#{salenumbery},
+			#{saleNumber},
 			#{pstime},
 			#{stockorder}
-
 		)
 	</insert>
 
     <update id="update" parameterType="com.shiguang.stock.domain.WeiwaiDO">
         update stock_weiwai
         <set>
-            <if test="danjuNumber != null">`danju_number` = #{danjuNumber},</if>
-            <if test="danjuDay != null">`danju_day` = #{danjuDay},</if>
-            <if test="eyeStyle != null">`eye_style` = #{eyeStyle},</if>
-            <if test="zhidanPeople != null">`zhidan_people` = #{zhidanPeople},</if>
-            <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
-            <if test="mfrsname != null">`mfrsname` = #{mfrsname},</if>
-            <if test="goodsmfrsid != null">`goodsmfrsid` = #{goodsmfrsid},</if>
-            <if test="goodsbrandnum != null">`goodsbrandnum` = #{goodsbrandnum},</if>
-            <if test="goodsbrandname != null">`goodsbrandname` = #{goodsbrandname},</if>
-            <if test="positionId != null">`position_id` = #{positionId},</if>
-            <if test="positionName != null">`position_name` = #{positionName},</if>
-            <if test="changjiaNumber != null">`changjia_number` = #{changjiaNumber},</if>
-            <if test="shouhuoPeople != null">`shouhuo_people` = #{shouhuoPeople},</if>
-            <if test="shouhuoPhone != null">`shouhuo_phone` = #{shouhuoPhone},</if>
-            <if test="shouhuoAddress != null">`shouhuo_address` = #{shouhuoAddress},</if>
-            <if test="beizhu != null">`beizhu` = #{beizhu},</if>
-
-            <if test="saleNumber != null">`sale_number` = #{saleNumber},</if>
-            <if test="mirrorTime != null">`mirror_time` = #{mirrorTime},</if>
-            <if test="goodsName != null">`goods_name` = #{goodsName},</if>
-            <if test="num != null">`num` = #{num},</if>
-            <if test="code != null">`code` = #{code},</if>
-            <if test="style != null">`style` = #{style},</if>
-            <if test="rl != null">`rl` = #{rl},</if>
-            <if test="count != null">`count` = #{count},</if>
-            <if test="sph != null">`sph` = #{sph},</if>
-            <if test="cyl != null">`cyl` = #{cyl},</if>
-            <if test="axial != null">`axial` = #{axial},</if>
-            <if test="lightbelow != null">`lightbelow` = #{lightbelow},</if>
-            <if test="lengjing != null">`lengjing` = #{lengjing},</if>
-            <if test="diameter != null">`diameter` = #{diameter},</if>
-            <if test="yaoqiu != null">`yaoqiu` = #{yaoqiu},</if>
-            <if test="jd != null">`jd` = #{jd},</if>
-            <if test="curvature != null">`curvature` = #{curvature},</if>
-
-            <if test="status != null">`status` = #{status},</if>
-            <if test="username != null">`username` = #{username},</if>
-            <if test="shTime != null">`shTime` = #{shTime},</if>
-            <if test="shstatus != null">`shstatus` = #{shstatus},</if>
-            <if test="psname != null">`psname` = #{psname},</if>
-
-            <if test="gkname != null">`gkname` = #{gkname},</if>
-            <if test="hyknum != null">`hyknum` = #{hyknum},</if>
-            <if test="phone != null">`phone` = #{phone},</if>
-            <if test="salenumbery != null">`salenumbery` = #{salenumbery},</if>
-            <if test="pstime != null">`pstime` = #{pstime},</if>
+            <if test="danjuNumber != null">`danju_number` = #{danjuNumber}, </if>
+            <if test="danjuDay != null">`danju_day` = #{danjuDay}, </if>
+            <if test="eyeStyle != null">`eye_style` = #{eyeStyle}, </if>
+            <if test="zhidanPeople != null">`zhidan_people` = #{zhidanPeople}, </if>
+            <if test="mfrsid != null">`mfrsid` = #{mfrsid}, </if>
+            <if test="mfrsname != null">`mfrsname` = #{mfrsname}, </if>
+            <if test="brandnum != null">`brandnum` = #{brandnum}, </if>
+            <if test="brandname != null">`brandname` = #{brandname}, </if>
+            <if test="positionId != null">`position_id` = #{positionId}, </if>
+            <if test="positionName != null">`position_name` = #{positionName}, </if>
+            <if test="shouhuoPeople != null">`shouhuo_people` = #{shouhuoPeople}, </if>
+            <if test="shouhuoPhone != null">`shouhuo_phone` = #{shouhuoPhone}, </if>
+            <if test="shouhuoAddress != null">`shouhuo_address` = #{shouhuoAddress}, </if>
+            <if test="changjiaNumber != null">`changjia_number` = #{changjiaNumber}, </if>
+            <if test="beizhu != null">`beizhu` = #{beizhu}, </if>
+            <if test="weiwaisaleNumber != null">`weiwaisale_number` = #{weiwaisaleNumber}, </if>
+            <if test="mirrorTime != null">`mirror_time` = #{mirrorTime}, </if>
+            <if test="num != null">`num` = #{num}, </if>
+            <if test="code != null">`code` = #{code}, </if>
+            <if test="name != null">`name` = #{name}, </if>
+            <if test="style != null">`style` = #{style}, </if>
+            <if test="rl != null">`rl` = #{rl}, </if>
+            <if test="count != null">`count` = #{count}, </if>
+            <if test="sph != null">`sph` = #{sph}, </if>
+            <if test="cyl != null">`cyl` = #{cyl}, </if>
+            <if test="zx != null">`zx` = #{zx}, </if>
+            <if test="add != null">`add` = #{add}, </if>
+            <if test="slj != null">`slj` = #{slj}, </if>
+            <if test="zj != null">`zj` = #{zj}, </if>
+            <if test="yaoqiu != null">`yaoqiu` = #{yaoqiu}, </if>
+            <if test="jd != null">`jd` = #{jd}, </if>
+            <if test="qulv != null">`qulv` = #{qulv}, </if>
+            <if test="gkname != null">`gkname` = #{gkname}, </if>
+            <if test="hyknum != null">`hyknum` = #{hyknum}, </if>
+            <if test="phone != null">`phone` = #{phone}, </if>
+            <if test="status != null">`status` = #{status}, </if>
+            <if test="username != null">`username` = #{username}, </if>
+            <if test="shTime != null">`sh_time` = #{shTime}, </if>
+            <if test="shstatus != null">`shstatus` = #{shstatus}, </if>
+            <if test="psname != null">`psname` = #{psname}, </if>
+            <if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
+            <if test="pstime != null">`pstime` = #{pstime}, </if>
             <if test="stockorder != null">`stockorder` = #{stockorder}</if>
         </set>
         where id = #{id}
@@ -311,49 +275,19 @@
     <delete id="remove">
 		delete from stock_weiwai where id = #{value}
 	</delete>
-    <delete id="removes">
-		delete from stock_weiwai where sale_number = #{value}
-	</delete>
+
     <delete id="batchRemove">
         delete from stock_weiwai where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
-    <select id="weiwailist" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select s.sale_number,s.member_number,m.name,m.phone_1,sa.eye_type,s.settle_date,sa.sale_name
-		from settlement s
-		left join member m on s.member_number=m.card_number
-		left join store_sales sa on s.sale_number=sa.sale_number
-	</select>
-    <select id="countList" resultType="int">
-        select count(*)
-        from settlement s
-        left join member m on s.member_number=m.card_number
-        left join store_sales sa on s.sale_number=sa.sale_number
-        <where>
-            <if test="id != null and id != ''">and s.id = #{id}</if>
-            <if test="saleNumber != null and saleNumber != ''">and s.sale_number = #{saleNumber}</if>
-            <if test="shouhuoNumber != null and shouhuoNumber != ''">and s.shouhuo_number = #{shouhuoNumber}</if>
-            <if test="positionId != null and positionId != ''">and s.position_id = #{positionId}</if>
-            <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
-            <if test="name != null and name != ''">and s.name = #{name}</if>
-            <if test="phone != null and phone != ''">and s.phone = #{phone}</if>
-            <if test="dzStype != null and dzStype != ''">and s.dz_stype = #{dzStype}</if>
-            <if test="mirrorTime != null and mirrorTime != ''">and s.mirror_time = #{mirrorTime}</if>
-            <if test="eyeRight != null and eyeRight != ''">and s.eye_right = #{eyeRight}</if>
-            <if test="eyeLeft != null and eyeLeft != ''">and s.eye_left = #{eyeLeft}</if>
-            <if test="departNumber != null and departNumber != ''">and s.depart_number = #{departNumber}</if>
-            <if test="sph != null and sph != ''">and s.sph = #{sph}</if>
-            <if test="cyl != null and cyl != ''">and s.cyl = #{cyl}</if>
-            <if test="goodsName != null and goodsName != ''">and s.goods_name = #{goodsName}</if>
-            <if test="rl != null and rl != ''">and s.rl = #{rl}</if>
-            <if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>
-            <if test="factory != null and factory != ''">and s.factory = #{factory}</if>
-            <if test="count != null and count != ''">and s.count = #{count}</if>
-            <if test="goodsCode != null and goodsCode != ''">and s.goods_code = #{goodsCode}</if>
-        </where>
-    </select>
+
+    <delete id="removes">
+		delete from stock_weiwai where danju_number = #{value}
+	</delete>
+
+
     <select id="phoneOrAddres" resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
         SELECT d.depart_number,d.depart_tel,d.depart_address,p.position_id,p.position_name
         FROM department d JOIN c_position p on d.depart_number = p.depart_number and d.company_id=p.company_id
@@ -363,9 +297,6 @@
         </where>
 
     </select>
-    <select id="selectDepartment" resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
-	select id,depart_name from department
-	</select>
 
     <select id="selectOrder" resultType="com.shiguang.storeSales.domain.SalesDO">
         SELECT
@@ -1382,76 +1313,123 @@
         group by sale_number ORDER BY id DESC
         ) AS temp
     </select>
-
-
-    <!--确认收货   [配送][][退回][][][]-->
-    <update id="updateStatus" parameterType="com.shiguang.stock.domain.WeiwaiDO">
-        update stock_weiwai
-        <set>
-            <if test="status != null">`status` = #{status},</if>
-            <if test="username != null">`username` = #{username},</if>
-            <if test="shTime != null">`sh_time` = #{shTime} ,</if>
-
-            <if test="shstatus != null">`shstatus` = #{shstatus} ,</if>
-            <if test="psname != null">`psname` = #{psname} ,</if>
-            <if test="pstime != null">`pstime` = #{pstime},</if>
-            <if test="stockorder != null">`stockorder` = #{stockorder}</if>
-        </set>
-        where danju_number = #{danjuNumber}
-    </update>
-
-<!--打印委外框镜配镜单-->
-    <select id="jkPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">
-			SELECT * FROM stock_weiwai where danju_number = #{value}
-	</select>
-    <!--打印委外框镜配镜单列表-->
-    <select id="jkPeijingdanList" resultType="com.shiguang.stock.domain.WeiwaiDO">
-			SELECT * FROM stock_weiwai
+    <select id="selectWeiwaiOrder" resultType="com.shiguang.stock.domain.WeiwaiDO">
+        select * FROM stock_weiwai
         <where>
             <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
-        </where>
-	</select>
-    <!--打印委外隐形配镜单-->
-    <select id="yxPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">
-			  SELECT * FROM stock_weiwai where danju_number = #{value}
-	</select>
-    <!--打印委外框镜配镜单列表-->
-    <select id="yxPeijingdanList" resultType="com.shiguang.stock.domain.WeiwaiDO">
-        SELECT * FROM stock_weiwai
-        <where>
-            <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
+            <if test="codeOne != null and codeOne != ''">and code = #{codeOne}</if>
         </where>
     </select>
-    <select id="weiwaiOrder" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select * FROM stock_weiwai where  danju_number = #{value}
-	</select>
-    <select id="selectWeiwaiOrder" resultType="com.shiguang.stock.domain.WeiwaiDO">
-	    select * FROM stock_weiwai
-        <where>
-            <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
-        </where>
-	</select>
 
-    <select id="selectbrandnumjpdz" resultType="com.shiguang.product.domain.JpdzDO">
-		  select a.mfrsid,a.brandnum ,b.brandname from  aa_jpdz a
-          join c_brand b on a.mfrsid=b.mfrsid and a.brandnum=b.brandnum
-          where a.produc_num=#{value}
-	</select>
-    <select id="selectbrandnumyxdz" resultType="com.shiguang.product.domain.YxdzDO">
-		  select a.mfrsid,a.brandnum ,b.brandname from  aa_yxdz a
-          join c_brand b on a.mfrsid=b.mfrsid and a.brandnum=b.brandnum
-          where a.produc_num=#{value}
-	</select>
-    <select id="jkbrandname" resultType="com.shiguang.mfrs.domain.BrandDO">
-        select brandname from c_brand
-        <where>
-            <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>
-            <if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>
-        </where>
-	</select>
+
+    <select id="getBrand" resultType="com.shiguang.product.domain.JpdzDO">
+      select b.brandnum,b.brandname from  aa_jpdz jpdz join c_brand b on jpdz.mfrsid=b.mfrsid and jpdz.brandnum=b.brandnum
+      where jpdz.produc_num = #{value}
+    </select>
+
+
+
+    <update id="updateStatus" parameterType="com.shiguang.stock.domain.WeiwaiDO">
+    update stock_weiwai
+    <set>
+    <if test="status != null">`status` = #{status},</if>
+    <if test="username != null">`username` = #{username},</if>
+    <if test="shTime != null">`sh_time` = #{shTime} ,</if>
+
+    <if test="shstatus != null">`shstatus` = #{shstatus} ,</if>
+    <if test="psname != null">`psname` = #{psname} ,</if>
+    <if test="pstime != null">`pstime` = #{pstime},</if>
+    <if test="stockorder != null">`stockorder` = #{stockorder}</if>
+    </set>
+    where danju_number = #{danjuNumber}
+    </update>
 
 
     <select id="getCode" resultType="com.shiguang.stock.domain.WeiwaiDO">
-		select  code,count from stock_weiwai   where danju_number = #{danjuNumber}
-	</select>
+    select  code,count from stock_weiwai   where danju_number = #{danjuNumber}
+    </select>
+
+
+
+    <!--<select id="weiwailist" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
+		<!--select s.sale_number,s.member_number,m.name,m.phone_1,sa.eye_type,s.settle_date,sa.sale_name-->
+		<!--from settlement s-->
+		<!--left join member m on s.member_number=m.card_number-->
+		<!--left join store_sales sa on s.sale_number=sa.sale_number-->
+	<!--</select>-->
+    <!--<select id="countList" resultType="int">-->
+        <!--select count(*)-->
+        <!--from settlement s-->
+        <!--left join member m on s.member_number=m.card_number-->
+        <!--left join store_sales sa on s.sale_number=sa.sale_number-->
+        <!--<where>-->
+            <!--<if test="id != null and id != ''">and s.id = #{id}</if>-->
+            <!--<if test="saleNumber != null and saleNumber != ''">and s.sale_number = #{saleNumber}</if>-->
+            <!--<if test="shouhuoNumber != null and shouhuoNumber != ''">and s.shouhuo_number = #{shouhuoNumber}</if>-->
+            <!--<if test="positionId != null and positionId != ''">and s.position_id = #{positionId}</if>-->
+            <!--<if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>-->
+            <!--<if test="name != null and name != ''">and s.name = #{name}</if>-->
+            <!--<if test="phone != null and phone != ''">and s.phone = #{phone}</if>-->
+            <!--<if test="dzStype != null and dzStype != ''">and s.dz_stype = #{dzStype}</if>-->
+            <!--<if test="mirrorTime != null and mirrorTime != ''">and s.mirror_time = #{mirrorTime}</if>-->
+            <!--<if test="eyeRight != null and eyeRight != ''">and s.eye_right = #{eyeRight}</if>-->
+            <!--<if test="eyeLeft != null and eyeLeft != ''">and s.eye_left = #{eyeLeft}</if>-->
+            <!--<if test="departNumber != null and departNumber != ''">and s.depart_number = #{departNumber}</if>-->
+            <!--<if test="sph != null and sph != ''">and s.sph = #{sph}</if>-->
+            <!--<if test="cyl != null and cyl != ''">and s.cyl = #{cyl}</if>-->
+            <!--<if test="goodsName != null and goodsName != ''">and s.goods_name = #{goodsName}</if>-->
+            <!--<if test="rl != null and rl != ''">and s.rl = #{rl}</if>-->
+            <!--<if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>-->
+            <!--<if test="factory != null and factory != ''">and s.factory = #{factory}</if>-->
+            <!--<if test="count != null and count != ''">and s.count = #{count}</if>-->
+            <!--<if test="goodsCode != null and goodsCode != ''">and s.goods_code = #{goodsCode}</if>-->
+        <!--</where>-->
+    <!--</select>-->
+    <!--<select id="selectDepartment" resultType="com.shiguang.baseinfomation.domain.DepartmentDO">-->
+	<!--select id,depart_name from department-->
+	<!--</select>-->
+
+
+    <!--&lt;!&ndash;打印委外框镜配镜单&ndash;&gt;-->
+    <!--<select id="jkPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
+			<!--SELECT * FROM stock_weiwai where danju_number = #{value}-->
+	<!--</select>-->
+    <!--&lt;!&ndash;打印委外框镜配镜单列表&ndash;&gt;-->
+    <!--<select id="jkPeijingdanList" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
+        <!--SELECT * FROM stock_weiwai-->
+        <!--<where>-->
+            <!--<if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>-->
+        <!--</where>-->
+    <!--</select>-->
+    <!--&lt;!&ndash;打印委外隐形配镜单&ndash;&gt;-->
+    <!--<select id="yxPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
+			  <!--SELECT * FROM stock_weiwai where danju_number = #{value}-->
+	<!--</select>-->
+    <!--&lt;!&ndash;打印委外框镜配镜单列表&ndash;&gt;-->
+    <!--<select id="yxPeijingdanList" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
+    <!--SELECT * FROM stock_weiwai-->
+    <!--<where>-->
+        <!--<if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>-->
+    <!--</where>-->
+    <!--</select>-->
+
+    <!--<select id="selectbrandnumjpdz" resultType="com.shiguang.product.domain.JpdzDO">-->
+		  <!--select a.mfrsid,a.brandnum ,b.brandname from  aa_jpdz a-->
+          <!--join c_brand b on a.mfrsid=b.mfrsid and a.brandnum=b.brandnum-->
+          <!--where a.produc_num=#{value}-->
+	<!--</select>-->
+    <!--<select id="selectbrandnumyxdz" resultType="com.shiguang.product.domain.YxdzDO">-->
+		  <!--select a.mfrsid,a.brandnum ,b.brandname from  aa_yxdz a-->
+          <!--join c_brand b on a.mfrsid=b.mfrsid and a.brandnum=b.brandnum-->
+          <!--where a.produc_num=#{value}-->
+	<!--</select>-->
+    <!--<select id="jkbrandname" resultType="com.shiguang.mfrs.domain.BrandDO">-->
+        <!--select brandname from c_brand-->
+        <!--<where>-->
+            <!--<if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>-->
+            <!--<if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>-->
+        <!--</where>-->
+    <!--</select>-->
+
+
 </mapper>

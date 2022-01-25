@@ -27,7 +27,7 @@ public interface WeiwaiService {
 
 
 	List<WeiwaiDO> list(Map<String, Object> map);
-	
+
 	int count(Map<String, Object> map);
 	
 	int save(WeiwaiDO weiwai);
@@ -35,44 +35,47 @@ public interface WeiwaiService {
 	int update(WeiwaiDO weiwai);
 	
 	int remove(Long id);
-	int removes(String saleNumber);
+	int removes(String danjuNumber);
 
 	int batchRemove(Long[] ids);
 
-	//配镜单
-	List<WeiwaiDO> weiwailist(Map<String, Object> map);
-	int countList(Map<String, Object> map);
 	//电话地址仓位
 	DepartmentDO phoneOrAddres(Map<String,Object> map);
-	//部门
-	List<DepartmentDO> selectDepartment(Map<String,Object> map);
-
 	//查询配镜单
 	List<SalesDO> selectOrder(Map<String, Object> map);
 	int selectOrderCount(Map<String, Object> map);
-
-//<!--确认收货   [配送][][退回][][][]-->
-	int updateStatus(WeiwaiDO weiwaiDO);
-
-	//委外镜框配镜单
-	WeiwaiDO jkPeijingdan(String danjuNumber);
-	//委外框镜配镜单List
-	List<WeiwaiDO> jkPeijingdanList(Map<String, Object> map);
-
-	//委外隐形配镜单
-	WeiwaiDO yxPeijingdan(String danjuNumber);
-	//委外隐形配镜单List
-	List<WeiwaiDO> yxPeijingdanList(Map<String, Object> map);
-	//确认收获库存偶没有
-	WeiwaiDO weiwaiOrder(String  danjuNumber);
-
+	//	商品品牌信息
+	JpdzDO getBrand(String  num);
 	//委外详情列表
 	List<WeiwaiDO> selectWeiwaiOrder(Map<String, Object> map);
-	//商品代码查询品牌代码
-	JpdzDO selectbrandnumjpdz(String num);
-	YxdzDO selectbrandnumyxdz(String num);
-	//打印单查询品牌名称
-	BrandDO jkbrandname(Map<String, Object> maps);
-	//条码
+
+	//<!--确认收货   [配送][][退回][][][]-->
+	int updateStatus(WeiwaiDO weiwaiDO);
+
+	//	//条码
 	WeiwaiDO getCode(String  danjuNumber);
+
+//	//配镜单
+//	List<WeiwaiDO> weiwailist(Map<String, Object> map);
+//	int countList(Map<String, Object> map);
+//
+//	//部门
+//	List<DepartmentDO> selectDepartment(Map<String,Object> map);
+
+//
+//	//委外镜框配镜单
+//	WeiwaiDO jkPeijingdan(String danjuNumber);
+//	//委外框镜配镜单List
+//	List<WeiwaiDO> jkPeijingdanList(Map<String, Object> map);
+//
+//	//委外隐形配镜单
+//	WeiwaiDO yxPeijingdan(String danjuNumber);
+//	//委外隐形配镜单List
+//	List<WeiwaiDO> yxPeijingdanList(Map<String, Object> map);
+
+//
+//
+//	//打印单查询品牌名称
+//	BrandDO jkbrandname(Map<String, Object> maps);
+
 }

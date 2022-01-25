@@ -61,21 +61,22 @@ function load() {
 									field : 'danjuNumber',
 									title : '单据编号'
 								},
-								{
-									field : 'salenumbery',
-									title : '原配镜单'
-								},{
-									field : 'gkname',
-									title : '会员姓名'
-								},
-								{
-									field : 'hyknum',
-									title : '会员卡号'
-								},
-								{
-									field : 'phone',
-									title : '电话'
-								},
+								// {
+								// 	field : 'saleNumber',
+								// 	title : '原配镜单'
+								// },
+								// {
+								// 	field : 'gkname',
+								// 	title : '会员姓名'
+								// },
+								// {
+								// 	field : 'hyknum',
+								// 	title : '会员卡号'
+								// },
+								// {
+								// 	field : 'phone',
+								// 	title : '电话'
+								// },
 							// {
 							// 		field : '',
 							// 		title : '销售门店'
@@ -150,8 +151,10 @@ function load() {
                                         var f = '';
                                         var b = '';
                                         if (row.shstatus==""){
+											// var n = '<span class="btn btn-info btn-sm' + s_psNum_h + '"   href="#" title="配送"  mce_href="#" onclick="psNum(\''
+											// 	+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle+" ','"+  row.yaoqiu  + '\')">配送</span> ';
 											var n = '<span class="btn btn-info btn-sm' + s_psNum_h + '"   href="#" title="配送"  mce_href="#" onclick="psNum(\''
-												+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle+" ','"+  row.yaoqiu  + '\')">配送</span> ';
+												+  row.danjuNumber + '\')">配送</span> ';
 											// var j = '<span class="btn btn-warning btn-sm"  href="#" title="退回"  mce_href="#" onclick="thNum(\''
 											// 	+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle + '\')">退回</span> ';
                                             var c = '';
@@ -312,11 +315,7 @@ function upshTime() {
 }
 
 //配送
-function psNum(salenumbery,danjuNumber,eyeStyle,yaoqiu ) {
-
-	if (yaoqiu== ''){
-		yaoqiu ="空"
-	}
+function psNum(danjuNumber ) {
 	var shstatus="0";
 	if (shstatus == "0"){
 		// alert("输入工号")
@@ -326,17 +325,14 @@ function psNum(salenumbery,danjuNumber,eyeStyle,yaoqiu ) {
 			maxmin : true,
 			shadeClose : false, // 点击遮罩关闭层
 			area : [ '800px', '520px' ],
-			content :"/stock/weiwai/psNum/"+ salenumbery+'/'+danjuNumber+'/'+eyeStyle+'/'+yaoqiu+'/'+shstatus
+			content :"/stock/weiwai/psNum/"+danjuNumber
 		});
 
 	}
 }
 function peisong() {
 	var danjuNumber = document.getElementById('danjuNumber').value;
-	var salenumbery = document.getElementById('salenumbery').value;
 	var psname = document.getElementById('username').value;
-	var eyeStyle = document.getElementById('eyeStyle').value;
-	var yaoqiu = $("#yaoqiu").val();
 	var shstatus = "0";
 	if (username != "") {
 		// alert(eyeStyle);
@@ -346,10 +342,7 @@ function peisong() {
 			data: {
 				'danjuNumber': danjuNumber,
 				'shstatus': shstatus,
-				'psname': psname,
-				'salenumbery': salenumbery,
-				'eyeStyle':eyeStyle,
-				'yaoqiu':yaoqiu
+				'psname': psname
 			},
 			dataType: 'JSON',
 			async: false,
