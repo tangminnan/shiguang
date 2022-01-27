@@ -12,6 +12,7 @@ import java.util.Map;
 
 import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 委外表
@@ -22,7 +23,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface WeiwaiDao {
 	WeiwaiDO get(Long id);
-
+	WeiwaiDO weiwaiOrder(WeiwaiDO weiwai);
 
 	List<WeiwaiDO> list(Map<String, Object> map);
 
@@ -33,9 +34,10 @@ public interface WeiwaiDao {
 	int update(WeiwaiDO weiwai);
 
 	int remove(Long id);
-	int removes(String danjuNumber);
+	int removes(WeiwaiDO weiwaiDO);
 
 	int batchRemove(Long[] ids);
+
 
 	//电话地址仓位
 	DepartmentDO phoneOrAddres(Map<String,Object> map);
@@ -52,6 +54,11 @@ public interface WeiwaiDao {
 
 	//	//条码
 	WeiwaiDO getCode(String  danjuNumber);
+
+
+	//信息导出
+	List<WeiwaiDO>  weiwaiOrderOut(@Param("arrys") String[] arrys );
+
 
 //	//配镜单
 //	List<WeiwaiDO> weiwailist(Map<String, Object> map);

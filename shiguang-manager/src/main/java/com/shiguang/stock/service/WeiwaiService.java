@@ -10,7 +10,10 @@ import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.stock.domain.WeiwaiDO;
 import com.shiguang.storeSales.domain.SalesDO;
+import org.apache.ibatis.annotations.Param;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +27,7 @@ import java.util.Map;
 public interface WeiwaiService {
 	
 	WeiwaiDO get(Long id);
+	WeiwaiDO weiwaiOrder(WeiwaiDO weiwai);
 
 
 	List<WeiwaiDO> list(Map<String, Object> map);
@@ -35,7 +39,7 @@ public interface WeiwaiService {
 	int update(WeiwaiDO weiwai);
 	
 	int remove(Long id);
-	int removes(String danjuNumber);
+	int removes(WeiwaiDO weiwaiDO);
 
 	int batchRemove(Long[] ids);
 
@@ -49,33 +53,55 @@ public interface WeiwaiService {
 	//委外详情列表
 	List<WeiwaiDO> selectWeiwaiOrder(Map<String, Object> map);
 
+
 	//<!--确认收货   [配送][][退回][][][]-->
 	int updateStatus(WeiwaiDO weiwaiDO);
 
 	//	//条码
 	WeiwaiDO getCode(String  danjuNumber);
 
+	//信息导出
+	List<WeiwaiDO>  weiwaiOrderOut(@Param("arrys") String[] arrys );
+
+	void weiwaiOut(@Param("arrys") String[] arrys,HttpServletRequest request, HttpServletResponse response);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //	//配镜单
 //	List<WeiwaiDO> weiwailist(Map<String, Object> map);
 //	int countList(Map<String, Object> map);
-//
 //	//部门
 //	List<DepartmentDO> selectDepartment(Map<String,Object> map);
-
-//
-//	//委外镜框配镜单
-//	WeiwaiDO jkPeijingdan(String danjuNumber);
 //	//委外框镜配镜单List
 //	List<WeiwaiDO> jkPeijingdanList(Map<String, Object> map);
-//
 //	//委外隐形配镜单
 //	WeiwaiDO yxPeijingdan(String danjuNumber);
 //	//委外隐形配镜单List
 //	List<WeiwaiDO> yxPeijingdanList(Map<String, Object> map);
 
-//
-//
 //	//打印单查询品牌名称
 //	BrandDO jkbrandname(Map<String, Object> maps);
-
 }

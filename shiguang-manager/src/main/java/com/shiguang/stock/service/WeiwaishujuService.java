@@ -25,7 +25,7 @@ public interface WeiwaishujuService {
 	int update(WeiwaishujuDO weiwaishuju);
 
 	int remove(Long id);
-	int removes(String number);
+	int removes(String saleNumber);
 
 	int batchRemove(Long[] ids);
 

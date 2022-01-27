@@ -27,7 +27,7 @@ public interface WeiwaishujuDao {
 	int update(WeiwaishujuDO weiwaishuju);
 
 	int remove(Long id);
-	int removes(String number);
+	int removes(String saleNumber);
 	int batchRemove(Long[] ids);
 	List<WeiwaishujuDO> getWeiwaiShuju(Map<String, Object> map);
 }

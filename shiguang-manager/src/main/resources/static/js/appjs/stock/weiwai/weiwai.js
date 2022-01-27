@@ -61,22 +61,22 @@ function load() {
 									field : 'danjuNumber',
 									title : '单据编号'
 								},
-								// {
-								// 	field : 'saleNumber',
-								// 	title : '原配镜单'
-								// },
-								// {
-								// 	field : 'gkname',
-								// 	title : '会员姓名'
-								// },
-								// {
-								// 	field : 'hyknum',
-								// 	title : '会员卡号'
-								// },
-								// {
-								// 	field : 'phone',
-								// 	title : '电话'
-								// },
+								{
+									field : 'saleNumber',
+									title : '原配镜单'
+								},
+								{
+									field : 'gkname',
+									title : '会员姓名'
+								},
+								{
+									field : 'hyknum',
+									title : '会员卡号'
+								},
+								{
+									field : 'phone',
+									title : '电话'
+								},
 							// {
 							// 		field : '',
 							// 		title : '销售门店'
@@ -137,32 +137,28 @@ function load() {
                                 formatter: function (value, row, index) {
                                     if (row.status == "1") {
                                         var a = '<span class="btn btn-primary btn-sm' + s_detial_h + '"  href="#" title="详情"  mce_href="#" onclick="detial(\''
-                                            + row.id + '\')">详情</span> ';
+                                            + row.saleNumber+" ','"+  row.danjuNumber+ '\')">详情</span> ';
                                         var f = '<span class="btn btn-success btn-sm' +s_userNum_h+ '" href="#" title="收货"  mce_href="#"   onclick="userNum(\''
-                                            + row.danjuNumber + '\')">收货</span> ';
+                                            + row.saleNumber+" ','"+  row.danjuNumber + '\')">收货</span> ';
                                         var b = '<span class="btn btn-danger btn-sm' +s_remove_h+ '" href="#" title="删除"  mce_href="#"   onclick="remove(\''
-                                            + row.id + '\')">删除</span> ';
+                                            + row.saleNumber+" ','"+  row.danjuNumber + '\')">删除</span> ';
                                         var n = '';
                                         var c = '';
-                                        // var j = '';
                                     } else if (row.status == "0") {
                                         var a = '<span class="btn btn-primary btn-sm' + s_detial_h + '"  href="#" title="详情"  mce_href="#" onclick="detial(\''
-                                            + row.id + '\')">详情</span> ';
+                                            + row.saleNumber+" ','"+  row.danjuNumber+ '\')">详情</span> ';
                                         var f = '';
                                         var b = '';
                                         if (row.shstatus==""){
-											// var n = '<span class="btn btn-info btn-sm' + s_psNum_h + '"   href="#" title="配送"  mce_href="#" onclick="psNum(\''
-											// 	+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle+" ','"+  row.yaoqiu  + '\')">配送</span> ';
 											var n = '<span class="btn btn-info btn-sm' + s_psNum_h + '"   href="#" title="配送"  mce_href="#" onclick="psNum(\''
-												+  row.danjuNumber + '\')">配送</span> ';
+                                                + row.saleNumber+" ','"+  row.danjuNumber + '\')">配送</span> ';
 											// var j = '<span class="btn btn-warning btn-sm"  href="#" title="退回"  mce_href="#" onclick="thNum(\''
-											// 	+ row.salenumbery+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle + '\')">退回</span> ';
+											// 	+ row.saleNumber+" ','"+  row.danjuNumber +" ','"+  row.eyeStyle + '\')">退回</span> ';
                                             var c = '';
 										}else {
 											var n = '';
-											// var j = '';
                                             var c = '<span class="btn btn-warning btn-sm' + s_code_h + '"    href="#" title="条码"  mce_href="#" onclick="code(\''
-                                                + row.goodsType+" ','"+ row.danjuNumber + '\')">条码</span> ';
+                                                + row.saleNumber+" ','"+  row.danjuNumber + '\')">条码</span> ';
 										}
 
 
@@ -193,19 +189,19 @@ function add() {
 	});
     layer.full(toIndex)
 }
-function detial(id) {
+function detial(saleNumber,danjuNumber) {
     var toIndex = layer.open({
 		type : 2,
 		title : '详情',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/detial/' + id // iframe的url
+		content : prefix + '/detial/' + saleNumber+"/"+danjuNumber // iframe的url
 	});
     layer.full(toIndex)
 }
 
-function remove(id) {
+function remove(saleNumber,danjuNumber) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]
 	}, function() {
@@ -213,7 +209,8 @@ function remove(id) {
 			url : prefix+"/remove",
 			type : "post",
 			data : {
-				'id' : id
+				'saleNumber' : saleNumber,
+				'danjuNumber' : danjuNumber
 			},
 			success : function(r) {
 				if (r.code==0) {
@@ -264,7 +261,7 @@ function batchRemove() {
 	});
 }
 
-function userNum(danjuNumber) {
+function userNum(saleNumber,danjuNumber) {
 	var status="0";
 	if (status == "0"){
 		// alert("输入工号")
@@ -274,7 +271,7 @@ function userNum(danjuNumber) {
 			maxmin : true,
 			shadeClose : false, // 点击遮罩关闭层
 			area : [ '800px', '520px' ],
-			content :"/stock/weiwai/userNum/"+ danjuNumber
+			content :"/stock/weiwai/userNum/"+saleNumber+"/"+ danjuNumber
 		});
 
 	}
@@ -282,6 +279,7 @@ function userNum(danjuNumber) {
 //修改收货状态添加库存
 function upshTime() {
 	var danjuNumber = document.getElementById('danjuNumber').value;
+	var saleNumber = document.getElementById('saleNumber').value;
 	var username = document.getElementById('username').value;
 	var status = "0";
 	if (username !=""){
@@ -292,7 +290,8 @@ function upshTime() {
 			data: {
 				'danjuNumber': danjuNumber,
 				'status': status,
-				'username':username
+				'username':username,
+				'saleNumber':saleNumber
 			},
 			dataType: 'JSON',
 			async: false,
@@ -315,7 +314,7 @@ function upshTime() {
 }
 
 //配送
-function psNum(danjuNumber ) {
+function psNum(saleNumber,danjuNumber ) {
 	var shstatus="0";
 	if (shstatus == "0"){
 		// alert("输入工号")
@@ -325,13 +324,14 @@ function psNum(danjuNumber ) {
 			maxmin : true,
 			shadeClose : false, // 点击遮罩关闭层
 			area : [ '800px', '520px' ],
-			content :"/stock/weiwai/psNum/"+danjuNumber
+			content :"/stock/weiwai/psNum/"+saleNumber+"/"+danjuNumber
 		});
 
 	}
 }
 function peisong() {
 	var danjuNumber = document.getElementById('danjuNumber').value;
+	var saleNumber = document.getElementById('saleNumber').value;
 	var psname = document.getElementById('username').value;
 	var shstatus = "0";
 	if (username != "") {
@@ -342,7 +342,8 @@ function peisong() {
 			data: {
 				'danjuNumber': danjuNumber,
 				'shstatus': shstatus,
-				'psname': psname
+				'psname': psname,
+				'saleNumber': saleNumber
 			},
 			dataType: 'JSON',
 			async: false,
@@ -449,9 +450,29 @@ function dayinList() {
 
 
 //打印条码
-function code(goodsType,danjuNumber){
-        window.open("/stock/weiwai/code?danjuNumber="+danjuNumber);
+function code(saleNumber,danjuNumber) {
+    window.open("/stock/weiwai/code?saleNumber=" + saleNumber+"&danjuNumber="+danjuNumber);
 }
+
+function out(){
+    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+    if (rows.length == 0) {
+        layer.msg("选择要导出的数据");
+        return;
+    }
+    // var danjuNumbers=[];
+    // var saleNumbers=[];
+	var arrys=[];
+    $.each(rows, function(i, row) {
+        // danjuNumbers[i] = row['danjuNumber'];
+        // saleNumbers[i] = row['saleNumber'];
+		arrys[i]=row['danjuNumber']+row['saleNumber'];
+
+    });
+    window.location.href="/stock/weiwai/out?arrys="+arrys;
+}
+
+
 
 
 

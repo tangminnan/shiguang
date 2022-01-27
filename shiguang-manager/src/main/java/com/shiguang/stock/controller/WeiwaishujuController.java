@@ -83,7 +83,6 @@ public class WeiwaishujuController {
 		}
 		String number= weiwaishuju.getNumber();
 		String danjuDay= weiwaishuju.getDanjuDay();
-		String departname= weiwaishuju.getDepartname();
 		String zhidanPeople= weiwaishuju.getZhidanPeople();
 		String jpStyle= weiwaishuju.getJcStyle();
 		String timetime= weiwaishuju.getTimetime();
@@ -111,11 +110,11 @@ public class WeiwaishujuController {
 			String[] gknames =weiwaishuju.getGkname().split(",");
 			String[] hyknums =weiwaishuju.getHyknum().split(",");
 			String[] phones =weiwaishuju.getPhone().split(",");
+			String[] departnames =weiwaishuju.getDepartname().split(",");
 			for(int a=0;a<nums.length;a++){
 				WeiwaishujuDO weiwaishujuDO=new WeiwaishujuDO();
 				weiwaishujuDO.setNumber(number);
 				weiwaishujuDO.setDanjuDay(danjuDay);
-				weiwaishujuDO.setDepartname(departname);
 				weiwaishujuDO.setZhidanPeople(zhidanPeople);
 				weiwaishujuDO.setJcStyle(jpStyle);
 				weiwaishujuDO.setTimetime(timetime);
@@ -235,6 +234,12 @@ public class WeiwaishujuController {
 					weiwaishujuDO.setPhone(phone);
 				}catch (ArrayIndexOutOfBoundsException e){
 					weiwaishujuDO.setPhone("");
+				}
+				try {
+					String departname = departnames[a];
+					weiwaishujuDO.setDepartname(departname);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setDepartname("");
 				}
 				weiwaishujuService.save(weiwaishujuDO);
 			}

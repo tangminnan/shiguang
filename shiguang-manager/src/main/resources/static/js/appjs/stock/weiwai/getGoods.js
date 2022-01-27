@@ -16,6 +16,12 @@ function batchSelect() {
             var saleNumber =  row['saleNumber'];
         }
 
+        if(null == row['departname']){
+            var departname  ="";
+        }else {
+            var departname =  row['departname'];
+        }
+
         if(null == row['name']){
             var name  ="";
         }else {
@@ -147,6 +153,7 @@ function batchSelect() {
         }
 
         obj.saleNumber = saleNumber;
+        obj.departname = departname;
         obj.name = name;
         obj.memberNumber = memberNumber;
         obj.phone1 = phone1;
@@ -177,17 +184,6 @@ function batchSelect() {
             var goodsNum =  row['goodsNum'];
         }
 
-        // if(null == row['jpGoodsName']){
-        //     var jpGoodsName  ="";
-        // }else {
-        //     var jpGoodsName =  row['jpGoodsName'];
-        // }
-        //
-        // if(null == row['jpGoodsNum']){
-        //     var jpGoodsNum  ="";
-        // }else {
-        //     var jpGoodsNum =  row['jpGoodsNum'];
-        // }
         if(null == row['storeName']){
             var storeName  ="";
         }else {

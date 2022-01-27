@@ -14,6 +14,7 @@
 <form class="form-horizontal m-t" id="signupForm">
     <div class="m40 tabS msgBox">
         <h3>单据信息</h3>
+        <input id="saleNumber" name="saleNumber" th:value="${weiwai.saleNumber}" type="hidden" readonly>
         <table border="0" cellspacing="0" cellpadding="0">
             <tr>
                 <td>单据编号：</td>
@@ -72,7 +73,7 @@
         </table>
 
         <div class="BQ-btn">
-            <input type="button" class="H_bc" value="打印配镜单" onclick="dayin()"/>
+            <input type="button" class="H_bc" value="打印委外订单" onclick="dayin()"/>
         </div>
     </div>
     <div class="m40 tabS msgBoxDD">
@@ -132,6 +133,7 @@
 <div th:include="include::footer"></div>
 <script type="text/javascript">
     $(document).ready(function () {
+        var saleNumber = $('#saleNumber').val();
         var danjuNumber = $('#danjuNumber').val();
         var eyeStyle = $('#eyeStyle').val();
         var html="";
@@ -147,7 +149,8 @@
             type: 'post',
             dataType: "json",
             data: {
-                'danjuNumber': danjuNumber
+                'danjuNumber': danjuNumber,
+                'saleNumber': saleNumber
             },
             success: function (xml) {
                 // alert(JSON.stringify(xml));
@@ -194,10 +197,11 @@
     function dayin() {
         var eyeStyle = $('#eyeStyle').val();
         var danjuNumber = $('#danjuNumber').val();
+        var saleNumber = $('#saleNumber').val();
         if (eyeStyle == '框镜订做') {
-            window.open("/stock/weiwai/jkPeijingdan?danjuNumber=" + danjuNumber);
+            window.open("/stock/weiwai/jkPeijingdan?danjuNumber=" + danjuNumber+'&saleNumber='+saleNumber);
         } else if (eyeStyle == '隐形订做') {
-            window.open("/stock/weiwai/yxPeijingdan?danjuNumber=" + danjuNumber);
+            window.open("/stock/weiwai/yxPeijingdan?danjuNumber=" + danjuNumber+'&saleNumber='+saleNumber);
         }
     }
 

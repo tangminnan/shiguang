@@ -152,7 +152,7 @@
                 <td><input id="danjuDay" name="danjuDay" th:value="${danjuDay}" readonly type="text"/></td>
                 <td>所属门店</td>
                 <td>
-                    <input id="departname" name="departname" th:value="${departmentName}" readonly type="text"/>
+                    <input  th:value="${departmentName}" readonly type="text"/>
                 </td>
             </tr>
             <tr>
@@ -312,6 +312,7 @@
     var hyNameArry = new Array();
     var hyNumberArry = new Array();
     var phoneArry = new Array();
+    var departnameArry = new Array();
 
     function PeiJing() {
         $("#tab1").remove();
@@ -355,8 +356,9 @@
             cancel: function (index, layero) {
 
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                // alert(JSON.stringify(rows));
                 for (var i = 0; i < rows.length; i++) {
-                    $("#departname").val(rows[0].mirorAddress);
+                    // $("#departname").val(rows[0].mirorAddress);
                     xsNumber += rows[i].saleNumber + ',';
                     rightsphs += rows[i].rightsph + ',';
                     rightcyls += rows[i].rightcyl + ',';
@@ -391,6 +393,7 @@
                     hyNameArry[i]=rows[i].name;//姓名 rows[i].name
                     hyNumberArry[i]=rows[i].memberNumber;//卡号rows[i].memberNumber
                     phoneArry[i]=rows[i].phone1;//电话rows[i].phone1
+                    departnameArry[i]=rows[i].mirorAddress;//销售门店
 
 
                 }
@@ -467,6 +470,7 @@
                         var hyNames= hyNameArry[b];
                         var hyNumbers= hyNumberArry[b];
                         var phones= phoneArry[b];
+                        var departnames= departnameArry[b];
 
 
                         var goodNums=goodsNums.split(",");//代码
@@ -482,6 +486,7 @@
                         var hyName = hyNames.split(",");
                         var hyNumber = hyNumbers.split(",");
                         var phone = phones.split(",");
+                        var departname = departnames.split(",");
                         // alert(goodsNums);
                         // alert(goodNums+"拆分");
                         // alert(goodNums.length+"长度");
@@ -544,6 +549,7 @@
                                         bhtml += "<td style='display: none'><input id='gkname' name='gkname' value='" + hyName[0] + "' type='text'/></td>";
                                         bhtml += "<td style='display: none'><input id='hyknum' name='hyknum' value='" + hyNumber[0] + "' type='text'/></td>";
                                         bhtml += "<td style='display: none'><input id='phone' name='phone' value='" + phone[0] + "' type='text'/></td>";
+                                        bhtml += "<td style='display: none'><input id='departname' name='departname' value='" + departname[0] + "' type='text'/></td>";
                                         bhtml += "</tr>";
                                     }
                                 } else if (leftRights[c] == "左") {
@@ -578,6 +584,7 @@
                                         bhtml += "<td style='display: none'><input id='gkname' name='gkname' value='" + hyName[0] + "' type='text'/></td>";
                                         bhtml += "<td style='display: none'><input id='hyknum' name='hyknum' value='" + hyNumber[0] + "' type='text'/></td>";
                                         bhtml += "<td style='display: none'><input id='phone' name='phone' value='" + phone[0] + "' type='text'/></td>";
+                                        bhtml += "<td style='display: none'><input id='departname' name='departname' value='" + departname[0] + "' type='text'/></td>";
                                         bhtml += "</tr>";
                                     }
                                 }

@@ -81,6 +81,12 @@ public class WeiwaiDO implements Serializable {
 	private String jd;
 	//曲率
 	private String qulv;
+	//远瞳
+	private String fartj;
+	//近瞳
+	private String neartj;
+	//瞳高
+	private String tg;
 	//顾客姓名
 	private String gkname;
 	//会员卡
@@ -103,16 +109,14 @@ public class WeiwaiDO implements Serializable {
 	private String pstime;
 	//库存对应单据号
 	private String stockorder;
+	//公司名称
+	private String companyName;
+	//部门名称
+	private String departname;
 	//条码
 	private String QRCode;
 
-	public String getQRCode() {
-		return QRCode;
-	}
 
-	public void setQRCode(String QRCode) {
-		this.QRCode = QRCode;
-	}
 	/**
 	 * 设置：id
 	 */
@@ -509,6 +513,31 @@ public class WeiwaiDO implements Serializable {
 	public String getQulv() {
 		return qulv;
 	}
+
+	public String getFartj() {
+		return fartj;
+	}
+
+	public void setFartj(String fartj) {
+		this.fartj = fartj;
+	}
+
+	public String getNeartj() {
+		return neartj;
+	}
+
+	public void setNeartj(String neartj) {
+		this.neartj = neartj;
+	}
+
+	public String getTg() {
+		return tg;
+	}
+
+	public void setTg(String tg) {
+		this.tg = tg;
+	}
+
 	/**
 	 * 设置：顾客姓名
 	 */
@@ -640,5 +669,28 @@ public class WeiwaiDO implements Serializable {
 	 */
 	public String getStockorder() {
 		return stockorder;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getDepartname() {
+		return departname;
+	}
+
+	public void setDepartname(String departname) {
+		this.departname = departname;
+	}
+
+	public String getQRCode() {
+		return QRCode;
+	}
+
+	public void setQRCode(String QRCode) {
+		this.QRCode = QRCode;
 	}
 }

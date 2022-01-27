@@ -158,11 +158,10 @@
                     type: 'post',
                     dataType: "json",
                     data: {
-                        'number': number,
+                        'number': number
                     },
                     success: function (xml) {
                         // alert(JSON.stringify(xml));
-
                         for (var i = 0; i < xml.length; i++) {
                                 $(".heji1").before("<tr class='val1'>" +
                                     "<td >" + xml[i].number + "</td>\n" +//0
@@ -191,12 +190,27 @@
                                     "<input name='zj' type='hidden' value=''>\n" +
                                     "<td>" + xml[i].yaoqiu + "</td>\n" +
                                     "<input  name='yaoqiu' type='hidden' value='" +  xml[i].yaoqiu + "'>\n" +
+
+                                    "<td style='display: none'>" + xml[i].num + "</td>\n" +
                                     "<input name='num' type='hidden' value='" +  xml[i].num + "'>\n" +
+                                    "<td style='display: none'>" + xml[i].code + "</td>\n" +
                                     "<input name='code' type='hidden' value='" +  xml[i].code + "'>\n" +
+                                    "<td style='display: none'>" + xml[i].saleNumber + "</td>\n" +
                                     "<input name='saleNumber' type='hidden' value='" +  xml[i].saleNumber + "'>\n" +
+                                    "<td style='display: none'>" + xml[i].gkname + "</td>\n" +
                                     "<input name='gkname' type='hidden' value='" +  xml[i].gkname + "'>\n" +
+                                    "<td style='display: none'>" + xml[i].hyknum + "</td>\n" +
                                     "<input name='hyknum' type='hidden' value='" +  xml[i].hyknum + "'>\n" +
+                                    "<td style='display: none'>" + xml[i].phone + "</td>\n" +
                                     "<input name='phone' type='hidden' value='" +  xml[i].phone + "'>\n" +
+                                    "<td style='display: none'>" + xml[i].departname + "</td>\n" +
+                                    "<input name='departname' type='hidden' value='" +  xml[i].departname + "'>\n" +
+                                    "<td style='display: none'>" + xml[i].fartj + "</td>\n" +
+                                    "<input name='fartj' type='hidden' value='" +  xml[i].fartj + "'>\n" +
+                                    "<td style='display: none'>" + xml[i].neartj + "</td>\n" +
+                                    "<input name='neartj' type='hidden' value='" +  xml[i].neartj + "'>\n" +
+                                    "<td style='display: none'>" + xml[i].tg + "</td>\n" +
+                                    "<input name='tg' type='hidden' value='" +  xml[i].tg + "'>\n" +
                                     "</tr>"
                                 );//页面每个数量
                             }

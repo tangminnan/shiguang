@@ -7,8 +7,20 @@
 		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`mfrsname`,`brandnum`,`brandname`,`position_id`,
 		`position_name`,`shouhuo_people`,`shouhuo_phone`,`shouhuo_address`,`changjia_number`,`beizhu`,`weiwaisale_number`,`mirror_time`,
 		`num`,`code`,`name`,`style`,`rl`,`count`,`sph`,`cyl`,`zx`,`add`,`slj`,`zj`,`yaoqiu`,`jd`,`qulv`,`gkname`,`hyknum`,`phone`,`status`,
-		`username`,`sh_time`,`shstatus`,`psname`,`sale_number`,`pstime`,`stockorder`
+		`username`,`sh_time`,`shstatus`,`psname`,`sale_number`,`pstime`,`stockorder`,`company_name`,`departname`,`fartj`,`neartj`,`tg`
 		from stock_weiwai where id = #{value}
+	</select>
+    <select id="weiwaiOrder" resultType="com.shiguang.stock.domain.WeiwaiDO">
+		select `id`,`danju_number`,`danju_day`,`eye_style`,`zhidan_people`,`mfrsid`,`mfrsname`,`brandnum`,`brandname`,`position_id`,
+		`position_name`,`shouhuo_people`,`shouhuo_phone`,`shouhuo_address`,`changjia_number`,`beizhu`,`weiwaisale_number`,`mirror_time`,
+		`num`,`code`,`name`,`style`,`rl`,`count`,`sph`,`cyl`,`zx`,`add`,`slj`,`zj`,`yaoqiu`,`jd`,`qulv`,`gkname`,`hyknum`,`phone`,`status`,
+		`username`,`sh_time`,`shstatus`,`psname`,`sale_number`,`pstime`,`stockorder`,`company_name`,`departname`,`fartj`,`neartj`,`tg`
+		from stock_weiwai
+        <where>
+        <if test="danjuNumber != null and danjuNumber != ''"> and danju_number = #{danjuNumber} </if>
+        <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+        </where>
+        group by danju_number   order by id desc
 	</select>
 
     <select id="list" resultType="com.shiguang.stock.domain.WeiwaiDO">
@@ -17,14 +29,18 @@
         left join c_position p on s.position_id=p.position_id
         <where>
             <if test="id != null and id != ''"> and s.id = #{id} </if>
-            <if test="danjuNumber != null and danjuNumber != ''"> and s.danju_number = #{danjuNumber} </if>
+            <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number  LIKE concat(concat('%', #{danjuNumber}),'%')</if>
+
             <if test="danjuDay != null and danjuDay != ''"> and s.danju_day = #{danjuDay} </if>
             <if test="eyeStyle != null and eyeStyle != ''"> and s.eye_style = #{eyeStyle} </if>
             <if test="zhidanPeople != null and zhidanPeople != ''"> and s.zhidan_people = #{zhidanPeople} </if>
-            <if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
-            <if test="mfrsname != null and mfrsname != ''"> and s.mfrsname = #{mfrsname} </if>
-            <if test="brandnum != null and brandnum != ''"> and s.brandnum = #{brandnum} </if>
-            <if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+
+            <if test="mfrsid != null and mfrsid != ''"> and s.mfrsid LIKE concat(concat('%', #{mfrsid}),'%') </if>
+            <if test="mfrsname != null and mfrsname != ''"> and s.mfrsname LIKE concat(concat('%', #{mfrsname}),'%') </if>
+            <if test="brandnum != null and brandnum != ''"> and s.brandnum LIKE concat(concat('%', #{brandnum}),'%') </if>
+            <if test="brandname != null and brandname != ''"> and s.brandname LIKE concat(concat('%', #{brandname}),'%') </if>
+
+
             <if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
             <if test="positionName != null and positionName != ''"> and s.position_name = #{positionName} </if>
             <if test="shouhuoPeople != null and shouhuoPeople != ''"> and s.shouhuo_people = #{shouhuoPeople} </if>
@@ -49,17 +65,26 @@
             <if test="yaoqiu != null and yaoqiu != ''"> and s.yaoqiu = #{yaoqiu} </if>
             <if test="jd != null and jd != ''"> and s.jd = #{jd} </if>
             <if test="qulv != null and qulv != ''"> and s.qulv = #{qulv} </if>
-            <if test="gkname != null and gkname != ''"> and s.gkname = #{gkname} </if>
-            <if test="hyknum != null and hyknum != ''"> and s.hyknum = #{hyknum} </if>
-            <if test="phone != null and phone != ''"> and s.phone = #{phone} </if>
+
+            <if test="gkname != null and gkname != ''"> and s.gkname LIKE concat(concat('%', #{gkname}),'%') </if>
+            <if test="hyknum != null and hyknum != ''"> and s.hyknum LIKE concat(concat('%', #{hyknum}),'%') </if>
+            <if test="phone != null and phone != ''"> and s.phone LIKE concat(concat('%', #{phone}),'%') </if>
+
             <if test="status != null and status != ''"> and s.status = #{status} </if>
             <if test="username != null and username != ''"> and s.username = #{username} </if>
             <if test="shTime != null and shTime != ''"> and s.sh_time = #{shTime} </if>
             <if test="shstatus != null and shstatus != ''"> and s.shstatus = #{shstatus} </if>
             <if test="psname != null and psname != ''"> and s.psname = #{psname} </if>
-            <if test="saleNumber != null and saleNumber != ''"> and s.sale_number = #{saleNumber} </if>
+
+            <if test="saleNumber != null and saleNumber != ''"> and s.sale_number LIKE concat(concat('%', #{saleNumber}),'%') </if>
             <if test="pstime != null and pstime != ''"> and s.pstime = #{pstime} </if>
             <if test="stockorder != null and stockorder != ''"> and s.stockorder = #{stockorder} </if>
+            <if test="companyName != null and companyName != ''"> and s.company_name = #{companyName} </if>
+            <if test="departname != null and departname != ''"> and s.departname = #{departname} </if>
+            <if test="fartj != null and fartj != ''"> and s.fartj = #{fartj} </if>
+            <if test="neartj != null and neartj != ''"> and s.neartj = #{neartj} </if>
+            <if test="tg != null and tg != ''"> and s.tg = #{tg} </if>
+
 
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(p.company_id,#{companyId})</if>
         </where>
@@ -68,7 +93,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-             group by s.danju_number   order by s.id desc
+             group by s.danju_number,s.sale_number   order by s.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -77,18 +102,22 @@
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from stock_weiwai s
-        left join c_position po on s.position_id=po.position_id
+        select count(*)  from stock_weiwai s
+        left join c_position p on s.position_id=p.position_id
         <where>
             <if test="id != null and id != ''"> and s.id = #{id} </if>
-            <if test="danjuNumber != null and danjuNumber != ''"> and s.danju_number = #{danjuNumber} </if>
+            <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number  LIKE concat(concat('%', #{danjuNumber}),'%')</if>
+
             <if test="danjuDay != null and danjuDay != ''"> and s.danju_day = #{danjuDay} </if>
             <if test="eyeStyle != null and eyeStyle != ''"> and s.eye_style = #{eyeStyle} </if>
             <if test="zhidanPeople != null and zhidanPeople != ''"> and s.zhidan_people = #{zhidanPeople} </if>
-            <if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
-            <if test="mfrsname != null and mfrsname != ''"> and s.mfrsname = #{mfrsname} </if>
-            <if test="brandnum != null and brandnum != ''"> and s.brandnum = #{brandnum} </if>
-            <if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
+
+            <if test="mfrsid != null and mfrsid != ''"> and s.mfrsid LIKE concat(concat('%', #{mfrsid}),'%') </if>
+            <if test="mfrsname != null and mfrsname != ''"> and s.mfrsname LIKE concat(concat('%', #{mfrsname}),'%') </if>
+            <if test="brandnum != null and brandnum != ''"> and s.brandnum LIKE concat(concat('%', #{brandnum}),'%') </if>
+            <if test="brandname != null and brandname != ''"> and s.brandname LIKE concat(concat('%', #{brandname}),'%') </if>
+
+
             <if test="positionId != null and positionId != ''"> and s.position_id = #{positionId} </if>
             <if test="positionName != null and positionName != ''"> and s.position_name = #{positionName} </if>
             <if test="shouhuoPeople != null and shouhuoPeople != ''"> and s.shouhuo_people = #{shouhuoPeople} </if>
@@ -113,17 +142,27 @@
             <if test="yaoqiu != null and yaoqiu != ''"> and s.yaoqiu = #{yaoqiu} </if>
             <if test="jd != null and jd != ''"> and s.jd = #{jd} </if>
             <if test="qulv != null and qulv != ''"> and s.qulv = #{qulv} </if>
-            <if test="gkname != null and gkname != ''"> and s.gkname = #{gkname} </if>
-            <if test="hyknum != null and hyknum != ''"> and s.hyknum = #{hyknum} </if>
-            <if test="phone != null and phone != ''"> and s.phone = #{phone} </if>
+
+            <if test="gkname != null and gkname != ''"> and s.gkname LIKE concat(concat('%', #{gkname}),'%') </if>
+            <if test="hyknum != null and hyknum != ''"> and s.hyknum LIKE concat(concat('%', #{hyknum}),'%') </if>
+            <if test="phone != null and phone != ''"> and s.phone LIKE concat(concat('%', #{phone}),'%') </if>
+
             <if test="status != null and status != ''"> and s.status = #{status} </if>
             <if test="username != null and username != ''"> and s.username = #{username} </if>
             <if test="shTime != null and shTime != ''"> and s.sh_time = #{shTime} </if>
             <if test="shstatus != null and shstatus != ''"> and s.shstatus = #{shstatus} </if>
             <if test="psname != null and psname != ''"> and s.psname = #{psname} </if>
-            <if test="saleNumber != null and saleNumber != ''"> and s.sale_number = #{saleNumber} </if>
+
+            <if test="saleNumber != null and saleNumber != ''"> and s.sale_number LIKE concat(concat('%', #{saleNumber}),'%') </if>
             <if test="pstime != null and pstime != ''"> and s.pstime = #{pstime} </if>
             <if test="stockorder != null and stockorder != ''"> and s.stockorder = #{stockorder} </if>
+            <if test="companyName != null and companyName != ''"> and s.company_name = #{companyName} </if>
+            <if test="departname != null and departname != ''"> and s.departname = #{departname} </if>
+            <if test="fartj != null and fartj != ''"> and s.fartj = #{fartj} </if>
+            <if test="neartj != null and neartj != ''"> and s.neartj = #{neartj} </if>
+            <if test="tg != null and tg != ''"> and s.tg = #{tg} </if>
+
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(p.company_id,#{companyId})</if>
         </where>
     </select>
 
@@ -172,8 +211,14 @@
 			`psname`,
 			`sale_number`,
 			`pstime`,
-			`stockorder`
-		)
+			`stockorder`,
+			`company_name`,
+			`departname`,
+			`fartj`,
+			`neartj`,
+			`tg`
+
+			)
 		values
 		(
 			#{danjuNumber},
@@ -218,7 +263,13 @@
 			#{psname},
 			#{saleNumber},
 			#{pstime},
-			#{stockorder}
+			#{stockorder},
+			#{companyName},
+			#{departname},
+			#{fartj},
+			#{neartj},
+			#{tg}
+
 		)
 	</insert>
 
@@ -267,7 +318,13 @@
             <if test="psname != null">`psname` = #{psname}, </if>
             <if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
             <if test="pstime != null">`pstime` = #{pstime}, </if>
-            <if test="stockorder != null">`stockorder` = #{stockorder}</if>
+            <if test="stockorder != null">`stockorder` = #{stockorder},</if>
+            <if test="companyName != null">`company_name` = #{companyName},</if>
+            <if test="departname != null">`departname` = #{departname},</if>
+            <if test="fartj != null">`fartj` = #{fartj},</if>
+            <if test="neartj != null">`neartj` = #{neartj},</if>
+            <if test="tg != null">`tg` = #{tg}</if>
+
         </set>
         where id = #{id}
     </update>
@@ -284,7 +341,12 @@
     </delete>
 
     <delete id="removes">
-		delete from stock_weiwai where danju_number = #{value}
+		delete
+        from stock_weiwai
+        <where>
+            <if test="danjuNumber != null and danjuNumber != ''"> and danju_number = #{danjuNumber} </if>
+            <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+        </where>
 	</delete>
 
 
@@ -1317,10 +1379,40 @@
         select * FROM stock_weiwai
         <where>
             <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
+            <if test="saleNumber != null and saleNumber != ''">and sale_number = #{saleNumber}</if>
             <if test="codeOne != null and codeOne != ''">and code = #{codeOne}</if>
         </where>
     </select>
 
+    <select id="weiwaiOrderOut" resultType="com.shiguang.stock.domain.WeiwaiDO">
+        SELECT * FROM stock_weiwai WHERE CONCAT(danju_number,sale_number) IN
+        <foreach item="arrys" collection="arrys" open="(" separator="," close=")">
+        #{arrys}
+        </foreach>
+    </select>
+    <!--<select id="weiwaiOrderOut" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
+        <!--SELECT * FROM stock_weiwai WHERE CONCAT(danju_number,sale_number) IN  #{arrys}-->
+    <!--</select>-->
+    <!--<select id="weiwaiOrderOut" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
+        <!--select * from stock_weiwai-->
+        <!--<where>-->
+            <!--<if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>-->
+            <!--<if test="saleNumber != null and saleNumber != ''">and sale_number = #{saleNumber}</if>-->
+        <!--</where>-->
+    <!--</select>-->
+    <!--<select id="weiwaiOrderOut" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
+        <!--select * from stock_weiwai-->
+        <!--where-->
+        <!--danju_number in-->
+        <!--<foreach item="danjuNumber" collection="danjuNumbers" open="(" separator="," close=")">-->
+        <!--#{danjuNumber}-->
+        <!--</foreach>-->
+        <!--and sale_number in-->
+        <!--<foreach item="saleNumber" collection="saleNumbers" open="(" separator="," close=")">-->
+        <!--#{saleNumber}-->
+        <!--</foreach>-->
+
+    <!--</select>-->
 
     <select id="getBrand" resultType="com.shiguang.product.domain.JpdzDO">
       select b.brandnum,b.brandname from  aa_jpdz jpdz join c_brand b on jpdz.mfrsid=b.mfrsid and jpdz.brandnum=b.brandnum
@@ -1341,7 +1433,10 @@
     <if test="pstime != null">`pstime` = #{pstime},</if>
     <if test="stockorder != null">`stockorder` = #{stockorder}</if>
     </set>
-    where danju_number = #{danjuNumber}
+        <where>
+            <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
+            <if test="saleNumber != null and saleNumber != ''">and sale_number = #{saleNumber}</if>
+        </where>
     </update>
 
 
@@ -1390,10 +1485,7 @@
 	<!--</select>-->
 
 
-    <!--&lt;!&ndash;打印委外框镜配镜单&ndash;&gt;-->
-    <!--<select id="jkPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
-			<!--SELECT * FROM stock_weiwai where danju_number = #{value}-->
-	<!--</select>-->
+
     <!--&lt;!&ndash;打印委外框镜配镜单列表&ndash;&gt;-->
     <!--<select id="jkPeijingdanList" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
         <!--SELECT * FROM stock_weiwai-->

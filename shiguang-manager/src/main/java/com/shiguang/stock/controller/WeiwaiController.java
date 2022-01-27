@@ -23,6 +23,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.sql.Array;
 import java.text.SimpleDateFormat;
@@ -126,10 +130,13 @@ public class WeiwaiController {
     }
 
     //委外详情按钮跳转页面
-    @GetMapping("/detial/{id}")
+    @GetMapping("/detial/{saleNumber}/{danjuNumber}")
     @RequiresPermissions("stock:weiwai:detial")
-    String detial(@PathVariable("id") Long id, Model model) {
-        WeiwaiDO weiwai = weiwaiService.get(id);
+    String detial(@PathVariable("saleNumber") String saleNumber, @PathVariable("danjuNumber") String danjuNumber, Model model) {
+        WeiwaiDO weiwaiDO = new WeiwaiDO();
+        weiwaiDO.setDanjuNumber(danjuNumber);
+        weiwaiDO.setSaleNumber(saleNumber);
+        WeiwaiDO weiwai = weiwaiService.weiwaiOrder(weiwaiDO);
         model.addAttribute("weiwai", weiwai);
         String eyeStyle = weiwai.getEyeStyle();
         if (eyeStyle.equals("3")) {
@@ -143,9 +150,10 @@ public class WeiwaiController {
     ///委外采购详情列表
     @ResponseBody
     @RequestMapping(value = "/selectWeiwaiOrder")
-    public List<WeiwaiDO> selectWeiwaiOrder(String danjuNumber, Model model) {
+    public List<WeiwaiDO> selectWeiwaiOrder(String danjuNumber, String saleNumber, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("danjuNumber", danjuNumber);
+        map.put("saleNumber", saleNumber);
         List<WeiwaiDO> weiwaiOrder = weiwaiService.selectWeiwaiOrder(map);
         model.addAttribute("weiwaiOrder", weiwaiOrder);
         return weiwaiOrder;
@@ -158,6 +166,7 @@ public class WeiwaiController {
     @PostMapping("/save")
     @RequiresPermissions("stock:weiwai:add")
     public R save(WeiwaiDO weiwai) {
+        String companyName = ShiroUtils.getUser().getCompany();
         String danjuNumber = weiwai.getDanjuNumber();
         String danjuDay = weiwai.getDanjuDay();
         String eyeStyle = weiwai.getEyeStyle();
@@ -192,8 +201,13 @@ public class WeiwaiController {
             String[] hyknums = weiwai.getHyknum().split(",");
             String[] phones = weiwai.getPhone().split(",");
             String[] saleNumbers = weiwai.getSaleNumber().split(",");
+            String[] departnames = weiwai.getDepartname().split(",");
+            String[] fartjs = weiwai.getFartj().split(",");
+            String[] neartjs = weiwai.getNeartj().split(",");
+            String[] tgs = weiwai.getTg().split(",");
             for (int a = 0; a < weiwaisaleNumbers.length; a++) {
                 WeiwaiDO weiwaiDO = new WeiwaiDO();
+                weiwaiDO.setCompanyName(companyName);
                 weiwaiDO.setDanjuNumber(danjuNumber);
                 weiwaiDO.setDanjuDay(danjuDay);
                 weiwaiDO.setEyeStyle(eyeStyle);
@@ -335,6 +349,30 @@ public class WeiwaiController {
                 } catch (ArrayIndexOutOfBoundsException e) {
                     weiwaiDO.setSaleNumber("");
                 }
+                try {
+                    String departname = departnames[a];
+                    weiwaiDO.setDepartname(departname);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setDepartname("");
+                }
+                try {
+                    String fartj = fartjs[a];
+                    weiwaiDO.setFartj(fartj);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setFartj("");
+                }
+                try {
+                    String neartj = neartjs[a];
+                    weiwaiDO.setNeartj(neartj);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setNeartj("");
+                }
+                try {
+                    String tg = tgs[a];
+                    weiwaiDO.setTg(tg);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setTg("");
+                }
                 weiwaiService.save(weiwaiDO);
             }
         }
@@ -359,13 +397,12 @@ public class WeiwaiController {
     @PostMapping("/remove")
     @ResponseBody
     @RequiresPermissions("stock:weiwai:remove")
-    public R remove(Long id) {
-        WeiwaiDO weiwaiDO = weiwaiService.get(id);
-        String danjuNumber = weiwaiDO.getDanjuNumber();
-        String number = weiwaiDO.getWeiwaisaleNumber();
-
-        if (weiwaiService.removes(danjuNumber) > 0) {
-            weiwaishujuService.removes(number);
+    public R remove(String saleNumber, String danjuNumber) {
+        WeiwaiDO weiwaiDO = new WeiwaiDO();
+        weiwaiDO.setSaleNumber(saleNumber);
+        weiwaiDO.setDanjuNumber(danjuNumber);
+        if (weiwaiService.removes(weiwaiDO) > 0) {
+            weiwaishujuService.removes(saleNumber);
             return R.ok();
         }
         return R.error();
@@ -480,20 +517,21 @@ public class WeiwaiController {
     /**
      * 收货输入工号
      */
-    @GetMapping("/userNum/{danjuNumber}")
+    @GetMapping("/userNum/{saleNumber}/{danjuNumber}")
     @RequiresPermissions("stock:weiwai:userNum")
-    String userNum(@PathVariable("danjuNumber") String danjuNumber, Model model) {
+    String userNum(@PathVariable("saleNumber") String saleNumber, @PathVariable("danjuNumber") String danjuNumber, Model model) {
+        model.addAttribute("saleNumber", saleNumber);
         model.addAttribute("danjuNumber", danjuNumber);
         return "/stock/weiwai/userNum";
     }
 
-    //
-//    /**
-//     * 收货状态
-//     */
+
+    /**
+     * 收货状态
+     */
     @ResponseBody
     @RequestMapping(value = "/updateStatus")
-    public R updateEnable(String danjuNumber, String status, String username) {
+    public R updateEnable(String danjuNumber, String saleNumber, String status, String username) {
         //———获取当前登录用户的公司id————
         Map<String, Object> map = new HashMap<>();
         String conpanyId = ShiroUtils.getUser().getCompanyId();
@@ -505,6 +543,7 @@ public class WeiwaiController {
         } else {
             Map<String, Object> weiwaimap = new HashMap<>();
             weiwaimap.put("danjuNumber", danjuNumber);
+            weiwaimap.put("saleNumber", saleNumber);
             List<WeiwaiDO> weiwaiOrder = weiwaiService.selectWeiwaiOrder(weiwaimap);
             for (WeiwaiDO weiwai : weiwaiOrder) {
                 Long positionId = weiwai.getPositionId();
@@ -534,6 +573,7 @@ public class WeiwaiController {
 
                     WeiwaiDO weiwaiDO = new WeiwaiDO();
                     weiwaiDO.setDanjuNumber(danjuNumber);
+                    weiwaiDO.setSaleNumber(saleNumber);
                     weiwaiDO.setStatus(status);
                     weiwaiDO.setUsername(username);
                     //———获取当前系统时间—————
@@ -649,6 +689,7 @@ public class WeiwaiController {
                         if (stockService.save(stockDO) > 0) {
                             WeiwaiDO weiwaiDO = new WeiwaiDO();
                             weiwaiDO.setDanjuNumber(danjuNumber);
+                            weiwaiDO.setSaleNumber(saleNumber);
                             weiwaiDO.setStatus(status);
                             weiwaiDO.setUsername(username);
                             //———获取当前系统时间—————
@@ -676,9 +717,10 @@ public class WeiwaiController {
      * 配送输入工号
      */
     @RequiresPermissions("stock:weiwai:psNum")
-    @GetMapping("/psNum/{danjuNumber}")
-    String psNum(@PathVariable("danjuNumber") String danjuNumber,
+    @GetMapping("/psNum/{saleNumber}/{danjuNumber}")
+    String psNum(@PathVariable("saleNumber") String saleNumber, @PathVariable("danjuNumber") String danjuNumber,
                  Model model) {
+        model.addAttribute("saleNumber", saleNumber);
         model.addAttribute("danjuNumber", danjuNumber);
         return "/stock/weiwai/userNumps";
     }
@@ -689,7 +731,7 @@ public class WeiwaiController {
      */
     @PostMapping("/editShouhuo")
     @ResponseBody
-    public R editShouhuo(String danjuNumber, String shstatus, String psname) {
+    public R editShouhuo(String danjuNumber, String saleNumber, String shstatus, String psname) {
         Map<String, Object> map = new HashMap<>();
         String conpanyId = ShiroUtils.getUser().getCompanyId();
         map.put("conpanyId", conpanyId);
@@ -699,11 +741,12 @@ public class WeiwaiController {
             return R.error("该工号不存在");
         } else {
             map.put("danjuNumber", danjuNumber);
+            map.put("saleNumber", saleNumber);
             List<WeiwaiDO> weiwaiOrders = weiwaiService.selectWeiwaiOrder(map);
 
             for (WeiwaiDO weiwaiDO : weiwaiOrders) {
                 String eyeStyle = weiwaiDO.getEyeStyle();
-                String saleNumber = weiwaiDO.getSaleNumber();
+//                String saleNumber = weiwaiDO.getSaleNumber();
                 LogStatusDO logStatusDO = new LogStatusDO();
                 if ("3".equals(eyeStyle)) {
                     String yaoqiu = weiwaiDO.getYaoqiu();
@@ -772,6 +815,7 @@ public class WeiwaiController {
                 if (statusService.save(logStatusDO) > 0) {
                     WeiwaiDO weiwaiDO1 = new WeiwaiDO();
                     weiwaiDO1.setDanjuNumber(danjuNumber);
+                    weiwaiDO1.setSaleNumber(saleNumber);
                     weiwaiDO1.setShstatus(shstatus);
                     weiwaiDO1.setPsname(psname);
                     //———获取当前系统时间—————
@@ -786,17 +830,19 @@ public class WeiwaiController {
         }
         return R.ok();
     }
+
     /**
      * 浏览器打印二维码
      */
     @GetMapping("/code")
-    public String code(String danjuNumber, Model model) {
+    public String code(String saleNumber, String danjuNumber, Model model) {
         Map<String, Object> map = new HashMap<>();
-        map.put("danjuNumber",danjuNumber);
+        map.put("saleNumber", saleNumber);
+        map.put("danjuNumber", danjuNumber);
         List<WeiwaiDO> weiwaiDOS = weiwaiService.selectWeiwaiOrder(map);
         model.addAttribute("weiwaiDOS", weiwaiDOS);
-        for (WeiwaiDO weiwaiDO : weiwaiDOS){
-            String code = QRCodeUtil.creatRrCode(weiwaiDO.getCode(), 200,200);
+        for (WeiwaiDO weiwaiDO : weiwaiDOS) {
+            String code = QRCodeUtil.creatRrCode(weiwaiDO.getCode(), 200, 200);
             code = "data:image/png;base64," + code;
             weiwaiDO.setQRCode(code);
         }
@@ -807,19 +853,47 @@ public class WeiwaiController {
      * 浏览器打印二维码一个
      */
     @GetMapping("/codeOne")
-    public String codeOne(String danjuNumber,String codeOne, Model model) {
+    public String codeOne(String danjuNumber, String codeOne, Model model) {
         Map<String, Object> map = new HashMap<>();
-        map.put("danjuNumber",danjuNumber);
-        map.put("codeOne",codeOne);
+        map.put("danjuNumber", danjuNumber);
+        map.put("codeOne", codeOne);
         List<WeiwaiDO> weiwaiDOS = weiwaiService.selectWeiwaiOrder(map);
         model.addAttribute("weiwaiDOS", weiwaiDOS);
-        for (WeiwaiDO weiwaiDO : weiwaiDOS){
-            String code = QRCodeUtil.creatRrCode(weiwaiDO.getCode(), 200,200);
+        for (WeiwaiDO weiwaiDO : weiwaiDOS) {
+            String code = QRCodeUtil.creatRrCode(weiwaiDO.getCode(), 200, 200);
             code = "data:image/png;base64," + code;
             weiwaiDO.setQRCode(code);
         }
         return "/stock/weiwai/codeOne";
     }
+
+    //打印委外框镜配镜单
+    @GetMapping("/jkPeijingdan")
+    String jkPeijingdan(String danjuNumber, String saleNumber, Model model) {
+        WeiwaiDO weiwaiDO1 = new WeiwaiDO();
+        weiwaiDO1.setDanjuNumber(danjuNumber);
+        weiwaiDO1.setSaleNumber(saleNumber);
+        WeiwaiDO weiwaiDO = weiwaiService.weiwaiOrder(weiwaiDO1);
+        model.addAttribute("weiwaiDO", weiwaiDO);
+        //———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String dayinDay = sdf.format(date);
+        model.addAttribute("dayinDay", dayinDay);
+        return "/stock/weiwai/jkPeijingdan";
+    }
+
+    ///打印委外框镜配镜单列表
+    @ResponseBody
+    @RequestMapping(value = "/jkPeijingdanList")
+    public List<WeiwaiDO> selectJKList(String danjuNumber, String saleNumber, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("danjuNumber", danjuNumber);
+        map.put("saleNumber", saleNumber);
+        List<WeiwaiDO> weiwaiDan = weiwaiService.selectWeiwaiOrder(map);
+        return weiwaiDan;
+    }
+
 
 //    /**
 //     * 退货输入工号
@@ -867,6 +941,120 @@ public class WeiwaiController {
 //
 
 
+//    /**
+//     * 浏览器打印二维码
+//     */
+//    @GetMapping("/code")
+//    @RequiresPermissions("stock:weiwai:code")
+//    public String code(String danjuNumber, Model model) {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("danjuNumber",danjuNumber);
+//        List<WeiwaiDO> weiwaiDO = weiwaiService.selectWeiwaiOrder(map);
+//        String[] goodsCodes= weiwaiDO.getCode().split(",");
+//        String[] goodsCounts= weiwaiDO.getCount().split(",");
+//        String [] codeAndCounts = new String[goodsCodes.length];
+//        String codes="";
+//        String counts="";
+//        for (int i=0;i<goodsCodes.length;i++) {
+//            codes = goodsCodes[i];
+//            counts = goodsCounts[i];
+//            codeAndCounts[i] = codes + "," + counts;
+//        }
+//        model.addAttribute("codeAndCounts",codeAndCounts);
+//
+//        List<Map<String ,Object>> weiwaiDOList=new ArrayList<>();
+//        for (int i=0;i<codeAndCounts.length;i++) {
+//            Map<String,Object> map=new HashMap<>();
+//            String[] countcode=codeAndCounts[i].split(",");
+//            map.put("goodsCodes",countcode[0]);
+//            map.put("goodsCounts",countcode[1]);
+//            weiwaiDOList.add(map);
+//        }
+////       model.addAttribute("weiwaiDOList", weiwaiDOList);
+//
+//        List<Map<String ,Object>> weiwaiCode=new ArrayList<>();
+//        for (int a=0;a<weiwaiDOList.size();a++){
+//            Map<String,Object> map=new HashMap<>();
+//            String goodsCode=String.valueOf(weiwaiDOList.get(a).get("goodsCodes"));
+//            String goodsCount=String.valueOf(weiwaiDOList.get(a).get("goodsCounts"));
+//            String code = QRCodeUtil.creatRrCode(String.valueOf(goodsCode), 200,200);
+//            code = "data:image/png;base64," + code;
+//            map.put("goodsCode",goodsCode);
+//            map.put("goodsCount",goodsCount);
+//            map.put("QRCode",code);
+//            weiwaiCode.add(map);
+//        }
+//        model.addAttribute("weiwaiCode", weiwaiCode);
+//        model.addAttribute("goodsCounts",goodsCounts);
+//        return "/stock/weiwai/code";
+//    }
+
+//
+
+
+//
+//
+//    //打印委外隐形配镜单
+//    @GetMapping("/yxPeijingdan")
+//    String yxPeijingdan(String danjuNumber, Model model) {
+//        WeiwaiDO weiwaiDO = weiwaiService.yxPeijingdan(danjuNumber);
+//        model.addAttribute("weiwaiDO", weiwaiDO);
+//        //———获取当前系统时间—————
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+//        Date date = new Date();
+//        String dayinDay = sdf.format(date);
+//        model.addAttribute("dayinDay", dayinDay);
+//        return "/stock/weiwai/yxPeijingdan";
+//    }
+//    ///打印委外隐形配镜单列表
+//    @ResponseBody
+//    @RequestMapping(value = "/yxPeijingdanList")
+//    public List<WeiwaiDO> yxPeijingdanList(String danjuNumber ,Model model ) {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("danjuNumber", danjuNumber);
+//        List<WeiwaiDO> weiwaiDOList = weiwaiService.yxPeijingdanList(map);
+//        model.addAttribute("weiwaiDOList", weiwaiDOList);
+//        return weiwaiDOList;
+//    }
+
+    /**
+     * 批量打印
+     */
+    @GetMapping("/dayinList")
+    @RequiresPermissions("stock:weiwai:danyiinList")
+    String dayinList(String[] ids, String[] danjuNumbers, String[] mfrsid, String mfrsnames, Model model) {
+        model.addAttribute("ids", ids);
+        String danjuNumber = "";
+        for (int i = 0; i < danjuNumbers.length; i++) {
+            danjuNumber += danjuNumbers[i] + ",";
+        }
+        model.addAttribute("danjuNumber", danjuNumber);
+        model.addAttribute("mfrsid", mfrsid);
+        model.addAttribute("mfrsnames", mfrsnames);
+        //———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String dayinDay = sdf.format(date);
+        model.addAttribute("dayinDay", dayinDay);
+        //------制单人------
+        String zhidanPeoples = ShiroUtils.getUser().getName();
+        model.addAttribute("zhidanPeoples", zhidanPeoples);
+        return "/stock/weiwai/dayinList";
+    }
+
+    /**
+     * 导出
+     *
+     * @throws IOException
+     */
+    @GetMapping("/out")
+    @RequiresPermissions("stock:weiwai:out")
+    public void out(String[] arrys, HttpServletRequest request, HttpServletResponse response) throws IOException{
+        weiwaiService.weiwaiOut(arrys,request, response);
+    }
+
+
+}
 
 
 
@@ -875,8 +1063,32 @@ public class WeiwaiController {
 
 
 
-
-
+//    /**
+//     * 导出
+//     *
+//     * @throws IOException
+//     */
+//    @GetMapping("/out")
+//    @RequiresPermissions("stock:weiwai:out")
+//    public String out(String[] danjuNumbers, String[] saleNumbers, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+//        List<WeiwaiDO> weiwaiDOList = weiwaiService.weiwaiOrderOut(danjuNumbers, saleNumbers);
+//        model.addAttribute("weiwaiDOList", weiwaiDOList);
+//
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        String filename = "配镜单明细" + format.format(new Date().getTime()) + ".xls";
+//        response.setContentType("application/ms-excel;charset=UTF-8");
+//        response.setHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes(), "iso-8859-1"));
+//
+//        OutputStream out = response.getOutputStream();
+//
+//        try {
+//            ExcelExportUtil4DIY.exportToFile(, out);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            out.close();
+//        }
+//    }
 
 
 
@@ -1090,137 +1302,3 @@ public class WeiwaiController {
 //        }
 //    }
 //
-
-
-//    /**
-//     * 浏览器打印二维码
-//     */
-//    @GetMapping("/code")
-//    @RequiresPermissions("stock:weiwai:code")
-//    public String code(String danjuNumber, Model model) {
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("danjuNumber",danjuNumber);
-//        List<WeiwaiDO> weiwaiDO = weiwaiService.selectWeiwaiOrder(map);
-//        String[] goodsCodes= weiwaiDO.getCode().split(",");
-//        String[] goodsCounts= weiwaiDO.getCount().split(",");
-//        String [] codeAndCounts = new String[goodsCodes.length];
-//        String codes="";
-//        String counts="";
-//        for (int i=0;i<goodsCodes.length;i++) {
-//            codes = goodsCodes[i];
-//            counts = goodsCounts[i];
-//            codeAndCounts[i] = codes + "," + counts;
-//        }
-//        model.addAttribute("codeAndCounts",codeAndCounts);
-//
-//        List<Map<String ,Object>> weiwaiDOList=new ArrayList<>();
-//        for (int i=0;i<codeAndCounts.length;i++) {
-//            Map<String,Object> map=new HashMap<>();
-//            String[] countcode=codeAndCounts[i].split(",");
-//            map.put("goodsCodes",countcode[0]);
-//            map.put("goodsCounts",countcode[1]);
-//            weiwaiDOList.add(map);
-//        }
-////       model.addAttribute("weiwaiDOList", weiwaiDOList);
-//
-//        List<Map<String ,Object>> weiwaiCode=new ArrayList<>();
-//        for (int a=0;a<weiwaiDOList.size();a++){
-//            Map<String,Object> map=new HashMap<>();
-//            String goodsCode=String.valueOf(weiwaiDOList.get(a).get("goodsCodes"));
-//            String goodsCount=String.valueOf(weiwaiDOList.get(a).get("goodsCounts"));
-//            String code = QRCodeUtil.creatRrCode(String.valueOf(goodsCode), 200,200);
-//            code = "data:image/png;base64," + code;
-//            map.put("goodsCode",goodsCode);
-//            map.put("goodsCount",goodsCount);
-//            map.put("QRCode",code);
-//            weiwaiCode.add(map);
-//        }
-//        model.addAttribute("weiwaiCode", weiwaiCode);
-//        model.addAttribute("goodsCounts",goodsCounts);
-//        return "/stock/weiwai/code";
-//    }
-
-//
-//    //打印委外框镜配镜单
-//    @GetMapping("/jkPeijingdan")
-//    String jkPeijingdan(String danjuNumber, Model model) {
-//        WeiwaiDO weiwaiDO = weiwaiService.jkPeijingdan(danjuNumber);
-//        model.addAttribute("weiwaiDO", weiwaiDO);
-//        //———获取当前系统时间—————
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
-//        Date date = new Date();
-//        String dayinDay = sdf.format(date);
-//        model.addAttribute("dayinDay", dayinDay);
-//        return "/stock/weiwai/jkPeijingdan";
-//    }
-//    ///打印委外框镜配镜单列表
-//    @ResponseBody
-//    @RequestMapping(value = "/jkPeijingdanList")
-//    public List<WeiwaiDO> selectJKList(String danjuNumber ,Model model ) {
-//        Map<String, Object> map = new HashMap<>();
-////        map.put("danjuNumber", danjuNumber);
-//        String[] danjuNumbes=danjuNumber.split(",");
-//        List<WeiwaiDO> weiwaiDOList=new ArrayList<>();
-//        List<WeiwaiDO> weiwaiDan=new ArrayList<>();
-//        for (int i=0;i<danjuNumbes.length;i++){
-//            String danjunum=danjuNumbes[i];
-//            map.put("danjuNumber",danjunum);
-//            weiwaiDan = weiwaiService.jkPeijingdanList(map);
-//            weiwaiDOList.addAll(weiwaiDan);
-//        }
-//        return weiwaiDOList;
-//    }
-//
-//
-//    //打印委外隐形配镜单
-//    @GetMapping("/yxPeijingdan")
-//    String yxPeijingdan(String danjuNumber, Model model) {
-//        WeiwaiDO weiwaiDO = weiwaiService.yxPeijingdan(danjuNumber);
-//        model.addAttribute("weiwaiDO", weiwaiDO);
-//        //———获取当前系统时间—————
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
-//        Date date = new Date();
-//        String dayinDay = sdf.format(date);
-//        model.addAttribute("dayinDay", dayinDay);
-//        return "/stock/weiwai/yxPeijingdan";
-//    }
-//    ///打印委外隐形配镜单列表
-//    @ResponseBody
-//    @RequestMapping(value = "/yxPeijingdanList")
-//    public List<WeiwaiDO> yxPeijingdanList(String danjuNumber ,Model model ) {
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("danjuNumber", danjuNumber);
-//        List<WeiwaiDO> weiwaiDOList = weiwaiService.yxPeijingdanList(map);
-//        model.addAttribute("weiwaiDOList", weiwaiDOList);
-//        return weiwaiDOList;
-//    }
-
-    /**
-     * 批量打印
-     */
-    @GetMapping("/dayinList")
-    @RequiresPermissions("stock:weiwai:danyiinList")
-    String dayinList(  String[] ids,String[] danjuNumbers, String[] mfrsid,String  mfrsnames,Model model) {
-        model.addAttribute("ids",ids);
-        String danjuNumber="";
-        for (int i=0;i<danjuNumbers.length;i++){
-            danjuNumber+=danjuNumbers[i]+",";
-        }
-        model.addAttribute("danjuNumber",danjuNumber);
-        model.addAttribute("mfrsid",mfrsid);
-        model.addAttribute("mfrsnames",mfrsnames);
-        //———获取当前系统时间—————
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
-        Date date = new Date();
-        String dayinDay = sdf.format(date);
-        model.addAttribute("dayinDay", dayinDay);
-        //------制单人------
-        String zhidanPeoples = ShiroUtils.getUser().getName();
-        model.addAttribute("zhidanPeoples",zhidanPeoples);
-        return "/stock/weiwai/dayinList";
-    }
-}
-
-
-
-

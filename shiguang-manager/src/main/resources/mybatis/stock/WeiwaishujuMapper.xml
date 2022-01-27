@@ -247,7 +247,7 @@
 		delete from stock_weiwaishuju where id = #{value}
 	</delete>
 	<delete id="removes">
-		delete from stock_weiwaishuju where number = #{value}
+		delete from stock_weiwaishuju where sale_number = #{value}
 	</delete>
 	<delete id="batchRemove">
 		delete from stock_weiwaishuju where id in

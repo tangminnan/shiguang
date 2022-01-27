@@ -48,8 +48,8 @@ public class WeiwaishujuServiceImpl implements WeiwaishujuService {
 	}
 
 	@Override
-	public int removes(String number) {
-		return weiwaishujuDao.removes(number);
+	public int removes(String saleNumber) {
+		return weiwaishujuDao.removes(saleNumber);
 	}
 
 	@Override
