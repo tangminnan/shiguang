@@ -262,15 +262,15 @@ public class SaleReportController {
                         String[] payModel = settlementDO.getPayModel().split(",");
                         String[] modelMoney = settlementDO.getModelMoney().split(",");
                         for (int i=0;i<payModel.length;i++){
-                            if ("0".equals(payModel[i])){
+                            if ("0".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
                                 weixinMoney = weixinMoney + Double.valueOf(modelMoney[i]);
-                            } else if ("1".equals(payModel[i])){
+                            } else if ("1".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
                                 zfbMoney = zfbMoney + Double.valueOf(modelMoney[i]);
-                            } else if ("4".equals(payModel[i])){
+                            } else if ("4".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
                                 xianjinMoney = xianjinMoney + Double.valueOf(modelMoney[i]);
-                            } else if ("2".equals(payModel[i])){
+                            } else if ("2".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
                                 yyshoufeichuMoney = yyshoufeichuMoney + Double.valueOf(modelMoney[i]);
-                            } else if ("3".equals(payModel[i])){
+                            } else if ("3".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
                                 yikatongoney = yikatongoney + Double.valueOf(modelMoney[i]);
                             }
                         }
@@ -292,7 +292,11 @@ public class SaleReportController {
 
                 }
                 qtsubTotal = weixinMoney + zfbMoney;
-                shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney;
+                if (xianjinMoney < 0){
+                    shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney;
+                } else {
+                    shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney;
+                }
                 Map<String,Object> resultMap = new HashMap<>();
                 resultMap.put("weixinMoney",new BigDecimal(weixinMoney).setScale(2,RoundingMode.HALF_UP));
                 resultMap.put("zfbMoney",new BigDecimal(zfbMoney).setScale(2,RoundingMode.HALF_UP));

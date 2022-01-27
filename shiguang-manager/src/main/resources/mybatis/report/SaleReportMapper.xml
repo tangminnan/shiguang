@@ -146,6 +146,8 @@
 			 <if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
 			 <if test="settleDateStart !=null and settleDateStart != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
 			 <if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			 <if test="settleDateStart !=null and settleDateStart != ''"> or date_format(d.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			 <if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(d.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			 <if test="state !=null and state != ''">and m.state = #{state}</if>
 			 <if test="departNumber !=null and departNumber != ''">and dt.depart_number = #{departNumber}</if>
 			 <if test="departType !=null and departType != ''">and dt.depart_type = #{departType}</if>
