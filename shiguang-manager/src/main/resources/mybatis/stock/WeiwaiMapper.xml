@@ -102,8 +102,11 @@
     </select>
 
     <select id="count" resultType="int">
-        select count(*)  from stock_weiwai s
-        left join c_position p on s.position_id=p.position_id
+        SELECT
+        count( 0 )
+        FROM
+        (
+        SELECT s.* FROM stock_weiwai s LEFT JOIN c_position p ON s.position_id = p.position_id
         <where>
             <if test="id != null and id != ''"> and s.id = #{id} </if>
             <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number  LIKE concat(concat('%', #{danjuNumber}),'%')</if>
@@ -162,8 +165,18 @@
             <if test="neartj != null and neartj != ''"> and s.neartj = #{neartj} </if>
             <if test="tg != null and tg != ''"> and s.tg = #{tg} </if>
 
+
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(p.company_id,#{companyId})</if>
         </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                group by s.danju_number,s.sale_number   order by s.id desc
+            </otherwise>
+        </choose>
+        ) aia
     </select>
 
     <insert id="save" parameterType="com.shiguang.stock.domain.WeiwaiDO" useGeneratedKeys="true" keyProperty="id">

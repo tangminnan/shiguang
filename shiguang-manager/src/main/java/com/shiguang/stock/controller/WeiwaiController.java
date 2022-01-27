@@ -748,6 +748,7 @@ public class WeiwaiController {
                 String eyeStyle = weiwaiDO.getEyeStyle();
 //                String saleNumber = weiwaiDO.getSaleNumber();
                 LogStatusDO logStatusDO = new LogStatusDO();
+                List<LogStatusDO> statusDOList=new ArrayList<>();
                 if ("3".equals(eyeStyle)) {
                     String yaoqiu = weiwaiDO.getYaoqiu();
                     Integer flag = yaoqiu.indexOf("委外代加工");
@@ -758,7 +759,14 @@ public class WeiwaiController {
                         workRecoedDO.setUserName(psname);
                         workRecoedDO.setType("配送");
                         workRecoedDO.setDateTime(new Date());
-                        statusService.saveRecord(workRecoedDO);
+
+                        Map<String,Object> statusmap=new HashMap<>();
+                        statusmap.put("saleNumber",saleNumber);
+                        statusmap.put("logisticStatus","配送");
+                         statusDOList=statusService.list(statusmap);
+                        if (statusDOList.size()==0){
+                            statusService.saveRecord(workRecoedDO);
+                        }
                         //减库存
                         String num = weiwaiDO.getNum();
                         String code = weiwaiDO.getCode();
@@ -809,23 +817,32 @@ public class WeiwaiController {
                         workRecoedDO.setUserName(psname);
                         workRecoedDO.setType("委外完成");
                         workRecoedDO.setDateTime(new Date());
-                        statusService.saveRecord(workRecoedDO);
+
+                        Map<String,Object> statusmap=new HashMap<>();
+                        statusmap.put("saleNumber",saleNumber);
+                        statusmap.put("logisticStatus","委外完成");
+                          statusDOList=statusService.list(statusmap);
+                        if (statusDOList.size()==0) {
+                            statusService.saveRecord(workRecoedDO);
+                        }
                     }
                 }
-                if (statusService.save(logStatusDO) > 0) {
-                    WeiwaiDO weiwaiDO1 = new WeiwaiDO();
-                    weiwaiDO1.setDanjuNumber(danjuNumber);
-                    weiwaiDO1.setSaleNumber(saleNumber);
-                    weiwaiDO1.setShstatus(shstatus);
-                    weiwaiDO1.setPsname(psname);
-                    //———获取当前系统时间—————
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
-                    Date date = new Date();
-                    String newDate = sdf.format(date);
-                    weiwaiDO1.setPstime(newDate);
-                    weiwaiService.updateStatus(weiwaiDO1);
-
+                if (statusDOList.size()==0){
+                    if (statusService.save(logStatusDO) > 0) {
+                        WeiwaiDO weiwaiDO1 = new WeiwaiDO();
+                        weiwaiDO1.setDanjuNumber(danjuNumber);
+                        weiwaiDO1.setSaleNumber(saleNumber);
+                        weiwaiDO1.setShstatus(shstatus);
+                        weiwaiDO1.setPsname(psname);
+                        //———获取当前系统时间—————
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                        Date date = new Date();
+                        String newDate = sdf.format(date);
+                        weiwaiDO1.setPstime(newDate);
+                        weiwaiService.updateStatus(weiwaiDO1);
+                    }
                 }
+
             }
         }
         return R.ok();
