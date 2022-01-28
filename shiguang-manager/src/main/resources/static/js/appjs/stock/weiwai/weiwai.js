@@ -460,6 +460,28 @@ function out(){
         layer.msg("选择要导出的数据");
         return;
     }
+
+
+    var ids = new Array();
+    var mfrsid = new Array();
+    var danjuNumbers = new Array();
+    // 遍历所有选择的行数据，取每条数据对应的ID
+    $.each(rows, function(i, row) {
+        ids[i] = row['id'];
+        danjuNumbers[i] = row['danjuNumber'];
+        mfrsid[i]=row['mfrsid'];
+        mfrsids=mfrsid[0];
+        mfrsnames=row['mfrsname'];
+    });
+    for (var i=0;i<mfrsid.length;i++){
+        // alert(mfrsids);
+        // alert(mfrsid[i]);
+        if (mfrsids!=mfrsid[i]){
+            return layer.alert("请选择同一个制造商！");
+        }
+    }
+
+
     // var danjuNumbers=[];
     // var saleNumbers=[];
 	var arrys=[];

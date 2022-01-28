@@ -3,6 +3,7 @@ package com.shiguang.stock.service.impl;
 import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.common.config.BootdoConfig;
 import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.product.domain.JpdzDO;
 import com.shiguang.storeSales.domain.SalesDO;
 import freemarker.template.Configuration;
@@ -119,6 +120,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 	public List<WeiwaiDO> weiwaiOrderOut(String[] arrys) {
 		return weiwaiDao.weiwaiOrderOut(arrys);
 	}
+
 
 	public Map<String, Object>  weiwaiOutList(@Param("arrys") String[] arrys, HttpServletRequest request, HttpServletResponse response) {
 		List<WeiwaiDO> weiwaiDOList = weiwaiOrderOut(arrys);
@@ -319,19 +321,26 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 		Map<String, Object> outList = new HashMap();
 		outList.put("arry",arry);
 
+		String companyIdNow=ShiroUtils.getUser().getCompanyId();
+		Map<String,Object> mapxinxi=new HashMap<>();
+		mapxinxi.put("companyid",companyIdNow);
+		mapxinxi.put("positionOrder", 2);
+		DepartmentDO departmentDO = phoneOrAddres(mapxinxi);
+
 		List<Map<String, Object>> xinxi = new ArrayList<>();
-		for (int i=0;i<1;i++){
-			Map<String,Object> xinximap=new HashMap<>();
-			String day= (String) allList.get(i).get("danjuDay");
-			String zhidanPeople= (String) allList.get(i).get("zhidanPeople");
-			String shouhuoPhone= (String) allList.get(i).get("shouhuoPhone");
-			String shouhuoAddress= (String) allList.get(i).get("shouhuoAddress");
-			xinximap.put("day",day);
-			xinximap.put("zhidanPeople",zhidanPeople);
-			xinximap.put("shouhuoPhone",shouhuoPhone);
-			xinximap.put("shouhuoAddress",shouhuoAddress);
-			xinxi.add(i,xinximap);
-		}
+		Map<String,Object> xinximap=new HashMap<>();
+		String zhidanPeople=ShiroUtils.getUser().getName();
+		String shouhuoAddress=departmentDO.getDepartAddress();
+		String shouhuoPhone=departmentDO.getDepartTel();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+		Date date = new Date();
+		String day = sdf.format(date);
+		xinximap.put("day",day);
+		xinximap.put("zhidanPeople",zhidanPeople);
+		xinximap.put("shouhuoPhone",shouhuoPhone);
+		xinximap.put("shouhuoAddress",shouhuoAddress);
+		xinxi.add(0,xinximap);
 		outList.put("xinxi",xinxi);
 		return outList;
 	}

@@ -695,7 +695,7 @@
         <Cell ss:StyleID="s62"/>
         <Cell ss:StyleID="s63"/>
         <Cell ss:StyleID="s88" ss:MergeAcross="11">
-          <Data ss:Type="String">备注： </Data>
+          <Data ss:Type="String">备注：请发顺丰！！！ </Data>
         </Cell>
         <Cell ss:StyleID="s89" ss:MergeAcross="2">
           <Data ss:Type="String">合 计：</Data>
@@ -827,7 +827,7 @@
               <Data ss:Type="String">打印日期：</Data>
           </Cell>
           <Cell ss:StyleID="s101" ss:MergeAcross="2">
-              <Data ss:Type="Number">44582</Data>
+              <Data ss:Type="String">${xinxis.day!''}</Data>
           </Cell>
           <Cell ss:StyleID="s53"/>
           <Cell ss:StyleID="s53"/>

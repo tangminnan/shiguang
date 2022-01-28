@@ -1403,6 +1403,7 @@
         #{arrys}
         </foreach>
     </select>
+
     <!--<select id="weiwaiOrderOut" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
         <!--SELECT * FROM stock_weiwai WHERE CONCAT(danju_number,sale_number) IN  #{arrys}-->
     <!--</select>-->
