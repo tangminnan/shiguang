@@ -2194,7 +2194,8 @@
         <!--</where>-->
     <!--</select>-->
     <select id="countall" resultType="int">
-        SELECT sum(s.goods_count) from stock s
+        SELECT ifnull(sum(s.goods_count),0)  from stock s
+
         join c_position p on s.position_id=p.position_id
         join c_mfrs m on s.mfrsid=m.mfrsnum
         <where>
@@ -2230,7 +2231,7 @@
         LEFT JOIN c_goods g ON s.goods_type = g.goodsid
         LEFT JOIN c_mfrs m ON s.mfrsid = m.mfrsnum
         LEFT JOIN c_position po ON s.position_id = po.position_id
-        LEFT JOIN c_brand b ON s.brandname = b.brandname AND s.`mfrsid` = b.`mfrsid`
+        LEFT JOIN c_brand b ON s.brandname = b.brandname AND s.`mfrsid` = b.`mfrsid` and s.goods_type=m.goodsid
         LEFT JOIN department d ON po.depart_number = d.depart_number  and po.company_id=d.company_id
         LEFT JOIN aa_produca jj ON jj.produc_num = s.goods_num
         LEFT JOIN aa_jpcp jpcp ON jpcp.produc_num = s.goods_num
