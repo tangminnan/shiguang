@@ -93,7 +93,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-             group by s.danju_number,s.sale_number   order by s.id desc
+             group by s.danju_number,s.sale_number   order by s.status desc ,s.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -173,7 +173,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                group by s.danju_number,s.sale_number   order by s.id desc
+                group by s.danju_number,s.sale_number   order by s.status desc ,s.id desc
             </otherwise>
         </choose>
         ) aia
