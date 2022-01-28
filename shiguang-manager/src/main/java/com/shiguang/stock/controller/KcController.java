@@ -95,7 +95,7 @@ public class KcController {
         if (null != ShiroUtils.getUser().getCompanyId()){
             query.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
-        query.put("status", "0");
+//        query.put("status", "0");
         // 钱转换
         if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
             retailPrice = Double.parseDouble(params.get("retailPrice").toString());
@@ -156,7 +156,7 @@ public class KcController {
 
 
 
-//    //库存数量
+    //库存数量
     @ResponseBody
     @GetMapping("/countall")
     public Integer countall(
@@ -181,14 +181,21 @@ public class KcController {
         map.put("goodsType",goodsType);
         map.put("mfrsname",mfrsname);
         map.put("brandname",brandname);
-        map.put("kccount",kccount);
+        if (kccount.equals("0")){
+            map.put("kccount0",kccount);
+        }else if (kccount.equals("1")){
+            map.put("kccount1","0");
+        }
+
         map.put("retailPrice",retailPrice);
         map.put("retailPrice2",retailPrice2);
         map.put("xsstate",xsstate);
         map.put("classtype",classtype);
+
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        map.put("companyId",companyId);
         int countalls=stockService.countall(map);
         model.addAttribute("countalls",countalls);
-//        int countall=Integer.valueOf(countalls);
         return countalls;
     }
 
