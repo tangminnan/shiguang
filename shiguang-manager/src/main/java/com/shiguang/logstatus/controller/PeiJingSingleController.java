@@ -82,7 +82,11 @@ public class PeiJingSingleController {
                 } else {
                     salesDO.setLogStatus("委外配送");
                 }
-
+            }
+            if ("1".equals(salesDO.getSaleType())){
+                salesDO.setSaleType("已缴费");
+            }else if ("3".equals(salesDO.getSaleType())){
+                salesDO.setSaleType("已退款");
             }
         }
         int total = statusService.findSalePeijingCount(query);

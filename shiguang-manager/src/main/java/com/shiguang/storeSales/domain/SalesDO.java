@@ -385,6 +385,8 @@ public class SalesDO implements Serializable {
 	private String rightzhouxiangsg;
 	//渐近/双光三棱镜OD
 	private String rightsanlingjingsg;
+	//渐近/双光ADD
+	private String rightaddsg;
 	//渐近/双光基地OD
 	private String rightjidisg;
 	//渐近/双光远用瞳距OD
@@ -405,6 +407,8 @@ public class SalesDO implements Serializable {
 	private String leftzhouxiangsg;
 	//渐近/双光三棱镜OS
 	private String leftsanlingjingsg;
+	//渐近/双光ADD
+	private String leftaddsg;
 	//渐近/双光基地OS
 	private String leftjidisg;
 	//渐近/双光远用瞳距OD

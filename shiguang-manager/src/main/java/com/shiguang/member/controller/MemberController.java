@@ -534,7 +534,7 @@ public class MemberController {
                     conclusion.setRighttg(sgjjDOList.get(0).getSgjjTgod());
                     conclusion.setRightprism("");
                     conclusion.setRightjd("");
-                    conclusion.setRightAdd("");
+                    conclusion.setRightAdd(sgjjDOList.get(0).getSgjjAddod());
                     conclusion.setLeftsph(sgjjDOList.get(0).getSgjjSphos());
                     conclusion.setLeftcyl(sgjjDOList.get(0).getSgjjCylos());
                     conclusion.setLeftzx(sgjjDOList.get(0).getSgjjAxialos());
@@ -551,7 +551,7 @@ public class MemberController {
                     conclusion.setLefttg(sgjjDOList.get(0).getSgjjTgos());
                     conclusion.setLeftprism("");
                     conclusion.setLeftjd("");
-                    conclusion.setLeftAdd("");
+                    conclusion.setLeftAdd(sgjjDOList.get(0).getSgjjAddos());
                     if (null != sgjjDOList.get(0).getSgjjJyvaod()){
                         conclusion.setRightjyva(sgjjDOList.get(0).getSgjjJyvaod());
                     } else {
@@ -730,6 +730,7 @@ public class MemberController {
                     conclusion.setRightjytj("");
                 }
                 conclusion.setRighttg(conclusionList.get(0).getRighttg());
+                conclusion.setRightAdd(conclusionList.get(0).getRightAdd());
                 conclusion.setRightprism(conclusionList.get(0).getRightprism());
                 conclusion.setRightjd(conclusionList.get(0).getRightjd());
                 conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
@@ -760,6 +761,7 @@ public class MemberController {
                     conclusion.setLeftjytj("");
                 }
                 conclusion.setLefttg(conclusionList.get(0).getLefttg());
+                conclusion.setLeftAdd(conclusionList.get(0).getLeftAdd());
                 conclusion.setLeftprism(conclusionList.get(0).getLeftprism());
                 conclusion.setLeftjd(conclusionList.get(0).getLeftjd());
             }

@@ -386,6 +386,7 @@
 				<td>球镜</td>
 				<td>柱镜</td>
 				<td>轴向</td>
+				<td>Add</td>
 				<td>三棱镜</td>
 				<td>基地</td>
 				<td>远用瞳距（mm）</td>
@@ -399,6 +400,7 @@
 				<td><input type="text" id="rightJianJinsgQJ" name="rightQJsg" onchange="getJianjsgBs()"/></td>
 				<td><input type="text" id="rightJianJinsgZJ" name="rightZJsg" onchange="getJianjsgBs()"/></td>
 				<td><input type="text" id="rightSGzhouxiang" name="rightzhouxiangsg" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" id="rightSGadd" name="rightaddsg"/></td>
 				<td><input type="text" id="rightSGslj" name="rightsanlingjingsg"/></td>
 				<td>
 					<select id="rightSGjidi" name="rightjidisg">
@@ -420,6 +422,7 @@
 				<td><input type="text" value=" " id="leftJianJinsgQJ" name="leftQJsg" onchange="getJianjsgBs()"/></td>
 				<td><input type="text" value=" " id="leftJianJinsgZJ" name="leftZJsg" onchange="getJianjsgBs()"/></td>
 				<td><input type="text" value=" " id="leftSGzhouxiang" name="leftzhouxiangsg" onblur="zhouxiang(this)" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/></td>
+				<td><input type="text" value=" " id="leftSGadd" name="leftaddsg"/></td>
 				<td><input type="text" value=" " id="leftSGslj" name="leftsanlingjingsg"/></td>
 				<td>
 					<select id="leftSGjidi" name="leftjidisg">
@@ -437,13 +440,13 @@
 				<td><input type="text" value=" " id="leftSGjinyongVA" name="leftjinyongVAsg"/></td>
 			</tr>
 			<tr class="Light_yellow aling_left">
-				<td colspan="3">建议镜片材质：</td>
-				<td colspan="3">处理方式：</td>
-				<td colspan="5">建议镜框：</td>
+				<td colspan="4">建议镜片材质：</td>
+				<td colspan="4">处理方式：</td>
+				<td colspan="6">建议镜框：</td>
 			</tr>
 			<tr>
 				<td class="Light_yellow">备注：</td>
-				<td colspan="10"><input class="aling_left" id="shuangguangRemark" name="remark" type="text" /></td>
+				<td colspan="11"><input class="aling_left" id="shuangguangRemark" name="remark" type="text" /></td>
 			</tr>
 			<tr class="Light_yellow">
 				<td> </td>
@@ -454,7 +457,7 @@
 				<td>镜片通道(mm)</td>
 				<td>对角线(mm)</td>
 				<td>框型</td>
-				<td colspan="3">直径(mm)</td>
+				<td colspan="4">直径(mm)</td>
 			</tr>
 			<tr>
 				<td class="Light_yellow">手动填写</td>
@@ -465,7 +468,7 @@
 				<td><input type="text" value=" " id="jptd" name="jingpiantongdao"/></td>
 				<td><input type="text" value=" " id="sgduijiaoxian" name="duijiaoxian"/></td>
 				<td><input type="text" value=" " id="sgkuangxing" name="kuangxing"/></td>
-				<td colspan="3"><input type="text" value=" " id="sgzhijing" name="zhijing"/></td>
+				<td colspan="4"><input type="text" value=" " id="sgzhijing" name="zhijing"/></td>
 			</tr>
 			</tbody>
 		</table>
@@ -2633,7 +2636,9 @@
             document.getElementById("rightJianJinsgZJ").readOnly=true;
             $("#rightSGzhouxiang").val(data.rightzx);
             document.getElementById("rightSGzhouxiang").readOnly=true;
-            $("#rightSGslj").val(data.rightprism);
+			$("#rightSGslj").val(data.rightprism);
+            //$("#rightSGslj").val("");
+            $("#rightSGadd").val(data.rightAdd);
             // if (data.rightprism != ''){
             //     document.getElementById("rightSGslj").readOnly=true;
             // }
@@ -2666,6 +2671,8 @@
             $("#leftSGzhouxiang").val(data.leftzx);
             document.getElementById("leftSGzhouxiang").readOnly=true;
             $("#leftSGslj").val(data.leftprism);
+            //$("#leftSGslj").val("");
+            $("#leftSGadd").val(data.leftAdd);
             // if (data.leftprism != ''){
             //     document.getElementById("leftSGslj").readOnly=true;
             // }
