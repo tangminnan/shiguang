@@ -4,8 +4,11 @@ import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.MfrsDO;
 import com.shiguang.product.domain.ProducaDO;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -52,4 +55,6 @@ public interface ProducaService {
     R importStock( String goodsType,String mfrsid,String brandnum,String brandname,Integer unitid,String year,String tax,String taxPrice,
                    String tradePrice,String transferPrice,String classtype,
                    Long xsstate,Long state,MultipartFile file);
+
+    void jjOut( HttpServletRequest request, HttpServletResponse response);
 }

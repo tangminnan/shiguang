@@ -239,7 +239,7 @@
     <div class="new_h4 fl">商品信息维护</div>
     <div class="Xbtn HspxxBtn fr">
         <a href="/upload/template/镜架批量导入.xlsx"><input type="button" value="批量导入模板下载"/></a>
-        <input type="button" value="导出商品"/>
+        <input name="jjOut" type="button" value="导出商品" onclick="out()"/>
         <input shiro:hasPermission="product:produca:add" onclick="add()" type="button" value="镜架类新增"/>
         <input shiro:hasPermission="product:produca:add" onclick="addall()" type="button" value="镜架类批量新增"/>
         <input type="button" value="显隐查询条件" hidden/>
@@ -454,6 +454,45 @@ function choiceBrand() {
             }
         }
     }
+
+    $("body").on("click","input[name=jjOut]",function(){
+        var x;
+        var r=confirm("导出商品信息时，请不要做任何操作！");
+        if (r==true){
+            x="确定";
+        }
+        else{
+            x="取消";
+        }
+        if(x=="确定"){
+            window.location.href="/product/produca/out";
+        }
+
+    });
+
+    // function out(){
+    //     layer.confirm('导出商品信息时，请不要做任何操作！', {
+    //         btn: ['确定', '取消']
+    //     }, function () {
+    //         $.ajax({
+    //             url: prefix + "/out",
+    //             type: "post",
+    //             data: {
+    //
+    //             },
+    //             success: function (r) {
+    //                 if (r.code == 0) {
+    //                     layer.msg(r.msg);
+    //                     reLoad();
+    //                 } else {
+    //                     layer.msg(r.msg);
+    //                 }
+    //             }
+    //         });
+    //     });
+    //     // window.location.href="/product/produca/out";
+    // }
+
 </script>
 </body>
 </html>

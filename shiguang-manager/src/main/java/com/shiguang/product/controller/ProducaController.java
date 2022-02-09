@@ -21,6 +21,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -339,5 +342,15 @@ ProducaController {
                          String tradePrice,String transferPrice,String classtype,Long xsstate,Long state,
                          MultipartFile file) {
         return producaService.importStock(goodsType,mfrsid,brandnum,brandname,unitid,year,tax,taxPrice,tradePrice,transferPrice,classtype,xsstate,state, file);
+    }
+
+    /**
+     * 导出
+     *
+     * @throws IOException
+     */
+    @GetMapping("/out")
+    public void out(  HttpServletRequest request, HttpServletResponse response) throws IOException {
+        producaService.jjOut(request, response);
     }
 }
