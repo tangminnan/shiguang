@@ -1,8 +1,10 @@
 package com.shiguang.product.service;
 
+import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.MfrsDO;
 import com.shiguang.product.domain.ProducaDO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -46,4 +48,8 @@ public interface ProducaService {
 
     ProducaDO getJJInfomation(String goodNum);
 
+    //采购批量导入
+    R importStock( String goodsType,String mfrsid,String brandnum,String brandname,Integer unitid,String year,String tax,String taxPrice,
+                   String tradePrice,String transferPrice,String classtype,
+                   Long xsstate,Long state,MultipartFile file);
 }

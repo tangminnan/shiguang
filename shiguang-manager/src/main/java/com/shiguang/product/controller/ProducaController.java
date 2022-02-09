@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -319,5 +320,24 @@ ProducaController {
 
     }
 
+    @GetMapping("/addall")
+    @RequiresPermissions("product:produca:add")
+    String addall(Model model) {
+        Map<String, Object> map = new HashMap<>();
+        //计量单位
+        List<UnitDO> unitDOList = unitService.list(map);
+        model.addAttribute("unitDOList", unitDOList);
+        return "product/produca/addall";
+    }
 
+    /**
+     * 导入
+     */
+    @PostMapping("/importStock")
+    @ResponseBody
+    public R importStock(String goodsType,String mfrsid,String brandnum,String brandname,Integer unitid,String year,String tax,String taxPrice,
+                         String tradePrice,String transferPrice,String classtype,Long xsstate,Long state,
+                         MultipartFile file) {
+        return producaService.importStock(goodsType,mfrsid,brandnum,brandname,unitid,year,tax,taxPrice,tradePrice,transferPrice,classtype,xsstate,state, file);
+    }
 }

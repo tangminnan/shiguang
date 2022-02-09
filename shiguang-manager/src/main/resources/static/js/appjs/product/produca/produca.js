@@ -236,6 +236,17 @@ function add() {
     });
     layer.full(toIndex);
 }
+function addall() {
+    var toIndex = layer.open({
+        type: 2,
+        title: '增加',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '520px'],
+        content: prefix + '/addall' // iframe的url
+    });
+    layer.full(toIndex);
+}
 
 function edit(id) {
     var toIndex = layer.open({
