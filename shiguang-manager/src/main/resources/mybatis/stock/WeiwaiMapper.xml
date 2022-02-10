@@ -87,6 +87,8 @@
 
 
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(p.company_id,#{companyId})</if>
+            <if test="day1 !=null and day1 != ''"> and date_format(s.danju_day ,'%Y-%m-%d' ) >= (#{day1})</if>
+            <if test="day2 !=null and day2 != ''"> and date_format(s.danju_day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -167,6 +169,8 @@
 
 
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(p.company_id,#{companyId})</if>
+            <if test="day1 !=null and day1 != ''"> and date_format(s.danju_day ,'%Y-%m-%d' ) >= (#{day1})</if>
+            <if test="day2 !=null and day2 != ''"> and date_format(s.danju_day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

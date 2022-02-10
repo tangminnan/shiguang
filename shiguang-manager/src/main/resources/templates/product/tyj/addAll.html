@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>镜架 批量新增</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
+
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+    <div class="new_h3">镜架批量新增</div>
+    <!--必填项-->
+    <div class="m40 tabS PHGL">
+        <h3>必填项</h3>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+
+                <td>制造商：</td>
+                <td>
+                    <input id="goodsType" name="goodsType" type="hidden" value="1"/>
+                    <input id="mfrsid" name="mfrsid" type="hidden" readonly/>
+                    <input id="mfrsname" name="mfrsname" type="text" readonly/>
+                    <input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
+                </td>
+                <td>商品品种：</td>
+                <td>
+                    <input id="brandnum" name="brandnum" type="hidden" value=""/>
+                    <input id="brandname" name="brandname" type="text" readonly style="background-color: #e4e4e4" />
+                    <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
+                </td>
+                <td>计量单位：</td>
+                <td>
+                    <select id="unitid" name="unitid">
+                        <option value="">请选择</option>
+                        <option th:each="ls:${unitDOList}" th:text="${ls.unitname}" th:value="${ls.unitid}">
+                        </option>
+                    </select>
+                    <em>*</em>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--非必填项2-->
+    <div class="m40 tabS PHGL">
+        <h3>非必填项</h3>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td style="width: 7.5%;">采购年份：</td>
+                <td>
+                    <input id="year" name="year" type="text" style="width: 25%"/><em>（年份后两位+两位月份)</em>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td style="width: 7.5%;">文件路径：</td>
+                <td>
+                    <input id="fileName" name="file"  type="file" style="color:#3B87D7;">
+                    <p style="color:red;">*文件格式为.xlsx；请确保导入数据的正确性，以保证库存的正确！</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    
+
+    <!--保存/清空-->
+    <div class="BQ-btn">
+        <!--未删除-->
+        <input id="tax" name="tax" value="17" type="hidden">
+        <input id="taxPrice" name="taxPrice" value="0.00" type="hidden">
+        <input id="tradePrice" name="tradePrice" value="0.00" type="hidden">
+        <input id="transferPrice" name="transferPrice" value="0.00" type="hidden">
+        <input id="classtype" name="classtype" value="1" type="hidden">
+        <input id="xsstate" name="xsstate" value="0" type="hidden">
+        <input id="state" name="state" value="1" type="hidden">
+        <input type="button" value="保存" onclick="saveAll()"/>
+        <dl>
+            <dt>镜架批量新增文档说明：</dt>
+            <dd> 厂家型号:小于等于20位<br/>
+                型号:小于等于9位（包括0-9、A-Z、a-z等字符<br/>
+                厂家色号:小于等于20位<br/>
+                色号:小于等于4位（包括0-9、A-Z、a-z等字符<br/>
+                材质、颜色、款式:所录内容必须在系统中提前录入<br/>
+                镜架尺寸:必须为数字类型<br/>
+                相应价格:必须为数字类型。
+            </dd>
+        </dl>
+    </div>
+</form>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    <!--选择制造商-->
+    function choiceMfrs() {
+        var goodsid = document.getElementById('goodsType').value;
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findmfrs/" + goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsname").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsnum);
+
+                    }
+                }
+            });
+            layer.full(toIndex);
+    }
+    function choiceBrand() {
+        var goodsid = document.getElementById('goodsType').value;
+        var mfrsname = document.getElementById('mfrsname').value;
+        if (mfrsname == "") {
+            layer.alert("请选择制造商！");
+        } else {
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品品种',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/kucun/stock/findbrand/" + mfrsname + "/" + goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#brandname").val(rows[i].brandname);
+                        $("#brandnum").val(rows[i].brandnum);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+    function saveAll() {
+        var mfrsid= $("#mfrsid").val();
+        var brandnum= $("#brandnum").val();
+        var unitid= $("#unitid").val();
+        if (mfrsid=="" || mfrsid==null){
+            layer.alert("请选择制造商！");
+        }else if(brandnum=="" || brandnum==null){
+            layer.alert("请选择商品品种！");
+        }else if(unitid=="" || unitid==null){
+            layer.alert("请选择计量单位！");
+        }else {
+            var formData = new FormData(document.getElementById("signupForm"));
+            $.ajax({
+                cache : true,
+                type : "POST",
+                url : "/product/produca/importStock",
+                data : formData,// 你的formid
+                processData:false,
+                contentType:false,
+                async : false,
+                error : function(request) {
+                    parent.layer.alert("网络超时");
+                },
+                success : function(data) {
+                    if (data.code == 0) {
+                        parent.layer.alert(data.msg);
+                        parent.reLoad();
+                        var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                        parent.layer.close(index);
+
+                    } else {
+                        parent.layer.alert(data.msg)
+                    }
+
+                }
+            });
+        }
+
+    }
+
+</script>
+
+</body>
+
+</html>

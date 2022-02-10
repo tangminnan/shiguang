@@ -39,7 +39,8 @@ function load() {
                                 hyknum:$('#hyknum').val(),
                                 phone:$('#phone').val(),
                                 mfrsname:$('#mfrsname').val(),
-					           // name:$('#searchName').val(),
+                                day1:$('#day1').val(),
+                                day2:$('#day2').val()
 					           // username:$('#searchName').val()
 							};
 						},
