@@ -217,7 +217,8 @@
 			`crt_cylod`,
 			`crt_cylos`,
 			`crt_axialod`,
-			`crt_axialos`
+			`crt_axialos`,
+			`create_time`
 		)
 		values
 		(
@@ -255,7 +256,8 @@
 			#{crtCylod},
 			#{crtCylos},
 			#{crtAxialod},
-			#{crtAxialos}
+			#{crtAxialos},
+			#{createTime}
 		)
 	</insert>
 	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.CrtDO">

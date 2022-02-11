@@ -182,7 +182,8 @@
 			`zy_text`,
 			`zy_beizhu`,
 			`ptometry_number`,
-			`status`
+			`status`,
+			`create_time`
 		)
 		values
 		(
@@ -213,7 +214,8 @@
 			#{zyText},
 			#{zyBeizhu},
 			#{ptometryNumber},
-			#{status}
+			#{status},
+			#{createTime}
 		)
 	</insert>
 	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.ZyDO">

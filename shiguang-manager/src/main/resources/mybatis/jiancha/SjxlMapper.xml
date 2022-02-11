@@ -206,7 +206,8 @@
 			`sjxl_xlsxl`,
 			`sjxl_beizhu`,
 			`ptometry_number`,
-			`status`
+			`status`,
+			`create_time`
 		)
 		values
 		(
@@ -239,7 +240,8 @@
 			#{sjxlXlsxl},
 			#{sjxlBeizhu},
 			#{ptometryNumber},
-			#{status}
+			#{status},
+			#{createTime}
 		)
 	</insert>
     <select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.SjxlDO">

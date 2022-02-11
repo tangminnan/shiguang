@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<input  id="company" th:value="${companyId}" type="hidden">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left" style="display:flex; margin-top:20px;">
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+							<div class="columns pull-right col-md-4.5 nopadding">
+								<input id="settleDateStart" type="text"
+									   placeholder="开始日期">～
+								<input id="settleDateEnd" type="text"
+									   placeholder="结束日期">
+							</div>
+							<div id="tab1" style="display: none" class="columns pull-right col-md-1.5 nopadding ">
+								<select  id="companyIds" name="companyIds"  data-actions-box="false"
+										data-size="5" style="width: 200px;height: 40px;">
+									<option value="">所属公司</option>
+									<option th:each="ls:${companyList}"
+											th:text="${ls.name}"
+											th:value="${ls.id}"></option>
+
+								</select>
+							</div>
+							<div id="tab2" style="display: none"  class="columns pull-right col-md-1.5 nopadding ">
+								<textarea id="departments" name="departments" readonly placeholder="请选择部门"></textarea>
+							</div>
+							<div id="tab3" style="display: none;margin-top: 10px;">
+								<input type="button" class="XZ-btn" value="选择部门" onclick="choiceDepartment()"/>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div th:include="include :: footer"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var company = $("#company").val();
+        if (company=="") {
+            tab1.style="display: block";
+            tab2.style="display: block";
+            tab3.style="display: block;margin-top: 10px;";
+        }else if (company!="") {
+            tab1.style="display: none";
+            tab2.style="display: none";
+            tab3.style="display: none";
+        }
+
+    });
+    laydate.render({
+        elem: '#settleDateStart',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
+    laydate.render({
+        elem: '#settleDateEnd',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
+    function choiceDepartment() {
+        var companyId;
+        var company = $("#company").val();
+        var companyIds = $("#companyIds").val();
+        if(company==""){
+            if(companyIds==""){
+                companyId=0;
+            }else  if(companyIds!=""){
+                companyId=companyIds;
+            }
+        }else if(company!=""){
+            companyId=company;
+        }
+        var toIndex = layer.open({
+            type: 2,
+            title: '销售门店',
+            maxmin: true,
+            shadeClose: false, // 点击遮罩关闭层
+            area: ['800px', '520px'],
+            content: "/information/saleYanguang/findcompany/" + companyId,// iframe的url
+            cancel: function (index, layero) {
+                var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                var array="";
+                for (var i = 0; i < rows.length; i++) {
+                    array+=rows[i].departName+",";
+                }
+                $("#departments").val(array);
+            }
+        });
+        layer.full(toIndex);
+    }
+
+
+    function reLoad() {
+
+        var companyId;
+        var company = $("#company").val();
+        var companyIds = $("#companyIds").val();
+        if(company==""){
+          if(companyIds==""){
+              companyId=0;
+		  }else  if(companyIds!=""){
+                companyId=companyIds;
+			}
+        }else if(company!=""){
+            companyId=company;
+        }
+
+
+        var settleDateStart = $("#settleDateStart").val();
+        var settleDateEnd = $("#settleDateEnd").val();
+        var departments = $("#departments").val();
+        if(departments=="" || departments==undefined){
+            departments="";
+        }else {
+            departments=departments;
+        }
+        window.open("/information/saleDoctor/findall/?companyId=" + companyId + "&settleDateStart=" + settleDateStart
+            + "&settleDateEnd=" + settleDateEnd+ "&departments=" + departments);
+
+    }
+</script>
+</body>
+</html>

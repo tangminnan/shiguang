@@ -177,7 +177,8 @@
 			`rgp_cylod`,
 			`rgp_cylos`,
 			`rgp_axialod`,
-			`rgp_axialos`
+			`rgp_axialos`,
+			`create_time`
 		)
 		values
 		(
@@ -207,7 +208,8 @@
 			#{rgpCylod},
 			#{rgpCylos},
 			#{rgpAxialod},
-			#{rgpAxialos}
+			#{rgpAxialos},
+			#{createTime}
 		)
 	</insert>
 	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.RgpDO">

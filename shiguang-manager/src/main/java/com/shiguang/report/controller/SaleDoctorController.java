@@ -8,10 +8,8 @@ import com.shiguang.mfrs.service.CompanyService;
 import com.shiguang.mfrs.service.GoodsService;
 import com.shiguang.product.domain.*;
 import com.shiguang.report.service.SaleReportService;
-
 import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
-@RequestMapping("/information/saleYanguang")
-public class SaleYanguangController {
+@RequestMapping("/information/saleDoctor")
+public class SaleDoctorController {
     @Autowired
     private SaleReportService saleReportService;
     @Autowired
@@ -36,36 +34,21 @@ public class SaleYanguangController {
     private GoodsService goodsService;
 
     @GetMapping()
-    @RequiresPermissions("information:saleYanguang:saleYanguang")
-    String saleYanguang(Model model) {
+    @RequiresPermissions("information:saleDoctor:saleDoctor")
+    String saleDoctor(Model model) {
         Map<String, Object> map = new HashMap<>();
         List<CompanyDO> companyList = companyService.list(map);
-//        String[] companyName = new String[companyList.size()];
-//        String companyName = "";
-//        String companyIds = "";
-//        int i = 0;
-//        for (CompanyDO gs1 : companyList) {
-//            String gsname=gs1.getName();
-//            Integer gsid=gs1.getId();
-////            companyDO.setName(gsname);
-////            companyName[i++]=String.valueOf(gsname);
-//            companyName =String.valueOf(companyName)+","+String.valueOf(gsname);
-//            companyIds =String.valueOf(companyIds)+","+String.valueOf(gsid);
-//        }
         model.addAttribute("companyList", companyList);
-//        model.addAttribute("companyName", companyName);
-//        model.addAttribute("companyIds", companyIds);
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
         //———获取当前登录用户的公司id————
         String companyId = ShiroUtils.getUser().getCompanyId();
         model.addAttribute("companyId", companyId);
-        return "saleReport/saleYanguang";
+        return "saleReport/saleDoctor";
     }
 
     //跳转制造商
     @GetMapping("/findcompany/{companyId}")
-//    @RequiresPermissions("information:saleYanguang:findcompany")
     String findcompany(@PathVariable("companyId") Integer companyId, Model model) {
         if (companyId == 0) {
             model.addAttribute("companyId", "");
@@ -90,24 +73,21 @@ public class SaleYanguangController {
         String[] department = departments.split(",");
         for (int d = 0; d < department.length; d++) {
             map.put("department", department[d]);
-//            验光师
-            List<SalesDO> yanguangPeoples = saleReportService.findYanguangPeople(map);
-            model.addAttribute("yanguangPeoples", yanguangPeoples);
+            List<SalesDO> doctorPeoples = saleReportService.findDoctorPeople(map);
+            model.addAttribute("doctorPeoples", doctorPeoples);
             List<Map<String, Object>> listMoney = new ArrayList<>();
 //            if (null != yanguangPeoples && yanguangPeoples.size() > 0) {
-            for (SalesDO yanguangPeople : yanguangPeoples) {
-                String username = yanguangPeople.getUsername();
+            for (SalesDO doctorPeople : doctorPeoples) {
+                String username = doctorPeople.getUsername();
                 map.put("username", username);
 
-//                数量
-                int ygcount = saleReportService.findYanguangCount(map);
-//                成交数量
-                int usecount = saleReportService.findUseCount(map);
-//                 验光成交金额
-                int amountMoney = saleReportService.findamountMoney(map);
-//                销售金额
+
+                int cfcount = saleReportService.findCfCount(map);
+                //销售金额，价钱，成交
+                int usecount = saleReportService.findCfUseCount(map);
+                int amountMoney = saleReportService.findCfamountMoney(map);
                 double primeMoney;
-                List<SalesDO> Goods = saleReportService.findGoods(map);
+                List<SalesDO> Goods = saleReportService.findDoctorGoods(map);
                 double jjMoney = 0.00;
                 double pjMoney = 0.00;
                 double jpMoney = 0.00;
@@ -258,7 +238,7 @@ public class SaleYanguangController {
                 listmap.put("lhjMoney", new BigDecimal(lhjMoney).setScale(2, RoundingMode.HALF_UP));
                 listmap.put("hcMoney", new BigDecimal(hcMoney).setScale(2, RoundingMode.HALF_UP));
                 listmap.put("sgMoney", new BigDecimal(sgMoney).setScale(2, RoundingMode.HALF_UP));
-                listmap.put("ygcount", new BigDecimal(Integer.valueOf(ygcount)));
+                listmap.put("cfcount", new BigDecimal(Integer.valueOf(cfcount)));
                 listmap.put("usecount", new BigDecimal(Integer.valueOf(usecount)));
                 listmap.put("amountMoney", new BigDecimal(amountMoney).setScale(2, RoundingMode.HALF_UP));
                 listmap.put("primeMoney", new BigDecimal(primeMoney).setScale(2, RoundingMode.HALF_UP));
@@ -277,7 +257,7 @@ public class SaleYanguangController {
         model.addAttribute("settleDateStart", settleDateStart);
         model.addAttribute("settleDateEnd", settleDateEnd);
         model.addAttribute("departments", departments);
-        return "saleReport/saleYanguangForm";
+        return "saleReport/saleDoctorForm";
     }
 
 @GetMapping("/Brand")

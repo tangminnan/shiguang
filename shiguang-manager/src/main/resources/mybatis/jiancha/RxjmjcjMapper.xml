@@ -175,7 +175,8 @@
 			`rx_hlypz`,
 			`rx_beizhu`,
 			`ptometry_number`,
-			`status`
+			`status`,
+			`create_time`,
 		)
 		values
 		(
@@ -203,7 +204,8 @@
 			#{rxHlypz},
 			#{rxBeizhu},
 			#{ptometryNumber},
-			#{status}
+			#{status},
+			#{createTime}
 		)
 	</insert>
     <select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.RxjmjcjDO">

@@ -228,7 +228,8 @@
 			`vst_cylod`,
 			`vst_cylos`,
 			`vst_axialod`,
-			`vst_axialos`
+			`vst_axialos`,
+			`create_time`
 		)
 		values
 		(
@@ -268,7 +269,8 @@
 			#{vstCylod},
 			#{vstCylos},
 			#{vstAxialod},
-			#{vstAxialos}
+			#{vstAxialos},
+			#{createTime}
 		)
 	</insert>
 	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.VstDO">

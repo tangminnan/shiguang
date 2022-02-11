@@ -196,7 +196,8 @@
 			`kjyy_text`,
 			`kjyy_beizhu`,
 			`ptometry_number`,
-			`status`
+			`status`,
+			`create_time`
 		)
 		values
 		(
@@ -227,7 +228,8 @@
 			#{kjyyText},
 			#{kjyyBeizhu},
 			#{ptometryNumber},
-			#{status}
+			#{status},
+			#{createTime}
 		)
 	</insert>
     <select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.KjyyDO">

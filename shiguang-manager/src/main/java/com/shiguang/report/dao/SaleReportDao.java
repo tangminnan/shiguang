@@ -46,4 +46,12 @@ public interface SaleReportDao {
     OldlensDO findlhj(String goodNum);
     HcDO findhc(String goodNum);
     ShiguangDO findsg(String goodNum);
+
+    List<SalesDO> findDoctorPeople(Map<String,Object> map);
+    int findCfCount(Map<String,Object> map);
+    int findCfUseCount(Map<String,Object> map);
+    int findCfamountMoney(Map<String,Object> map);
+    int findCfprimeMoney(Map<String,Object> map);
+    List<SalesDO> findDoctorGoods(Map<String,Object> map);
+
 }
