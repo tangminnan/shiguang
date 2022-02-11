@@ -41,6 +41,40 @@
 							<input id="peijingDateEnd" type="text"
 								   placeholder="结束日期">
 						</div>
+						<div class="columns pull-right nopadding">
+							<input id="mfrsName" type="text"
+								   placeholder="请选择品牌">
+							<input id="mfrsNum" type="hidden">
+							<input type="button" onclick="getMfrsName()" value="按供应商查询" style="background-color: #1c84c6;color: white"></input>
+						</div>
+						<div class="columns pull-right nopadding">
+							<input id="brandName" type="text"
+								   placeholder="请选择品牌">
+							<input type="button" onclick="getBrandName()" value="按品牌查询" style="background-color: #1c84c6;color: white"></input>
+						</div>
+						<div class="columns pull-right nopadding">
+							<select name="storeDescribe" id="storeDescribe" class="form-control" data-actions-box="false"
+									data-size="5">
+								<option value=""></option>
+								<option value="镜架">镜架</option>
+								<option value="配件">配件</option>
+								<option value="镜片">镜片</option>
+								<option value="隐形">隐形</option>
+								<option value="护理液">护理液</option>
+								<option value="太阳镜">太阳镜</option>
+								<option value="老花镜">老花镜</option>
+								<option value="耗材">耗材</option>
+								<option value="视光">视光</option>
+							</select>
+						</div>
+						<div class="columns pull-right nopadding">
+							<input id="factory" type="text" class="form-control"
+								   placeholder="型号">
+						</div>
+						<div class="columns pull-right nopadding">
+							<input id="color" type="text" class="form-control"
+								   placeholder="色号">
+						</div>
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
 					</table>
@@ -85,6 +119,47 @@
         format: 'yyyy-MM-dd',
         type: 'date'
     });
+
+    function getMfrsName () {
+        var toIndex = layer.open({
+            type : 2,
+            title : '镜架',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/peijing/mfrs/",// iframe的url
+            cancel: function(index, layero){
+                var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                //alert(JSON.stringify(rows));
+                if (''!= rows){
+                    $("#mfrsName").val(rows[0].mfrsname);
+                    $("#mfrsNum").val(rows[0].mfrsnum);
+                }
+
+            }
+        });
+        layer.full(toIndex)
+    }
+
+    function getBrandName () {
+        var toIndex = layer.open({
+            type : 2,
+            title : '镜架',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/highmember/brand/",// iframe的url
+            cancel: function(index, layero){
+                var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                //alert(JSON.stringify(rows));
+                if (''!= rows){
+                    $("#brandName").val(rows[0].brandname);
+                }
+
+            }
+        });
+        layer.full(toIndex)
+    }
 </script>
 </body>
 </html>

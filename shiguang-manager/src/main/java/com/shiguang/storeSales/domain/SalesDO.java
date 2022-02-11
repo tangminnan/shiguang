@@ -344,6 +344,17 @@ public class SalesDO implements Serializable {
 		this.mfrsid = mfrsid;
 	}
 
+	//镜架代码
+	private String jjGoodsNum;
+
+	public String getJjGoodsNum() {
+		return jjGoodsNum;
+	}
+
+	public void setJjGoodsNum(String jjGoodsNum) {
+		this.jjGoodsNum = jjGoodsNum;
+	}
+
 	//近用球镜OD
 	private String rightQJjy;
 	//近用柱镜OD

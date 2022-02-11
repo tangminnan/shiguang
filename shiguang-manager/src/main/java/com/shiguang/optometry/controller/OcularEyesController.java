@@ -11,6 +11,7 @@ import com.shiguang.line.service.LineService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.optometry.domain.OcularEyesDO;
+import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.service.OcularEyesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +88,20 @@ public class OcularEyesController {
     }
 
     /**
+     * 读取数据
+     * @param model
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getOcular")
+    OcularEyesDO getOcular(Model model) {
+        OcularEyesDO ocularEyesDO = new OcularEyesDO();
+//        IOMASTERUtil iomasterUtil = new IOMASTERUtil();
+//        iomasterUtil.readFile1();
+        return ocularEyesDO;
+    }
+
+    /**
      * 保存
      */
     @ResponseBody
@@ -94,11 +109,11 @@ public class OcularEyesController {
     @RequiresPermissions("information:ocular:add")
     public R save( OcularEyesDO eyes){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        LineDO lineDO = new LineDO();
-        lineDO.setMemberNumber(eyes.getMemberNumber());
-        lineDO.setLineDate(simpleDateFormat.format(new Date()));
-        lineDO.setCallStatus("4");
-        lineService.updateByMember(lineDO);
+//        LineDO lineDO = new LineDO();
+//        lineDO.setMemberNumber(eyes.getMemberNumber());
+//        lineDO.setLineDate(simpleDateFormat.format(new Date()));
+//        lineDO.setCallStatus("4");
+//        lineService.updateByMember(lineDO);
         if(eyesService.save(eyes)>0){
             return R.ok();
         }

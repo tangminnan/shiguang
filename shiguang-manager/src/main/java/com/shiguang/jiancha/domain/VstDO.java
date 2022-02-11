@@ -1,6 +1,7 @@
 package com.shiguang.jiancha.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -17,6 +18,8 @@ public class VstDO implements Serializable {
     private Long vstId;
     //卡号
     private String cardNumber;
+    //销售编号
+    private String saleNumber;
     //处方类型
     private String vstPrescriptionType;
     //医生
@@ -89,6 +92,30 @@ public class VstDO implements Serializable {
     private String vstAxialod;
     //轴向OS
     private String vstAxialos;
+    //创建时间
+    private Date createTime;
+
+    /**
+     * 设置：创建时间
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
+     * 获取：创建时间
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public String getSaleNumber() {
+        return saleNumber;
+    }
+
+    public void setSaleNumber(String saleNumber) {
+        this.saleNumber = saleNumber;
+    }
 
     /**
      * 设置：角膜接触镜VSTid
