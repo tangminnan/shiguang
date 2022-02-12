@@ -139,7 +139,8 @@
 			`crt_cylod`,
 			`crt_cylos`,
 			`crt_axialod`,
-			`crt_axialos`
+			`crt_axialos`,
+			`create_time`
 		)
 		values
 		(
@@ -177,7 +178,8 @@
 			#{crtCylod},
 			#{crtCylos},
 			#{crtAxialod},
-			#{crtAxialos}
+			#{crtAxialos},
+			#{createTime}
 		)
 	</insert>
     <insert id="saveCrt" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true" keyProperty="crtId">

@@ -5,6 +5,8 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.logstatus.service.LogStatusService;
+import com.shiguang.mfrs.domain.MfrsDO;
+import com.shiguang.mfrs.service.MfrsService;
 import com.shiguang.optometry.domain.ResultCornealDO;
 import com.shiguang.optometry.domain.ResultDiopterDO;
 import com.shiguang.optometry.domain.ResultOptometryDO;
@@ -13,6 +15,7 @@ import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +37,8 @@ public class PeiJingSingleController {
     private LogStatusService statusService;
     @Autowired
     private SalesService salesService;
+    @Autowired
+    private MfrsService mfrsService;
 
     /**
      * 配镜单
@@ -71,6 +76,15 @@ public class PeiJingSingleController {
             query.put("offset",0);
             query.put("limit",10);
         }
+        if (null != params.get("mfrsName") && !"".equals(params.get("mfrsName"))){
+            query.put("mfrsNum",String.valueOf(query.get("mfrsNum")).trim());
+            query.put("offset",0);
+            query.put("limit",10);
+        } else {
+            query.put("mfrsNum","");
+            query.put("offset",0);
+            query.put("limit",10);
+        }
         List<SalesDO> salesDOList = statusService.findSalePeijingAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (SalesDO salesDO : salesDOList){
@@ -91,6 +105,31 @@ public class PeiJingSingleController {
         }
         int total = statusService.findSalePeijingCount(query);
         PageUtils pageUtils = new PageUtils(salesDOList, total);
+        return pageUtils;
+    }
+
+    /**
+     * 制造商
+     */
+    @GetMapping("/mfrs")
+    @RequiresPermissions("information:peijing:mfrs")
+    String mfrs(Model model) {
+        return "logstatus/mfrs";
+    }
+
+    //查询制造商
+    @ResponseBody
+    @GetMapping("/mfrsList")
+    public PageUtils mfrsList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        if (null != query.get("goodsids") && !"".equals(query.get("goodsids"))) {
+            query.put("goodsIds", Integer.parseInt(query.get("goodsids").toString()));
+        }
+        query.put("xsstate","0");
+        List<MfrsDO> mfrsDOList = mfrsService.findMfrs(query);
+        int total = mfrsService.findMfrscount(query);
+        PageUtils pageUtils = new PageUtils(mfrsDOList, total);
         return pageUtils;
     }
 

@@ -39,7 +39,13 @@ function load() {
                                 name:$("#name").val(),
                                 phone1:$("#phone1").val(),
                                 peijingDateStart:$("#peijingDateStart").val(),
-                                peijingDateEnd:$("#peijingDateEnd").val()
+                                peijingDateEnd:$("#peijingDateEnd").val(),
+                                mfrsNum:$("#mfrsNum").val(),
+                                mfrsName:$("#mfrsName").val(),
+                                brandName:$("#brandName").val(),
+                                storeDescribe:$("#storeDescribe").val(),
+                                factory:$("#factory").val(),
+                                color:$("#color").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};

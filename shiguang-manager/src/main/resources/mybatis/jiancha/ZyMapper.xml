@@ -117,7 +117,8 @@
 			`zy_text`, 
 			`zy_beizhu`,
 			`ptometry_number`,
-			`status`
+			`status`,
+			`create_time`
 		)
 		values
 		(
@@ -149,7 +150,8 @@
 			#{zyText}, 
 			#{zyBeizhu},
 			#{ptometryNumber},
-			#{status}
+			#{status},
+			#{createTime}
 		)
 	</insert>
 	<insert id="saveZY" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true" keyProperty="zyId">

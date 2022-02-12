@@ -115,7 +115,8 @@
 			`rgp_cylod`,
 			`rgp_cylos`,
 			`rgp_axialod`,
-			`rgp_axialos`
+			`rgp_axialos`,
+			`create_time`
 		)
 		values
 		(
@@ -145,7 +146,8 @@
 			#{rgpCylod},
 			#{rgpCylos},
 			#{rgpAxialod},
-			#{rgpAxialos}
+			#{rgpAxialos},
+			#{createTime}
 		)
 	</insert>
     <insert id="saveRgp" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true" keyProperty="rgpId">

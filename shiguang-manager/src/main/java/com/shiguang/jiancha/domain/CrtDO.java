@@ -1,6 +1,7 @@
 package com.shiguang.jiancha.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -84,6 +85,22 @@ public class CrtDO implements Serializable {
     private String crtAxialod;
     //轴向OS
     private String crtAxialos;
+    //创建时间
+    private Date createTime;
+
+    /**
+     * 设置：创建时间
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
+     * 获取：创建时间
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
 
     /**
      * 设置：角膜接触镜CRTid

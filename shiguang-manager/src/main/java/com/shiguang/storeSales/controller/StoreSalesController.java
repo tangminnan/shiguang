@@ -373,6 +373,8 @@ public class StoreSalesController {
                 kjjyDO.setPtometryNumber(salesDO.getPtometryNumber());
                 kjjyDO.setCardNumber(salesDO.getMemberNumber());
                 kjjyDO.setSaleNumber(salesDO.getSaleNumber());
+                kjjyDO.setKjjyDoctor("无");
+                kjjyDO.setCreateTime(new Date());
                 kjjyDO.setKjjyPrescriptionType(salesDO.getRecipelwlType().toString());
                 kjjyDO.setKjjyOptometryName(salesDO.getOptometrywlName());
                 kjjyDO.setKjjySphod(salesDO.getRightQJjy());
@@ -412,6 +414,8 @@ public class StoreSalesController {
                 KjyyDO kjyyDO = new KjyyDO();
                 kjyyDO.setPtometryNumber(salesDO.getPtometryNumber());
                 kjyyDO.setCardNumber(salesDO.getMemberNumber());
+                kjyyDO.setKjyyDoctor("无");
+                kjyyDO.setCreateTime(new Date());
                 kjyyDO.setSaleNumber(salesDO.getSaleNumber());
                 kjyyDO.setKjyyPrescriptionType(salesDO.getRecipelwlType().toString());
                 kjyyDO.setKjyyOptometryName(salesDO.getOptometrywlName());
@@ -454,6 +458,8 @@ public class StoreSalesController {
                 sgjjDO.setPtometryNumber(salesDO.getPtometryNumber());
                 sgjjDO.setCardNumber(salesDO.getMemberNumber());
                 sgjjDO.setSaleNumber(salesDO.getSaleNumber());
+                sgjjDO.setSgjjDoctor("无");
+                sgjjDO.setCreateTime(new Date());
                 sgjjDO.setSgjjPrescriptionType(salesDO.getRecipelwlType().toString());
                 sgjjDO.setSgjjOptometryName(salesDO.getOptometrywlName());
                 sgjjDO.setSgjjSphod(salesDO.getRightQJsg());
@@ -495,6 +501,8 @@ public class StoreSalesController {
                 zyDO.setPtometryNumber(salesDO.getPtometryNumber());
                 zyDO.setCardNumber(salesDO.getMemberNumber());
                 zyDO.setSaleNumber(salesDO.getSaleNumber());
+                zyDO.setZyDoctor("无");
+                zyDO.setCreateTime(new Date());
                 zyDO.setZyPrescriptionType(salesDO.getRecipelwlType().toString());
                 zyDO.setZyOptometryName(salesDO.getOptometrywlName());
                 zyDO.setZySphod(salesDO.getRightQJzy());
@@ -534,6 +542,8 @@ public class StoreSalesController {
                 RxjmjcjDO rxjmjcjDO = new RxjmjcjDO();
                 rxjmjcjDO.setPtometryNumber(salesDO.getPtometryNumber());
                 rxjmjcjDO.setCardNumber(salesDO.getMemberNumber());
+                rxjmjcjDO.setRxDoctor("无");
+                rxjmjcjDO.setCreateTime(new Date());
                 rxjmjcjDO.setSaleNumber(salesDO.getSaleNumber());
                 rxjmjcjDO.setRxPrescriptionType(salesDO.getRecipelwlType().toString());
                 rxjmjcjDO.setRxOptometryName(salesDO.getOptometrywlName());
@@ -568,6 +578,8 @@ public class StoreSalesController {
                 SjxlDO sjxlDO = new SjxlDO();
                 sjxlDO.setPtometryNumber(salesDO.getPtometryNumber());
                 sjxlDO.setCardNumber(salesDO.getMemberNumber());
+                sjxlDO.setSjxlDoctor("无");
+                sjxlDO.setCreateTime(new Date());
                 sjxlDO.setSaleNumber(salesDO.getSaleNumber());
                 sjxlDO.setSjxlPrescriptionType(salesDO.getRecipelwlType().toString());
                 sjxlDO.setSjxlOptometryName(salesDO.getOptometrywlName());
@@ -606,7 +618,10 @@ public class StoreSalesController {
                 vstDO.setPtometryNumber(salesDO.getPtometryNumber());
                 vstDO.setVstPrescriptionType(salesDO.getRecipelwlType().toString());
                 vstDO.setCardNumber(salesDO.getMemberNumber());
+                vstDO.setSaleNumber(salesDO.getSaleNumber());
                 vstDO.setVstSphod(salesDO.getRightQJvst());
+                vstDO.setVstDoctor("无");
+                vstDO.setCreateTime(new Date());
                 vstDO.setVstSphos(salesDO.getLeftQJvst());
                 if ("".equals(salesDO.getRightZJvst()) || null == salesDO.getRightZJvst()){
                     vstDO.setVstCylod("0.00");
@@ -653,6 +668,8 @@ public class StoreSalesController {
                 CrtDO crtDO = new CrtDO();
                 crtDO.setPtometryNumber(salesDO.getPtometryNumber());
                 crtDO.setCardNumber(salesDO.getMemberNumber());
+                crtDO.setCrtDoctor("无");
+                crtDO.setCreateTime(new Date());
                 crtDO.setCrtPrescriptionType(salesDO.getRecipelwlType().toString());
                 crtDO.setStatus("1");
                 crtDO.setCrtSphod(salesDO.getRightQjcrt());
@@ -699,6 +716,8 @@ public class StoreSalesController {
                 RgpDO rgpDO = new RgpDO();
                 rgpDO.setPtometryNumber(salesDO.getPtometryNumber());
                 rgpDO.setCardNumber(salesDO.getMemberNumber());
+                rgpDO.setRgpDoctor("无");
+                rgpDO.setCreateTime(new Date());
                 rgpDO.setRgpPrescriptionType(salesDO.getRecipelwlType().toString());
                 rgpDO.setRgpOptometryName(salesDO.getOptometrywlName());
                 rgpDO.setRgpQgdod(salesDO.getRightRgpgd());
@@ -728,6 +747,8 @@ public class StoreSalesController {
                 YaopinDO yaopinDO = new YaopinDO();
                 yaopinDO.setPtometryNumber(salesDO.getPtometryNumber());
                 yaopinDO.setCardNumber(salesDO.getMemberNumber());
+                yaopinDO.setYpDoctor("无");
+                yaopinDO.setCreateTime(new Date());
                 yaopinDO.setYpPrescriptionType(salesDO.getRecipelwlType().toString());
                 yaopinDO.setYpOptometryName(salesDO.getOptometrywlName());
                 yaopinDO.setYpNr(salesDO.getContent());
