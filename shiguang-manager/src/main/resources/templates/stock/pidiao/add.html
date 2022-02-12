@@ -52,7 +52,7 @@
 			<td>接收公司：</td>
 			<td>
 				<select id="inCompany" name="inCompany" style="width:48%" onchange="indepartment()">
-					<option></option>
+					<option value="">--请选择--</option>
 					<option th:each="ls:${companyList}"
 							th:text="${ls.name}"
 							th:value="${ls.id}"

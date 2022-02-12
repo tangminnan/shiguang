@@ -97,7 +97,7 @@
                 <td>
                     <select name="unitid" id="unitid" th:value="${parts.unitid}" class="form-control"
                             data-actions-box="false" data-size="5">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${unitDOList}"
                                 th:text="${ls.unitname}"
                                 th:value="${ls.unitid}"></option>

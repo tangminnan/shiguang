@@ -77,7 +77,7 @@
                 <td>计量单位：</td>
                 <td>
                     <select id="unitid" name="unitid">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${unitDOList}" th:text="${ls.unitname}" th:value="${ls.unitid}">
                         </option>
                     </select>
@@ -164,7 +164,7 @@
                 <td>接触镜类别：</td>
                 <td>
                     <select id="contactLens" name="contactLens" style="width:30%">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="RGP">RGP</option>
                         <option value="角膜塑形镜">角膜塑形镜</option>
                     </select>
@@ -240,7 +240,7 @@
                 <td>颜色：</td>
                 <td>
                     <select id="color" name="color">
-                        <option></option>
+                        <option value="">--请选择--</option>
                     </select>
                 </td>
             </tr>
@@ -258,7 +258,7 @@
                 <td>材质：</td>
                 <td>
                     <select id="caizhiId" name="caizhiId">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${caizhiDOList}"
                                 th:text="${ls.caizhi}"
                                 th:value="${ls.caizhiId}"

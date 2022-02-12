@@ -87,7 +87,7 @@
                 <td>
                     <select name="unitid" id="unitid" th:value="${jpdz.unitid}" class="form-control"
                             data-actions-box="false" data-size="5">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${unitDOList}"
                                 th:text="${ls.unitname}"
                                 th:value="${ls.unitid}"></option>
@@ -196,7 +196,7 @@
                 <td>
                     <select id="lightbelowRight" name="lightbelowRight" th:value="${jpdz.cylSpan}" style="width: 25%"
                             data-actions-box="false" data-size="5" >
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${lightbelowDOList}"
                                 th:text="${ls.lightbelow}"
                                 th:value="${ls.lightbelow}"
@@ -207,7 +207,7 @@
                     </select>
                     -<select id="lightbelowLeft" name="lightbelowLeft" th:value="${jpdz.cylSpan}" style="width: 25%"
                              data-actions-box="false" data-size="5">
-                    <option></option>
+                    <option value="">--请选择--</option>
                     <option th:each="ls:${lightbelowDOList}"
                             th:text="${ls.lightbelow}"
                             th:value="${ls.lightbelow}"
@@ -224,7 +224,7 @@
                 <td>
                     <select id="lensId" name="lensId" th:value="${jpdz.lensId}" class="form-control"
                             data-actions-box="false" data-size="5">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${lensDOList}"
                                 th:text="${ls.lensName}"
                                 th:value="${ls.lensId}"
@@ -264,7 +264,7 @@
                     <select id="lightId" name="lightId" th:value="${jpdz.lightId}" class="form-control"
                             data-actions-box="false" data-size="5"
                             onchange="lightIdstr()">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${lightDOList}"
                                 th:text="${ls.lightName}"
                                 th:value="${ls.lightId}"
@@ -278,7 +278,7 @@
                     <select id="gradualId" name="gradualId" th:value="${jpdz.gradualId}"
                             class="form-control" style="display: none;"
                             data-actions-box="false" data-size="5">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${gradualDOList}"
                                 th:text="${ls.gradualName}"
                                 th:value="${ls.gradualId}"
@@ -308,7 +308,7 @@
                     <select id="functionId" name="functionId" th:value="${jpdz.functionId}"
                             class="form-control"
                             data-actions-box="false" data-size="5">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${functionDOList}"
                                 th:text="${ls.functionName}"
                                 th:value="${ls.functionId}"
@@ -327,7 +327,7 @@
                 <td>柱镜为-0.25度（-25散）：</td>
                 <td>
                     <select id="can" name="can" class="form-control">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1" th:field="*{jpdz.can}">能</option>
                         <option value="2" th:field="*{jpdz.can}">不能</option>
                     </select>

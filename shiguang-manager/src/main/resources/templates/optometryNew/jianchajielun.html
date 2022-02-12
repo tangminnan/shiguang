@@ -208,7 +208,7 @@
                 <td class="w170">处方类型：</td>
                 <td>
                     <select class="select_value" id="chufangType" name="chufangType">
-                        <option></option>
+                        <<option value="">--请选择--</option>
                         <option value="2">远用</option>
                         <option value="1">近用</option>
                         <option value="3">渐进/双光</option>
@@ -241,7 +241,7 @@
                     医生：
 
                     <select id="kjyyDoctor" name="kjyyDoctor">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listDoctor}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -249,7 +249,7 @@
                     </select>
                     验光师：
                     <select  id="kjyyOptometryName" name="kjyyOptometryName">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -321,7 +321,7 @@
                 <td rowspan="2" colspan="1">建议镜片材质:</td>
                 <td rowspan="1" colspan="2" class="daK">
                     <select id="kjyyJpcz" name="kjyyJpcz">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">老花渐进</option>
                         <option value="2">青少年渐进</option>
                         <option value="3">老非球面树脂花渐进</option>
@@ -338,7 +338,7 @@
                 <td rowspan="1" colspan="1">处理方式:</td>
                 <td rowspan="1" colspan="2" class="daK">
                     <select id="kjyyClfs" name="kjyyClfs">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">足矫</option>
                         <option value="2">欠矫</option>
                         <option value="3">过矫</option>
@@ -358,7 +358,7 @@
                 <td rowspan="1" colspan="2" class="daK">
                     <label><input name="kjyyJykj" value="建议镜框" type="checkbox"/> 建议镜框：</label>
                     <select style="width: 30%;" id="kjyyKjlx" name="kjyyKjlx">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">打孔</option>
                         <option value="2">拉丝</option>
                         <option value="3">板材</option>
@@ -381,7 +381,7 @@
                 <td style="text-align: right" colspan="7">
                     医生：
                     <select id="kjjyDoctor" name="kjjyDoctor">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listDoctor}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -389,7 +389,7 @@
                     </select>
                     验光师：
                     <select id="kjjyOptometryName" name="kjjyOptometryName">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -463,7 +463,7 @@
                 <td rowspan="2" colspan="1">建议镜片材质:</td>
                 <td rowspan="1" colspan="2" class="daK">
                     <select id="kjjyJpcz" name="kjjyJpcz">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">老花渐进</option>
                         <option value="2">青少年渐进</option>
                         <option value="3">老非球面树脂花渐进</option>
@@ -480,7 +480,7 @@
                 <td rowspan="1" colspan="1">处理方式:</td>
                 <td rowspan="1" colspan="2" class="daK">
                     <select id="kjjyClfs" name="kjjyClfs">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">足矫</option>
                         <option value="2">欠矫</option>
                         <option value="3">过矫</option>
@@ -500,7 +500,7 @@
                 <td rowspan="1" colspan="2" class="daK">
                     <label><input name="kjjyJykj" value="建议镜框" type="checkbox"/> 建议镜框：</label>
                     <select style="width: 30%;" id="kjjyKjlx" name="kjjyKjlx">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">打孔</option>
                         <option value="2">拉丝</option>
                         <option value="3">板材</option>
@@ -524,7 +524,7 @@
                 <td style="text-align: right" colspan="8">
                     医生：
                     <select id="sgjjDoctor" name="sgjjDoctor">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listDoctor}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -532,7 +532,7 @@
                     </select>
                     验光师：
                     <select id="sgjjOptometryName" name="sgjjOptometryName">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -586,7 +586,7 @@
                 <td rowspan="2" colspan="1">建议镜片材质:</td>
                 <td rowspan="1" colspan="3" class="daK">
                     <select name="sgjjJpcz">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">老花渐进</option>
                         <option value="2">青少年渐进</option>
                         <option value="3">老非球面树脂花渐进</option>
@@ -603,7 +603,7 @@
                 <td rowspan="1" colspan="1">处理方式:</td>
                 <td rowspan="1" colspan="3" class="daK">
                     <select name="sgjjClfs">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">足矫</option>
                         <option value="2">欠矫</option>
                         <option value="3">过矫</option>
@@ -623,7 +623,7 @@
                 <td rowspan="1" colspan="3" class="daK">
                     <label><input name="sgjjJykj" value="建议镜框" type="checkbox"/> 建议镜框：</label>
                     <select style="width: 30%;" name="sgjjKjlx">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">打孔</option>
                         <option value="2">拉丝</option>
                         <option value="3">板材</option>
@@ -646,7 +646,7 @@
                 <td style="text-align: right" colspan="8">
                     医生：
                     <select id="rxDoctor" name="rxDoctor">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listDoctor}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -654,7 +654,7 @@
                     </select>
                     验光师：
                     <select id="rxOptometryName" name="rxOptometryName">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -688,7 +688,7 @@
                 <td><input name="rxUnitod" type="text"/></td>
                 <td rowspan="2">
                     <select name="rxClfs" style="width: 70%;">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">足矫</option>
                         <option value="2">欠矫</option>
                         <option value="3">过矫</option>
@@ -734,7 +734,7 @@
                 <td style="text-align: right" colspan="7">
                     医生：
                     <select id="zyDoctor" name="zyDoctor">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listDoctor}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -742,7 +742,7 @@
                     </select>
                     验光师：
                     <select id="zyOptometryName" name="zyOptometryName">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -813,7 +813,7 @@
                 <td rowspan="2" colspan="1">建议镜片材质:</td>
                 <td rowspan="1" colspan="3" class="daK">
                     <select name="zyJpcz">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">老花渐进</option>
                         <option value="2">青少年渐进</option>
                         <option value="3">老非球面树脂花渐进</option>
@@ -830,7 +830,7 @@
                 <td rowspan="1" colspan="1">处理方式:</td>
                 <td rowspan="1" colspan="3" class="daK">
                     <select name="zyClfs">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">足矫</option>
                         <option value="2">欠矫</option>
                         <option value="3">过矫</option>
@@ -850,7 +850,7 @@
                 <td rowspan="1" colspan="3" class="daK">
                     <label><input name="zyJyjk" value="建议镜框" type="checkbox"/> 建议镜框：</label>
                     <select style="width: 30%;" name="zyJklx">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">打孔</option>
                         <option value="2">拉丝</option>
                         <option value="3">板材</option>
@@ -873,7 +873,7 @@
                 <td style="text-align: right" colspan="8">
                     医生：
                     <select name="sjxlDoctor">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listDoctor}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -881,7 +881,7 @@
                     </select>
                     验光师：
                     <select name="sjxlOptometryName">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -989,7 +989,7 @@
                 <td style="text-align: right" colspan="14">
                     医生：
                     <select name="vstDoctor">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listDoctor}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -997,7 +997,7 @@
                     </select>
                     验光师：
                     <select name="vstOptometryName">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -1083,7 +1083,7 @@
                 <td style="text-align: right" colspan="13">
                     医生：
                     <select name="crtDoctor">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listDoctor}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -1091,7 +1091,7 @@
                     </select>
                     验光师：
                     <select name="crtOptometryName">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -1174,7 +1174,7 @@
                 <td style="text-align: right" colspan="9">
                     医生：
                     <select name="rgpDoctor">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listDoctor}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -1182,7 +1182,7 @@
                     </select>
                     验光师：
                     <select name="rgpOptometryName">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -1254,7 +1254,7 @@
                 <td style="text-align: right">
                     医生：
                     <select name="ypDoctor">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listDoctor}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -1262,7 +1262,7 @@
                     </select>
                     验光师：
                     <select name="ypOptometryName">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -1292,7 +1292,7 @@
         <div class="daijingFS">
             <span>戴镜方式：</span>
             <select name="way">
-                <option></option>
+                <option value="">--请选择--</option>
                 <option value="日戴">日戴</option>
                 <option value="夜戴">夜戴</option>
                 <option value="连续戴">连续戴</option>
@@ -1305,7 +1305,7 @@
 
             <span>复诊类型：</span>
             <select name="visitType">
-                <option></option>
+                <option value="">--请选择--</option>
                 <option value="硬镜复诊">硬镜复诊</option>
                 <option value="软镜复诊">软镜复诊</option>
                 <option value="框镜复诊">框镜复诊</option>

@@ -72,7 +72,7 @@
                 <td>
                     <select name="unitid" id="unitid" th:value="${yxcp.unitid}" class="form-control"
                             data-actions-box="false" data-size="5">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${unitDOList}"
                                 th:text="${ls.unitname}"
                                 th:value="${ls.unitid}"></option>
@@ -85,7 +85,7 @@
                 <td>
                     <!--<select id="sphId" name="sphId" th:value="${yxcp.sphId}" class="form-control"-->
                             <!--data-actions-box="false" data-size="5" disabled>-->
-                        <!--<option></option>-->
+                        <!--<option value="">--请选择--</option>-->
                         <!--<option th:each="ls:${sphDOList}"-->
                                 <!--th:text="${ls.sph}"-->
                                 <!--th:value="${ls.sph}"-->
@@ -101,7 +101,7 @@
                 <td>
                     <!--<select id="cylId" name="cylId" th:value="${yxcp.cylId}" class="form-control"-->
                             <!--data-actions-box="false" data-size="5" disabled>-->
-                        <!--<option></option>-->
+                        <!--<option value="">--请选择--</option>-->
                         <!--<option th:each="ls:${cylDOList}"-->
                                 <!--th:text="${ls.cyl}"-->
                                 <!--th:value="${ls.cyl}"-->
@@ -156,7 +156,7 @@
                     <select id="usageId" name="usageId" th:value="${yxcp.usageId}" class="form-control"
                             style="width:60%"
                             data-actions-box="false" data-size="5">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${usageDOList}"
                                 th:text="${ls.usageName}"
                                 th:value="${ls.usageId}"
@@ -169,7 +169,7 @@
                 <td style="width:20%;">
                     <select id="typeId" name="typeId" th:value="${yxcp.typeId}" class="form-control"
                             data-actions-box="false" data-size="5">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${typeDOList}"
                                 th:text="${ls.typeName}"
                                 th:value="${ls.typeId}"
@@ -207,7 +207,7 @@
                     <select id="invisibleId" name="invisibleId" th:value="${yxcp.invisibleId}" style="width:60%"
                             class="form-control"
                             data-actions-box="false" data-size="5">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${invisibleDOList}"
                                 th:text="${ls.invisible}"
                                 th:value="${ls.invisibleId}"
@@ -221,7 +221,7 @@
                 <td>
                     <select id="caizhiId" name="caizhiId" th:value="${yxcp.caizhiId}" class="form-control"
                             data-actions-box="false" data-size="5">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${caizhiDOList}"
                                 th:text="${ls.caizhi}"
                                 th:value="${ls.caizhiId}"

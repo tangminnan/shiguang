@@ -86,7 +86,7 @@
                 <td>计量单位：</td>
                 <td>
                     <select id="unitid" name="unitid">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${unitDOList}" th:text="${ls.unitname}" th:value="${ls.unitid}">
                         </option>
                     </select>
@@ -131,7 +131,7 @@
                 <td>颜色：</td>
                 <td style="width:20%;">
                     <select id="color" name="color">
-                        <option></option>
+                        <option value="">--请选择--</option>
                     </select>
                 </td>
             </tr>
@@ -139,7 +139,7 @@
                 <td>款式：</td>
                 <td>
                     <select id="styleId" name="styleId" class="form-control" style="width: 60%">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${styleDOList}" th:text="${ls.style}" th:value="${ls.styleId}">
                         </option>
                     </select>

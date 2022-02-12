@@ -64,7 +64,7 @@
                             <div class="col-sm-8">
                                 <select name="unitid" id="unitid" th:value="${jpcp.unitid}" class="form-control"
                                         data-actions-box="false" data-size="5" disabled>
-                                    <option></option>
+                                    <option value="">--请选择--</option>
                                     <option th:each="ls:${unitDOList}"
                                             th:text="${ls.unitname}"
                                             th:value="${ls.unitid}"></option>
@@ -107,7 +107,7 @@
                                 <select id="lightbelowId" name="lightbelowId" th:value="${jpcp.lightbelowId}"
                                         class="form-control"
                                         data-actions-box="false" data-size="5" disabled>
-                                    <option></option>
+                                    <option value="">--请选择--</option>
                                     <option th:each="ls:${lightbelowDOList}"
                                             th:text="${ls.lightbelow}"
                                             th:value="${ls.lightbelow}"
@@ -123,7 +123,7 @@
                             <div class="col-sm-8">
                                 <select id="lensId" name="lensId" th:value="${jpcp.lensId}" class="form-control"
                                         data-actions-box="false" data-size="5" disabled>
-                                    <option></option>
+                                    <option value="">--请选择--</option>
                                     <option th:each="ls:${lensDOList}"
                                             th:text="${ls.lensName}"
                                             th:value="${ls.lensId}"
@@ -165,7 +165,7 @@
                                 <select id="lightId" name="lightId" th:value="${jpcp.lightId}" class="form-control"
                                         data-actions-box="false" data-size="5"
                                         onchange="lightIdstr(this.options[this.options.selectedIndex].value)" disabled>
-                                    <option></option>
+                                    <option value="">--请选择--</option>
                                     <option th:each="ls:${lightDOList}"
                                             th:text="${ls.lightName}"
                                             th:value="${ls.lightId}"
@@ -181,7 +181,7 @@
                                 <select id="gradualId" name="gradualId" th:value="${jpcp.gradualId}"
                                         class="form-control"
                                         data-actions-box="false" data-size="5" disabled>
-                                    <option></option>
+                                    <option value="">--请选择--</option>
                                     <option th:each="ls:${gradualDOList}"
                                             th:text="${ls.gradualName}"
                                             th:value="${ls.gradualId}"
@@ -214,7 +214,7 @@
                                 <select id="functionId" name="functionId" th:value="${jpcp.functionId}"
                                         class="form-control"
                                         data-actions-box="false" data-size="5" disabled>
-                                    <option></option>
+                                    <option value="">--请选择--</option>
                                     <option th:each="ls:${functionDOList}"
                                             th:text="${ls.functionName}"
                                             th:value="${ls.functionId}"

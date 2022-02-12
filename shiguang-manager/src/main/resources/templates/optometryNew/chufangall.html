@@ -418,7 +418,7 @@
                     <td>散瞳用药</td>
                     <td colspan="3">
                         <select id="pharmacyId" name="pharmacyId" th:value="${tryresultsDO.pharmacyId}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option th:each="ls:${pharmacyDOList}"
                                     th:text="${ls.pharmacy}"
                                     th:value="${ls.pharmacyId}"
@@ -653,7 +653,7 @@
                     </td>
                     <td>
                         <select class="input_text" id="jdrZ" name="jdrZ" th:value="${tryresultsDO.jdrZ}" disabled >
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="内">内</option>
                             <option value="外">外</option>
                             <option value="上">上</option>
@@ -692,7 +692,7 @@
                     </td>
                     <td>
                         <select class="input_text" id="jdlZ" name="jdlZ" th:value="${tryresultsDO.jdlZ}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="内">内</option>
                             <option value="外">外</option>
                             <option value="上">上</option>
@@ -754,7 +754,7 @@
                     </td>
                     <td>
                         <select class="input_text" id="jdrTry" name="jdrTry" th:value="${tryresultsDO.jdrTry}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="内">内</option>
                             <option value="外">外</option>
                             <option value="上">上</option>
@@ -802,7 +802,7 @@
                     </td>
                     <td>
                         <select class="input_text" id="jdlTry" name="jdlTry" th:value="${tryresultsDO.jdlTry}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="内">内</option>
                             <option value="外">外</option>
                             <option value="上">上</option>
@@ -929,7 +929,7 @@
                     <td rowspan="2" colspan="1">建议镜片材质:</td>
                     <td rowspan="1" colspan="2" class="daK">
                         <select id="kjyyJpcz" name="kjyyJpcz" th:value="${resultDO.kjyyJpcz}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="1">老花渐进</option>
                             <option value="2">青少年渐进</option>
                             <option value="3">老非球面树脂花渐进</option>
@@ -947,7 +947,7 @@
                     <td rowspan="1" colspan="1">处理方式:</td>
                     <td rowspan="1" colspan="2" class="daK">
                         <select id="kjyyClfs" name="kjyyClfs"  th:value="${resultDO.kjyyClfs}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="1">足矫</option>
                             <option value="2">欠矫</option>
                             <option value="3">过矫</option>
@@ -968,7 +968,7 @@
                     <td rowspan="1" colspan="2" class="daK">
                         <label><input name="kjyyJykj" value="建议镜框" type="checkbox" readonly/> 建议镜框：</label>
                         <select style="width: 30%;" id="kjyyKjlx" name="kjyyKjlx" th:value="${resultDO.kjyyKjlx}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="1">打孔</option>
                             <option value="2">拉丝</option>
                             <option value="3">板材</option>
@@ -1053,7 +1053,7 @@
                     <td rowspan="2" colspan="1">建议镜片材质:</td>
                     <td rowspan="1" colspan="2" class="daK">
                         <select id="kjjyJpcz" name="kjjyJpcz" th:value="${resultDO.kjjyJpcz}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="1">老花渐进</option>
                             <option value="2">青少年渐进</option>
                             <option value="3">老非球面树脂花渐进</option>
@@ -1071,7 +1071,7 @@
                     <td rowspan="1" colspan="1">处理方式:</td>
                     <td rowspan="1" colspan="2" class="daK">
                         <select id="kjjyClfs" name="kjjyClfs" th:value="${resultDO.kjjyClfs}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="1">足矫</option>
                             <option value="2">欠矫</option>
                             <option value="3">过矫</option>
@@ -1092,7 +1092,7 @@
                     <td rowspan="1" colspan="2" class="daK">
                         <label><input name="kjjyJykj" value="建议镜框" type="checkbox" readonly /> 建议镜框：</label>
                         <select style="width: 30%;" id="kjjyKjlx" name="kjjyKjlx" th:value="${resultDO.kjjyKjlx}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="1">打孔</option>
                             <option value="2">拉丝</option>
                             <option value="3">板材</option>
@@ -1164,7 +1164,7 @@
                     <td rowspan="2" colspan="1">建议镜片材质:</td>
                     <td rowspan="1" colspan="3" class="daK">
                         <select id="sgjjJpcz" name="sgjjJpcz" th:value="${resultDO.sgjjJpcz}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="1">老花渐进</option>
                             <option value="2">青少年渐进</option>
                             <option value="3">老非球面树脂花渐进</option>
@@ -1182,7 +1182,7 @@
                     <td rowspan="1" colspan="1">处理方式:</td>
                     <td rowspan="1" colspan="3" class="daK">
                         <select id="sgjjClfs" name="sgjjClfs" th:value="${resultDO.sgjjClfs}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="1">足矫</option>
                             <option value="2">欠矫</option>
                             <option value="3">过矫</option>
@@ -1203,7 +1203,7 @@
                     <td rowspan="1" colspan="3" class="daK">
                         <label><input name="sgjjJykj" value="建议镜框" type="checkbox" readonly/> 建议镜框：</label>
                         <select style="width: 30%;" id="sgjjKjlx" name="sgjjKjlx" th:value="${resultDO.sgjjKjlx}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="1">打孔</option>
                             <option value="2">拉丝</option>
                             <option value="3">板材</option>
@@ -1367,7 +1367,7 @@
                     <td rowspan="2" colspan="1">建议镜片材质:</td>
                     <td rowspan="1" colspan="3" class="daK">
                         <select id="zyJpcz" name="zyJpcz" th:value="${resultDO.zyJpcz}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="1">老花渐进</option>
                             <option value="2">青少年渐进</option>
                             <option value="3">老非球面树脂花渐进</option>
@@ -1385,7 +1385,7 @@
                     <td rowspan="1" colspan="1">处理方式:</td>
                     <td rowspan="1" colspan="3" class="daK">
                         <select id="zyClfs" name="zyClfs" th:value="${resultDO.zyClfs}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="1">足矫</option>
                             <option value="2">欠矫</option>
                             <option value="3">过矫</option>
@@ -1406,7 +1406,7 @@
                     <td rowspan="1" colspan="3" class="daK">
                         <label><input name="zyJyjk" value="建议镜框" type="checkbox" readonly/> 建议镜框：</label>
                         <select style="width: 30%;" id="zyJklx" name="zyJklx"  th:value="${resultDO.zyJklx}" disabled>
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="1">打孔</option>
                             <option value="2">拉丝</option>
                             <option value="3">板材</option>

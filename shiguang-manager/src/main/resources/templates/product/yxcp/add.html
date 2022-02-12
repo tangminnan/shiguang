@@ -63,7 +63,7 @@
                 <td>计量单位：</td>
                 <td>
                     <select id="unitid" name="unitid">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${unitDOList}" th:text="${ls.unitname}" th:value="${ls.unitid}">
                         </option>
                     </select>
@@ -173,7 +173,7 @@
                 <td>颜色：</td>
                 <td>
                     <select id="color" name="color">
-                        <option></option>
+                        <option value="">--请选择--</option>
                     </select>
                 </td>
             </tr>
@@ -191,7 +191,7 @@
                 <td>材质：</td>
                 <td>
                     <select id="caizhiId" name="caizhiId">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${caizhiDOList}"
                                 th:text="${ls.caizhi}"
                                 th:value="${ls.caizhiId}"

@@ -138,7 +138,7 @@
                                 <select name="technologyId" id="technologyId" th:value="${produca.technologyId}"
                                           disabled style="width:43%"
                                         data-actions-box="false" data-size="5">
-                                    <option></option>
+                                    <option value="">--请选择--</option>
                                     <option th:each="ls:${technologyDOList}"
                                             th:text="${ls.technologyType}"
                                             th:value="${ls.technologyId}"></option>
@@ -154,7 +154,7 @@
                                 <select name="materialid" id="materialid" th:value="${produca.materialid}"
                                           disabled style="width:43%"
                                         data-actions-box="false" data-size="5">
-                                    <option></option>
+                                    <option value="">--请选择--</option>
                                     <option th:each="ls:${materialDOList}"
                                             th:text="${ls.materialname}"
                                             th:value="${ls.materialid}"></option>
@@ -178,7 +178,7 @@
                                 <select id="styleId" name="styleId" th:value="${produca.styleId}"
                                           disabled style="width:43%"
                                         data-actions-box="false" data-size="5">
-                                    <option></option>
+                                    <option value="">--请选择--</option>
                                     <option th:each="ls:${styleDOList}"
                                             th:text="${ls.style}"
                                             th:value="${ls.styleId}"></option>

@@ -456,7 +456,7 @@
                     <td>散瞳用药</td>
                     <td colspan="3">
                         <select id="pharmacyId" name="pharmacyId" th:value="${tryresultsDO.pharmacyId}" >
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option th:each="ls:${pharmacyDOList}"
                                     th:text="${ls.pharmacy}"
                                     th:value="${ls.pharmacyId}"
@@ -691,7 +691,7 @@
                     </td>
                     <td>
                         <select class="input_text" id="jdrZ" name="jdrZ" th:value="${tryresultsDO.jdrZ}">
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="内">内</option>
                             <option value="外">外</option>
                             <option value="上">上</option>
@@ -735,7 +735,7 @@
                     </td>
                     <td>
                         <select class="input_text" id="jdlZ" name="jdlZ" th:value="${tryresultsDO.jdlZ}">
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="内">内</option>
                             <option value="外">外</option>
                             <option value="上">上</option>
@@ -803,7 +803,7 @@
                     </td>
                     <td>
                         <select class="input_text" id="jdrTry" name="jdrTry" th:value="${tryresultsDO.jdrTry}">
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="内">内</option>
                             <option value="外">外</option>
                             <option value="上">上</option>
@@ -851,7 +851,7 @@
                     </td>
                     <td>
                         <select class="input_text" id="jdlTry" name="jdlTry" th:value="${tryresultsDO.jdlTry}">
-                            <option></option>
+                            <option value="">--请选择--</option>
                             <option value="内">内</option>
                             <option value="外">外</option>
                             <option value="上">上</option>

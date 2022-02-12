@@ -77,7 +77,7 @@
                 <td>计量单位：</td>
                 <td>
                     <select id="unitid" name="unitid">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${unitDOList}" th:text="${ls.unitname}" th:value="${ls.unitid}">
                         </option>
                     </select>
@@ -233,7 +233,7 @@
                 <td>镜片功能：</td>
                 <td>
                     <select id="functionId" name="functionId" class="form-control">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${functionDOList}"
                                 th:text="${ls.functionName}"
                                 th:value="${ls.functionId}"
@@ -248,7 +248,7 @@
                 <td>柱镜为-0.25度（-25散）：</td>
                 <td>
                     <select id="can" name="can">
-                        <option></option>
+                        <option value="">--请选择--</option>
                         <option value="1">能</option>
                         <option value="2">不能</option>
                     </select>
