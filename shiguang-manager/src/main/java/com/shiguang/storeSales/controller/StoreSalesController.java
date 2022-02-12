@@ -324,6 +324,9 @@ public class StoreSalesController {
             } else {
                 salesDO.setPtometryNumber("Y"+GuuidUtil.getUUID());
             }
+            if ("2".equals(salesDO.getChufang())) {
+                salesDO.setPtometryNumber("Y"+GuuidUtil.getUUID());
+            }
 //            if (null != salesDO.getStoreName()){
 //                salesDO.setStoreName(salesDO.getStoreName().substring(0,salesDO.getStoreName().length()-3));
 //            }
