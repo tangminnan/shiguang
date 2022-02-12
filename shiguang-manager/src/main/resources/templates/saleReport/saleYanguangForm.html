@@ -93,8 +93,13 @@
                     html+="<td>" + list[i].store + "</td>";
                     html += "<td class='username'>" + list[i].username + "</td>";
                     html += "<td>" + list[i].name + "</td>";
-                    html += "<td>" + listMoney[i].usecount + "</td>";
-                    html += "<td>" + listMoney[i].ygcount + "</td>";
+                    // html += "<td>" + listMoney[i].usecount + "</td>";
+                    // html += "<td>" + listMoney[i].ygcount + "</td>";
+                    // html += "<td>" + listMoney[i].amountMoney + "</td>";
+                    // html += "<td>" + listMoney[i].primeMoney + "</td>";
+                    html += "<td class='cBlue'><a href='#'  style='color: #fd0c0c' onclick='reportYgcount(this)'>" + listMoney[i].usecount + "</a></td>";
+                    html += "<td class='cBlue'><a href='#' style='color: #2063fd' onclick='reportUseYgcount(this)'>" + listMoney[i].ygcount + "</a></td>";
+
                     html += "<td>" + listMoney[i].amountMoney + "</td>";
                     html += "<td>" + listMoney[i].primeMoney + "</td>";
                     html += "<td class='cBlue'><a href='#' onclick='reportJj(this)'>" + listMoney[i].jjMoney + "</a></td>";
@@ -146,6 +151,28 @@
             $("#detailId").append(html);
 
         });
+
+
+
+        function reportYgcount(e){
+            var username=$(e).parent().prevAll().filter(".username").html();
+            var settleDateStart=$("#settleDateStart").val();
+            var settleDateEnd=$("#settleDateEnd").val();
+            window.open("/information/saleYanguang/doctorUse?username="+username +
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd );
+        }
+        function reportUseYgcount(e){
+            var username=$(e).parent().prevAll().filter(".username").html();
+            var settleDateStart=$("#settleDateStart").val();
+            var settleDateEnd=$("#settleDateEnd").val();
+            window.open("/information/saleYanguang/doctor?username="+username +
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd );
+        }
+
+
+
+
+
 
         function reportJj(e){
             var username=$(e).parent().prevAll().filter(".username").html();

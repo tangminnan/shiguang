@@ -568,16 +568,16 @@
       </Row>
       <Row ss:Height="20">
         <Cell ss:StyleID="s105" ss:MergeAcross="1" ss:MergeDown="1"/>
-        <#if list.brandnameR == list.brandnameL>
+        <#if list.viewGoodNameR == list.viewGoodNameL>
         <Cell ss:StyleID="s106" ss:MergeAcross="2" ss:MergeDown="1">
-            <Data ss:Type="String">${list.brandnameR!''}</Data>
+            <Data ss:Type="String">${list.viewGoodNameR!''}</Data>
         </Cell>
-        <#elseif list.brandnameR != list.brandnameL>
+        <#elseif list.viewGoodNameR != list.viewGoodNameL>
              <#--<Cell ss:StyleID="s106" ss:MergeAcross="1" ss:MergeDown="1">-->
-                 <#--<Data ss:Type="String">${list.brandnameR!''}</Data>-->
+                 <#--<Data ss:Type="String">${list.viewGoodNameR!''}</Data>-->
              <#--</Cell>-->
          <Cell   ss:Index="5"  ss:StyleID="s60">
-             <Data ss:Type="String">${list.brandnameR!''}</Data>
+             <Data ss:Type="String">${list.viewGoodNameR!''}</Data>
          </Cell>
         <#else>
         </#if>
@@ -634,16 +634,16 @@
           </Cell>
       </Row>
       <Row ss:Height="20">
-           <#if list.brandnameR == list.brandnameL>
+           <#if list.viewGoodNameR == list.viewGoodNameL>
         <Cell ss:StyleID="s106" ss:MergeAcross="2" ss:MergeDown="1">
-            <Data ss:Type="String">${list.brandnameL!''}</Data>
+            <Data ss:Type="String">${list.viewGoodNameL!''}</Data>
         </Cell>
-           <#elseif list.brandnameR != list.brandnameL>
+           <#elseif list.viewGoodNameR != list.viewGoodNameL>
             <#--<Cell ss:StyleID="s106" ss:MergeAcross="1" ss:MergeDown="1">-->
-                <#--<Data ss:Type="String">${list.brandnameL!''}</Data>-->
+                <#--<Data ss:Type="String">${list.viewGoodNameL!''}</Data>-->
             <#--</Cell>-->
             <Cell  ss:Index="5" ss:StyleID="s60">
-                <Data ss:Type="String">${list.brandnameL!''}</Data>
+                <Data ss:Type="String">${list.viewGoodNameL!''}</Data>
             </Cell>
            <#else>
            </#if>
@@ -662,7 +662,6 @@
         <Cell ss:StyleID="s61">
           <Data ss:Type="String">${list.zxL!''}</Data>
         </Cell>
-        <Cell ss:StyleID="s60"/>
         <Cell ss:StyleID="s60">
           <Data ss:Type="String">${list.fartjL!''}</Data>
         </Cell>
@@ -680,6 +679,9 @@
           </Cell>
           <Cell ss:StyleID="s58">
               <Data ss:Type="String">${list.jdL!''}</Data>
+          </Cell>
+          <Cell ss:StyleID="s58">
+              <Data ss:Type="String">${list.zjL!''}</Data>
           </Cell>
         <Cell ss:StyleID="s58">
           <Data ss:Type="Number">${list.countL!''}</Data>

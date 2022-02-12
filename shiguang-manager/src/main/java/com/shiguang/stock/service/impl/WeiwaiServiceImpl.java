@@ -135,7 +135,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 			String mfrsid=weiwaiDO.getMfrsid();
 			String mfrsname=weiwaiDO.getMfrsname();
 			String brandnum=weiwaiDO.getBrandnum();
-			String brandname=weiwaiDO.getBrandname();
+			String viewGoodName=weiwaiDO.getViewGoodName();
 			Long positionId=weiwaiDO.getPositionId();
 			String positionName=weiwaiDO.getPositionName();
 			String shouhuoPeople=weiwaiDO.getShouhuoPeople();
@@ -177,7 +177,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 			params.put("mfrsid",mfrsid);
 			params.put("mfrsname",mfrsname);
 			params.put("brandnum",brandnum);
-			params.put("brandname",brandname);
+			params.put("viewGoodName",viewGoodName);
 			params.put("positionId",positionId);
 			params.put("positionName",positionName);
 			params.put("shouhuoPeople",shouhuoPeople);
@@ -225,7 +225,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 				if (allList.get(i).get("danjuNumber").equals(allList.get(j).get("danjuNumber"))
 						&& allList.get(i).get("saleNumber").equals(allList.get(j).get("saleNumber")) ){
 					if ("右".equals(allList.get(j).get("rl"))){
-						String brandnameR= (String) allList.get(j).get("brandname");
+						String viewGoodNameR= (String) allList.get(j).get("viewGoodName");
 						String styleR= (String) allList.get(j).get("style");
 						String rlR= "R";
 						String sphR=(String) allList.get(j).get("sph");
@@ -247,7 +247,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						String companyName= (String) allList.get(j).get("companyName");
 						String mfrsname= (String) allList.get(j).get("mfrsname");
 						String danjuDay= (String) allList.get(j).get("danjuDay");
-						map.put("brandnameR",brandnameR);
+						map.put("viewGoodNameR",viewGoodNameR);
 						map.put("styleR",styleR);
 						map.put("rlR",rlR);
 						map.put("sphR",sphR);
@@ -271,7 +271,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						map.put("danjuDay",danjuDay);
 
 					}else {
-						String brandnameL= (String) allList.get(j).get("brandname");
+						String viewGoodNameL= (String) allList.get(j).get("viewGoodName");
 						String styleL= (String) allList.get(j).get("style");
 						String rlL= "L";
 						String sphL=(String) allList.get(j).get("sph");
@@ -289,7 +289,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						String tiimeL=(String) allList.get(j).get("mirrorTime");
 						String beizhuL=(String) allList.get(j).get("beizhu");
 
-						map.put("brandnameL",brandnameL);
+						map.put("viewGoodNameL",viewGoodNameL);
 						map.put("styleL",styleL);
 						map.put("rlL",rlL);
 						map.put("sphL",sphL);

@@ -76,41 +76,41 @@
 		JOIN sys_user su ON su. NAME = s.sale_name
 		join department d on d.depart_number = m.depart_number) a
 		<where>
-		<if test="departNumber != null and departNumber != ''"> and departNumber = #{departNumber} </if>
-		<if test="companyid !=null and companyid != ''">and companyId in (#{companyid})</if>
+			<if test="departNumber != null and departNumber != ''"> and departNumber = #{departNumber} </if>
+			<if test="companyid !=null and companyid != ''">and companyId in (#{companyid})</if>
 			<if test="saleNum != null and saleNum !=''">and saleNum = #{saleNum}</if>
-		<if test="settleDateStart !=null and settleDateStart != ''">and date_format(settleDate ,'%Y-%m-%d' ) >= #{settleDateStart}</if>
+			<if test="settleDateStart !=null and settleDateStart != ''">and date_format(settleDate ,'%Y-%m-%d' ) >= #{settleDateStart}</if>
 			<if test="settleDateEnd !=null and settleDateEnd != ''">and date_format(settleDate ,'%Y-%m-%d' ) &lt;= #{settleDateEnd}</if>
-		and (`type`='配镜单' or `type`='定金单' OR `type` = '检查单')
-		and isSale != 0
+			and (`type`='配镜单' or `type`='定金单' OR `type` = '检查单')
+			and isSale != 0
 		</where>
 		GROUP BY saleNumber
 
 
 		<!--select ss.`sale_name`,ss.`sale_number`,ss.`goods_num`,ss.`amount_money`,ss.`prime_money`,ss.`additional_cost`,ss.`additional_price`,-->
 		<!--ss.`additional_count`,ss.`store_describe`,ss.`store_unit`,ss.`store_count`,su.`username` as saleNum,c.`is_sale` as isSale,s.`pay_money` as payMoney-->
-		 <!--from store_sales ss-->
-		 <!--join settlement s on s.sale_number = ss.sale_number-->
-		 <!--join department d on d.depart_number = ss.store_num-->
+		<!--from store_sales ss-->
+		<!--join settlement s on s.sale_number = ss.sale_number-->
+		<!--join department d on d.depart_number = ss.store_num-->
 		<!--join sys_user su on su.name = ss.sale_name-->
 		<!--join cost c on c.sale_number = ss.sale_number-->
 		<!--<where>-->
-			<!--<if test="departNumber != null and departNumber != ''"> and d.depart_number = #{departNumber} </if>-->
-			<!--<if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>-->
-			<!--<if test="settleDate !=null and settleDate != ''">and date_format(s.settle_date ,'%Y-%m-%d' ) = (#{settleDate})</if>-->
-			<!--and (c.`type`='配镜单' or c.`type`='定金单')-->
-			<!--and c.is_sale != 0-->
+		<!--<if test="departNumber != null and departNumber != ''"> and d.depart_number = #{departNumber} </if>-->
+		<!--<if test="companyid !=null and companyid != ''">and d.company_id in (#{companyid})</if>-->
+		<!--<if test="settleDate !=null and settleDate != ''">and date_format(s.settle_date ,'%Y-%m-%d' ) = (#{settleDate})</if>-->
+		<!--and (c.`type`='配镜单' or c.`type`='定金单')-->
+		<!--and c.is_sale != 0-->
 		<!--</where>-->
 		<!--<choose>-->
-			<!--<when test="sort != null and sort.trim() != ''">-->
-				<!--order by ${sort} ${order}-->
-			<!--</when>-->
-			<!--<otherwise>-->
-				<!--order by s.`settle_date` desc-->
-			<!--</otherwise>-->
+		<!--<when test="sort != null and sort.trim() != ''">-->
+		<!--order by ${sort} ${order}-->
+		<!--</when>-->
+		<!--<otherwise>-->
+		<!--order by s.`settle_date` desc-->
+		<!--</otherwise>-->
 		<!--</choose>-->
 		<!--<if test="offset != null and limit != null">-->
-			<!--limit #{offset}, #{limit}-->
+		<!--limit #{offset}, #{limit}-->
 		<!--</if>-->
 	</select>
 	<select id="findSaleReportCount" resultType="int">
@@ -125,34 +125,34 @@
 			<if test="settleDate !=null and settleDate != ''">and date_format(s.settle_date ,'%Y-%m-%d' ) = (#{settleDate})</if>
 		</where>
 	</select>
-    <!--查询报表中的检查数和检查费 -->
-    <select id="findCostList" resultType="com.shiguang.report.domain.SaleReportDO">
-        select count(sale_number) as checkCount ,SUM(cost_money) as checkMoney,is_sale as isSale
-        from cost
-        <where>
-            <if test="saleNumber != null and saleNumber !=''">sale_number = #{saleNumber}</if>
-            and `type`='检查单'
+	<!--查询报表中的检查数和检查费 -->
+	<select id="findCostList" resultType="com.shiguang.report.domain.SaleReportDO">
+		select count(sale_number) as checkCount ,SUM(cost_money) as checkMoney,is_sale as isSale
+		from cost
+		<where>
+			<if test="saleNumber != null and saleNumber !=''">sale_number = #{saleNumber}</if>
+			and `type`='检查单'
 			and is_sale != 0
-        </where>
-        group by sale_number
-    </select>
+		</where>
+		group by sale_number
+	</select>
 
 	<!-- 查询中心店的营业员的报表 -->
 	<select id="findSaleReportForms" resultType="com.shiguang.settlement.domain.SettlementDO">
 		select s.`id`,s.`cost_id`,s.`sale_number`,s.`member_number`,s.`sale_name`,s.`actual_money`,s.`payment_money`,s.`change_money`,s.`pay_model`,
 		s.`model_money`,s.`pay_money`,s.`pay_way`,s.`front_money`,s.`settle_date`,s.`front_time`,d.`drawback_money` as drawBackMoney,d.`drackback_way` as drawBackWay,dt.`depart_name` as departmentName
-		 from settlement s join member m on m.card_number = s.member_number join department dt on dt.company_id = m.company_id left join drawback d on d.sale_number = s.sale_number
-		 <where>
-			 <if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
-			 <if test="settleDateStart !=null and settleDateStart != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
-			 <if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
-			 <if test="settleDateStart !=null and settleDateStart != ''"> or date_format(d.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
-			 <if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(d.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
-			 <if test="state !=null and state != ''">and m.state = #{state}</if>
-			 <if test="departNumber !=null and departNumber != ''">and dt.depart_number = #{departNumber}</if>
-			 <if test="departType !=null and departType != ''">and dt.depart_type = #{departType}</if>
+		from settlement s join member m on m.card_number = s.member_number join department dt on dt.company_id = m.company_id left join drawback d on d.sale_number = s.sale_number
+		<where>
+			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''"> or date_format(d.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(d.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="state !=null and state != ''">and m.state = #{state}</if>
+			<if test="departNumber !=null and departNumber != ''">and dt.depart_number = #{departNumber}</if>
+			<if test="departType !=null and departType != ''">and dt.depart_type = #{departType}</if>
 
-		 </where>
+		</where>
 		GROUP BY s.sale_number
 		order by dt.depart_number
 	</select>
@@ -212,7 +212,7 @@
 			<if test="departNumber !=null and departNumber != ''">and ss.store_num = #{departNumber}</if>
 			and (ss.sale_type = '1')
 		</where>
-		 GROUP BY s.sale_name
+		GROUP BY s.sale_name
 	</select>
 
 	<select id="findSaleReportDetailForms" resultType="com.shiguang.storeSales.domain.SalesDO">
@@ -249,19 +249,19 @@
 	<!--GROUP BY u.username-->
 	<!--</select>-->
 	<!--<select id="findYanguangCount" resultType="com.shiguang.storeSales.domain.SalesDO">-->
-		<!--select  COUNT(try.ptometry_number) as ygcount-->
-		<!--from  sys_user u-->
-		<!--join sys_user_role ur on u.user_id=ur.user_id-->
-		<!--join jc_tryresults try on try.optometry_name=u.name-->
-		<!--join store_sales s on try.ptometry_number=s.ptometry_number-->
-		<!--<where>-->
-			<!--<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>-->
-			<!--<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>-->
-			<!--<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>-->
-			<!--<if test="department !=null and department != ''">and u.store = #{department}</if>-->
-			<!--and (ur.role_id = 7)-->
-		<!--</where>-->
-		<!--GROUP BY u.username-->
+	<!--select  COUNT(try.ptometry_number) as ygcount-->
+	<!--from  sys_user u-->
+	<!--join sys_user_role ur on u.user_id=ur.user_id-->
+	<!--join jc_tryresults try on try.optometry_name=u.name-->
+	<!--join store_sales s on try.ptometry_number=s.ptometry_number-->
+	<!--<where>-->
+	<!--<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>-->
+	<!--<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>-->
+	<!--<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>-->
+	<!--<if test="department !=null and department != ''">and u.store = #{department}</if>-->
+	<!--and (ur.role_id = 7)-->
+	<!--</where>-->
+	<!--GROUP BY u.username-->
 	<!--</select>-->
 
 
@@ -276,54 +276,579 @@
 		</where>
 		GROUP BY u.username
 	</select>
+	<!--<select id="findYanguangCount" resultType="int">-->
+	<!--select  COUNT(try.ptometry_number) as ygcount-->
+	<!--from  sys_user u-->
+	<!--join sys_user_role ur on u.user_id=ur.user_id-->
+	<!--left join jc_tryresults try on try.optometry_name=u.name-->
+	<!--<where>-->
+	<!--<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>-->
+	<!--<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>-->
+	<!--<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>-->
+	<!--<if test="department !=null and department != ''">and u.store = #{department}</if>-->
+	<!--<if test="username !=null and username != ''">and u.username = #{username}</if>-->
+	<!--and (ur.role_id = 7)-->
+	<!--</where>-->
+	<!--</select>-->
+	<!--<select id="findUseCount"  resultType="int">-->
+	<!--SELECT-->
+	<!--COUNT( try.ptometry_number ) AS usecount-->
+	<!--FROM-->
+	<!--sys_user u-->
+	<!--JOIN sys_user_role ur ON u.user_id = ur.user_id-->
+	<!--LEFT JOIN jc_tryresults try ON try.optometry_name = u.NAME-->
+	<!--left join store_sales s on try.ptometry_number=s.ptometry_number-->
+	<!--<where>-->
+	<!--<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>-->
+	<!--<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>-->
+	<!--<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>-->
+	<!--<if test="department !=null and department != ''">and u.store = #{department}</if>-->
+	<!--<if test="username !=null and username != ''">and u.username = #{username}</if>-->
+	<!--and (ur.role_id = 7)and (s.sale_type=1)-->
+	<!--</where>-->
+	<!--</select>-->
+	<!--<select id="findamountMoney" resultType="int">-->
+	<!--SELECT-->
+	<!--ifnull(sum(s.amount_money),0)  AS amountMoney-->
+
+	<!--FROM-->
+	<!--sys_user u-->
+	<!--JOIN sys_user_role ur ON u.user_id = ur.user_id-->
+	<!--LEFT JOIN jc_tryresults try ON try.optometry_name = u.NAME-->
+	<!--left join store_sales s on try.ptometry_number=s.ptometry_number-->
+	<!--<where>-->
+	<!--<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>-->
+	<!--<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>-->
+	<!--<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>-->
+	<!--<if test="department !=null and department != ''">and u.store = #{department}</if>-->
+	<!--<if test="username !=null and username != ''">and u.username = #{username}</if>-->
+	<!--and (ur.role_id = 7)and (s.sale_type=1)-->
+	<!--</where>-->
+	<!--</select>-->
+	<!--<select id="findprimeMoney" resultType="int">-->
+	<!--SELECT-->
+	<!--ifnull(sum(s.prime_money),0)  AS primeMoney-->
+	<!--FROM-->
+	<!--sys_user u-->
+	<!--JOIN sys_user_role ur ON u.user_id = ur.user_id-->
+	<!--LEFT JOIN jc_tryresults try ON try.optometry_name = u.NAME-->
+	<!--left join store_sales s on try.ptometry_number=s.ptometry_number-->
+	<!--<where>-->
+	<!--<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>-->
+	<!--<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>-->
+	<!--<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>-->
+	<!--<if test="department !=null and department != ''">and u.store = #{department}</if>-->
+	<!--<if test="username !=null and username != ''">and u.username = #{username}</if>-->
+	<!--and (ur.role_id = 7)and (s.sale_type=1)-->
+	<!--</where>-->
+	<!--</select>-->
+	<!--<select id="findGoods" resultType="com.shiguang.storeSales.domain.SalesDO">-->
+	<!--select u.store,u.username,u.name ,-->
+	<!--s.sale_number,s.goods_num,s.store_name,s.store_describe,s.classtype,s.store_count, s.store_unit,s.amount_money-->
+	<!--from  sys_user u-->
+	<!--join sys_user_role ur on u.user_id=ur.user_id-->
+	<!--join jc_result r on r.optometry_name=u.name-->
+	<!--join store_sales s on r.ptometry_number=s.ptometry_number-->
+	<!--<where>-->
+	<!--<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>-->
+	<!--<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(r.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>-->
+	<!--<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(r.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>-->
+	<!--<if test="department !=null and department != ''">and u.store = #{department}</if>-->
+	<!--<if test="username !=null and username != ''">and u.username = #{username}</if>-->
+	<!--<if test="storeDescribe != null and storeDescribe != ''">and s.store_describe LIKE concat(concat('%', #{storeDescribe}),'%')</if>-->
+	<!--<if test="brandname != null and brandname != ''">and  s.store_name LIKE concat(concat('%', #{brandname}),'%')</if>-->
+	<!--and (ur.role_id = 7) and (s.sale_type=1)-->
+	<!--</where>-->
+	<!--</select>-->
+
+
+
 	<select id="findYanguangCount" resultType="int">
-		select  COUNT(try.ptometry_number) as ygcount
-		from  sys_user u
-		join sys_user_role ur on u.user_id=ur.user_id
-		left join jc_tryresults try on try.optometry_name=u.name
+		SELECT
+		COUNT( ptometry_number ) AS ygcount
+		FROM
+		(
+		SELECT
+		ptometry_number,
+		company_id,
+		create_time,
+		username,
+		role_id,
+		store
+		FROM
+		(
+		SELECT
+		kjyy.ptometry_number,
+		u.company_id,
+		kjyy.create_time,
+		u.username,
+		ur.role_id,
+		u.store
+		FROM
+		jc_kjyy kjyy
+		JOIN sys_user u ON kjyy.kjyy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
+		SELECT
+		kjjy.ptometry_number,
+		u.company_id,
+		kjjy.create_time,
+		u.username,
+		ur.role_id,
+		u.store
+		FROM
+		jc_kjjy kjjy
+		JOIN sys_user u ON kjjy.kjjy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
+		SELECT
+		sgjj.ptometry_number,
+		u.company_id,
+		sgjj.create_time,
+		u.username,
+		ur.role_id,
+		u.store
+		FROM
+		jc_sgjj sgjj
+		JOIN sys_user u ON sgjj.sgjj_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
+		SELECT
+		rx.ptometry_number,
+		u.company_id,
+		rx.create_time,
+		u.username,
+		ur.role_id,
+		u.store
+		FROM
+		jc_rxjmjcj rx
+		JOIN sys_user u ON rx.rx_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
+		SELECT
+		zy.ptometry_number,
+		u.company_id,
+		zy.create_time,
+		u.username,
+		ur.role_id,
+		u.store
+		FROM
+		jc_zy zy
+		JOIN sys_user u ON zy.zy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
+		SELECT
+		sjxl.ptometry_number,
+		u.company_id,
+		sjxl.create_time,
+		u.username,
+		ur.role_id,
+		u.store
+		FROM
+		jc_sjxl sjxl
+		JOIN sys_user u ON sjxl.sjxl_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
+		SELECT
+		vst.ptometry_number,
+		u.company_id,
+		vst.create_time,
+		u.username,
+		ur.role_id,
+		u.store
+		FROM
+		jc_vst vst
+		JOIN sys_user u ON vst.vst_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
+		SELECT
+		crt.ptometry_number,
+		u.company_id,
+		crt.create_time,
+		u.username,
+		ur.role_id,
+		u.store
+		FROM
+		jc_crt crt
+		JOIN sys_user u ON crt.crt_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
+		SELECT
+		rgp.ptometry_number,
+		u.company_id,
+		rgp.create_time,
+		u.username,
+		ur.role_id,
+		u.store
+		FROM
+		jc_rgp rgp
+		JOIN sys_user u ON rgp.rgp_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
+		SELECT
+		yp.ptometry_number,
+		u.company_id,
+		yp.create_time,
+		u.username,
+		ur.role_id,
+		u.store
+		FROM
+		jc_yaopin yp
+		JOIN sys_user u ON yp.yp_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		) aia
 		<where>
-			<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>
-			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
-			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
-			<if test="department !=null and department != ''">and u.store = #{department}</if>
-			<if test="username !=null and username != ''">and u.username = #{username}</if>
-			and (ur.role_id = 7)
+			<if test="companyId !=null and companyId != ''">and  company_id in (#{companyId})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="department !=null and department != ''">and store = #{department}</if>
+			<if test="username !=null and username != ''">and  username = #{username}</if>
+			and ( role_id = 7)
 		</where>
+		) ai
+
 	</select>
 	<select id="findUseCount"  resultType="int">
 		SELECT
-		 COUNT( try.ptometry_number ) AS usecount
+		COUNT( ptometry_number ) AS usecount
 		FROM
-		sys_user u
-		JOIN sys_user_role ur ON u.user_id = ur.user_id
-		LEFT JOIN jc_tryresults try ON try.optometry_name = u.NAME
-		left join store_sales s on try.ptometry_number=s.ptometry_number
+		(
+		SELECT
+		ptometry_number,
+		company_id,
+		create_time,
+		username,
+		role_id,
+		sale_type,
+		store,
+		sale_number
+		FROM
+		(
+		SELECT
+		kjyy.ptometry_number,
+		u.company_id,
+		kjyy.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number
+		FROM
+		jc_kjyy kjyy
+		JOIN sys_user u ON kjyy.kjyy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON kjyy.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		kjjy.ptometry_number,
+		u.company_id,
+		kjjy.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number
+		FROM
+		jc_kjjy kjjy
+		JOIN sys_user u ON kjjy.kjjy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON kjjy.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		sgjj.ptometry_number,
+		u.company_id,
+		sgjj.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number
+		FROM
+		jc_sgjj sgjj
+		JOIN sys_user u ON sgjj.sgjj_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON sgjj.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		rx.ptometry_number,
+		u.company_id,
+		rx.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number
+		FROM
+		jc_rxjmjcj rx
+		JOIN sys_user u ON rx.rx_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON rx.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		zy.ptometry_number,
+		u.company_id,
+		zy.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number
+		FROM
+		jc_zy zy
+		JOIN sys_user u ON zy.zy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON zy.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		sjxl.ptometry_number,
+		u.company_id,
+		sjxl.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number
+		FROM
+		jc_sjxl sjxl
+		JOIN sys_user u ON sjxl.sjxl_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON sjxl.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		vst.ptometry_number,
+		u.company_id,
+		vst.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number
+		FROM
+		jc_vst vst
+		JOIN sys_user u ON vst.vst_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON vst.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		crt.ptometry_number,
+		u.company_id,
+		crt.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number
+		FROM
+		jc_crt crt
+		JOIN sys_user u ON crt.crt_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON crt.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		rgp.ptometry_number,
+		u.company_id,
+		rgp.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number
+		FROM
+		jc_rgp rgp
+		JOIN sys_user u ON rgp.rgp_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON rgp.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		yp.ptometry_number,
+		u.company_id,
+		yp.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number
+		FROM
+		jc_yaopin yp
+		JOIN sys_user u ON yp.yp_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON yp.ptometry_number = s.ptometry_number
+		) aia
 		<where>
-			<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>
-			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
-			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
-			<if test="department !=null and department != ''">and u.store = #{department}</if>
-			<if test="username !=null and username != ''">and u.username = #{username}</if>
-			and (ur.role_id = 7)and (s.sale_type=1)
+			<if test="companyId !=null and companyId != ''">and  company_id in (#{companyId})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="department !=null and department != ''">and  store = #{department}</if>
+			<if test="username !=null and username != ''">and  username = #{username}</if>
+			and ( role_id = 7)and ( sale_type=1)
 		</where>
+        GROUP BY sale_number
+		) ai
+
+
 	</select>
 	<select id="findamountMoney" resultType="int">
 		SELECT
-		ifnull(sum(s.amount_money),0)  AS amountMoney
-
+		ifnull( sum( amount_money ), 0 ) AS amountMoney
 		FROM
-		sys_user u
-		JOIN sys_user_role ur ON u.user_id = ur.user_id
-		LEFT JOIN jc_tryresults try ON try.optometry_name = u.NAME
-		left join store_sales s on try.ptometry_number=s.ptometry_number
+		(
+		SELECT
+		ptometry_number,
+		company_id,
+		create_time,
+		username,
+		role_id,
+		sale_type,
+		store,
+		sale_number,
+		amount_money
+		FROM
+		(
+		SELECT
+		kjyy.ptometry_number,
+		u.company_id,
+		kjyy.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number,
+		s.amount_money
+		FROM
+		jc_kjyy kjyy
+		JOIN sys_user u ON kjyy.kjyy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON kjyy.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		kjjy.ptometry_number,
+		u.company_id,
+		kjjy.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number,
+		s.amount_money
+		FROM
+		jc_kjjy kjjy
+		JOIN sys_user u ON kjjy.kjjy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON kjjy.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		sgjj.ptometry_number,
+		u.company_id,
+		sgjj.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number,
+		s.amount_money
+		FROM
+		jc_sgjj sgjj
+		JOIN sys_user u ON sgjj.sgjj_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON sgjj.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		rx.ptometry_number,
+		u.company_id,
+		rx.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number,
+		s.amount_money
+		FROM
+		jc_rxjmjcj rx
+		JOIN sys_user u ON rx.rx_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON rx.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		zy.ptometry_number,
+		u.company_id,
+		zy.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number,
+		s.amount_money
+		FROM
+		jc_zy zy
+		JOIN sys_user u ON zy.zy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON zy.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		sjxl.ptometry_number,
+		u.company_id,
+		sjxl.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number,
+		s.amount_money
+		FROM
+		jc_sjxl sjxl
+		JOIN sys_user u ON sjxl.sjxl_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON sjxl.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		vst.ptometry_number,
+		u.company_id,
+		vst.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number,
+		s.amount_money
+		FROM
+		jc_vst vst
+		JOIN sys_user u ON vst.vst_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON vst.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		crt.ptometry_number,
+		u.company_id,
+		crt.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number,
+		s.amount_money
+		FROM
+		jc_crt crt
+		JOIN sys_user u ON crt.crt_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON crt.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		rgp.ptometry_number,
+		u.company_id,
+		rgp.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number,
+		s.amount_money
+		FROM
+		jc_rgp rgp
+		JOIN sys_user u ON rgp.rgp_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON rgp.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		yp.ptometry_number,
+		u.company_id,
+		yp.create_time,
+		u.username,
+		ur.role_id,
+		s.sale_type,
+		u.store,
+		s.sale_number,
+		s.amount_money
+		FROM
+		jc_yaopin yp
+		JOIN sys_user u ON yp.yp_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON yp.ptometry_number = s.ptometry_number
+		) aia
 		<where>
-			<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>
-			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
-			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
-			<if test="department !=null and department != ''">and u.store = #{department}</if>
-			<if test="username !=null and username != ''">and u.username = #{username}</if>
-			and (ur.role_id = 7)and (s.sale_type=1)
+			<if test="companyId !=null and companyId != ''">and  company_id in (#{companyId})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="department !=null and department != ''">and  store = #{department}</if>
+			<if test="username !=null and username != ''">and  username = #{username}</if>
+			and ( role_id = 7)and ( sale_type=1)
 		</where>
+		GROUP BY
+		sale_number
+		) ai
+
 	</select>
 	<select id="findprimeMoney" resultType="int">
 		SELECT
@@ -343,22 +868,249 @@
 		</where>
 	</select>
 	<select id="findGoods" resultType="com.shiguang.storeSales.domain.SalesDO">
-		select u.store,u.username,u.name ,
-		s.sale_number,s.goods_num,s.store_name,s.store_describe,s.classtype,s.store_count, s.store_unit,s.amount_money
-		from  sys_user u
-		join sys_user_role ur on u.user_id=ur.user_id
-		join jc_result r on r.optometry_name=u.name
-		join store_sales s on r.ptometry_number=s.ptometry_number
+		SELECT
+		company_id,
+		store,
+		username,
+		role_id,
+		NAME,
+		sale_number,
+		goods_num,
+		store_name,
+		store_describe,
+		classtype,
+		store_count,
+		store_unit,
+		amount_money,
+		sale_type,
+		create_time
+		FROM
+		(
+		SELECT
+		u.company_id,
+		u.store,
+		u.username,
+		ur.role_id,
+		u.NAME,
+		s.sale_number,
+		s.goods_num,
+		s.store_name,
+		s.store_describe,
+		s.classtype,
+		s.store_count,
+		s.store_unit,
+		s.amount_money,
+		s.sale_type,
+		kjyy.create_time
+		FROM
+		jc_kjyy kjyy
+		JOIN sys_user u ON kjyy.kjyy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON kjyy.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		u.company_id,
+		u.store,
+		u.username,
+		ur.role_id,
+		u.NAME,
+		s.sale_number,
+		s.goods_num,
+		s.store_name,
+		s.store_describe,
+		s.classtype,
+		s.store_count,
+		s.store_unit,
+		s.amount_money,
+		s.sale_type,
+		kjjy.create_time
+		FROM
+		jc_kjjy kjjy
+		JOIN sys_user u ON kjjy.kjjy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON kjjy.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		u.company_id,
+		u.store,
+		u.username,
+		ur.role_id,
+		u.NAME,
+		s.sale_number,
+		s.goods_num,
+		s.store_name,
+		s.store_describe,
+		s.classtype,
+		s.store_count,
+		s.store_unit,
+		s.amount_money,
+		s.sale_type,
+		sgjj.create_time
+		FROM
+		jc_sgjj sgjj
+		JOIN sys_user u ON sgjj.sgjj_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON sgjj.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		u.company_id,
+		u.store,
+		u.username,
+		ur.role_id,
+		u.NAME,
+		s.sale_number,
+		s.goods_num,
+		s.store_name,
+		s.store_describe,
+		s.classtype,
+		s.store_count,
+		s.store_unit,
+		s.amount_money,
+		s.sale_type,
+		rx.create_time
+		FROM
+		jc_rxjmjcj rx
+		JOIN sys_user u ON rx.rx_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON rx.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		u.company_id,
+		u.store,
+		u.username,
+		ur.role_id,
+		u.NAME,
+		s.sale_number,
+		s.goods_num,
+		s.store_name,
+		s.store_describe,
+		s.classtype,
+		s.store_count,
+		s.store_unit,
+		s.amount_money,
+		s.sale_type,
+		zy.create_time
+		FROM
+		jc_zy zy
+		JOIN sys_user u ON zy.zy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON zy.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		u.company_id,
+		u.store,
+		u.username,
+		ur.role_id,
+		u.NAME,
+		s.sale_number,
+		s.goods_num,
+		s.store_name,
+		s.store_describe,
+		s.classtype,
+		s.store_count,
+		s.store_unit,
+		s.amount_money,
+		s.sale_type,
+		sjxl.create_time
+		FROM
+		jc_sjxl sjxl
+		JOIN sys_user u ON sjxl.sjxl_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON sjxl.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		u.company_id,
+		u.store,
+		u.username,
+		ur.role_id,
+		u.NAME,
+		s.sale_number,
+		s.goods_num,
+		s.store_name,
+		s.store_describe,
+		s.classtype,
+		s.store_count,
+		s.store_unit,
+		s.amount_money,
+		s.sale_type,
+		vst.create_time
+		FROM
+		jc_vst vst
+		JOIN sys_user u ON vst.vst_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON vst.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		u.company_id,
+		u.store,
+		u.username,
+		ur.role_id,
+		u.NAME,
+		s.sale_number,
+		s.goods_num,
+		s.store_name,
+		s.store_describe,
+		s.classtype,
+		s.store_count,
+		s.store_unit,
+		s.amount_money,
+		s.sale_type,
+		crt.create_time
+		FROM
+		jc_crt crt
+		JOIN sys_user u ON crt.crt_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON crt.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		u.company_id,
+		u.store,
+		u.username,
+		ur.role_id,
+		u.NAME,
+		s.sale_number,
+		s.goods_num,
+		s.store_name,
+		s.store_describe,
+		s.classtype,
+		s.store_count,
+		s.store_unit,
+		s.amount_money,
+		s.sale_type,
+		rgp.create_time
+		FROM
+		jc_rgp rgp
+		JOIN sys_user u ON rgp.rgp_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON rgp.ptometry_number = s.ptometry_number UNION ALL
+		SELECT
+		u.company_id,
+		u.store,
+		u.username,
+		ur.role_id,
+		u.NAME,
+		s.sale_number,
+		s.goods_num,
+		s.store_name,
+		s.store_describe,
+		s.classtype,
+		s.store_count,
+		s.store_unit,
+		s.amount_money,
+		s.sale_type,
+		yp.create_time
+		FROM
+		jc_yaopin yp
+		JOIN sys_user u ON yp.yp_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+		JOIN store_sales s ON yp.ptometry_number = s.ptometry_number
+		) aia
 		<where>
-			<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>
-			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(r.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
-			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(r.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
-			<if test="department !=null and department != ''">and u.store = #{department}</if>
-			<if test="username !=null and username != ''">and u.username = #{username}</if>
-			<if test="storeDescribe != null and storeDescribe != ''">and s.store_describe LIKE concat(concat('%', #{storeDescribe}),'%')</if>
-			<if test="brandname != null and brandname != ''">and  s.store_name LIKE concat(concat('%', #{brandname}),'%')</if>
-			and (ur.role_id = 7) and (s.sale_type=1)
+			<if test="companyId !=null and companyId != ''">and  company_id in (#{companyId})</if>
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="department !=null and department != ''">and  store = #{department}</if>
+			<if test="username !=null and username != ''">and  username = #{username}</if>
+			<if test="storeDescribe != null and storeDescribe != ''">and  store_describe LIKE concat(concat('%', #{storeDescribe}),'%')</if>
+			<if test="brandname != null and brandname != ''">and   store_name LIKE concat(concat('%', #{brandname}),'%')</if>
+			and ( role_id = 7) and ( sale_type=1)
 		</where>
+		GROUP BY
+		sale_number
+
+
 	</select>
 
 	<select id="findJj" resultType="com.shiguang.product.domain.ProducaDO">
@@ -420,130 +1172,315 @@
 	</select>
 
 
-
-    <select id="findDoctorPeople" resultType="com.shiguang.storeSales.domain.SalesDO">
-        select  u.store,u.username,u.name
-        from  sys_user u
-        join sys_user_role ur on u.user_id=ur.user_id
+    <select id="ygDoctorUse" resultType="com.shiguang.storeSales.domain.SalesDO">
+        SELECT
+        ptometry_number,
+        company_id,
+        create_time,
+        username,
+        role_id,
+        sale_type,
+        store,
+        sale_number,
+        doctor
+        FROM
+        (
+        SELECT
+        kjyy.ptometry_number,
+        u.company_id,
+        kjyy.create_time,
+        u.username,
+        ur.role_id,
+        s.sale_type,
+        u.store,
+        s.sale_number,
+        kjyy.kjyy_doctor as doctor
+        FROM
+        jc_kjyy kjyy
+        JOIN sys_user u ON kjyy.kjyy_optometry_name = u.
+        NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+        JOIN store_sales s ON kjyy.ptometry_number = s.ptometry_number UNION ALL
+        SELECT
+        kjjy.ptometry_number,
+        u.company_id,
+        kjjy.create_time,
+        u.username,
+        ur.role_id,
+        s.sale_type,
+        u.store,
+        s.sale_number,
+        kjjy.kjjy_doctor  as doctor
+        FROM
+        jc_kjjy kjjy
+        JOIN sys_user u ON kjjy.kjjy_optometry_name = u.
+        NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+        JOIN store_sales s ON kjjy.ptometry_number = s.ptometry_number UNION ALL
+        SELECT
+        sgjj.ptometry_number,
+        u.company_id,
+        sgjj.create_time,
+        u.username,
+        ur.role_id,
+        s.sale_type,
+        u.store,
+        s.sale_number,
+        sgjj.sgjj_doctor  as doctor
+        FROM
+        jc_sgjj sgjj
+        JOIN sys_user u ON sgjj.sgjj_optometry_name = u.
+        NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+        JOIN store_sales s ON sgjj.ptometry_number = s.ptometry_number UNION ALL
+        SELECT
+        rx.ptometry_number,
+        u.company_id,
+        rx.create_time,
+        u.username,
+        ur.role_id,
+        s.sale_type,
+        u.store,
+        s.sale_number,
+        rx.rx_doctor  as doctor
+        FROM
+        jc_rxjmjcj rx
+        JOIN sys_user u ON rx.rx_optometry_name = u.
+        NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+        JOIN store_sales s ON rx.ptometry_number = s.ptometry_number UNION ALL
+        SELECT
+        zy.ptometry_number,
+        u.company_id,
+        zy.create_time,
+        u.username,
+        ur.role_id,
+        s.sale_type,
+        u.store,
+        s.sale_number,
+        zy.zy_doctor  as doctor
+        FROM
+        jc_zy zy
+        JOIN sys_user u ON zy.zy_optometry_name = u.
+        NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+        JOIN store_sales s ON zy.ptometry_number = s.ptometry_number UNION ALL
+        SELECT
+        sjxl.ptometry_number,
+        u.company_id,
+        sjxl.create_time,
+        u.username,
+        ur.role_id,
+        s.sale_type,
+        u.store,
+        s.sale_number,
+        sjxl.sjxl_doctor  as doctor
+        FROM
+        jc_sjxl sjxl
+        JOIN sys_user u ON sjxl.sjxl_optometry_name = u.
+        NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+        JOIN store_sales s ON sjxl.ptometry_number = s.ptometry_number UNION ALL
+        SELECT
+        vst.ptometry_number,
+        u.company_id,
+        vst.create_time,
+        u.username,
+        ur.role_id,
+        s.sale_type,
+        u.store,
+        s.sale_number,
+        vst.vst_doctor  as doctor
+        FROM
+        jc_vst vst
+        JOIN sys_user u ON vst.vst_optometry_name = u.
+        NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+        JOIN store_sales s ON vst.ptometry_number = s.ptometry_number UNION ALL
+        SELECT
+        crt.ptometry_number,
+        u.company_id,
+        crt.create_time,
+        u.username,
+        ur.role_id,
+        s.sale_type,
+        u.store,
+        s.sale_number,
+        crt.crt_doctor  as doctor
+        FROM
+        jc_crt crt
+        JOIN sys_user u ON crt.crt_optometry_name = u.
+        NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+        JOIN store_sales s ON crt.ptometry_number = s.ptometry_number UNION ALL
+        SELECT
+        rgp.ptometry_number,
+        u.company_id,
+        rgp.create_time,
+        u.username,
+        ur.role_id,
+        s.sale_type,
+        u.store,
+        s.sale_number,
+        rgp.rgp_doctor  as doctor
+        FROM
+        jc_rgp rgp
+        JOIN sys_user u ON rgp.rgp_optometry_name = u.
+        NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+        JOIN store_sales s ON rgp.ptometry_number = s.ptometry_number UNION ALL
+        SELECT
+        yp.ptometry_number,
+        u.company_id,
+        yp.create_time,
+        u.username,
+        ur.role_id,
+        s.sale_type,
+        u.store,
+        s.sale_number,
+        yp.yp_doctor  as doctor
+        FROM
+        jc_yaopin yp
+        JOIN sys_user u ON yp.yp_optometry_name = u.
+        NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
+        JOIN store_sales s ON yp.ptometry_number = s.ptometry_number
+        ) aia
         <where>
-            <if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>
-            <if test="department !=null and department != ''">and u.store = #{department}</if>
-            and (ur.role_id = 9)
+            <if test="companyId !=null and companyId != ''">and  company_id in (#{companyId})</if>
+            <if test="settleDateStart !=null and settleDateStart != ''"> and date_format( create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+            <if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+            <if test="department !=null and department != ''">and  store = #{department}</if>
+            <if test="username !=null and username != ''">and  username = #{username}</if>
+            <if test="storeDescribe != null and storeDescribe != ''">and  store_describe LIKE concat(concat('%', #{storeDescribe}),'%')</if>
+            <if test="brandname != null and brandname != ''">and   store_name LIKE concat(concat('%', #{brandname}),'%')</if>
+            and ( role_id = 7) and ( sale_type=1)
         </where>
-        GROUP BY u.username
+        GROUP BY
+        sale_number
+
+
     </select>
-
-
-
-	<select id="findCfCount" resultType="int">
-		SELECT
-		count( 0 )
-		FROM
-		(
+	<select id="ygDoctor" resultType="com.shiguang.storeSales.domain.SalesDO">
 		SELECT
 		ptometry_number,
 		company_id,
+		create_time,
 		username,
 		role_id,
-		create_time,
-		store
+		store,
+		doctor
 		FROM
 		(
 		SELECT
-		k.ptometry_number,
+		kjyy.ptometry_number,
 		u.company_id,
+		kjyy.create_time,
 		u.username,
 		ur.role_id,
-		jg.create_time,
-		u.store
+		u.store,
+		kjyy.kjyy_doctor AS doctor
 		FROM
-		jc_kjjy k
-		JOIN jc_result jg ON jg.ptometry_number = k.ptometry_number
-		JOIN sys_user u ON k.kjjy_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
+		jc_kjyy kjyy
+		JOIN sys_user u ON kjyy.kjyy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
 		SELECT
-		ky.ptometry_number,
+		kjjy.ptometry_number,
 		u.company_id,
+		kjjy.create_time,
 		u.username,
 		ur.role_id,
-		jg.create_time,
-		u.store
+		u.store,
+		kjjy.kjjy_doctor AS doctor
 		FROM
-		jc_kjyy ky
-		JOIN jc_result jg ON jg.ptometry_number = ky.ptometry_number
-		JOIN sys_user u ON ky.kjyy_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
+		jc_kjjy kjjy
+		JOIN sys_user u ON kjjy.kjjy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
 		SELECT
-		sg.ptometry_number,
+		sgjj.ptometry_number,
 		u.company_id,
+		sgjj.create_time,
 		u.username,
 		ur.role_id,
-		jg.create_time,
-		u.store
+		u.store,
+		sgjj.sgjj_doctor AS doctor
 		FROM
-		jc_sgjj sg
-		JOIN jc_result jg ON jg.ptometry_number = sg.ptometry_number
-		JOIN sys_user u ON sg.sgjj_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
+		jc_sgjj sgjj
+		JOIN sys_user u ON sgjj.sgjj_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
 		SELECT
-		z.ptometry_number,
+		rx.ptometry_number,
 		u.company_id,
+		rx.create_time,
 		u.username,
 		ur.role_id,
-		jg.create_time,
-		u.store
+		u.store,
+		rx.rx_doctor AS doctor
 		FROM
-		jc_zy z
-		JOIN jc_result jg ON jg.ptometry_number = z.ptometry_number
-		JOIN sys_user u ON z.zy_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
+		jc_rxjmjcj rx
+		JOIN sys_user u ON rx.rx_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
 		SELECT
-		x.ptometry_number,
+		zy.ptometry_number,
 		u.company_id,
+		zy.create_time,
 		u.username,
 		ur.role_id,
-		jg.create_time,
-		u.store
+		u.store,
+		zy.zy_doctor AS doctor
 		FROM
-		jc_rxjmjcj x
-		JOIN jc_result jg ON jg.ptometry_number = x.ptometry_number
-		JOIN sys_user u ON x.rx_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
+		jc_zy zy
+		JOIN sys_user u ON zy.zy_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
 		SELECT
-		sx.ptometry_number,
+		sjxl.ptometry_number,
 		u.company_id,
+		sjxl.create_time,
 		u.username,
 		ur.role_id,
-		jg.create_time,
-		u.store
+		u.store,
+		sjxl.sjxl_doctor AS doctor
 		FROM
-		jc_sjxl sx
-		JOIN jc_result jg ON jg.ptometry_number = sx.ptometry_number
-		JOIN sys_user u ON sx.sjxl_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
+		jc_sjxl sjxl
+		JOIN sys_user u ON sjxl.sjxl_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
 		SELECT
-		rg.ptometry_number,
+		vst.ptometry_number,
 		u.company_id,
+		vst.create_time,
 		u.username,
 		ur.role_id,
-		jg.create_time,
-		u.store
+		u.store,
+		vst.vst_doctor AS doctor
 		FROM
-		jc_rgp rg
-		JOIN jc_result jg ON jg.ptometry_number = rg.ptometry_number
-		JOIN sys_user u ON rg.rgp_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
+		jc_vst vst
+		JOIN sys_user u ON vst.vst_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
 		SELECT
-		cr.ptometry_number,
+		crt.ptometry_number,
 		u.company_id,
+		crt.create_time,
 		u.username,
 		ur.role_id,
-		jg.create_time,
-		u.store
+		u.store,
+		crt.crt_doctor AS doctor
 		FROM
-		jc_crt cr
-		JOIN jc_result jg ON jg.ptometry_number = cr.ptometry_number
-		JOIN sys_user u ON cr.crt_doctor = u.
+		jc_crt crt
+		JOIN sys_user u ON crt.crt_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
+		SELECT
+		rgp.ptometry_number,
+		u.company_id,
+		rgp.create_time,
+		u.username,
+		ur.role_id,
+		u.store,
+		rgp.rgp_doctor AS doctor
+		FROM
+		jc_rgp rgp
+		JOIN sys_user u ON rgp.rgp_optometry_name = u.
+		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION ALL
+		SELECT
+		yp.ptometry_number,
+		u.company_id,
+		yp.create_time,
+		u.username,
+		ur.role_id,
+		u.store,
+		yp.yp_doctor AS doctor
+		FROM
+		jc_yaopin yp
+		JOIN sys_user u ON yp.yp_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
 		) aia
 		<where>
@@ -552,149 +1489,286 @@
 			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="department !=null and department != ''">and  store = #{department}</if>
 			<if test="username !=null and username != ''">and  username = #{username}</if>
-			and ( role_id = 9)
+			<if test="storeDescribe != null and storeDescribe != ''">and  store_describe LIKE concat(concat('%', #{storeDescribe}),'%')</if>
+			<if test="brandname != null and brandname != ''">and   store_name LIKE concat(concat('%', #{brandname}),'%')</if>
+			and ( role_id = 7)
 		</where>
-		) aia
-
 	</select>
 
+	<!--<select id="findDoctorPeople" resultType="com.shiguang.storeSales.domain.SalesDO">-->
+		<!--select  u.store,u.username,u.name-->
+		<!--from  sys_user u-->
+		<!--join sys_user_role ur on u.user_id=ur.user_id-->
+		<!--<where>-->
+			<!--<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>-->
+			<!--<if test="department !=null and department != ''">and u.store = #{department}</if>-->
+			<!--and (ur.role_id = 9)-->
+		<!--</where>-->
+		<!--GROUP BY u.username-->
+	<!--</select>-->
 
-	<select id="findCfUseCount"  resultType="int">
-		SELECT
-		count( 0 )
-		FROM
-		(
-		SELECT
-		ptometry_number,
-		company_id,
-		username,
-		role_id,
-		create_time,
-		store ,
-		sale_type
-		FROM
-		(
-		SELECT
-		k.ptometry_number,
-		u.company_id,
-		u.username,
-		ur.role_id,
-		jg.create_time,
-		u.store ,
-		sa.sale_type
-		FROM
-		jc_kjjy k
-		JOIN store_sales sa ON sa.ptometry_number = k.ptometry_number
-		JOIN jc_result jg ON jg.ptometry_number = k.ptometry_number
-		JOIN sys_user u ON k.kjjy_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
-		SELECT
-		ky.ptometry_number,
-		u.company_id,
-		u.username,
-		ur.role_id,
-		jg.create_time,
-		u.store ,
-		sa.sale_type
-		FROM
-		jc_kjyy ky
-		JOIN store_sales sa ON sa.ptometry_number = ky.ptometry_number
-		JOIN jc_result jg ON jg.ptometry_number = ky.ptometry_number
-		JOIN sys_user u ON ky.kjyy_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
-		SELECT
-		sg.ptometry_number,
-		u.company_id,
-		u.username,
-		ur.role_id,
-		jg.create_time,
-		u.store ,
-		sa.sale_type
-		FROM
-		jc_sgjj sg
-		JOIN store_sales sa ON sa.ptometry_number = sg.ptometry_number
-		JOIN jc_result jg ON jg.ptometry_number = sg.ptometry_number
-		JOIN sys_user u ON sg.sgjj_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
-		SELECT
-		z.ptometry_number,
-		u.company_id,
-		u.username,
-		ur.role_id,
-		jg.create_time,
-		u.store ,
-		sa.sale_type
-		FROM
-		jc_zy z
-		JOIN store_sales sa ON sa.ptometry_number = z.ptometry_number
-		JOIN jc_result jg ON jg.ptometry_number = z.ptometry_number
-		JOIN sys_user u ON z.zy_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
-		SELECT
-		x.ptometry_number,
-		u.company_id,
-		u.username,
-		ur.role_id,
-		jg.create_time,
-		u.store ,
-		sa.sale_type
-		FROM
-		jc_rxjmjcj x
-		LEFT JOIN store_sales sa ON sa.ptometry_number = x.ptometry_number
-		JOIN jc_result jg ON jg.ptometry_number = x.ptometry_number
-		JOIN sys_user u ON x.rx_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
-		SELECT
-		sx.ptometry_number,
-		u.company_id,
-		u.username,
-		ur.role_id,
-		jg.create_time,
-		u.store ,
-		sa.sale_type
-		FROM
-		jc_sjxl sx
-		JOIN store_sales sa ON sa.ptometry_number = sx.ptometry_number
-		JOIN jc_result jg ON jg.ptometry_number = sx.ptometry_number
-		JOIN sys_user u ON sx.sjxl_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
-		SELECT
-		rg.ptometry_number,
-		u.company_id,
-		u.username,
-		ur.role_id,
-		jg.create_time,
-		u.store ,
-		sa.sale_type
-		FROM
-		jc_rgp rg
-		JOIN store_sales sa ON sa.ptometry_number = rg.ptometry_number
-		JOIN jc_result jg ON jg.ptometry_number = rg.ptometry_number
-		JOIN sys_user u ON rg.rgp_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION
-		SELECT
-		cr.ptometry_number,
-		u.company_id,
-		u.username,
-		ur.role_id,
-		jg.create_time,
-		u.store ,
-		sa.sale_type
-		FROM
-		jc_crt cr
-		JOIN store_sales sa ON sa.ptometry_number = cr.ptometry_number
-		JOIN jc_result jg ON jg.ptometry_number = cr.ptometry_number
-		JOIN sys_user u ON cr.crt_doctor = u.
-		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		) aia
-		<where>
-			<if test="companyId !=null and companyId != ''">and  company_id in (#{companyId})</if>
-			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
-			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
-			<if test="department !=null and department != ''">and  store = #{department}</if>
-			<if test="username !=null and username != ''">and  username = #{username}</if>
-			and (role_id = 9)and ( sale_type=1)
-		</where>
-		) aia
-	</select>
+
+
+	<!--<select id="findCfCount" resultType="int">-->
+		<!--SELECT-->
+		<!--count( 0 )-->
+		<!--FROM-->
+		<!--(-->
+		<!--SELECT-->
+		<!--ptometry_number,-->
+		<!--company_id,-->
+		<!--username,-->
+		<!--role_id,-->
+		<!--create_time,-->
+		<!--store-->
+		<!--FROM-->
+		<!--(-->
+		<!--SELECT-->
+		<!--k.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store-->
+		<!--FROM-->
+		<!--jc_kjjy k-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = k.ptometry_number-->
+		<!--JOIN sys_user u ON k.kjjy_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--ky.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store-->
+		<!--FROM-->
+		<!--jc_kjyy ky-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = ky.ptometry_number-->
+		<!--JOIN sys_user u ON ky.kjyy_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--sg.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store-->
+		<!--FROM-->
+		<!--jc_sgjj sg-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = sg.ptometry_number-->
+		<!--JOIN sys_user u ON sg.sgjj_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--z.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store-->
+		<!--FROM-->
+		<!--jc_zy z-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = z.ptometry_number-->
+		<!--JOIN sys_user u ON z.zy_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--x.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store-->
+		<!--FROM-->
+		<!--jc_rxjmjcj x-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = x.ptometry_number-->
+		<!--JOIN sys_user u ON x.rx_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--sx.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store-->
+		<!--FROM-->
+		<!--jc_sjxl sx-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = sx.ptometry_number-->
+		<!--JOIN sys_user u ON sx.sjxl_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--rg.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store-->
+		<!--FROM-->
+		<!--jc_rgp rg-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = rg.ptometry_number-->
+		<!--JOIN sys_user u ON rg.rgp_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--cr.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store-->
+		<!--FROM-->
+		<!--jc_crt cr-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = cr.ptometry_number-->
+		<!--JOIN sys_user u ON cr.crt_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id-->
+		<!--) aia-->
+		<!--<where>-->
+			<!--<if test="companyId !=null and companyId != ''">and  company_id in (#{companyId})</if>-->
+			<!--<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>-->
+			<!--<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>-->
+			<!--<if test="department !=null and department != ''">and  store = #{department}</if>-->
+			<!--<if test="username !=null and username != ''">and  username = #{username}</if>-->
+			<!--and ( role_id = 9)-->
+		<!--</where>-->
+		<!--) aia-->
+
+	<!--</select>-->
+
+
+	<!--<select id="findCfUseCount"  resultType="int">-->
+		<!--SELECT-->
+		<!--count( 0 )-->
+		<!--FROM-->
+		<!--(-->
+		<!--SELECT-->
+		<!--ptometry_number,-->
+		<!--company_id,-->
+		<!--username,-->
+		<!--role_id,-->
+		<!--create_time,-->
+		<!--store ,-->
+		<!--sale_type-->
+		<!--FROM-->
+		<!--(-->
+		<!--SELECT-->
+		<!--k.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store ,-->
+		<!--sa.sale_type-->
+		<!--FROM-->
+		<!--jc_kjjy k-->
+		<!--JOIN store_sales sa ON sa.ptometry_number = k.ptometry_number-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = k.ptometry_number-->
+		<!--JOIN sys_user u ON k.kjjy_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--ky.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store ,-->
+		<!--sa.sale_type-->
+		<!--FROM-->
+		<!--jc_kjyy ky-->
+		<!--JOIN store_sales sa ON sa.ptometry_number = ky.ptometry_number-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = ky.ptometry_number-->
+		<!--JOIN sys_user u ON ky.kjyy_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--sg.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store ,-->
+		<!--sa.sale_type-->
+		<!--FROM-->
+		<!--jc_sgjj sg-->
+		<!--JOIN store_sales sa ON sa.ptometry_number = sg.ptometry_number-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = sg.ptometry_number-->
+		<!--JOIN sys_user u ON sg.sgjj_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--z.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store ,-->
+		<!--sa.sale_type-->
+		<!--FROM-->
+		<!--jc_zy z-->
+		<!--JOIN store_sales sa ON sa.ptometry_number = z.ptometry_number-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = z.ptometry_number-->
+		<!--JOIN sys_user u ON z.zy_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--x.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store ,-->
+		<!--sa.sale_type-->
+		<!--FROM-->
+		<!--jc_rxjmjcj x-->
+		<!--LEFT JOIN store_sales sa ON sa.ptometry_number = x.ptometry_number-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = x.ptometry_number-->
+		<!--JOIN sys_user u ON x.rx_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--sx.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store ,-->
+		<!--sa.sale_type-->
+		<!--FROM-->
+		<!--jc_sjxl sx-->
+		<!--JOIN store_sales sa ON sa.ptometry_number = sx.ptometry_number-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = sx.ptometry_number-->
+		<!--JOIN sys_user u ON sx.sjxl_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--rg.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store ,-->
+		<!--sa.sale_type-->
+		<!--FROM-->
+		<!--jc_rgp rg-->
+		<!--JOIN store_sales sa ON sa.ptometry_number = rg.ptometry_number-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = rg.ptometry_number-->
+		<!--JOIN sys_user u ON rg.rgp_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id UNION-->
+		<!--SELECT-->
+		<!--cr.ptometry_number,-->
+		<!--u.company_id,-->
+		<!--u.username,-->
+		<!--ur.role_id,-->
+		<!--jg.create_time,-->
+		<!--u.store ,-->
+		<!--sa.sale_type-->
+		<!--FROM-->
+		<!--jc_crt cr-->
+		<!--JOIN store_sales sa ON sa.ptometry_number = cr.ptometry_number-->
+		<!--JOIN jc_result jg ON jg.ptometry_number = cr.ptometry_number-->
+		<!--JOIN sys_user u ON cr.crt_doctor = u.-->
+		<!--NAME JOIN sys_user_role ur ON u.user_id = ur.user_id-->
+		<!--) aia-->
+		<!--<where>-->
+			<!--<if test="companyId !=null and companyId != ''">and  company_id in (#{companyId})</if>-->
+			<!--<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>-->
+			<!--<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>-->
+			<!--<if test="department !=null and department != ''">and  store = #{department}</if>-->
+			<!--<if test="username !=null and username != ''">and  username = #{username}</if>-->
+			<!--and (role_id = 9)and ( sale_type=1)-->
+		<!--</where>-->
+		<!--) aia-->
+	<!--</select>-->
 </mapper>

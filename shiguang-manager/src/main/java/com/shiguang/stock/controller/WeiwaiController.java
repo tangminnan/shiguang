@@ -239,9 +239,11 @@ public class WeiwaiController {
                     JpdzDO jpdzDO = weiwaiService.getBrand(num);
                     String brandnum = jpdzDO.getBrandnum();
                     String brandname = jpdzDO.getBrandname();
+                    String viewGoodName = jpdzDO.getViewGoodName();
                     weiwaiDO.setNum(num);
                     weiwaiDO.setBrandnum(brandnum);
                     weiwaiDO.setBrandname(brandname);
+                    weiwaiDO.setViewGoodName(viewGoodName);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     weiwaiDO.setNum("");
                     weiwaiDO.setBrandnum("");

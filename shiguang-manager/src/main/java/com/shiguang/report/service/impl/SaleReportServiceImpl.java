@@ -147,32 +147,43 @@ public class SaleReportServiceImpl implements SaleReportService {
     }
 
     @Override
-    public List<SalesDO> findDoctorPeople(Map<String, Object> map) {
-        return saleReportDao.findDoctorPeople(map);
+    public List<SalesDO> ygDoctorUse(Map<String, Object> map) {
+        return saleReportDao.ygDoctorUse(map);
     }
 
     @Override
-    public int findCfCount(Map<String, Object> map) {
-        return saleReportDao.findCfCount(map);
+    public List<SalesDO> ygDoctor(Map<String, Object> map) {
+        return saleReportDao.ygDoctor(map);
     }
 
-    @Override
-    public int findCfUseCount(Map<String, Object> map) {
-        return saleReportDao.findCfUseCount(map);
-    }
+    //    @Override
+//    public List<SalesDO> findDoctorPeople(Map<String, Object> map) {
+//        return saleReportDao.findDoctorPeople(map);
+//    }
 
-    @Override
-    public int findCfamountMoney(Map<String, Object> map) {
-        return saleReportDao.findCfamountMoney(map);
-    }
+//    @Override
+//    public int findCfCount(Map<String, Object> map) {
+//        return saleReportDao.findCfCount(map);
+//    }
+//
+//    @Override
+//    public int findCfUseCount(Map<String, Object> map) {
+//        return saleReportDao.findCfUseCount(map);
+//    }
+//
+//    @Override
+//    public int findCfamountMoney(Map<String, Object> map) {
+//        return saleReportDao.findCfamountMoney(map);
+//    }
+//
+//    @Override
+//    public int findCfprimeMoney(Map<String, Object> map) {
+//        return saleReportDao.findCfamountMoney(map);
+//    }
+//
+//    @Override
+//    public List<SalesDO> findDoctorGoods(Map<String, Object> map) {
+//        return saleReportDao.findDoctorGoods(map);
+//    }
 
-    @Override
-    public int findCfprimeMoney(Map<String, Object> map) {
-        return saleReportDao.findCfamountMoney(map);
-    }
-
-    @Override
-    public List<SalesDO> findDoctorGoods(Map<String, Object> map) {
-        return saleReportDao.findDoctorGoods(map);
-    }
 }

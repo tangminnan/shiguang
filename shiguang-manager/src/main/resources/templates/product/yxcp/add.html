@@ -367,51 +367,7 @@
             }
         });
     }
-        // var a1 = document.getElementById("producNum");
-        // var a2 = document.getElementById("producCode");
-        // var cylId = document.getElementById("cylId");
-        // var sphId = document.getElementById("sphId");
-        // // console.log(cylId);
-        // // console.log(sphId);
-        // var sum;
-        // var a1_val = "3.00.00.000000000.0000";
-        // function change(e, k, s) {
-        //     a1.value = a1.value.substring(0, k) + e.value + a1.value.substring(s, 22);
-        //     a1_val = a1.value.substring(0, 7) + a1_val.substring(7, 22);
-        //     a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//黏贴
-        //     var texts=$("#brandnum option:selected").text();
-        //     // alert(texts)
-        //     $("#producName").val(texts);
-        // }
-        // function change1(e, err) {
-        //     var select1_val = e.options[e.options.selectedIndex].innerText
-        //     var select2_val = err.options[err.options.selectedIndex].innerText
-        //     // layer.alert(e.value,err.value)
-        //     if (e.value == "") {
-        //         select1_val = 0
-        //         //    layer.alert(select1_val)
-        //     } else if (err.value == "") {
-        //         select2_val = 0
-        //         // layer.alert(select2_val)
-        //     }
-        //     // console.log(select1_val,select2_val);
-        //     select1_val = ZF(select1_val)
-        //     select2_val = ZF(select2_val)
-        //     sum = select1_val.replace(".", "").replace("+", "").replace("-", "")
-        //         + select2_val.replace(".", "").replace("+", "").replace("-", "")
-        //     a1.value = a1.value.substring(0, 8) + sum.padEnd("9", "000000000") + a1.value.substring(17, 22);
-        //     a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");
-        //     console.log(a1.value.substring(18, 22));
-        // }
-        // function ZF(e) {
-        //     // layer.alert(e.indexOf("+"))
-        //     if (e.indexOf("+") == 0) {
-        //         e = "Z" + e
-        //     } else {
-        //         e = "F" + e
-        //     }
-        //     return e
-        // }
+
     var a1 = document.getElementById("producNum");
     var a2 = document.getElementById("producCode");
     var cylId = document.getElementById("cylId");
@@ -426,7 +382,7 @@
         a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");//黏贴
         var texts=$("#brandnum option:selected").text();
         // alert(texts)
-        $("#producName").val(texts);
+        // $("#producName").val(texts);
     }
     function change1(e, err) {
         var select1_val = e.options[e.options.selectedIndex].innerText

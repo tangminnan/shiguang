@@ -233,7 +233,9 @@
 			`departname`,
 			`fartj`,
 			`neartj`,
-			`tg`
+			`tg`,
+			`view_good_name`
+
 
 			)
 		values
@@ -285,7 +287,8 @@
 			#{departname},
 			#{fartj},
 			#{neartj},
-			#{tg}
+			#{tg},
+			#{viewGoodName}
 
 		)
 	</insert>
@@ -1433,7 +1436,7 @@
     <!--</select>-->
 
     <select id="getBrand" resultType="com.shiguang.product.domain.JpdzDO">
-      select b.brandnum,b.brandname from  aa_jpdz jpdz join c_brand b on jpdz.mfrsid=b.mfrsid and jpdz.brandnum=b.brandnum
+      select b.brandnum,b.brandname ,jpdz.view_good_name from   aa_jpdz jpdz join c_brand b on jpdz.mfrsid=b.mfrsid and jpdz.brandnum=b.brandnum
       where jpdz.produc_num = #{value}
     </select>
 

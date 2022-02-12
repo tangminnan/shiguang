@@ -2,6 +2,7 @@ package com.shiguang.report.controller;
 
 
 import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.line.domain.YgLineDO;
 import com.shiguang.mfrs.domain.CompanyDO;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.service.CompanyService;
@@ -10,6 +11,7 @@ import com.shiguang.product.domain.*;
 import com.shiguang.report.service.SaleReportService;
 
 import com.shiguang.storeSales.domain.SalesDO;
+import io.swagger.models.auth.In;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -898,5 +900,96 @@ public String Brand(String settleDateStart, String settleDateEnd,
         String createTime = sdf.format(date);
         model.addAttribute("createTime", createTime);
         return "saleReport/ygGoods";
+    }
+
+
+
+
+
+
+    @GetMapping("/doctorUse")
+    public String doctorUse(String settleDateStart, String settleDateEnd,
+                        String username, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("settleDateStart", settleDateStart);
+        map.put("settleDateEnd", settleDateEnd);
+        map.put("username", username);
+        model.addAttribute("settleDateStart", settleDateStart);
+        model.addAttribute("settleDateEnd", settleDateEnd);
+        model.addAttribute("username", username);
+        List<SalesDO> ygDoctor = saleReportService.ygDoctorUse(map);
+        List namelist=new ArrayList();
+        for (int i=0;i<ygDoctor.size();i++){
+            namelist.add(ygDoctor.get(i).getDoctor());
+        }
+        int count=1;
+        List<Map<String, Object>> doctorsCount = new ArrayList<>();
+
+        for (int i=0;i<namelist.size();i++){
+            count=1;
+            for (int j=i+1;j<namelist.size();j++){
+                if (namelist.get(i).equals(namelist.get(j))){
+                    count++;
+                    namelist.remove(j);
+                    j--;
+                }
+            }
+            String  doctors= (String) namelist.get(i);
+            Integer counts= count;
+            Map<String, Object> ygDoctormap = new HashMap<>();
+            ygDoctormap.put("doctors",doctors);
+            ygDoctormap.put("counts",counts);
+            doctorsCount.add( ygDoctormap);
+        }
+        model.addAttribute("doctorsCount", doctorsCount);
+        //———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String createTime = sdf.format(date);
+        model.addAttribute("createTime", createTime);
+        return "saleReport/ygDoctor";
+    }
+
+    @GetMapping("/doctor")
+    public String doctor(String settleDateStart, String settleDateEnd,
+                         String username, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("settleDateStart", settleDateStart);
+        map.put("settleDateEnd", settleDateEnd);
+        map.put("username", username);
+        model.addAttribute("settleDateStart", settleDateStart);
+        model.addAttribute("settleDateEnd", settleDateEnd);
+        model.addAttribute("username", username);
+        List<SalesDO> ygDoctor = saleReportService.ygDoctor(map);
+        List namelist=new ArrayList();
+        for (int i=0;i<ygDoctor.size();i++){
+            namelist.add(ygDoctor.get(i).getDoctor());
+        }
+        int count=1;
+        List<Map<String, Object>> doctorsCount = new ArrayList<>();
+
+        for (int i=0;i<namelist.size();i++){
+            count=1;
+            for (int j=i+1;j<namelist.size();j++){
+                if (namelist.get(i).equals(namelist.get(j))){
+                    count++;
+                    namelist.remove(j);
+                    j--;
+                }
+            }
+            String  doctors= (String) namelist.get(i);
+            Integer counts= count;
+            Map<String, Object> ygDoctormap = new HashMap<>();
+            ygDoctormap.put("doctors",doctors);
+            ygDoctormap.put("counts",counts);
+            doctorsCount.add( ygDoctormap);
+        }
+        model.addAttribute("doctorsCount", doctorsCount);
+        //———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String createTime = sdf.format(date);
+        model.addAttribute("createTime", createTime);
+        return "saleReport/ygDoctor";
     }
 }

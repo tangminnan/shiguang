@@ -115,6 +115,8 @@ public class WeiwaiDO implements Serializable {
 	private String departname;
 	//条码
 	private String QRCode;
+//	名称
+	private String viewGoodName;
 
 
 	/**
@@ -692,5 +694,13 @@ public class WeiwaiDO implements Serializable {
 
 	public void setQRCode(String QRCode) {
 		this.QRCode = QRCode;
+	}
+
+	public String getViewGoodName() {
+		return viewGoodName;
+	}
+
+	public void setViewGoodName(String viewGoodName) {
+		this.viewGoodName = viewGoodName;
 	}
 }

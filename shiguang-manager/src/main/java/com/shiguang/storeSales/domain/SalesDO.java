@@ -120,6 +120,12 @@ public class SalesDO implements Serializable {
 	private String righttg;
 	//左眼瞳高
 	private String lefttg;
+	//	医生
+	private String doctor;
+//	公司id
+	private String companyId;
+
+	private String role_id;
 	public void setRighttg(String righttg) {this.righttg = righttg;}
 
 	public String getRighttg() {return righttg;}
@@ -127,6 +133,30 @@ public class SalesDO implements Serializable {
 	public void setLefttg(String lefttg) {this.lefttg = lefttg;}
 
 	public String getLefttg() {return lefttg;}
+
+	public String getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(String doctor) {
+		this.doctor = doctor;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
+	public String getRole_id() {
+		return role_id;
+	}
+
+	public void setRole_id(String role_id) {
+		this.role_id = role_id;
+	}
 
 	public String getUsername() {
 		return username;
