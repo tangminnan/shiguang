@@ -174,7 +174,8 @@
 			`way`, 
 			`follow_time`, 
 			`visit_type`,
-			`status`
+			`status`,
+			`new_old`
 		)
 		values
 		(
@@ -224,7 +225,8 @@
 			#{way}, 
 			#{followTime}, 
 			#{visitType},
-			#{status}
+			#{status},
+			#{newOld}
 		)
 	</insert>
 	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.ResultDO">

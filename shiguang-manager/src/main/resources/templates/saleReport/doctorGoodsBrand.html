@@ -5,7 +5,7 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>验光师业绩统计表（品种）</title>
+<title>商品品种明细（医生）</title>
 <style type="text/css">
 	*{padding: 0;margin: 0;box-sizing: border-box;font-size: 14px;}
 	.fl{float: left;}
@@ -73,7 +73,6 @@
             $("#detailId").append(html);
         });
 
-
         function reportGoods(e){
             var brandnum=$(e).parent().prevAll().filter(".brandnum").html();
             var brandname=$(e).parent().prevAll().filter(".brandname").html();
@@ -84,7 +83,7 @@
             var selectGoods=$("#selectGoods").val();
             var newOld=$("#newOld").val();
 
-            window.open("/information/saleYanguang/goodsList?brandnum="+brandnum+"&brandname="+brandname+
+            window.open("/information/saleDoctor/goodsList?brandnum="+brandnum+"&brandname="+brandname+
                 "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&username="+username
 				+"&storeDescribe="+storeDescribe+"&selectGoods="+selectGoods+"&newOld="+newOld);
         }

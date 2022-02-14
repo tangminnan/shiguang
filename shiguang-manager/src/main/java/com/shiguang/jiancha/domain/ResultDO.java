@@ -113,6 +113,14 @@ public class ResultDO implements Serializable {
     //是否结算
     private String haveid;
 
+    private String newOld;
+    public String getNewOld() {
+        return newOld;
+    }
+
+    public void setNewOld(String newOld) {
+        this.newOld = newOld;
+    }
     public String getHaveid() {
         return haveid;
     }
@@ -128,6 +136,9 @@ public class ResultDO implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+
+
     /**
      * 设置：检查结论id
      */

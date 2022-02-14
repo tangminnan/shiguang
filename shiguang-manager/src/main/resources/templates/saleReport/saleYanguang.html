@@ -19,6 +19,14 @@
 								<input id="settleDateEnd" type="text"
 									   placeholder="结束日期">
 							</div>
+							<div id="choicenewOld" style="display: none" class="columns pull-right col-md-1.5 nopadding ">
+								<select  id="newOld" name="newOld"  data-actions-box="false"
+										 data-size="5" style="width: 200px;height: 40px;">
+									<option value="">--请选择新老院区--</option>
+									<option value="old">老院区</option>
+									<option value="new">新院区</option>
+								</select>
+							</div>
 							<div id="tab1" style="display: none" class="columns pull-right col-md-1.5 nopadding ">
 								<select  id="companyIds" name="companyIds"  data-actions-box="false"
 										data-size="5" style="width: 200px;height: 40px;">
@@ -46,49 +54,22 @@
 	<div th:include="include :: footer"></div>
 <script type="text/javascript">
     $(document).ready(function () {
-        var html=0;
         var company = $("#company").val();
         if (company=="") {
-            // html +="<tr>";
-            // html+="<td>所属公司</td>";
-            // html+="<td>";
-            // html+="<select id=\"companyIds\" name=\"companyId\" style=\"width: 200px\">";
-            // html+="<option value="">--请选择--</option>";
-            // html+="<option th:each=\"ls:${companyList}\" th:text=\"${ls.name}\" th:value=\"${ls.id}\"></option>";
-            // html+="</select>";
-            // html+="</td>";
-            // html+="<td>查询日期</td>";
-            // html+="<td>";
-            // html+="<input id='settleDateStart' name='settleDateStart' placeholder='开始日期' type='text' onclick='settleDateStart()' readonly/>至<input id='settleDateEnd' name='settleDateEnd' placeholder='结束日期' type='text' onclick='settleDateEnd()' readonly/>";
-            // html+="</td>";
-            // html+="</tr>";
-            // html +="<tr>";
-            // html +="<td>销售门店：</td>";
-            // html +="<td colspan='4'>";
-            // html +="<label class='text'>";
-            // html +="<textarea id='departments' name='departments' rows='3' readonly></textarea>";
-            // html +="<input type='button' class='XZ-btn' value='选择' onclick='choiceDepartment()'/>";
-            // html +="</label>";
-            // html +="</td>";
-            // html +="</tr>";
+            newOld.style="display: none";
             tab1.style="display: block";
             tab2.style="display: block";
             tab3.style="display: block;margin-top: 10px;";
         }else if (company!="") {
-            // $("#gs").remove();
-            // $("#bm").remove();
-            // html +="<tr>";
-            // html+="<td>查询日期</td>";
-            // html+="<td>";
-            // html+="<input id='settleDateStart' name='settleDateStart' placeholder='开始日期' type='text' onclick='settleDateStart()' readonly/>至<input id='settleDateEnd' name='settleDateEnd' placeholder='结束日期' type='text' onclick='settleDateEnd()' readonly/>";
-            // html+="</td>";
-            // html+="</tr>";
-            // $("#detailId").append(html);
+            if (company==1){
+                choicenewOld.style="display: block";
+            } else {
+                choicenewOld.style="display: none";
+            }
             tab1.style="display: none";
             tab2.style="display: none";
             tab3.style="display: none";
         }
-
     });
     laydate.render({
         elem: '#settleDateStart',
@@ -101,17 +82,6 @@
         type: 'date'
     });
     function choiceDepartment() {
-        // var companyId;
-        // var company = $("#company").val();
-        // var companyIds = $("#companyIds").val();
-        // if(company==""){
-        //     companyId=0;
-        // }else if(company!=""){
-        //     companyId=companyIds;
-        // }
-        // if(company=="" && companyIds!=""){
-        //     companyId=companyIds;
-        // }
         var companyId;
         var company = $("#company").val();
         var companyIds = $("#companyIds").val();
@@ -168,8 +138,14 @@
         }else {
             departments=departments;
         }
+        var newOld = $("#newOld").val();
+        if(newOld=="" || newOld==undefined){
+            newOld="";
+        }else {
+            newOld=newOld;
+        }
         window.open("/information/saleYanguang/findall/?companyId=" + companyId + "&settleDateStart=" + settleDateStart
-            + "&settleDateEnd=" + settleDateEnd+ "&departments=" + departments);
+            + "&settleDateEnd=" + settleDateEnd+ "&departments=" + departments+ "&newOld=" + newOld);
 
     }
 </script>

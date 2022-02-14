@@ -33,7 +33,6 @@ public interface SaleReportService {
     int findUseCount(Map<String,Object> map);
     int findamountMoney(Map<String,Object> map);
 
-    int findprimeMoney(Map<String,Object> map);
     List<SalesDO> findGoods(Map<String,Object> map);
 
     ProducaDO findJj(String goodNum);
@@ -49,15 +48,15 @@ public interface SaleReportService {
     ShiguangDO findsg(String goodNum);
 
 
-//    List<SalesDO> findDoctorPeople(Map<String,Object> map);
-//    int findCfCount(Map<String,Object> map);
-//    int findCfUseCount(Map<String,Object> map);
-//    int findCfamountMoney(Map<String,Object> map);
-//    int findCfprimeMoney(Map<String,Object> map);
-//    List<SalesDO> findDoctorGoods(Map<String,Object> map);
 
     List<SalesDO> ygDoctorUse(Map<String,Object> map);
     List<SalesDO> ygDoctor(Map<String,Object> map);
 
+
+    List<SalesDO> findDoctorPeople(Map<String,Object> map);
+    int findCfCount(Map<String,Object> map);
+    int findCfUseCount(Map<String,Object> map);
+    int findCfamountMoney(Map<String,Object> map);
+    List<SalesDO> findDoctorGoods(Map<String,Object> map);
 
 }

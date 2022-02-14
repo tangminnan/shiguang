@@ -36,12 +36,18 @@
         <!--验光信息-->
         <div class="m40 msgBox">
             <h3>验光信息</h3>
+            <input id="companyId" name="companyId" th:value="${companyId}" type="hidden"/>
             <ul>
                 <li>验光号：<input id="ptometryNumber" name="ptometryNumber" th:value="${uuidstr}" type="text"/></li>
                 <li>验光师/医生：<input id="optometryName" name="optometryName" th:value="${optometryName}" type="text"/>
                 </li>
                 <li>日期：<input input id="createTime" name="createTime" th:value="${createTime}" type="text"/></li>
             </ul>
+            <select id="newOld" name="newOld" style="width: 10%;display: none" >
+                <option value="">--请选择新老院区--</option>
+                <option value="old">老院区</option>
+                <option value="new">新院区</option>
+            </select>
         </div>
 
         <!--顾客资料-->
@@ -907,6 +913,19 @@
 <script type="text/javascript" src="/js/appjs/optometryNew/jctryresults.js"></script>
 <!--第一个页面-->
 <script type="text/javascript">
+
+    $().ready(function () {
+        var companyId=$("#companyId").val();
+        if (companyId==1){
+            newOld.style = "display: block";
+        } else {
+            newOld.style = "display: none";
+        }
+    });
+
+
+
+
     function getMemberDetail() {
         var id = $("#memberId").val();
         layer.open({

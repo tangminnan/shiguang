@@ -35,7 +35,7 @@
 		<h3>验光师业绩统计表</h3>
 		<input type="hidden" id="settleDateStart" th:value="${settleDateStart}">
 		<input type="hidden" id="settleDateEnd" th:value="${settleDateEnd}">
-		<!--<input type="text" id="departments" th:value="${departments}">-->
+		<input type="hidden" id="newOld" th:value="${newOld}">
 		<table border="0" cellspacing="0" cellpadding="0" id="reportId">
 			<tbody id="detailId">
 			<tr class="thead">
@@ -85,18 +85,13 @@
             var all13 = 0;
             var all14 = 0;
             var all15 = 0;
-                // for (var a = 0; a < 1; a++) {
-                //     html = "<tr ><td rowspan='" + list.length + "'>" + list[a].store + "</td>";
-                // }
+
                 for (var i=0;i<list.length;i++) {
                     html+="<tr>";
                     html+="<td>" + list[i].store + "</td>";
                     html += "<td class='username'>" + list[i].username + "</td>";
                     html += "<td>" + list[i].name + "</td>";
-                    // html += "<td>" + listMoney[i].usecount + "</td>";
-                    // html += "<td>" + listMoney[i].ygcount + "</td>";
-                    // html += "<td>" + listMoney[i].amountMoney + "</td>";
-                    // html += "<td>" + listMoney[i].primeMoney + "</td>";
+
                     html += "<td class='cBlue'><a href='#'  style='color: #fd0c0c' onclick='reportYgcount(this)'>" + listMoney[i].usecount + "</a></td>";
                     html += "<td class='cBlue'><a href='#' style='color: #2063fd' onclick='reportUseYgcount(this)'>" + listMoney[i].ygcount + "</a></td>";
 
@@ -158,15 +153,17 @@
             var username=$(e).parent().prevAll().filter(".username").html();
             var settleDateStart=$("#settleDateStart").val();
             var settleDateEnd=$("#settleDateEnd").val();
+            var newOld=$("#newOld").val();
             window.open("/information/saleYanguang/doctorUse?username="+username +
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd );
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd +"&newOld="+newOld );
         }
         function reportUseYgcount(e){
             var username=$(e).parent().prevAll().filter(".username").html();
             var settleDateStart=$("#settleDateStart").val();
             var settleDateEnd=$("#settleDateEnd").val();
+            var newOld=$("#newOld").val();
             window.open("/information/saleYanguang/doctor?username="+username +
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd );
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&newOld="+newOld );
         }
 
 
@@ -178,101 +175,112 @@
             var username=$(e).parent().prevAll().filter(".username").html();
             var settleDateStart=$("#settleDateStart").val();
             var settleDateEnd=$("#settleDateEnd").val();
+            var newOld=$("#newOld").val();
             var storeDescribe="镜架";
             var selectGoods="镜架";
             window.open("/information/saleYanguang/Brand?username="+username+"&storeDescribe="+storeDescribe+
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods);
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods+"&newOld="+newOld);
         }
         function reportPj(e){
             var username=$(e).parent().prevAll().filter(".username").html();
             var settleDateStart=$("#settleDateStart").val();
             var settleDateEnd=$("#settleDateEnd").val();
+            var newOld=$("#newOld").val();
             var storeDescribe="配件";
             var selectGoods="配件";
             window.open("/information/saleYanguang/Brand?username="+username+"&storeDescribe="+storeDescribe+
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods);
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods+"&newOld="+newOld);
         }
 
         function reportJp(e){
             var username=$(e).parent().prevAll().filter(".username").html();
             var settleDateStart=$("#settleDateStart").val();
             var settleDateEnd=$("#settleDateEnd").val();
+            var newOld=$("#newOld").val();
             var storeDescribe="镜片";
             var selectGoods="镜片成品";
             window.open("/information/saleYanguang/Brand?username="+username+"&storeDescribe="+storeDescribe+
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods);
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods+"&newOld="+newOld);
         }
         function reportJpdz(e){
             var username=$(e).parent().prevAll().filter(".username").html();
             var settleDateStart=$("#settleDateStart").val();
             var settleDateEnd=$("#settleDateEnd").val();
+            var newOld=$("#newOld").val();
             var storeDescribe="镜片";
             var selectGoods="镜片订做";
             window.open("/information/saleYanguang/Brand?username="+username+"&storeDescribe="+storeDescribe+
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods);
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods+"&newOld="+newOld);
         }
         function reportYx(e){
             var username=$(e).parent().prevAll().filter(".username").html();
             var settleDateStart=$("#settleDateStart").val();
             var settleDateEnd=$("#settleDateEnd").val();
+            var newOld=$("#newOld").val();
             var storeDescribe="隐形";
             var selectGoods="隐形成品";
             window.open("/information/saleYanguang/Brand?username="+username+"&storeDescribe="+storeDescribe+
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods);
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods+"&newOld="+newOld);
         }
         function reportYxdz(e){
             var username=$(e).parent().prevAll().filter(".username").html();
             var settleDateStart=$("#settleDateStart").val();
             var settleDateEnd=$("#settleDateEnd").val();
+            var newOld=$("#newOld").val();
             var storeDescribe="隐形";
             var selectGoods="隐形订做";
             window.open("/information/saleYanguang/Brand?username="+username+"&storeDescribe="+storeDescribe+
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods);
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods+"&newOld="+newOld);
         }
         function reportHly(e){
             var username=$(e).parent().prevAll().filter(".username").html();
             var settleDateStart=$("#settleDateStart").val();
             var settleDateEnd=$("#settleDateEnd").val();
+            var newOld=$("#newOld").val();
             var storeDescribe="护理液";
             var selectGoods="护理液";
             window.open("/information/saleYanguang/Brand?username="+username+"&storeDescribe="+storeDescribe+
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods);
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods+"&newOld="+newOld);
         }
         function reportTyj(e){
             var username=$(e).parent().prevAll().filter(".username").html();
             var settleDateStart=$("#settleDateStart").val();
             var settleDateEnd=$("#settleDateEnd").val();
+            var newOld=$("#newOld").val();
             var storeDescribe="太阳镜";
             var selectGoods="太阳镜";
             window.open("/information/saleYanguang/Brand?username="+username+"&storeDescribe="+storeDescribe+
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods);
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods+"&newOld="+newOld);
         }
         function reportLhj(e){
             var username=$(e).parent().prevAll().filter(".username").html();
             var settleDateStart=$("#settleDateStart").val();
             var settleDateEnd=$("#settleDateEnd").val();
+            var newOld=$("#newOld").val();
             var storeDescribe="老花镜";
             var selectGoods="老花镜";
             window.open("/information/saleYanguang/Brand?username="+username+"&storeDescribe="+storeDescribe+
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods);
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods+"&newOld="+newOld);
         }
         function reportHc(e){
             var username=$(e).parent().prevAll().filter(".username").html();
             var settleDateStart=$("#settleDateStart").val();
             var settleDateEnd=$("#settleDateEnd").val();
+            var newOld=$("#newOld").val();
             var storeDescribe="耗材";
             var selectGoods="耗材";
             window.open("/information/saleYanguang/Brand?username="+username+"&storeDescribe="+storeDescribe+
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods);
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods+"&newOld="+newOld);
         }
         function reportSg(e){
             var username=$(e).parent().prevAll().filter(".username").html();
             var settleDateStart=$("#settleDateStart").val();
             var settleDateEnd=$("#settleDateEnd").val();
+            var newOld=$("#newOld").val();
             var storeDescribe="视光";
             var selectGoods="视光";
             window.open("/information/saleYanguang/Brand?username="+username+"&storeDescribe="+storeDescribe+
-                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods);
+                "&settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&selectGoods="+selectGoods+"&newOld="+newOld);
         }
 	</script>
 </body>

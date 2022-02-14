@@ -321,6 +321,8 @@ public class TryresultsDO implements Serializable {
     private String axialLeft2;
     //删除状态
     private String status;
+    //新老院区
+    private String newOld;
 
     public String getStatus() {
         return status;
@@ -329,6 +331,15 @@ public class TryresultsDO implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getNewOld() {
+        return newOld;
+    }
+
+    public void setNewOld(String newOld) {
+        this.newOld = newOld;
+    }
+
     /**
      * 设置：试戴镜结果id
      */

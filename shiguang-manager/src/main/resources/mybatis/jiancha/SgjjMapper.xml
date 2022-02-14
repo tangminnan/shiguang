@@ -207,7 +207,8 @@
 			`sgjj_beizhu`,
 			`ptometry_number`,
 			`status`,
-			`create_time`
+			`create_time`,
+			`new_old`
 		)
 		values
 		(
@@ -241,10 +242,11 @@
 			#{sgjjBeizhu},
 			#{ptometryNumber},
 			#{status},
-			#{createTime}
+			#{createTime},
+			#{newOld}
 		)
 	</insert>
-	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.SgjjDO">
+	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.ResultDO">
         select ptometry_number
         from jc_sgjj where ptometry_number=#{ptometryNumber}
     </select>

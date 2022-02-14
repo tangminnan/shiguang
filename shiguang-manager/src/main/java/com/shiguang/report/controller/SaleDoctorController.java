@@ -59,218 +59,221 @@ public class SaleDoctorController {
     }
 
 
-//    @GetMapping("/findall")
-//    public String reportList(Integer companyId, String settleDateStart, String settleDateEnd, String departments, Model model) {
-//        Map<String, Object> map = new HashMap<>();
-//        if (companyId == 0) {
-//            map.put("companyId", "");
-//        } else {
-//            map.put("companyId", companyId);
-//        }
-//        map.put("settleDateStart", settleDateStart);
-//        map.put("settleDateEnd", settleDateEnd);
-//
-//        String[] department = departments.split(",");
-//        for (int d = 0; d < department.length; d++) {
-//            map.put("department", department[d]);
-//            List<SalesDO> doctorPeoples = saleReportService.findDoctorPeople(map);
-//            model.addAttribute("doctorPeoples", doctorPeoples);
-//            List<Map<String, Object>> listMoney = new ArrayList<>();
-////            if (null != yanguangPeoples && yanguangPeoples.size() > 0) {
-//            for (SalesDO doctorPeople : doctorPeoples) {
-//                String username = doctorPeople.getUsername();
-//                map.put("username", username);
-//
-//
-//                int cfcount = saleReportService.findCfCount(map);
-//                //销售金额，价钱，成交
-//                int usecount = saleReportService.findCfUseCount(map);
-//                int amountMoney = saleReportService.findCfamountMoney(map);
-//                double primeMoney;
-//                List<SalesDO> Goods = saleReportService.findDoctorGoods(map);
-//                double jjMoney = 0.00;
-//                double pjMoney = 0.00;
-//                double jpMoney = 0.00;
-//                double jpdzMoney = 0.00;
-//                double yxMoney = 0.00;
-//                double yxdzMoney = 0.00;
-//                double hlyMoney = 0.00;
-//                double tyjMoney = 0.00;
-//                double lhjMoney = 0.00;
-//                double hcMoney = 0.00;
-//                double sgMoney = 0.00;
-//
-//                for (SalesDO good : Goods) {
-//                    String[] storeDescribes = null;
-//                    if (null != good.getStoreDescribe() && !"".equals(good.getStoreDescribe())) {
-//                        storeDescribes = good.getStoreDescribe().split(",");
-//                    }
-//                    String[] classtypes = null;
-//                    if (null != good.getClasstype() && !"".equals(good.getClasstype())) {
-//                        classtypes = good.getClasstype().split(",");
-//                    }
-//                    String[] storeCounts = null;
-//                    if (null != good.getStoreCount() && !"".equals(good.getStoreCount())) {
-//                        storeCounts = good.getStoreCount().split(",");
-//                    }
-//                    String[] storeUnits = null;
-//                    if (null != good.getStoreUnit()) {
-//                        storeUnits = good.getStoreUnit().split(",");
-//                    }
-//                    String[] storeNames = null;
-//                    if (null != good.getStoreName()) {
-//                        storeNames = good.getStoreName().split(",");
-//                    }
-//                    if (null != storeDescribes) {
-//                        for (int i = 0; i < storeDescribes.length; i++) {
-//                            String goodstype = storeDescribes[i];
-//                            String classtype = classtypes[i];
-//                            String money = storeUnits[i];
-//                            String count = storeCounts[i];
-//                            String name = storeNames[i];
-//                            if ("镜架".equals(goodstype)) {
-//                                if (null != storeUnits && null != storeCounts) {
-//                                    if ("".equals(money)) {
-//                                        jjMoney = jjMoney + 0.00;
-//                                    } else {
-//                                        jjMoney = jjMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
-//                                    }
-//                                }
-//                            } else if ("配件".equals(goodstype) || "镜架配件".equals(goodstype)) {
-//                                if (null != storeUnits && null != storeCounts) {
-//                                    if ("".equals(money)) {
-//                                        pjMoney = pjMoney + 0.00;
-//                                    } else {
-//                                        pjMoney = pjMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
-//                                    }
-//                                }
-//                            }
-//                            else if ("镜片".equals(goodstype)  && "1".equals(classtype)) {
-//                                if (null != storeUnits && null != storeCounts) {
-//                                    if ("".equals(money)) {
-//                                        jpMoney = jpMoney + 0.00;
-//                                    } else {
-//                                        jpMoney = jpMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
-//                                    }
-//                                }
-//                            }else if ("镜片".equals(goodstype)  && "2".equals(classtype) ) {
-//                                if (null != storeUnits && null != storeCounts) {
-//                                    if ("".equals(money)) {
-//                                        jpdzMoney = jpdzMoney + 0.00;
-//                                    } else {
-//                                        jpdzMoney = jpdzMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
-//                                    }
-//                                }
-//                            } else if ("隐形".equals(goodstype)  && "1".equals(classtype)) {
-//                                if (null != storeUnits && null != storeCounts) {
-//                                    if ("".equals(money)) {
-//                                        yxMoney = yxMoney + 0.00;
-//                                    } else {
-//                                        yxMoney = yxMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
-//                                    }
-//
-//                                }
-//                            } else if ("隐形".equals(goodstype)  && "2".equals(classtype)) {
-//                                if (null != storeUnits && null != storeCounts) {
-//                                    if ("".equals(money)) {
-//                                        yxdzMoney = yxdzMoney + 0.00;
-//                                    } else {
-//                                        yxdzMoney = yxdzMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
-//                                    }
-//                                }
-//                            }
-//                            else if ("护理液".equals(goodstype)) {
-//                                if (null != storeUnits && null != storeCounts) {
-//                                    if ("".equals(money)) {
-//                                        hlyMoney = hlyMoney + 0.00;
-//                                    } else {
-//                                        hlyMoney = hlyMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
-//                                    }
-//                                }
-//                            } else if ("太阳镜".equals(goodstype)) {
-//                                if (null != storeUnits && null != storeCounts) {
-//                                    if ("".equals(money)) {
-//                                        tyjMoney = tyjMoney + 0.00;
-//                                    } else {
-//                                        tyjMoney = tyjMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
-//                                    }
-//                                }
-//                            } else if ("老花镜".equals(goodstype)) {
-//                                if (null != storeUnits && null != storeCounts) {
-//                                    if ("".equals(money)) {
-//                                        lhjMoney = lhjMoney + 0.00;
-//                                    } else {
-//                                        lhjMoney = lhjMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
-//                                    }
-//                                }
-//                            } else if ("耗材".equals(goodstype)) {
-//                                if (null != storeUnits && null != storeCounts) {
-//                                    if ("".equals(money)) {
-//                                        hcMoney = hcMoney + 0.00;
-//                                    } else {
-//                                        hcMoney = hcMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
-//                                    }
-//                                }
-//                            } else if ("视光".equals(goodstype)) {
-//                                if (null != storeUnits && null != storeCounts) {
-//                                    if ("".equals(money)) {
-//                                        sgMoney = sgMoney + 0.00;
-//                                    } else {
-//                                        sgMoney = sgMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//
+    @GetMapping("/findall")
+    public String reportList(Integer companyId, String settleDateStart, String settleDateEnd, String departments,String newOld, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        if (companyId == 0) {
+            map.put("companyId", "");
+        } else {
+            map.put("companyId", companyId);
+        }
+        map.put("settleDateStart", settleDateStart);
+        map.put("settleDateEnd", settleDateEnd);
+        map.put("newOld", newOld);
+
+        String[] department = departments.split(",");
+        for (int d = 0; d < department.length; d++) {
+            map.put("department", department[d]);
+            List<SalesDO> doctorPeoples = saleReportService.findDoctorPeople(map);
+            model.addAttribute("doctorPeoples", doctorPeoples);
+            List<Map<String, Object>> listMoney = new ArrayList<>();
+//            if (null != yanguangPeoples && yanguangPeoples.size() > 0) {
+            for (SalesDO doctorPeople : doctorPeoples) {
+                String username = doctorPeople.getUsername();
+                map.put("username", username);
+
+
+                int cfcount = saleReportService.findCfCount(map);
+                //销售金额，价钱，成交
+                int usecount = saleReportService.findCfUseCount(map);
+                int amountMoney = saleReportService.findCfamountMoney(map);
+                double primeMoney;
+                List<SalesDO> Goods = saleReportService.findDoctorGoods(map);
+                double jjMoney = 0.00;
+                double pjMoney = 0.00;
+                double jpMoney = 0.00;
+                double jpdzMoney = 0.00;
+                double yxMoney = 0.00;
+                double yxdzMoney = 0.00;
+                double hlyMoney = 0.00;
+                double tyjMoney = 0.00;
+                double lhjMoney = 0.00;
+                double hcMoney = 0.00;
+                double sgMoney = 0.00;
+
+                for (SalesDO good : Goods) {
+                    String[] storeDescribes = null;
+                    if (null != good.getStoreDescribe() && !"".equals(good.getStoreDescribe())) {
+                        storeDescribes = good.getStoreDescribe().split(",");
+                    }
+                    String[] classtypes = null;
+                    if (null != good.getClasstype() && !"".equals(good.getClasstype())) {
+                        classtypes = good.getClasstype().split(",");
+                    }
+                    String[] storeCounts = null;
+                    if (null != good.getStoreCount() && !"".equals(good.getStoreCount())) {
+                        storeCounts = good.getStoreCount().split(",");
+                    }
+                    String[] storeUnits = null;
+                    if (null != good.getStoreUnit()) {
+                        storeUnits = good.getStoreUnit().split(",");
+                    }
+                    String[] storeNames = null;
+                    if (null != good.getStoreName()) {
+                        storeNames = good.getStoreName().split(",");
+                    }
+                    if (null != storeDescribes) {
+                        for (int i = 0; i < storeDescribes.length; i++) {
+                            String goodstype = storeDescribes[i];
+                            String classtype = classtypes[i];
+                            String money = storeUnits[i];
+                            String count = storeCounts[i];
+                            String name = storeNames[i];
+                            if ("镜架".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        jjMoney = jjMoney + 0.00;
+                                    } else {
+                                        jjMoney = jjMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            } else if ("配件".equals(goodstype) || "镜架配件".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        pjMoney = pjMoney + 0.00;
+                                    } else {
+                                        pjMoney = pjMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            }
+                            else if ("镜片".equals(goodstype)  && "1".equals(classtype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        jpMoney = jpMoney + 0.00;
+                                    } else {
+                                        jpMoney = jpMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            }else if ("镜片".equals(goodstype)  && "2".equals(classtype) ) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        jpdzMoney = jpdzMoney + 0.00;
+                                    } else {
+                                        jpdzMoney = jpdzMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            } else if ("隐形".equals(goodstype)  && "1".equals(classtype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        yxMoney = yxMoney + 0.00;
+                                    } else {
+                                        yxMoney = yxMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+
+                                }
+                            } else if ("隐形".equals(goodstype)  && "2".equals(classtype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        yxdzMoney = yxdzMoney + 0.00;
+                                    } else {
+                                        yxdzMoney = yxdzMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            }
+                            else if ("护理液".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        hlyMoney = hlyMoney + 0.00;
+                                    } else {
+                                        hlyMoney = hlyMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            } else if ("太阳镜".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        tyjMoney = tyjMoney + 0.00;
+                                    } else {
+                                        tyjMoney = tyjMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            } else if ("老花镜".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        lhjMoney = lhjMoney + 0.00;
+                                    } else {
+                                        lhjMoney = lhjMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            } else if ("耗材".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        hcMoney = hcMoney + 0.00;
+                                    } else {
+                                        hcMoney = hcMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            } else if ("视光".equals(goodstype)) {
+                                if (null != storeUnits && null != storeCounts) {
+                                    if ("".equals(money)) {
+                                        sgMoney = sgMoney + 0.00;
+                                    } else {
+                                        sgMoney = sgMoney + Double.valueOf(Double.valueOf(money) * Integer.parseInt(count));
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+                primeMoney = jjMoney + pjMoney + jpMoney + jpdzMoney+ yxMoney + yxdzMoney + hlyMoney + tyjMoney + lhjMoney + hcMoney + sgMoney;
+
+                Map<String, Object> listmap = new HashMap<>();
+                listmap.put("jjMoney", new BigDecimal(jjMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("pjMoney", new BigDecimal(pjMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("jpMoney", new BigDecimal(jpMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("jpdzMoney", new BigDecimal(jpdzMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("yxMoney", new BigDecimal(yxMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("yxdzMoney", new BigDecimal(yxdzMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("hlyMoney", new BigDecimal(hlyMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("tyjMoney", new BigDecimal(tyjMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("lhjMoney", new BigDecimal(lhjMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("hcMoney", new BigDecimal(hcMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("sgMoney", new BigDecimal(sgMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("cfcount", new BigDecimal(Integer.valueOf(cfcount)));
+                listmap.put("usecount", new BigDecimal(Integer.valueOf(usecount)));
+                listmap.put("amountMoney", new BigDecimal(amountMoney).setScale(2, RoundingMode.HALF_UP));
+                listmap.put("primeMoney", new BigDecimal(primeMoney).setScale(2, RoundingMode.HALF_UP));
+                listMoney.add(listmap);
 //                }
-//                primeMoney = jjMoney + pjMoney + jpMoney + jpdzMoney+ yxMoney + yxdzMoney + hlyMoney + tyjMoney + lhjMoney + hcMoney + sgMoney;
-//
-//                Map<String, Object> listmap = new HashMap<>();
-//                listmap.put("jjMoney", new BigDecimal(jjMoney).setScale(2, RoundingMode.HALF_UP));
-//                listmap.put("pjMoney", new BigDecimal(pjMoney).setScale(2, RoundingMode.HALF_UP));
-//                listmap.put("jpMoney", new BigDecimal(jpMoney).setScale(2, RoundingMode.HALF_UP));
-//                listmap.put("jpdzMoney", new BigDecimal(jpdzMoney).setScale(2, RoundingMode.HALF_UP));
-//                listmap.put("yxMoney", new BigDecimal(yxMoney).setScale(2, RoundingMode.HALF_UP));
-//                listmap.put("yxdzMoney", new BigDecimal(yxdzMoney).setScale(2, RoundingMode.HALF_UP));
-//                listmap.put("hlyMoney", new BigDecimal(hlyMoney).setScale(2, RoundingMode.HALF_UP));
-//                listmap.put("tyjMoney", new BigDecimal(tyjMoney).setScale(2, RoundingMode.HALF_UP));
-//                listmap.put("lhjMoney", new BigDecimal(lhjMoney).setScale(2, RoundingMode.HALF_UP));
-//                listmap.put("hcMoney", new BigDecimal(hcMoney).setScale(2, RoundingMode.HALF_UP));
-//                listmap.put("sgMoney", new BigDecimal(sgMoney).setScale(2, RoundingMode.HALF_UP));
-//                listmap.put("cfcount", new BigDecimal(Integer.valueOf(cfcount)));
-//                listmap.put("usecount", new BigDecimal(Integer.valueOf(usecount)));
-//                listmap.put("amountMoney", new BigDecimal(amountMoney).setScale(2, RoundingMode.HALF_UP));
-//                listmap.put("primeMoney", new BigDecimal(primeMoney).setScale(2, RoundingMode.HALF_UP));
-//                listMoney.add(listmap);
-////                }
-//            }
-//            model.addAttribute("listMoney", listMoney);
-//        }
-//
-//        //———获取当前系统时间—————
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
-//        Date date = new Date();
-//        String createTime = sdf.format(date);
-//        model.addAttribute("createTime", createTime);
-//
-//        model.addAttribute("settleDateStart", settleDateStart);
-//        model.addAttribute("settleDateEnd", settleDateEnd);
-//        model.addAttribute("departments", departments);
-//        return "saleReport/saleDoctorForm";
-//    }
+            }
+            model.addAttribute("listMoney", listMoney);
+        }
+
+        //———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String createTime = sdf.format(date);
+        model.addAttribute("createTime", createTime);
+
+        model.addAttribute("settleDateStart", settleDateStart);
+        model.addAttribute("settleDateEnd", settleDateEnd);
+        model.addAttribute("departments", departments);
+        model.addAttribute("newOld", newOld);
+        return "saleReport/saleDoctorForm";
+    }
 
 @GetMapping("/Brand")
 public String Brand(String settleDateStart, String settleDateEnd,
-                      String username, String storeDescribe, String selectGoods, Model model) {
+                      String username, String storeDescribe, String selectGoods,  String newOld, Model model) {
 
     Map<String, Object> map = new HashMap<>();
     map.put("settleDateStart", settleDateStart);
     map.put("settleDateEnd", settleDateEnd);
     map.put("username", username);
     map.put("storeDescribe", storeDescribe);
+    map.put("newOld", newOld);
 
-    List<SalesDO> Goods = saleReportService.findGoods(map);
+    List<SalesDO> Goods = saleReportService.findDoctorGoods(map);
     List<Map<String, Object>> listBrand = new ArrayList<>();
     for (SalesDO good : Goods) {
         String[] storeDescribes = null;
@@ -535,20 +538,22 @@ public String Brand(String settleDateStart, String settleDateEnd,
     Date date = new Date();
     String createTime = sdf.format(date);
     model.addAttribute("createTime", createTime);
-    return "saleReport/ygGoodsBrand";
+    model.addAttribute("newOld", newOld);
+    return "saleReport/doctorGoodsBrand";
 }
 
     @GetMapping("/goodsList")
     public String goodsList(String settleDateStart, String settleDateEnd, String brandnum, String brandname,
-                            String username, String storeDescribe, String selectGoods,  Model model) {
+                            String username, String storeDescribe, String selectGoods, String newOld,  Model model) {
 
         Map<String, Object> map = new HashMap<>();
         map.put("settleDateStart", settleDateStart);
         map.put("settleDateEnd", settleDateEnd);
         map.put("username", username);
         map.put("storeDescribe", storeDescribe);
+        map.put("newOld", newOld);
 
-        List<SalesDO> Goods = saleReportService.findGoods(map);
+        List<SalesDO> Goods = saleReportService.findDoctorGoods(map);
         List<Map<String, Object>> goodsLists = new ArrayList<>();
         for (SalesDO good : Goods) {
             String[] storeDescribes = null;
@@ -877,6 +882,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
         Date date = new Date();
         String createTime = sdf.format(date);
         model.addAttribute("createTime", createTime);
-        return "saleReport/ygGoods";
+        return "saleReport/doctorGoods";
     }
 }

@@ -84,7 +84,8 @@
 			`yp_ym`,
 			`ptometry_number`,
 			`status`,
-			`create_time`
+			`create_time`,
+			`new_old`
 		)
 		values
 		(
@@ -96,10 +97,11 @@
 			#{ypYm},
 			#{ptometryNumber},
 			#{status},
-			#{createTime}
+			#{createTime},
+			#{newOld}
 		)
 	</insert>
-    <select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.YaopinDO">
+    <select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.ResultDO">
         select ptometry_number
         from jc_yaopin where ptometry_number=#{ptometryNumber}
     </select>

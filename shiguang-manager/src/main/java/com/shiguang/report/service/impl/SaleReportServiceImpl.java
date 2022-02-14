@@ -81,10 +81,6 @@ public class SaleReportServiceImpl implements SaleReportService {
         return saleReportDao.findamountMoney(map);
     }
 
-    @Override
-    public int findprimeMoney(Map<String, Object> map) {
-        return saleReportDao.findprimeMoney(map);
-    }
 
     @Override
     public List<SalesDO> findGoods(Map<String, Object> map) {
@@ -156,34 +152,29 @@ public class SaleReportServiceImpl implements SaleReportService {
         return saleReportDao.ygDoctor(map);
     }
 
-    //    @Override
-//    public List<SalesDO> findDoctorPeople(Map<String, Object> map) {
-//        return saleReportDao.findDoctorPeople(map);
-//    }
 
-//    @Override
-//    public int findCfCount(Map<String, Object> map) {
-//        return saleReportDao.findCfCount(map);
-//    }
-//
-//    @Override
-//    public int findCfUseCount(Map<String, Object> map) {
-//        return saleReportDao.findCfUseCount(map);
-//    }
-//
-//    @Override
-//    public int findCfamountMoney(Map<String, Object> map) {
-//        return saleReportDao.findCfamountMoney(map);
-//    }
-//
-//    @Override
-//    public int findCfprimeMoney(Map<String, Object> map) {
-//        return saleReportDao.findCfamountMoney(map);
-//    }
-//
-//    @Override
-//    public List<SalesDO> findDoctorGoods(Map<String, Object> map) {
-//        return saleReportDao.findDoctorGoods(map);
-//    }
+    @Override
+    public List<SalesDO> findDoctorPeople(Map<String, Object> map) {
+        return saleReportDao.findDoctorPeople(map);
+    }
 
+    @Override
+    public int findCfCount(Map<String, Object> map) {
+        return saleReportDao.findCfCount(map);
+    }
+
+    @Override
+    public int findCfUseCount(Map<String, Object> map) {
+        return saleReportDao.findCfUseCount(map);
+    }
+
+    @Override
+    public int findCfamountMoney(Map<String, Object> map) {
+        return saleReportDao.findCfamountMoney(map);
+    }
+
+    @Override
+    public List<SalesDO> findDoctorGoods(Map<String, Object> map) {
+        return saleReportDao.findDoctorGoods(map);
+    }
 }

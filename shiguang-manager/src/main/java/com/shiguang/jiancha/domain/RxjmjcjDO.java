@@ -68,7 +68,14 @@ public class RxjmjcjDO implements Serializable {
     private String status;
     //创建时间
     private Date createTime;
+    private String newOld;
+    public String getNewOld() {
+        return newOld;
+    }
 
+    public void setNewOld(String newOld) {
+        this.newOld = newOld;
+    }
     /**
      * 设置：创建时间
      */

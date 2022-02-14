@@ -19,6 +19,14 @@
 								<input id="settleDateEnd" type="text"
 									   placeholder="结束日期">
 							</div>
+							<div id="choicenewOld" style="display: none" class="columns pull-right col-md-1.5 nopadding ">
+								<select  id="newOld" name="newOld"  data-actions-box="false"
+										 data-size="5" style="width: 200px;height: 40px;">
+									<option value="">--请选择新老院区--</option>
+									<option value="old">老院区</option>
+									<option value="new">新院区</option>
+								</select>
+							</div>
 							<div id="tab1" style="display: none" class="columns pull-right col-md-1.5 nopadding ">
 								<select  id="companyIds" name="companyIds"  data-actions-box="false"
 										data-size="5" style="width: 200px;height: 40px;">
@@ -52,6 +60,11 @@
             tab2.style="display: block";
             tab3.style="display: block;margin-top: 10px;";
         }else if (company!="") {
+            if (company==1){
+                choicenewOld.style="display: block";
+            } else {
+                choicenewOld.style="display: none";
+            }
             tab1.style="display: none";
             tab2.style="display: none";
             tab3.style="display: none";
@@ -125,8 +138,14 @@
         }else {
             departments=departments;
         }
+        var newOld = $("#newOld").val();
+        if(newOld=="" || newOld==undefined){
+            newOld="";
+        }else {
+            newOld=newOld;
+        }
         window.open("/information/saleDoctor/findall/?companyId=" + companyId + "&settleDateStart=" + settleDateStart
-            + "&settleDateEnd=" + settleDateEnd+ "&departments=" + departments);
+            + "&settleDateEnd=" + settleDateEnd+ "&departments=" + departments+ "&newOld=" + newOld);
 
     }
 </script>

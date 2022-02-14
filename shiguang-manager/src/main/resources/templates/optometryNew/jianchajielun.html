@@ -28,6 +28,7 @@
             <li>验光师/医生：<input name="optometryName" th:value="${tryresultsDO.optometryName}" type="text"/></li>
             <li>日期：<input input name="createTime" th:value="${newtime}" type="text"/></li>
         </ul>
+        <input input id="newOld" name="newOld" th:value="${tryresultsDO.newOld}" type="text" style="display: none"/>
     </div>
     <!--顾客资料-->
     <div class="m40 msgBox">
@@ -1328,6 +1329,14 @@
 <script type="text/javascript">
 
     $().ready(function () {
+        var newOld = $("#newOld").val();
+        if(newOld=="" || newOld==null){
+            newOld.style = "display: none";
+        } else {
+            newOld.style = "display: block";
+        }
+
+
         getSixMonth();
 
         var sphod=parseFloat($('#sphod').val());

@@ -110,6 +110,8 @@ public class OptometryNewController {
         model.addAttribute("uuidstr", uuidstr);
 //———获取当前登录用户的名称————
         model.addAttribute("optometryName", ShiroUtils.getUser().getName());
+        //———获取当前登录用户的名称————
+        model.addAttribute("companyId", ShiroUtils.getUser().getCompanyId());
 //———获取当前系统时间—————
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
         Date date = new Date();
@@ -298,6 +300,7 @@ public class OptometryNewController {
         if (trylist.size() > 0) {
             for (int i = 0; i < trylist.size(); i++) {
                 //验光信息
+                tryresultsDO.setNewOld(trylist.get(0).getNewOld());
                 tryresultsDO.setPtometryNumber(trylist.get(0).getPtometryNumber());
                 tryresultsDO.setOptometryName(trylist.get(0).getOptometryName());
                 SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

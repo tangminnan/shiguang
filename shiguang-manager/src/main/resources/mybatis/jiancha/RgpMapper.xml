@@ -180,7 +180,8 @@
 			`rgp_cylos`,
 			`rgp_axialod`,
 			`rgp_axialos`,
-			`create_time`
+			`create_time`,
+			`new_old`
 		)
 		values
 		(
@@ -211,10 +212,11 @@
 			#{rgpCylos},
 			#{rgpAxialod},
 			#{rgpAxialos},
-			#{createTime}
+			#{createTime},
+			#{newOld}
 		)
 	</insert>
-	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.RgpDO">
+	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.ResultDO">
         select ptometry_number
         from jc_rgp where ptometry_number=#{ptometryNumber}
     </select>

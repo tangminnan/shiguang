@@ -79,8 +79,9 @@ public class SaleYanguangController {
 
 
     @GetMapping("/findall")
-    public String reportList(Integer companyId, String settleDateStart, String settleDateEnd, String departments, Model model) {
+    public String reportList(Integer companyId, String settleDateStart, String settleDateEnd, String departments,String newOld, Model model) {
         Map<String, Object> map = new HashMap<>();
+        map.put("newOld", newOld);
         if (companyId == 0) {
             map.put("companyId", "");
         } else {
@@ -279,18 +280,20 @@ public class SaleYanguangController {
         model.addAttribute("settleDateStart", settleDateStart);
         model.addAttribute("settleDateEnd", settleDateEnd);
         model.addAttribute("departments", departments);
+        model.addAttribute("newOld", newOld);
         return "saleReport/saleYanguangForm";
     }
 
 @GetMapping("/Brand")
 public String Brand(String settleDateStart, String settleDateEnd,
-                      String username, String storeDescribe, String selectGoods, Model model) {
+                      String username, String storeDescribe, String selectGoods,String newOld, Model model) {
 
     Map<String, Object> map = new HashMap<>();
     map.put("settleDateStart", settleDateStart);
     map.put("settleDateEnd", settleDateEnd);
     map.put("username", username);
     map.put("storeDescribe", storeDescribe);
+    map.put("newOld", newOld);
 
     List<SalesDO> Goods = saleReportService.findGoods(map);
     List<Map<String, Object>> listBrand = new ArrayList<>();
@@ -557,18 +560,20 @@ public String Brand(String settleDateStart, String settleDateEnd,
     Date date = new Date();
     String createTime = sdf.format(date);
     model.addAttribute("createTime", createTime);
+    model.addAttribute("newOld", newOld);
     return "saleReport/ygGoodsBrand";
 }
 
     @GetMapping("/goodsList")
     public String goodsList(String settleDateStart, String settleDateEnd, String brandnum, String brandname,
-                            String username, String storeDescribe, String selectGoods,  Model model) {
+                            String username, String storeDescribe, String selectGoods,  String newOld,  Model model) {
 
         Map<String, Object> map = new HashMap<>();
         map.put("settleDateStart", settleDateStart);
         map.put("settleDateEnd", settleDateEnd);
         map.put("username", username);
         map.put("storeDescribe", storeDescribe);
+        map.put("newOld", newOld);
 
         List<SalesDO> Goods = saleReportService.findGoods(map);
         List<Map<String, Object>> goodsLists = new ArrayList<>();
@@ -909,11 +914,12 @@ public String Brand(String settleDateStart, String settleDateEnd,
 
     @GetMapping("/doctorUse")
     public String doctorUse(String settleDateStart, String settleDateEnd,
-                        String username, Model model) {
+                        String username,String newOld, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("settleDateStart", settleDateStart);
         map.put("settleDateEnd", settleDateEnd);
         map.put("username", username);
+        map.put("newOld", newOld);
         model.addAttribute("settleDateStart", settleDateStart);
         model.addAttribute("settleDateEnd", settleDateEnd);
         model.addAttribute("username", username);
@@ -952,11 +958,12 @@ public String Brand(String settleDateStart, String settleDateEnd,
 
     @GetMapping("/doctor")
     public String doctor(String settleDateStart, String settleDateEnd,
-                         String username, Model model) {
+                         String username,String newOld, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("settleDateStart", settleDateStart);
         map.put("settleDateEnd", settleDateEnd);
         map.put("username", username);
+        map.put("newOld", newOld);
         model.addAttribute("settleDateStart", settleDateStart);
         model.addAttribute("settleDateEnd", settleDateEnd);
         model.addAttribute("username", username);

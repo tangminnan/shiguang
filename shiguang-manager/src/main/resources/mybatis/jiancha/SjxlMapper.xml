@@ -209,7 +209,8 @@
 			`sjxl_beizhu`,
 			`ptometry_number`,
 			`status`,
-			`create_time`
+			`create_time`,
+			`new_old`
 		)
 		values
 		(
@@ -243,10 +244,11 @@
 			#{sjxlBeizhu},
 			#{ptometryNumber},
 			#{status},
-			#{createTime}
+			#{createTime},
+			#{newOld}
 		)
 	</insert>
-    <select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.SjxlDO">
+    <select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.ResultDO">
         select ptometry_number
         from jc_sjxl where ptometry_number=#{ptometryNumber}
     </select>

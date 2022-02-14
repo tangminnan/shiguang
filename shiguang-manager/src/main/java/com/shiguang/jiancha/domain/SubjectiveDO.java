@@ -59,7 +59,14 @@ public class SubjectiveDO implements Serializable {
     private String nearLeftz;
     //删除状态
     private String status;
+    private String newOld;
+    public String getNewOld() {
+        return newOld;
+    }
 
+    public void setNewOld(String newOld) {
+        this.newOld = newOld;
+    }
     public String getStatus() {
         return status;
     }

@@ -140,7 +140,8 @@
 			`crt_cylos`,
 			`crt_axialod`,
 			`crt_axialos`,
-			`create_time`
+			`create_time`,
+			`new_old`
 		)
 		values
 		(
@@ -179,7 +180,8 @@
 			#{crtCylos},
 			#{crtAxialod},
 			#{crtAxialos},
-			#{createTime}
+			#{createTime},
+			#{newOld}
 		)
 	</insert>
     <insert id="saveCrt" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true" keyProperty="crtId">
@@ -220,7 +222,8 @@
 			`crt_cylos`,
 			`crt_axialod`,
 			`crt_axialos`,
-			`create_time`
+			`create_time`,
+			`new_old`
 		)
 		values
 		(
@@ -259,10 +262,11 @@
 			#{crtCylos},
 			#{crtAxialod},
 			#{crtAxialos},
-			#{createTime}
+			#{createTime},
+			#{newOld}
 		)
 	</insert>
-	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.CrtDO">
+	<select id="haveYanguangNum" resultType="com.shiguang.jiancha.domain.ResultDO">
         select ptometry_number
         from jc_crt where ptometry_number=#{ptometryNumber}
     </select>
