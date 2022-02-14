@@ -105,6 +105,14 @@ public class ResultController {
     @PostMapping("/save")
     @RequiresPermissions("jiancha:result:add")
     public R save(ResultDO result, TryresultsDO tryresultsDO) {
+        String newOld=result.getNewOld();
+        if (newOld==null || newOld==""){
+            result.setNewOld(null);
+        }
+        String trynewOld=tryresultsDO.getNewOld();
+        if (trynewOld==null || trynewOld==""){
+            tryresultsDO.setNewOld(null);
+        }
 
 //        先判断删除处方后在修改有没有保存最后的结果和处方【是否有保存这个验光号数据】
         String ptometryNumber = result.getPtometryNumber();

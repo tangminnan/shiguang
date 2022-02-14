@@ -92,10 +92,10 @@ public class TryresultsController {
     @PostMapping("/save")
     @RequiresPermissions("jiancha:tryresults:add")
     public R save(TryresultsDO tryresults) {
-//        String newOld=tryresults.getNewOld();
-//        if (newOld==null || newOld==""){
-//            tryresults.setNewOld("new");
-//        }
+        String newOld=tryresults.getNewOld();
+        if (newOld==null || newOld==""){
+            tryresults.setNewOld(null);
+        }
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        LineDO lineDO = new LineDO();
 //        lineDO.setMemberNumber(tryresults.getCardNumber());
