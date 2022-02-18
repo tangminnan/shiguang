@@ -148,7 +148,8 @@
 			`vst_cylos`,
 			`vst_axialod`,
 			`vst_axialos`,
-			`create_time`
+			`create_time`,
+			`new_old`
 		)
 		values
 		(
@@ -190,7 +191,8 @@
 			#{vstCylos},
 			#{vstAxialod},
 			#{vstAxialos},
-			#{createTime}
+			#{createTime},
+			#{newOld}
 		)
 	</insert>
 	<insert id="saveVst" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true" keyProperty="vstId">

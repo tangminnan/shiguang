@@ -316,8 +316,18 @@ public class SalesDO implements Serializable {
 	private String jpGoodsName;
 	private String jpGoodsNum;
 	private String jpGoodsCode;
+	//院区
+	private String newOld;
 
-//	private List<SalesDO> lists = new ArrayList<>();
+	public String getNewOld() {
+		return newOld;
+	}
+
+	public void setNewOld(String newOld) {
+		this.newOld = newOld;
+	}
+
+	//	private List<SalesDO> lists = new ArrayList<>();
 //
 //	public List<SalesDO> getLists() {
 //		return lists;

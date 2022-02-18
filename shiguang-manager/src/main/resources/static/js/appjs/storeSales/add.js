@@ -10,10 +10,15 @@ $.validator.setDefaults({
 function save() {
 	var amountMoney = $("#amountMoney").val();
 	var saleName = $("#saleName").val();
+	var newOld = $("#newOld").val();
+    var chufangid = $("[name=chufang]:checked").val();
     layer.confirm("确认是否要结算", {
         btn : [ '确定', '取消' ]
         // 按钮
     }, function() {
+    	if (chufangid == '2' && newOld == ""){
+    		return layer.alert("请选择院区")
+		}
     	if (amountMoney == ""){
     		return layer.alert("请先下单")
 		}

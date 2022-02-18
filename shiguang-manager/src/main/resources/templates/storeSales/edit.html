@@ -130,6 +130,17 @@
 						<!--<input class="empty" type="button" value="清空" />-->
 					</td>
 				</tr>
+				<tr id="tab1111111" style="display:none;">
+					<td>院区</td>
+					<td>
+						<select id="newOld" name="newOld">
+							<option value="" >--请选择院区--</option>
+							<option value="old" >老院区</option>
+							<option value="new" >新院区</option>
+						</select>
+						<!--<input class="empty" type="button" value="清空" />-->
+					</td>
+				</tr>
 				<tr id="tab111111" style="display:none;">
 					<td class="chuF_red" colspan="2" style="color: #fc4242">会员使用外来处方或者未通过验光正式提交处方时使用！</td>
 				</tr>
@@ -1388,6 +1399,7 @@
             tab1111.style="display:''";
             tab11111.style="display:''";
             tab111111.style="display:''";
+            tab1111111.style="display:''";
             tab2.style="display:none";
             tab22.style="display:none";
             document.getElementById("disaa").value="";
@@ -1398,6 +1410,7 @@
             tab1111.style="display:none";
             tab11111.style="display:none";
             tab111111.style="display:none";
+            tab1111111.style="display:none";
             tab2.style="display:''";
             tab22.style="display:''";
 		}
@@ -2075,10 +2088,11 @@
 				}
                 rows = dataArray;
                 localStorage.clear();
-                if (rows.length > 0){
-                    a=a+1;
-                }
+                // if (rows.length > 0){
+                //     a=a+1;
+                // }
                 for (var i=0;i<rows.length;i++){
+                    a=a+1;
                     var goodsNumStr = rows[i][0].goodsNum;
                     var retailPrice = rows[i][0].retailPrice;
                     var desc = "镜片";

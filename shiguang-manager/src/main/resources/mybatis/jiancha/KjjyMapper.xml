@@ -129,7 +129,8 @@
 			`kjjy_beizhu`,
 			`ptometry_number`,
 			`status`,
-			`create_time`
+			`create_time`,
+			`new_old`
 		)
 		values
 		(
@@ -162,7 +163,8 @@
 			#{kjjyBeizhu},
 			#{ptometryNumber},
 			#{status},
-			#{createTime}
+			#{createTime},
+			#{newOld}
 		)
 	</insert>
     <insert id="savekjjy" parameterType="com.shiguang.jiancha.domain.ResultDO" useGeneratedKeys="true"

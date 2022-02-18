@@ -116,7 +116,8 @@
 			`rx_beizhu`,
 			`ptometry_number`,
 			`status`,
-			`create_time`
+			`create_time`,
+			`new_old`
 		)
 		values
 		(
@@ -146,7 +147,8 @@
 			#{rxBeizhu},
 			#{ptometryNumber},
 			#{status},
-			#{createTime}
+			#{createTime},
+			#{newOld}
 		)
 	</insert>
     <insert id="saveRxjmjcj" parameterType="com.shiguang.jiancha.domain.RxjmjcjDO" useGeneratedKeys="true"

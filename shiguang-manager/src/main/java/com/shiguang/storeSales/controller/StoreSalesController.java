@@ -373,6 +373,7 @@ public class StoreSalesController {
         if ("2".equals(salesDO.getChufang())) {
             if (salesDO.getRecipelwlType() == 1) {
                 KjjyDO kjjyDO = new KjjyDO();
+                kjjyDO.setNewOld(salesDO.getNewOld());
                 kjjyDO.setPtometryNumber(salesDO.getPtometryNumber());
                 kjjyDO.setCardNumber(salesDO.getMemberNumber());
                 kjjyDO.setSaleNumber(salesDO.getSaleNumber());
@@ -409,12 +410,14 @@ public class StoreSalesController {
                 ResultDO resultDO = new ResultDO();
                 resultDO.setCardNumber(salesDO.getMemberNumber());
                 resultDO.setPtometryNumber(salesDO.getPtometryNumber());
+                resultDO.setNewOld(salesDO.getNewOld());
                 resultDO.setCreateTime(new Date());
                 resultDO.setOptometryName(salesDO.getOptometrywlName());
                 resultDO.setStatus("1");
                 resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 2) {
                 KjyyDO kjyyDO = new KjyyDO();
+                kjyyDO.setNewOld(salesDO.getNewOld());
                 kjyyDO.setPtometryNumber(salesDO.getPtometryNumber());
                 kjyyDO.setCardNumber(salesDO.getMemberNumber());
                 kjyyDO.setKjyyDoctor("无");
@@ -451,6 +454,7 @@ public class StoreSalesController {
                 kjyyService.save(kjyyDO);
                 ResultDO resultDO = new ResultDO();
                 resultDO.setCardNumber(salesDO.getMemberNumber());
+                resultDO.setNewOld(salesDO.getNewOld());
                 resultDO.setPtometryNumber(salesDO.getPtometryNumber());
                 resultDO.setCreateTime(new Date());
                 resultDO.setOptometryName(salesDO.getOptometrywlName());
@@ -458,6 +462,7 @@ public class StoreSalesController {
                 resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 3) {
                 SgjjDO sgjjDO = new SgjjDO();
+                sgjjDO.setNewOld(salesDO.getNewOld());
                 sgjjDO.setPtometryNumber(salesDO.getPtometryNumber());
                 sgjjDO.setCardNumber(salesDO.getMemberNumber());
                 sgjjDO.setSaleNumber(salesDO.getSaleNumber());
@@ -493,6 +498,7 @@ public class StoreSalesController {
                 sgjjDO.setStatus("1");
                 sgjjService.save(sgjjDO);
                 ResultDO resultDO = new ResultDO();
+                resultDO.setNewOld(salesDO.getNewOld());
                 resultDO.setCardNumber(salesDO.getMemberNumber());
                 resultDO.setPtometryNumber(salesDO.getPtometryNumber());
                 resultDO.setCreateTime(new Date());
@@ -501,6 +507,7 @@ public class StoreSalesController {
                 resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 4) {
                 ZyDO zyDO = new ZyDO();
+                zyDO.setNewOld(salesDO.getNewOld());
                 zyDO.setPtometryNumber(salesDO.getPtometryNumber());
                 zyDO.setCardNumber(salesDO.getMemberNumber());
                 zyDO.setSaleNumber(salesDO.getSaleNumber());
@@ -535,6 +542,7 @@ public class StoreSalesController {
                 zyDO.setStatus("1");
                 zyService.save(zyDO);
                 ResultDO resultDO = new ResultDO();
+                resultDO.setNewOld(salesDO.getNewOld());
                 resultDO.setCardNumber(salesDO.getMemberNumber());
                 resultDO.setPtometryNumber(salesDO.getPtometryNumber());
                 resultDO.setCreateTime(new Date());
@@ -543,6 +551,7 @@ public class StoreSalesController {
                 resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 5) {
                 RxjmjcjDO rxjmjcjDO = new RxjmjcjDO();
+                rxjmjcjDO.setNewOld(salesDO.getNewOld());
                 rxjmjcjDO.setPtometryNumber(salesDO.getPtometryNumber());
                 rxjmjcjDO.setCardNumber(salesDO.getMemberNumber());
                 rxjmjcjDO.setRxDoctor("无");
@@ -571,6 +580,7 @@ public class StoreSalesController {
                 rxjmjcjDO.setStatus("1");
                 rxjmjcjService.save(rxjmjcjDO);
                 ResultDO resultDO = new ResultDO();
+                resultDO.setNewOld(salesDO.getNewOld());
                 resultDO.setCardNumber(salesDO.getMemberNumber());
                 resultDO.setPtometryNumber(salesDO.getPtometryNumber());
                 resultDO.setCreateTime(new Date());
@@ -579,6 +589,7 @@ public class StoreSalesController {
                 resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 7) {
                 SjxlDO sjxlDO = new SjxlDO();
+                sjxlDO.setNewOld(salesDO.getNewOld());
                 sjxlDO.setPtometryNumber(salesDO.getPtometryNumber());
                 sjxlDO.setCardNumber(salesDO.getMemberNumber());
                 sjxlDO.setSjxlDoctor("无");
@@ -610,6 +621,7 @@ public class StoreSalesController {
                 sjxlDO.setStatus("1");
                 sjxlService.save(sjxlDO);
                 ResultDO resultDO = new ResultDO();
+                resultDO.setNewOld(salesDO.getNewOld());
                 resultDO.setCardNumber(salesDO.getMemberNumber());
                 resultDO.setPtometryNumber(salesDO.getPtometryNumber());
                 resultDO.setCreateTime(new Date());
@@ -618,7 +630,9 @@ public class StoreSalesController {
                 resultService.save(resultDO);
             }else if (salesDO.getRecipelwlType() == 8){
                 VstDO vstDO = new VstDO();
+                vstDO.setNewOld(salesDO.getNewOld());
                 vstDO.setPtometryNumber(salesDO.getPtometryNumber());
+                vstDO.setVstOptometryName(salesDO.getOptometrywlName());
                 vstDO.setVstPrescriptionType(salesDO.getRecipelwlType().toString());
                 vstDO.setCardNumber(salesDO.getMemberNumber());
                 vstDO.setSaleNumber(salesDO.getSaleNumber());
@@ -661,6 +675,7 @@ public class StoreSalesController {
                 vstDO.setStatus("1");
                 vstService.save(vstDO);
                 ResultDO resultDO = new ResultDO();
+                resultDO.setNewOld(salesDO.getNewOld());
                 resultDO.setCardNumber(salesDO.getMemberNumber());
                 resultDO.setPtometryNumber(salesDO.getPtometryNumber());
                 resultDO.setCreateTime(new Date());
@@ -669,8 +684,10 @@ public class StoreSalesController {
                 resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 9){
                 CrtDO crtDO = new CrtDO();
+                crtDO.setNewOld(salesDO.getNewOld());
                 crtDO.setPtometryNumber(salesDO.getPtometryNumber());
                 crtDO.setCardNumber(salesDO.getMemberNumber());
+                crtDO.setCrtOptometryName(salesDO.getOptometrywlName());
                 crtDO.setCrtDoctor("无");
                 crtDO.setCreateTime(new Date());
                 crtDO.setCrtPrescriptionType(salesDO.getRecipelwlType().toString());
@@ -709,6 +726,7 @@ public class StoreSalesController {
                 crtDO.setCrtVaos(salesDO.getLeftVAcrt());
                 crtService.save(crtDO);
                 ResultDO resultDO = new ResultDO();
+                resultDO.setNewOld(salesDO.getNewOld());
                 resultDO.setCardNumber(salesDO.getMemberNumber());
                 resultDO.setPtometryNumber(salesDO.getPtometryNumber());
                 resultDO.setCreateTime(new Date());
@@ -717,6 +735,7 @@ public class StoreSalesController {
                 resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 10) {
                 RgpDO rgpDO = new RgpDO();
+                rgpDO.setNewOld(salesDO.getNewOld());
                 rgpDO.setPtometryNumber(salesDO.getPtometryNumber());
                 rgpDO.setCardNumber(salesDO.getMemberNumber());
                 rgpDO.setRgpDoctor("无");
@@ -740,6 +759,7 @@ public class StoreSalesController {
                 rgpDO.setStatus("1");
                 rgpService.save(rgpDO);
                 ResultDO resultDO = new ResultDO();
+                resultDO.setNewOld(salesDO.getNewOld());
                 resultDO.setCardNumber(salesDO.getMemberNumber());
                 resultDO.setPtometryNumber(salesDO.getPtometryNumber());
                 resultDO.setCreateTime(new Date());
@@ -748,6 +768,7 @@ public class StoreSalesController {
                 resultService.save(resultDO);
             } else if (salesDO.getRecipelwlType() == 11) {
                 YaopinDO yaopinDO = new YaopinDO();
+                yaopinDO.setNewOld(salesDO.getNewOld());
                 yaopinDO.setPtometryNumber(salesDO.getPtometryNumber());
                 yaopinDO.setCardNumber(salesDO.getMemberNumber());
                 yaopinDO.setYpDoctor("无");
@@ -759,6 +780,7 @@ public class StoreSalesController {
                 yaopinDO.setStatus("1");
                 yaopinService.save(yaopinDO);
                 ResultDO resultDO = new ResultDO();
+                resultDO.setNewOld(salesDO.getNewOld());
                 resultDO.setCardNumber(salesDO.getMemberNumber());
                 resultDO.setPtometryNumber(salesDO.getPtometryNumber());
                 resultDO.setCreateTime(new Date());
