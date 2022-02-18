@@ -35,12 +35,12 @@ function load() {
                         mfrsids: $('#mfrsids').val().trim(),
                         goodsids: $('#goodsids').val().trim(),
                         mfrsnames: $('#mfrsnames').val().trim(),
-                        goodsid: $('#goodsid').val().trim(),
-                        mfrsid: $('#mfrsid').val().trim(),
+                        goodsid: $('#goodsid').val() ,
+                        mfrsid: $('#mfrsid').val() ,
 
                         brandnum: $('#brandnum').val().trim(),
-                        stateId: $('#stateId').val().trim(),
-                        payid: $('#payid').val().trim(),
+                        stateId: $('#stateId').val() ,
+                        payid: $('#payid').val() ,
                         brandname: $('#brandname').val().trim()
 
                         // name:$('#searchName').val(),

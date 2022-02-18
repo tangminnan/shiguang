@@ -35,8 +35,8 @@ function load() {
                         mfrsnum: $('#mfrsnum').val().trim(),
                         mfrsname: $('#mfrsname').val().trim(),
                         goodsids: $('#goodsids').val().trim(),
-                        goodsid:$('#goodsid').val().trim(),
-                        xsstate: $('#xsstate').val().trim()
+                        goodsid:$('#goodsid').val() ,
+                        xsstate: $('#xsstate').val()
                         // username:$('#searchName').val()
                     };
                 },
