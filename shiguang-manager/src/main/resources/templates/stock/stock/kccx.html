@@ -348,18 +348,18 @@
                                 //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                                 limit: params.limit,
                                 offset: params.offset,
-                                positionId: $('#positionId').val(),
-                                goodsNum : $("#goodsNum").val(),
-                                goodsCode : $("#goodsCode").val(),
-                                goodsName : $("#goodsName").val(),
-                                goodsType : $("#goodsType option:selected").val(),
-                                mfrsname : $("#mfrsname").val(),
-                                brandname : $("#brandname").val(),
-                                retailPrice : $("#retailPrice").val(),
-                                retailPrice2 : $("#retailPrice2").val(),
-                                xsstate: $("input[name='xsstate']:checked").val(),
-                                classtype : $("#classtype").val(),
-                                kccount : $("#kccount").val()
+                                positionId: $('#positionId').val().trim(),
+                                goodsNum : $("#goodsNum").val().trim(),
+                                goodsCode : $("#goodsCode").val().trim(),
+                                goodsName : $("#goodsName").val().trim(),
+                                goodsType : $("#goodsType option:selected").val().trim(),
+                                mfrsname : $("#mfrsname").val().trim(),
+                                brandname : $("#brandname").val().trim(),
+                                retailPrice : $("#retailPrice").val().trim(),
+                                retailPrice2 : $("#retailPrice2").val().trim(),
+                                xsstate: $("input[name='xsstate']:checked").val().trim(),
+                                classtype : $("#classtype").val().trim(),
+                                kccount : $("#kccount").val().trim()
                             };
                         },
                         columns: [

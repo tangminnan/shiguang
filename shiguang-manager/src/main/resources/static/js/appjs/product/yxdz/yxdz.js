@@ -34,17 +34,17 @@ function load() {
                         offset: params.offset,
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
-                        producNum:$('#producNum').val(),
-                        producName:$('#producName').val(),
-                        mfrsname: $('#mfrsname').val(),
-                        brandname: $('#brandname').val(),
-                        retailPrice:$('#retailPrice').val(),
-                        retailPrice2:$('#retailPrice2').val(),
-                        taxPrice:$('#taxPrice').val(),
-                        taxPrice2:$('#taxPrice2').val(),
-                        usageId:$('#usageId').val(),
-                        typeId:$('#typeId').val(),
-                        xsstate:$('#xsstate').val(),
+                        producNum:$('#producNum').val().trim(),
+                        producName:$('#producName').val().trim(),
+                        mfrsname: $('#mfrsname').val().trim(),
+                        brandname: $('#brandname').val().trim(),
+                        retailPrice:$('#retailPrice').val().trim(),
+                        retailPrice2:$('#retailPrice2').val().trim(),
+                        taxPrice:$('#taxPrice').val().trim(),
+                        taxPrice2:$('#taxPrice2').val().trim(),
+                        usageId:$('#usageId').val().trim(),
+                        typeId:$('#typeId').val().trim(),
+                        xsstate:$('#xsstate').val().trim()
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果

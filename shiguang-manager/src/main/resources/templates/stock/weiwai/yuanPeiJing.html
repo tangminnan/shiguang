@@ -269,12 +269,12 @@
 										//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 										limit: params.limit,
 										offset: params.offset,
-										eyeStyle  : $("#eyeStyle").val(),
-										saleNumber  : $("#saleNumber").val(),
-										name  : $("#name").val(),
-										memberNumber  : $("#memberNumber").val(),
-										phone1  : $("#phone1").val(),
-                                        mfrsid  : $("#mfrsid").val()
+										eyeStyle  : $("#eyeStyle").val().trim(),
+										saleNumber  : $("#saleNumber").val().trim(),
+										name  : $("#name").val().trim(),
+										memberNumber  : $("#memberNumber").val().trim(),
+										phone1  : $("#phone1").val().trim(),
+                                        mfrsid  : $("#mfrsid").val().trim()
 									};
 								},
 								columns: [

@@ -34,10 +34,10 @@ function load() {
                         offset: params.offset,
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
-                        cardNumber: $('#cardNumber').val(),
+                        cardNumber: $('#cardNumber').val().trim(),
                         saleNumber: $('#saleNumber').val(),
-                        name: $('#name').val(),
-                        phone1: $('#phone1').val(),
+                        name: $('#name').val().trim(),
+                        phone1: $('#phone1').val().trim()
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果

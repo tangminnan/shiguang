@@ -49,13 +49,11 @@ function load() {
 								},
 																{
 									field : 'spanId', 
-									title : '
-跨度id' 
+									title : '跨度id'
 								},
 																{
 									field : 'span', 
-									title : '
-跨度' 
+									title : '跨度'
 								},
 																{
 									title : '操作',

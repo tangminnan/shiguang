@@ -32,14 +32,14 @@ function load() {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
                         offset: params.offset,
-                        goodsid: $('#goodsid').val(),
-                        mfrsname: $('#mfrsname').val(),
+                        goodsid: $('#goodsid').val().trim(),
+                        mfrsname: $('#mfrsname').val().trim(),
                         mfrsid: $('#mfrsid').val(),
-                        brandnum: $('#brandnum').val(),
+                        brandnum: $('#brandnum').val().trim(),
                         stateId: $('#stateId').val(),
                         payid: $('#payid').val(),
-                        brandname: $('#brandname').val(),
-                        xsstate: $('#xsstate').val()
+                        brandname: $('#brandname').val().trim(),
+                        xsstate: $('#xsstate').val().trim()
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
                     };

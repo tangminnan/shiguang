@@ -34,23 +34,23 @@ function load() {
                         offset: params.offset,
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
-                        producNum:$('#producNum').val(),
-                        producName:$('#producName').val(),
-                        mfrsname: $('#mfrsname').val(),
-                        brandname: $('#brandname').val(),
-                        retailPrice:$('#retailPrice').val(),
-                        retailPrice2:$('#retailPrice2').val(),
-                        taxPrice:$('#taxPrice').val(),
-                        taxPrice2:$('#taxPrice2').val(),
-                        usageId:$('#usageId').val(),
-                        typeId:$('#typeId').val(),
-                        xsstate:$('#xsstate').val(),
+                        producNum:$('#producNum').val().trim(),
+                        producName:$('#producName').val().trim(),
+                        mfrsname: $('#mfrsname').val().trim(),
+                        brandname: $('#brandname').val().trim(),
+                        retailPrice:$('#retailPrice').val().trim(),
+                        retailPrice2:$('#retailPrice2').val().trim(),
+                        taxPrice:$('#taxPrice').val().trim(),
+                        taxPrice2:$('#taxPrice2').val().trim(),
+                        usageId:$('#usageId').val().trim(),
+                        typeId:$('#typeId').val().trim(),
+                        xsstate:$('#xsstate').val().trim(),
 
 
-                        sph:$('#sph').val(),
-                        sph2:$('#sph2').val(),
-                        cyl:$('#cyl').val(),
-                        cyl2:$('#cyl2').val(),
+                        // sph:$('#sph').val().trim(),
+                        // sph2:$('#sph2').val().trim(),
+                        // cyl:$('#cyl').val().trim(),
+                        // cyl2:$('#cyl2').val().trim()
 
 
                     };
