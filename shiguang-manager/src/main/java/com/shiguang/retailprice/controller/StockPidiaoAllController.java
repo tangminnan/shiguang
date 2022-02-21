@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -80,14 +77,14 @@ String stockPidiaoAll(Model model) {
         map.put("producName",producName);
         map.put("producNum",producNum);
         map.put("status",status);
-        if (goods.equals(1)){
-           List<PidiaoDO> summary= pidiaoService.jingjiaSummary(map);
-           model.addAttribute("summary",summary);
-        }else if (goods.equals(2)){
+         List<PidiaoDO> summary = new ArrayList<>();
+        if (goods.equals("1")){
+           summary= pidiaoService.jingjiaSummary(map);
+        }else if (goods.equals("2")){
 
-        }else if (goods.equals(3) && classtype.equals(1)){
+        }else if (goods.equals("3") && classtype.equals("1")){
 
-        }else if (goods.equals(3) && classtype.equals(2)){
+        }else if (goods.equals("3") && classtype.equals("2")){
 
         }else if (goods.equals(4) && classtype.equals(1)){
 
@@ -110,6 +107,8 @@ String stockPidiaoAll(Model model) {
         Date date = new Date();
         String newDate = sdf.format(date);
         model.addAttribute("newDate", newDate);
+        model.addAttribute("summary",summary);
+
         return "/retailprice/stockPidiaoAll/summary";
     }
 }

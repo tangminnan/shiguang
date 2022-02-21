@@ -436,8 +436,18 @@
 		FROM stock_pidiao p
 		left join aa_produca a on p.goods_num=a.produc_num
 		<where>
-			<if test="id != null and id != ''">and id = #{id}</if>
-			<if test="pidiaonum != null and pidiaonum != ''">and pidiao_number = #{pidiaonum}</if>
+			<if test="positionId != null and positionId != ''">and p.out_positionid = #{positionId}</if>
+
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( p.sh_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(  p.sh_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+
+			<if test="goods != null and goods != ''">and p.goods = #{goods}</if>
+			<if test="classtype != null and classtype != ''">and p.classtype = #{classtype}</if>
+			<if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+			<if test="brandname != null and brandname != ''">and p.brandname = #{brandname}</if>
+			<if test="producName != null and producName != ''">and p.goods_name = #{producName}</if>
+			<if test="producNum != null and producNum != ''">and p.goods_num = #{producNum}</if>
+			<if test="status != null and status != ''">and p.status = #{status}</if>
 		</where>
 	</select>
 </mapper>

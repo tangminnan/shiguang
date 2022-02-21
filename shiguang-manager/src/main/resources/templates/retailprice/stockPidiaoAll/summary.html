@@ -43,26 +43,29 @@
 </div>
 <div th:include="include::footer"></div>
 <script type="text/javascript">
-    $().ready(function () {
-        var number = $("#number").val();
-        $.ajax({
-            // url: '/retailprice/retailprice/selectOrder',
-            type: 'post',
-            dataType: "json",
-            data: {
-                'number': number
-            },
-            success: function (xml) {
-                for (var i = 0; i < xml.length; i++) {
-                    $(".liebiao").after("<tr class='val'>" +
-                        "<td name='goodsNum'>" + xml[i].goodsNum + "</td>\n" +
-                        "<td name='name'>" + xml[i].brandname + "</td>\n" +
-                        "<td name='oldPrice'>" + xml[i].oldPrice + "</td>\n" +
-                        "<td name='newPrice'>" + xml[i].newPrice + "</td>\n" +
-                        "</tr>");
-                }
-            }
-        });
+    $().ready(function() {
+        var summary = [[${summary}]];
+        var html = "";
+        var allCount = 0;
+        var allMoney = 0;
+        for (var i = 0; i < summary.length; i++) {
+            html += "<tr>";
+            html += "<td>" + summary[i].goods+"."+summary[i].mfrsid+"."+summary[i].brandnum+ "</td>";
+            html += "<td>" + summary[i].viewGoodsName + "</td>";
+            html += "<td>" + summary[i].unit + "</td>";
+            html += "<td>" + summary[i].needCount + "</td>";
+            html += "<td>" + summary[i].useCount + "</td>";
+            html += "<td>" + summary[i].money + "</td>";
+            html += "</tr>";
+            allCount+=summary[i].useCount;
+            allMoney+=summary[i].money;
+        }
+        html+="<tr class='tfoot'>";
+        html+="<td colspan='3'>总合计：</td>";
+        html+="<td>"+allCount+"</td>";
+        html+="<td>"+allMoney+"</td>";
+        html+="</tr>";
+        $("#liebiao").append(html);
     });
 </script>
 </body>
