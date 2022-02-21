@@ -63,4 +63,9 @@ public interface PidiaoService {
 
 	//是否有这个单号
 	List<PidiaoDO> haveOrderNum(Map<String, Object> map);
+
+
+
+	//批调统计表
+	List<PidiaoDO> jingjiaSummary(Map<String, Object> map);
 }

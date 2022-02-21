@@ -15,7 +15,7 @@
 	</select>
     <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.ProducaDO">
-        select produc_num from aa_produca where produc_num=#{producNum} and state='1' order by id
+        select produc_num from aa_produca where produc_num=#{producNum}   order by id
 	</select>
 
 
@@ -191,7 +191,7 @@
             <if test="xsstate != null">`xsstate` = #{xsstate},</if>
             <if test="state != null">`state` = #{state},</if>
             <if test="classtype != null">`classtype` = #{classtype},</if>
-            <if test="viewGoodName != null">`view_nood_name` = #{viewGoodName}</if>
+            <if test="viewGoodName != null">`view_good_name` = #{viewGoodName}</if>
         </set>
         <where>
         <if test="id != null and id != ''">and id = #{id}</if>
@@ -231,7 +231,7 @@
     </select>
 
     <!--菜单联动显示-->
-    <select id="choice" resultType="com.shiguang.product.domain.ProducaDO">
+    <select id="choice" resultType="com.shiguang.mfrs.domain.BrandDO">
 		select  brandid,brandnum ,brandname  from c_brand
 		<where>
             <if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>

@@ -429,4 +429,15 @@
 			<if test="pidiaonum != null and pidiaonum != ''">and pidiao_number = #{pidiaonum}</if>
 		</where>
 	</select>
+
+	<select id="jingjiaSummary" resultType="com.shiguang.stock.domain.PidiaoDO">
+		SELECT
+		p.goods_num,a.view_good_name,p.unit,p.need_count,p.use_count,p.money,p.goods,a.mfrsid,a.brandnum
+		FROM stock_pidiao p
+		left join aa_produca a on p.goods_num=a.produc_num
+		<where>
+			<if test="id != null and id != ''">and id = #{id}</if>
+			<if test="pidiaonum != null and pidiaonum != ''">and pidiao_number = #{pidiaonum}</if>
+		</where>
+	</select>
 </mapper>

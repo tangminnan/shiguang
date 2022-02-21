@@ -254,7 +254,9 @@ public class YxcpController {
         yxcp.setViewGoodName(producName);
         yxcp.setProducName(producName+"-球镜:"+sphId+"-柱镜:"+cylId+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
-            return R.error("商品代码已存在");
+//            return R.error("商品代码已存在");
+            yxcpService.update(yxcp);
+            return R.ok();
         }
         if (yxcpService.save(yxcp) > 0) {
             return R.ok();

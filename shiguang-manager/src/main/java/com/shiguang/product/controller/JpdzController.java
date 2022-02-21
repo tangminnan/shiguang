@@ -249,7 +249,10 @@ public class JpdzController {
         jpdz.setViewGoodName(producName);
         jpdz.setProducName(producName+"-球镜:"+sphUp+"/"+sphDown+"-柱镜:"+cylUp+"/"+cylDown+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
-            return R.error("商品代码已存在");
+//            return R.error("商品代码已存在");
+            jpdzService.update(jpdz);
+            return R.ok();
+
         }
         if (jpdzService.save(jpdz) > 0) {
             return R.ok();

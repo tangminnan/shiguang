@@ -131,7 +131,9 @@ public class HlyController {
         hly.setViewGoodName(producName);
         hly.setProducName(producName+"-型号:"+factory+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
-            return R.error("商品代码已存在");
+//            return R.error("商品代码已存在");
+            hlyService.update(hly);
+           return R.ok();
         }
         if (hlyService.save(hly) > 0) {
             return R.ok();

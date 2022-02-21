@@ -53,9 +53,10 @@
                         </td>
                         <td>商品编号：</td>
                         <td>
-                            <input id="proid" name="proid" type="text" onkeyup="choiceProid(this)"
-                                   onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
-                                   oninput="if(value.length>4)value=value.slice(0,4)" value="0000"/>
+                            <input id="proid" name="proid" type="text" onchange="choiceProid(this)"
+                                   onkeyup="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"
+                                   oninput="if(value.length>4)value=value.slice(0,4)"  />
+                            <!--onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()"-->
                             <em>*</em>
                         </td>
                     </tr>
@@ -279,9 +280,9 @@
             } else if (unitid == "") {
                 layer.alert("请选择计量单位");
             } else if (sphId == "") {
-                layer.alert("请选择球镜");
+                    layer.alert("请选择球镜");
             } else if (cylId == "") {
-                layer.alert("请选择柱镜");
+                    layer.alert("请选择柱镜");
             }
             // else if (tax == "") {
             //     layer.alert("请输入税率");
@@ -332,6 +333,7 @@
         var a2 = document.getElementById("producCode");
         var cylId = document.getElementById("cylId");
         var sphId = document.getElementById("sphId");
+
         // console.log(cylId);
         // console.log(sphId);
         var sum;
@@ -344,23 +346,58 @@
             // alert(texts)
             // $("#producName").val(texts);
         }
-        function change1(e, err) {
-            var select1_val = e.options[e.options.selectedIndex].innerText
-            var select2_val = err.options[err.options.selectedIndex].innerText
+
+
+        function choiceProid(e) {//商品编号
+            // var proid = document.getElementById("producFactory")
+            // sum = 17 - proid.value.length
+            // sum1 = 22 - e.value.length
+            // a1.value = a1_val.substring(0, sum) + proid.value.toUpperCase() + a1_val.substring(17, sum1) + e.value.toUpperCase()
+            // a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "")//黏贴
+
+
+
+            var proids = $("#proid").val().padStart(4, '0');
+
+            var select1_val = $("#sphId").val();
+            var select2_val = $("#cylId").val();
+
             // layer.alert(e.value,err.value)
-            if (e.value == "") {
+            if (select1_val == "") {
                 select1_val = 0
                 //    layer.alert(select1_val)
-            } else if (err.value == "") {
+            } else if (select2_val == "") {
                 select2_val = 0
                 // layer.alert(select2_val)
             }
             // console.log(select1_val,select2_val);
             select1_val = ZF(select1_val.indexOf("+")==0,select1_val.replace(".", "").replace("+", "").replace("-", "").padStart("4", "000000000"))
             sum = select1_val+ select2_val.replace(".", "").replace("+", "").replace("-", "")
-            a1.value = a1.value.substring(0, 8) + sum + ".0000";
+            a1.value = a1.value.substring(0, 8) + sum + "."+proids;
             a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");
             console.log(a1.value.substring(18, 22));
+        }
+        function change1(e, err) {
+                var proids = $("#proid").val().padStart(4, '0');
+
+                var select1_val = e.options[e.options.selectedIndex].innerText
+                var select2_val = err.options[err.options.selectedIndex].innerText
+
+                // layer.alert(e.value,err.value)
+                if (e.value == "") {
+                    select1_val = 0
+                    //    layer.alert(select1_val)
+                } else if (err.value == "") {
+                    select2_val = 0
+                    // layer.alert(select2_val)
+                }
+                // console.log(select1_val,select2_val);
+                select1_val = ZF(select1_val.indexOf("+")==0,select1_val.replace(".", "").replace("+", "").replace("-", "").padStart("4", "000000000"))
+                sum = select1_val+ select2_val.replace(".", "").replace("+", "").replace("-", "")
+                a1.value = a1.value.substring(0, 8) + sum + "."+proids;
+                a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");
+                console.log(a1.value.substring(18, 22));
+
         }
         function ZF(judge,e) {
             // layer.alert(e.indexOf("+"))

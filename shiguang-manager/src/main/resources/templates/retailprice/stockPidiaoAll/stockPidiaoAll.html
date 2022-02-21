@@ -26,9 +26,9 @@
 			</td>
 			<td>收货日期：</td>
 			<td>
-				<input id="shTime1" type="text"
+				<input id="settleDateStart" type="text"
 					   placeholder="开始日期"  />～
-				<input id="shTime2" type="text"
+				<input id="settleDateEnd" type="text"
 					   placeholder="结束日期" />
 			</td>
 			<td>统计类型：</td>
@@ -62,6 +62,7 @@
 			</td>
 			<td>制造商：</td>
 			<td>
+				<input id="mfrsid" name="mfrsid" type="text" readonly/>
 				<input id="mfrsname" name="mfrsname" type="text" readonly/>
 				<input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
 			</td>
@@ -82,10 +83,10 @@
 			</td>
 			<td>收货状态：</td>
 			<td>
-				<select id="shstate" name="shstate" style="width: 50%">
+				<select id="status" name="status" style="width: 50%">
 					<option value="">--请选择--</option>
-					<option value="1">收货</option>
-					<option value="2">未收货</option>
+					<option value="0">收货</option>
+					<option value="1">未收货</option>
 				</select>
 			</td>
 		</tr>
@@ -99,12 +100,12 @@
 <div th:include="include :: footer"></div>
 <script type="text/javascript">
 	laydate.render({
-		elem: '#shTime1',
+		elem: '#settleDateStart',
 		format: 'yyyy-MM-dd',
 		type: 'date'
 	});
 	laydate.render({
-		elem: '#shTime2',
+		elem: '#settleDateEnd',
 		format: 'yyyy-MM-dd',
 		type: 'date'
 	});
@@ -196,50 +197,55 @@
                 controls[i].value = '';
             }
         }
+        $("#mfrsid").val("");
     }
     function reLoad() {
         var positionId = $('#positionId').val();
-        var shTime1=$("#shTime1").val();
-        var shTime2=$("#shTime2").val();
-        var goodsType=$("#goodsType").val();
+        var settleDateStart=$("#settleDateStart").val();
+        var settleDateEnd=$("#settleDateEnd").val();
         var way=$("#way").val();
-        var mfrsname=$("#mfrsname").val();
+
+        var goods=$("#goodsType").val();
+        var mfrsid=$("#mfrsid").val();
         var brandname=$("#brandname").val();
         var producName=$("#producName").val();
         var producNum=$("#producNum").val();
-        var shstate=$("#shstate").val();
-        if (goodsType== ""){
+        var status=$("#status").val();
+        if (goods== ""){
             $("#classtype").val("") ;
         }else {
             $("#classtype").val("1") ;
         }
-        if (goodsType == 3 || goodsType == 4) {
+        if (goods == 3 || goods == 4) {
             $("#classtype").val($("input[name='classtype']:checked").val());
         }
-        if(shTime1=="" || shTime1==null){
+        var classtype=$("#classtype").val();
+        if(positionId=="" || positionId==null){
+            layer.alert("请选择仓位！")
+		} else if(settleDateStart=="" || settleDateStart==null){
             layer.alert("请选择收货时间(开始日期)！");
-            // var time1=document.getElementById('shTime1');
-            // time1.onclick=function () {
-            //     alert(1111111111);
-            //     laydate.render({
-            //         elem: '#shTime1',
-            //         format: 'yyyy-MM-dd',
-            //         type: 'date'
-            //     });
-            // }
-		}else if (shTime1 !="" && (shTime2=="" || shTime2==null)){
+		}else if ( settleDateEnd=="" || settleDateEnd==null){
             layer.alert("请选择收货时间(结束日期)！");
 		} else if (way=="" || way==null){
             layer.alert("请选择统计类型！")
 		}else {
-
-
-            window.open("/stock/stock/dayinOrder?danjuNumber="+ danjuNumber);
+            window.open("/stockPidiaoAll/stockPidiaoAll/summary/?positionId=" + positionId + "&settleDateStart=" + settleDateStart
+                + "&settleDateEnd=" + settleDateEnd+ "&way=" + way+ "&goods=" + goods+ "&classtype=" + classtype+ "&mfrsid=" + mfrsid+ "&brandname=" + brandname
+				+ "&producName=" + producName+ "&producNum=" + producNum+ "&status=" + status);
 		}
     }
 </script>
 </body>
 </html>
-
+// var time1=document.getElementById('shTime1');
+// time1.onclick=function () {
+//     alert(1111111111);
+//     laydate.render({
+//         elem: '#shTime1',
+//         format: 'yyyy-MM-dd',
+//         type: 'date'
+//     });
+// }
+// }else if (shTime1 !="" && (shTime2=="" || shTime2==null)){
 
 

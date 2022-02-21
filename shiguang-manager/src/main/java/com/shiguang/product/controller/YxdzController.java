@@ -255,7 +255,9 @@ public class YxdzController {
         yxdz.setViewGoodName(producName);
         yxdz.setProducName(producName+"-球镜:"+sphUp+"/"+sphDown+"-柱镜:"+cylUp+"/"+cylDown +"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
-            return R.error("商品代码已存在");
+//            return R.error("商品代码已存在");
+            yxdzService.update(yxdz);
+            return R.ok();
         }
         if (yxdzService.save(yxdz) > 0) {
             return R.ok();

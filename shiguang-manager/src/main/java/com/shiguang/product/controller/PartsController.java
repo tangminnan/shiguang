@@ -146,7 +146,9 @@ public class PartsController {
         parts.setViewGoodName(producName);
         parts.setProducName(producName+"-型号:"+factory+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
-            return R.error("商品代码已存在");
+            partsService.update(parts);
+//            return R.error("商品代码已存在");
+            return R.ok();
         }
         if (partsService.save(parts) > 0) {
             return R.ok();

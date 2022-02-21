@@ -122,4 +122,9 @@ public class PidiaoServiceImpl implements PidiaoService {
 	public List<PidiaoDO> haveOrderNum(Map<String, Object> map) {
 		return pidiaoDao.haveOrderNum(map);
 	}
+
+	@Override
+	public List<PidiaoDO> jingjiaSummary(Map<String, Object> map) {
+		return pidiaoDao.jingjiaSummary(map);
+	}
 }

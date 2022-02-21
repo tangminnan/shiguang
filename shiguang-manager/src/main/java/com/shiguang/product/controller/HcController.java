@@ -130,7 +130,9 @@ public class HcController {
         hc.setViewGoodName(producName);
         hc.setProducName(producName+"-型号:"+factory+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
-            return R.error("商品代码已存在");
+//            return R.error("商品代码已存在");
+            hcService.update(hc);
+           return R.ok();
         }
         if (hcService.save(hc) > 0) {
             return R.ok();

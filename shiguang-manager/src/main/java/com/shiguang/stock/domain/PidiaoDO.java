@@ -28,7 +28,7 @@ public class PidiaoDO implements Serializable {
 	private String danzi;
 
 
-	//状态
+	//收货状态（0收货，1未收货）
 	private String status;
 	//工号
 	private String  username;

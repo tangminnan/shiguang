@@ -147,7 +147,9 @@ public class TyjController {
         tyj.setViewGoodName(producName);
         tyj.setProducName(producName+"-型号:"+factory+"-颜色:"+color+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
-            return R.error("商品代码已存在");
+//            return R.error("商品代码已存在");
+            tyjService.update(tyj);
+            return R.ok();
         }
         if (tyjService.save(tyj) > 0) {
             return R.ok();

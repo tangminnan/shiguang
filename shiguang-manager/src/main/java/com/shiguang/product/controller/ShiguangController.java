@@ -131,8 +131,11 @@ public class ShiguangController {
         shiguang.setProducName(producName+"-型号:"+factory+"-标价:"+retailPrice);
         List<ShiguangDO> haveNum=shiguangService.haveNum(map);
         if (haveNum.size() > 0) {
-            return R.error("商品代码已存在");
+//            return R.error("商品代码已存在");
+            shiguangService.update(shiguang);
+            return R.ok();
         }
+
         if (shiguangService.save(shiguang) > 0) {
             return R.ok();
         }

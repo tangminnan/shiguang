@@ -244,6 +244,6 @@
     </update>
     <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.JpcpDO">
-        select produc_num from aa_jpcp where produc_num=#{producNum}  and state='1' order by id
+        select produc_num from aa_jpcp where produc_num=#{producNum}   order by id
 	</select>
 </mapper>

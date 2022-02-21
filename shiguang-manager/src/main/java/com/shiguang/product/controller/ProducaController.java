@@ -207,11 +207,14 @@ ProducaController {
         produca.setViewGoodName(producName);
         produca.setProducName(producName+"-型号:"+factory+"-色号:"+producColor+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
-            return R.error("商品代码已存在");
-        }
-        if (producaService.save(produca) > 0) {
+//            return R.error("商品代码已存在");
+            producaService.update(produca);
             return R.ok();
         }
+            if (producaService.save(produca) > 0) {
+                return R.ok();
+            }
+
         return R.error();
     }
 

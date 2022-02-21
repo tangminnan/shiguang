@@ -377,6 +377,6 @@
     </update>
     <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.JpdzDO">
-        select produc_num from aa_jpdz where produc_num=#{producNum} and state='1' order by id
+        select produc_num from aa_jpdz where produc_num=#{producNum}   order by id
 	</select>
 </mapper>

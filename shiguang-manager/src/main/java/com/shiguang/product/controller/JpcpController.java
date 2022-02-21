@@ -250,7 +250,9 @@ public class JpcpController {
         jpcp.setViewGoodName(producName);
         jpcp.setProducName(producName+"-球镜:"+sph+"-柱镜:"+cyl+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
-            return R.error("商品代码已存在");
+            jpcpService.update(jpcp);
+            return R.ok();
+//            return R.error("商品代码已存在");
         }
         if (jpcpService.save(jpcp) > 0) {
             return R.ok();
