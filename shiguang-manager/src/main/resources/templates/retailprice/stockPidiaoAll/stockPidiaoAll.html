@@ -62,7 +62,7 @@
 			</td>
 			<td>制造商：</td>
 			<td>
-				<input id="mfrsid" name="mfrsid" type="text" readonly/>
+				<input id="mfrsid" name="mfrsid" type="hidden" readonly/>
 				<input id="mfrsname" name="mfrsname" type="text" readonly/>
 				<input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
 			</td>
@@ -73,10 +73,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td>商品名称：</td>
-			<td>
-				<input id="producName" name="producName" type="text"/>
-			</td>
+			<!--<td>商品名称：</td>-->
+			<!--<td>-->
+				<!--<input id="producName" name="producName" type="text"/>-->
+			<!--</td>-->
 			<td>商品代码：</td>
 			<td>
 				<input id="producNum" name="producNum" type="text">
@@ -208,7 +208,7 @@
         var goods=$("#goodsType").val();
         var mfrsid=$("#mfrsid").val();
         var brandname=$("#brandname").val();
-        var producName=$("#producName").val();
+        // var producName=$("#producName").val();
         var producNum=$("#producNum").val();
         var status=$("#status").val();
         if (goods== ""){
@@ -228,24 +228,21 @@
             layer.alert("请选择收货时间(结束日期)！");
 		} else if (way=="" || way==null){
             layer.alert("请选择统计类型！")
+		}else if (goods=="" || goods==null){
+            layer.alert("请选择商品类型！")
 		}else {
-            window.open("/stockPidiaoAll/stockPidiaoAll/summary/?positionId=" + positionId + "&settleDateStart=" + settleDateStart
-                + "&settleDateEnd=" + settleDateEnd+ "&way=" + way+ "&goods=" + goods+ "&classtype=" + classtype+ "&mfrsid=" + mfrsid+ "&brandname=" + brandname
-				+ "&producName=" + producName+ "&producNum=" + producNum+ "&status=" + status);
+            // if (way==1){
+                window.open("/stockPidiaoAll/stockPidiaoAll/summary/?positionId=" + positionId + "&settleDateStart=" + settleDateStart
+                    + "&settleDateEnd=" + settleDateEnd + "&way=" + way + "&goods=" + goods+ "&classtype=" + classtype+ "&mfrsid=" + mfrsid+ "&brandname=" + brandname
+                    +"&producNum=" + producNum+ "&status=" + status);
+                    // + "&producName=" + producName+ "&producNum=" + producNum+ "&status=" + status);
+			// }
+
 		}
     }
 </script>
 </body>
 </html>
-// var time1=document.getElementById('shTime1');
-// time1.onclick=function () {
-//     alert(1111111111);
-//     laydate.render({
-//         elem: '#shTime1',
-//         format: 'yyyy-MM-dd',
-//         type: 'date'
-//     });
-// }
-// }else if (shTime1 !="" && (shTime2=="" || shTime2==null)){
+
 
 

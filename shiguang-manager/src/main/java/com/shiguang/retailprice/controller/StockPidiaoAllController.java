@@ -63,43 +63,57 @@ String stockPidiaoAll(Model model) {
     //打印订单
     @GetMapping("/summary")
     String summary(Integer positionId, String settleDateStart,String settleDateEnd,String way,
-                   String goods,String classtype,
-                   String mfrsid, String brandname,String producName,String producNum, String status, Model model) {
+                   String goods,String classtype, String mfrsid, String brandname,String producName,
+//                   String producNum,
+                   String status, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("positionId",positionId);
         map.put("settleDateStart",settleDateStart);
         map.put("settleDateEnd",settleDateEnd);
-        map.put("way",way);
         map.put("goods",goods);
         map.put("classtype",classtype);
         map.put("mfrsid",mfrsid);
         map.put("brandname",brandname);
         map.put("producName",producName);
-        map.put("producNum",producNum);
+//        map.put("producNum",producNum);
         map.put("status",status);
-         List<PidiaoDO> summary = new ArrayList<>();
+//        List<Map<String, Object>> summary = new ArrayList<>();
+        List<PidiaoDO> summary = new ArrayList<>();
         if (goods.equals("1")){
-           summary= pidiaoService.jingjiaSummary(map);
+            summary= pidiaoService.jingjiaSummary(map);
+//            List<PidiaoDO> jingjiaSummary= pidiaoService.jingjiaSummary(map);
+//            for (PidiaoDO pidiaoDO:jingjiaSummary){
+//                Map<String, Object> jingjiamap = new HashMap<>();
+//                jingjiamap.put("goods", pidiaoDO.getGoods());
+//                jingjiamap.put("mfrsid", pidiaoDO.getMfrsid());
+//                jingjiamap.put("brandnum", pidiaoDO.getBrandnum());
+//                jingjiamap.put("viewGoodName", pidiaoDO.getViewGoodName());
+//                jingjiamap.put("unit", pidiaoDO.getUnit());
+//                jingjiamap.put("needCount", pidiaoDO.getNeedCount());
+//                jingjiamap.put("useCount", pidiaoDO.getUseCount());
+//                jingjiamap.put("money", pidiaoDO.getMoney());
+//                summary.add(jingjiamap);
+//            }
         }else if (goods.equals("2")){
-
+            summary= pidiaoService.peijianSummary(map);
         }else if (goods.equals("3") && classtype.equals("1")){
-
+            summary= pidiaoService.jpcpSummary(map);
         }else if (goods.equals("3") && classtype.equals("2")){
-
-        }else if (goods.equals(4) && classtype.equals(1)){
-
-        }else if (goods.equals(4) && classtype.equals(2)){
-
-        }else if (goods.equals(5)){
-
-        }else if (goods.equals(6)){
-
-        }else if (goods.equals(7)){
-
-        }else if (goods.equals(8)){
-
-        }else if (goods.equals(9)){
-
+            summary= pidiaoService.jpdzSummary(map);
+        }else if (goods.equals("4") && classtype.equals("1")){
+            summary= pidiaoService.yxcpSummary(map);
+        }else if (goods.equals("4") && classtype.equals("2")){
+            summary= pidiaoService.yxdzSummary(map);
+        }else if (goods.equals("5")){
+            summary= pidiaoService.hlySummary(map);
+        }else if (goods.equals("6")){
+            summary= pidiaoService.tyjSummary(map);
+        }else if (goods.equals("7")){
+            summary= pidiaoService.lhjSummary(map);
+        }else if (goods.equals("8")){
+            summary= pidiaoService.hcSummary(map);
+        }else if (goods.equals("9")){
+            summary= pidiaoService.sgSummary(map);
         }
 
         //———获取当前系统时间—————
@@ -108,7 +122,11 @@ String stockPidiaoAll(Model model) {
         String newDate = sdf.format(date);
         model.addAttribute("newDate", newDate);
         model.addAttribute("summary",summary);
+        if (way.equals("1")){
+            return "/retailprice/stockPidiaoAll/summary";
 
-        return "/retailprice/stockPidiaoAll/summary";
+        }else {
+            return "/retailprice/stockPidiaoAll/detialed";
+        }
     }
 }

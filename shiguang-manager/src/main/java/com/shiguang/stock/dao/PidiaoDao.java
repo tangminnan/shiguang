@@ -65,4 +65,14 @@ public interface PidiaoDao {
 
 	//批调统计表
 	List<PidiaoDO> jingjiaSummary(Map<String, Object> map);
+	List<PidiaoDO> peijianSummary(Map<String, Object> map);
+	List<PidiaoDO> jpcpSummary(Map<String, Object> map);
+	List<PidiaoDO> jpdzSummary(Map<String, Object> map);
+	List<PidiaoDO> yxcpSummary(Map<String, Object> map);
+	List<PidiaoDO> yxdzSummary(Map<String, Object> map);
+	List<PidiaoDO> hlySummary(Map<String, Object> map);
+	List<PidiaoDO> tyjSummary(Map<String, Object> map);
+	List<PidiaoDO> lhjSummary(Map<String, Object> map);
+	List<PidiaoDO> hcSummary(Map<String, Object> map);
+	List<PidiaoDO> sgSummary(Map<String, Object> map);
 }

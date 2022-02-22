@@ -432,9 +432,220 @@
 
 	<select id="jingjiaSummary" resultType="com.shiguang.stock.domain.PidiaoDO">
 		SELECT
-		p.goods_num,a.view_good_name,p.unit,p.need_count,p.use_count,p.money,p.goods,a.mfrsid,a.brandnum
+		p.goods_num,a.view_good_name,p.unit,p.need_count,p.use_count,p.money,p.goods,a.mfrsid,a.brandnum,
+		p.pidiao_number,p.factory,p.beizhu,p.out_department
 		FROM stock_pidiao p
 		left join aa_produca a on p.goods_num=a.produc_num
+		<where>
+			<if test="positionId != null and positionId != ''">and p.out_positionid = #{positionId}</if>
+
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( p.sh_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(  p.sh_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+
+			<if test="goods != null and goods != ''">and p.goods = #{goods}</if>
+			<if test="classtype != null and classtype != ''">and p.classtype = #{classtype}</if>
+			<if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+			<if test="brandname != null and brandname != ''">and p.brandname = #{brandname}</if>
+			<if test="producName != null and producName != ''">and p.goods_name = #{producName}</if>
+			<if test="producNum != null and producNum != ''">and p.goods_num = #{producNum}</if>
+			<if test="status != null and status != ''">and p.status = #{status}</if>
+		</where>
+	</select>
+	<select id="peijianSummary" resultType="com.shiguang.stock.domain.PidiaoDO">
+		SELECT
+		p.goods_num,a.view_good_name,p.unit,p.need_count,p.use_count,p.money,p.goods,a.mfrsid,a.brandnum,
+		p.pidiao_number,p.factory,p.beizhu,p.out_department
+		FROM stock_pidiao p
+		left join aa_parts a on p.goods_num=a.produc_num
+		<where>
+			<if test="positionId != null and positionId != ''">and p.out_positionid = #{positionId}</if>
+
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( p.sh_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(  p.sh_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+
+			<if test="goods != null and goods != ''">and p.goods = #{goods}</if>
+			<if test="classtype != null and classtype != ''">and p.classtype = #{classtype}</if>
+			<if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+			<if test="brandname != null and brandname != ''">and p.brandname = #{brandname}</if>
+			<if test="producName != null and producName != ''">and p.goods_name = #{producName}</if>
+			<if test="producNum != null and producNum != ''">and p.goods_num = #{producNum}</if>
+			<if test="status != null and status != ''">and p.status = #{status}</if>
+		</where>
+	</select>
+	<select id="jpcpSummary" resultType="com.shiguang.stock.domain.PidiaoDO">
+		SELECT
+		p.goods_num,a.view_good_name,p.unit,p.need_count,p.use_count,p.money,p.goods,a.mfrsid,a.brandnum,
+		p.pidiao_number,p.factory,p.beizhu,p.out_department
+		FROM stock_pidiao p
+		left join aa_jpcp a on p.goods_num=a.produc_num
+		<where>
+			<if test="positionId != null and positionId != ''">and p.out_positionid = #{positionId}</if>
+
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( p.sh_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(  p.sh_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+
+			<if test="goods != null and goods != ''">and p.goods = #{goods}</if>
+			<if test="classtype != null and classtype != ''">and p.classtype = #{classtype}</if>
+			<if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+			<if test="brandname != null and brandname != ''">and p.brandname = #{brandname}</if>
+			<if test="producName != null and producName != ''">and p.goods_name = #{producName}</if>
+			<if test="producNum != null and producNum != ''">and p.goods_num = #{producNum}</if>
+			<if test="status != null and status != ''">and p.status = #{status}</if>
+		</where>
+	</select>
+	<select id="jpdzSummary" resultType="com.shiguang.stock.domain.PidiaoDO">
+		SELECT
+		p.goods_num,a.view_good_name,p.unit,p.need_count,p.use_count,p.money,p.goods,a.mfrsid,a.brandnum,
+		p.pidiao_number,p.factory,p.beizhu,p.out_department
+		FROM stock_pidiao p
+		left join aa_jpdz a on p.goods_num=a.produc_num
+		<where>
+			<if test="positionId != null and positionId != ''">and p.out_positionid = #{positionId}</if>
+
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( p.sh_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(  p.sh_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+
+			<if test="goods != null and goods != ''">and p.goods = #{goods}</if>
+			<if test="classtype != null and classtype != ''">and p.classtype = #{classtype}</if>
+			<if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+			<if test="brandname != null and brandname != ''">and p.brandname = #{brandname}</if>
+			<if test="producName != null and producName != ''">and p.goods_name = #{producName}</if>
+			<if test="producNum != null and producNum != ''">and p.goods_num = #{producNum}</if>
+			<if test="status != null and status != ''">and p.status = #{status}</if>
+		</where>
+	</select>
+	<select id="yxcpSummary" resultType="com.shiguang.stock.domain.PidiaoDO">
+		SELECT
+		p.goods_num,a.view_good_name,p.unit,p.need_count,p.use_count,p.money,p.goods,a.mfrsid,a.brandnum,
+		p.pidiao_number,p.factory,p.beizhu,p.out_department
+		FROM stock_pidiao p
+		left join aa_yxcp a on p.goods_num=a.produc_num
+		<where>
+			<if test="positionId != null and positionId != ''">and p.out_positionid = #{positionId}</if>
+
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( p.sh_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(  p.sh_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+
+			<if test="goods != null and goods != ''">and p.goods = #{goods}</if>
+			<if test="classtype != null and classtype != ''">and p.classtype = #{classtype}</if>
+			<if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+			<if test="brandname != null and brandname != ''">and p.brandname = #{brandname}</if>
+			<if test="producName != null and producName != ''">and p.goods_name = #{producName}</if>
+			<if test="producNum != null and producNum != ''">and p.goods_num = #{producNum}</if>
+			<if test="status != null and status != ''">and p.status = #{status}</if>
+		</where>
+	</select>
+	<select id="yxdzSummary" resultType="com.shiguang.stock.domain.PidiaoDO">
+		SELECT
+		p.goods_num,a.view_good_name,p.unit,p.need_count,p.use_count,p.money,p.goods,a.mfrsid,a.brandnum,
+		p.pidiao_number,p.factory,p.beizhu,p.out_department
+		FROM stock_pidiao p
+		left join aa_yxdz a on p.goods_num=a.produc_num
+		<where>
+			<if test="positionId != null and positionId != ''">and p.out_positionid = #{positionId}</if>
+
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( p.sh_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(  p.sh_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+
+			<if test="goods != null and goods != ''">and p.goods = #{goods}</if>
+			<if test="classtype != null and classtype != ''">and p.classtype = #{classtype}</if>
+			<if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+			<if test="brandname != null and brandname != ''">and p.brandname = #{brandname}</if>
+			<if test="producName != null and producName != ''">and p.goods_name = #{producName}</if>
+			<if test="producNum != null and producNum != ''">and p.goods_num = #{producNum}</if>
+			<if test="status != null and status != ''">and p.status = #{status}</if>
+		</where>
+	</select>
+	<select id="hlySummary" resultType="com.shiguang.stock.domain.PidiaoDO">
+		SELECT
+		p.goods_num,a.view_good_name,p.unit,p.need_count,p.use_count,p.money,p.goods,a.mfrsid,a.brandnum,
+		p.pidiao_number,p.factory,p.beizhu,p.out_department
+		FROM stock_pidiao p
+		left join aa_hly a on p.goods_num=a.produc_num
+		<where>
+			<if test="positionId != null and positionId != ''">and p.out_positionid = #{positionId}</if>
+
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( p.sh_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(  p.sh_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+
+			<if test="goods != null and goods != ''">and p.goods = #{goods}</if>
+			<if test="classtype != null and classtype != ''">and p.classtype = #{classtype}</if>
+			<if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+			<if test="brandname != null and brandname != ''">and p.brandname = #{brandname}</if>
+			<if test="producName != null and producName != ''">and p.goods_name = #{producName}</if>
+			<if test="producNum != null and producNum != ''">and p.goods_num = #{producNum}</if>
+			<if test="status != null and status != ''">and p.status = #{status}</if>
+		</where>
+	</select>
+	<select id="tyjSummary" resultType="com.shiguang.stock.domain.PidiaoDO">
+		SELECT
+		p.goods_num,a.view_good_name,p.unit,p.need_count,p.use_count,p.money,p.goods,a.mfrsid,a.brandnum,
+		p.pidiao_number,p.factory,p.beizhu,p.out_department
+		FROM stock_pidiao p
+		left join aa_tyj a on p.goods_num=a.produc_num
+		<where>
+			<if test="positionId != null and positionId != ''">and p.out_positionid = #{positionId}</if>
+
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( p.sh_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(  p.sh_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+
+			<if test="goods != null and goods != ''">and p.goods = #{goods}</if>
+			<if test="classtype != null and classtype != ''">and p.classtype = #{classtype}</if>
+			<if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+			<if test="brandname != null and brandname != ''">and p.brandname = #{brandname}</if>
+			<if test="producName != null and producName != ''">and p.goods_name = #{producName}</if>
+			<if test="producNum != null and producNum != ''">and p.goods_num = #{producNum}</if>
+			<if test="status != null and status != ''">and p.status = #{status}</if>
+		</where>
+	</select>
+	<select id="lhjSummary" resultType="com.shiguang.stock.domain.PidiaoDO">
+		SELECT
+		p.goods_num,a.view_good_name,p.unit,p.need_count,p.use_count,p.money,p.goods,a.mfrsid,a.brandnum,
+		p.pidiao_number,p.factory,p.beizhu,p.out_department
+		FROM stock_pidiao p
+		left join aa_oldlens a on p.goods_num=a.produc_num
+		<where>
+			<if test="positionId != null and positionId != ''">and p.out_positionid = #{positionId}</if>
+
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( p.sh_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(  p.sh_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+
+			<if test="goods != null and goods != ''">and p.goods = #{goods}</if>
+			<if test="classtype != null and classtype != ''">and p.classtype = #{classtype}</if>
+			<if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+			<if test="brandname != null and brandname != ''">and p.brandname = #{brandname}</if>
+			<if test="producName != null and producName != ''">and p.goods_name = #{producName}</if>
+			<if test="producNum != null and producNum != ''">and p.goods_num = #{producNum}</if>
+			<if test="status != null and status != ''">and p.status = #{status}</if>
+		</where>
+	</select>
+	<select id="hcSummary" resultType="com.shiguang.stock.domain.PidiaoDO">
+		SELECT
+		p.goods_num,a.view_good_name,p.unit,p.need_count,p.use_count,p.money,p.goods,a.mfrsid,a.brandnum,
+		p.pidiao_number,p.factory,p.beizhu,p.out_department
+		FROM stock_pidiao p
+		left join aa_hc a on p.goods_num=a.produc_num
+		<where>
+			<if test="positionId != null and positionId != ''">and p.out_positionid = #{positionId}</if>
+
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format( p.sh_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(  p.sh_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+
+			<if test="goods != null and goods != ''">and p.goods = #{goods}</if>
+			<if test="classtype != null and classtype != ''">and p.classtype = #{classtype}</if>
+			<if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
+			<if test="brandname != null and brandname != ''">and p.brandname = #{brandname}</if>
+			<if test="producName != null and producName != ''">and p.goods_name = #{producName}</if>
+			<if test="producNum != null and producNum != ''">and p.goods_num = #{producNum}</if>
+			<if test="status != null and status != ''">and p.status = #{status}</if>
+		</where>
+	</select>
+	<select id="sgSummary" resultType="com.shiguang.stock.domain.PidiaoDO">
+		SELECT
+		p.goods_num,a.view_good_name,p.unit,p.need_count,p.use_count,p.money,p.goods,a.mfrsid,a.brandnum,
+		p.pidiao_number,p.factory,p.beizhu,p.out_department
+		FROM stock_pidiao p
+		left join aa_shiguang a on p.goods_num=a.produc_num
 		<where>
 			<if test="positionId != null and positionId != ''">and p.out_positionid = #{positionId}</if>
 

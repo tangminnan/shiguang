@@ -127,4 +127,54 @@ public class PidiaoServiceImpl implements PidiaoService {
 	public List<PidiaoDO> jingjiaSummary(Map<String, Object> map) {
 		return pidiaoDao.jingjiaSummary(map);
 	}
+
+	@Override
+	public List<PidiaoDO> peijianSummary(Map<String, Object> map) {
+		return pidiaoDao.peijianSummary(map);
+	}
+
+	@Override
+	public List<PidiaoDO> jpcpSummary(Map<String, Object> map) {
+		return pidiaoDao.jpcpSummary(map);
+	}
+
+	@Override
+	public List<PidiaoDO> jpdzSummary(Map<String, Object> map) {
+		return pidiaoDao.jpdzSummary(map);
+	}
+
+	@Override
+	public List<PidiaoDO> yxcpSummary(Map<String, Object> map) {
+		return pidiaoDao.yxcpSummary(map);
+	}
+
+	@Override
+	public List<PidiaoDO> yxdzSummary(Map<String, Object> map) {
+		return pidiaoDao.yxdzSummary(map);
+	}
+
+	@Override
+	public List<PidiaoDO> hlySummary(Map<String, Object> map) {
+		return pidiaoDao.hlySummary(map);
+	}
+
+	@Override
+	public List<PidiaoDO> tyjSummary(Map<String, Object> map) {
+		return pidiaoDao.tyjSummary(map);
+	}
+
+	@Override
+	public List<PidiaoDO> lhjSummary(Map<String, Object> map) {
+		return pidiaoDao.lhjSummary(map);
+	}
+
+	@Override
+	public List<PidiaoDO> hcSummary(Map<String, Object> map) {
+		return pidiaoDao.hcSummary(map);
+	}
+
+	@Override
+	public List<PidiaoDO> sgSummary(Map<String, Object> map) {
+		return pidiaoDao.sgSummary(map);
+	}
 }

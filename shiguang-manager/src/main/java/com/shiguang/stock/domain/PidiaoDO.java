@@ -521,6 +521,7 @@ public class PidiaoDO implements Serializable {
 	private String mfrsid;
 	private String mfrsname;
 	private String brandname;
+	private String brandnum;
 
 	public String getBrandname() {
 		return brandname;
@@ -528,6 +529,14 @@ public class PidiaoDO implements Serializable {
 
 	public void setBrandname(String brandname) {
 		this.brandname = brandname;
+	}
+
+	public String getBrandnum() {
+		return brandnum;
+	}
+
+	public void setBrandnum(String brandnum) {
+		this.brandnum = brandnum;
 	}
 
 	//标准零售价格

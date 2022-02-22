@@ -1,72 +1,89 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>调拨汇总表</title>
-<style type="text/css">
-*{padding: 0;margin: 0;box-sizing: border-box;}
-.tal{text-align: left;}
-.container {width:900px;margin:50px auto;}
-.container h3{text-align: center;font-size: 24px;letter-spacing:2px;margin-bottom: 25px;}
-	table{width: 100%;}
-	table td,table th{padding:5px 0;}
-	.tabA b,.tabC b{width:85px;display: inline-block;text-align:right;margin-right:10px;}
-	.tabA td{width: 35%;}
-	.tabB{border-left:1px solid #000;border-top:1px solid #000;text-align: center;margin:10px 0;}
-	.tabB td,.tabB th{border-right:1px solid #000;border-bottom:1px solid #000;}
-	.tabC b{width:100px;}
-	.tabC em{width:60px;display: inline-block;border-bottom:1px solid #000;vertical-align: bottom;font-style:normal;text-align: center;}
-	p{float: right;margin-top: 50px;}
-</style>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>调拨汇总表</title>
+	<style type="text/css">
+		*{padding: 0;margin: 0;box-sizing: border-box;font-size: 14px;}
+		.fl{float: left;}
+		.fr{float: right;}
+		.container {margin:50px auto;width:600px;}
+		h3{font-size: 20px;text-align: center;letter-spacing: 1px;margin-bottom:15px;}
+		table{width: 100%;border-left:1px solid #000;border-top:1px solid #000;text-align: center;color:#333;}
+		table td{border-right:1px solid #000;border-bottom:1px solid #000;padding:6px 2px;}
+		.thead{background: #dcdcdc;font-weight: bold;color:#000;}
+		.tfoot{background: #fecccc;font-weight: bold;}
+		.tfoot td{color: #fd0c0c !important;}
+		.txt{overflow: hidden;margin:15px 0;font-weight: bold;}
+	</style>
 
 </head>
 <body>
 <div class="container">
-	<h3>调拨汇总表</h3>
-	<table class="tabB" border="0" cellspacing="0" cellpadding="0">
-		<thead>
-			<tr>
-				<th>商品代码</th>
-				<th>商品名称</th>
-				<th>单位</th>
-				<th>需求数量</th>
-				<th>调拨数量</th>
-				<th>销售单价</th>
-				<th>价格合计</th>
-			</tr>
-		</thead>
-		<tbody class="liebiao"></tbody>
+	<h3>批调明细表</h3>
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tbody id="detailId">
+		<tr class="thead">
+			<td>商品代码</td>
+			<td>商品名称</td>
+			<td>单位</td>
+			<!--<td>需求数量</td>-->
+			<td>调拨数量</td>
+			<td>销售单价</td>
+			<td>价格合计</td>
+		</tr>
+
+		</tbody>
+		</tr>
 	</table>
+	<div class="txt">
+		<p class="fl">打印日期：<span th:text="${newDate}"></span></p>
+	</div>
 </div>
-<div th:include="include::footer"></div>
-<script type="text/javascript">
+<div th:include="include :: footer"></div>
+<script type="text/javascript"></script>
+<script th:inline="javascript">
     $().ready(function() {
         var summary = [[${summary}]];
         var html = "";
-        var allCount = 0;
-        var allMoney = 0;
+        var moneyheji = 0;
+        // var allneedCount = 0;
+        var alluseCount = 0;
+        var danjia = 0;
+        var heji = 0;
         for (var i = 0; i < summary.length; i++) {
+
+			// if (summary[i].needCount =="" || summary[i].needCount ==null || summary[i].needCount==undefined){
+            //     summary[i].needCount=""
+            // }
+			moneyheji=(summary[i].useCount*summary[i].money).toFixed(2);
             html += "<tr>";
             html += "<td>" + summary[i].goods+"."+summary[i].mfrsid+"."+summary[i].brandnum+ "</td>";
-            html += "<td>" + summary[i].viewGoodsName + "</td>";
+            html += "<td>" + summary[i].viewGoodName + "</td>";
             html += "<td>" + summary[i].unit + "</td>";
-            html += "<td>" + summary[i].needCount + "</td>";
+            // html += "<td>" + summary[i].needCount + "</td>";
             html += "<td>" + summary[i].useCount + "</td>";
             html += "<td>" + summary[i].money + "</td>";
+            html += "<td>" +  moneyheji+ "</td>";
             html += "</tr>";
-            allCount+=summary[i].useCount;
-            allMoney+=summary[i].money;
+            // allneedCount+=parseInt(summary[i].needCount);
+            alluseCount+=parseInt(summary[i].useCount);
+            danjia+=parseFloat(summary[i].money);
+            heji+=parseFloat(moneyheji);
         }
         html+="<tr class='tfoot'>";
         html+="<td colspan='3'>总合计：</td>";
-        html+="<td>"+allCount+"</td>";
-        html+="<td>"+allMoney+"</td>";
+        // html+="<td>"+allneedCount+"</td>";
+        html+="<td>"+alluseCount+"</td>";
+        html+="<td>"+"</td>";
+        html+="<td>"+heji+"</td>";
         html+="</tr>";
-        $("#liebiao").append(html);
+        $("#detailId").append(html);
     });
+
 </script>
 </body>
 </html>
