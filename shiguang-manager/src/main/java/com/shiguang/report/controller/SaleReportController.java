@@ -235,6 +235,7 @@ public class SaleReportController {
             }
         }
         List<SettlementDO> list = saleReportService.findSaleReportForms(query);
+        List<SettlementDO> drawList = saleReportService.drawckMoney(query);
 
         if (null != ShiroUtils.getUser().getCompanyId()){
             maps.put("companyid",ShiroUtils.getUser().getCompanyId());
@@ -252,13 +253,10 @@ public class SaleReportController {
                 double yikatongoney = 0;
                 double yyshoufeichuMoney = 0;
                 double qtsubTotal = 0;
-                double tkMoney = 0;
+                //double tkMoney = 0;
                 double shihsouTotal = 0;
                 for (SettlementDO settlementDO : list){
                     if (departmentDO.getDepartName().equals(settlementDO.getDepartmentName())){
-                        if (null != settlementDO.getDrawBackMoney()){
-                            tkMoney = tkMoney + Double.valueOf(settlementDO.getDrawBackMoney());
-                        }
                         String[] payModel = settlementDO.getPayModel().split(",");
                         String[] modelMoney = settlementDO.getModelMoney().split(",");
                         for (int i=0;i<payModel.length;i++){
@@ -277,6 +275,12 @@ public class SaleReportController {
                         if (null != settlementDO.getChangeMoney()){
                             xianjinMoney = xianjinMoney - settlementDO.getChangeMoney();
                         }
+
+                    }
+
+                }
+                if (null != drawList && drawList.size() > 0){
+                    for (SettlementDO settlementDO : drawList){
                         if ("0".equals(settlementDO.getDrawBackWay())){
                             weixinMoney = weixinMoney-Double.valueOf(settlementDO.getDrawBackMoney());
                         } else if ("1".equals(settlementDO.getDrawBackWay())){
@@ -289,7 +293,6 @@ public class SaleReportController {
                             xianjinMoney = xianjinMoney - Double.valueOf(settlementDO.getDrawBackMoney());
                         }
                     }
-
                 }
                 qtsubTotal = weixinMoney + zfbMoney;
                 if (xianjinMoney < 0){

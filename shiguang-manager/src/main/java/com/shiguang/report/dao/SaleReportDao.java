@@ -18,6 +18,8 @@ public interface SaleReportDao {
 
     List<SettlementDO> findSaleReportForms(Map<String,Object> map);
 
+    List<SettlementDO> drawckMoney(Map<String,Object> map);
+
     int findSaleReportFormsCount(Map<String, Object> map);
 
     List<SalesDO> findGoodsList(Map<String,Object> map);
