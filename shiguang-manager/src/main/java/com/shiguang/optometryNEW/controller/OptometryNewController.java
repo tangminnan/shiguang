@@ -18,6 +18,8 @@ import com.shiguang.product.domain.HlyDO;
 import com.shiguang.product.domain.ShiguangDO;
 import com.shiguang.product.service.HlyService;
 import com.shiguang.product.service.ShiguangService;
+import com.shiguang.system.domain.UserDO;
+import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,7 +61,8 @@ public class OptometryNewController {
     @Autowired
     private ShiguangService shiguangService;
 
-
+    @Autowired
+    UserService userService;
     @GetMapping()
     @RequiresPermissions("information:optometryNew:optometryNew")
     String Optometry() {
@@ -277,12 +280,18 @@ public class OptometryNewController {
 //            optometryAfterDO.setCornealAstigmatismOs(list2.get(0).getCornealAstigmatismOs());
 //        }
 //        model.addAttribute("optometryAfterDO", optometryAfterDO);
-        if("new".equals(ShiroUtils.getUser().getNewOld())){
+//        String a=ShiroUtils.getUser().getNewOld();
+        String name= ShiroUtils.getUser().getName();
+        String password= ShiroUtils.getUser().getPassword();
+        Long id=ShiroUtils.getUser().getUserId();
+        UserDO userDO =  userService.get(id);
+        String newOld=userDO.getNewOld();
+        if("new".equals(newOld)){
             model.addAttribute("newOlds","新院区");
-        }else if("old".equals(ShiroUtils.getUser().getNewOld())){
+        }else if("old".equals(newOld)){
             model.addAttribute("newOlds","老院区");
         }
-        model.addAttribute("newOld",ShiroUtils.getUser().getNewOld());
+        model.addAttribute("newOld",newOld);
         return "optometryNew/edit";
     }
 

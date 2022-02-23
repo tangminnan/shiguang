@@ -3,6 +3,8 @@
 
 <mapper namespace="com.shiguang.system.dao.UserDao">
 
+
+
 	<select id="get" resultType="com.shiguang.system.domain.UserDO">
 		select `user_id`,`username`,`name`,`password`,`discount`,`store_num`,`store`,`company_id`,`company`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,biaoge_biaoti,
 		biaoge_neirong,`technical_title`,`consultation_fee`,`synopsis`,`head`,`new_old` from sys_user where user_id = #{value}

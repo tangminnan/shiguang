@@ -43,6 +43,8 @@ public class UserServiceImpl implements UserService {
 	private BootdoConfig bootdoConfig;
 	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
+
+
 	@Override
 	public UserDO get(Long id) {
 		List<Long> roleIds = userRoleMapper.listRoleId(id);

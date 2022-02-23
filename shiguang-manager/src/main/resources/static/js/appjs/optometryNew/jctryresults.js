@@ -12,6 +12,7 @@ $.validator.setDefaults({
 function saveTry() {
     var companyId=$("#companyId").val();
     var newOld=$("#newOld").val();
+    // alert(newOld);
     if (companyId==1){
         if (newOld==null || newOld==""){
             layer.alert("请选择新老院区！");

@@ -14,8 +14,10 @@ import com.shiguang.system.vo.UserVO;
 
 @Service
 public interface UserService {
+
 	UserDO get(Long id);
-	
+
+
 	List<UserDO> getbyphone(String phone);
 
 	List<UserDO> getRoleList(Map<String, Object> map);

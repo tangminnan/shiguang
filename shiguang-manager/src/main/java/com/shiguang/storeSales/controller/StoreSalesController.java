@@ -257,12 +257,15 @@ public class StoreSalesController {
                 }
             }
         }
-        if("new".equals(ShiroUtils.getUser().getNewOld())){
+        Long id=ShiroUtils.getUser().getUserId();
+        UserDO userDOs =  userService.get(id);
+        String newOld=userDOs.getNewOld();
+        if("new".equals(newOld)){
             model.addAttribute("newOlds","新院区");
-        }else if("old".equals(ShiroUtils.getUser().getNewOld())){
+        }else if("old".equals(newOld)){
             model.addAttribute("newOlds","老院区");
         }
-        model.addAttribute("newOld",ShiroUtils.getUser().getNewOld());
+        model.addAttribute("newOld",newOld);
         return "storeSales/edit";
     }
 
