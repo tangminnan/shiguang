@@ -1,6 +1,7 @@
 package com.shiguang.mfrs.service.impl;
 
 import com.shiguang.mfrs.domain.BrandDO;
+import com.shiguang.system.domain.UserDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,5 +59,10 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public int updateState(CompanyDO companyDO) {
 		return companyDao.updateState(companyDO);
+	}
+
+	@Override
+	public int newOlds(UserDO userDO) {
+		return companyDao.newOlds(userDO);
 	}
 }

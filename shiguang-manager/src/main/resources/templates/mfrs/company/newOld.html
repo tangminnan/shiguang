@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm">
+						<div class="form-group">
+							<!--<label class="col-sm-3 control-label">新老院区选择：</label>-->
+							<input type="hidden" name="username" th:value="${username}">
+							<input type="hidden" name="password" th:value="${password}">
+							<div class="col-sm-8">
+								<select id="newOld" name="newOld" style="width: 90%;" >
+									<option value="">--请选择院区--</option>
+									<option value="old">老院区</option>
+									<option value="new">新院区</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-8 col-sm-offset-3">
+								<button type="submit" class="btn btn-primary" onclick="newOlds()">提交</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    function newOlds() {
+        var formData = new FormData(document.getElementById("signupForm"));
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url : "/mfrs/company/newOlds",
+            //data : $('#signupForm').serialize(),// 你的formid
+            data : formData,// 你的formid
+            async : false,
+            processData:false,
+            contentType:false,
+            error : function(request) {
+                parent.layer.alert("Connection error");
+            },
+            success : function(data) {
+                if (data.code == 0) {
+                    // parent.layer.msg("操作成功");
+                    // parent.reLoad();
+                    // var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                    // parent.layer.close(index);
+                    parent.location.href = '/index';
+                } else {
+                    parent.layer.alert(data.msg)
+                }
+
+            }
+        });
+
+    }
+</script>
+</body>
+</html>

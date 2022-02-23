@@ -257,6 +257,12 @@ public class StoreSalesController {
                 }
             }
         }
+        if("new".equals(ShiroUtils.getUser().getNewOld())){
+            model.addAttribute("newOlds","新院区");
+        }else if("old".equals(ShiroUtils.getUser().getNewOld())){
+            model.addAttribute("newOlds","老院区");
+        }
+        model.addAttribute("newOld",ShiroUtils.getUser().getNewOld());
         return "storeSales/edit";
     }
 

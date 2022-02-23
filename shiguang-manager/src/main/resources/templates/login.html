@@ -33,6 +33,7 @@
             <div class="signin-info">
                 <div class="logopanel m-b">
                     <h1>视光中心管理系统</h1>
+                    <!--<input id="companyId" name="companyId" th:value="${companyId}" type="hidden"/>-->
                 </div>
                 <!--<div class="m-b"></div>-->
                 <!--<h3>-->
@@ -123,8 +124,37 @@
                  if (r.code == 0) {
                     var index = layer.load(1, {
                         shade: [0.1,'#fff'] //0.1透明度的白色背景
+
+
                     });
-                    parent.location.href = '/index';
+                    // parent.location.href = '/newOld';
+                    // parent.location.href = '/index';
+
+
+                         if (r.companyId==1){
+                             var username=r.username;
+                             var password=r.password;
+                             // alert(username);
+                             // alert(password);
+                             layer.open({
+                                 type : 2,
+                                 title : ' ',
+                                 maxmin : true,
+                                 shadeClose : false, // 点击遮罩关闭层
+                                 area : [ '400px', '250px' ],
+                                 content : '/mfrs/company/newOld/'+ username+"/"+password  , // iframe的url
+
+                                 // btn: ['确定', '取消'],
+                                 // yes: function(index, layero) {
+                                 //     var rows = $(layero).find("iframe")[0].contentWindow.sureRoom();
+                                 //     $("#consultRoom").val(rows);
+                                 //     window.localStorage.setItem("consultRoom",rows)
+                                 //     layer.close(index);//需要手动关闭窗口
+                                 // }
+                             });
+                         }else {
+                             parent.location.href = '/index';
+                         }
                 } else {
                     layer.msg(r.msg);
                 }

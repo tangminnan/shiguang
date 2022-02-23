@@ -5,6 +5,7 @@ import io.swagger.models.auth.In;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,9 @@ import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.system.domain.MenuDO;
 import com.shiguang.system.service.MenuService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LoginController extends BaseController {
@@ -38,7 +41,6 @@ public class LoginController extends BaseController {
 	FileService fileService;
 	@GetMapping({ "/", "" })
 	String welcome(Model model) {
-
 		return "redirect:/login";
 	}
 
@@ -62,6 +64,16 @@ public class LoginController extends BaseController {
 		return "index_v1";
 	}
 
+
+
+
+	@Log("请求访问主页")
+	@GetMapping({ "/newOld" })
+	String newOld(Model model) {
+		return "mfrs/company/newOld";
+	}
+
+
 	@GetMapping("/login")
 	String login() {
 		return "login";
@@ -70,14 +82,22 @@ public class LoginController extends BaseController {
 	@Log("登录")
 	@PostMapping("/login")
 	@ResponseBody
-	R ajaxLogin(String username, String password) {
-
+	Map<String, Object> ajaxLogin(String username, String password) {
+		Map<String,Object> map=new HashMap<>();
 		password = MD5Utils.encrypt(username, password);
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		Subject subject = SecurityUtils.getSubject();
 		try {
 			subject.login(token);
-			return R.ok();
+			String companyId=ShiroUtils.getUser().getCompanyId();
+			map.put("code",0);
+			map.put("companyId",companyId);
+			map.put("username",username);
+			map.put("password",password);
+			map.put("msg", "操作成功");
+//			return R.ok();
+//			return R.ok(companyId);
+			return map;
 		} catch (AuthenticationException e) {
 			return R.error("用户或密码错误");
 		}
@@ -90,7 +110,8 @@ public class LoginController extends BaseController {
 	}
 
 	@GetMapping("/main")
-	String main() {
+	String main(Model model) {
+
 		return "main";
 	}
 

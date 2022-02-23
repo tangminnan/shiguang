@@ -6,10 +6,12 @@ import java.util.Map;
 
 import com.shiguang.common.config.BootdoConfig;
 import com.shiguang.common.utils.FileUtil;
+import com.shiguang.jiancha.domain.YizhuDO;
 import com.shiguang.mfrs.domain.*;
 import com.shiguang.mfrs.service.CitiesService;
 import com.shiguang.mfrs.service.ProvincesService;
 import com.shiguang.stock.domain.StockDO;
+import com.shiguang.system.domain.UserDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -254,4 +256,21 @@ public class CompanyController {
 		}
 		return R.error();
 	}
+
+
+	@GetMapping("/newOld/{username}/{password}")
+	String newOld(@PathVariable("username") String username, @PathVariable("password") String password, Model model){
+		model.addAttribute("username",username);
+		model.addAttribute("password",password);
+		return "mfrs/company/newOld";
+	}
+
+
+	@ResponseBody
+	@RequestMapping("/newOlds")
+	public R newOlds(UserDO userDO) {
+		companyService.newOlds(userDO);
+		return R.ok();
+	}
+
 }

@@ -196,4 +196,9 @@
     <update id="updateState" parameterType="com.shiguang.mfrs.domain.CompanyDO">
     update c_company set `state` = #{state} where id = #{id}
     </update>
+
+
+    <update id="newOlds" parameterType="com.shiguang.system.domain.UserDO">
+    update sys_user set new_old = #{newOld} where username = #{username} and password=#{password}
+    </update>
 </mapper>

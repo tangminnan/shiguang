@@ -133,12 +133,16 @@
 				<tr id="tab1111111" style="display:none;">
 					<td>院区</td>
 					<td>
-						<select id="newOld" name="newOld">
-							<option value="" >--请选择院区--</option>
-							<option value="old" >老院区</option>
-							<option value="new" >新院区</option>
-						</select>
+						<input id="newOlds" name="newOlds" th:value="${newOlds}"  type="text" readonly/>
+						<input id="newOld" name="newOld" th:value="${newOld}" class="form-control"
+							   type="hidden">
+						<!--<select id="newOld" name="newOld" disabled="disabled">-->
+							<!--<option value="" >&#45;&#45;请选择院区&#45;&#45;</option>-->
+							<!--<option value="old" >老院区</option>-->
+							<!--<option value="new" >新院区</option>-->
+						<!--</select>-->
 						<!--<input class="empty" type="button" value="清空" />-->
+
 					</td>
 				</tr>
 				<tr id="tab111111" style="display:none;">

@@ -83,11 +83,18 @@ public class UserDO implements Serializable {
     private String synopsis;
     //头像
     private String head;
+    private String newOld;
     private MultipartFile imgFile;
-   
-    
-    
-    
+
+
+    public String getNewOld() {
+        return newOld;
+    }
+
+    public void setNewOld(String newOld) {
+        this.newOld = newOld;
+    }
+
     public String getBiaogeBiaoti() {
 		return biaogeBiaoti;
 	}

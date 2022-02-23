@@ -277,6 +277,12 @@ public class OptometryNewController {
 //            optometryAfterDO.setCornealAstigmatismOs(list2.get(0).getCornealAstigmatismOs());
 //        }
 //        model.addAttribute("optometryAfterDO", optometryAfterDO);
+        if("new".equals(ShiroUtils.getUser().getNewOld())){
+            model.addAttribute("newOlds","新院区");
+        }else if("old".equals(ShiroUtils.getUser().getNewOld())){
+            model.addAttribute("newOlds","老院区");
+        }
+        model.addAttribute("newOld",ShiroUtils.getUser().getNewOld());
         return "optometryNew/edit";
     }
 

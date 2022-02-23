@@ -2,6 +2,7 @@ package com.shiguang.mfrs.service;
 
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.CompanyDO;
+import com.shiguang.system.domain.UserDO;
 
 import java.util.List;
 import java.util.Map;
@@ -31,4 +32,6 @@ public interface CompanyService {
 
 	//删除修改状态
 	int updateState(CompanyDO companyDO);
+
+	int newOlds(UserDO userDO);
 }

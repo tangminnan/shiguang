@@ -6,6 +6,7 @@ import com.shiguang.mfrs.domain.CompanyDO;
 import java.util.List;
 import java.util.Map;
 
+import com.shiguang.system.domain.UserDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -33,4 +34,6 @@ public interface CompanyDao {
 
 	//删除修改状态
 	int updateState(CompanyDO companyDO);
+
+	int newOlds(UserDO userDO);
 }

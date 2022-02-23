@@ -42,12 +42,16 @@
                 <li>验光师/医生：<input id="optometryName" name="optometryName" th:value="${optometryName}" type="text"/>
                 </li>
                 <li>日期：<input input id="createTime" name="createTime" th:value="${createTime}" type="text"/></li>
+                <li id="xianshi" style="display: none">院区：<input id="newOlds" name="newOlds" th:value="${newOlds}" type="text" readonly /></li>
+                <input id="newOld" name="newOld" th:value="${newOld}" class="form-control"
+                       type="hidden">
             </ul>
-            <select id="newOld" name="newOld" style="width: 10%;display: none" >
-                <option value="">--请选择新老院区--</option>
-                <option value="old">老院区</option>
-                <option value="new">新院区</option>
-            </select>
+            <!--<select id="newOld" name="newOld" style="width: 10%;" disabled="disabled">-->
+                <!--<option value="">&#45;&#45;请选择新老院区&#45;&#45;</option>-->
+                <!--<option value="old">老院区</option>-->
+                <!--<option value="new">新院区</option>-->
+            <!--</select>-->
+
         </div>
 
         <!--顾客资料-->
@@ -914,18 +918,16 @@
 <!--第一个页面-->
 <script type="text/javascript">
 
-    $().ready(function () {
-        var companyId=$("#companyId").val();
-        if (companyId==1){
-            newOld.style = "width: 10%;display: block";
 
-        } else {
-            newOld.style="width: 10%;display: none";
-        }
-    });
+   $().ready(function () {
+       var companyId = $("#companyId").val();
+       if(companyId=="1"){
+           xianshi.style = "display: block";
+       }else {
+           xianshi.style = "display: none";
+       }
 
-
-
+   });
 
     function getMemberDetail() {
         var id = $("#memberId").val();
