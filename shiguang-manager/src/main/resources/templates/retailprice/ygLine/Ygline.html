@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<input  id="company" th:value="${companyId}" type="hidden">
+<div class="wrapper wrapper-content ">
+	<div class="col-sm-12">
+		<div class="ibox">
+			<div class="ibox-body">
+				<div class="fixed-table-toolbar">
+					<div class="columns pull-left" style="display:flex; margin-top:20px;">
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+						<div class="columns pull-right col-md-4.5 nopadding">
+							<input id="settleDateStart" type="text"
+								   placeholder="开始日期">～
+							<input id="settleDateEnd" type="text"
+								   placeholder="结束日期">
+						</div>
+						<div id="choicenewOld" style="display: none" class="columns pull-right col-md-1.5 nopadding ">
+							<select  id="newOld" name="newOld"  data-actions-box="false"
+									 data-size="5" style="width: 200px;height: 40px;">
+								<option value="">--请选择院区--</option>
+								<option value="old">老院区</option>
+								<option value="new">新院区</option>
+							</select>
+						</div>
+						<div id="tab1" style="display: none" class="columns pull-right col-md-1.5 nopadding ">
+							<select  id="companyIds" name="companyIds"  data-actions-box="false"
+									 data-size="5" style="width: 200px;height: 40px;">
+								<option value="">所属公司</option>
+								<option th:each="ls:${companyList}"
+										th:text="${ls.name}"
+										th:value="${ls.id}"></option>
+
+							</select>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var company = $("#company").val();
+        if (company=="") {
+            newOld.style="display: none";
+            tab1.style="display: block";
+
+        }else if (company!="") {
+            if (company==1){
+                choicenewOld.style="display: block";
+            } else {
+                choicenewOld.style="display: none";
+            }
+            tab1.style="display: none";
+
+        }
+    });
+    laydate.render({
+        elem: '#settleDateStart',
+        format: 'yyyy-MM-dd HH:mm:ss',
+        type: 'time'
+    });
+    laydate.render({
+        elem: '#settleDateEnd',
+        format: 'yyyy-MM-dd HH:mm:ss',
+        type: 'time'
+    });
+
+
+    function reLoad() {
+
+        var companyId;
+        var company = $("#company").val();
+        var companyIds = $("#companyIds").val();
+        if(company==""){
+            if(companyIds==""){
+                companyId=0;
+            }else  if(companyIds!=""){
+                companyId=companyIds;
+
+            }
+        }else if(company!=""){
+            companyId=company;
+        }
+        var settleDateStart = $("#settleDateStart").val();
+        var settleDateEnd = $("#settleDateEnd").val();
+        var newOld = $("#newOld").val();
+        // alert(companyId);
+        if (companyId=="1"){
+            if(newOld=="" || newOld==undefined){
+                layer.alert("请选择院区！")
+            }else {
+                newOld=newOld;
+                window.open("/YgLineAll/YgLineAll/findall/?companyId=" + companyId + "&settleDateStart=" + settleDateStart
+                    + "&settleDateEnd=" + settleDateEnd + "&newOld=" + newOld);
+            }
+
+		} else {
+            if(newOld=="" || newOld==undefined){
+                newOld="";
+                window.open("/YgLineAll/YgLineAll/findall/?companyId=" + companyId + "&settleDateStart=" + settleDateStart
+                    + "&settleDateEnd=" + settleDateEnd + "&newOld=" + newOld);
+            }
+
+		}
+
+
+
+    }
+</script>
+</body>
+</html>
