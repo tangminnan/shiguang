@@ -193,7 +193,7 @@
         from store_sales sa
         left join log_status ls on ls.sale_number = sa.sale_number
         join member m on m.card_number = sa.member_number and m.state = 1 and m.`status` = 0
-        join aa_produca ap on ap.produc_num = sa.jj_goods_num
+        left join aa_produca ap on ap.produc_num = sa.jj_goods_num
         <where>
             <if test="logisticStatus != null and logisticStatus != ''"> and logistic_status = #{logisticStatus} </if>
             <if test="saleNumber !=null and saleNumber != ''">and sa.sale_number like concat('%', #{saleNumber},'%')</if>
