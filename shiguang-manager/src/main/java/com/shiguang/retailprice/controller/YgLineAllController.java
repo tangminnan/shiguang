@@ -51,7 +51,7 @@ public class YgLineAllController {
         //———获取当前登录用户的公司id————
         String companyId = ShiroUtils.getUser().getCompanyId();
         model.addAttribute("companyId", companyId);
-        return "retailprice/ygLine/ygLine";
+        return "retailprice/ygLine/Ygline";
     }
 
 
@@ -77,5 +77,6 @@ public class YgLineAllController {
         model.addAttribute("lineDOS",lineDOS);
         return "retailprice/ygLine/newoldLine";
     }
+
 
 }
