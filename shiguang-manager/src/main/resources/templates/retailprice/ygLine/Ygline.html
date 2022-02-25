@@ -19,6 +19,16 @@
 							<input id="settleDateEnd" type="text"
 								   placeholder="结束日期">
 						</div>
+						<div id="tab1" style="display: none" class="columns pull-right col-md-1.5 nopadding ">
+							<select  id="companyIds" name="companyIds"  data-actions-box="false"
+									 data-size="5" style="width: 200px;height: 40px;" onchange="xuanze()">
+								<option value="">所属公司</option>
+								<option th:each="ls:${companyList}"
+										th:text="${ls.name}"
+										th:value="${ls.id}"></option>
+
+							</select>
+						</div>
 						<div id="choicenewOld" style="display: none" class="columns pull-right col-md-1.5 nopadding ">
 							<select  id="newOld" name="newOld"  data-actions-box="false"
 									 data-size="5" style="width: 200px;height: 40px;">
@@ -27,17 +37,6 @@
 								<option value="new">新院区</option>
 							</select>
 						</div>
-						<div id="tab1" style="display: none" class="columns pull-right col-md-1.5 nopadding ">
-							<select  id="companyIds" name="companyIds"  data-actions-box="false"
-									 data-size="5" style="width: 200px;height: 40px;">
-								<option value="">所属公司</option>
-								<option th:each="ls:${companyList}"
-										th:text="${ls.name}"
-										th:value="${ls.id}"></option>
-
-							</select>
-						</div>
-
 					</div>
 				</div>
 
@@ -51,7 +50,7 @@
     $(document).ready(function () {
         var company = $("#company").val();
         if (company=="") {
-            newOld.style="display: none";
+            choicenewOld.style="display: none";
             tab1.style="display: block";
 
         }else if (company!="") {
@@ -74,6 +73,19 @@
         format: 'yyyy-MM-dd HH:mm:ss',
         type: 'time'
     });
+
+    function xuanze() {
+        var companyIds = $("#companyIds").val();
+        // alert(companyIds);
+        if (companyIds==1){
+            choicenewOld.style="display: block";
+            // alert("显示");
+        } else {
+            choicenewOld.style="display: none";
+            // alert("一次");
+        }
+    }
+
 
 
     function reLoad() {
@@ -112,8 +124,6 @@
             }
 
 		}
-
-
 
     }
 </script>
