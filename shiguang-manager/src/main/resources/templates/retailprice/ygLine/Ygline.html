@@ -117,7 +117,9 @@
             }
 
 		} else {
-            if(newOld=="" || newOld==undefined){
+            if(companyId=="" || companyId==undefined){
+                layer.alert("请选择公司！")
+            }else if(newOld=="" || newOld==undefined){
                 newOld="";
                 window.open("/YgLineAll/YgLineAll/findall/?companyId=" + companyId + "&settleDateStart=" + settleDateStart
                     + "&settleDateEnd=" + settleDateEnd + "&newOld=" + newOld);
