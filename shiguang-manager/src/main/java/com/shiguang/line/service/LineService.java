@@ -18,7 +18,7 @@ public interface LineService {
 	LineDO get(Long id);
 	
 	List<LineDO> list(Map<String, Object> map);
-	
+
 	int count(Map<String, Object> map);
 	
 	int save(LineDO line);
@@ -36,4 +36,9 @@ public interface LineService {
 	int removeMember(LineDO lineDO);
 
 	Map<String,Object> callList(Map<String,Object> map);
+
+	List<LineDO> newList(Map<String, Object> map);
+
+	List<LineDO> oldList(Map<String, Object> map);
+
 }

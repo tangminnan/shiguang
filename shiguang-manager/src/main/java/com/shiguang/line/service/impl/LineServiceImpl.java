@@ -69,6 +69,16 @@ public class LineServiceImpl implements LineService {
 		return lineDao.removeMember(lineDO);
 	}
 
+	@Override
+	public List<LineDO> newList(Map<String, Object> map) {
+		return lineDao.newList(map);
+	}
+
+	@Override
+	public List<LineDO> oldList(Map<String, Object> map) {
+		return lineDao.oldList(map);
+	}
+
 	public Map<String,Object> callList(Map<String,Object> maps){
 		Map<String,Object> resultMap = new HashMap<>();
 		List<LineMemberDO> lineMemberDOList = new ArrayList<>();

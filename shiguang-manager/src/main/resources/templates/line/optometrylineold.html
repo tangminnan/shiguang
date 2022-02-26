@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<button shiro:hasPermission="information:line:addCall" id="call" type="button" class="btn  btn-primary" onclick="add()" value="叫号">
+								<i class="fa fa-plus" aria-hidden="true"></i>叫号
+								<input id="consultRoom" type="hidden" />
+							</button>
+							<!--<button shiro:hasPermission="information:line:batchRemove" type="button" class="btn  btn-danger"-->
+								<!--onclick="batchRemove()">-->
+								<!--<i class="fa fa-trash" aria-hidden="true"></i>删除-->
+							<!--</button>-->
+						</div>
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="searchName" type="text" class="form-control"
+								placeholder="">
+						</div>
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_resetPwd_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="information:line:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="information:optometryline:remove">
+			<script type="text/javascript">
+				var s_remove_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="information:line:resetPwd">
+			<script type="text/javascript">
+				var s_resetPwd_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/line/optometrylineold.js"></script>
+<script type="text/javascript">
+    $().ready(function(){
+        layer.open({
+            type : 2,
+            title : '诊室',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '400px', '250px' ],
+            content : '/information/optometryline/consultRoomold/', // iframe的url
+            btn: ['确定', '取消'],
+            yes: function(index, layero) {
+                var rows = $(layero).find("iframe")[0].contentWindow.sureRoom();
+                $("#consultRoom").val(rows);
+                window.localStorage.setItem("consultRoom",rows)
+                layer.close(index);//需要手动关闭窗口
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

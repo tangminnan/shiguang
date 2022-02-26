@@ -3,6 +3,8 @@ package com.shiguang.line.service.impl;
 import com.shiguang.line.dao.OptometryLineDao;
 import com.shiguang.line.domain.YgLineDO;
 import com.shiguang.line.domain.YgLineMemberDO;
+import com.shiguang.line.domain.YgLineMemberoldDO;
+import com.shiguang.line.domain.YgLineoldDO;
 import com.shiguang.line.service.OptometryLineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,5 +74,52 @@ public class OptometryLineServiceImpl implements OptometryLineService {
     @Override
     public int remove(Long id) {
         return optometryLineDao.remove(id);
+    }
+
+
+    @Override
+    public List<YgLineoldDO> listold(Map<String, Object> map) {
+        return optometryLineDao.listold(map);
+    }
+
+    @Override
+    public int countold(Map<String, Object> map) {
+        return optometryLineDao.countold(map);
+    }
+
+    @Override
+    public int updateold(YgLineoldDO line) {
+        return optometryLineDao.updateold(line);
+    }
+
+    @Override
+    public YgLineoldDO getold(Long id) {
+        return optometryLineDao.getold(id);
+    }
+
+    @Override
+    public List<YgLineoldDO> linesListold(Map<String, Object> map) {
+        return optometryLineDao.linesListold(map);
+    }
+
+    @Override
+    public List<YgLineMemberoldDO> listMemberold(Map<String, Object> map) {
+        return optometryLineDao.listMemberold(map);
+    }
+
+    @Override
+    public List<YgLineoldDO> lineListold(Map<String, Object> map) {
+        return optometryLineDao.lineListold(map);
+    }
+
+    @Override
+    public int removeold(Long id) {
+        return optometryLineDao.removeold(id);
+    }
+
+
+    @Override
+    public int saveLineMemberold(YgLineMemberoldDO ygLineMemberoldDO) {
+        return optometryLineDao.saveLineMemberold(ygLineMemberoldDO);
     }
 }

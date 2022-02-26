@@ -156,4 +156,29 @@
         </foreach>
     </delete>
 
+    <select id="newList" resultType="com.shiguang.line.domain.LineDO">
+        SELECT y.consult_room,count( y.consult_room ) as linecount  FROM ygline y
+	    left join member m on y.member_number=m.card_number
+        <where>
+            <if test="companyId !=null and companyId != ''">and  m.company_id = #{companyId}</if>
+            <if test="callStatus !=null and callStatus != ''">and  y.call_status = #{callStatus}</if>
+            <if test="settleDateStart !=null and settleDateStart != ''"> and date_format( y.line_time , '%Y-%m-%d %H:%i:%S' ) >= (#{settleDateStart})</if>
+            <if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( y.line_time , '%Y-%m-%d %H:%i:%S' ) &lt;= (#{settleDateEnd})</if>
+        </where>
+        GROUP BY
+        y.consult_room
+
+    </select>
+    <select id="oldList" resultType="com.shiguang.line.domain.LineDO">
+        SELECT y.consult_room,count( y.consult_room ) as linecount FROM yglineold y
+	    left join member m on y.member_number=m.card_number
+        <where>
+            <if test="companyId !=null and companyId != ''">and  m.company_id = #{companyId}</if>
+            <if test="callStatus !=null and callStatus != ''">and  y.call_status = #{callStatus}</if>
+            <if test="settleDateStart !=null and settleDateStart != ''"> and date_format( y.line_time , '%Y-%m-%d %H:%i:%S' ) >= (#{settleDateStart})</if>
+            <if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( y.line_time , '%Y-%m-%d %H:%i:%S' ) &lt;= (#{settleDateEnd})</if>
+        </where>
+        GROUP BY
+        y.consult_room
+    </select>
 </mapper>

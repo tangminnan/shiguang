@@ -35,6 +35,7 @@ public class LineDO implements Serializable {
 	//排队日期
 	private Date lineTime;
 	private String lineDate;
+	private String linecount;
 
 	/**
 	 * 设置：
@@ -149,4 +150,12 @@ public class LineDO implements Serializable {
 	public void setLineDate(String lineDate){this.lineDate = lineDate;}
 
 	public String getLineDate(){return lineDate;}
+
+	public String getLinecount() {
+		return linecount;
+	}
+
+	public void setLinecount(String linecount) {
+		this.linecount = linecount;
+	}
 }

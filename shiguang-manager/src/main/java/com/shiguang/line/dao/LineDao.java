@@ -35,4 +35,9 @@ public interface LineDao {
 	List<LineDO> lineList(Map<String,Object> map);
 
 	int removeMember(LineDO lineDO);
+
+
+	List<LineDO> newList(Map<String, Object> map);
+
+	List<LineDO> oldList(Map<String, Object> map);
 }

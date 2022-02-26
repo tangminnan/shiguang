@@ -192,4 +192,163 @@
     <delete id="remove">
         delete from ygline where id = #{value}
     </delete>
+
+
+
+    <select id="listold" resultType="com.shiguang.line.domain.YgLineoldDO">
+        select `id`,`sex`,`member_name`,`call_status`,`consult_room`,`line_time` from yglineold
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
+            <!--and call_status in ('1','2','3') or call_status = '0'-->
+            <choose>
+                <when test="consultRoom != null and consultRoom != ''">
+                    and (consult_room = #{consultRoom} and call_status in ('1','2','3') or call_status = '0')
+                </when>
+                <otherwise>
+                    and (call_status in ('1','2','3') or call_status = '0')
+                </otherwise>
+            </choose>
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by line_time ASC
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="countold" resultType="int">
+        select count(*) from yglineold
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <if test="callStatus != null and callStatus != ''"> and call_status = #{callStatus} </if>
+            <choose>
+                <when test="consultRoom != null and consultRoom != ''">
+                    and (consult_room = #{consultRoom} and call_status in ('1','2','3') or call_status = '0')
+                </when>
+                <otherwise>
+                    and (call_status in ('1','2','3') or call_status = '0')
+                </otherwise>
+            </choose>
+
+            <!--<if test="consultRoom != null and consultRoom != ''">and (consult_room = #{consultRoom} and call_status in ('1','2','3'))</if>-->
+            <!--or call_status = '0'-->
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+        </where>
+    </select>
+    <update id="updateold" parameterType="com.shiguang.line.domain.YgLineoldDO">
+        update yglineold
+        <set>
+            <if test="sex != null">`sex` = #{sex}, </if>
+            <if test="memberName != null">`member_name` = #{memberName}, </if>
+            <if test="callStatus != null">`call_status` = #{callStatus}, </if>
+            <if test="consultRoom != null">`consult_room` = #{consultRoom}, </if>
+            <if test="lineTime != null">`line_time` = #{lineTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <select id="getold" resultType="com.shiguang.line.domain.YgLineoldDO">
+		select `id`,`sex`,`member_name`,`call_status`,`consult_room`,`line_time` from yglineold where id = #{value}
+	</select>
+
+
+    <select id="linesListold" resultType="com.shiguang.line.domain.YgLineoldDO">
+        select `id`,`sex`,`member_name`,`call_status`,`consult_room`,`line_time` from yglineold
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+            and (consult_room is null or consult_room ='') and call_status != '4'
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by line_time ASC
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+
+    <select id="listMemberold" resultType="com.shiguang.line.domain.YgLineMemberoldDO">
+        select `id`,`member_name`,`sex`,`consult_room`,`line_time` from ygline_memberold
+        <where>
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id ASC
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+    <select id="lineListold" resultType="com.shiguang.line.domain.YgLineoldDO">
+        select `id`,`sex`,`member_name`,`call_status`,`consult_room`,`line_time` from yglineold
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+            and (consult_room is not null or consult_room !='') and call_status != '4'
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by line_time ASC
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+    <delete id="removeold">
+        delete from yglineold where id = #{value}
+    </delete>
+    <insert id="saveLineMemberold" parameterType="com.shiguang.line.domain.YgLineMemberoldDO" useGeneratedKeys="true" keyProperty="id">
+		insert into ygline_memberold
+		(
+		    `member_name`,
+		    `sex`,
+		    `consult_room`,
+		    `line_time`
+		)
+		values
+		(
+			#{memberName},
+			#{sex},
+			#{consultRoom},
+			#{lineTime}
+		)
+	</insert>
 </mapper>

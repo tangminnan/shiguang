@@ -3,12 +3,12 @@ package com.shiguang.line.controller;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
-import com.shiguang.line.domain.LineDO;
-import com.shiguang.line.domain.LineMemberDO;
-import com.shiguang.line.domain.YgLineDO;
-import com.shiguang.line.domain.YgLineMemberDO;
+import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.line.domain.*;
 import com.shiguang.line.service.OptometryLineService;
 import com.shiguang.member.domain.MemberDO;
+import com.shiguang.system.domain.UserDO;
+import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,11 +25,19 @@ import java.util.*;
 public class OptometryLineController {
     @Autowired
     private OptometryLineService optometryLineService;
-
+    @Autowired
+    UserService userService;
     @GetMapping()
     @RequiresPermissions("information:optometryline:optometryline")
     String Line(){
-        return "line/optometryline";
+        Long id=ShiroUtils.getUser().getUserId();
+        UserDO userDO =  userService.get(id);
+        String newOld=userDO.getNewOld();
+        if("new".equals(newOld)){
+            return "line/optometryline";
+        }else {
+            return "line/optometrylineold";
+        }
     }
 
     @ResponseBody
@@ -169,5 +177,151 @@ public class OptometryLineController {
         }
         return R.error();
     }
+
+//-------------------------
+//    @GetMapping()
+////    @RequiresPermissions("information:optometryline:optometryline")
+//    String Lineold(){
+//        return "line/optometrylineold";
+//    }
+
+    @ResponseBody
+    @GetMapping("/listold")
+//    @RequiresPermissions("information:optometryline:optometryline")
+    public PageUtils listold(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        query.put("lineTime",simpleDateFormat.format(new Date()));
+        query.put("storey","4");
+        List<YgLineoldDO> lineListold = optometryLineService.listold(query);
+        if (null != lineListold && lineListold.size() > 0){
+            for (YgLineoldDO ygLineoldDO : lineListold){
+                if (ygLineoldDO.getSex() == 0){
+                    ygLineoldDO.setSexx("男");
+                }else if (ygLineoldDO.getSex() == 1){
+                    ygLineoldDO.setSexx("女");
+                }
+            }
+        }
+        int total = optometryLineService.countold(query);
+        PageUtils pageUtils = new PageUtils(lineListold, total);
+        return pageUtils;
+    }
+
+    /**
+     * 输入诊室
+     * @return
+     */
+    @GetMapping("/consultRoomold")
+//    @RequiresPermissions("information:optometryline:consultRoom")
+    String consultRoomold(){
+        return "line/consultRoomold";
+    }
+
+    /**
+     * 叫号
+     */
+    @PostMapping( "/addCallold")
+    @ResponseBody
+//    @RequiresPermissions("information:optometryline:addCall")
+    public R addCallold(String consultRoom){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Map<String,Object> map = new HashMap<>();
+        map.put("consultRoom",consultRoom);
+        map.put("lineTime",simpleDateFormat.format(new Date()));
+        List<YgLineoldDO> ygLineoldDOS = optometryLineService.listold(map);
+        if (null != ygLineoldDOS && ygLineoldDOS.size() > 0){
+            Long lineId = ygLineoldDOS.get(0).getId();
+            YgLineoldDO lineoldDO = optometryLineService.getold(lineId);
+            int callStatus = 0;
+            if (Integer.parseInt(lineoldDO.getCallStatus())<4){
+                callStatus = Integer.parseInt(lineoldDO.getCallStatus()) + 1;
+            } else {
+                callStatus = 4;
+            }
+            YgLineoldDO ygLineoldDO = new YgLineoldDO();
+            ygLineoldDO.setId(lineId);
+            ygLineoldDO.setConsultRoom(consultRoom);
+            ygLineoldDO.setCallStatus(String.valueOf(callStatus));
+            optometryLineService.updateold(ygLineoldDO);
+            YgLineMemberoldDO lineMemberoldDO = new YgLineMemberoldDO();
+            lineMemberoldDO.setConsultRoom(consultRoom);
+            lineMemberoldDO.setMemberName(lineoldDO.getMemberName());
+            lineMemberoldDO.setSex(lineoldDO.getSex());
+            lineMemberoldDO.setLineTime(lineoldDO.getLineTime());
+            if(optometryLineService.saveLineMemberold(lineMemberoldDO)>0){
+                return R.ok();
+            }
+        }
+        return R.error();
+    }
+
+    /**
+     * 排队级叫号列表
+     * @return
+     */
+    @GetMapping( "/callListold")
+    @ResponseBody
+    public Map<String,Object> callListold(){
+        Map<String,Object> resultMap = new HashMap<>();
+        Map<String,Object> map = new HashMap<>();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        map.put("lineTime",simpleDateFormat.format(new Date()));
+        List<YgLineoldDO> lineDOList = optometryLineService.linesListold(map);
+        resultMap.put("lineDOList",lineDOList);
+        List<YgLineMemberoldDO> lineMemberDOList = new ArrayList<>();
+        List<YgLineMemberoldDO> lineMemberDOS = optometryLineService.listMemberold(map);
+        YgLineMemberoldDO lineMemberoldDO = new YgLineMemberoldDO();
+        if (null != lineMemberDOS && lineMemberDOS.size() > 0){
+            lineMemberoldDO.setMemberName(lineMemberDOS.get(0).getMemberName());
+            lineMemberoldDO.setSex(lineMemberDOS.get(0).getSex());
+            lineMemberoldDO.setConsultRoom(lineMemberDOS.get(0).getConsultRoom());
+            lineMemberoldDO.setId(lineMemberDOS.get(0).getId());
+            lineMemberDOList.add(lineMemberoldDO);
+            resultMap.put("lineMemberDOS",lineMemberDOList);
+            resultMap.put("content","请"+lineMemberDOS.get(0).getMemberName()+"到"+lineMemberDOS.get(0).getConsultRoom()+"做综合验光检查");
+        } else {
+            resultMap.put("lineMemberDOS",lineMemberDOList);
+            resultMap.put("content","");
+        }
+        List<Map<String,Object>> roomList = new ArrayList<>();
+        List<YgLineoldDO> lineMemberDOList1 = optometryLineService.lineListold(map);
+        if (null != lineMemberDOList1 && lineMemberDOList1.size() > 0){
+            for (YgLineoldDO lineMemberDOstr : lineMemberDOList1){
+                if (!"".equals(lineMemberDOstr.getConsultRoom())){
+                    Map<String,Object> roomMap = new HashMap<>();
+                    roomMap.put("id",lineMemberDOstr.getId());
+                    roomMap.put("memberName",lineMemberDOstr.getMemberName());
+                    roomMap.put("sex",lineMemberDOstr.getSex());
+                    roomMap.put("consultRoom",lineMemberDOstr.getConsultRoom());
+                    roomList.add(roomMap);
+                }
+            }
+        }
+        resultMap.put("roomList",roomList);
+        if (null != lineMemberDOS && lineMemberDOS.size() > 0){
+//				LineDO lineDO = new LineDO();
+//				lineDO.setMemberNumber(lineMemberDO.getMemberNumber());
+//				lineDO.setLineDate(simpleDateFormat.format(new Date()));
+//				lineService.removeMember(lineDO);
+            optometryLineService.removeMember(lineMemberDOS.get(0).getId());
+        }
+        return resultMap;
+    }
+
+    /**
+     * 删除
+     */
+    @PostMapping( "/removeold")
+    @ResponseBody
+//    @RequiresPermissions("information:optometryline:remove")
+    public R removeold(Long id){
+        if(optometryLineService.removeold(id)>0){
+            return R.ok();
+        }
+        return R.error();
+    }
+
 
 }
