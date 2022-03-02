@@ -119,7 +119,7 @@
 	<update id="update" parameterType="com.shiguang.stock.domain.StocklogDO">
 		update stock_stocklog 
 		<set>
-			<if test="danjunum != danjunum">`danjunum` = #{danjunum}, </if>
+			<if test="danjunum != null">`danjunum` = #{danjunum}, </if>
 			<if test="num != null">`num` = #{num}, </if>
 			<if test="code != null">`code` = #{code}, </if>
 			<if test="name != null">`name` = #{name}, </if>

@@ -149,8 +149,10 @@ public class ProducaServiceImpl implements ProducaService {
                 for (int rowNum = 2; rowNum <= sheet.getLastRowNum(); rowNum++) {
                     try {
                         row = sheet.getRow(rowNum);
+                        String startFactory = ExcelUtils.getCellFormatValue(row.getCell((short) 0)).replaceAll("[\t\n' ']", "");    // 型号
                         String producFactory = ExcelUtils.getCellFormatValue(row.getCell((short) 0)).replaceAll("[\t\n' ']", "");    // 型号
                         String producFactorycolor = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    //  色号
+                        String startFactorycolor = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    //  色号
                         String retailPrice = ExcelUtils.getCellFormatValue(row.getCell((short) 2)).replaceAll("[\t\n' ']", "");    //  零售价
                         String factoryAdd = "";
                         String factorycolorAdd = "";
@@ -179,10 +181,13 @@ public class ProducaServiceImpl implements ProducaService {
                         producaDO.setProducName(brandname + "-型号:" + producFactory + "-色号:" + producFactorycolor + "-标价:" + retailPrice);
                         producaDO.setMfrsid(mfrsid);
                         producaDO.setBrandnum(brandnum);
-                        producaDO.setFactory(producFactory);
-                        producaDO.setProducFactory(producFactory);
-                        producaDO.setProducFactorycolor(producFactorycolor);
-                        producaDO.setProducColor(producFactorycolor);
+
+
+                        producaDO.setFactory(startFactory);
+                        producaDO.setProducFactory(startFactory);
+                        producaDO.setProducFactorycolor(startFactorycolor);
+                        producaDO.setProducColor(startFactorycolor);
+
                         producaDO.setUnitid(unitid);
                         producaDO.setYear(year);
                         producaDO.setTax(tax);
