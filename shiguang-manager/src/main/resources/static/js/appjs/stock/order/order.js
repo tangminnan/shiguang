@@ -176,8 +176,8 @@ function remove(id) {
 
 //打印条码
 function code(goodsType,danjuNumber){
-    if (goodsType==1){
-        window.open("/stock/stock/codeJingjia?danjuNumber="+danjuNumber);
+    if (goodsType==1 || goodsType==6){
+        window.open("/stock/stock/codeJingjia?danjuNumber="+danjuNumber + "&goodsType=" + goodsType);
     } else {
         window.open("/stock/stock/code?danjuNumber="+danjuNumber);
     }

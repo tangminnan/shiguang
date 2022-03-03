@@ -1015,8 +1015,8 @@
         var codeOne =object;
         var goodsType = $('#goodsType').val();
         var danjuNumber = $('#danjuNumber').val();
-        if (goodsType==1){
-            window.open("/stock/stock/codeJingjiaOne?danjuNumber="+danjuNumber+'&codeOne='+codeOne);
+        if (goodsType==1 || goodsType==6){
+            window.open("/stock/stock/codeJingjiaOne?danjuNumber="+danjuNumber+'&codeOne='+codeOne+ "&goodsType=" + goodsType);
         } else {
             window.open("/stock/stock/codeOne?danjuNumber="+danjuNumber+'&codeOne='+codeOne);
         }

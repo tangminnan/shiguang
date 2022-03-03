@@ -63,6 +63,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public List<OrderDO> gettyjCode(Map<String, Object> map) {
+		return orderDao.gettyjCode(map);
+	}
+
+	@Override
 	public int updateStatus(OrderDO order) {
 		return orderDao.updateStatus(order);
 	}

@@ -31,6 +31,7 @@ public interface OrderService {
 	
 	int batchRemove(Long[] ids);
 	List<OrderDO> getCode(Map<String, Object> map);
+	List<OrderDO> gettyjCode(Map<String, Object> map);
 	int updateStatus(OrderDO order);
 	//采购详情列表
 	List<OrderDO> selectOrder(Map<String, Object> map);

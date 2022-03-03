@@ -1777,10 +1777,15 @@ public class StockController {
      */
     @GetMapping("/codeJingjia")
     @RequiresPermissions("stock:stock:code")
-    public String codeJingjia(String danjuNumber, Model model) {
+    public String codeJingjia(String danjuNumber,Integer goodsType, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("danjuNumber",danjuNumber);
-        List<OrderDO> orderDOS = orderService.getCode(map);
+        List<OrderDO> orderDOS=null;
+        if (goodsType==1){
+            orderDOS = orderService.getCode(map);
+        }else if (goodsType==6){
+            orderDOS = orderService.gettyjCode(map);
+        }
         model.addAttribute("orderDOS", orderDOS);
         for (OrderDO orderDO1 : orderDOS){
             String code = QRCodeUtil.creatRrCode(orderDO1.getGoodsCode(), 200,200);
@@ -1811,11 +1816,16 @@ public class StockController {
      * 浏览器打印二维码一个
      */
     @GetMapping("/codeJingjiaOne")
-    public String codeJingjiaOne(String danjuNumber,String codeOne, Model model) {
+    public String codeJingjiaOne(String danjuNumber,String codeOne,Integer goodsType, Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("danjuNumber",danjuNumber);
         map.put("codeOne",codeOne);
-        List<OrderDO> orderDOS = orderService.getCode(map);
+        List<OrderDO> orderDOS=null;
+        if (goodsType==1){
+            orderDOS = orderService.getCode(map);
+        }else if (goodsType==6){
+            orderDOS = orderService.gettyjCode(map);
+        }
         model.addAttribute("orderDOS", orderDOS);
         for (OrderDO orderDO1 : orderDOS){
             String code = QRCodeUtil.creatRrCode(orderDO1.getGoodsCode(), 200,200);
