@@ -106,7 +106,29 @@ function reLoad() {
      var settleDateStart = $("#settleDateStart").val();
      var settleDateEnd = $("#settleDateEnd").val();
      var goodsType = $("#goodsType").val();
-     window.open("/information/saleGoods/salegoodsList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&goodsType="+goodsType);
+    var brandName = $("input[name='brandName']:checked").val();
+    if (brandName == undefined || brandName =='0'){
+        brandName = "";
+	}
+//     var _LoadingHtml = '页面加载中，请等待...';
+//
+// //呈现loading效果
+//
+//     document.write(_LoadingHtml);
+//
+// //监听加载状态改变
+//     document.onreadystatechange = completeLoading;
+//
+// //加载状态为complete时移除loading效果
+//     function completeLoading() {
+//     	alert(document.readyState);
+//         if (document.readyState == "complete") {
+//             var loadingMask = document.getElementById('loadingDiv');
+//             loadingMask.parentNode.removeChild(loadingMask);
+//
+//         }
+//     }
+    window.open("/information/saleGoods/salegoodsList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&goodsType="+goodsType+"&brandName="+brandName);
 
 }
 function add() {

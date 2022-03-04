@@ -22,6 +22,10 @@
 						<div class="columns pull-right">
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
 						</div>
+							<div class="columns pull-right nopadding">
+								<input name="brandName"  type="radio" value="0" checked/>商品类别
+								<input name="brandName"  type="radio" value="1" />按品牌
+							</div>
 							<div class="columns pull-right  nopadding">
 								<select class="form-control" name="goodsType" id="goodsType" >
 									<option value="">请选择商品类别</option>
@@ -35,7 +39,6 @@
 									<option value="视光">视光</option>
 								</select>
 							</div>
-
 							<div class="columns pull-right nopadding">
 								<input id="settleDateStart" type="text"
 									   placeholder="开始日期">～

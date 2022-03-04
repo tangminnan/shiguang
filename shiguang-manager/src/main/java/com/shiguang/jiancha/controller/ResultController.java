@@ -535,19 +535,31 @@ public class ResultController {
 //        model.addAttribute("crtDOList", crtDOList);
 //        model.addAttribute("rgpDOList", rgpDOList);
 //        model.addAttribute("yaopinDOList", yaopinDOList);
-        if (tryresultsDO.getSex() == 0) {
-            tryresultsDO.setSexx("男");
+        if (tryresultsDO != null ){
+            if (tryresultsDO.getSex() == 0) {
+                tryresultsDO.setSexx("男");
+            } else {
+                tryresultsDO.setSexx("女");
+            }
+            SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date time = tryresultsDO.getCreateTime();
+            String newtime = sdftime.format(time);
+            model.addAttribute("newtime", newtime);
+            model.addAttribute("tryresultsDO", tryresultsDO);
         } else {
-            tryresultsDO.setSexx("女");
+            ResultDetailDO resultDO1 = resultService.getresult(map);
+            if (resultDO1.getSex() == 0) {
+                resultDO1.setSexx("男");
+            } else {
+                resultDO1.setSexx("女");
+            }
+            model.addAttribute("tryresultsDO", resultDO1);
         }
-        SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date time = tryresultsDO.getCreateTime();
-        String newtime = sdftime.format(time);
-        model.addAttribute("newtime", newtime);
+
         //————————————————散瞳用药————————————————————————————————
         List<PharmacyDO> pharmacyDOList = pharmacyService.list(map);
         model.addAttribute("pharmacyDOList", pharmacyDOList);
-        model.addAttribute("tryresultsDO", tryresultsDO);
+
 
         return "optometryNew/chufangall";
     }

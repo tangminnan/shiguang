@@ -339,4 +339,14 @@
 			group by r.ptometry_number
 	</select>
 
+	<select id="getresult" resultType="com.shiguang.jiancha.domain.ResultDetailDO">
+		select m.name,m.sex,m.age,m.phone_1, t.*
+		from jc_result t left join member m on t.card_number=m.card_number
+		<where>
+			<if test="cardNumber != null and cardNumber != ''"> and t.card_number = #{value} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and t.ptometry_number = #{ptometryNumber} </if>
+		</where>
+		order by id desc
+	</select>
+
 </mapper>

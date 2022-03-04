@@ -816,7 +816,7 @@ public class SettlementController {
 				if (null != conclusionList.get(0).getRightyytj() && !"".equals(conclusionList.get(0).getRightyytj())){
 					conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
 				} else {
-					conclusion.setRightyytj(conclusionList.get(0).getRightjytj());
+					conclusion.setRightyytj("");
 				}
 				if (null != conclusionList.get(0).getRightjytj() && !"".equals(conclusionList.get(0).getRightjytj())){
 					conclusion.setRightjytj(conclusionList.get(0).getRightjytj());
@@ -847,7 +847,7 @@ public class SettlementController {
 				if (null != conclusionList.get(0).getLeftyytj() && !"".equals(conclusionList.get(0).getLeftyytj())){
 					conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
 				} else {
-					conclusion.setLeftyytj(conclusionList.get(0).getLeftjytj());
+					conclusion.setLeftyytj("");
 				}
 				if (null != conclusionList.get(0).getLeftjytj() && !"".equals(conclusionList.get(0).getLeftjytj())){
 					conclusion.setLeftjytj(conclusionList.get(0).getLeftjytj());

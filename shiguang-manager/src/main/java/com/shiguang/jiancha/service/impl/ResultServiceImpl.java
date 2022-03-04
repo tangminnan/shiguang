@@ -1,5 +1,6 @@
 package com.shiguang.jiancha.service.impl;
 
+import com.shiguang.jiancha.domain.ResultDetailDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,5 +76,10 @@ public class ResultServiceImpl implements ResultService {
 	@Override
 	public ResultDO getChufangAll(Map<String, Object> map) {
 		return resultDao.getChufangAll(map);
+	}
+
+	@Override
+	public ResultDetailDO getresult(Map<String, Object> map) {
+		return resultDao.getresult(map);
 	}
 }

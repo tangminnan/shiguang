@@ -333,7 +333,7 @@ ProducaController {
         //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
-        return "product/produca/addall";
+        return "product/produca/addAll";
     }
 
     /**

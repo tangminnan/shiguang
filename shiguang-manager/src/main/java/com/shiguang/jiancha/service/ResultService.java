@@ -1,6 +1,7 @@
 package com.shiguang.jiancha.service;
 
 import com.shiguang.jiancha.domain.ResultDO;
+import com.shiguang.jiancha.domain.ResultDetailDO;
 import com.shiguang.jiancha.domain.TryresultsDO;
 
 import java.util.List;
@@ -34,5 +35,7 @@ public interface ResultService {
 	int shujulistcount(Map<String, Object> map);
 	//所有处方
 	ResultDO getChufangAll(Map<String, Object> map);
+
+	ResultDetailDO getresult(Map<String,Object> map);
 
 }

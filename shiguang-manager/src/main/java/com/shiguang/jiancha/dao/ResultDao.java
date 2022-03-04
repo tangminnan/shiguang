@@ -5,6 +5,7 @@ import com.shiguang.jiancha.domain.ResultDO;
 import java.util.List;
 import java.util.Map;
 
+import com.shiguang.jiancha.domain.ResultDetailDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -35,4 +36,6 @@ public interface ResultDao {
 	int shujulistcount(Map<String, Object> map);
 	//所有处方
 	ResultDO getChufangAll(Map<String, Object> map);
+	//所有处方
+	ResultDetailDO getresult(Map<String, Object> map);
 }
