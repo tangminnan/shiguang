@@ -65,7 +65,11 @@ public class OptometryNewController {
     UserService userService;
     @GetMapping()
     @RequiresPermissions("information:optometryNew:optometryNew")
-    String Optometry() {
+    String Optometry(Model model) {
+        Map<String,Object> map=new HashMap<>();
+        map.put("YangguangName","验光师");
+        List<TryresultsDO> listYanguang = tryresultsService.listYanguang(map);
+        model.addAttribute("listYanguang",listYanguang);
         return "optometryNew/optometryNew";
     }
     //查询会员

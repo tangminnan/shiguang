@@ -104,6 +104,10 @@ public class MemberDO implements Serializable {
     //公众号
     private String openId;
 
+    //验光师
+    private String optometryName;
+
+
     /**
      * 设置：
      */
@@ -655,4 +659,12 @@ public class MemberDO implements Serializable {
     public void setOpenId(String openId) {this.openId = openId;}
 
     public String getOpenId() {return openId;}
+
+    public String getOptometryName() {
+        return optometryName;
+    }
+
+    public void setOptometryName(String optometryName) {
+        this.optometryName = optometryName;
+    }
 }

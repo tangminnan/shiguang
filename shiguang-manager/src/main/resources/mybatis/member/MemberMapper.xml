@@ -549,13 +549,52 @@
         </foreach>
     </update>
     <select id="yanguangList" resultType="com.shiguang.member.domain.MemberDO">
-        select m.`id`,m.`name`,m.`member_option`,m.`card_number`,m.`sex`,m.`depart_number`,m.`birthday_year`,m.`birthday_month`,
-        m.`birthday_day`,m.`age`,m.`phone_1`,m.`phone_2`,m.`phone_3`,m.`province_code`,m.`province_name`,m.`city_code`,m.`city_name`,
-        m.`area_code`,m.`area_name`,m.`card_type`,m.`master_card`,m.`minor_name`,m.`crowd_type`,m.`exclusive_customer`,
-        m.`exclusive_customer_id`,m.`identity_type`,m.`identity_id`,m.`vocation`,m.`school`,m.`qq_number`,m.`email`,
-        m.`address`,m.`postal_code`,m.`interest`,m.`source`,m.`integral_pasd`,m.`remark`,m.`register_time`,m.`status`,m.`state`
-        from member m
-
+        SELECT
+        m.`id`,
+        m.`name`,
+        m.`member_option`,
+        m.`card_number`,
+        m.`sex`,
+        m.`depart_number`,
+        m.`birthday_year`,
+        m.`birthday_month`,
+        m.`birthday_day`,
+        m.`age`,
+        m.`phone_1`,
+        m.`phone_2`,
+        m.`phone_3`,
+        m.`province_code`,
+        m.`province_name`,
+        m.`city_code`,
+        m.`city_name`,
+        m.`area_code`,
+        m.`area_name`,
+        m.`card_type`,
+        m.`master_card`,
+        m.`minor_name`,
+        m.`crowd_type`,
+        m.`exclusive_customer`,
+        m.`exclusive_customer_id`,
+        m.`identity_type`,
+        m.`identity_id`,
+        m.`vocation`,
+        m.`school`,
+        m.`qq_number`,
+        m.`email`,
+        m.`address`,
+        m.`postal_code`,
+        m.`interest`,
+        m.`source`,
+        m.`integral_pasd`,
+        m.`remark`,
+        m.`register_time`,
+        m.`status`,
+        m.`state` ,
+        try.ptometry_number,
+        try.create_time
+        FROM
+        member m
+        left join jc_tryresults try on m.card_number =try.card_number
         <where>
             <if test="id != null and id != ''"> and m.id = #{id} </if>
             <if test="name != null and name != ''"> and m.`name` like concat('%', #{name},'%') </if>
@@ -605,12 +644,16 @@
             <if test="agestart != null and agestart !=''"> and m.age >= #{agestart} </if>
             <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
 
+            <if test="optometryName != null and optometryName != ''"> and try.optometry_name = #{optometryName} </if>
+            <if test="dateStart !=null and dateStart != ''"> and date_format( try.create_time ,'%Y-%m-%d' ) >= (#{dateStart})</if>
+            <if test="dateEnd !=null and dateEnd != ''"> and date_format( try.create_time ,'%Y-%m-%d' ) &lt;= (#{dateEnd})</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
+                GROUP BY m.card_number
                 order by m.id desc
             </otherwise>
         </choose>
@@ -619,8 +662,54 @@
         </if>
     </select>
     <select id="yanguangCount" resultType="int">
-        select count(*)   from member m
-
+        SELECT count( 0 ) FROM
+        (
+        SELECT
+        m.`id`,
+        m.`name`,
+        m.`member_option`,
+        m.`card_number`,
+        m.`sex`,
+        m.`depart_number`,
+        m.`birthday_year`,
+        m.`birthday_month`,
+        m.`birthday_day`,
+        m.`age`,
+        m.`phone_1`,
+        m.`phone_2`,
+        m.`phone_3`,
+        m.`province_code`,
+        m.`province_name`,
+        m.`city_code`,
+        m.`city_name`,
+        m.`area_code`,
+        m.`area_name`,
+        m.`card_type`,
+        m.`master_card`,
+        m.`minor_name`,
+        m.`crowd_type`,
+        m.`exclusive_customer`,
+        m.`exclusive_customer_id`,
+        m.`identity_type`,
+        m.`identity_id`,
+        m.`vocation`,
+        m.`school`,
+        m.`qq_number`,
+        m.`email`,
+        m.`address`,
+        m.`postal_code`,
+        m.`interest`,
+        m.`source`,
+        m.`integral_pasd`,
+        m.`remark`,
+        m.`register_time`,
+        m.`status`,
+        m.`state` ,
+        try.ptometry_number,
+        try.create_time
+        FROM
+        member m
+        left join jc_tryresults try on m.card_number =try.card_number
         <where>
             <if test="id != null and id != ''"> and m.id = #{id} </if>
             <if test="name != null and name != ''"> and m.`name` like concat('%', #{name},'%') </if>
@@ -628,7 +717,7 @@
             <if test="departNumber != null and departNumber != ''">
                 and m.depart_number = ${departNumber}
             </if>
-            <!-- <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>-->
+            <!--            <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>-->
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
             <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
             <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
@@ -636,9 +725,10 @@
             <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
             <if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
             <if test="age != null and age != ''"> and m.age = #{age} </if>
-            <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
-            <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
-            <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
+            <if test="phone1 != null and phone1 != ''"> and m.phone_1 like concat('%', #{phone1},'%') </if>
+            <if test="phone2 != null and phone2 != ''"> and m.phone_2 like concat('%', #{phone2},'%') </if>
+            <if test="phone3 != null and phone3 != ''"> and m.phone_3 like concat('%', #{phone3},'%') </if>
+
             <if test="provinceCode != null and provinceCode != ''"> and m.province_code = #{provinceCode} </if>
             <if test="provinceName != null and provinceName != ''"> and m.province_name = #{provinceName} </if>
             <if test="cityCode != null and cityCode != ''"> and m.city_code = #{cityCode} </if>
@@ -668,6 +758,21 @@
             <if test="state != null and state != ''"> and m.state = #{state} </if>
             <if test="agestart != null and agestart !=''"> and m.age >= #{agestart} </if>
             <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
+
+            <if test="optometryName != null and optometryName != ''"> and try.optometry_name = #{optometryName} </if>
+            <if test="dateStart !=null and dateStart != ''"> and date_format( try.create_time ,'%Y-%m-%d' ) >= (#{dateStart})</if>
+            <if test="dateEnd !=null and dateEnd != ''"> and date_format( try.create_time ,'%Y-%m-%d' ) &lt;= (#{dateEnd})</if>
         </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                GROUP BY m.card_number
+                order by m.id desc
+            </otherwise>
+        </choose>
+
+        ) AS temp
     </select>
 </mapper>

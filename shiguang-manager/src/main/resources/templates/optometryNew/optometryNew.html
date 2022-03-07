@@ -29,6 +29,21 @@
             <td>
                 <input id="phone1" name="phone1" type="text"/>
             </td>
+            <td>
+                <select  id="optometryName" name="optometryName" style="width: 100%">
+                    <option value="">--请选择验光师--</option>
+                    <option th:each="ls:${listYanguang}"
+                            th:text="${ls.name}"
+                            th:value="${ls.name}"
+                    ></option>
+                </select>
+            </td>
+            <td>
+                <input id="dateStart" type="text"
+                       placeholder="开始日期">～
+                <input id="dateEnd" type="text"
+                       placeholder="结束日期">
+            </td>
         </tr>
 <!--        <tr>-->
 <!--            <td>会员性别 </td>-->
@@ -71,6 +86,17 @@
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/optometryNew/optometryNew.js"></script>
 <script type="text/javascript">
+    laydate.render({
+        elem: '#dateStart',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
+    laydate.render({
+        elem: '#dateEnd',
+        // format: 'yyyy-MM-dd HH:mm:ss',
+        format: 'yyyy-MM-dd',
+        type: 'date'
+    });
     //清空
     function clearText() {
         var controls = document.getElementsByTagName('input');
