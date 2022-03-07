@@ -880,7 +880,7 @@ public class RetailpriceController {
 					String goodsNum = stock.getGoodsNum();
 					StockDO stockDO = new StockDO();
 					stockDO.setGoodsNum(goodsNum);
-					stockDO.setProducName(producName);
+					stockDO.setGoodsName(producName);
 					stockDO.setRetailPrice(newMoney);
 					stockService.update(stockDO);
 				}
@@ -925,7 +925,7 @@ public class RetailpriceController {
 					String goodsNum = stock.getGoodsNum();
 					StockDO stockDO = new StockDO();
 					stockDO.setGoodsNum(goodsNum);
-					stockDO.setProducName(producName);
+					stockDO.setGoodsName(producName);
 					stockDO.setRetailPrice(newMoney);
 					stockService.update(stockDO);
 				}
@@ -969,7 +969,7 @@ public class RetailpriceController {
 					String goodsNum = stock.getGoodsNum();
 					StockDO stockDO = new StockDO();
 					stockDO.setGoodsNum(goodsNum);
-					stockDO.setProducName(producName);
+					stockDO.setGoodsName(producName);
 					stockDO.setRetailPrice(newMoney);
 					stockService.update(stockDO);
 				}
@@ -1013,7 +1013,7 @@ public class RetailpriceController {
 					String goodsNum = stock.getGoodsNum();
 					StockDO stockDO = new StockDO();
 					stockDO.setGoodsNum(goodsNum);
-					stockDO.setProducName(producName);
+					stockDO.setGoodsName(producName);
 					stockDO.setRetailPrice(newMoney);
 					stockService.update(stockDO);
 				}
@@ -1057,7 +1057,7 @@ public class RetailpriceController {
 					String goodsNum = stock.getGoodsNum();
 					StockDO stockDO = new StockDO();
 					stockDO.setGoodsNum(goodsNum);
-					stockDO.setProducName(producName);
+					stockDO.setGoodsName(producName);
 					stockDO.setRetailPrice(newMoney);
 					stockService.update(stockDO);
 				}
@@ -1101,7 +1101,7 @@ public class RetailpriceController {
 					String goodsNum = stock.getGoodsNum();
 					StockDO stockDO = new StockDO();
 					stockDO.setGoodsNum(goodsNum);
-					stockDO.setProducName(producName);
+					stockDO.setGoodsName(producName);
 					stockDO.setRetailPrice(newMoney);
 					stockService.update(stockDO);
 				}
@@ -1145,7 +1145,7 @@ public class RetailpriceController {
 					String goodsNum = stock.getGoodsNum();
 					StockDO stockDO = new StockDO();
 					stockDO.setGoodsNum(goodsNum);
-					stockDO.setProducName(producName);
+					stockDO.setGoodsName(producName);
 					stockDO.setRetailPrice(newMoney);
 					stockService.update(stockDO);
 				}
@@ -1189,7 +1189,7 @@ public class RetailpriceController {
 					String goodsNum = stock.getGoodsNum();
 					StockDO stockDO = new StockDO();
 					stockDO.setGoodsNum(goodsNum);
-					stockDO.setProducName(producName);
+					stockDO.setGoodsName(producName);
 					stockDO.setRetailPrice(newMoney);
 					stockService.update(stockDO);
 				}
@@ -1233,7 +1233,7 @@ public class RetailpriceController {
 					String goodsNum = stock.getGoodsNum();
 					StockDO stockDO = new StockDO();
 					stockDO.setGoodsNum(goodsNum);
-					stockDO.setProducName(producName);
+					stockDO.setGoodsName(producName);
 					stockDO.setRetailPrice(newMoney);
 					stockService.update(stockDO);
 				}
@@ -1276,7 +1276,7 @@ public class RetailpriceController {
 					String goodsNum = stock.getGoodsNum();
 					StockDO stockDO = new StockDO();
 					stockDO.setGoodsNum(goodsNum);
-					stockDO.setProducName(producName);
+					stockDO.setGoodsName(producName);
 					stockDO.setRetailPrice(newMoney);
 					stockService.update(stockDO);
 				}
@@ -1320,7 +1320,7 @@ public class RetailpriceController {
 					String goodsNum = stock.getGoodsNum();
 					StockDO stockDO = new StockDO();
 					stockDO.setGoodsNum(goodsNum);
-					stockDO.setProducName(producName);
+					stockDO.setGoodsName(producName);
 					stockDO.setRetailPrice(newMoney);
 					stockService.update(stockDO);
 				}

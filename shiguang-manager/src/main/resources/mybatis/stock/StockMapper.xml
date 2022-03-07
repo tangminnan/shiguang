@@ -58,6 +58,7 @@
 
             <if test="num != null and num != ''">and s.goods_num LIKE concat(concat('%', #{num}),'%')</if>
             <if test="oldMoney != null and oldMoney != ''">and s.retail_price = #{oldMoney}</if>
+            <if test="producNum != null and producNum != ''">and s.goods_num = #{producNum}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -112,6 +113,7 @@
 
             <if test="num != null and num != ''">and s.goods_num LIKE concat(concat('%', #{num}),'%')</if>
             <if test="oldMoney != null and oldMoney != ''">and s.retail_price = #{oldMoney}</if>
+            <if test="producNum != null and producNum != ''">and s.goods_num = #{producNum}</if>
         </where>
     </select>
 
