@@ -15,6 +15,8 @@ import com.shiguang.product.domain.StyleDO;
 import com.shiguang.product.service.OlddegreesService;
 import com.shiguang.product.service.OldlensService;
 import com.shiguang.product.service.StyleService;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,6 +49,8 @@ public class OldlensController {
     //老花镜度数
     @Autowired
     private OlddegreesService olddegreesService;
+    @Autowired
+    private StockService stockService;
 
 
     private Double retailPrice;
@@ -161,6 +165,12 @@ public class OldlensController {
         if (haveNum.size() > 0) {
 //            return R.error("商品代码已存在");
             oldlensService.update(oldlens);
+            StockDO stockDO=new StockDO();
+            stockDO.setGoodsNum(producNum);
+            stockDO.setGoodsName(producName+"-球镜:"+oldId+"-型号:"+factory+"-标价:"+retailPrice);
+            stockDO.setRetailPrice(retailPrice);
+            stockDO.setFactory(factory);
+            stockService.update(stockDO);
             return R.ok();
         }
         if (oldlensService.save(oldlens) > 0) {

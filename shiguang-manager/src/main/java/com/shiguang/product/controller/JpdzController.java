@@ -8,6 +8,8 @@ import com.shiguang.mfrs.domain.*;
 import com.shiguang.mfrs.service.*;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,6 +62,8 @@ public class JpdzController {
     //渐进片分类
     @Autowired
     private GradualService gradualService;
+    @Autowired
+    private StockService stockService;
 
 
     private Double retailPrice;
@@ -251,6 +255,12 @@ public class JpdzController {
         if (haveNum.size() > 0) {
 //            return R.error("商品代码已存在");
             jpdzService.update(jpdz);
+            StockDO stockDO=new StockDO();
+            stockDO.setGoodsNum(producNum);
+            stockDO.setGoodsName(producName+"-球镜:"+sphUp+"/"+sphDown+"-柱镜:"+cylUp+"/"+cylDown+"-标价:"+retailPrice);
+            stockDO.setRetailPrice(retailPrice);
+            stockDO.setFactory("");
+            stockService.update(stockDO);
             return R.ok();
 
         }

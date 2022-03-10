@@ -2,6 +2,7 @@ package com.shiguang.product.dao;
 
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.product.domain.ProducaDO;
+import com.shiguang.stock.domain.StockDO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -31,6 +32,8 @@ public interface ProducaDao {
     int save(ProducaDO produca);
 
     int update(ProducaDO produca);
+
+    int updateStock(StockDO stockDO);
 
     int remove(Long id);
 

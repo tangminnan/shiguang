@@ -14,6 +14,8 @@ import com.shiguang.mfrs.service.UnitService;
 import com.shiguang.product.domain.HcDO;
 import com.shiguang.product.domain.PartsDO;
 import com.shiguang.product.service.PartsService;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,6 +45,8 @@ public class PartsController {
     //折射率
     @Autowired
     private RefractivityService refractivityService;
+    @Autowired
+    private StockService stockService;
 
     @GetMapping()
     String Parts() {
@@ -147,6 +151,12 @@ public class PartsController {
         parts.setProducName(producName+"-型号:"+factory+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             partsService.update(parts);
+            StockDO stockDO=new StockDO();
+            stockDO.setGoodsNum(producNum);
+            stockDO.setGoodsName(producName+"-型号:"+factory+"-标价:"+retailPrice);
+            stockDO.setRetailPrice(retailPrice);
+            stockDO.setFactory(factory);
+            stockService.update(stockDO);
 //            return R.error("商品代码已存在");
             return R.ok();
         }

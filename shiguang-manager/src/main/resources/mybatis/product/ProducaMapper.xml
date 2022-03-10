@@ -198,7 +198,45 @@
         <if test="producNum != null and id != ''">and produc_num = #{producNum}</if>
         </where>
     </update>
-
+    <update id="updateStock" parameterType="com.shiguang.stock.domain.StockDO">
+        update stock
+        <set>
+            <if test="goodsNum != null">`goods_num` = #{goodsNum},</if>
+            <if test="goodsCode != null">`goods_code` = #{goodsCode},</if>
+            <if test="goodsName != null">`goods_name` = #{goodsName},</if>
+            <if test="goodsCount != null">`goods_count` = #{goodsCount},</if>
+            <if test="goodsType != null">`goods_type` = #{goodsType},</if>
+            <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
+            <if test="brandname != null">`brandname` = #{brandname},</if>
+            <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
+            <if test="priceSum != null">`price_sum` = #{priceSum},</if>
+            <if test="costPrice != null">`cost_price` = #{costPrice},</if>
+            <if test="costSum != null">`cost_sum` = #{costSum},</if>
+            <if test="wholePrice != null">`whole_price` = #{wholePrice},</if>
+            <if test="wholeSum != null">`whole_sum` = #{wholeSum},</if>
+            <if test="positionId != null">`position_id` = #{positionId},</if>
+            <if test="positionName != null">`position_name` = #{positionName},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="danjuNumber != null">`danju_number` = #{danjuNumber},</if>
+            <if test="orderNumber != null">`order_number` = #{orderNumber},</if>
+            <if test="yundanNumber != null">`yundan_number` = #{yundanNumber},</if>
+            <if test="zhidanPeople != null">`zhidan_people` = #{zhidanPeople},</if>
+            <if test="danjuDay != null">`danju_day` = #{danjuDay},</if>
+            <if test="tuihuoNumber != null">`tuihuo_number` = #{tuihuoNumber},</if>
+            <if test="factoryNumber != null">`factory_number` = #{factoryNumber},</if>
+            <if test="beizhu != null">`beizhu` = #{beizhu},</if>
+            <if test="batch != null">`batch` = #{batch}, </if>
+            <if test="zhuceNumber != null">`zhuce_number` = #{zhuceNumber}, </if>
+            <if test="produceDay != null">`produce_day` = #{produceDay}, </if>
+            <if test="useday != null">`useday` = #{useday}, </if>
+            <if test="classtype != null">`classtype` = #{classtype},</if>
+            <if test="factory != null">`factory` = #{factory}, </if>
+            <if test="status != null">`status` = #{status}, </if>
+            <if test="username != null">`username` = #{username}, </if>
+            <if test="returnzt != null">`returnzt` = #{returnzt} </if>
+        </set>
+        where goods_num = #{goodsNum}
+    </update>
     <delete id="remove">
 		delete from aa_produca where id = #{value}
 	</delete>

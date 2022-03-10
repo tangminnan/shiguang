@@ -11,6 +11,8 @@ import com.shiguang.mfrs.service.UnitService;
 import com.shiguang.product.domain.HlyDO;
 import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.product.service.HlyService;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +41,8 @@ public class HlyController {
     //计量单位
     @Autowired
     private UnitService unitService;
+    @Autowired
+    private StockService stockService;
 
     private Double retailPrice;
     private Double retailPrice2;
@@ -133,6 +137,12 @@ public class HlyController {
         if (haveNum.size() > 0) {
 //            return R.error("商品代码已存在");
             hlyService.update(hly);
+            StockDO stockDO=new StockDO();
+            stockDO.setGoodsNum(producNum);
+            stockDO.setGoodsName(producName+"-型号:"+factory+"-标价:"+retailPrice);
+            stockDO.setRetailPrice(retailPrice);
+            stockDO.setFactory(factory);
+            stockService.update(stockDO);
            return R.ok();
         }
         if (hlyService.save(hly) > 0) {

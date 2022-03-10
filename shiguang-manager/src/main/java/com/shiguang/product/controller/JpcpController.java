@@ -8,6 +8,8 @@ import com.shiguang.mfrs.domain.*;
 import com.shiguang.mfrs.service.*;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,6 +63,8 @@ public class JpcpController {
     //渐进片分类
     @Autowired
     private GradualService gradualService;
+    @Autowired
+    private StockService stockService;
 
     private Double retailPrice;
     private Double retailPrice2;
@@ -251,6 +255,12 @@ public class JpcpController {
         jpcp.setProducName(producName+"-球镜:"+sph+"-柱镜:"+cyl+"-标价:"+retailPrice);
         if (haveNum.size() > 0) {
             jpcpService.update(jpcp);
+            StockDO stockDO=new StockDO();
+            stockDO.setGoodsNum(producNum);
+            stockDO.setGoodsName(producName+"-球镜:"+sph+"-柱镜:"+cyl+"-标价:"+retailPrice);
+            stockDO.setRetailPrice(retailPrice);
+            stockDO.setFactory("");
+            stockService.update(stockDO);
             return R.ok();
 //            return R.error("商品代码已存在");
         }

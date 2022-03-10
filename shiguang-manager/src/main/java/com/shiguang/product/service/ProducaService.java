@@ -4,6 +4,7 @@ import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.MfrsDO;
 import com.shiguang.product.domain.ProducaDO;
+import com.shiguang.stock.domain.StockDO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,6 +37,8 @@ public interface ProducaService {
 
     //修改停用启用
     int update(ProducaDO produca);
+
+    int updateStock(StockDO stockDO);
 
     int remove(Long id);
 

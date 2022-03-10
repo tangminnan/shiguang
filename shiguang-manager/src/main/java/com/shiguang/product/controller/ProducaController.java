@@ -13,6 +13,7 @@ import com.shiguang.product.service.ProducaService;
 import com.shiguang.product.service.StyleService;
 import com.shiguang.product.service.TechnologyService;
 import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,8 @@ ProducaController {
     private PayService payService;
     @Autowired
     private  BrandService brandService;
+    @Autowired
+    private StockService stockService;
 
 
     private Double retailPrice;
@@ -209,6 +212,12 @@ ProducaController {
         if (haveNum.size() > 0) {
 //            return R.error("商品代码已存在");
             producaService.update(produca);
+            StockDO stockDO=new StockDO();
+            stockDO.setGoodsNum(producNum);
+            stockDO.setGoodsName(producName+"-型号:"+factory+"-色号:"+producColor+"-标价:"+retailPrice);
+            stockDO.setRetailPrice(retailPrice);
+            stockDO.setFactory(factory);
+            stockService.update(stockDO);
             return R.ok();
         }
             if (producaService.save(produca) > 0) {

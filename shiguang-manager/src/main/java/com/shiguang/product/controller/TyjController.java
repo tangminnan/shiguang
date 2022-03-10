@@ -13,6 +13,8 @@ import com.shiguang.product.domain.StyleDO;
 import com.shiguang.product.domain.TyjDO;
 import com.shiguang.product.service.StyleService;
 import com.shiguang.product.service.TyjService;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +44,8 @@ public class TyjController {
     //款式
     @Autowired
     private StyleService styleService;
+    @Autowired
+    private StockService stockService;
 
     private Double retailPrice;
     private Double retailPrice2;
@@ -149,6 +153,12 @@ public class TyjController {
         if (haveNum.size() > 0) {
 //            return R.error("商品代码已存在");
             tyjService.update(tyj);
+            StockDO stockDO=new StockDO();
+            stockDO.setGoodsNum(producNum);
+            stockDO.setGoodsName(producName+"-型号:"+factory+"-颜色:"+color+"-标价:"+retailPrice);
+            stockDO.setRetailPrice(retailPrice);
+            stockDO.setFactory(factory);
+            stockService.update(stockDO);
             return R.ok();
         }
         if (tyjService.save(tyj) > 0) {

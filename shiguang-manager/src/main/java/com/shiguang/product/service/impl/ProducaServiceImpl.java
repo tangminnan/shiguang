@@ -9,6 +9,7 @@ import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.product.dao.ProducaDao;
 import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.product.service.ProducaService;
+import com.shiguang.stock.dao.StockDao;
 import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.domain.WeiwaiDO;
@@ -77,6 +78,11 @@ public class ProducaServiceImpl implements ProducaService {
     @Override
     public int update(ProducaDO produca) {
         return producaDao.update(produca);
+    }
+
+    @Override
+    public int updateStock(StockDO stockDO) {
+        return producaDao.updateStock(stockDO);
     }
 
     @Override
@@ -205,6 +211,15 @@ public class ProducaServiceImpl implements ProducaService {
                         List<ProducaDO> haveNum = producaDao.haveNum(map);
                         if (haveNum.size() > 0) {
                             sl = sl + "," + String.valueOf(rowNum - 1);
+
+                            producaDao.update(producaDO);
+                            StockDO stockDO=new StockDO();
+                            stockDO.setGoodsNum(producNum);
+                            stockDO.setGoodsName(brandname + "-型号:" + producFactory + "-色号:" + producFactorycolor + "-标价:" + retailPrice);
+                            stockDO.setRetailPrice(retailPrice);
+                            stockDO.setFactory(startFactory);
+                            producaDao.updateStock(stockDO);
+                            num++;
                         } else {
                             producaDao.save(producaDO);
                             num++;
@@ -219,7 +234,8 @@ public class ProducaServiceImpl implements ProducaService {
                     return R.ok("上传成功,共增加[" + num + "]条,第" + sl + "行导入失败，原因：商品代码已存在");
                 } else {
                     if (sl != "") {
-                        return R.ok("上传成功,共增加[" + num + "]条,第" + sl + "行导入失败，原因：商品代码已存在");
+//                        return R.ok("上传成功,共增加[" + num + "]条,第" + sl + "行导入失败，原因：商品代码已存在");
+                        return R.ok("上传成功,共增加[" + num + "]条");
                     } else {
                         return R.ok("上传成功,共增加[" + num + "]条");
                     }
