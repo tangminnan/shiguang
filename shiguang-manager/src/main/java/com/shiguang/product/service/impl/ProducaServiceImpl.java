@@ -21,9 +21,8 @@ import io.swagger.models.auth.In;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.ibatis.annotations.Param;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -155,6 +154,12 @@ public class ProducaServiceImpl implements ProducaService {
                 for (int rowNum = 2; rowNum <= sheet.getLastRowNum(); rowNum++) {
                     try {
                         row = sheet.getRow(rowNum);
+                        Cell cell0 = row.getCell((short) 0);
+                        Cell cell1 = row.getCell((short) 1);
+//                        Cell cell2 = row.getCell((short) 2);
+                        cell0.setCellType(CellType.STRING);
+                        cell1.setCellType(CellType.STRING);
+//                        cell2.setCellType(CellType.STRING);
                         String startFactory = ExcelUtils.getCellFormatValue(row.getCell((short) 0)).replaceAll("[\t\n' ']", "");    // 型号
                         String producFactory = ExcelUtils.getCellFormatValue(row.getCell((short) 0)).replaceAll("[\t\n' ']", "");    // 型号
                         String producFactorycolor = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    //  色号
