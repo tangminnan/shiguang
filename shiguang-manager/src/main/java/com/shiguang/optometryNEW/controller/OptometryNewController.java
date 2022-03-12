@@ -67,7 +67,13 @@ public class OptometryNewController {
     @RequiresPermissions("information:optometryNew:optometryNew")
     String Optometry(Model model) {
         Map<String,Object> map=new HashMap<>();
+//        Integer companyId=ShiroUtils.getUser().getCompanyId();
+        String companyId = null;
+        if (null != ShiroUtils.getUser().getCompanyId()) {
+            companyId = ShiroUtils.getUser().getCompanyId();
+        }
         map.put("YangguangName","验光师");
+        map.put("companyId",companyId);
         List<TryresultsDO> listYanguang = tryresultsService.listYanguang(map);
         model.addAttribute("listYanguang",listYanguang);
         return "optometryNew/optometryNew";

@@ -972,7 +972,10 @@
     select u.name from sys_user u
     left join sys_user_role ur on u.user_id=ur.user_id
     left join  sys_role r on r.role_id=ur.role_id
-    where r.role_name= #{YangguangName}
+    <where>
+    <if test="YangguangName != null and YangguangName != ''"> and r.role_name = #{YangguangName} </if>
+    <if test="companyId != null and companyId != ''"> and u.company_id = #{companyId} </if>
+    </where>
 </select>
 
     <select id="getTryresult" resultType="com.shiguang.jiancha.domain.TryresultsDO">

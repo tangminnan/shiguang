@@ -17,6 +17,9 @@ public class TryresultsDO implements Serializable {
     //试戴镜结果id
     private Long id;
 
+    //公司id
+    private Integer companyId;
+
 
     //姓名
     private String name;
@@ -352,6 +355,14 @@ public class TryresultsDO implements Serializable {
      */
     public Long getId() {
         return id;
+    }
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 
     /**
