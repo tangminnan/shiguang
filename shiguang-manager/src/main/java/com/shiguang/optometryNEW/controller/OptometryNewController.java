@@ -81,11 +81,11 @@ public class OptometryNewController {
         Query query = new Query(params);
         //———获取当前登录用户的公司id————
         String companyId=ShiroUtils.getUser().getCompanyId();
-        if (query.get("cardNumber") != "" || query.get("name") !="" || query.get("phone1") != ""){
-            query.put("companyId","");
-        }else  {
-            query.put("companyId",companyId);
-        }
+//        if (query.get("cardNumber") != "" || query.get("name") !="" || query.get("phone1") != ""){
+//            query.put("companyId","");
+//        }else  {
+//            query.put("companyId",companyId);
+//        }
         query.put("status", 0);
         query.put("state", 1);
         List<MemberDO> memberDOList = memberService.yanguangList(query);
