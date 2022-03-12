@@ -70,7 +70,7 @@
 			<if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>
 			<if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>
 
-			<!--<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>-->
+			<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
 			<!--<if test="companyId != null and companyId != ''">or FIND_IN_SET(de.company_id,#{companyId})</if>-->
 		  		</where>
         <choose>
@@ -142,7 +142,7 @@
 			 <if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>
 			 <if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>
 
-			 <!--<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>-->
+			 <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
 			 <!--<if test="companyId != null and companyId != ''">or FIND_IN_SET(de.company_id,#{companyId})</if>-->
 		 </where>
 	</select>

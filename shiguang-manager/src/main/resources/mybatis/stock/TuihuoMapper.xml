@@ -633,30 +633,31 @@
 		</where>
 	</select>
 	<select id="orderList" resultType="com.shiguang.stock.domain.TuihuoDO">
-		select t.`id`,t.`tuihuo_num`,t.`zhidan_people`,t.`danju_day`,t.`mfrsid`,m.`mfrsname`,t.`position_id`,p.position_name,t.`beizhu`,t.`style`
+		select t.`id`,t.`tuihuo_num`,t.`zhidan_people`,t.`danju_day`,t.`mfrsid`,m.`mfrsname`,t.`position_id`,p.position_name,t.`beizhu`,t.`style`,p.company_id
 		from stock_tuihuo t
 		left join c_mfrs m on t.mfrsid=m.mfrsnum
 		left join c_position p on t.position_id=t.position_id
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
-			<if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
-			<if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
-			<if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
-			<if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
-			<if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
-			<if test="goodsxinxiid != null and goodsxinxiid != ''"> and goodsxinxiid = #{goodsxinxiid} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
-			<if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
-			<if test="factory != null and factory != ''"> and factory = #{factory} </if>
-			<if test="unit != null and unit != ''"> and unit = #{unit} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
-			<if test="count != null and count != ''"> and count = #{count} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
-			<if test="style != null and style != ''"> and style = #{style} </if>
+			<if test="id != null and id != ''"> and t.id = #{id} </if>
+			<if test="tuihuoNum != null and tuihuoNum != ''"> and t.tuihuo_num = #{tuihuoNum} </if>
+			<if test="zhidanPeople != null and zhidanPeople != ''"> and t.zhidan_people = #{zhidanPeople} </if>
+			<if test="danjuDay != null and danjuDay != ''"> and t.danju_day = #{danjuDay} </if>
+			<if test="mfrsid != null and mfrsid != ''"> and t.mfrsid = #{mfrsid} </if>
+			<if test="mfrsname != null and mfrsname != ''"> and m.mfrsname = #{mfrsname} </if>
+			<if test="positionId != null and positionId != ''"> and t.position_id = #{positionId} </if>
+			<if test="beizhu != null and beizhu != ''"> and t.beizhu = #{beizhu} </if>
+			<if test="goodsxinxiid != null and goodsxinxiid != ''"> and t.goodsxinxiid = #{goodsxinxiid} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and t.goods_num = #{goodsNum} </if>
+			<if test="goodsName != null and goodsName != ''"> and t.goods_name = #{goodsName} </if>
+			<if test="factory != null and factory != ''"> and t.factory = #{factory} </if>
+			<if test="unit != null and unit != ''"> and t.unit = #{unit} </if>
+			<if test="goodsCount != null and goodsCount != ''"> and t.goods_count = #{goodsCount} </if>
+			<if test="count != null and count != ''"> and t.count = #{count} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and t.goods_code = #{goodsCode} </if>
+			<if test="style != null and style != ''"> and t.style = #{style} </if>
+			<if test="companyId != null and companyId != ''"> and p.company_id = #{companyId} </if>
 		</where>
-		group by tuihuo_num  order by id desc
+		group by t.tuihuo_num  order by t.id desc
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
@@ -667,23 +668,24 @@
 		left join c_mfrs m on t.mfrsid=m.mfrsnum
 		left join c_position p on t.position_id=t.position_id
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
-			<if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
-			<if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
-			<if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
-			<if test="mfrsname != null and mfrsname != ''"> and mfrsname = #{mfrsname} </if>
-			<if test="positionId != null and positionId != ''"> and position_id = #{positionId} </if>
-			<if test="beizhu != null and beizhu != ''"> and beizhu = #{beizhu} </if>
-			<if test="goodsxinxiid != null and goodsxinxiid != ''"> and goodsxinxiid = #{goodsxinxiid} </if>
-			<if test="goodsNum != null and goodsNum != ''"> and goods_num = #{goodsNum} </if>
-			<if test="goodsName != null and goodsName != ''"> and goods_name = #{goodsName} </if>
-			<if test="factory != null and factory != ''"> and factory = #{factory} </if>
-			<if test="unit != null and unit != ''"> and unit = #{unit} </if>
-			<if test="goodsCount != null and goodsCount != ''"> and goods_count = #{goodsCount} </if>
-			<if test="count != null and count != ''"> and count = #{count} </if>
-			<if test="goodsCode != null and goodsCode != ''"> and goods_code = #{goodsCode} </if>
-			<if test="style != null and style != ''"> and style = #{style} </if>
+			<if test="id != null and id != ''"> and t.id = #{id} </if>
+			<if test="tuihuoNum != null and tuihuoNum != ''"> and t.tuihuo_num = #{tuihuoNum} </if>
+			<if test="zhidanPeople != null and zhidanPeople != ''"> and t.zhidan_people = #{zhidanPeople} </if>
+			<if test="danjuDay != null and danjuDay != ''"> and t.danju_day = #{danjuDay} </if>
+			<if test="mfrsid != null and mfrsid != ''"> and t.mfrsid = #{mfrsid} </if>
+			<if test="mfrsname != null and mfrsname != ''"> and m.mfrsname = #{mfrsname} </if>
+			<if test="positionId != null and positionId != ''"> and t.position_id = #{positionId} </if>
+			<if test="beizhu != null and beizhu != ''"> and t.beizhu = #{beizhu} </if>
+			<if test="goodsxinxiid != null and goodsxinxiid != ''"> and t.goodsxinxiid = #{goodsxinxiid} </if>
+			<if test="goodsNum != null and goodsNum != ''"> and t.goods_num = #{goodsNum} </if>
+			<if test="goodsName != null and goodsName != ''"> and t.goods_name = #{goodsName} </if>
+			<if test="factory != null and factory != ''"> and t.factory = #{factory} </if>
+			<if test="unit != null and unit != ''"> and t.unit = #{unit} </if>
+			<if test="goodsCount != null and goodsCount != ''"> and t.goods_count = #{goodsCount} </if>
+			<if test="count != null and count != ''"> and t.count = #{count} </if>
+			<if test="goodsCode != null and goodsCode != ''"> and t.goods_code = #{goodsCode} </if>
+			<if test="style != null and style != ''"> and t.style = #{style} </if>
+			<if test="companyId != null and companyId != ''"> and p.company_id = #{companyId} </if>
 		</where>
 	</select>
 

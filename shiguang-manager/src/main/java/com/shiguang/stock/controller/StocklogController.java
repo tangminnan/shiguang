@@ -3,6 +3,7 @@ package com.shiguang.stock.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.shiguang.common.utils.ShiroUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -48,6 +49,11 @@ public class StocklogController {
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
+		String companyId = null;
+		if (null != ShiroUtils.getUser().getCompanyId()) {
+			companyId = ShiroUtils.getUser().getCompanyId();
+		}
+		query.put("companyId",companyId);
 		List<StocklogDO> stocklogList = stocklogService.list(query);
 		int total = stocklogService.count(query);
 		PageUtils pageUtils = new PageUtils(stocklogList, total);

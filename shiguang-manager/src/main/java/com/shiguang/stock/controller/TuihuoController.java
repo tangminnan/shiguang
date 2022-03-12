@@ -73,6 +73,11 @@ public class TuihuoController {
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
+		String companyId = null;
+		if (null != ShiroUtils.getUser().getCompanyId()) {
+			companyId = ShiroUtils.getUser().getCompanyId();
+		}
+		query.put("companyId",companyId);
 		List<TuihuoDO> tuihuoList = tuihuoService.orderList(query);
 		int total = tuihuoService.orderCount(query);
 		PageUtils pageUtils = new PageUtils(tuihuoList, total);

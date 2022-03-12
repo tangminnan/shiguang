@@ -9,7 +9,8 @@
 
 	<select id="list" resultType="com.shiguang.stock.domain.StocklogDO">
 		SELECT
-		log.*,s.mfrsname,inp.position_name as inposition_name,outp.position_name as outposition_name,goodsname
+		log.*,s.mfrsname,inp.position_name as inposition_name,outp.position_name as outposition_name,goodsname,
+		outp.company_id
 		FROM
 		stock_stocklog log
 		join c_mfrs s on log.mfrsnum=s.mfrsnum
@@ -35,6 +36,7 @@
 		  		  <if test="day != null and day != ''"> and log.day = #{day} </if>
 		  		  <if test="way != null and way != ''"> and log.way = #{way} </if>
 		  		  <if test="username != null and username != ''"> and log.username = #{username} </if>
+		  		  <if test="companyId != null and companyId != ''"> and outp.company_id = #{companyId} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -50,27 +52,41 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from stock_stocklog
-		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="danjunum != null and danjunum != ''"> and danjunum = #{danjunum} </if>
-		  		  <if test="num != null and num != ''"> and num = #{num} </if>
-		  		  <if test="code != null and code != ''"> and code = #{code} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="goodsid != null and goodsid != ''"> and goodsid = #{goodsid} </if>
-		  		  <if test="mfrsnum != null and mfrsnum != ''"> and mfrsnum = #{mfrsnum} </if>
-		  		  <if test="brandname != null and brandname != ''"> and brandname = #{brandname} </if>
-		  		  <if test="money != null and money != ''"> and money = #{money} </if>
-		  		  <if test="useday != null and useday != ''"> and useday = #{useday} </if>
-		  		  <if test="bacth != null and bacth != ''"> and bacth = #{bacth} </if>
-		  		  <if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
-		  		  <if test="counts != null and counts != ''"> and counts = #{counts} </if>
-		  		  <if test="inpositionId != null and inpositionId != ''"> and inposition_id = #{inpositionId} </if>
-		  		  <if test="outpositionId != null and outpositionId != ''"> and outposition_id = #{outpositionId} </if>
-		  		  <if test="day != null and day != ''"> and day = #{day} </if>
-		  		  <if test="way != null and way != ''"> and way = #{way} </if>
-		  		  <if test="username != null and username != ''"> and username = #{username} </if>
-		  		</where>
+		select count(*) FROM
+		stock_stocklog log
+		join c_mfrs s on log.mfrsnum=s.mfrsnum
+		join c_goods g on log.goodsid=g.goodsid
+		left join c_position inp on log.inposition_id=inp.position_id
+		left join c_position outp on log.outposition_id=outp.position_id
+		<where>
+			<if test="id != null and id != ''"> and log.id = #{id} </if>
+			<if test="danjunum != null and danjunum != ''"> and log.danjunum = #{danjunum} </if>
+			<if test="num != null and num != ''"> and log.num = #{num} </if>
+			<if test="code != null and code != ''"> and log.code = #{code} </if>
+			<if test="name != null and name != ''"> and log.name = #{name} </if>
+			<if test="goodsid != null and goodsid != ''"> and log.goodsid = #{goodsid} </if>
+			<if test="mfrsnum != null and mfrsnum != ''"> and log.mfrsnum = #{mfrsnum} </if>
+			<if test="brandname != null and brandname != ''"> and log.brandname = #{brandname} </if>
+			<if test="money != null and money != ''"> and log.money = #{money} </if>
+			<if test="useday != null and useday != ''"> and log.useday = #{useday} </if>
+			<if test="bacth != null and bacth != ''"> and log.bacth = #{bacth} </if>
+			<if test="zhidanPeople != null and zhidanPeople != ''"> and log.zhidan_people = #{zhidanPeople} </if>
+			<if test="counts != null and counts != ''"> and log.counts = #{counts} </if>
+			<if test="inpositionId != null and inpositionId != ''"> and log.inposition_id = #{inpositionId} </if>
+			<if test="outpositionId != null and outpositionId != ''"> and log.outposition_id = #{outpositionId} </if>
+			<if test="day != null and day != ''"> and log.day = #{day} </if>
+			<if test="way != null and way != ''"> and log.way = #{way} </if>
+			<if test="username != null and username != ''"> and log.username = #{username} </if>
+			<if test="companyId != null and companyId != ''"> and outp.company_id = #{companyId} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
 	</select>
 	 
 	<insert id="save" parameterType="com.shiguang.stock.domain.StocklogDO" useGeneratedKeys="true" keyProperty="id">
