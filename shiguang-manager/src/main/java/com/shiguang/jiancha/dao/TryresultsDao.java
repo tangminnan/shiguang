@@ -31,7 +31,7 @@ public interface TryresultsDao {
 
     int batchRemove(Long[] ids);
     //根据人查相对应的验光号医生时间等信息
-    List<TryresultsDO> listUser(String cardNumber);
+    List<TryresultsDO> listUser(Map<String, Object> map);
 
     //    查询医生
     List<TryresultsDO> listDoctor(Map<String, Object> map);

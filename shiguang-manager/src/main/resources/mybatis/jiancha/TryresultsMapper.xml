@@ -958,7 +958,11 @@
     `sphere_righttry`,`sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,`axial_lefttry`,`dva_righttry`,
     `dva_lefttry`,`nva_righttry`,`nva_lefttry`,`prism_righttry`,`prism_lefttry`,`jdr_try`,`jdl_try`,`height_righttry`,`height_lefttry`,
     `add_righttry`,`add_lefttry`,`yuan_rrty`,`yuan_lrty`,`near_righttry`,`near_lefttry`,`remarks`,`new_old`
-    from jc_tryresults where card_number = #{cardNumber}
+    from jc_tryresults
+        <where>
+            <if test="cardNumber != null and cardNumber != ''"> and card_number= #{cardNumber} </if>
+            <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+        </where>
     order by id desc
 
 </select>

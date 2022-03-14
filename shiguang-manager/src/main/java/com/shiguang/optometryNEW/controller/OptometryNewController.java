@@ -306,8 +306,8 @@ public class OptometryNewController {
     }
 
     //检查结论
-    @GetMapping("/jianchajielun/{cardNumber}")
-    String jianchajielun(@PathVariable("cardNumber") String cardNumber, Model model,HttpServletRequest request) {
+    @GetMapping("/jianchajielun/{cardNumber}/{ptometryNumber}")
+    String jianchajielun(@PathVariable("cardNumber") String cardNumber,@PathVariable("ptometryNumber") String ptometryNumber, Model model,HttpServletRequest request) {
 //         request.getParameter("cardNumber");
 
         //————会员信息——————
@@ -320,7 +320,10 @@ public class OptometryNewController {
         model.addAttribute("memberDO", memberDO);
         //————试戴镜结论————
         //根据人查相对应的验光号医生时间等信息
-        List<TryresultsDO> trylist = tryresultsService.listUser(cardNumber);
+        Map<String,Object> maps=new HashMap<>();
+        maps.put("cardNumber",cardNumber);
+        maps.put("ptometryNumber",ptometryNumber);
+        List<TryresultsDO> trylist = tryresultsService.listUser(maps);
         TryresultsDO tryresultsDO = new TryresultsDO();
         if (trylist.size() > 0) {
             for (int i = 0; i < trylist.size(); i++) {

@@ -26,9 +26,10 @@ public class TryresultsServiceImpl implements TryresultsService {
     }
 
     //根据人查相对应的验光号医生时间等信息
+
     @Override
-    public List<TryresultsDO> listUser(String cardNumber) {
-        return tryresultsDao.listUser(cardNumber);
+    public List<TryresultsDO> listUser(Map<String, Object> map) {
+        return tryresultsDao.listUser(map);
     }
 
     @Override

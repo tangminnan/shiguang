@@ -28,14 +28,16 @@ function saveTry() {
                 },
                 success: function (data) {
                     var cardNumber = document.getElementById('cardNumber').value;
+                    var ptometryNumber = document.getElementById('ptometryNumber').value;
                     // alert(cardNumber);
+                    // alert(ptometryNumber);
                     var toIndex = layer.open({
                         type: 2,
                         title: '检查结论',
                         maxmin: true,
                         shadeClose: false, // 点击遮罩关闭层
                         area: ['1000px', '520px'],
-                        content: prefix + '/jianchajielun/' + cardNumber  // iframe的url
+                        content: prefix + '/jianchajielun/' + cardNumber+'/'+ptometryNumber  // iframe的url
                     });
                     layer.full(toIndex);
 
@@ -64,14 +66,16 @@ function saveTry() {
                 //     parent.layer.alert(data.msg)
                 // }
                 var cardNumber = document.getElementById('cardNumber').value;
+                var ptometryNumber = document.getElementById('ptometryNumber').value;
                 // alert(cardNumber);
+                // alert(ptometryNumber);
                 var toIndex = layer.open({
                     type: 2,
                     title: '检查结论',
                     maxmin: true,
                     shadeClose: false, // 点击遮罩关闭层
                     area: ['1000px', '520px'],
-                    content: prefix + '/jianchajielun/' + cardNumber  // iframe的url
+                    content: prefix + '/jianchajielun/' + cardNumber+'/'+ptometryNumber  // iframe的url
                 });
                 layer.full(toIndex);
 
@@ -129,14 +133,16 @@ function updateTry() {
             //     parent.layer.alert(data.msg)
             // }
             var cardNumber = document.getElementById('cardNumber').value;
+            var ptometryNumber = document.getElementById('ptometryNumber').value;
             // alert(cardNumber);
+            // alert(ptometryNumber);
             var toIndex = layer.open({
                 type: 2,
                 title: '检查结论',
                 maxmin: true,
                 shadeClose: false, // 点击遮罩关闭层
                 area: ['1000px', '520px'],
-                content: prefix + '/jianchajielun/' + cardNumber  // iframe的url
+                content: prefix + '/jianchajielun/' + cardNumber+'/'+ptometryNumber  // iframe的url
             });
             layer.full(toIndex);
 

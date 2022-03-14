@@ -23,7 +23,7 @@ public interface TryresultsService {
     List<TryresultsDO> list(Map<String, Object> map);
 
     //根据人查相对应的验光号医生时间等信息
-    List<TryresultsDO> listUser(String cardNumber);
+    List<TryresultsDO> listUser(Map<String, Object> map);
 
     int count(Map<String, Object> map);
 
