@@ -76,7 +76,14 @@ public class OptometryNewController {
         map.put("companyId",companyId);
         List<TryresultsDO> listYanguang = tryresultsService.listYanguang(map);
         model.addAttribute("listYanguang",listYanguang);
-        return "optometryNew/optometryNew";
+        if (companyId==null){
+            companyId="0";
+        }
+        if (companyId.equals("1")){
+            return "optometryNew/optometryNews";
+        }else {
+            return "optometryNew/optometryNew";
+        }
     }
     //查询会员
     @ResponseBody

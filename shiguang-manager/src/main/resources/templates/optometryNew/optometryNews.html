@@ -29,21 +29,21 @@
             <td>
                 <input id="phone1" name="phone1" type="text"/>
             </td>
-            <!--<td>-->
-                <!--<select  id="optometryName" name="optometryName" style="width: 100%">-->
-                    <!--<option value="">&#45;&#45;请选择验光师&#45;&#45;</option>-->
-                    <!--<option th:each="ls:${listYanguang}"-->
-                            <!--th:text="${ls.name}"-->
-                            <!--th:value="${ls.name}"-->
-                    <!--&gt;</option>-->
-                <!--</select>-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<input id="dateStart" type="text"-->
-                       <!--placeholder="开始日期">～-->
-                <!--<input id="dateEnd" type="text"-->
-                       <!--placeholder="结束日期">-->
-            <!--</td>-->
+            <td>
+            <select  id="optometryName" name="optometryName" style="width: 100%">
+            <option value="">--请选择验光师--</option>
+            <option th:each="ls:${listYanguang}"
+            th:text="${ls.name}"
+            th:value="${ls.name}"
+            ></option>
+            </select>
+            </td>
+            <td>
+            <input id="dateStart" type="text"
+            placeholder="开始日期">～
+            <input id="dateEnd" type="text"
+            placeholder="结束日期">
+            </td>
         </tr>
     </table>
     <!--保存/清空-->
