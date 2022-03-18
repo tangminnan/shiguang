@@ -439,7 +439,7 @@
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
 		h.main_capacity,h.second_capacity,s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
 		from stock s
-		  join aa_hly h on s.goodsxinxiid=h.id
+		  join aa_hly h on s.goods_num	= h.produc_num
 		  join c_position po on s.position_id=po.position_id
 		<where>
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
@@ -479,7 +479,7 @@
 		t.produc_factorycolor,t.size,
 		s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
 		from stock s
-		 join aa_tyj t on s.goodsxinxiid=t.id
+		 join aa_tyj t on s.goods_num	= t.produc_num
 		 join c_position po on s.position_id=po.position_id
 		<where>
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
@@ -519,7 +519,7 @@
 		ol.degrees,o.size,o.produc_factorycolor,
 		s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
 		from stock s
-		  join aa_oldlens o on s.goodsxinxiid=o.id
+		  join aa_oldlens o on s.goods_num	= o.produc_num
 		left join a_olddegrees ol on o.old_id= o.old_id
 		 join c_position po on s.position_id=po.position_id
 		<where>
@@ -559,7 +559,7 @@
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
 		s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
 		from stock s
-		  join aa_hc h on s.goodsxinxiid=h.id
+		  join aa_hc h on s.goods_num	= h.produc_num
 		 join c_position po on s.position_id=po.position_id
 		<where>
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
@@ -598,7 +598,7 @@
 		select s.goods_num,s.goods_code,s.goods_name,s.factory,s.unit,
 		s.retail_price,po.position_name,s.goods_count,s.goodsxinxiid
 		from stock s
-		  join aa_hc h on s.goodsxinxiid=h.id
+		  join aa_shiguang sg on s.goods_num	= sg.produc_num
 		  join c_position po on s.position_id=po.position_id
 		<where>
 			<if test="mfrsid != null and mfrsid != ''"> and s.mfrsid = #{mfrsid} </if>
