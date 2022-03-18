@@ -1350,23 +1350,23 @@ public class StoreSalesController {
                 if ("0".equals(params.get("rightYuanYongQJ").toString().trim())){
                     maps.put("rightYuanYongQJ", "0.00");
                 } else {
-                    maps.put("rightYuanYongQJ", params.get("rightYuanYongQJ"));
+                    maps.put("rightYuanYongQJ", params.get("rightYuanYongQJ").toString().trim());
                 }
                 if ("0".equals(params.get("rightYuanYongZJ").toString().trim())){
                     maps.put("rightYuanYongZJ", "0.00");
                 } else {
-                    maps.put("rightYuanYongZJ", params.get("rightYuanYongZJ"));
+                    maps.put("rightYuanYongZJ", params.get("rightYuanYongZJ").toString().trim());
                 }
             } else if ("1".equals(params.get("jingpianType").toString())) {
                 if ("0".equals(params.get("leftYuanYongQJ").toString().trim())){
                     maps.put("leftYuanYongQJ", "0.00");
                 }else {
-                    maps.put("leftYuanYongQJ", params.get("leftYuanYongQJ"));
+                    maps.put("leftYuanYongQJ", params.get("leftYuanYongQJ").toString().trim());
                 }
                 if ("0".equals(params.get("leftYuanYongZJ").toString().trim())){
                     maps.put("leftYuanYongZJ", "0.00");
                 } else {
-                    maps.put("leftYuanYongZJ", params.get("leftYuanYongZJ"));
+                    maps.put("leftYuanYongZJ", params.get("leftYuanYongZJ").toString().trim());
                 }
             }
             if ("0".equals(dzType)) {
