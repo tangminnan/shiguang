@@ -103,6 +103,8 @@ public class MemberDO implements Serializable {
     private String payWay;
     //公众号
     private String openId;
+    //积分
+    private Integer integral;
 
     //验光师
     private String optometryName;
@@ -666,5 +668,13 @@ public class MemberDO implements Serializable {
 
     public void setOptometryName(String optometryName) {
         this.optometryName = optometryName;
+    }
+
+    public Integer getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(Integer integral) {
+        this.integral = integral;
     }
 }

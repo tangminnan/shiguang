@@ -34,6 +34,8 @@ public interface MemberDao {
 
     int update(MemberDO member);
 
+    int updateInteger(MemberDO member);
+
     int remove(Long id);
 
     int batchRemove(@Param("id") Long[] ids, @Param("status") Long status);

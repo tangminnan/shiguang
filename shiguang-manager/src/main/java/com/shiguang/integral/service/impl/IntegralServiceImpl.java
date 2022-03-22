@@ -51,5 +51,10 @@ public class IntegralServiceImpl implements IntegralService {
 	public int batchRemove(Long[] ids){
 		return integralDao.batchRemove(ids);
 	}
+
+	@Override
+	public IntegralDO getPoints(Map<String,Object> map){
+		return integralDao.getPoints(map);
+	}
 	
 }
