@@ -88,6 +88,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public int updateInteger(MemberDO member){
+        return memberDao.updateInteger(member);
+    }
+
+    @Override
     public int remove(Long id){
         return memberDao.remove(id);
     }

@@ -526,11 +526,20 @@
             <if test="source != null">`source` = #{source}, </if>
             <if test="integralPasd != null">`integral_pasd` = #{integralPasd}, </if>
             <if test="remark != null">`remark` = #{remark}, </if>
-            <if test="registerTime != null">`register_time` = #{registerTime}</if>
-            <if test="status != null">`status` = #{status}</if>
-            <if test="state != null">`state` = #{state}</if>
+            <if test="registerTime != null">`register_time` = #{registerTime},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="state != null">`state` = #{state},</if>
+            <if test="integral != null and integral != ''">`integral` = #{integral}</if>
         </set>
         where id = #{id}
+    </update>
+
+    <update id="updateInteger" parameterType="com.shiguang.member.domain.MemberDO">
+        update member
+        <set>
+            <if test="integral != null and integral != ''">`integral` = #{integral}</if>
+        </set>
+        where cardNumber = #{cardNumber}
     </update>
 
     <delete id="remove">

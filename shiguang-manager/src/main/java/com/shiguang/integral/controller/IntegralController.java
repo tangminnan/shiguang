@@ -129,6 +129,7 @@ public class IntegralController {
 	@RequiresPermissions("information:integral:add")
 	public R save(IntegralDO integral){
 		integral.setCreateTime(new Date());
+		integral.setCompanyId(ShiroUtils.getUser().getCompanyId());
 		if(integralService.save(integral)>0){
 			return R.ok();
 		}

@@ -51,7 +51,8 @@
 			`store_name`,
 			`card_type`,
 			`redeem_points`,
-			`create_time`
+			`create_time`,
+			`company_id`
 		)
 		values
 		(
@@ -60,7 +61,8 @@
 			#{storeName},
 			#{cardType},
 			#{redeemPoints},
-			#{createTime}
+			#{createTime},
+			#{companyId}
 		)
 	</insert>
 
@@ -76,6 +78,14 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="getPoints" resultType="com.shiguang.integral.domain.IntegralDO">
+        select * from integral
+        <where>
+            <if test="storeNum != null and storeNum != ''"> and FIND_IN_SET(#{storeNum},store_num )</if>
+            <if test="companyId != null and companyId != ''"> and companyId = #{companyId}</if>
+        </where>
+    </select>
 
     <delete id="remove">
 		delete from integral where id = #{value}

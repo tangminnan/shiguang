@@ -31,6 +31,8 @@ public interface MemberService {
 
     int update(MemberDO member);
 
+    int updateInteger(MemberDO member);
+
     int remove(Long id);
 
     int batchRemove(Long[] ids,Long status);
