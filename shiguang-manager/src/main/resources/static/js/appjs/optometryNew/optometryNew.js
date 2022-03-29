@@ -4,6 +4,7 @@ var prefix = "/information/optometryNew"
 // });
 
 function load() {
+    // alert("查询");
     $('#exampleTable')
         .bootstrapTable(
             {

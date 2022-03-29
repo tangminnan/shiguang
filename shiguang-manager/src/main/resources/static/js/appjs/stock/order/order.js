@@ -92,6 +92,10 @@ function load() {
                         field: 'danjuDay',
                         title: '制单日期'
                     },
+                    {
+                        field: 'beizhu',
+                        title: '备注'
+                    },
 
                     // {
                     //     field: '',
