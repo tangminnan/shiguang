@@ -26,6 +26,14 @@
 								<input name="brandName"  type="radio" value="0" checked/>商品类别
 								<input name="brandName"  type="radio" value="1" />按品牌
 							</div>
+							<div class="columns pull-right nopadding">
+								<select name="departNumber" id="departNumber" class="form-control" data-actions-box="false" data-size="5">
+									<option value="">请选择部门</option>
+									<option th:each="ls:${departmentDOList}"
+											th:text="${ls.departName}"
+											th:value="${ls.departNumber}"></option>
+								</select>
+							</div>
 							<div class="columns pull-right  nopadding">
 								<select class="form-control" name="goodsType" id="goodsType" >
 									<option value="">请选择商品类别</option>
