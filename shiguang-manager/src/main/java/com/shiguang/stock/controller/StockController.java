@@ -103,7 +103,13 @@ public class StockController {
         Query query = new Query(params);
         //———获取当前登录用户的公司id————
         if (null != ShiroUtils.getUser().getCompanyId()){
-            query.put("companyId",ShiroUtils.getUser().getCompanyId());
+            if(ShiroUtils.getUser().getCompanyId().equals("3")){
+                query.put("companyId","");
+            }else {
+                query.put("companyId",ShiroUtils.getUser().getCompanyId());
+            }
+
+
         }
        Object gdname=query.get("goodsid");
         if ("镜架".equals(gdname)){

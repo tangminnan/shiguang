@@ -19,6 +19,29 @@
                         <!--</button>-->
                     </div>
                     <br>
+                    <!--<div  class="columns pull-left col-md-4 nopadding">-->
+                        <!--<div class="col-sm-8 form-inline" data-toggle="distpicker">-->
+                            <!--<select id="provinceName" name="provinceName" class="form-control chosen-select" ></select>-->
+                            <!--<select id="cityName"  name="cityName" class="form-control chosen-select" ></select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<input id="provinceCode" name="provinceCode" class="form-control" type="hidden">-->
+                    <!--<input id="cityCode" name="cityCode" class="form-control" type="hidden">-->
+                    <!--<div class="columns pull-left col-md-2 nopadding">-->
+                        <!--<input id="name" type="text" class="form-control"-->
+                               <!--placeholder="公司名称">-->
+                    <!--</div>-->
+                    <!--<div class="columns pull-left col-md-2 nopadding" style="display: none">-->
+                        <!--<input id="type" type="text" class="form-control"-->
+                               <!--placeholder="公司类型">-->
+                    <!--</div>-->
+                    <!--<div class="columns pull-left col-md-2 nopadding">-->
+                        <!--<input id="telephone" type="text" class="form-control"-->
+                               <!--placeholder="公司电话">-->
+                    <!--</div>-->
+                    <!--<div class="columns pull-left">-->
+                        <!--<button class="btn btn-success" onclick="reLoad()">查询</button>-->
+                    <!--</div>-->
                     <div class="columns pull-left" style="display:flex;  margin-top:20px">
                         <div class="columns pull-right col-md-2 nopadding">
                             <input id="name" type="text" class="form-control"
@@ -27,13 +50,24 @@
                         <div class="columns pull-right col-md-2 nopadding">
                             <select name="province" id="province" class="form-control" data-actions-box="false"
                                     data-size="5">
-                                <option value="">所属区域</option>
+                                <option value="">所属省</option>
                                 <option th:each="ls:${provincesDOList}"
                                         th:text="${ls.province}"
                                         th:value="${ls.province}"></option>
                             </select>
                         </div>
-                        <div class="columns pull-right col-md-2 nopadding">
+                        <!--<div class="columns pull-right col-md-2 nopadding">-->
+                            <!--<select name="cityName" id="cityName" class="form-control" data-actions-box="false"-->
+                                    <!--data-size="5">-->
+                                <!--<option value="">所属市</option>-->
+                                <!--<option th:each="ls:${citiesDOList}"-->
+                                        <!--th:text="${ls.city}"-->
+                                        <!--th:value="${ls.city}"></option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+
+
+                        <div class="columns pull-right col-md-2 nopadding" style="display: none">
                             <input id="type" type="text" class="form-control"
                                    placeholder="公司类型">
                         </div>

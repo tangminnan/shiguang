@@ -59,6 +59,10 @@ public class CompanyController {
 		//省
 		List<ProvincesDO> provincesDOList = provincesService.list(map);
 		model.addAttribute("provincesDOList", provincesDOList);
+		//市
+		List<CitiesDO> citiesDOList = citiesService.list(map);
+		model.addAttribute("citiesDOList", citiesDOList);
+
 	    return "mfrs/company/company";
 	}
 
