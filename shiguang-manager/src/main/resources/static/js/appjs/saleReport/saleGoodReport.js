@@ -110,6 +110,7 @@ function reLoad() {
     if (brandName == undefined || brandName =='0'){
         brandName = "";
 	}
+    var departNumber = $("#departNumber").val();
 //     var _LoadingHtml = '页面加载中，请等待...';
 //
 // //呈现loading效果
@@ -128,7 +129,7 @@ function reLoad() {
 //
 //         }
 //     }
-    window.open("/information/saleGoods/salegoodsList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&goodsType="+goodsType+"&brandName="+brandName);
+    window.open("/information/saleGoods/salegoodsList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&goodsType="+goodsType+"&brandName="+brandName+"&departNumber="+departNumber);
 
 }
 function add() {

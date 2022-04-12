@@ -1,5 +1,8 @@
 package com.shiguang.report.controller;
 
+import com.shiguang.baseinfomation.domain.DepartmentDO;
+import com.shiguang.baseinfomation.service.DepartmentService;
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.report.service.SaleReportService;
 import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -21,15 +24,22 @@ import java.util.*;
 public class SaleGoodsController {
     @Autowired
     private SaleReportService saleReportService;
+    @Autowired
+    private DepartmentService departmentService;
 
     @GetMapping()
     @RequiresPermissions("information:saleGoods:saleGoods")
-    String SaleGoods(){
+    String SaleGoods(Model model){
+        Map<String, Object> map = new HashMap<>();
+        map.put("departType","销售门店");
+        map.put("state",1);
+        List<DepartmentDO> departmentDOList = departmentService.list(map);
+        model.addAttribute("departmentDOList",departmentDOList);
         return "saleReport/saleGoodReport";
     }
 
     @GetMapping("/salegoodsList")
-    public String salegoodsList(String settleDateStart,String settleDateEnd,String goodsType,String brandName,Model model) {
+    public String salegoodsList(String settleDateStart,String settleDateEnd,String goodsType,String brandName,String departNumber,Model model) {
         Map<String,Object> query = new HashMap<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -46,6 +56,9 @@ public class SaleGoodsController {
         } else {
             query.put("settleDateEnd",simpleDateFormat.format(date));
             model.addAttribute("settleDateEnd",simpleDateFormat.format(date));
+        }
+        if (!"".equals(departNumber)){
+            query.put("departNumber",departNumber);
         }
         List<SalesDO> salesDOList = saleReportService.findGoodsList(query);
         int jjcount = 0;
