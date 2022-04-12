@@ -27,6 +27,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/mfrs/brand")
 public class BrandController {
+
+
     @Autowired
     private BrandService brandService;
     //制造商
