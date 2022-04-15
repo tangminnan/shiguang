@@ -4,11 +4,11 @@
 <mapper namespace="com.shiguang.line.dao.OptometryLineDao">
 
     <select id="get" resultType="com.shiguang.line.domain.YgLineDO">
-		select `id`,`sex`,`member_name`,`call_status`,`consult_room`,`line_time` from ygline where id = #{value}
+		select `id`,`sex`,`company_id`,`member_name`,`call_status`,`consult_room`,`line_time` from ygline where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.line.domain.YgLineDO">
-        select `id`,`sex`,`member_name`,`call_status`,`consult_room`,`line_time` from ygline
+        select `id`,`sex`,`company_id`,`member_name`,`call_status`,`consult_room`,`line_time` from ygline
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
@@ -63,11 +63,12 @@
     </select>
 
     <select id="lineList" resultType="com.shiguang.line.domain.YgLineDO">
-        select `id`,`sex`,`member_name`,`call_status`,`consult_room`,`line_time` from ygline
+        select `id`,`sex`,`company_id`,`member_name`,`call_status`,`consult_room`,`line_time` from ygline
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="companyId != null and companyId != ''"> and company_id = #{companyId} </if>
             <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
             <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
@@ -87,11 +88,12 @@
     </select>
 
     <select id="linesList" resultType="com.shiguang.line.domain.YgLineDO">
-        select `id`,`sex`,`member_name`,`call_status`,`consult_room`,`line_time` from ygline
+        select `id`,`sex`,`company_id`,`member_name`,`call_status`,`consult_room`,`line_time` from ygline
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="companyId != null and companyId != ''"> and company_id = #{companyId} </if>
             <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
             <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>

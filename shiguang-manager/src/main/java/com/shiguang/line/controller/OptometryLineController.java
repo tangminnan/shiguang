@@ -118,11 +118,14 @@ public class OptometryLineController {
      */
     @GetMapping( "/callList")
     @ResponseBody
-    public Map<String,Object> callList(){
+    public Map<String,Object> callList(String type){
         Map<String,Object> resultMap = new HashMap<>();
         Map<String,Object> map = new HashMap<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         map.put("lineTime",simpleDateFormat.format(new Date()));
+        if("jinan".equals(type)){
+            map.put("companyId",'3');
+        }
         List<YgLineDO> lineDOList = optometryLineService.linesList(map);
         resultMap.put("lineDOList",lineDOList);
         List<YgLineMemberDO> lineMemberDOList = new ArrayList<>();

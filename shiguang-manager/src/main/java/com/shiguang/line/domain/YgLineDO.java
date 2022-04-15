@@ -8,6 +8,7 @@ public class YgLineDO implements Serializable {
 
     //
     private Long id;
+    private String companyId;
     private String memberNumber;
     //
     private String callStatus;
@@ -35,6 +36,14 @@ public class YgLineDO implements Serializable {
      */
     public Long getId() {
         return id;
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
     }
 
     public void setMemberNumber(String memberNumber){this.memberNumber = memberNumber;}

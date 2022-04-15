@@ -519,9 +519,15 @@ public class SettlementController {
 			StringBuilder sb = new StringBuilder();
 			if (null != color && color.length>0){
 				for (String n:color){
-					sb.append(n.replace("'", "\\'")).append(",");
+					if (null != n){
+						sb.append(n.replace("'", "\\'")).append(",");
+					}
+
 				}
-				sb.deleteCharAt(sb.length() - 1);
+				if (sb.length()>0){
+					sb.deleteCharAt(sb.length() - 1);
+				}
+
 			}
 			settlementDO.setColorSize(sb.toString());
 		}

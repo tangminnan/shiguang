@@ -2532,9 +2532,21 @@
     });
     var cfType="";
     function getData(obj){
+        var now = new Date();
+        var year = now.getFullYear(); //得到年份
+        var month = now.getMonth();//得到月份
+        var date = now.getDate();//得到日期
+        month = month + 1;
+        if (month < 10) month = "0" + month;
+        if (date < 10) date = "0" + date;
+        var time = "";
+        time = year + "-" + month + "-" + date;
         var ss = JSON.stringify(obj);
         var data = JSON.parse(ss);
         console.log(data);
+        if (time != data.ygTime){
+            return layer.alert("该处方非当日处方，请重新选择")
+		}
         cfType = data.chufangType;
         $("#optometryName").val(data.yangsName)
         $("#recipelTypes").val(data.chufang);

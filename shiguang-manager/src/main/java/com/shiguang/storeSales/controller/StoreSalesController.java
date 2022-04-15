@@ -221,13 +221,16 @@ public class StoreSalesController {
         List<Conclusion> conclusionList = salesService.conclusionList(map2);
         model.addAttribute("conclusionList", conclusionList);
         SimpleDateFormat sdfs = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdfss = new SimpleDateFormat("yyyy-MM-dd");
         if (null != conclusionList) {
             for (Conclusion c : conclusionList) {
                 //String ygtime = sdfs.format(c.getCreateTime());
                 if (null != c.getCreateTime()){
                     c.setYanguangTime(sdfs.format(c.getCreateTime()));
+                    c.setYgTime(sdfss.format(c.getCreateTime()));
                 } else {
                     c.setYanguangTime(sdfs.format(new Date()));
+                    c.setYgTime(sdfss.format(new Date()));
                 }
                 if (null == c.getYangsName() || "".equals(c.getYangsName())){
                     c.setYangsName(c.getYanguangName());
@@ -981,6 +984,7 @@ public class StoreSalesController {
         workRecoedDO.setType("销售");
         workRecoedDO.setDateTime(new Date());
         logStatusService.saveRecord(workRecoedDO);
+        salesDO.setCompanyId(ShiroUtils.getUser().getCompanyId());
         if (salesService.save(salesDO) > 0) {
             //this.editsetle(salesDO,model);
             return R.ok();
