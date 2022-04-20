@@ -1,5 +1,7 @@
 package com.shiguang.storeCard.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -83,6 +85,10 @@ public class CardController {
 	@PostMapping("/save")
 	@RequiresPermissions("information:card:add")
 	public R save(CardDO card){
+		SimpleDateFormat formats = new SimpleDateFormat("yyyyMMddHHmmss");
+		if(null == card.getCardNumber() || "".equals(card.getCardNumber())){
+			card.setCardNumber(formats.format(new Date()));
+		}
 		if(cardService.save(card)>0){
 			return R.ok();
 		}

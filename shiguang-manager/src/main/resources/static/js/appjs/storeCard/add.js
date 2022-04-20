@@ -36,14 +36,26 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+            cardMoney : {
 				required : true
-			}
+			},
+            memberName : {
+                required : true
+            },
+            password : {
+                required : true
+            }
 		},
 		messages : {
-			name : {
-				required : icon + "请输入姓名"
-			}
+            cardMoney : {
+				required : icon + "请输入储值金额"
+			},
+            memberName : {
+                required : icon + "请选择会员姓名"
+            },
+            password : {
+                required : icon + "请输入密码"
+            }
 		}
 	})
 }

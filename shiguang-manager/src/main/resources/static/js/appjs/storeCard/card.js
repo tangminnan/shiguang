@@ -56,10 +56,6 @@ function load() {
 									title : '储值金额' 
 								},
 																{
-									field : 'memberNumber', 
-									title : '会员卡号' 
-								},
-																{
 									field : 'createName', 
 									title : '建卡人'
 								},
@@ -69,7 +65,7 @@ function load() {
 								},
 																{
 									field : 'remark', 
-									title : '' 
+									title : '备注'
 								},
 																{
 									title : '操作',
