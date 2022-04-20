@@ -510,7 +510,7 @@ public class StockServiceImpl implements StockService {
                             StockDO jingjias=  stockDao.jingjias(stockDO);
                             String goodsNum=jingjias.getProducNum();
                             String goodsCode=jingjias.getProducCode();
-                            String goodsName=jingjias.getViewGoodName()+"-型号:"+jingjias.getFactory()+"-色号:"+jingjias.getProducFactorycolor()+"-标价:"+jingjias.getRetailPrice();
+                            String goodsName=jingjias.getViewGoodName()+"-型号:"+jingjias.getProducFactory()+"-色号:"+jingjias.getProducFactorycolor()+"-标价:"+jingjias.getRetailPrice();
                             String mfrsid=jingjias.getMfrsid();
                             String brandname=jingjias.getBrandname();
                             String retailPrice=jingjias.getRetailPrice();
