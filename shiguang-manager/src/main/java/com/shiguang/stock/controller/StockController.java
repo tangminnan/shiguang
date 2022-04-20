@@ -1798,6 +1798,7 @@ public class StockController {
             code = "data:image/png;base64," + code;
             orderDO1.setQRCode(code);
         }
+
         return "/stock/stock/codeJingjia";
     }
     /**
@@ -1815,7 +1816,18 @@ public class StockController {
             code = "data:image/png;base64," + code;
             orderDO1.setQRCode(code);
         }
-        return "/stock/stock/code";
+        //———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if (companyId==null){
+            companyId="";
+        }
+        if (companyId.equals(3)||companyId.equals("3")){
+            return "/stock/stock/codeJN";
+        }else {
+            return "/stock/stock/code";
+
+        }
+
     }
 
     /**
@@ -1855,7 +1867,17 @@ public class StockController {
             code = "data:image/png;base64," + code;
             orderDO1.setQRCode(code);
         }
-        return "/stock/stock/codeOne";
+        //———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if (companyId==null){
+            companyId="";
+        }
+        if (companyId.equals(3)||companyId.equals("3")){
+            return "/stock/stock/codeOneJN";
+        }else {
+            return "/stock/stock/codeOne";
+
+        }
     }
     //打印订单
     @GetMapping("/dayinOrder")

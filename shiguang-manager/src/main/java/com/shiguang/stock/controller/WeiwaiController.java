@@ -869,7 +869,19 @@ public class WeiwaiController {
             code = "data:image/png;base64," + code;
             weiwaiDO.setQRCode(code);
         }
-        return "/stock/weiwai/code";
+
+        //———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if (companyId==null){
+            companyId="";
+        }
+        if (companyId.equals(3)||companyId.equals("3")){
+            return "/stock/weiwai/codeJN";
+        }else {
+            return "/stock/weiwai/code";
+
+        }
+
     }
 
     /**
@@ -887,7 +899,17 @@ public class WeiwaiController {
             code = "data:image/png;base64," + code;
             weiwaiDO.setQRCode(code);
         }
-        return "/stock/weiwai/codeOne";
+        //———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if (companyId==null){
+            companyId="";
+        }
+        if (companyId.equals(3)||companyId.equals("3")){
+            return "/stock/weiwai/codeOneJN";
+        }else {
+            return "/stock/weiwai/codeOne";
+
+        }
     }
 
     //打印委外框镜配镜单
