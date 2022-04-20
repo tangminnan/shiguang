@@ -2545,7 +2545,7 @@
         var data = JSON.parse(ss);
         console.log(data);
         if (time != data.ygTime){
-            return layer.alert("该处方非当日处方，请重新选择")
+             layer.alert("该处方非当日处方，请重新选择")
 		}
         cfType = data.chufangType;
         $("#optometryName").val(data.yangsName)
