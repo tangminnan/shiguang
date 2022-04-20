@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.storeCard.dao.CardDao">
+
+	<select id="get" resultType="com.shiguang.storeCard.domain.CardDO">
+		select `id`,`card_number`,`member_name`,`card_money`,`member_number`,`password`,`create_name`,`create_time`,`remark`,`status`,`state` from stored_card where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.storeCard.domain.CardDO">
+		select `id`,`card_number`,`member_name`,`card_money`,`member_number`,`password`,`create_name`,`create_time`,`remark`,`status`,`state` from stored_card
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+		  		  <if test="cardMoney != null and cardMoney != ''"> and card_money = #{cardMoney} </if>
+		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+		  		  <if test="password != null and password != ''"> and password = #{password} </if>
+		  		  <if test="createName != null and createName != ''"> and create_name = #{createName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="state != null and state != ''"> and state = #{state} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from stored_card
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+		  		  <if test="cardMoney != null and cardMoney != ''"> and card_money = #{cardMoney} </if>
+		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+		  		  <if test="password != null and password != ''"> and password = #{password} </if>
+		  		  <if test="createName != null and createName != ''"> and create_name = #{createName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="state != null and state != ''"> and state = #{state} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.storeCard.domain.CardDO" useGeneratedKeys="true" keyProperty="id">
+		insert into stored_card
+		(
+			`card_number`, 
+			`card_money`, 
+			`member_number`,
+			`member_name`,
+			`password`, 
+			`create_name`, 
+			`create_time`, 
+			`remark`, 
+			`status`, 
+			`state`
+		)
+		values
+		(
+			#{cardNumber}, 
+			#{cardMoney}, 
+			#{memberNumber},
+			#{memberName},
+			#{password}, 
+			#{createName}, 
+			#{createTime}, 
+			#{remark}, 
+			#{status}, 
+			#{state}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.storeCard.domain.CardDO">
+		update stored_card 
+		<set>
+			<if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
+			<if test="cardMoney != null">`card_money` = #{cardMoney}, </if>
+			<if test="memberNumber != null">`member_number` = #{memberNumber}, </if>
+			<if test="password != null">`password` = #{password}, </if>
+			<if test="createName != null">`create_name` = #{createName}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="state != null">`state` = #{state}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from stored_card where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from stored_card where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
