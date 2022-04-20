@@ -123,6 +123,7 @@
 	<insert id="save" parameterType="com.shiguang.storeSales.domain.SalesDO" useGeneratedKeys="true" keyProperty="id">
 		insert into store_sales
 		(
+		    `company_id`,
 		    `ptometry_number`,
 			`member_number`, 
 			`sale_name`,
@@ -177,6 +178,7 @@
 		)
 		values
 		(
+		    #{companyId},
 		    #{ptometryNumber},
 			#{memberNumber}, 
 			#{saleName},

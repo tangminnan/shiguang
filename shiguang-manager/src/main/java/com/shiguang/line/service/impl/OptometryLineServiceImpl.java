@@ -1,10 +1,7 @@
 package com.shiguang.line.service.impl;
 
 import com.shiguang.line.dao.OptometryLineDao;
-import com.shiguang.line.domain.YgLineDO;
-import com.shiguang.line.domain.YgLineMemberDO;
-import com.shiguang.line.domain.YgLineMemberoldDO;
-import com.shiguang.line.domain.YgLineoldDO;
+import com.shiguang.line.domain.*;
 import com.shiguang.line.service.OptometryLineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,6 +73,65 @@ public class OptometryLineServiceImpl implements OptometryLineService {
         return optometryLineDao.remove(id);
     }
 
+    @Override
+    public YgLineJinanDO getJinan(Long id) {
+        return optometryLineDao.getJinan(id);
+    }
+
+    @Override
+    public List<YgLineJinanDO> listJinan(Map<String, Object> map) {
+        return optometryLineDao.listJinan(map);
+    }
+
+    @Override
+    public int countJinan(Map<String, Object> map) {
+        return optometryLineDao.countJinan(map);
+    }
+
+    @Override
+    public int updateJinan(YgLineJinanDO line) {
+        return optometryLineDao.updateJinan(line);
+    }
+
+    @Override
+    public int updateJinanStatus(YgLineJinanDO line) {
+        return optometryLineDao.updateJinanStatus(line);
+    }
+
+    @Override
+    public List<YgLineJinanDO> lineJinanList(Map<String, Object> map) {
+        return optometryLineDao.lineJinanList(map);
+    }
+
+    @Override
+    public List<YgLineJinanDO> linesJinanList(Map<String, Object> map) {
+        return optometryLineDao.linesJinanList(map);
+    }
+
+    @Override
+    public List<YgLineMemberJinanDO> linememberJinanList(Map<String, Object> map) {
+        return optometryLineDao.linememberJinanList(map);
+    }
+
+    @Override
+    public List<YgLineMemberJinanDO> listMemberJinan(Map<String, Object> map) {
+        return optometryLineDao.listMemberJinan(map);
+    }
+
+    @Override
+    public int saveLineMemberJinan(YgLineMemberJinanDO ygLineMemberDO) {
+        return optometryLineDao.saveLineMemberJinan(ygLineMemberDO);
+    }
+
+    @Override
+    public int removeMemberjinan(Long id) {
+        return optometryLineDao.removeMember(id);
+    }
+
+    @Override
+    public int removejinan(Long id) {
+        return optometryLineDao.remove(id);
+    }
 
     @Override
     public List<YgLineoldDO> listold(Map<String, Object> map) {

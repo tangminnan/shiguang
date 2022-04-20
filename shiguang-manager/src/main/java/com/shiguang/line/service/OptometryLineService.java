@@ -1,9 +1,6 @@
 package com.shiguang.line.service;
 
-import com.shiguang.line.domain.YgLineDO;
-import com.shiguang.line.domain.YgLineMemberDO;
-import com.shiguang.line.domain.YgLineMemberoldDO;
-import com.shiguang.line.domain.YgLineoldDO;
+import com.shiguang.line.domain.*;
 
 import java.util.List;
 import java.util.Map;
@@ -33,6 +30,29 @@ public interface OptometryLineService {
 
     int remove(Long id);
 
+    YgLineJinanDO getJinan(Long id);
+
+    List<YgLineJinanDO> listJinan(Map<String, Object> map);
+
+    int countJinan(Map<String, Object> map);
+
+    int updateJinan(YgLineJinanDO line);
+
+    int updateJinanStatus(YgLineJinanDO ygLineDO);
+
+    List<YgLineJinanDO> lineJinanList(Map<String,Object> map);
+
+    List<YgLineJinanDO> linesJinanList(Map<String,Object> map);
+
+    List<YgLineMemberJinanDO> linememberJinanList(Map<String,Object> map);
+
+    List<YgLineMemberJinanDO> listMemberJinan(Map<String,Object> map);
+
+    int saveLineMemberJinan(YgLineMemberJinanDO ygLineMemberDO);
+
+    int removeMemberjinan(Long id);
+
+    int removejinan(Long id);
 
     List<YgLineoldDO> listold(Map<String, Object> map);
 

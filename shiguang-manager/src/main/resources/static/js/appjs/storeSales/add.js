@@ -19,7 +19,7 @@ function save() {
     	if (chufangid == '2' && newOld == ""){
     		return layer.alert("请选择院区")
 		}
-    	if (amountMoney == ""){
+    	if (amountMoney == "" || amountMoney == 0){
     		return layer.alert("请先下单")
 		}
 		if (saleName == ''){

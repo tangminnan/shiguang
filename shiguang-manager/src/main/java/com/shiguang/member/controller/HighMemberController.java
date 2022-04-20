@@ -89,18 +89,18 @@ public class HighMemberController {
         }
         if (null != params.get("ageStart") && !"".equals(params.get("ageStart"))){
             query.put("agestart",Long.parseLong(params.get("ageStart").toString().trim()));
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("ageEnd")&& !"".equals(params.get("ageEnd"))){
             query.put("ageend",Long.parseLong(params.get("ageEnd").toString().trim()));
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("name") && !"".equals(params.get("name"))){
             query.put("name",String.valueOf(query.get("name")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         List<MemberDO> memberList = memberService.heightlist(query);
         int total = memberService.heightcount(query);

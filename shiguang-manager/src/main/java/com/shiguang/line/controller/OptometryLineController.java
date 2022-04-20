@@ -49,6 +49,7 @@ public class OptometryLineController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         query.put("lineTime",simpleDateFormat.format(new Date()));
         query.put("storey","4");
+        query.put("companyId",ShiroUtils.getUser().getCompanyId());
         List<YgLineDO> lineList = optometryLineService.list(query);
         if (null != lineList && lineList.size() > 0){
             for (YgLineDO lineDO : lineList){
@@ -124,6 +125,66 @@ public class OptometryLineController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         map.put("lineTime",simpleDateFormat.format(new Date()));
         List<YgLineDO> lineDOList = optometryLineService.linesList(map);
+        //排队的
+        resultMap.put("lineDOList",lineDOList);
+        List<YgLineMemberDO> lineMemberDOList = new ArrayList<>();
+        List<YgLineMemberDO> lineMemberDOS = optometryLineService.listMember(map);
+        YgLineMemberDO lineMemberDO = new YgLineMemberDO();
+        if (null != lineMemberDOS && lineMemberDOS.size() > 0){
+            lineMemberDO.setMemberName(lineMemberDOS.get(0).getMemberName());
+            lineMemberDO.setSex(lineMemberDOS.get(0).getSex());
+            lineMemberDO.setConsultRoom(lineMemberDOS.get(0).getConsultRoom());
+            lineMemberDO.setId(lineMemberDOS.get(0).getId());
+            lineMemberDOList.add(lineMemberDO);
+            //被叫号的
+            resultMap.put("lineMemberDOS",lineMemberDOList);
+            resultMap.put("content","请"+lineMemberDOS.get(0).getMemberName()+"到"+lineMemberDOS.get(0).getConsultRoom()+"做综合验光检查");
+        } else {
+            resultMap.put("lineMemberDOS",lineMemberDOList);
+            resultMap.put("content","");
+        }
+        List<Map<String,Object>> roomList = new ArrayList<>();
+        List<YgLineDO> lineMemberDOList1 = optometryLineService.lineList(map);
+        if (null != lineMemberDOList1 && lineMemberDOList1.size() > 0){
+            for (YgLineDO lineMemberDOstr : lineMemberDOList1){
+                if (!"".equals(lineMemberDOstr.getConsultRoom())){
+                    Map<String,Object> roomMap = new HashMap<>();
+                    roomMap.put("id",lineMemberDOstr.getId());
+                    roomMap.put("memberName",lineMemberDOstr.getMemberName());
+                    roomMap.put("sex",lineMemberDOstr.getSex());
+                    roomMap.put("consultRoom",lineMemberDOstr.getConsultRoom());
+                    roomList.add(roomMap);
+                }
+            }
+        }
+        //正在就诊的
+        resultMap.put("roomList",roomList);
+        if (null != lineMemberDOS && lineMemberDOS.size() > 0){
+//				LineDO lineDO = new LineDO();
+//				lineDO.setMemberNumber(lineMemberDO.getMemberNumber());
+//				lineDO.setLineDate(simpleDateFormat.format(new Date()));
+//				lineService.removeMember(lineDO);
+            optometryLineService.removeMember(lineMemberDOS.get(0).getId());
+        }
+        return resultMap;
+    }
+
+
+    /**
+     * 济南中心排队级叫号列表
+     * @return
+     */
+    @GetMapping( "/calljinanList")
+    @ResponseBody
+    public Map<String,Object> calljinanList(String type){
+        Map<String,Object> resultMap = new HashMap<>();
+        Map<String,Object> map = new HashMap<>();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        map.put("lineTime",simpleDateFormat.format(new Date()));
+        if("jinan".equals(type)){
+            map.put("companyId",'3');
+        }
+        List<YgLineDO> lineDOList = optometryLineService.linesList(map);
         resultMap.put("lineDOList",lineDOList);
         List<YgLineMemberDO> lineMemberDOList = new ArrayList<>();
         List<YgLineMemberDO> lineMemberDOS = optometryLineService.listMember(map);
@@ -135,7 +196,7 @@ public class OptometryLineController {
             lineMemberDO.setId(lineMemberDOS.get(0).getId());
             lineMemberDOList.add(lineMemberDO);
             resultMap.put("lineMemberDOS",lineMemberDOList);
-            resultMap.put("content","请"+lineMemberDOS.get(0).getMemberName()+"到"+lineMemberDOS.get(0).getConsultRoom()+"做综合验光检查");
+            resultMap.put("content","请"+lineMemberDOS.get(0).getMemberName()+"到"+lineMemberDOS.get(0).getConsultRoom());
         } else {
             resultMap.put("lineMemberDOS",lineMemberDOList);
             resultMap.put("content","");
@@ -164,6 +225,7 @@ public class OptometryLineController {
         }
         return resultMap;
     }
+
 
     /**
      * 删除
