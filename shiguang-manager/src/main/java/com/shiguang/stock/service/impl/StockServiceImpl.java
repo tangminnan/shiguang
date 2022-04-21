@@ -638,7 +638,7 @@ public class StockServiceImpl implements StockService {
                             StockDO peijians=  stockDao.peijians(stockDO);
                             String goodsNum=peijians.getProducNum();
                             String goodsCode=peijians.getProducCode();
-                            String goodsName=peijians.getViewGoodName()+"-型号:"+peijians.getFactory()+"-标价:"+peijians.getRetailPrice();
+                            String goodsName=peijians.getViewGoodName()+"-型号:"+peijians.getProducFactory()+"-标价:"+peijians.getRetailPrice();
                             String mfrsid=peijians.getMfrsid();
                             String brandname=peijians.getBrandname();
                             String retailPrice=peijians.getRetailPrice();
