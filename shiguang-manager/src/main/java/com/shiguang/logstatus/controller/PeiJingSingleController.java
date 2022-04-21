@@ -63,27 +63,27 @@ public class PeiJingSingleController {
         }
         if (null != params.get("name") && !"".equals(params.get("name"))){
             query.put("name",String.valueOf(query.get("name")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("saleNumber") && !"".equals(params.get("saleNumber"))){
             query.put("saleNumber",String.valueOf(query.get("saleNumber")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("phone1") && !"".equals(params.get("phone1"))){
             query.put("phone1",String.valueOf(query.get("phone1")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("mfrsName") && !"".equals(params.get("mfrsName"))){
             query.put("mfrsNum",String.valueOf(query.get("mfrsNum")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         } else {
             query.put("mfrsNum","");
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         List<SalesDO> salesDOList = statusService.findSalePeijingAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

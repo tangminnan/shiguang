@@ -1282,9 +1282,9 @@
                     if ('' == rows){
                         $("#saleDiscounts").val('');
                         return layer.alert("该员工没有打折权限")
-					} else if ('001' != rows){
-                        $("#saleDiscounts").val('');
-                        return layer.alert("该员工没有打折权限")
+					// } else if ('001' != rows){
+                    //     $("#saleDiscounts").val('');
+                    //     return layer.alert("该员工没有打折权限")
 					} else {
                         var saleDz = (parseFloat(price) * parseFloat(saleCount)).toFixed(2);
                         zkMoney = (parseFloat(price) - parseFloat(saleDz)).toFixed(2);
@@ -2066,7 +2066,7 @@
 		if (leftYuanYongZJ == ''){
             leftYuanYongZJ = 0;
 		}
-        if (rightYuanYongQJ =='' || rightYuanYongZJ == '' || leftYuanYongQJ == '' || leftYuanYongZJ == ''){
+        if (rightYuanYongQJ ==''  || leftYuanYongQJ == '' ){
             return layer.alert("请选择球镜度数");
         }
         // alert(rightYuanYongQJ == '');

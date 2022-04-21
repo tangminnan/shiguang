@@ -8,6 +8,7 @@ import java.util.Map;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.storeCard.domain.CardDO;
 import com.shiguang.storeCard.service.CardService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -85,10 +86,12 @@ public class CardController {
 	@PostMapping("/save")
 	@RequiresPermissions("information:card:add")
 	public R save(CardDO card){
-		SimpleDateFormat formats = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat formats = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 		if(null == card.getCardNumber() || "".equals(card.getCardNumber())){
-			card.setCardNumber(formats.format(new Date()));
+			card.setCardNumber(card.getMemberNumber());
 		}
+		card.setCreateName(ShiroUtils.getUser().getName());
+		card.setCreateTime(formats.format(new Date()));
 		if(cardService.save(card)>0){
 			return R.ok();
 		}

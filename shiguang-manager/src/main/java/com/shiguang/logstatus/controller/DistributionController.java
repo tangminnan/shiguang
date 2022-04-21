@@ -55,13 +55,13 @@ public class DistributionController {
         }
         if (null != params.get("memberName") && !"".equals(params.get("memberName"))){
             query.put("memberName",String.valueOf(query.get("memberName")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("saleNumber") && !"".equals(params.get("saleNumber"))){
             query.put("saleNumber",String.valueOf(query.get("saleNumber")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("phone") && !"".equals(params.get("phone"))){
             query.put("phone",String.valueOf(query.get("phone")).trim());

@@ -182,13 +182,16 @@ public class StoreSalesController {
         }
         model.addAttribute("optometryDO", optometryDO);
         Map<String, Object> map = new HashMap<>();
-        map.put("roleType", 1);
+        map.put("roleTypes1", 2);
+        map.put("roleTypes2", 7);
         if (null != ShiroUtils.getUser().getCompanyId()){
             map.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
-        List<UserDO> userDOList = userService.getRoleList(map);
+        List<UserDO> userDOList = userService.getRoleNumList(map);
         model.addAttribute("userDOList", userDOList);
-        map.put("roleType", 2);
+        map.put("roleType1", 1);
+        map.put("roleType2", 2);
+        map.put("roleType3", 6);
         List<UserDO> yanguangDOList = userService.getRoleList(map);
         model.addAttribute("yanguangDOList", yanguangDOList);
         List<ProcessAskDO> proList = optometryService.processlist(map);
@@ -959,6 +962,7 @@ public class StoreSalesController {
                 companyId = ShiroUtils.getUser().getCompanyId();
                 Map<String,Object> map = new HashMap<>();
                 map.put("companyId", companyId);
+                map.put("departNumber",ShiroUtils.getUser().getStoreNum());
                 positionDO = stockService.findPosition(map);
             }
             for (int e=0;e<goodsDescribe.length;e++){

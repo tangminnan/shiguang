@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="Maven: com.huaweicloud:esdk-obs-java:3.20.6.1">
     <CLASSES>
-<<<<<<< HEAD
       <root url="jar://$MAVEN_REPOSITORY$/com/huaweicloud/esdk-obs-java/3.20.6.1/esdk-obs-java-3.20.6.1.jar!/" />
     </CLASSES>
     <JAVADOC>
@@ -9,15 +8,6 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/com/huaweicloud/esdk-obs-java/3.20.6.1/esdk-obs-java-3.20.6.1-sources.jar!/" />
-=======
-      <root url="jar://D:/maven/repository/com/huaweicloud/esdk-obs-java/3.20.6.1/esdk-obs-java-3.20.6.1.jar!/" />
-    </CLASSES>
-    <JAVADOC>
-      <root url="jar://D:/maven/repository/com/huaweicloud/esdk-obs-java/3.20.6.1/esdk-obs-java-3.20.6.1-javadoc.jar!/" />
-    </JAVADOC>
-    <SOURCES>
-      <root url="jar://D:/maven/repository/com/huaweicloud/esdk-obs-java/3.20.6.1/esdk-obs-java-3.20.6.1-sources.jar!/" />
->>>>>>> 343515d7654d2092a5e67af5c9755e31ccab19a0
     </SOURCES>
   </library>
 </component>

@@ -16,6 +16,8 @@ import java.util.Map;
 public interface CardService {
 	
 	CardDO get(Long id);
+
+	CardDO getMemberNum(String memberNumber);
 	
 	List<CardDO> list(Map<String, Object> map);
 	

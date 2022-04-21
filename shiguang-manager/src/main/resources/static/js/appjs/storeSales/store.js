@@ -683,7 +683,13 @@ function getYinxing(){
             leftYuanYongZJ = $("#leftVstZJ").val();
         }
     }
-    if (rightYuanYongQJ =='' || rightYuanYongZJ == '' || leftYuanYongQJ == '' || leftYuanYongZJ == ''){
+    if (rightYuanYongZJ == ''){
+        rightYuanYongZJ = 0;
+    }
+    if (leftYuanYongZJ == ''){
+        leftYuanYongZJ = 0;
+    }
+    if (rightYuanYongQJ ==''  || leftYuanYongQJ == ''){
         return layer.alert("请选择球镜度数");
     }
     var str = 0;

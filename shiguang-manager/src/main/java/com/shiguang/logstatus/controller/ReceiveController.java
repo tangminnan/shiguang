@@ -52,18 +52,18 @@ public class ReceiveController {
         }
         if (null != params.get("memberName") && !"".equals(params.get("memberName"))){
             query.put("memberName",String.valueOf(query.get("memberName")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("saleNumber") && !"".equals(params.get("saleNumber"))){
             query.put("saleNumber",String.valueOf(query.get("saleNumber")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("phone") && !"".equals(params.get("phone"))){
             query.put("phone",String.valueOf(query.get("phone")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

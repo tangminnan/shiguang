@@ -21,6 +21,8 @@ public interface UserDao {
 	List<UserDO> getbyphone(String phone);
 
 	List<UserDO> getRoleList(Map<String, Object> map);
+
+	List<UserDO> getRoleNumList(Map<String, Object> map);
 	
 	List<UserDO> list(Map<String,Object> map);
 	

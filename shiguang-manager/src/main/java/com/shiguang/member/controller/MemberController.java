@@ -418,6 +418,12 @@ public class MemberController {
                 } else if ("4".equals(paymodel[i])){
                     model.addAttribute("paymodel","现金");
                     payModels.append("现金:"+moneyPay[i]+",");
+                }  else if ("5".equals(paymodel[i])){
+                    model.addAttribute("paymodel","银联卡");
+                    payModels.append("银联卡:"+moneyPay[i]+",");
+                } else if ("6".equals(paymodel[i])){
+                    model.addAttribute("paymodel","储值卡");
+                    payModels.append("储值卡:"+moneyPay[i]+",");
                 }
             }
             model.addAttribute("payModels",payModels.deleteCharAt(payModels.length()-1));
@@ -848,7 +854,7 @@ public class MemberController {
         String cardNumber = member.getCardNumber();
         Map<String, Object> map = new HashMap<>();
         if (!"".equals(cardNumber)){
-            map.put("cardNumber",cardNumber);
+            map.put("cardsNumber",cardNumber);
             List<MemberDO> list = memberService.list(map);
             if (list.size() > 0){
                 return R.error("会员卡号已存在");

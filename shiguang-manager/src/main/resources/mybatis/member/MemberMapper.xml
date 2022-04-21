@@ -24,6 +24,7 @@
             <if test="memberOption != null and memberOption != ''"> and m.member_option = #{memberOption} </if>
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
             <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+            <if test="cardsNumber != null and cardsNumber != ''"> and m.card_number = #{cardsNumber} </if>
             <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
             <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>

@@ -64,6 +64,10 @@ public class SettlementDO implements Serializable {
 	private String drawBackWay;
 	//部门名称
 	private String departmentName;
+	//储值卡
+	private String chuzhiNumber;
+	//储值卡密码
+	private String chuzhiPasd;
 
 
 	/**
@@ -237,5 +241,21 @@ public class SettlementDO implements Serializable {
 
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
+	}
+
+	public String getChuzhiNumber() {
+		return chuzhiNumber;
+	}
+
+	public void setChuzhiNumber(String chuzhiNumber) {
+		this.chuzhiNumber = chuzhiNumber;
+	}
+
+	public String getChuzhiPasd() {
+		return chuzhiPasd;
+	}
+
+	public void setChuzhiPasd(String chuzhiPasd) {
+		this.chuzhiPasd = chuzhiPasd;
 	}
 }

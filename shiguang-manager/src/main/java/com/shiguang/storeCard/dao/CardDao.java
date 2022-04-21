@@ -17,6 +17,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface CardDao {
 
 	CardDO get(Long id);
+
+	CardDO getMemberNum(String memberNumber);
 	
 	List<CardDO> list(Map<String, Object> map);
 	

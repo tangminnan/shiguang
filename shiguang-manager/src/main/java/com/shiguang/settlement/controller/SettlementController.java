@@ -31,6 +31,8 @@ import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
+import com.shiguang.storeCard.domain.CardDO;
+import com.shiguang.storeCard.service.CardService;
 import com.shiguang.storeSales.domain.Conclusion;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
@@ -96,6 +98,8 @@ public class SettlementController {
 	private ProducaService producaService;
 	@Autowired
 	private IntegralService integralService;
+	@Autowired
+	private CardService cardService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:settlement:settlement")
@@ -118,18 +122,18 @@ public class SettlementController {
 		}
 		if (null != params.get("cardNumber") && !"".equals(params.get("cardNumber"))){
 			query.put("cardNumber",String.valueOf(query.get("cardNumber")).trim());
-			query.put("offset",0);
-			query.put("limit",10);
+//			query.put("offset",0);
+//			query.put("limit",10);
 		}
 		if (null != params.get("name") && !"".equals(params.get("name"))){
 			query.put("name",String.valueOf(query.get("name")).trim());
-			query.put("offset",0);
-			query.put("limit",10);
+//			query.put("offset",0);
+//			query.put("limit",10);
 		}
 		if (null != params.get("phone1") && !"".equals(params.get("phone1"))){
 			query.put("phone1",String.valueOf(query.get("phone1")).trim());
-			query.put("offset",0);
-			query.put("limit",10);
+//			query.put("offset",0);
+//			query.put("limit",10);
 		}
 		List<JieKuanMoneyDO> memberDOList = memberService.payList(query);
 		if (null != memberDOList && memberDOList.size() > 0){
@@ -439,7 +443,29 @@ public class SettlementController {
 		settlement.setSaleName(ShiroUtils.getUser().getName());
 		settlement.setSaleAcount(ShiroUtils.getUser().getUsername());
 		settlement.setSettleDate(new Date());
+		if ("6".equals(settlement.getPayModel().substring(0,settlement.getPayModel().length()-1))){
+			String cardNumber = settlement.getChuzhiNumber();
+			CardDO cardDO = cardService.getMemberNum(cardNumber);
+			if (null != cardDO){
+				if (cardDO.getPassword().equals(settlement.getChuzhiPasd())){
+					if (Double.valueOf(cardDO.getCardMoney()) > Double.valueOf(settlement.getModelMoney().substring(0,settlement.getModelMoney().length()-1))){
+						double money = Double.valueOf(cardDO.getCardMoney()) - Double.valueOf(settlement.getModelMoney().substring(0,settlement.getModelMoney().length()-1));
+						cardDO.setCardMoney(money+"");
+						cardService.update(cardDO);
+						if(settlementService.save(settlement)>0){
+							return R.ok();
+						}
+					} else {
+						return R.error("余额不足");
+					}
 
+				} else {
+					return R.error("密码输入错误");
+				}
+			} else{
+				return R.error("该用户没有绑定储值卡");
+			}
+		}
 		if(settlementService.save(settlement)>0){
 			return R.ok();
 		}

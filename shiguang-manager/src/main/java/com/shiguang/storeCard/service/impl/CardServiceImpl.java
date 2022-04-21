@@ -21,6 +21,11 @@ public class CardServiceImpl implements CardService {
 	public CardDO get(Long id){
 		return cardDao.get(id);
 	}
+
+	@Override
+	public CardDO getMemberNum(String memberNumber){
+		return cardDao.getMemberNum(memberNumber);
+	}
 	
 	@Override
 	public List<CardDO> list(Map<String, Object> map){

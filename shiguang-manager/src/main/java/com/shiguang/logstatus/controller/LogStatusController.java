@@ -111,18 +111,18 @@ public class LogStatusController {
         //query.put("storeDescribe","镜片");
         if (null != params.get("memberName") && !"".equals(params.get("memberName"))){
             query.put("memberName",String.valueOf(query.get("memberName")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("saleNumber") && !"".equals(params.get("saleNumber"))){
             query.put("saleNumber",String.valueOf(query.get("saleNumber")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("phone") && !"".equals(params.get("phone"))){
             query.put("phone",String.valueOf(query.get("phone")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -252,6 +252,12 @@ public class LogStatusController {
                 } else if ("4".equals(paymodel[i])){
                     model.addAttribute("paymodel","现金");
                     payModels.append("现金:"+moneyPay[i]+",");
+                } else if ("5".equals(paymodel[i])){
+                    model.addAttribute("paymodel","银联卡");
+                    payModels.append("银联卡:"+moneyPay[i]+",");
+                } else if ("6".equals(paymodel[i])){
+                    model.addAttribute("paymodel","储值卡");
+                    payModels.append("储值卡:"+moneyPay[i]+",");
                 }
             }
             model.addAttribute("payModels",payModels.deleteCharAt(payModels.length()-1));
