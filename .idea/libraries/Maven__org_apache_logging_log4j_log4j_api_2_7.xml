@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="Maven: org.apache.logging.log4j:log4j-api:2.7">
     <CLASSES>
+<<<<<<< HEAD
       <root url="jar://$MAVEN_REPOSITORY$/org/apache/logging/log4j/log4j-api/2.7/log4j-api-2.7.jar!/" />
     </CLASSES>
     <JAVADOC>
@@ -8,6 +9,15 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/apache/logging/log4j/log4j-api/2.7/log4j-api-2.7-sources.jar!/" />
+=======
+      <root url="jar://D:/maven/repository/org/apache/logging/log4j/log4j-api/2.7/log4j-api-2.7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/maven/repository/org/apache/logging/log4j/log4j-api/2.7/log4j-api-2.7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/maven/repository/org/apache/logging/log4j/log4j-api/2.7/log4j-api-2.7-sources.jar!/" />
+>>>>>>> 343515d7654d2092a5e67af5c9755e31ccab19a0
     </SOURCES>
   </library>
 </component>

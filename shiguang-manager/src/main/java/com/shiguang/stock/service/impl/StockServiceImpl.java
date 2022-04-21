@@ -492,7 +492,11 @@ public class StockServiceImpl implements StockService {
                         return R.error("Excel中有部分基本信息数据为空，请检查好重新导入");
                 }
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-                //———生成单据编号————
+
+
+
+
+                         //———生成单据编号————
                 Long uuid = GuuidUtil.getUUID();
                 String danjuNumber = "PIN" + uuid.toString();
                 for (int rowNum = 2; rowNum <= sheet.getLastRowNum(); rowNum++) {
@@ -510,7 +514,7 @@ public class StockServiceImpl implements StockService {
                             StockDO jingjias=  stockDao.jingjias(stockDO);
                             String goodsNum=jingjias.getProducNum();
                             String goodsCode=jingjias.getProducCode();
-                            String goodsName=jingjias.getViewGoodName()+"-型号:"+jingjias.getFactory()+"-色号:"+jingjias.getProducFactorycolor()+"-标价:"+jingjias.getRetailPrice();
+                            String goodsName=jingjias.getViewGoodName()+"-型号:"+jingjias.getProducFactory()+"-色号:"+jingjias.getProducFactorycolor()+"-标价:"+jingjias.getRetailPrice();
                             String mfrsid=jingjias.getMfrsid();
                             String brandname=jingjias.getBrandname();
                             String retailPrice=jingjias.getRetailPrice();

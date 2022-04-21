@@ -1798,8 +1798,18 @@ public class StockController {
             code = "data:image/png;base64," + code;
             orderDO1.setQRCode(code);
         }
+//———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if (companyId==null){
+            companyId="";
+        }
+        if (companyId.equals(3)||companyId.equals("3")){
+            return "/stock/stock/codeJingjiaJN";
+        }else {
+            return "/stock/stock/codeJingjia";
 
-        return "/stock/stock/codeJingjia";
+        }
+
     }
     /**
      * 浏览器打印二维码
@@ -1850,7 +1860,17 @@ public class StockController {
             code = "data:image/png;base64," + code;
             orderDO1.setQRCode(code);
         }
-        return "/stock/stock/codeJingjiaOne";
+        //———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if (companyId==null){
+            companyId="";
+        }
+        if (companyId.equals(3)||companyId.equals("3")){
+            return "/stock/stock/codeJingjiaOneJN";
+        }else {
+            return "/stock/stock/codeJingjiaOne";
+        }
+
     }
     /**
      * 浏览器打印二维码一个
