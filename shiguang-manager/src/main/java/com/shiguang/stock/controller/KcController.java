@@ -93,13 +93,13 @@ public class KcController {
         Query query = new Query(params);
         //———获取当前登录用户的公司id————
         if (null != ShiroUtils.getUser().getCompanyId()){
-            if(ShiroUtils.getUser().getCompanyId().equals("3")){
-                query.put("companyId","");
-            }else {
+//            if(ShiroUtils.getUser().getCompanyId().equals("3")){
+//                query.put("companyId","");
+//            }else {
                 query.put("companyId",ShiroUtils.getUser().getCompanyId());
-            }
+//            }
         }
-//        query.put("status", "0");
+
         // 钱转换
         if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
             retailPrice = Double.parseDouble(params.get("retailPrice").toString());
@@ -196,14 +196,11 @@ public class KcController {
         map.put("xsstate",xsstate);
         map.put("classtype",classtype);
 
-//        String companyId=ShiroUtils.getUser().getCompanyId();
-//        map.put("companyId",companyId);
-
-        if(ShiroUtils.getUser().getCompanyId().equals("3")){
-            map.put("companyId","");
-        }else {
+//        if(ShiroUtils.getUser().getCompanyId().equals("3")){
+//            map.put("companyId","");
+//        }else {
             map.put("companyId",ShiroUtils.getUser().getCompanyId());
-        }
+//        }
         int countalls=stockService.countall(map);
         model.addAttribute("countalls",countalls);
         return countalls;
