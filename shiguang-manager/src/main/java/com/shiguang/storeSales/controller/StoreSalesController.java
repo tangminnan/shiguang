@@ -1990,6 +1990,7 @@ public class StoreSalesController {
                 if (null != departNumber){
                     Map<String, Object> map = new HashMap<>();
                     map.put("companyId", ShiroUtils.getUser().getCompanyId());
+                    map.put("departNumber",departNumber);
                     PositionDO positionDO = stockService.findPosition(map);
                     if (null != positionDO) {
                         positionId = positionDO.getPositionId();

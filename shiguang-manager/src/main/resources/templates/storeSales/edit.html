@@ -2060,6 +2060,12 @@
                 leftYuanYongZJ = $("#leftVstZJ").val();
             }
 		}
+		if (rightYuanYongZJ == ''){
+            rightYuanYongZJ = 0;
+		}
+		if (leftYuanYongZJ == ''){
+            leftYuanYongZJ = 0;
+		}
         if (rightYuanYongQJ =='' || rightYuanYongZJ == '' || leftYuanYongQJ == '' || leftYuanYongZJ == ''){
             return layer.alert("请选择球镜度数");
         }
