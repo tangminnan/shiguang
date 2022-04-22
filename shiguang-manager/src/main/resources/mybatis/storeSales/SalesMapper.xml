@@ -298,6 +298,7 @@
 			<if test="phone !=null and phone != ''">and m.`phone_1` like concat('%', #{phone},'%')</if>
 			<if test="eyeType != null and eyeType != ''"> and s.eye_type = #{eyeType} </if>
 			<if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
+			<if test="companyId !=null and companyId != ''">and m.company_id=#{companyId}</if>
 			<if test="amountMoney != null and amountMoney != ''"> and s.amount_money = #{amountMoney} </if>
 			<if test="mirrorWay != null and mirrorWay != ''"> and s.mirror_way = #{mirrorWay} </if>
 			<if test="mirrorTime != null and mirrorTime != ''"> and s.mirror_time = #{mirrorTime} </if>
@@ -342,6 +343,7 @@
 			<if test="phone !=null and phone != ''">and m.`phone_1` like concat('%', #{phone},'%')</if>
 			<if test="eyeType != null and eyeType != ''"> and s.eye_type = #{eyeType} </if>
 			<if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
+			<if test="companyId !=null and companyId != ''">and m.company_id=#{companyId}</if>
 			<if test="amountMoney != null and amountMoney != ''"> and s.amount_money = #{amountMoney} </if>
 			<if test="mirrorWay != null and mirrorWay != ''"> and s.mirror_way = #{mirrorWay} </if>
 			<if test="mirrorTime != null and mirrorTime != ''"> and s.mirror_time = #{mirrorTime} </if>

@@ -258,6 +258,18 @@ public class LogStatusController {
                 } else if ("6".equals(paymodel[i])){
                     model.addAttribute("paymodel","储值卡");
                     payModels.append("储值卡:"+moneyPay[i]+",");
+                } else if ("7".equals(paymodel[i])){
+                    model.addAttribute("paymodel",".");
+                    payModels.append("储值卡:"+moneyPay[i]+",");
+                } else if ("8".equals(paymodel[i])){
+                    model.addAttribute("paymodel","..");
+                    payModels.append("储值卡:"+moneyPay[i]+",");
+                } else if ("9".equals(paymodel[i])){
+                    model.addAttribute("paymodel","积分");
+                    payModels.append("积分:"+moneyPay[i]+",");
+                } else if ("10".equals(paymodel[i])){
+                    model.addAttribute("paymodel","微信平台");
+                    payModels.append("微信平台:"+moneyPay[i]+",");
                 }
             }
             model.addAttribute("payModels",payModels.deleteCharAt(payModels.length()-1));
@@ -718,9 +730,14 @@ public class LogStatusController {
             if (!"镜架".equals(storeDescribe[a]) && !"自架".equals(storeDescribe[a]) && !"自片".equals(storeDescribe[a]) ){
                 if (!"镜片".equals(storeDescribe[a]) && !"隐形".equals(storeDescribe[a])){
                     maps.put("companyId", companyId);
+                    maps.put("departNumber",ShiroUtils.getUser().getStoreNum());
                     positionDO = stockService.findPosition(maps);
                 } else {
                     maps.put("companyId", companyId);
+                    maps.put("departNumber",ShiroUtils.getUser().getStoreNum());
+                    if ("3".equals(companyId)){
+                        maps.put("positionName","施尔明合格仓");
+                    }
                     positionDO = stockService.findHegePosition(maps);
                 }
                 StockDO stockDOs = new StockDO();
@@ -831,6 +848,7 @@ public class LogStatusController {
             }
             Map<String,Object> maps = new HashMap<>();
             maps.put("companyId", companyId);
+            maps.put("departNumber",ShiroUtils.getUser().getStoreNum());
             PositionDO positionDO = stockService.findHegePosition(maps);
             for (int a=0;a<storeDescribe.length;a++){
                 if (!"镜架".equals(storeDescribe[a]) && !"自架".equals(storeDescribe[a]) && !"自片".equals(storeDescribe[a]) ){

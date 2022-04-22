@@ -424,6 +424,18 @@ public class MemberController {
                 } else if ("6".equals(paymodel[i])){
                     model.addAttribute("paymodel","储值卡");
                     payModels.append("储值卡:"+moneyPay[i]+",");
+                } else if ("7".equals(paymodel[i])){
+                    model.addAttribute("paymodel",".");
+                    payModels.append(".:"+moneyPay[i]+",");
+                } else if ("8".equals(paymodel[i])){
+                    model.addAttribute("paymodel","..");
+                    payModels.append("..:"+moneyPay[i]+",");
+                } else if ("9".equals(paymodel[i])){
+                    model.addAttribute("paymodel","积分");
+                    payModels.append("积分:"+moneyPay[i]+",");
+                } else if ("10".equals(paymodel[i])){
+                    model.addAttribute("paymodel","微信平台");
+                    payModels.append("微信平台:"+moneyPay[i]+",");
                 }
             }
             model.addAttribute("payModels",payModels.deleteCharAt(payModels.length()-1));
@@ -914,6 +926,25 @@ public class MemberController {
             return R.ok();
         }
         return R.error();
+    }
+
+    /**
+     * 排队
+     */
+    @PostMapping( "/jinanline/{id}")
+    @RequiresPermissions("information:member:line")
+    public String jinanline(@PathVariable("id") Long id){
+//        MemberDO memberDO = memberService.get(id);
+//        LineDO lineDO = new LineDO();
+//        lineDO.setMemberNumber(memberDO.getCardNumber());
+//        lineDO.setMemberName(memberDO.getName());
+//        lineDO.setSex(memberDO.getSex());
+//        lineDO.setCallStatus("0");
+//        lineDO.setLineTime(new Date());
+//        if(lineService.save(lineDO)>0){
+//            return R.ok();
+//        }
+        return "member/distributeLine";
     }
 
     /**

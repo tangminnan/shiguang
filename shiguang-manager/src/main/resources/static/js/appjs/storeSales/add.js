@@ -16,12 +16,12 @@ function save() {
         btn : [ '确定', '取消' ]
         // 按钮
     }, function() {
-    	if (chufangid == '2' && newOld == ""){
-    		return layer.alert("请选择院区")
-		}
-    	if (amountMoney == "" || amountMoney == 0){
-    		return layer.alert("请先下单")
-		}
+    	// if (chufangid == '2' && newOld == ""){
+    	// 	return layer.alert("请选择院区")
+		// }
+    	// if (amountMoney == "" || amountMoney == 0){
+    	// 	return layer.alert("请先下单")
+		// }
 		if (saleName == ''){
     		return layer.alert("请选择销售人员")
 		}

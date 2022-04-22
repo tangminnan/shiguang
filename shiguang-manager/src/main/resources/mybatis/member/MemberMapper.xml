@@ -30,7 +30,7 @@
             <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
             <if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
             <if test="age != null and age != ''"> and m.age = #{age} </if>
-            <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+            <if test="phone1 != null and phone1 != ''"> and (m.phone_1 = #{phone1} or m.phone_2 = #{phone1} or m.phone_3 = #{phone1} ) </if>
             <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
             <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
             <if test="provinceCode != null and provinceCode != ''"> and m.province_code = #{provinceCode} </if>
@@ -90,6 +90,8 @@
         m.`depart_number` as departNumber,
         m.`age` as age,
         m.`phone_1` as phone1,
+        m.`phone_2` as phone2,
+        m.`phone_3` as phone3,
         '配镜单' as saleForm,
         m.state as state,
         m.`status` as `status`
@@ -108,6 +110,8 @@
         m.`depart_number` as departNumber,
         m.`age` as age,
         m.`phone_1` as phone1,
+        m.`phone_2` as phone2,
+        m.`phone_3` as phone3,
         '检查单' as saleForm,
         m.state as state,
         m.`status` as `status`
@@ -121,7 +125,7 @@
         <if test="cardNumber != null and cardNumber != ''"> and cardNumber like concat('%', #{cardNumber},'%') </if>
         <if test="sex != null and sex != ''"> and sex = #{sex} </if>
         <if test="age != null and age != ''"> and age = #{age} </if>
-        <if test="phone1 != null and phone1 != ''"> and phone1 = #{phone1} </if>
+        <if test="phone1 != null and phone1 != ''"> and (phone1 = #{phone1} or phone2 = #{phone1} or phone3 = #{phone1} ) </if>
         and `status` = 0
         and state = 1
 <!--        <if test="isSale != null and isSale != ''"> and c.is_sale = #{isSale} </if>-->
@@ -155,6 +159,8 @@
         m.`depart_number` as departNumber,
         m.`age` as age,
         m.`phone_1` as phone1,
+        m.`phone_2` as phone2,
+        m.`phone_3` as phone3,
         '配镜单' as saleForm,
         m.state as state,
         m.`status` as `status`
@@ -173,6 +179,8 @@
         m.`depart_number` as departNumber,
         m.`age` as age,
         m.`phone_1` as phone1,
+        m.`phone_2` as phone2,
+        m.`phone_3` as phone3,
         '检查单' as saleForm,
         m.state as state,
         m.`status` as `status`
@@ -186,7 +194,7 @@
             <if test="cardNumber != null and cardNumber != ''"> and cardNumber like concat('%', #{cardNumber},'%') </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="age != null and age != ''"> and age = #{age} </if>
-            <if test="phone1 != null and phone1 != ''"> and phone1 = #{phone1} </if>
+            <if test="phone1 != null and phone1 != ''"> and (phone1 = #{phone1} or phone2 = #{phone1} or phone3 = #{phone1} ) </if>
             and `status` = 0
             and state = 1
             <!--        <if test="isSale != null and isSale != ''"> and c.is_sale = #{isSale} </if>-->
@@ -220,7 +228,7 @@
             <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
             <if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
             <if test="age != null and age != ''"> and m.age = #{age} </if>
-            <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+            <if test="phone1 != null and phone1 != ''"> (m.phone_1 = #{phone1} or m.phone_2 = #{phone1} or m.phone_3 = #{phone1} ) </if>
             <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
             <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
             <if test="state != null and state != ''"> and m.state = #{state} </if>

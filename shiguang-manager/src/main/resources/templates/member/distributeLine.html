@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>诊室</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
+<body>
+	<!--保存-->
+<form class="form-horizontal m-t" id="signupForm" style="margin-top: 20px;text-align: center;">
+	<div class="form-group">
+	<label class="col-sm-3 control-label">分配方式：</label>
+	<div class="col-sm-8">
+	<label class="radio-inline"> <input type="radio"
+	name="memberOption" value="0" checked onchange="getMember(this.value)"/> 手动分配
+	</label>
+	<label class="radio-inline"> <input type="radio"
+	name="memberOption" value="1" onchange="getMember(this.value)"/> 自动分配
+	</label>
+	</div>
+	</div>
+	<div class="form-group" id="ygs" style="display: block;">
+		<label class="col-sm-3 control-label">验光室：</label>
+		<select name="identityType" id="identityType">
+			<option value="验光室一">验光室一</option>
+			<option value="验光室二">验光室二</option>
+			<option value="验光室三">验光室三</option>
+			<option value="验光室四">验光室四</option>
+			<option value="验光室五">验光室五</option>
+			<option value="验光室六">验光室六</option>
+			<option value="验光室七">验光室七</option>
+			<option value="验光室八">验光室八</option>
+			<option value="验光室九">验光室九</option>
+			<option value="验光室十">验光室十</option>
+		</select>
+	</div>
+</form>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    function getMember(obj){
+        alert(obj);
+    }
+</script>
+</body>
+</html>

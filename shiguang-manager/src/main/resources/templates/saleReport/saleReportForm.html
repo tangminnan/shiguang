@@ -38,16 +38,17 @@
 				<td>销售门店</td>
 				<td>实际收入合计</td>
 				<td>现金</td>
-				<td>储蓄卡</td>
+				<td>储值卡</td>
 				<td>医院收费处</td>
 				<td>一卡通</td>
-				<td>银行卡小计</td>
+				<td>银联卡</td>
 				<td>其他小计</td>
 				<td>微信平台</td>
-				<td> - </td>
+				<td> . </td>
 				<td>支付宝</td>
 				<td>微信</td>
-				<td> - </td>
+				<td> .. </td>
+				<td> 积分 </td>
 			</tr>
 			<!--<tr>-->
 				<!--<td ><a href="#" onclick="reportDefinte()">哈尔滨中心店</a></td>-->
@@ -109,16 +110,17 @@
                 html = "<tr><td><a href='#'  onclick='reportDefinte()'>"+list[i].departmentName+"</a></td>";
                 html += "<td>"+list[i].shihsouTotal+"</td>"
 				html += "<td>"+list[i].xianjinMoney+"</td>"
-				html += "<td>0.00</td>";
+				html += "<td>"+list[i].chuzhikamoney+"</td>";
                 html += "<td>"+list[i].yyshoufeichuMoney+"</td>";
                 html += "<td>"+list[i].yikatongoney+"</td>"
-				html += "<td>0.00</td>"
+				html += "<td>"+list[i].yinliankamoney+"</td>"
 				html += "<td>"+list[i].qtsubTotal+"</td>"
 				html += "<td>0.00</td>";
-                html += "<td>0.00</td>";
+                html += "<td>"+list[i].dianmoney+"</td>";
                 html += "<td>"+list[i].zfbMoney+"</td>"
 				html += "<td>"+list[i].weixinMoney+"</td>"
-				html += "<td>0.00</td></tr>"
+				html += "<td>"+list[i].diandianmoney+"</td>"
+                html += "<td>"+list[i].jifenmoney+"</td></tr>"
 				$("#reportId").append(html);
 			}
         });

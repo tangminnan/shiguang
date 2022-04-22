@@ -56,10 +56,8 @@ public class PeiJingSingleController {
     public PageUtils peijinglist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        if (null != ShiroUtils.getUser().getCompanyId()){
-            if (!"3".equals(ShiroUtils.getUser().getCompanyId())){
-                query.put("companyid",ShiroUtils.getUser().getCompanyId());
-            }
+        if (!"".equals(ShiroUtils.getUser().getCompanyId()) && null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyid",ShiroUtils.getUser().getCompanyId());
         }
         if (null != params.get("name") && !"".equals(params.get("name"))){
             query.put("name",String.valueOf(query.get("name")).trim());

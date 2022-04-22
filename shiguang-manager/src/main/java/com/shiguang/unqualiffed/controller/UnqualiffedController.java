@@ -199,6 +199,7 @@ public class UnqualiffedController {
 		//SalesDO salesDO = salesService.getSaleNumber(saleNumber[0]);
 		Map<String,Object> map = new HashMap<>();
 		map.put("companyId",ShiroUtils.getUser().getCompanyId());
+		map.put("departNumber",ShiroUtils.getUser().getStoreNum());
 		PositionDO positionDO = stockService.findBuHegePosition(map);
 		String[] goodsCode = unqualiffed.getGoodsCode().split(",");
 		String[] count = unqualiffed.getCount().split(",");

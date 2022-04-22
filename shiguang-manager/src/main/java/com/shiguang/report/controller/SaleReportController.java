@@ -252,6 +252,11 @@ public class SaleReportController {
                 double xianjinMoney = 0;
                 double yikatongoney = 0;
                 double yyshoufeichuMoney = 0;
+                double yinliankamoney = 0;
+                double chuzhikamoney = 0;
+                double dianmoney = 0;
+                double diandianmoney = 0;
+                double jifenmoney = 0;
                 double qtsubTotal = 0;
                 //double tkMoney = 0;
                 double shihsouTotal = 0;
@@ -270,6 +275,16 @@ public class SaleReportController {
                                 yyshoufeichuMoney = yyshoufeichuMoney + Double.valueOf(modelMoney[i]);
                             } else if ("3".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
                                 yikatongoney = yikatongoney + Double.valueOf(modelMoney[i]);
+                            } else if ("5".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                yinliankamoney = yinliankamoney + Double.valueOf(modelMoney[i]);
+                            } else if ("6".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                chuzhikamoney = chuzhikamoney + Double.valueOf(modelMoney[i]);
+                            } else if ("7".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                dianmoney = dianmoney + Double.valueOf(modelMoney[i]);
+                            } else if ("8".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                diandianmoney = diandianmoney + Double.valueOf(modelMoney[i]);
+                            } else if ("9".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                jifenmoney = jifenmoney + Double.valueOf(modelMoney[i]);
                             }
                         }
                         if (null != settlementDO.getChangeMoney()){
@@ -291,14 +306,24 @@ public class SaleReportController {
                             yikatongoney = yikatongoney - Double.valueOf(settlementDO.getDrawBackMoney());
                         } else if ("4".equals(settlementDO.getDrawBackWay())){
                             xianjinMoney = xianjinMoney - Double.valueOf(settlementDO.getDrawBackMoney());
+                        } else if ("5".equals(settlementDO.getDrawBackWay())){
+                            yinliankamoney = yinliankamoney - Double.valueOf(settlementDO.getDrawBackMoney());
+                        } else if ("6".equals(settlementDO.getDrawBackWay())){
+                            chuzhikamoney = chuzhikamoney - Double.valueOf(settlementDO.getDrawBackMoney());
+                        } else if ("7".equals(settlementDO.getDrawBackWay())){
+                            dianmoney = dianmoney - Double.valueOf(settlementDO.getDrawBackMoney());
+                        } else if ("8".equals(settlementDO.getDrawBackWay())){
+                            diandianmoney = diandianmoney - Double.valueOf(settlementDO.getDrawBackMoney());
+                        } else if ("9".equals(settlementDO.getDrawBackWay())){
+                            jifenmoney = jifenmoney - Double.valueOf(settlementDO.getDrawBackMoney());
                         }
                     }
                 }
                 qtsubTotal = weixinMoney + zfbMoney;
                 if (xianjinMoney < 0){
-                    shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney;
+                    shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney + yinliankamoney + diandianmoney + dianmoney + jifenmoney;
                 } else {
-                    shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney;
+                    shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney + yinliankamoney + diandianmoney + dianmoney + jifenmoney;
                 }
                 Map<String,Object> resultMap = new HashMap<>();
                 resultMap.put("weixinMoney",new BigDecimal(weixinMoney).setScale(2,RoundingMode.HALF_UP));
@@ -306,6 +331,11 @@ public class SaleReportController {
                 resultMap.put("xianjinMoney",new BigDecimal(xianjinMoney).setScale(2,RoundingMode.HALF_UP));
                 resultMap.put("yyshoufeichuMoney",new BigDecimal(yyshoufeichuMoney).setScale(2,RoundingMode.HALF_UP));
                 resultMap.put("yikatongoney",new BigDecimal(yikatongoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("yinliankamoney",new BigDecimal(yinliankamoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("chuzhikamoney",new BigDecimal(chuzhikamoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("diandianmoney",new BigDecimal(diandianmoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("dianmoney",new BigDecimal(dianmoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("jifenmoney",new BigDecimal(jifenmoney).setScale(2,RoundingMode.HALF_UP));
                 resultMap.put("qtsubTotal",new BigDecimal(qtsubTotal).setScale(2,RoundingMode.HALF_UP));
                 resultMap.put("shihsouTotal",new BigDecimal(shihsouTotal).setScale(2,RoundingMode.HALF_UP));
                 resultMap.put("departmentName",departmentDO.getDepartName());

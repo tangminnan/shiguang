@@ -212,7 +212,7 @@ public class ExamineController {
         Map<String,Object> map = new HashMap<>();
         LensMeterDO lensMeterDO = new LensMeterDO();
         //serialPort.sendToData();
-        Long id = Long.valueOf(ShiroUtils.getUser().getCompanyId() + ShiroUtils.getUser().getUsername());
+        Long id = Long.valueOf(ShiroUtils.getUser().getCompanyId() + ShiroUtils.getUser().getUserId());
         //List<JDJInfoDO> jdjInfoDOS = lensMeterService.jdjList(map);
         JdjInfomationDO jdjInfomationDO = lensMeterService.getJdjInfomation(id);
         if (null != jdjInfomationDO){
