@@ -118,6 +118,10 @@ public class OptometryNewController {
     @GetMapping("/edit/{cardNumber}")
     @RequiresPermissions("information:optometryNew:edit")
     String edit(@PathVariable("cardNumber") String cardNumber, Model model) {
+        Map<String,Object> YGmap=new HashMap<>();
+        YGmap.put("YangguangName","验光师");
+        List<TryresultsDO> listYanguang = tryresultsService.listYanguang(YGmap);
+        model.addAttribute("listYanguang",listYanguang);
 //————会员信息——————
         MemberDO memberDO = memberService.getCardNumber(cardNumber);
         if (memberDO.getSex() == 0) {
