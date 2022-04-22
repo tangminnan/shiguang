@@ -1,7 +1,7 @@
 package com.shiguang.product.service.impl;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
+//import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.dao.PartsDao;
 import com.shiguang.product.domain.PartsDO;
 import com.shiguang.product.service.PartsService;
@@ -52,11 +52,11 @@ public class PartsServiceImpl implements PartsService {
         return partsDao.batchRemove(ids);
     }
 
-    //查询配件制造商
-    @Override
-    public List<MgDO> mglist(Map<String, Object> map) {
-        return partsDao.mglist(map);
-    }
+//    //查询配件制造商
+//    @Override
+//    public List<MgDO> mglist(Map<String, Object> map) {
+//        return partsDao.mglist(map);
+//    }
 
 
     //删除修改状态

@@ -1,7 +1,7 @@
 package com.shiguang.product.dao;
 
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
+//import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.product.domain.HlyDO;
 import com.shiguang.product.domain.PartsDO;
 import org.apache.ibatis.annotations.Mapper;
@@ -35,8 +35,8 @@ public interface PartsDao {
 
     int batchRemove(Long[] ids);
 
-    //查询配件制造商
-    List<MgDO> mglist(Map<String, Object> map);
+//    //查询配件制造商
+//    List<MgDO> mglist(Map<String, Object> map);
 
 
     //删除修改状态

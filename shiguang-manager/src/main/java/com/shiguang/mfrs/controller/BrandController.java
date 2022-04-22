@@ -263,8 +263,10 @@ public class BrandController {
             return R.error("商品类别不能为空");
         }
         //判断是否已存在
+        String mfrsid = brand.getMfrsid();
         String brandnum = brand.getBrandnum();
         Map<String, Object> map = new HashMap<>();
+        map.put("mfrsid", mfrsid);
         map.put("brandnum", brandnum);
         List<BrandDO> list = brandService.haveNum(map);
         if (list.size() > 0) {
