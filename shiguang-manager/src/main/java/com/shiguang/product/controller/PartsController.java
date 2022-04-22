@@ -5,7 +5,7 @@ import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.StringUtils;
 import com.shiguang.mfrs.domain.BrandDO;
-import com.shiguang.mfrs.domain.MgDO;
+//import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.mfrs.domain.RefractivityDO;
 import com.shiguang.mfrs.domain.UnitDO;
 import com.shiguang.mfrs.service.MfrsService;

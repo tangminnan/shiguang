@@ -470,9 +470,11 @@ public class StockServiceImpl implements StockService {
     public R importStock(Integer goodsType, String positionId,String checkType,String dzlx, MultipartFile file) {
         System.out.println("==============file================" + file);
         int num = 0;
+        String sl = "";
         InputStream in = null;
         Workbook book = null;
         List<Integer> list = new ArrayList<>();
+        List<Integer> listSize = new ArrayList<>();
         try {
             if (file != null) {
                 in = file.getInputStream();
@@ -512,6 +514,10 @@ public class StockServiceImpl implements StockService {
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
                             StockDO jingjias=  stockDao.jingjias(stockDO);
+                            if(jingjias==null){
+                                sl = sl + "," + String.valueOf(rowNum - 1);
+                            }
+
                             String goodsNum=jingjias.getProducNum();
                             String goodsCode=jingjias.getProducCode();
                             String goodsName=jingjias.getViewGoodName()+"-型号:"+jingjias.getProducFactory()+"-色号:"+jingjias.getProducFactorycolor()+"-标价:"+jingjias.getRetailPrice();
@@ -636,6 +642,9 @@ public class StockServiceImpl implements StockService {
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
                             StockDO peijians=  stockDao.peijians(stockDO);
+                            if(peijians==null){
+                                sl = sl + "," + String.valueOf(rowNum - 1);
+                            }
                             String goodsNum=peijians.getProducNum();
                             String goodsCode=peijians.getProducCode();
                             String goodsName=peijians.getViewGoodName()+"-型号:"+peijians.getProducFactory()+"-标价:"+peijians.getRetailPrice();
@@ -763,9 +772,15 @@ public class StockServiceImpl implements StockService {
                             String goodsName = null;
                             if("1".equals(styles)){
                                 jingpians =  stockDao.jingpians(stockDO);
+                                if(jingpians==null){
+                                    sl = sl + "," + String.valueOf(rowNum - 1);
+                                }
                                 goodsName =jingpians.getViewGoodName()+"-球镜:"+jingpians.getSph()+"-柱镜:"+jingpians.getCyl()+"-标价:"+jingpians.getRetailPrice();
                             }else if ("2".equals(styles)){
                                 jingpians=  stockDao.jingpiandzs(stockDO);
+                                if(jingpians==null){
+                                    sl = sl + "," + String.valueOf(rowNum - 1);
+                                }
                                 goodsName=jingpians.getViewGoodName()+"-球镜:"+jingpians.getSphUp()+"/"+jingpians.getSphDown()+"-柱镜:"+jingpians.getCylUp()+"/"+jingpians.getCylDown()+"-标价:"+jingpians.getRetailPrice();
                             }
                             String goodsNum=jingpians.getProducNum();
@@ -894,9 +909,15 @@ public class StockServiceImpl implements StockService {
                             String goodsName=null;
                             if("1".equals(styles)){
                                 yinxings =  stockDao.yinxings(stockDO);
+                                if(yinxings==null){
+                                    sl = sl + "," + String.valueOf(rowNum - 1);
+                                }
                                   goodsName=yinxings.getViewGoodName()+"-球镜:"+yinxings.getSph()+"-柱镜:"+yinxings.getCyl()+"-标价:"+yinxings.getRetailPrice();
                             }else if ("2".equals(styles)){
                                 yinxings=  stockDao.yinxingdzs(stockDO);
+                                if(yinxings==null){
+                                    sl = sl + "," + String.valueOf(rowNum - 1);
+                                }
                                   goodsName=yinxings.getViewGoodName()+"-球镜:"+yinxings.getSphUp()+"/"+yinxings.getSphDown()+"-柱镜:"+yinxings.getCylUp()+"/"+yinxings.getCylDown()+"-标价:"+yinxings.getRetailPrice();
                             }
                             String goodsNum=yinxings.getProducNum();
@@ -1023,6 +1044,9 @@ public class StockServiceImpl implements StockService {
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
                             StockDO huliyes=  stockDao.huliyes(stockDO);
+                            if(huliyes==null){
+                                sl = sl + "," + String.valueOf(rowNum - 1);
+                            }
                             String goodsNum=huliyes.getProducNum();
                             String goodsCode=huliyes.getProducCode();
                             String goodsName=huliyes.getViewGoodName()+"-型号:"+huliyes.getProducFactory()+"-标价:"+huliyes.getRetailPrice();
@@ -1147,6 +1171,9 @@ public class StockServiceImpl implements StockService {
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
                             StockDO taiyangjings=  stockDao.taiyangjings(stockDO);
+                            if(taiyangjings==null){
+                                sl = sl + "," + String.valueOf(rowNum - 1);
+                            }
                             String goodsNum=taiyangjings.getProducNum();
                             String goodsCode=taiyangjings.getProducCode();
                             String goodsName=taiyangjings.getViewGoodName()+"-型号:"+taiyangjings.getProducFactory()+"-颜色:"+taiyangjings.getProducFactorycolor()+"-标价:"+taiyangjings.getRetailPrice();
@@ -1271,6 +1298,9 @@ public class StockServiceImpl implements StockService {
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
                             StockDO laohuajings=  stockDao.laohuajings(stockDO);
+                            if(laohuajings==null){
+                                sl = sl + "," + String.valueOf(rowNum - 1);
+                            }
                             String goodsNum=laohuajings.getProducNum();
                             String goodsCode=laohuajings.getProducCode();
                             String goodsName=laohuajings.getViewGoodName()+"-球镜:"+laohuajings.getSph()+"-型号:"+laohuajings.getProducFactory()+"-标价:"+laohuajings.getRetailPrice();
@@ -1395,6 +1425,9 @@ public class StockServiceImpl implements StockService {
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
                             StockDO haocais=  stockDao.haocais(stockDO);
+                            if(haocais==null){
+                                sl = sl + "," + String.valueOf(rowNum - 1);
+                            }
                             String goodsNum=haocais.getProducNum();
                             String goodsCode=haocais.getProducCode();
                             String goodsName=haocais.getViewGoodName()+"-型号:"+haocais.getProducFactory()+"-标价:"+haocais.getRetailPrice();
@@ -1519,6 +1552,9 @@ public class StockServiceImpl implements StockService {
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
                             StockDO shiguangs=  stockDao.shiguangs(stockDO);
+                            if(shiguangs==null){
+                                sl = sl + "," + String.valueOf(rowNum - 1);
+                            }
                             String goodsNum=shiguangs.getProducNum();
                             String goodsCode=shiguangs.getProducCode();
                             String goodsName=shiguangs.getViewGoodName()+"-型号:"+shiguangs.getProducFactory()+"-标价:"+shiguangs.getRetailPrice();
@@ -1641,17 +1677,22 @@ public class StockServiceImpl implements StockService {
 
                         }
 
-
                     } catch (Exception e) {
                         System.out.println("导入失败======第" + (rowNum + 1) + "条==================");
                         e.printStackTrace();
                     }
 
                 }
-                if (list.size() > 0) {
-                    return R.ok("上传成功,共增加[" + num + "]条,第" + list + "行导入用户失败，原因：姓名或者出生日期可能无效");
+                if (listSize.size() > 0) {
+                    return R.ok("上传成功,共增加[" + num + "]条,第" + sl + "行导入失败，原因：商品代码已存在");
                 } else {
-                    return R.ok("上传成功,共增加[" + num + "]条");
+                    if (sl != "") {
+                        return R.ok("上传成功,共增加[" + num + "]条,第" + sl + "行导入失败，原因：商品代码不存在");
+//                        return R.ok("上传成功,共增加[" + num + "]条");
+                    } else {
+                        return R.ok("上传成功,共增加[" + num + "]条");
+                    }
+
                 }
             } else {
                 return R.error("请选择导入的文件!");
@@ -1670,6 +1711,12 @@ public class StockServiceImpl implements StockService {
         }
         return R.error();
     }
+
+
+
+
+
+
 
     //判断名字是否都为汉字
     private boolean checkRealName(String realName) {

@@ -9,9 +9,9 @@
 		.w33{float: left;width:64px;text-align: center;padding:1%;}
 		.w33 p{font-size:7px;word-wrap:break-word;word-break:normal;width: 48px !important;padding: 0px 7px;}
 	</style>
+
 </head>
 <body>
-济南
 	<div id="devid" style="overflow:hidden;">
 	</div>
 <div th:include="include :: footer"></div>
@@ -20,14 +20,13 @@
 	    var html ="";
 	    var list = [[${orderDOS}]];
 		for (var i=0;i<list.length;i++){
-		    // alert(list[i].goodsCount);
 		    for (var a=0;a<list[i].goodsCount;a++){
 		    	html += "<div class=w33>";
 		        html +="<img alt='' src='"+list[i].QRCode+"' >";
 		        html +="<p cellspacing=\"0\" cellpadding=\"0\" style=\" width: 100%;\">";
 		        html +="<tbody>";
 		        html += "<tr>";
-		        html += "<td style='font-size:8px'>"+list[i].goodsCode+"</td>";
+		        html += "<td style='font-size:8px;font-weight: bold'>"+list[i].goodsCode+"</td>";
                 html += "</tr>";
                 html += "</tbody>";
                 html += "</p>";

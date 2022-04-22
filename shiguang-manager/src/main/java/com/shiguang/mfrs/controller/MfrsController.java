@@ -5,11 +5,11 @@ import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.domain.MfrsDO;
-import com.shiguang.mfrs.domain.MgDO;
+//import com.shiguang.mfrs.domain.MgDO;
 import com.shiguang.mfrs.domain.PayDO;
 import com.shiguang.mfrs.service.GoodsService;
 import com.shiguang.mfrs.service.MfrsService;
-import com.shiguang.mfrs.service.MgService;
+//import com.shiguang.mfrs.service.MgService;
 import com.shiguang.mfrs.service.PayService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +43,8 @@ public class MfrsController {
     @Autowired
     private PayService payService;
     //制造商商品表
-    @Autowired
-    private MgService mgService;
+//    @Autowired
+//    private MgService mgService;
 
 
     @GetMapping()
@@ -187,15 +187,6 @@ public class MfrsController {
             return R.error("制造商代码已存在");
         }
         if (mfrsService.save(mfrs) > 0) {
-            //获取制造商中的商品id,依次循环遍历，保存到关系表中，走两个保存方法
-//            String[] str = mfrs.getGoodsid().split(",");
-//            for (int i = 0; i < str.length; i++) {
-//                MgDO mgDO = new MgDO();
-//                mgDO.setMfrsid(mfrs.getMfrsid());
-//                mgDO.setGoodsid(Integer.parseInt(str[i]));
-//                mgService.save(mgDO);
-//            }
-
             return R.ok();
         }
         return R.error();
@@ -208,24 +199,6 @@ public class MfrsController {
     @RequestMapping("/update")
     @RequiresPermissions("mfrs:mfrs:edit")
     public R update(MfrsDO mfrs) {
-        if (null == mfrs.getGoodsid()) {
-            return R.error("商品类别不能为空");
-        }
-        //判断是否已存在商品
-        Integer mfrsid = mfrs.getMfrsid();
-        Map<String, Object> map = new HashMap<>();
-        map.put("mfrsid", mfrsid);
-        List<MgDO> list = mgService.mglist(map);
-        if (list.size() > 0) {
-            mgService.remove(mfrsid);
-        }
-        String[] str = mfrs.getGoodsid().split(",");
-        for (int i = 0; i < str.length; i++) {
-            MgDO mgDO = new MgDO();
-            mgDO.setMfrsid(mfrs.getMfrsid());
-            mgDO.setGoodsid(Integer.parseInt(str[i]));
-            mgService.save(mgDO);
-        }
         mfrsService.update(mfrs);
         return R.ok();
     }
@@ -261,16 +234,5 @@ public class MfrsController {
         return R.error();
     }
 
-//    /**
-//     * 删除
-//     */
-//    @PostMapping( "/remove")
-//    @ResponseBody
-//    @RequiresPermissions("mfrs:mfrs:remove")
-//    public R remove( Integer mfrsid){
-//        if(mfrsService.remove(mfrsid)>0){
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
+
 }
