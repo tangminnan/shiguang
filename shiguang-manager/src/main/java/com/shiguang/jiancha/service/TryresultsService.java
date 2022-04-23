@@ -33,7 +33,7 @@ public interface TryresultsService {
     int update(TryresultsDO tryresults);
 
 
-    int remove(Long id);
+    int remove(String ptometryNumber);
 
     int batchRemove(Long[] ids);
     //查询医生

@@ -54,8 +54,8 @@ public class TryresultsServiceImpl implements TryresultsService {
     }
 
     @Override
-    public int remove(Long id) {
-        return tryresultsDao.remove(id);
+    public int remove(String ptometryNumber) {
+        return tryresultsDao.remove(ptometryNumber);
     }
 
     @Override

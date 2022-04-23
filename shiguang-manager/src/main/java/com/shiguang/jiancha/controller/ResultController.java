@@ -595,5 +595,4 @@ public class ResultController {
         return "optometryNew/chufangalledit";
     }
 
-
 }

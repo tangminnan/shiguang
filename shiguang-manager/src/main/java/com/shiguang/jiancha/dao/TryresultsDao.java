@@ -27,7 +27,7 @@ public interface TryresultsDao {
     List<TryresultsDO> haveYanguangNum(Map<String, Object> map);
     int update(TryresultsDO tryresults);
 
-    int remove(Long id);
+    int remove(String ptometryNumber);
 
     int batchRemove(Long[] ids);
     //根据人查相对应的验光号医生时间等信息
