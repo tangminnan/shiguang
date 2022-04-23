@@ -108,7 +108,7 @@ public class SettlementMethodController {
         SalesDO salesDO = salesService.getSaleNumber(saleNumber);
         model.addAttribute("settlement", settlement);
         model.addAttribute("salesDO",salesDO);
-        return "method/edit";
+        return "method/editMethod";
     }
 
     /**
@@ -120,6 +120,12 @@ public class SettlementMethodController {
     public R update(SettlementDO settlement){
         //SettlementDO settlementDO = settlementService.get(settlement.getId());
         //settlement.setPayMoney(settlement.getPayMoney() + settlement.getFrontMoney());
+        settlement.setSaleName(ShiroUtils.getUser().getName());
+        settlement.setSaleAcount(ShiroUtils.getUser().getUsername());
+        if (null != settlement.getPayGgModel() && !"".equals(settlement.getPayGgModel())){
+            settlement.setPayModel(settlement.getPayGgModel());
+            settlement.setModelMoney(settlement.getModelGgMoney());
+        }
         settlementService.updateMethod(settlement);
         return R.ok();
     }

@@ -182,7 +182,6 @@ public class StoreSalesController {
         }
         model.addAttribute("optometryDO", optometryDO);
         Map<String, Object> map = new HashMap<>();
-        map.put("roleTypes1", 2);
         map.put("roleTypes2", 7);
         if (null != ShiroUtils.getUser().getCompanyId()){
             map.put("companyId",ShiroUtils.getUser().getCompanyId());

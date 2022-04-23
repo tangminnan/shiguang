@@ -168,7 +168,7 @@ public class LogStatusController {
 //		model.addAttribute("sumMoney",sumMoney);
 //		model.addAttribute("jianchaTime",simpleDateFormat.format(new Date()));
         SalesDO settlementDO = salesService.getSaleNumber(saleNumber);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if (null != settlementDO.getPeijingTime()){
             settlementDO.setPeijingDate(simpleDateFormat.format(settlementDO.getPeijingTime()));
         }else {
@@ -739,16 +739,16 @@ public class LogStatusController {
                         maps.put("positionName","施尔明合格仓");
                     }
                     positionDO = stockService.findHegePosition(maps);
-                }
-                StockDO stockDOs = new StockDO();
-                stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
-                stockDOs.setGoodsCode(goodsCode[a]);
-                StockDO stockDO = stockService.getProduceCode(stockDOs);
-                if (null != stockDO){
-                    Long countGoods = Long.parseLong(stockDO.getGoodsCount());
-                    Long count = countGoods - Long.valueOf(storeCount[a]);
-                    stockDO.setGoodsCount(String.valueOf(count));
-                    stockService.updateGoodsCount(stockDO);
+                    StockDO stockDOs = new StockDO();
+                    stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
+                    stockDOs.setGoodsCode(goodsCode[a]);
+                    StockDO stockDO = stockService.getProduceCode(stockDOs);
+                    if (null != stockDO){
+                        Long countGoods = Long.parseLong(stockDO.getGoodsCount());
+                        Long count = countGoods - Long.valueOf(storeCount[a]);
+                        stockDO.setGoodsCount(String.valueOf(count));
+                        stockService.updateGoodsCount(stockDO);
+                    }
                 }
             }
         }

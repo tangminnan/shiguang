@@ -38,8 +38,8 @@
 		select u.name,u.user_id,r.role_name from sys_user u left join sys_user_role ur on ur.user_id = u.user_id left join sys_role r on r.role_id = ur.role_id
 		<where>
 			<if test="companyId != null and companyId != ''"> and u.company_id = #{companyId} </if>
-			<if test="(roleTypes1 != null and roleTypes1 != '') or (roleTypes2 != null and roleTypes2 != '') ">
-				and (r.role_type != #{roleTypes1} and r.role_type != #{roleTypes2} ) </if>
+			<if test="roleTypes2 != null and roleTypes2 != '' ">
+				 and r.role_type != #{roleTypes2}  </if>
 			<if test="userId != null and userId != ''"> and u.user_id = #{userId} </if>
 		</where>
 		group by u.user_id

@@ -113,6 +113,10 @@
 	<update id="updateMethod" parameterType="com.shiguang.settlement.domain.SettlementDO">
 		update settlement
 		<set>
+			<if test="payModel != null">`pay_model` = #{payModel}, </if>
+			<if test="saleName != null">`sale_name` = #{saleName}, </if>
+			<if test="saleAcount != null">`sale_acount` = #{saleAcount}, </if>
+			<if test="modelMoney != null">`model_money` = #{modelMoney},</if>
 			<if test="payModel != null">`pay_model` = #{payModel} </if>
 		</set>
 		where sale_number = #{saleNumber}

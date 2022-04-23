@@ -99,6 +99,8 @@ public class PeiJingSingleController {
                 salesDO.setSaleType("已缴费");
             }else if ("3".equals(salesDO.getSaleType())){
                 salesDO.setSaleType("已退款");
+            }else if ("0".equals(salesDO.getSaleType())){
+                salesDO.setSaleType("未缴费");
             }
         }
         int total = statusService.findSalePeijingCount(query);

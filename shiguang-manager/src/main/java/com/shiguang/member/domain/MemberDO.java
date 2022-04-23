@@ -105,7 +105,10 @@ public class MemberDO implements Serializable {
     private String openId;
     //积分
     private Integer integral;
-
+    //储值卡号
+    private String storeCardNum;
+    //储值余额
+    private String cardMoney;
     //验光师
     private String optometryName;
 
@@ -676,5 +679,21 @@ public class MemberDO implements Serializable {
 
     public void setIntegral(Integer integral) {
         this.integral = integral;
+    }
+
+    public String getStoreCardNum() {
+        return storeCardNum;
+    }
+
+    public void setStoreCardNum(String storeCardNum) {
+        this.storeCardNum = storeCardNum;
+    }
+
+    public String getCardMoney() {
+        return cardMoney;
+    }
+
+    public void setCardMoney(String cardMoney) {
+        this.cardMoney = cardMoney;
     }
 }

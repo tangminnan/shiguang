@@ -32,7 +32,9 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
+								offset:params.offset,
+                                memberName:$('#memberName').val(),
+                                phone:$('#phone').val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -51,6 +53,10 @@ function load() {
 									field : 'cardNumber', 
 									title : '储值卡号' 
 								},
+                            {
+                                field : 'memberName',
+                                title : '会员姓名'
+                            },
 																{
 									field : 'cardMoney', 
 									title : '储值金额' 

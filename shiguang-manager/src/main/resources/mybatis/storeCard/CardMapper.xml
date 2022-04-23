@@ -15,25 +15,29 @@
 	</select>
 
 	<select id="list" resultType="com.shiguang.storeCard.domain.CardDO">
-		select `id`,`card_number`,`member_name`,`card_money`,`member_number`,`password`,`create_name`,`create_time`,`remark`,`status`,`state` from stored_card
+		select sc.`id`,sc.`card_number`,sc.`member_name`,sc.`card_money`,sc.`member_number`,sc.`password`,sc.`create_name`,sc.`create_time`,sc.`remark`,
+		sc.`status`,sc.`state`
+		from stored_card sc left join member m on m.card_number = sc.member_number
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-		  		  <if test="cardMoney != null and cardMoney != ''"> and card_money = #{cardMoney} </if>
-		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
-		  		  <if test="password != null and password != ''"> and password = #{password} </if>
-		  		  <if test="createName != null and createName != ''"> and create_name = #{createName} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
-		  		  <if test="state != null and state != ''"> and state = #{state} </if>
+		  		  <if test="id != null and id != ''"> and sc.id = #{id} </if>
+		  		  <if test="cardNumber != null and cardNumber != ''"> and sc.card_number = #{cardNumber} </if>
+		  		  <if test="cardMoney != null and cardMoney != ''"> and sc.card_money = #{cardMoney} </if>
+		  		  <if test="memberNumber != null and memberNumber != ''"> and sc.member_number = #{memberNumber} </if>
+			      <if test="memberName != null and memberName != ''"> and sc.member_name = #{memberName}</if>
+			      <if test="phone != null and phone != ''"> and (m.phone_1 = #{phone} or m.phone_2 = #{phone} or m.phone_3 = #{phone})</if>
+		  		  <if test="password != null and password != ''"> and sc.password = #{password} </if>
+		  		  <if test="createName != null and createName != ''"> and sc.create_name = #{createName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and sc.create_time = #{createTime} </if>
+		  		  <if test="remark != null and remark != ''"> and sc.remark = #{remark} </if>
+		  		  <if test="status != null and status != ''"> and sc.status = #{status} </if>
+		  		  <if test="state != null and state != ''"> and sc.state = #{state} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by id desc
+                order by sc.id desc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
@@ -42,19 +46,21 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from stored_card
-		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-		  		  <if test="cardMoney != null and cardMoney != ''"> and card_money = #{cardMoney} </if>
-		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
-		  		  <if test="password != null and password != ''"> and password = #{password} </if>
-		  		  <if test="createName != null and createName != ''"> and create_name = #{createName} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
-		  		  <if test="state != null and state != ''"> and state = #{state} </if>
-		  		</where>
+		select count(*) from stored_card sc left join member m on m.card_number = sc.member_number
+		<where>
+			<if test="id != null and id != ''"> and sc.id = #{id} </if>
+			<if test="cardNumber != null and cardNumber != ''"> and sc.card_number = #{cardNumber} </if>
+			<if test="cardMoney != null and cardMoney != ''"> and sc.card_money = #{cardMoney} </if>
+			<if test="memberNumber != null and memberNumber != ''"> and sc.member_number = #{memberNumber} </if>
+			<if test="memberName != null and memberName != ''"> and sc.member_name = #{memberName}</if>
+			<if test="phone != null and phone != ''"> and (m.phone_1 = #{phone} or m.phone_2 = #{phone} or m.phone_3 = #{phone})</if>
+			<if test="password != null and password != ''"> and sc.password = #{password} </if>
+			<if test="createName != null and createName != ''"> and sc.create_name = #{createName} </if>
+			<if test="createTime != null and createTime != ''"> and sc.create_time = #{createTime} </if>
+			<if test="remark != null and remark != ''"> and sc.remark = #{remark} </if>
+			<if test="status != null and status != ''"> and sc.status = #{status} </if>
+			<if test="state != null and state != ''"> and sc.state = #{state} </if>
+		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.shiguang.storeCard.domain.CardDO" useGeneratedKeys="true" keyProperty="id">

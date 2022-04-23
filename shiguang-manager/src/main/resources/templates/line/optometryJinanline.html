@@ -72,6 +72,7 @@
                 var rows = $(layero).find("iframe")[0].contentWindow.sureRoom();
                 $("#consultRoom").val(rows);
                 window.localStorage.setItem("consultRoom",rows)
+                load();
                 layer.close(index);//需要手动关闭窗口
             }
         });

@@ -33,6 +33,10 @@ public class SettlementDO implements Serializable {
 	private Double changeMoney;
 	//支付方式
 	private String payModel;
+	//更改付款方式
+	private String payGgModel;
+	//缴费金额
+	private String modelGgMoney;
 	//缴费金额(根据支付方式)
 	private String modelMoney;
 	//缴费金额
@@ -257,5 +261,21 @@ public class SettlementDO implements Serializable {
 
 	public void setChuzhiPasd(String chuzhiPasd) {
 		this.chuzhiPasd = chuzhiPasd;
+	}
+
+	public String getPayGgModel() {
+		return payGgModel;
+	}
+
+	public void setPayGgModel(String payGgModel) {
+		this.payGgModel = payGgModel;
+	}
+
+	public String getModelGgMoney() {
+		return modelGgMoney;
+	}
+
+	public void setModelGgMoney(String modelGgMoney) {
+		this.modelGgMoney = modelGgMoney;
 	}
 }

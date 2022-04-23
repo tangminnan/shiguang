@@ -1009,7 +1009,7 @@
 		</ul>
 		<ul class="ulC">
 			<li>实收金额：<input type="text" id="amountMoney" name="amountMoney" readonly onchange="getShishou()"/><input type="hidden" id="primeMoney" name="primeMoney"/></li>
-			<li>商品打折：<input type="text" id="saleDiscounts" name="saleDiscounts" onchange="getDiscount()"/><input type="hidden" id="saleAccount" name="saleAccount"/><input type="button" value="还原" /></li>
+			<li>商品打折：<input type="text" id="saleDiscounts" name="saleDiscounts" onchange="getDiscount()"/><input type="hidden" id="saleAccount" name="saleAccount"/></li>
 			<li>一口价：<input type="text" id="fisPrice" onchange="getFixedPrice()" /><input type="button" class="qianpi" value="签批" /><input type="button" onclick="getfidHy()" value="还原" /></li>
 			<li>抹零金额：<input type="text" value="0.00" id="molingMoney" onfocus="if (value =='0.00'){value =''}" onblur="if (value ==''){value='0.00'}" name="molingMoney" onchange="getChangeValue()"/></li>
 		</ul>
@@ -1255,7 +1255,7 @@
         var shishou = $("#amountMoney").val();
         $("#ula").empty();
         var lis="";
-        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
         lis += "<li>折扣金额：0.00</li>";
         lis += "<li>优惠金额：0.00</li>";
         lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1263,7 +1263,7 @@
         lis += "<li>实收金额："+shishou+"</li>";
         $("#ula").append(lis)
         $("#amountMoney").val(shishou)
-        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 	}
 
     var zkMoney = "0.00";
@@ -1286,11 +1286,11 @@
                     //     $("#saleDiscounts").val('');
                     //     return layer.alert("该员工没有打折权限")
 					} else {
-                        var saleDz = (parseFloat(price) * parseFloat(saleCount)).toFixed(2);
-                        zkMoney = (parseFloat(price) - parseFloat(saleDz)).toFixed(2);
+                        var saleDz = (parseFloat(price) * parseFloat(saleCount)).toFixed(1);
+                        zkMoney = (parseFloat(price) - parseFloat(saleDz)).toFixed(1);
                         $("#ula").empty();
                         var lis="";
-                        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+                        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
                         lis += "<li>折扣金额："+zkMoney+"</li>";
                         lis += "<li>优惠金额：0.00</li>";
                         lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1298,7 +1298,7 @@
                         lis += "<li>实收金额："+saleDz+"</li>";
                         $("#ula").append(lis)
                         $("#amountMoney").val(saleDz)
-                        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+                        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
                         $("#saleAccount").val(rows);
 					}
                     layer.close(index);//需要手动关闭窗口
@@ -1312,7 +1312,7 @@
         //price = firstPrice;
         $("#ula").empty();
         var lis="";
-        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
         lis += "<li>折扣金额：0.00</li>";
         lis += "<li>优惠金额：0.00</li>";
         lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1320,13 +1320,13 @@
         lis += "<li>实收金额："+firstPrice+"</li>";
         $("#ula").append(lis)
         $("#amountMoney").val(firstPrice)
-        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 	}
 	
 	function getfidHy() {
         $("#ula").empty();
         var lis="";
-        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
         lis += "<li>折扣金额：0.00</li>";
         lis += "<li>优惠金额：0.00</li>";
         lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1339,7 +1339,7 @@
             $("#amountMoney").val(price)
 		}
         $("#ula").append(lis)
-        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
     }
 
     function getCheck(value){
@@ -1718,7 +1718,7 @@
                     $("#goods").append(html);
                     //document.getElementById("yingshouMoney"+rows[i].goodsNum+"").text=rows[i].retailPrice
                     $("#yingshouMoneyjj"+a+"").text(rows[i].retailPrice)
-                    price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
+                    price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(1);
                     //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                     //arraystore.push(rows[i].goodsName);
                    // arrayunit.push(rows[i].retailPrice);
@@ -1740,7 +1740,7 @@
                 // $("#producaNum").val(producaNum);
                 $("#ula").empty();
                 var lis="";
-                lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+                lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
                 lis += "<li>折扣金额：0.00</li>";
                 lis += "<li>优惠金额：0.00</li>";
                 lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1748,7 +1748,7 @@
                 lis += "<li>实收金额："+price+"</li>";
                 $("#ula").append(lis)
 				$("#amountMoney").val(price)
-				$("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+				$("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
                 //son_msg就是子页面中的msg数据
                 //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
             }
@@ -1768,12 +1768,12 @@
 		if ("镜架" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyjj"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyjj"+targetStr+"").text(dd);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1781,16 +1781,16 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 		} else if ("护理液" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyhly"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyhly"+targetStr+"").text(dd);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1798,16 +1798,16 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 		} else if ("镜片" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyjp"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyjp"+targetStr+"").text(dd);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1815,16 +1815,16 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
         } else if ("框镜" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyjjpj"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyjjpj"+targetStr+"").text(dd);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1832,16 +1832,16 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
         } else if ("太阳镜" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneytyj"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneytyj"+targetStr+"").text(dd);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1849,16 +1849,16 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
         } else if ("耗材" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyhc"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyhc"+targetStr+"").text(dd);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1866,16 +1866,16 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
         } else if ("老花镜" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneylhj"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneylhj"+targetStr+"").text(dd);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1883,16 +1883,16 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 		} else if ("视光" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneysg"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneysg"+targetStr+"").text(dd);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1900,16 +1900,16 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 		} else if ("配件" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneypj"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneypj"+targetStr+"").text(dd);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1917,16 +1917,16 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
         } else if ("隐形" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyyx"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2)
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyyx"+targetStr+"").text(dd);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1934,16 +1934,16 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
         } else if ("隐形配件" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyyxpj"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(2);
+            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1);
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyyxpj"+targetStr+"").text(dd);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额：0.00</li>";
             lis += "<li>优惠金额：0.00</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1951,7 +1951,7 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
         }
 
     }
@@ -1960,10 +1960,10 @@
 	    a=a-1;
         var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
         tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
-        price = (parseFloat(price)- parseFloat(prices)).toFixed(2)
+        price = (parseFloat(price)- parseFloat(prices)).toFixed(1)
         $("#ula").empty();
         var lis="";
-        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
         lis += "<li>折扣金额：0.00</li>";
         lis += "<li>优惠金额：0.00</li>";
         lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -1971,7 +1971,7 @@
         lis += "<li>实收金额："+price+"</li>";
         $("#ula").append(lis);
         $("#amountMoney").val(price);
-        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
         arraystore.remove(produName);
         arrayunit.remove(prices);
         arraycount.remove(1);
@@ -2141,7 +2141,7 @@
                     $("#goods").append(html);
                     //$("#yingshouMoneyjp"+i+"").text("2342")
                     $("#yingshouMoneyjp"+a+"").text(rows[i][0].retailPrice);
-                    price = (parseFloat(price)+ parseFloat(rows[i][0].retailPrice)).toFixed(2);
+                    price = (parseFloat(price)+ parseFloat(rows[i][0].retailPrice)).toFixed(1);
                     //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                     //arraystore.push(rows[i].goodsName);
                     //arrayunit.push(rows[i].retailPrice);
@@ -2162,7 +2162,7 @@
                 //$("#jpGoodsName").val(jpArray);
                 $("#ula").empty();
                 var lis="";
-                lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+                lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
                 lis += "<li>折扣金额：0.00</li>";
                 lis += "<li>优惠金额：0.00</li>";
                 lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -2170,7 +2170,7 @@
                 lis += "<li>实收金额："+price+"</li>";
                 $("#ula").append(lis)
                 $("#amountMoney").val(price)
-                $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+                $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
                 //son_msg就是子页面中的msg数据
                 //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
             }
@@ -2225,7 +2225,7 @@
 		}
         var pe = 1;
         prce = pe;
-        price =(parseFloat(price)+ parseFloat(options.val())).toFixed(2);
+        price =(parseFloat(price)+ parseFloat(options.val())).toFixed(1);
         var yjyhPrice = $("#amountMoney").val();
         // alert(price)
 		// alert(youhuiPrice)
@@ -2240,10 +2240,10 @@
 		// }
         // alert(price)
 		if ( '' != yjyhPrice && yjyhPrice != price){
-            yjyhPrice = (parseFloat(yjyhPrice)+ parseFloat(options.val())).toFixed(2);
+            yjyhPrice = (parseFloat(yjyhPrice)+ parseFloat(options.val())).toFixed(1);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额："+dazhePrice+"</li>";
             lis += "<li>优惠金额："+youhuiPrice+"</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -2251,11 +2251,11 @@
             lis += "<li>实收金额："+yjyhPrice+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(yjyhPrice)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 		} else {
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额："+dazhePrice+"</li>";
             lis += "<li>优惠金额："+youhuiPrice+"</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -2263,7 +2263,7 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 		}
 
 		addhtml = "<tr><td>"+options.text()+"</td>";
@@ -2291,7 +2291,7 @@
         document.getElementById('additionalPrices').value = "";
         var privaul = $("#prival").val();
         prce = privaul;
-        var sumprices = (parseFloat(privaul) * parseFloat(obj)).toFixed(2);
+        var sumprices = (parseFloat(privaul) * parseFloat(obj)).toFixed(1);
         sumprice.innerText = sumprices;
         //$("#sumprice").val(sumprices);
 		$("#additionalPrices").val(sumprices);
@@ -2340,13 +2340,13 @@
         tr.parentNode.removeChild(tr);//从tr的父元素[tbody]移除tr
 		//var dd = $("#prival").val();
 		//alert(prce);
-		var dsf = (parseFloat(prce) * parseFloat(privals)).toFixed(2);
-        price = (parseFloat(price) - parseFloat(dsf)).toFixed(2);
+		var dsf = (parseFloat(prce) * parseFloat(privals)).toFixed(1);
+        price = (parseFloat(price) - parseFloat(dsf)).toFixed(1);
 		if ("" != yjyhPrice && yjyhPrice != price){
-            yjyhPrice = (parseFloat(yjyhPrice) - parseFloat(dsf)).toFixed(2);
+            yjyhPrice = (parseFloat(yjyhPrice) - parseFloat(dsf)).toFixed(1);
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额："+dazhePrice+"</li>";
             lis += "<li>优惠金额："+youhuiPrice+"</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -2354,11 +2354,11 @@
             lis += "<li>实收金额："+yjyhPrice+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(yjyhPrice)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 		} else {
             $("#ula").empty();
             var lis="";
-            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
             lis += "<li>折扣金额："+dazhePrice+"</li>";
             lis += "<li>优惠金额："+youhuiPrice+"</li>";
             lis += "<li>抹零金额："+molingPrice+"</li>";
@@ -2366,7 +2366,7 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
-            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 		}
         addinal.remove(addinalname);
         addinalPrice.remove(privals);
@@ -2411,24 +2411,24 @@
         if ("" == molingMoney){
             molingPrice = 0.00;
             molingMoney = 0.00;
-            price = (parseFloat(price) + parseFloat(molingOldPrice)).toFixed(2);
+            price = (parseFloat(price) + parseFloat(molingOldPrice)).toFixed(1);
 		} else {
             molingPrice = molingMoney;
             molingOldPrice = molingMoney;
-            price = (parseFloat(price) - parseFloat(molingMoney)).toFixed(2);
+            price = (parseFloat(price) - parseFloat(molingMoney)).toFixed(1);
 		}
 
 
 
         $("#ula").empty();
         var lis="";
-        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(2)+"</li>";
+        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
         lis += "<li>折扣金额："+zkMoney+"</li>";
         lis += "<li>优惠金额：0.00</li>";
         lis += "<li>抹零金额："+molingPrice+"</li>";
-        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(2))
+        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
         if ("0.00" != zkMoney){
-            price = (parseFloat(price) - parseFloat(zkMoney)).toFixed(2);
+            price = (parseFloat(price) - parseFloat(zkMoney)).toFixed(1);
         }
         lis += "<li>应收金额："+price+"</li>";
         lis += "<li>实收金额："+price+"</li>";

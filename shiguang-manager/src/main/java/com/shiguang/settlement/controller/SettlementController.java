@@ -116,7 +116,10 @@ public class SettlementController {
 //		List<SettlementDO> settlementList = settlementService.list(query);
 //		int total = settlementService.count(query);
 //		PageUtils pageUtils = new PageUtils(settlementList, total);
+		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
 		query.put("state",1);
+		query.put("isSale",'0');
+//		query.put("saleDate", sim.format(new Date()));
 		if (null != ShiroUtils.getUser().getCompanyId()){
 			query.put("companyid",ShiroUtils.getUser().getCompanyId());
 		}
@@ -547,7 +550,7 @@ public class SettlementController {
 //		model.addAttribute("sumMoney",sumMoney);
 //		model.addAttribute("jianchaTime",simpleDateFormat.format(new Date()));
 		SalesDO settlementDO = salesService.getSaleNumber(saleNumber);
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		if (null != settlementDO.getPeijingTime()){
 			settlementDO.setPeijingDate(simpleDateFormat.format(settlementDO.getPeijingTime()));
 		}else {

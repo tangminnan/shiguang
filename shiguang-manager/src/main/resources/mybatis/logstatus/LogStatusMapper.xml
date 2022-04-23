@@ -207,7 +207,6 @@
             <if test="storeDescribe !=null and storeDescribe != ''">and FIND_IN_SET(#{storeDescribe},sa.store_describe)</if>
             <if test="factory !=null and factory != ''">and ap.produc_factory = #{factory}</if>
             <if test="color !=null and color != ''">and ap.produc_color = #{color}</if>
-            and (sa.sale_type = '1' or sa.sale_type = '3')
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -241,7 +240,6 @@
             <if test="storeDescribe !=null and storeDescribe != ''">and FIND_IN_SET(#{storeDescribe},sa.store_describe)</if>
             <if test="factory !=null and factory != ''">and ap.produc_factory = #{factory}</if>
             <if test="color !=null and color != ''">and ap.produc_color = #{color}</if>
-            and (sa.sale_type = '1' or sa.sale_type = '3')
         </where>
     </select>
 

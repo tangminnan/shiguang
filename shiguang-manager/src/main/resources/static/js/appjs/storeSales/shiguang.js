@@ -128,8 +128,10 @@ function sure(){
 var array = new Array();
 function batchSelect() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-    array.push(rows);
-    window.localStorage.setItem("shiguang",JSON.stringify(array))
+	return rows;
+    ///array.push(rows);
+   // alert(array)
+   //  window.localStorage.setItem("shiguang",JSON.stringify(rows))
    // window.opener.goodsInfo(rows);
 	// if (rows.length == 0) {
 	// 	layer.msg("请选择要购买的镜架");

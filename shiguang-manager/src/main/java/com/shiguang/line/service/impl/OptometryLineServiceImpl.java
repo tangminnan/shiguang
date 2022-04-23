@@ -84,7 +84,7 @@ public class OptometryLineServiceImpl implements OptometryLineService {
     }
 
     @Override
-    public void saveYgLineJinan(YgLineJinanDO ygLineJinanDO) {
+    public int saveYgLineJinan(YgLineJinanDO ygLineJinanDO) {
         return optometryLineDao.saveYgLineJinan(ygLineJinanDO);
     }
 

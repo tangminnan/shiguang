@@ -1,7 +1,7 @@
 
 var prefix = "/information/optometryJinanline"
 $(function() {
-	load();
+	//load();
 });
 
 function load() {
@@ -78,6 +78,7 @@ function load() {
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
+	load();
 }
 function add() {
 	var consultRoom =window.localStorage.getItem("consultRoom");

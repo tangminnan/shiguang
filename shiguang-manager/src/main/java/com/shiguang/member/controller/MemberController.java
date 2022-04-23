@@ -342,7 +342,7 @@ public class MemberController {
 //		model.addAttribute("sumMoney",sumMoney);
 //		model.addAttribute("jianchaTime",simpleDateFormat.format(new Date()));
         SalesDO settlementDO = salesService.getSaleNumber(saleNumber);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if (null != settlementDO.getPeijingTime()){
             settlementDO.setPeijingDate(simpleDateFormat.format(settlementDO.getPeijingTime()));
         }else {

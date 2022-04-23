@@ -4,7 +4,9 @@
 <mapper namespace="com.shiguang.member.dao.MemberDao">
 
     <select id="get" resultType="com.shiguang.member.domain.MemberDO">
-		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`company_id`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status`,`state` from member where id = #{value}
+		select m.`id`,m.`name`,m.`member_option`,m.`card_number`,m.`sex`,m.`depart_number`,m.`company_id`,m.`birthday_year`,m.`birthday_month`,m.`birthday_day`,m.`age`,m.`phone_1`,m.`phone_2`,m.`phone_3`,m.`province_code`,m.`province_name`,m.`city_code`,m.`city_name`,m.`area_code`,m.`area_name`,m.`card_type`,m.`master_card`,m.`minor_name`,m.`crowd_type`,
+		m.`exclusive_customer`,m.`exclusive_customer_id`,m.`identity_type`,m.`identity_id`,m.`vocation`,m.`school`,m.`qq_number`,m.`email`,m.`address`,m.`postal_code`,
+		m.`interest`,m.`source`,m.`integral_pasd`,m.`integral`,m.`remark`,m.`register_time`,m.`status`,m.`state`,sc.`card_number` as storeCardNum, sc.`card_money` from member m left join stored_card sc on sc.member_number = m.card_number  where m.id = #{value}
 	</select>
 
     <select id="getCardNumber" resultType="com.shiguang.member.domain.MemberDO">
@@ -78,7 +80,7 @@
     </select>
 
     <select id="payList" resultType="com.shiguang.settlement.domain.JieKuanMoneyDO">
-        SELECT name,companyId,cardNumber,isSale,saleNumber,peijingTime,sex,departNumber,age,phone1,saleForm,state,status from(
+        SELECT name,companyId,cardNumber,isSale,saleNumber,peijingTime,amountMoney,sex,departNumber,age,phone1,saleForm,state,status from(
         SELECT
         m.`name` as name,
         m.company_id as companyId,
@@ -86,6 +88,7 @@
         s.`sale_type` AS isSale,
         s.`sale_number` as saleNumber,
         s.peijing_time as peijingTime,
+        s.amount_money as amountMoney,
         m.`sex` as sex,
         m.`depart_number` as departNumber,
         m.`age` as age,
@@ -106,6 +109,7 @@
         c.is_sale AS isSale,
         c.`sale_number` as saleNumber,
         c.create_time as peijingTime,
+        '' as amountMoney,
         m.`sex` as sex,
         m.`depart_number` as departNumber,
         m.`age` as age,
@@ -126,6 +130,8 @@
         <if test="sex != null and sex != ''"> and sex = #{sex} </if>
         <if test="age != null and age != ''"> and age = #{age} </if>
         <if test="phone1 != null and phone1 != ''"> and (phone1 = #{phone1} or phone2 = #{phone1} or phone3 = #{phone1} ) </if>
+        <if test="saleDate != null and saleDate !=''"> and date_format(peijingTime ,'%Y-%m-%d') = #{saleDate}</if>
+        <if test="isSale != null and isSale != ''"> and isSale = #{isSale} </if>
         and `status` = 0
         and state = 1
 <!--        <if test="isSale != null and isSale != ''"> and c.is_sale = #{isSale} </if>-->
@@ -147,7 +153,7 @@
 </select>
 
     <select id="payCountList" resultType="com.shiguang.settlement.domain.JieKuanMoneyDO">
-        SELECT name,companyId,cardNumber,isSale,saleNumber,peijingTime,sex,departNumber,age,phone1,saleForm,state,status from(
+        SELECT name,companyId,cardNumber,isSale,saleNumber,peijingTime,amountMoney,sex,departNumber,age,phone1,saleForm,state,status from(
         SELECT
         m.`name` as name,
         m.company_id as companyId,
@@ -155,6 +161,7 @@
         s.`sale_type` AS isSale,
         s.`sale_number` as saleNumber,
         s.peijing_time as peijingTime,
+        s.amount_money as amountMoney,
         m.`sex` as sex,
         m.`depart_number` as departNumber,
         m.`age` as age,
@@ -175,6 +182,7 @@
         c.is_sale AS isSale,
         c.`sale_number` as saleNumber,
         c.create_time as peijingTime,
+        '' as amountMoney,
         m.`sex` as sex,
         m.`depart_number` as departNumber,
         m.`age` as age,
@@ -195,6 +203,8 @@
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="age != null and age != ''"> and age = #{age} </if>
             <if test="phone1 != null and phone1 != ''"> and (phone1 = #{phone1} or phone2 = #{phone1} or phone3 = #{phone1} ) </if>
+            <if test="saleDate != null and saleDate !=''">and date_format(peijingTime ,'%Y-%m-%d') = #{saleDate}</if>
+            <if test="isSale != null and isSale != ''"> and isSale = #{isSale} </if>
             and `status` = 0
             and state = 1
             <!--        <if test="isSale != null and isSale != ''"> and c.is_sale = #{isSale} </if>-->

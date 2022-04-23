@@ -215,7 +215,8 @@
             <!--and call_status in ('1','2','3') or call_status = '0'-->
             <choose>
                 <when test="consultRoom != null and consultRoom != ''">
-                    and (consult_room = #{consultRoom} and call_status in ('1','2','3') or call_status = '0')
+                    and (consult_room = #{consultRoom} or consult_room is NULL)
+                    and ( call_status in ('1','2','3') or call_status = '0')
                 </when>
                 <otherwise>
                     and (call_status in ('1','2','3') or call_status = '0')
