@@ -18,6 +18,8 @@ public interface CardService {
 	CardDO get(Long id);
 
 	CardDO getMemberNum(String memberNumber);
+
+	CardDO getCardNum(String cardNumber);
 	
 	List<CardDO> list(Map<String, Object> map);
 	

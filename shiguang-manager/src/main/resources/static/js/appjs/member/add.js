@@ -11,6 +11,8 @@ function save() {
     var ideentityType = $("#identityType").val();
     //var ideentityType = $("input[name='identityType']:checked").val();
     var identityCard = $("input[name='identityId']").val();
+    var companyId = $("#companyId").val();
+    if (companyId == '1'){
         if(ideentityType=="居民身份证"){
             var date = new Date();
             var nowyear = date.getFullYear();
@@ -36,6 +38,8 @@ function save() {
             //var birthday = year+"-"+month+"-"+day
             //$("input[name='birthday']").val(birthday);
         }
+    }
+
 
 	$.ajax({
 		cache : true,

@@ -5,12 +5,15 @@ import com.shiguang.baseinfomation.service.*;
 import com.shiguang.common.utils.*;
 import com.shiguang.jiancha.domain.*;
 import com.shiguang.jiancha.service.*;
-import com.shiguang.line.domain.LineDO;
+import com.shiguang.line.domain.YgLineJinanDO;
 import com.shiguang.line.service.LineService;
+import com.shiguang.line.service.OptometryLineService;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.mailInfo.domain.MailInfoDO;
 import com.shiguang.mailInfo.service.MailInfoService;
+import com.shiguang.member.domain.LineDO;
 import com.shiguang.member.domain.MemberDO;
+import com.shiguang.member.service.DistributeLineService;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.product.service.ProducaService;
@@ -81,6 +84,10 @@ public class MemberController {
     private LogStatusService logStatusService;
     @Autowired
     private ProducaService producaService;
+    @Autowired
+    private DistributeLineService distributeLineService;
+    @Autowired
+    private OptometryLineService optometryLineService;
 
     @GetMapping()
     @RequiresPermissions("information:member:member")
@@ -154,6 +161,7 @@ public class MemberController {
         model.addAttribute("sourceDOList",sourceDOList);
         List<InterestDO> interestDOList = interestService.list(map);
         model.addAttribute("interestDOList",interestDOList);
+        model.addAttribute("companyId",ShiroUtils.getUser().getCompanyId());
         return "member/add";
     }
 
@@ -872,11 +880,13 @@ public class MemberController {
                 return R.error("会员卡号已存在");
             }
         } else {
-            map.put("identityId",member.getIdentityId());
-            map.put("state","1");
-            List<MemberDO> list = memberService.list(map);
-            if (list.size() > 0){
-                return R.error("该会员已存在");
+            if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+                map.put("identityId",member.getIdentityId());
+                map.put("state","1");
+                List<MemberDO> list = memberService.list(map);
+                if (list.size() > 0){
+                    return R.error("该会员已存在");
+                }
             }
             member.setCardNumber("H"+GuuidUtil.getUUID());
         }
@@ -908,32 +918,34 @@ public class MemberController {
         return R.ok();
     }
 
-    /**
-     * 排队
-     */
-    @PostMapping( "/line")
-    @ResponseBody
-    @RequiresPermissions("information:member:line")
-    public R line(Long id){
-        MemberDO memberDO = memberService.get(id);
-        LineDO lineDO = new LineDO();
-        lineDO.setMemberNumber(memberDO.getCardNumber());
-        lineDO.setMemberName(memberDO.getName());
-        lineDO.setSex(memberDO.getSex());
-        lineDO.setCallStatus("0");
-        lineDO.setLineTime(new Date());
-        if(lineService.save(lineDO)>0){
-            return R.ok();
-        }
-        return R.error();
-    }
+//    /**
+//     * 排队
+//     */
+//    @PostMapping( "/line")
+//    @ResponseBody
+//    @RequiresPermissions("information:member:line")
+//    public R line(Long id){
+//        MemberDO memberDO = memberService.get(id);
+//        LineDO lineDO = new LineDO();
+//        lineDO.setMemberNumber(memberDO.getCardNumber());
+//        lineDO.setMemberName(memberDO.getName());
+//        lineDO.setSex(memberDO.getSex());
+//        lineDO.setCallStatus("0");
+//        lineDO.setLineTime(new Date());
+//        if(lineService.save(lineDO)>0){
+//            return R.ok();
+//        }
+//        return R.error();
+//    }
 
     /**
      * 排队
      */
-    @PostMapping( "/jinanline/{id}")
+    @GetMapping( "/jinanline/{id}")
     @RequiresPermissions("information:member:line")
-    public String jinanline(@PathVariable("id") Long id){
+    public String jinanline(@PathVariable("id") Long id, Model model){
+        MemberDO memberDO = memberService.get(id);
+        model.addAttribute("memberDO",memberDO);
 //        MemberDO memberDO = memberService.get(id);
 //        LineDO lineDO = new LineDO();
 //        lineDO.setMemberNumber(memberDO.getCardNumber());
@@ -945,6 +957,25 @@ public class MemberController {
 //            return R.ok();
 //        }
         return "member/distributeLine";
+    }
+
+    @ResponseBody
+    @PostMapping("/saveLine")
+    @RequiresPermissions("information:member:line")
+    public R save( LineDO lineDO){
+        SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        lineDO.setCreateTime(sim.format(new Date()));
+        lineDO.setCreateName(ShiroUtils.getUser().getName());
+        distributeLineService.save(lineDO);
+        YgLineJinanDO ygLineJinanDO = new YgLineJinanDO();
+        ygLineJinanDO.setMemberName(lineDO.getMemberName());
+        ygLineJinanDO.setMemberNumber(lineDO.getMemberNumber());
+        ygLineJinanDO.setCompanyId(ShiroUtils.getUser().getCompanyId());
+        ygLineJinanDO.setSex(lineDO.getSex());
+        ygLineJinanDO.setCallStatus("0");
+        ygLineJinanDO.setLineTime(new Date());
+        optometryLineService.saveYgLineJinan(ygLineJinanDO);
+        return R.ok("分诊成功");
     }
 
     /**

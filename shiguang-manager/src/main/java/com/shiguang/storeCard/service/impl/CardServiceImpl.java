@@ -26,6 +26,11 @@ public class CardServiceImpl implements CardService {
 	public CardDO getMemberNum(String memberNumber){
 		return cardDao.getMemberNum(memberNumber);
 	}
+
+	@Override
+	public CardDO getCardNum(String cardNum){
+		return cardDao.getCardNum(cardNum);
+	}
 	
 	@Override
 	public List<CardDO> list(Map<String, Object> map){

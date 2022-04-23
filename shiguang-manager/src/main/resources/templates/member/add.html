@@ -9,7 +9,8 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
-																																			<div class="form-group">	
+							<input id="companyId" th:value="${companyId}" type="hidden">
+																																			<div class="form-group">
 								<label class="col-sm-3 control-label">顾客姓名：</label>
 								<div class="col-sm-8">
 									<input id="name" name="name"  type="text">
@@ -133,136 +134,142 @@
 									<button type="submit" class="btn btn-primary">保存</button>
 								</div>
 							</div>
-						</form>
-						<!--<h2 style="color: red; text-align: center">以下为可选项</h2>-->
+						<!--</form>-->
+						<h2 style="color: red; text-align: center">以下为可选项</h2>
 							<!--<form class="form-horizontal m-t" id="signupForms">-->
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">主卡：</label>-->
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">主卡：</label>
+								<div class="col-sm-8">
+									<input id="masterCard" name="masterCard" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">姓名：</label>
+								<div class="col-sm-8">
+									<input id="minorName" name="minorName" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">人群分类：</label>
+								<div class="col-sm-8">
+									<select name="crowdType" id="crowdType"  data-actions-box="false" data-size="5">
+										<option></option>
+										<option th:each="ls:${personSortDOList}"
+												th:text="${ls.crowdName}"
+												th:value="${ls.crowdName}"></option>
+									</select>
+								</div>
+							</div>
+																												<!--<div class="form-group">	-->
+								<!--<label class="col-sm-3 control-label">专属客服：</label>-->
 								<!--<div class="col-sm-8">-->
-									<!--<input id="masterCard" name="masterCard" class="form-control" type="text">-->
+									<!--<input id="exclusiveCustomer" name="exclusiveCustomer" class="form-control" type="text">-->
+									<!--<input id="exclusiveCustomerId" name="exclusiveCustomerId" class="form-control" type="hidden">-->
 								<!--</div>-->
 							<!--</div>-->
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">证件类型：</label>
+								<div class="col-sm-8">
+									<select class="form-control" name="identityTypefk" id="identityTypefk" >
+										<option value="">请选择</option>
+										<option value="居民身份证">居民身份证</option>
+										<option value="机动车驾驶证">机动车驾驶证</option>
+										<option value="台湾居民来往大陆通行证">台湾居民来往大陆通行证</option>
+										<option value="中国人民解放军军人证">中国人民解放军军人证</option>
+										<option value="中国人民武装警察身份证">中国人民武装警察身份证</option>
+										<option value="护照">护照</option>
+										<option value="户口本">户口本</option>
+									</select>
+								</div>
+							</div>
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">联系人证件号码：</label>
+								<div class="col-sm-8">
+									<input id="identityIds" name="identityIdfk" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">职业：</label>
+								<div class="col-sm-8">
+									<select name="vocation" id="vocation"  data-actions-box="false" data-size="5">
+										<option></option>
+										<option th:each="ls:${vocationDOList}"
+												th:text="${ls.vocationName}"
+												th:value="${ls.vocationName}"></option>
+									</select>
+								</div>
+							</div>
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">学校：</label>
+								<div class="col-sm-8">
+									<input id="school" name="school" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">QQ号码：</label>
+								<div class="col-sm-8">
+									<input id="qqNumber" name="qqNumber" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">E-Mail：</label>
+								<div class="col-sm-8">
+									<input id="e-mail" name="e-mail" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">地址：</label>
+								<div class="col-sm-8">
+									<input id="address" name="address" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">邮编：</label>
+								<div class="col-sm-8">
+									<input id="postalCode" name="postalCode" class="form-control" type="text">
+								</div>
+							</div>
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">兴趣爱好：</label>
+								<div class="col-sm-8">
+									<select name="interests" id="interests" multiple class="selectpicker form-control"  onchange="changeInterest()" >
+										<option></option>
+										<option th:each="ls:${interestDOList}"
+												th:text="${ls.imterestName}"
+												th:value="${ls.imterestName}"></option>
+									</select>
+									<input id="interest" name="interest" class="form-control" type="hidden">
+								</div>
+							</div>
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">来源：</label>
+								<div class="col-sm-8">
+									<select name="source" id="source"  data-actions-box="false" data-size="5">
+										<option></option>
+										<option th:each="ls:${sourceDOList}"
+												th:text="${ls.sourceName}"
+												th:value="${ls.sourceName}"></option>
+									</select>
+								</div>
+							</div>
 																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">姓名：</label>-->
+								<!--<label class="col-sm-3 control-label">积分密码：</label>-->
 								<!--<div class="col-sm-8">-->
-									<!--<input id="minorName" name="minorName" class="form-control" type="text">-->
+									<!--<input id="integralPasd" name="integralPasd" class="form-control" type="text">-->
 								<!--</div>-->
 							<!--</div>-->
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">人群分类：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<select name="crowdType" id="crowdType"  data-actions-box="false" data-size="5">-->
-										<!--<option></option>-->
-										<!--<option th:each="ls:${personSortDOList}"-->
-												<!--th:text="${ls.crowdName}"-->
-												<!--th:value="${ls.crowdName}"></option>-->
-									<!--</select>-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--&lt;!&ndash;<div class="form-group">	&ndash;&gt;-->
-								<!--&lt;!&ndash;<label class="col-sm-3 control-label">专属客服：</label>&ndash;&gt;-->
-								<!--&lt;!&ndash;<div class="col-sm-8">&ndash;&gt;-->
-									<!--&lt;!&ndash;<input id="exclusiveCustomer" name="exclusiveCustomer" class="form-control" type="text">&ndash;&gt;-->
-									<!--&lt;!&ndash;<input id="exclusiveCustomerId" name="exclusiveCustomerId" class="form-control" type="hidden">&ndash;&gt;-->
-								<!--&lt;!&ndash;</div>&ndash;&gt;-->
-							<!--&lt;!&ndash;</div>&ndash;&gt;-->
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">证件类型：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<select class="form-control" name="identityType" id="identityType" >-->
-										<!--<option value="">请选择</option>-->
-										<!--<option value="居民身份证">居民身份证</option>-->
-										<!--<option value="机动车驾驶证">机动车驾驶证</option>-->
-										<!--<option value="台湾居民来往大陆通行证">台湾居民来往大陆通行证</option>-->
-										<!--<option value="中国人民解放军军人证">中国人民解放军军人证</option>-->
-										<!--<option value="中国人民武装警察身份证">中国人民武装警察身份证</option>-->
-										<!--<option value="护照">护照</option>-->
-										<!--<option value="户口本">户口本</option>-->
-									<!--</select>-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">联系人证件号码：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="identityId" name="identityId" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">职业：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<select name="vocation" id="vocation"  data-actions-box="false" data-size="5">-->
-										<!--<option></option>-->
-										<!--<option th:each="ls:${vocationDOList}"-->
-												<!--th:text="${ls.vocationName}"-->
-												<!--th:value="${ls.vocationName}"></option>-->
-									<!--</select>-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">学校：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="school" name="school" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">QQ号码：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="qqNumber" name="qqNumber" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">E-Mail：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="e-mail" name="e-mail" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">地址：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="address" name="address" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">邮编：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="postalCode" name="postalCode" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">兴趣爱好：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<select name="interests" id="interests" multiple class="selectpicker form-control"  onchange="changeInterest()" >-->
-										<!--<option></option>-->
-										<!--<option th:each="ls:${interestDOList}"-->
-												<!--th:text="${ls.imterestName}"-->
-												<!--th:value="${ls.imterestName}"></option>-->
-									<!--</select>-->
-									<!--<input id="interest" name="interest" class="form-control" type="hidden">-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">来源：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<select name="source" id="source"  data-actions-box="false" data-size="5">-->
-										<!--<option></option>-->
-										<!--<option th:each="ls:${sourceDOList}"-->
-												<!--th:text="${ls.sourceName}"-->
-												<!--th:value="${ls.sourceName}"></option>-->
-									<!--</select>-->
-								<!--</div>-->
-							<!--</div>-->
-																												<!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
-								<!--&lt;!&ndash;<label class="col-sm-3 control-label">积分密码：</label>&ndash;&gt;-->
-								<!--&lt;!&ndash;<div class="col-sm-8">&ndash;&gt;-->
-									<!--&lt;!&ndash;<input id="integralPasd" name="integralPasd" class="form-control" type="text">&ndash;&gt;-->
-								<!--&lt;!&ndash;</div>&ndash;&gt;-->
-							<!--&lt;!&ndash;</div>&ndash;&gt;-->
-																												<!--<div class="form-group">-->
-								<!--<label class="col-sm-3 control-label">备注：</label>-->
-								<!--<div class="col-sm-8">-->
-									<!--<input id="remark" name="remark" class="form-control" type="text">-->
-								<!--</div>-->
-							<!--</div>-->
+																												<div class="form-group">
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">保存</button>
+								</div>
+							</div>
+						</form>
 
 																					<!--<div class="form-group">-->
 								<!--<div class="col-sm-8 col-sm-offset-3">-->
@@ -561,7 +568,7 @@
         //     alert(birthyear);
         // });
         $(".et-name").bind("input birthdayYear", function () {
-            alert($(".et-name").val());
+            //alert($(".et-name").val());
         });
         function getAge(obj){
             // alert(data);

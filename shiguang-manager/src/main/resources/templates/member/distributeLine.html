@@ -11,6 +11,9 @@
 <body>
 	<!--保存-->
 <form class="form-horizontal m-t" id="signupForm" style="margin-top: 20px;text-align: center;">
+	<input type="hidden" id="memberNumber" name="memberNumber" th:value="${memberDO.cardNumber}">
+	<input type="hidden" id="memberName" name="memberName" th:value="${memberDO.name}">
+	<input type="hidden" id="sex" name="sex" th:value="${memberDO.sex}">
 	<div class="form-group">
 	<label class="col-sm-3 control-label">分配方式：</label>
 	<div class="col-sm-8">
@@ -37,11 +40,22 @@
 			<option value="验光室十">验光室十</option>
 		</select>
 	</div>
+	<div class="form-group">
+		<div class="col-sm-8 col-sm-offset-3">
+			<button type="submit" class="btn btn-primary">确定</button>
+		</div>
+	</div>
 </form>
 <div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/member/distributeLine.js"></script>
 <script type="text/javascript">
     function getMember(obj){
         alert(obj);
+        if ('1' == obj){
+            ygs.style='display:none';
+		} else if ('0' == obj){
+            ygs.style='display:block';
+		}
     }
 </script>
 </body>

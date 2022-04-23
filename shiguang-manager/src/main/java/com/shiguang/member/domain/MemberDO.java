@@ -18,7 +18,7 @@ public class MemberDO implements Serializable {
     private Long costId;
     //是否缴费
     private Long isSale;
-    //顾客性别(1:男2:女)
+    //顾客性别(0:男1:女)
     private Long sex;
     private String sexx;
     //部门编码

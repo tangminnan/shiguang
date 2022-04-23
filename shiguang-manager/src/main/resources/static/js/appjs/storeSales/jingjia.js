@@ -143,8 +143,8 @@ function batchSelect() {
     	// });
     // alert(rows.length)
     // sessionStorage.setItem("row",rows);
-    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-    parent.layer.close(index);
+    // var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+    // parent.layer.close(index);
 	return rows;
    // window.opener.goodsInfo(rows);
 	// if (rows.length == 0) {

@@ -84,6 +84,11 @@ public class OptometryLineServiceImpl implements OptometryLineService {
     }
 
     @Override
+    public void saveYgLineJinan(YgLineJinanDO ygLineJinanDO) {
+        return optometryLineDao.saveYgLineJinan(ygLineJinanDO);
+    }
+
+    @Override
     public int countJinan(Map<String, Object> map) {
         return optometryLineDao.countJinan(map);
     }

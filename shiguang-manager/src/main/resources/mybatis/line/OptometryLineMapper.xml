@@ -370,6 +370,18 @@
             limit #{offset}, #{limit}
         </if>
     </select>
+
+    <insert id="saveYgLineJinan" parameterType="com.shiguang.line.domain.YgLineJinanDO" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+		insert into ygline_jinan
+		(
+		`company_id`,`member_number`,`call_status`,`member_name`,`sex`,`consult_room`,`line_time`
+		)
+		values
+		(
+		#{companyId},#{memberNumber},#{callStatus},#{memberName},#{sex},#{consultRoom},#{lineTime}
+		)
+	</insert>
+
     <insert id="saveLineMemberJinan" parameterType="com.shiguang.line.domain.YgLineMemberJinanDO" useGeneratedKeys="true" keyProperty="id">
 		insert into ygline_member_jinan
 		(

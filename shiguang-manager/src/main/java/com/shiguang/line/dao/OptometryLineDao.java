@@ -37,6 +37,8 @@ public interface OptometryLineDao {
 
     List<YgLineJinanDO> listJinan(Map<String, Object> map);
 
+    void saveYgLineJinan(YgLineJinanDO ygLineJinanDO);
+
     int countJinan(Map<String, Object> map);
 
     int updateJinan(YgLineJinanDO line);

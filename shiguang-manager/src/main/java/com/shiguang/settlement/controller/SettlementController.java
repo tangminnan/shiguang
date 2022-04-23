@@ -165,6 +165,25 @@ public class SettlementController {
 		model.addAttribute("memberDO",memberDO);
 		//List<CostDO> costDOList = costService.getMemberNum(cardNumber);
 		//CostDO costDO = costService.get(costId);
+		model.addAttribute("memberDO",memberDO);
+		Map<String,Object> mapphone = new HashMap<>();
+		if (null != memberDO.getPhone1() && !"".equals(memberDO.getPhone1())){
+			mapphone.put("phone1",memberDO.getPhone1());
+		} else {
+			mapphone.put("phone1",memberDO.getPhone2());
+		}
+		List<MemberDO> memberList = memberService.list(mapphone);
+		List<CardDO> cardDOS = new ArrayList<>();
+		for (MemberDO memberDO1 : memberList){
+			CardDO cardDO = new CardDO();
+			cardDO = cardService.getMemberNum(memberDO1.getCardNumber());
+			if (null == cardDO){
+				cardDO = new CardDO();
+				cardDO.setCardNumber("");
+			}
+			cardDOS.add(cardDO);
+		}
+		model.addAttribute("cardDOS",cardDOS);
 		Map<String,Object> map = new HashMap<>();
 		map.put("saleNumber",saleNumber);
 		SalesDO salesDO = salesService.getSaleNumber(saleNumber);
@@ -230,7 +249,19 @@ public class SettlementController {
 	String editMoney(@PathVariable("cardNumber") String cardNumber,Model model){
 		MemberDO memberDO = memberService.getCardNumber(cardNumber);
 		model.addAttribute("memberDO",memberDO);
-
+		Map<String,Object> mapphone = new HashMap<>();
+		if (null != memberDO.getPhone1() && !"".equals(memberDO.getPhone1())){
+			mapphone.put("phone1",memberDO.getPhone1());
+		} else {
+			mapphone.put("phone1",memberDO.getPhone2());
+		}
+		List<MemberDO> memberList = memberService.list(mapphone);
+		List<CardDO> cardDOS = new ArrayList<>();
+		for (MemberDO memberDO1 : memberList){
+			CardDO cardDO = cardService.getMemberNum(memberDO1.getCardNumber());
+			cardDOS.add(cardDO);
+		}
+		model.addAttribute("cardDOS",cardDOS);
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Map<String,Object> map = new HashMap<>();
@@ -445,7 +476,7 @@ public class SettlementController {
 		settlement.setSettleDate(new Date());
 		if ("6".equals(settlement.getPayModel().substring(0,settlement.getPayModel().length()-1))){
 			String cardNumber = settlement.getChuzhiNumber();
-			CardDO cardDO = cardService.getMemberNum(cardNumber);
+			CardDO cardDO = cardService.getCardNum(cardNumber);
 			if (null != cardDO){
 				if (cardDO.getPassword().equals(settlement.getChuzhiPasd())){
 					if (Double.valueOf(cardDO.getCardMoney()) > Double.valueOf(settlement.getModelMoney().substring(0,settlement.getModelMoney().length()-1))){

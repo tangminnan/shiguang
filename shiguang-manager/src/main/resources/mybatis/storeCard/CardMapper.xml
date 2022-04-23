@@ -10,6 +10,9 @@
 	<select id="getMemberNum" resultType="com.shiguang.storeCard.domain.CardDO">
 		select `id`,`card_number`,`member_name`,`card_money`,`member_number`,`password`,`create_name`,`create_time`,`remark`,`status`,`state` from stored_card where member_number = #{value}
 	</select>
+	<select id="getCardNum" resultType="com.shiguang.storeCard.domain.CardDO">
+		select `id`,`card_number`,`member_name`,`card_money`,`member_number`,`password`,`create_name`,`create_time`,`remark`,`status`,`state` from stored_card where card_number = #{value}
+	</select>
 
 	<select id="list" resultType="com.shiguang.storeCard.domain.CardDO">
 		select `id`,`card_number`,`member_name`,`card_money`,`member_number`,`password`,`create_name`,`create_time`,`remark`,`status`,`state` from stored_card
