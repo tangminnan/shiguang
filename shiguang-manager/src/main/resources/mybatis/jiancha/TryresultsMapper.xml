@@ -943,7 +943,7 @@
 
 
     <delete id="remove">
-		delete from jc_tryresults where id = #{value}
+		delete from jc_tryresults where ptometry_number = #{ptometryNumber}
 	</delete>
 
     <delete id="batchRemove">

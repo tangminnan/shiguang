@@ -127,7 +127,7 @@ function load() {
                                                 + '\')">修改</span> ';
                                             var h = '<span class="btn btn-danger btn-sm" href="#" title="删除"  mce_href="#" onclick="reomveTry(\''
                                                 + value
-                                                + '\')">删除验光</span> ';
+                                                + '\')">删除</span> ';
                                         }else if (row.trystatus =="0") {
                                             // var f = '';
                                             if (row.haveid == "1"){ //是否结算
@@ -147,7 +147,7 @@ function load() {
                                                         + '\')">修改</span> ';
                                                     var h = '<span class="btn btn-danger btn-sm" href="#" title="删除"  mce_href="#" onclick="reomveTry(\''
                                                         + value
-                                                        + '\')">删除验光</span> ';
+                                                        + '\')">删除</span> ';
 
                                                 }
                                             } else if (row.haveid == "0") { //是否结算
