@@ -88,6 +88,7 @@ public class WeiwaiController {
                 query.put("companyId",ShiroUtils.getUser().getCompanyId());
             }
         }
+//        query.put("companyId",ShiroUtils.getUser().getCompanyId());
         List<WeiwaiDO> weiwaiList = weiwaiService.list(query);
         int total = weiwaiService.count(query);
         PageUtils pageUtils = new PageUtils(weiwaiList, total);
@@ -115,6 +116,9 @@ public class WeiwaiController {
             Map<String, Object> map = new HashMap<>();
             map.put("companyid", companyid);
             map.put("positionOrder", 2);
+            if(companyId.equals(3)||companyId.equals("3")){
+                map.put("positionId", 7);
+            }
             DepartmentDO departmentDO = weiwaiService.phoneOrAddres(map);
 
             String departTel = departmentDO.getDepartTel();

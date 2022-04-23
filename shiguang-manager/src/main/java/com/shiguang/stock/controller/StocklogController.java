@@ -51,7 +51,11 @@ public class StocklogController {
         Query query = new Query(params);
 		String companyId = null;
 		if (null != ShiroUtils.getUser().getCompanyId()) {
-			companyId = ShiroUtils.getUser().getCompanyId();
+			if(ShiroUtils.getUser().getCompanyId().equals("3")){
+				query.put("companyId","");
+			}else {
+				query.put("companyId",ShiroUtils.getUser().getCompanyId());
+			}
 		}
 		query.put("companyId",companyId);
 		List<StocklogDO> stocklogList = stocklogService.list(query);
