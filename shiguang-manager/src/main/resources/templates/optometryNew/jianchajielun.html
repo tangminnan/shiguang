@@ -11,7 +11,6 @@
     <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
 </head>
 <body>
-<!--onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" 轴向-->
 <form class="form-horizontal m-t" id="jielun">
     <div class="topTab">
         <ul>
@@ -24,21 +23,21 @@
     <div class="m40 msgBox">
         <h3>验光信息</h3>
         <ul>
-            <li>验光号：<input name="ptometryNumber" th:value="${tryresultsDO.ptometryNumber}" type="text"/></li>
-            <li>验光师/医生：<input name="optometryName" th:value="${tryresultsDO.optometryName}" type="text"/></li>
-            <li>日期：<input input name="createTime" th:value="${newtime}" type="text"/></li>
+            <li>验光号：<input name="ptometryNumber" th:value="${tryresultsDO.ptometryNumber}" readonly type="text"/></li>
+            <li>验光师：<input name="optometryName" th:value="${tryresultsDO.optometryName}" readonly type="text"/></li>
+            <li>日期：<input input name="createTime" th:value="${newtime}" readonly type="text"/></li>
         </ul>
-        <input input id="newOld" name="newOld" th:value="${tryresultsDO.newOld}" type="text" style="display: none"/>
+        <input input id="newOld" name="newOld" th:value="${tryresultsDO.newOld}" readonly type="text" style="display: none"/>
     </div>
     <!--顾客资料-->
     <div class="m40 msgBox">
         <h3>顾客资料</h3>
         <ul>
-            <li>卡号：<input name="cardNumber" th:value="${memberDO.cardNumber}" type="text"/></li>
-            <li>姓名：<input name="name" th:value="${memberDO.name}" type="text"/></li>
-            <li>性别：<input name="sexx" th:value="${memberDO.sexx}" class="short" type="text"/></li>
-            <li>年龄：<input name="age" th:value="${memberDO.age}" class="short" type="text"/></li>
-            <li>电话：<input name="phone1" th:value="${memberDO.phone1}" type="text"/></li>
+            <li>卡号：<input name="cardNumber" th:value="${memberDO.cardNumber}" type="text" readonly/></li>
+            <li>姓名：<input name="name" th:value="${memberDO.name}" type="text" readonly/></li>
+            <li>性别：<input name="sexx" th:value="${memberDO.sexx}" class="short" type="text" readonly/></li>
+            <li>年龄：<input name="age" th:value="${memberDO.age}" class="short" type="text" readonly/></li>
+            <li>电话：<input name="phone1" th:value="${memberDO.phone1}" type="text" readonly/></li>
             <input id="memberId" name="memberId" th:value="${memberDO.id}" type="hidden">
             <input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}" type="hidden">
             <input id="memname" name="memname" th:value="${memberDO.name}" type="hidden">
@@ -51,7 +50,7 @@
     <!--初步诊断-->
     <div class="m40 tabS">
         <h3>初步诊断</h3>
-            <table class="tabG" cellspacing="0" cellpadding="0">
+        <table class="tabG" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
                 <td class="w170">屈光不正</td>
@@ -240,17 +239,17 @@
 
                 <td style="text-align: right" colspan="7">
                     医生：
-
                     <select id="kjyyDoctor" name="kjyyDoctor">
-                        <option value="">--请选择--</option>
+                        <option value="">--选择医生--</option>
                         <option th:each="ls:${listDoctor}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
                         ></option>
                     </select>
                     验光师：
-                    <select  id="kjyyOptometryName" name="kjyyOptometryName">
-                        <option value="">--请选择--</option>
+                    <input id="kjyyOptometryName" name="kjyyOptometryName" th:value="${tryresultsDO.optometryName}" style="width: 75px" readonly type="text"/>
+                    <select  id="ygKjyyshi" name="ygKjyyshi"   onchange="ygKjyy()">
+                        <option value="">--选择验光师--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -389,8 +388,9 @@
                         ></option>
                     </select>
                     验光师：
-                    <select id="kjjyOptometryName" name="kjjyOptometryName">
-                        <option value="">--请选择--</option>
+                    <input id="kjjyOptometryName" name="kjjyOptometryName" th:value="${tryresultsDO.optometryName}" style="width: 75px" readonly type="text"/>
+                    <select  id="ygKjjyshi" name="ygKjjyshi"   onchange="ygKjjy()">
+                        <option value="">--选择验光师--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -411,10 +411,9 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <input id="sphod" th:value="${tryresultsDO.sphereRighttry}"  hidden/>
-                <input id="addod" th:value="${tryresultsDO.addRighttry}" hidden />
-                <td><input  id="kjjySphod"  name="kjjySphod" type="text"onblur="zhengfu(this)"
-                           oninput="getmoney(this,10)" autofocus/></td>
+
+                <td><input  id="kjjySphod"  name="kjjySphod"  th:value="${tryresultsDO.sphereRighttry}" type="text"onblur="zhengfu(this)"
+                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjjyCylod" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialRighttry}" id="kjjyAxialod" name="kjjyAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
@@ -437,12 +436,11 @@
             </tr>
             <tr>
                 <td>OS</td>
-                <input id="sphos" th:value="${tryresultsDO.sphereLefttry}" hidden />
-                <input id="addos" th:value="${tryresultsDO.addLefttry}" hidden />
-                <td><input  id="kjjySphos" name="kjjySphos" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+
+                <td><input  id="kjjySphos" name="kjjySphos"   th:value="${tryresultsDO.sphereLefttry}" type="text"onblur="zhengfu(this)"
+                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderLefttry}"name="kjjyCylos" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                           oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialLefttry}"  id="kjjyAxialos" name="kjjyAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input th:value="${tryresultsDO.prismLefttry}"  id="kjjyPrismos" name="kjjyPrismos" class="short" type="text"/> △</td>
                 <td>
@@ -532,8 +530,9 @@
                         ></option>
                     </select>
                     验光师：
-                    <select id="sgjjOptometryName" name="sgjjOptometryName">
-                        <option value="">--请选择--</option>
+                    <input id="sgjjOptometryName" name="sgjjOptometryName" th:value="${tryresultsDO.optometryName}" style="width: 75px" readonly type="text"/>
+                    <select  id="ygSgjjshi" name="ygSgjjshi"   onchange="ygSgjj()">
+                        <option value="">--选择验光师--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -556,9 +555,9 @@
             <tr>
                 <td>OD</td>
                 <td><input th:value="${tryresultsDO.sphereRighttry}"  name="sgjjSphod" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                           oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}"name="sgjjCylod" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                           oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialRighttry}" id="sgjjAxialod"  name="sgjjAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input  th:value="${tryresultsDO.addRighttry}"     name="sgjjAddod" onblur="zhengfu(this)"
                             oninput="getmoney(this,10)" autofocus type="text"/></td>
@@ -654,8 +653,9 @@
                         ></option>
                     </select>
                     验光师：
-                    <select id="rxOptometryName" name="rxOptometryName">
-                        <option value="">--请选择--</option>
+                    <input id="rxOptometryName" name="rxOptometryName" th:value="${tryresultsDO.optometryName}" style="width: 75px" readonly type="text"/>
+                    <select  id="ygRxjmjcjshi" name="ygRxjmjcjshi"   onchange="ygRxjmjcj()">
+                        <option value="">--选择验光师--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -679,9 +679,9 @@
                 <td>OD</td>
                 <td><input name="rxBcod" type="text"/></td>
                 <td><input th:value="${tryresultsDO.sphereRighttry}"  name="rxSphod" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                           oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}"name="rxCylod" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                           oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialRighttry}"  id="rxAxialod" name="rxAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input name="rxZjod" type="text"/></td>
                 <td><input th:value="${tryresultsDO.dvaRighttry}"  name="rxVaod" type="text"/></td>
@@ -700,9 +700,9 @@
                 <td>OS</td>
                 <td><input name="rxBcos" type="text"/></td>
                 <td><input th:value="${tryresultsDO.sphereLefttry}"  name="rxSphos" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                           oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderLefttry}"name="rxCylos" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                           oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialLefttry}" id="rxAxialos"  name="rxAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input name="rxZjos" type="text"/></td>
                 <td><input th:value="${tryresultsDO.dvaLefttry}"  name="rxVaos" type="text"/></td>
@@ -741,9 +741,11 @@
                                 th:value="${ls.name}"
                         ></option>
                     </select>
+
                     验光师：
-                    <select id="zyOptometryName" name="zyOptometryName">
-                        <option value="">--请选择--</option>
+                    <input id="zyOptometryName" name="zyOptometryName" th:value="${tryresultsDO.optometryName}" style="width: 75px" readonly type="text"/>
+                    <select  id="ygKjzyshi" name="ygKjzyshi"   onchange="ygKjzy()">
+                        <option value="">--选择验光师--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -765,9 +767,9 @@
             <tr>
                 <td>OD</td>
                 <td><input th:value="${tryresultsDO.sphereRighttry}"   name="zySphod" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                           oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="zyCylod" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                           oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialRighttry}"  id="zyAxialod"  name="zyAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"    name="zyPrismod" class="short" type="text"/> △</td>
                 <td>
@@ -783,15 +785,14 @@
                 </td>
                 <td><input name="zyZytjod" type="text"/></td>
                 <td><input th:value="${tryresultsDO.heightRighttry}" name="zyTgod" type="text"/></td>
-                <!--<td><input th:value="${tryresultsDO.dvaRighttry}" name="zyVaod" type="text"/></td>-->
                 <td><input name="zyVaod" type="text"/></td>
             </tr>
             <tr>
                 <td>OS</td>
                 <td><input  th:value="${tryresultsDO.sphereLefttry}"  name="zySphos" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="zyCylos" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input  th:value="${tryresultsDO.axialLefttry}" id="zyAxialos"  name="zyAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input  th:value="${tryresultsDO.prismLefttry}"   name="zyPrismos" class="short" type="text"/> △</td>
                 <td>
@@ -807,7 +808,6 @@
                 </td>
                 <td><input name="zyZytjos" type="text"/></td>
                 <td><input th:value="${tryresultsDO.heightLefttry}" name="zyTgos" type="text"/></td>
-                <!--<td><input th:value="${tryresultsDO.dvaLefttry}" name="zyVaos" type="text"/></td>-->
                 <td><input name="zyVaos" type="text"/></td>
             </tr>
             <tr>
@@ -880,9 +880,11 @@
                                 th:value="${ls.name}"
                         ></option>
                     </select>
+
                     验光师：
-                    <select name="sjxlOptometryName">
-                        <option value="">--请选择--</option>
+                    <input id="sjxlOptometryName" name="sjxlOptometryName" th:value="${tryresultsDO.optometryName}" style="width: 75px" readonly type="text"/>
+                    <select  id="ygSjxlshi" name="ygSjxlshi"   onchange="ygSjxl()">
+                        <option value="">--选择验光师--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -906,9 +908,9 @@
             <tr>
                 <td>OD</td>
                 <td><input th:value="${tryresultsDO.sphereRighttry}"   name="sjxlSphod" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                           oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="sjxlCylod" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                           oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialRighttry}"  id="sjxlAxialod"  name="sjxlAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"   name="sjxlSljod" class="short" type="text"/> △</td>
                 <td>
@@ -931,9 +933,9 @@
             <tr>
                 <td>OS</td>
                 <td><input  th:value="${tryresultsDO.sphereLefttry}"  name="sjxlSphos" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="sjxlCylos" type="text"onblur="zhengfu(this)"
-                             oninput="getmoney(this,10)" autofocus/></td>
+                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input  th:value="${tryresultsDO.axialLefttry}" id="sjxlAxialos"  name="sjxlAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input  th:value="${tryresultsDO.prismLefttry}"   name="sjxlSljos" class="short" type="text"/> △</td>
                 <td>
@@ -996,9 +998,11 @@
                                 th:value="${ls.name}"
                         ></option>
                     </select>
+
                     验光师：
-                    <select name="vstOptometryName">
-                        <option value="">--请选择--</option>
+                    <input id="vstOptometryName" name="vstOptometryName" th:value="${tryresultsDO.optometryName}" style="width: 75px" readonly type="text"/>
+                    <select  id="ygVstshi" name="ygVstshi"   onchange="ygVst()">
+                        <option value="">--选择验光师--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -1090,9 +1094,11 @@
                                 th:value="${ls.name}"
                         ></option>
                     </select>
+
                     验光师：
-                    <select name="crtOptometryName">
-                        <option value="">--请选择--</option>
+                    <input id="crtOptometryName" name="crtOptometryName" th:value="${tryresultsDO.optometryName}" style="width: 75px" readonly type="text"/>
+                    <select  id="ygCrtshi" name="ygCrtshi"   onchange="ygCrt()">
+                        <option value="">--选择验光师--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -1181,9 +1187,11 @@
                                 th:value="${ls.name}"
                         ></option>
                     </select>
+
                     验光师：
-                    <select name="rgpOptometryName">
-                        <option value="">--请选择--</option>
+                    <input id="rgpOptometryName" name="rgpOptometryName" th:value="${tryresultsDO.optometryName}" style="width: 75px" readonly type="text"/>
+                    <select  id="ygRgpshi" name="ygRgpshi"   onchange="ygRgp()">
+                        <option value="">--选择验光师--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -1229,7 +1237,7 @@
                             oninput="getmoney(this,10)" autofocus/></td>
                 <td><input  th:value="${tryresultsDO.cylinderLefttry}"name="rgpCylos" type="text"onblur="zhengfu(this)"
                             oninput="getmoney(this,10)" autofocus/></td>
-                <td><input  th:value="${tryresultsDO.axialLefttry}" id="rgpAxialos"  name="rgpAxialos" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
+                <td><input  th:value="${tryresultsDO.axialLefttry}" id="rgpAxialos"  name="rgpAxialos" type="text" onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input name="rgpQgdos" type="text"/></td>
                 <td><input name="rgpBcos" type="text"/></td>
                 <td><input name="rgpDiaos" type="text"/></td>
@@ -1261,9 +1269,11 @@
                                 th:value="${ls.name}"
                         ></option>
                     </select>
+
                     验光师：
-                    <select name="ypOptometryName">
-                        <option value="">--请选择--</option>
+                    <input id="ypOptometryName" name="ypOptometryName" th:value="${tryresultsDO.optometryName}" style="width: 75px" readonly type="text"/>
+                    <select  id="ygYpshi" name="ygYpshi"   onchange="ygYp()">
+                        <option value="">--选择验光师--</option>
                         <option th:each="ls:${listYanguang}"
                                 th:text="${ls.name}"
                                 th:value="${ls.name}"
@@ -1379,6 +1389,57 @@
     });
 
 
+
+
+    function ygKjyy() {
+        var ygKjyyshi=$("#ygKjyyshi").val();
+        $("#kjyyOptometryName").val(ygKjyyshi);
+    }
+    function ygKjjy() {
+        var ygKjjyshi=$("#ygKjjyshi").val();
+        $("#kjjyOptometryName").val(ygKjjyshi);
+    }
+    function ygSgjj() {
+        var ygSgjjshi=$("#ygSgjjshi").val();
+        $("#sgjjOptometryName").val(ygSgjjshi);
+    }
+    function ygRxjmjcj() {
+        var ygRxjmjcjshi=$("#ygRxjmjcjshi").val();
+        $("#rxOptometryName").val(ygRxjmjcjshi);
+    }
+
+    function ygKjzy() {
+        var ygKjzyshi=$("#ygKjzyshi").val();
+        $("#zyOptometryName").val(ygKjzyshi);
+    }
+
+    function ygSjxl() {
+        var ygSjxlshi=$("#ygSjxlshi").val();
+        $("#sjxlOptometryName").val(ygSjxlshi);
+    }
+
+    function ygVst() {
+        var ygVstshi=$("#ygVstshi").val();
+        $("#vstOptometryName").val(ygVstshi);
+    }
+
+    function ygCrt() {
+        var ygCrtshi=$("#ygCrtshi").val();
+        $("#crtOptometryName").val(ygCrtshi);
+    }
+
+    function ygRgp() {
+        var ygRgpshi=$("#ygRgpshi").val();
+        $("#rgpOptometryName").val(ygRgpshi);
+    }
+
+    function ygYp() {
+        var ygYpshi=$("#ygYpshi").val();
+        $("#ypOptometryName").val(ygYpshi);
+    }
+
+
+
     function getMemberDetail() {
         var id = $("#memberId").val();
         layer.open({
@@ -1452,51 +1513,47 @@
     });
 
     // 点击删除处方数值为空
-    // $(".input_del").click(function () {
-    //     // console.log($(this).parentsUntil('table').eq(2).parent());
-    //     // $('table tbody').empty();
-    //     // $(this).parentsUntil('table').value="";
-    //     // $(this).parentsUntil('table').eq(2).parent().find("input").not(".input_del").val("");
-    //     $(this).parentsUntil('table').eq(2).parent().find("input");
-    //     $(this).parentsUntil('table').eq(2).parent().find("select").val("");
-    //     $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none");
-    // });
-    // 点击删除处方数值为空
-    function deleteInput(obj){
-        if (obj.id == 'remove1'){
-            $("#kjyyPrescriptionType").remove();
-        }
-        if (obj.id=='remove2'){
-            $("#kjjyPrescriptionType").remove();
-        }
-        if (obj.id=='remove3'){
-            $("#sgjjPrescriptionType").remove();
-        }
-        if (obj.id=='remove4'){
-            $("#rxPrescriptionType").remove();
-        }
-        if (obj.id=='remove5'){
-            $("#zyPrescriptionType").remove();
-        }
-        if (obj.id=='remove6'){
-            $("#sjxlPrescriptionType").remove();
-        }
-        if (obj.id=='remove7'){
-            $("#vstPrescriptionType").remove();
-        }
-        if (obj.id=='remove8'){
-            $("#crtPrescriptionType").remove();
-        }
-        if (obj.id=='remove9'){
-            $("#rgpPrescriptionType").remove();
-        }
-        if (obj.id=='remove10'){
-            $("#ypPrescriptionType").remove();
-        }
-        $(obj).parentsUntil('table').eq(2).parent().find("input");
-        $(obj).parentsUntil('table').eq(2).parent().find("select").val("");
-        $(obj).parentsUntil('table').eq(2).parent().attr("style", "display: none");
-    }
+    $(".input_del").click(function () {
+        $(this).parentsUntil('table').eq(2).parent().find("input");
+        $(this).parentsUntil('table').eq(2).parent().find("select").val("");
+        $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none");
+    });
+    // // 点击删除处方数值为空
+    // function deleteInput(obj){
+    //     if (obj.id == 'remove1'){
+    //         $("#kjyyPrescriptionType").remove();
+    //     }
+    //     if (obj.id=='remove2'){
+    //         $("#kjjyPrescriptionType").remove();
+    //     }
+    //     if (obj.id=='remove3'){
+    //         $("#sgjjPrescriptionType").remove();
+    //     }
+    //     if (obj.id=='remove4'){
+    //         $("#rxPrescriptionType").remove();
+    //     }
+    //     if (obj.id=='remove5'){
+    //         $("#zyPrescriptionType").remove();
+    //     }
+    //     if (obj.id=='remove6'){
+    //         $("#sjxlPrescriptionType").remove();
+    //     }
+    //     if (obj.id=='remove7'){
+    //         $("#vstPrescriptionType").remove();
+    //     }
+    //     if (obj.id=='remove8'){
+    //         $("#crtPrescriptionType").remove();
+    //     }
+    //     if (obj.id=='remove9'){
+    //         $("#rgpPrescriptionType").remove();
+    //     }
+    //     if (obj.id=='remove10'){
+    //         $("#ypPrescriptionType").remove();
+    //     }
+    //     $(obj).parentsUntil('table').eq(2).parent().find("input");
+    //     $(obj).parentsUntil('table').eq(2).parent().find("select").val("");
+    //     $(obj).parentsUntil('table').eq(2).parent().attr("style", "display: none");
+    // }
 
     //清空
     function clearText() {
@@ -1566,18 +1623,7 @@
         }
     };
 
-    // function xiaoshu(e) {//用 onkeyup 或者 onkeydown事件 配合正负方法使用【限制输入在两位位数】
-    //     var val = parseFloat(e.value)
-    //     var val1 = e.value
-    //     // console.log(val);
-    //     var num = val1.indexOf(".") + 2
-    //     console.log(num);
-    //     if (val1.length > num) {
-    //         console.log(123);
-    //         var val2 = 0 | val * 100
-    //         e.value = val2 / 100
-    //     }
-    // }
+
 
     //自动补0，四舍五入
     function shuzi(e) {
@@ -1635,11 +1681,11 @@
         if (kjyyAxialos == "NaN"){
             $("#kjyyAxialos").val("");
         }
-         var kjjyAxialod=document.getElementById('kjjyAxialod').value;
+        var kjjyAxialod=document.getElementById('kjjyAxialod').value;
         if (kjjyAxialod == "NaN"){
             $("#kjjyAxialod").val("");
         }
-         var kjjyAxialos=document.getElementById('kjjyAxialos').value;
+        var kjjyAxialos=document.getElementById('kjjyAxialos').value;
         if (kjjyAxialos == "NaN"){
             $("#kjjyAxialos").val("");
         }
@@ -1675,6 +1721,15 @@
         if (sjxlAxialos == "NaN"){
             $("#sjxlAxialos").val("");
         }
+        var kjjySphod=document.getElementById('kjjySphod').value;
+        if (kjjySphod == "NaN"){
+            $("#kjjySphod").val("");
+        }
+        var kjjySphos=document.getElementById('kjjySphos').value;
+        if (kjjySphos == "NaN"){
+            $("#kjjySphos").val("");
+        }
+
 
 
     }
