@@ -140,11 +140,10 @@ public class TryresultsController {
     /**
      * 删除
      */
-    @PostMapping("/remove")
+    @PostMapping("/reomveTry")
     @ResponseBody
-    @RequiresPermissions("jiancha:tryresults:remove")
-    public R remove(Long id) {
-        if (tryresultsService.remove(id) > 0) {
+    public R remove(String ptometryNumber) {
+        if (tryresultsService.remove(ptometryNumber) > 0) {
             return R.ok();
         }
         return R.error();
