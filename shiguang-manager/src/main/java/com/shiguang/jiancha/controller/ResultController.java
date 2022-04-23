@@ -113,7 +113,6 @@ public class ResultController {
         if (trynewOld==null || trynewOld==""){
             tryresultsDO.setNewOld(null);
         }
-
 //        先判断删除处方后在修改有没有保存最后的结果和处方【是否有保存这个验光号数据】
         String ptometryNumber = result.getPtometryNumber();
         Map<String, Object> map = new HashMap<>();
@@ -129,270 +128,134 @@ public class ResultController {
         List<ResultDO> rgpYgnum = rgpService.haveYanguangNum(map);
         List<ResultDO> yaopinYgnum = yaopinService.haveYanguangNum(map);
         List<ResultDO> resultYgnum = resultService.haveYanguangNum(map);
-
 //        处方类型所有数据保存
-        if (result.getKjyyPrescriptionType() != null && result.getKjyyPrescriptionType() != "") {
-            if (result.getKjyyDoctor() == "" || result.getKjyyOptometryName() == "") {
-                return R.error("请选择医生或验光师");
-            } else {
-                if ("".equals(result.getKjyySphod())) {
-                    result.setKjyySphod("0.00");
-                }
-                if ("".equals(result.getKjyySphos())) {
-                    result.setKjyySphos("0.00");
-                }
-                if ("".equals(result.getKjyyCylod())) {
-                    result.setKjyyCylod("0.00");
-                }
-                if ("".equals(result.getKjyyCylos())) {
-                    result.setKjyyCylos("0.00");
-                }
-                if (kjyyYgnum.size() > 0) {
-                    kjyyServce.update(result);
-                } else {
-                    kjyyServce.savekjyy(result);
-                }
-
-            }
-        }
-
-
-        if (result.getKjjyPrescriptionType() != null && result.getKjjyPrescriptionType() != "") {
-            if (result.getKjjyDoctor() == "" || result.getKjjyOptometryName() == "") {
-                return R.error("请选择医生或验光师");
-            } else {
-
-
-                if ("".equals(result.getKjjySphod())) {
-                    result.setKjjySphod("0.00");
-                }
-                if ("".equals(result.getKjjySphos())) {
-                    result.setKjjySphos("0.00");
-                }
-                if ("".equals(result.getKjjyCylod())) {
-                    result.setKjjyCylod("0.00");
-                }
-                if ("".equals(result.getKjjyCylos())) {
-                    result.setKjjyCylos("0.00");
-                }
-                if (kjjyYgnum.size() > 0) {
-                    kjjyService.update(result);
-                } else {
-                    kjjyService.savekjjy(result);
-                }
-
-            }
-        }
-
-        if (result.getSgjjPrescriptionType() != null && result.getSgjjPrescriptionType() != "") {
-            if (result.getSgjjDoctor() == "" || result.getSgjjOptometryName() == "") {
-                return R.error("请选择医生或验光师");
-            } else {
-
-                if ("".equals(result.getSgjjSphod())) {
-                    result.setSgjjSphod("0.00");
-                }
-                if ("".equals(result.getSgjjSphos())) {
-                    result.setSgjjSphos("0.00");
-                }
-                if ("".equals(result.getSgjjCylod())) {
-                    result.setSgjjCylod("0.00");
-                }
-                if ("".equals(result.getSgjjCylos())) {
-                    result.setSgjjCylos("0.00");
-                }
-
-                if (sgjjYgnum.size() > 0) {
-                    sgjjService.update(result);
-                } else {
-                    sgjjService.savesgjj(result);
-                }
-
-            }
-        }
-
-        if (result.getRxPrescriptionType() != null && result.getRxPrescriptionType() != "") {
-            if (result.getRxDoctor() == "" || result.getRxOptometryName() == "") {
-                return R.error("请选择医生或验光师");
-            } else {
-
-
-                if ("".equals(result.getRxSphod())) {
-                    result.setRxSphod("0.00");
-                }
-                if ("".equals(result.getRxSphos())) {
-                    result.setRxSphos("0.00");
-                }
-                if ("".equals(result.getRxCylod())) {
-                    result.setRxCylod("0.00");
-                }
-                if ("".equals(result.getRxCylos())) {
-                    result.setRxCylos("0.00");
-                }
-                if (rxjmjcjYgnum.size() > 0) {
-                    rxjmjcjService.update(result);
-                } else {
-                    rxjmjcjService.saveRxjmjcj(result);
-                }
-
-            }
-        }
-
-
-        if (result.getZyPrescriptionType() != null && result.getZyPrescriptionType() != "") {
-            if (result.getZyDoctor() == "" || result.getZyOptometryName() == "") {
-                return R.error("请选择医生或验光师");
-            } else {
-
-
-                if ("".equals(result.getZySphod())) {
-                    result.setZySphod("0.00");
-                }
-                if ("".equals(result.getZySphos())) {
-                    result.setZySphos("0.00");
-                }
-                if ("".equals(result.getZyCylod())) {
-                    result.setZyCylod("0.00");
-                }
-                if ("".equals(result.getZyCylos())) {
-                    result.setZyCylos("0.00");
-                }
-                if (zyYgnum.size() > 0) {
-                    zyService.update(result);
-                } else {
-                    zyService.saveZY(result);
-                }
-
-            }
-        }
-
-        if (result.getSjxlPrescriptionType() != null && result.getSjxlPrescriptionType() != "") {
-            if (result.getSjxlDoctor() == "" || result.getSjxlOptometryName() == "") {
-                return R.error("请选择医生或验光师");
-            } else {
-
-
-                if ("".equals(result.getSjxlSphod())) {
-                    result.setSjxlSphod("0.00");
-                }
-                if ("".equals(result.getSjxlSphos())) {
-                    result.setSjxlSphos("0.00");
-                }
-                if ("".equals(result.getSjxlCylod())) {
-                    result.setSjxlCylod("0.00");
-                }
-                if ("".equals(result.getSjxlCylos())) {
-                    result.setSjxlCylos("0.00");
-                }
-                if (sjxlYgnum.size() > 0) {
-                    sjxlService.update(result);
-                } else {
-                    sjxlService.saveSjxl(result);
-                }
-
-            }
-        }
-
-
-        if (result.getVstPrescriptionType() != null && result.getVstPrescriptionType() != "") {
-            if (result.getVstDoctor() == "" || result.getVstOptometryName() == "") {
-                return R.error("请选择医生或验光师");
-            } else {
-
-
-                if ("".equals(result.getVstSphod())) {
-                    result.setVstSphod("0.00");
-                }
-                if ("".equals(result.getVstSphos())) {
-                    result.setVstSphos("0.00");
-                }
-                if ("".equals(result.getVstCylod())) {
-                    result.setVstCylod("0.00");
-                }
-                if ("".equals(result.getVstCylos())) {
-                    result.setVstCylos("0.00");
-                }
-                if (vstYgnum.size() > 0) {
-                    vstService.update(result);
-                } else {
-                    vstService.saveVst(result);
-                }
-
-            }
-        }
-
-
-        if (result.getCrtPrescriptionType() != null && result.getCrtPrescriptionType() != "") {
-            if (result.getCrtDoctor() == "" || result.getCrtOptometryName() == "") {
-                return R.error("请选择医生或验光师");
-            } else {
-
-                if ("".equals(result.getCrtSphod())) {
-                    result.setCrtSphod("0.00");
-                }
-                if ("".equals(result.getCrtSphos())) {
-                    result.setCrtSphos("0.00");
-                }
-                if ("".equals(result.getCrtCylod())) {
-                    result.setCrtCylod("0.00");
-                }
-                if ("".equals(result.getCrtCylos())) {
-                    result.setCrtCylos("0.00");
-                }
-                if (crtYgnum.size() > 0) {
-                    crtService.update(result);
-                } else {
-                    crtService.saveCrt(result);
-                }
-
-            }
-        }
-
-
-        if (result.getRgpPrescriptionType() != null && result.getRgpPrescriptionType() != "") {
-            if (result.getRgpDoctor() == "" || result.getRgpOptometryName() == "") {
-                return R.error("请选择医生或验光师");
-            } else {
-
-                if ("".equals(result.getRgpSphod())) {
-                    result.setRgpSphod("0.00");
-                }
-                if ("".equals(result.getRgpSphos())) {
-                    result.setRgpSphos("0.00");
-                }
-                if ("".equals(result.getRgpCylod())) {
-                    result.setRgpCylod("0.00");
-                }
-                if ("".equals(result.getRgpCylos())) {
-                    result.setRgpCylos("0.00");
-                }
-                if (rgpYgnum.size() > 0) {
-                    rgpService.update(result);
-                } else {
-                    rgpService.saveRgp(result);
-                }
-
-            }
-        }
-
-
-        if (result.getYpPrescriptionType() != null && result.getYpPrescriptionType() != "") {
-            if (result.getYpDoctor() == "" || result.getYpOptometryName() == "") {
-                return R.error("请选择医生或验光师");
-            } else {
-                if (yaopinYgnum.size() > 0) {
-                    yaopinService.update(result);
-                } else {
-                    yaopinService.saveYaopin(result);
-                }
-
-            }
-        }
-
         if (resultYgnum.size() > 0) {
             if (resultService.update(result) > 0) {
                 tryresultsDO.setStatus("0");
                 tryresultsService.updateStatus(tryresultsDO);
+
+                if (result.getKjyyPrescriptionType() != null && result.getKjyyPrescriptionType() != "") {
+                    if (result.getKjyyDoctor() == "" || result.getKjyyOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (kjyyYgnum.size() > 0) {
+                            kjyyServce.update(result);
+                        } else {
+                            kjyyServce.savekjyy(result);
+                        }
+
+                    }
+                }
+
+                if (result.getKjjyPrescriptionType() != null && result.getKjjyPrescriptionType() != "") {
+                    if (result.getKjjyDoctor() == "" || result.getKjjyOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (kjjyYgnum.size() > 0) {
+                            kjjyService.update(result);
+                        } else {
+                            kjjyService.savekjjy(result);
+                        }
+                    }
+                }
+
+                if (result.getSgjjPrescriptionType() != null && result.getSgjjPrescriptionType() != "") {
+                    if (result.getSgjjDoctor() == "" || result.getSgjjOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (sgjjYgnum.size() > 0) {
+                            sgjjService.update(result);
+                        } else {
+                            sgjjService.savesgjj(result);
+                        }
+
+                    }
+                }
+
+                if (result.getRxPrescriptionType() != null && result.getRxPrescriptionType() != "") {
+                    if (result.getRxDoctor() == "" || result.getRxOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (rxjmjcjYgnum.size() > 0) {
+                            rxjmjcjService.update(result);
+                        } else {
+                            rxjmjcjService.saveRxjmjcj(result);
+                        }
+                    }
+                }
+
+                if (result.getZyPrescriptionType() != null && result.getZyPrescriptionType() != "") {
+                    if (result.getZyDoctor() == "" || result.getZyOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (zyYgnum.size() > 0) {
+                            zyService.update(result);
+                        } else {
+                            zyService.saveZY(result);
+                        }
+
+                    }
+                }
+                if (result.getSjxlPrescriptionType() != null && result.getSjxlPrescriptionType() != "") {
+                    if (result.getSjxlDoctor() == "" || result.getSjxlOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (sjxlYgnum.size() > 0) {
+                            sjxlService.update(result);
+                        } else {
+                            sjxlService.saveSjxl(result);
+                        }
+
+                    }
+                }
+                if (result.getVstPrescriptionType() != null && result.getVstPrescriptionType() != "") {
+                    if (result.getVstDoctor() == "" || result.getVstOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (vstYgnum.size() > 0) {
+                            vstService.update(result);
+                        } else {
+                            vstService.saveVst(result);
+                        }
+
+                    }
+                }
+                if (result.getCrtPrescriptionType() != null && result.getCrtPrescriptionType() != "") {
+                    if (result.getCrtDoctor() == "" || result.getCrtOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (crtYgnum.size() > 0) {
+                            crtService.update(result);
+                        } else {
+                            crtService.saveCrt(result);
+                        }
+
+                    }
+                }
+                if (result.getRgpPrescriptionType() != null && result.getRgpPrescriptionType() != "") {
+                    if (result.getRgpDoctor() == "" || result.getRgpOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (rgpYgnum.size() > 0) {
+                            rgpService.update(result);
+                        } else {
+                            rgpService.saveRgp(result);
+                        }
+
+                    }
+                }
+                if (result.getYpPrescriptionType() != null && result.getYpPrescriptionType() != "") {
+                    if (result.getYpDoctor() == "" || result.getYpOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (yaopinYgnum.size() > 0) {
+                            yaopinService.update(result);
+                        } else {
+                            yaopinService.saveYaopin(result);
+                        }
+
+                    }
+                }
                 return R.ok();
             }
             return R.error();
@@ -400,6 +263,129 @@ public class ResultController {
             if (resultService.save(result) > 0) {
                 tryresultsDO.setStatus("0");
                 tryresultsService.updateStatus(tryresultsDO);
+
+                if (result.getKjyyPrescriptionType() != null && result.getKjyyPrescriptionType() != "") {
+                    if (result.getKjyyDoctor() == "" || result.getKjyyOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (kjyyYgnum.size() > 0) {
+                            kjyyServce.update(result);
+                        } else {
+                            kjyyServce.savekjyy(result);
+                        }
+
+                    }
+                }
+
+                if (result.getKjjyPrescriptionType() != null && result.getKjjyPrescriptionType() != "") {
+                    if (result.getKjjyDoctor() == "" || result.getKjjyOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (kjjyYgnum.size() > 0) {
+                            kjjyService.update(result);
+                        } else {
+                            kjjyService.savekjjy(result);
+                        }
+                    }
+                }
+
+                if (result.getSgjjPrescriptionType() != null && result.getSgjjPrescriptionType() != "") {
+                    if (result.getSgjjDoctor() == "" || result.getSgjjOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (sgjjYgnum.size() > 0) {
+                            sgjjService.update(result);
+                        } else {
+                            sgjjService.savesgjj(result);
+                        }
+
+                    }
+                }
+
+                if (result.getRxPrescriptionType() != null && result.getRxPrescriptionType() != "") {
+                    if (result.getRxDoctor() == "" || result.getRxOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (rxjmjcjYgnum.size() > 0) {
+                            rxjmjcjService.update(result);
+                        } else {
+                            rxjmjcjService.saveRxjmjcj(result);
+                        }
+                    }
+                }
+
+                if (result.getZyPrescriptionType() != null && result.getZyPrescriptionType() != "") {
+                    if (result.getZyDoctor() == "" || result.getZyOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (zyYgnum.size() > 0) {
+                            zyService.update(result);
+                        } else {
+                            zyService.saveZY(result);
+                        }
+
+                    }
+                }
+                if (result.getSjxlPrescriptionType() != null && result.getSjxlPrescriptionType() != "") {
+                    if (result.getSjxlDoctor() == "" || result.getSjxlOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (sjxlYgnum.size() > 0) {
+                            sjxlService.update(result);
+                        } else {
+                            sjxlService.saveSjxl(result);
+                        }
+
+                    }
+                }
+                if (result.getVstPrescriptionType() != null && result.getVstPrescriptionType() != "") {
+                    if (result.getVstDoctor() == "" || result.getVstOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (vstYgnum.size() > 0) {
+                            vstService.update(result);
+                        } else {
+                            vstService.saveVst(result);
+                        }
+
+                    }
+                }
+                if (result.getCrtPrescriptionType() != null && result.getCrtPrescriptionType() != "") {
+                    if (result.getCrtDoctor() == "" || result.getCrtOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (crtYgnum.size() > 0) {
+                            crtService.update(result);
+                        } else {
+                            crtService.saveCrt(result);
+                        }
+
+                    }
+                }
+                if (result.getRgpPrescriptionType() != null && result.getRgpPrescriptionType() != "") {
+                    if (result.getRgpDoctor() == "" || result.getRgpOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (rgpYgnum.size() > 0) {
+                            rgpService.update(result);
+                        } else {
+                            rgpService.saveRgp(result);
+                        }
+
+                    }
+                }
+                if (result.getYpPrescriptionType() != null && result.getYpPrescriptionType() != "") {
+                    if (result.getYpDoctor() == "" || result.getYpOptometryName() == "") {
+                        return R.error("请选择医生或验光师");
+                    } else {
+                        if (yaopinYgnum.size() > 0) {
+                            yaopinService.update(result);
+                        } else {
+                            yaopinService.saveYaopin(result);
+                        }
+
+                    }
+                }
                 return R.ok();
             }
             return R.error();

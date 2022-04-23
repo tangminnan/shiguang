@@ -376,6 +376,7 @@
         <where>
             <if test="companyid != null and companyid != ''">and d.company_id = #{companyid}</if>
             <if test="positionOrder != null and positionOrder != ''">and p.position_order = #{positionOrder}</if>
+            <if test="positionId != null and positionId != ''">and p.position_id = #{positionId}</if>
         </where>
 
     </select>

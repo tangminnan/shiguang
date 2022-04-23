@@ -673,7 +673,7 @@
                                onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus/></td>
                     <td><input class="input_text" id="axialRightz" name="axialRightz" onblur="zhouxiang(this)"
                                onkeyup="value=value.replace(/[^\d]+/g,'')"  type="text"/></td>
-                    <td><input class="input_text" id="dvaRightz" name="dvaRightz" oninput="getmoney(this,10)" autofocus type="text" /></td>
+                    <td><input class="input_text" id="dvaRightz" name="dvaRightz"  type="text" /></td>
                     <td><input class="input_text" id="nvaRightz" name="nvaRightz" type="text" oninput="getmoney(this,10)" autofocus/></td>
                     <td><input id="prismRightz" name="prismRightz" class="short input_text"
                                type="text" onblur="zhengfu(this)" oninput="getmoney(this,10)" autofocus/> △
@@ -709,7 +709,7 @@
                                onkeyup="value=value.replace(/[^\d]+/g,'')"  type="text"/>
                     </td>
                     <td>
-                        <input class="input_text" id="dvaLeftz" name="dvaLeftz" type="text" oninput="getmoney(this,10)" autofocus/>
+                        <input class="input_text" id="dvaLeftz" name="dvaLeftz" type="text"  />
                     </td>
                     <td>
                         <input class="input_text" id="nvaLeftz" name="nvaLeftz" type="text"
@@ -778,7 +778,7 @@
                                onkeyup="value=value.replace(/[^\d]+/g,'')"  type="text"/>
                     </td>
                     <td>
-                        <input class="input_text" id="dvaRighttry" name="dvaRighttry" type="text" oninput="getmoney(this,10)" autofocus/>
+                        <input class="input_text" id="dvaRighttry" name="dvaRighttry" type="text"  />
                     </td>
                     <td>
                         <input class="input_text" id="nvaRighttry" name="nvaRighttry" type="text" oninput="getmoney(this,10)" autofocus/>
@@ -828,7 +828,7 @@
                                onkeyup="value=value.replace(/[^\d]+/g,'')"  type="text"/>
                     </td>
                     <td>
-                        <input class="input_text" id="dvaLefttry" name="dvaLefttry" type="text" oninput="getmoney(this,10)" autofocus/>
+                        <input class="input_text" id="dvaLefttry" name="dvaLefttry" type="text"  />
                     </td>
                     <td>
                         <input class="input_text" id="nvaLefttry" name="nvaLefttry" type="text" oninput="getmoney(this,10)" autofocus></td>
@@ -945,15 +945,7 @@
 
 
 
-    //自动补0，四舍五入
-    function shuzi(e) {
-        var val = parseFloat(e.value);
-        if (val > 0) {
-            e.value = val.toFixed(2);
-        } else if (val <= 0) {
-            e.value = val.toFixed(2);
-        }
-    };
+
     /**
      * 限制输入框只能输入数字和最大长度* 如果是小数只能输入到小数点后两位
      */

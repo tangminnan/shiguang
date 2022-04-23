@@ -24,7 +24,7 @@
         <h3>验光信息</h3>
         <ul>
             <li>验光号：<input name="ptometryNumber" th:value="${tryresultsDO.ptometryNumber}" readonly type="text"/></li>
-            <li>验光师：<input name="optometryName" th:value="${tryresultsDO.optometryName}" readonly type="text"/></li>
+            <li>验光师：<input id="optometryName" name="optometryName" th:value="${tryresultsDO.optometryName}" readonly type="text"/></li>
             <li>日期：<input input name="createTime" th:value="${newtime}" readonly type="text"/></li>
         </ul>
         <input input id="newOld" name="newOld" th:value="${tryresultsDO.newOld}" readonly type="text" style="display: none"/>
@@ -270,9 +270,9 @@
             </tr>
             <tr>
                 <td>OD</td>
-                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="kjyySphod" type="text"onblur="zhengfu(this)"
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="kjyySphod" type="text" onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjyyCylod" type="text"onblur="zhengfu(this)"
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjyyCylod" type="text" onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialRighttry}"   id="kjyyAxialod"  name="kjyyAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input th:value="${tryresultsDO.prismRighttry}"   name="kjyyPrismod" class="short" type="text"/>
@@ -559,7 +559,7 @@
                 <td><input th:value="${tryresultsDO.cylinderRighttry}"name="sgjjCylod" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialRighttry}" id="sgjjAxialod"  name="sgjjAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
-                <td><input  th:value="${tryresultsDO.addRighttry}"     name="sgjjAddod" onblur="zhengfu(this)"
+                <td><input  th:value="${tryresultsDO.addRighttry}"     name="sgjjAddod"  onblur="zhengfu(this)"
                             oninput="getmoney(this,10)" autofocus type="text"/></td>
                 <td><input  th:value="${tryresultsDO.yuanRrty}"        name="sgjjYytjod" type="text"/></td>
                 <td><input  th:value="${tryresultsDO.nearRighttry}"   name="sgjjJytjod" type="text"/></td>
@@ -1126,7 +1126,7 @@
             <tr>
                 <td>OD</td>
 
-                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="crtSphod" type="text"onblur="zhengfu(this)"
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="crtSphod" type="text" onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="crtCylod" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
@@ -1215,9 +1215,9 @@
             <tr>
                 <td>OD</td>
 
-                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="rgpSphod" type="text"onblur="zhengfu(this)"
+                <td><input th:value="${tryresultsDO.sphereRighttry}"   name="rgpSphod" type="text" onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
-                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="rgpCylod" type="text"onblur="zhengfu(this)"
+                <td><input th:value="${tryresultsDO.cylinderRighttry}" name="rgpCylod" type="text" onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.axialRighttry}"  id="rgpAxialod"  name="rgpAxialod" type="text"onblur="zhouxiang(this)" onkeyup="value=value.replace(/[^\d]+/g,'')" /></td>
                 <td><input name="rgpQgdod" type="text"/></td>
@@ -1349,26 +1349,6 @@
 
         getSixMonth();
 
-        var sphod=parseFloat($('#sphod').val());
-        var addod=parseFloat($('#addod').val());
-        var sphos=parseFloat($('#sphos').val());
-        var addos=parseFloat($('#addos').val());
-
-
-        var sphaddod=(sphod+addod).toFixed(2);
-        var sphaddos=(sphos+addos).toFixed(2);
-        if (sphaddod>0){
-            sphaddod="+"+sphaddod
-        }
-        if (sphaddos>0){
-            sphaddos="+"+sphaddos
-        }
-
-        $('#kjjySphod').val(sphaddod);
-        $('#kjjySphos').val(sphaddos);
-
-
-
 
         var kjyyJdods = $("input[name='kjyyJdods']").val();
         $("#kjyyJdod").find("[value=" + kjyyJdods + "]").attr("selected", true);
@@ -1387,6 +1367,7 @@
         var sjxlJdoss = $("input[name='sjxlJdoss']").val();
         $("#sjxlJdos").find("[value=" + sjxlJdoss + "]").attr("selected", true);
     });
+
 
 
 
@@ -1512,48 +1493,48 @@
         goodsidstr($(".select_value").val());
     });
 
-    // 点击删除处方数值为空
-    $(".input_del").click(function () {
-        $(this).parentsUntil('table').eq(2).parent().find("input");
-        $(this).parentsUntil('table').eq(2).parent().find("select").val("");
-        $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none");
-    });
     // // 点击删除处方数值为空
-    // function deleteInput(obj){
-    //     if (obj.id == 'remove1'){
-    //         $("#kjyyPrescriptionType").remove();
-    //     }
-    //     if (obj.id=='remove2'){
-    //         $("#kjjyPrescriptionType").remove();
-    //     }
-    //     if (obj.id=='remove3'){
-    //         $("#sgjjPrescriptionType").remove();
-    //     }
-    //     if (obj.id=='remove4'){
-    //         $("#rxPrescriptionType").remove();
-    //     }
-    //     if (obj.id=='remove5'){
-    //         $("#zyPrescriptionType").remove();
-    //     }
-    //     if (obj.id=='remove6'){
-    //         $("#sjxlPrescriptionType").remove();
-    //     }
-    //     if (obj.id=='remove7'){
-    //         $("#vstPrescriptionType").remove();
-    //     }
-    //     if (obj.id=='remove8'){
-    //         $("#crtPrescriptionType").remove();
-    //     }
-    //     if (obj.id=='remove9'){
-    //         $("#rgpPrescriptionType").remove();
-    //     }
-    //     if (obj.id=='remove10'){
-    //         $("#ypPrescriptionType").remove();
-    //     }
-    //     $(obj).parentsUntil('table').eq(2).parent().find("input");
-    //     $(obj).parentsUntil('table').eq(2).parent().find("select").val("");
-    //     $(obj).parentsUntil('table').eq(2).parent().attr("style", "display: none");
-    // }
+    // $(".input_del").click(function () {
+    //     $(this).parentsUntil('table').eq(2).parent().find("input");
+    //     $(this).parentsUntil('table').eq(2).parent().find("select").val("");
+    //     $(this).parentsUntil('table').eq(2).parent().attr("style", "display: none");
+    // });
+    // 点击删除处方数值为空
+    function deleteInput(obj){
+        if (obj.id == 'remove1'){
+            $("#kjyyPrescriptionType").remove();
+        }
+        if (obj.id=='remove2'){
+            $("#kjjyPrescriptionType").remove();
+        }
+        if (obj.id=='remove3'){
+            $("#sgjjPrescriptionType").remove();
+        }
+        if (obj.id=='remove4'){
+            $("#rxPrescriptionType").remove();
+        }
+        if (obj.id=='remove5'){
+            $("#zyPrescriptionType").remove();
+        }
+        if (obj.id=='remove6'){
+            $("#sjxlPrescriptionType").remove();
+        }
+        if (obj.id=='remove7'){
+            $("#vstPrescriptionType").remove();
+        }
+        if (obj.id=='remove8'){
+            $("#crtPrescriptionType").remove();
+        }
+        if (obj.id=='remove9'){
+            $("#rgpPrescriptionType").remove();
+        }
+        if (obj.id=='remove10'){
+            $("#ypPrescriptionType").remove();
+        }
+        $(obj).parentsUntil('table').eq(2).parent().find("input");
+        $(obj).parentsUntil('table').eq(2).parent().find("select").val("");
+        $(obj).parentsUntil('table').eq(2).parent().attr("style", "display: none");
+    }
 
     //清空
     function clearText() {
@@ -1618,22 +1599,14 @@
         var val = parseFloat(e.value)
         if (val > 0) {
             e.value = "+" + val.toFixed(2)
-        } else if (val <= 0) {
+        } else if (val < 0) {
             e.value = val.toFixed(2)
         }
     };
 
 
 
-    //自动补0，四舍五入
-    function shuzi(e) {
-        var val = parseFloat(e.value);
-        if (val > 0) {
-            e.value = val.toFixed(2);
-        } else if (val <= 0) {
-            e.value = val.toFixed(2);
-        }
-    };
+
     /**
      * 限制输入框只能输入数字和最大长度* 如果是小数只能输入到小数点后两位
      */
@@ -1721,14 +1694,7 @@
         if (sjxlAxialos == "NaN"){
             $("#sjxlAxialos").val("");
         }
-        var kjjySphod=document.getElementById('kjjySphod').value;
-        if (kjjySphod == "NaN"){
-            $("#kjjySphod").val("");
-        }
-        var kjjySphos=document.getElementById('kjjySphos').value;
-        if (kjjySphos == "NaN"){
-            $("#kjjySphos").val("");
-        }
+
 
 
 
