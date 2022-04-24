@@ -1016,6 +1016,7 @@ public class StoreSalesController {
             String[] brandName = salesDO.getBrandName().split(",");
             String[] leftRight = salesDO.getLeftRight().split(",");
             String weiwaiNumber = "W"+GuuidUtil.getUUID();
+            String danjuNumber = "OUT"+GuuidUtil.getUUID();
             for (int s=0;s<goodsDescribe.length;s++){
                 if ("镜片".equals(goodsDescribe[s]) && "2".equals(classType[s])){
                     WeiwaishujuDO weiwaishujuDO = new WeiwaishujuDO();
@@ -1212,7 +1213,7 @@ public class StoreSalesController {
                     weiwaishujuService.save(weiwaishujuDO);
                     WeiwaiDO weiwaiDO = new WeiwaiDO();
                     weiwaiDO.setSaleNumber(salesDO.getSaleNumber());
-                    weiwaiDO.setDanjuNumber("OUT"+GuuidUtil.getUUID());
+                    weiwaiDO.setDanjuNumber(danjuNumber);
                     weiwaiDO.setDanjuDay(sim.format(new Date()));
                     weiwaiDO.setEyeStyle("3");
                     weiwaiDO.setZhidanPeople(ShiroUtils.getUser().getName());
@@ -1246,7 +1247,7 @@ public class StoreSalesController {
                     weiwaiDO.setGkname(weiwaishujuDO.getGkname());
                     weiwaiDO.setHyknum(weiwaishujuDO.getHyknum());
                     weiwaiDO.setPhone(weiwaishujuDO.getPhone());
-                    weiwaiDO.setStatus("1");
+                    weiwaiDO.setStatus("");
                     weiwaiDO.setCompanyName(ShiroUtils.getUser().getCompany());
                     weiwaiDO.setDepartname(ShiroUtils.getUser().getStore());
                     weiwaiDO.setViewGoodName(jpdzDO.getViewGoodName());
