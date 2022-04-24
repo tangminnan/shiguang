@@ -52,7 +52,9 @@ public interface OptometryLineService {
 
     int saveLineMemberJinan(YgLineMemberJinanDO ygLineMemberDO);
 
-    int removeMemberjinan(Long id);
+    YgLineMemberJinanDO getMemberNumber(Map<String,Object> map);
+
+    int removeMemberjinan(String id);
 
     int removejinan(Long id);
 

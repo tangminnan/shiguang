@@ -8,6 +8,13 @@ $.validator.setDefaults({
 	}
 });
 function save() {
+	var payWay = $("#payWay").val();
+	if ('全款' == payWay){
+		var ss = $("#changeMoney").val();
+		if (ss < 0){
+			return layer.alert("请选择定金付款方式！")
+		}
+	}
 	$.ajax({
 		cache : true,
 		type : "POST",

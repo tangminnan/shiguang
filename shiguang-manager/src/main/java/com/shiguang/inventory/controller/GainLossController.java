@@ -175,6 +175,7 @@ public class GainLossController {
 //				}
 				StockDO stockDO = new StockDO();
 				stockDO.setGoodsNum(goodsNum[i]);
+				stockDO.setPositionId(gainLoss.getPositionId()+"");
 				StockDO producaDO = stockService.getProduceNum(stockDO);
 				producaDO.setInventoryCount(goodsCount[i]);
 					goodsList.add(producaDO);

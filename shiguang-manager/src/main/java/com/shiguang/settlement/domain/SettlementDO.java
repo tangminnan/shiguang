@@ -72,7 +72,16 @@ public class SettlementDO implements Serializable {
 	private String chuzhiNumber;
 	//储值卡密码
 	private String chuzhiPasd;
+	//付款状态
+	private String isSale;
 
+	public String getIsSale() {
+		return isSale;
+	}
+
+	public void setIsSale(String isSale) {
+		this.isSale = isSale;
+	}
 
 	/**
 	 * 设置：主键

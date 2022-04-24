@@ -45,8 +45,10 @@
 		</span>
 	</div>
 	<div class="gukeMSG2">
-		顾客姓名：<input type="text" id="memberName" th:value="${memberDO.name}" disabled/>
-		顾客电话：<input type="text"  id="memberTel" th:value="${memberDO.phone1}" disabled/>
+		顾客姓名：<input type="text" id="memberName"  th:value="${memberDO.name}" disabled/>
+		<input type="hidden"  name="memberName" th:value="${memberDO.name}"/>
+		<input type="hidden"  name="memberTel" th:value="${memberDO.phone1}" />
+		顾客电话：<input type="text"  id="memberTel" name="memberTel" th:value="${memberDO.phone1}" disabled/>
 		性别：<input class="short" type="text" id="memberSex" th:value="${memberDO.sexx}" disabled/>
 		年龄：<input class="short" type="text" id="memberAge" th:value="${memberDO.age}" disabled/>
 		会员卡类型：<input type="text" id="memberType" th:value="${memberDO.cardType}" disabled/>

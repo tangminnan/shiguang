@@ -170,9 +170,11 @@ public class MemberController {
     String edit(@PathVariable("id") Long id,Model model)throws Exception{
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         MemberDO member = memberService.get(id);
-        Date date = member.getRegisterTime();
-        String strDate = sdf.format(date);
-        member.setCreateTime(strDate);
+        if (null !=  member.getRegisterTime()){
+            Date date = member.getRegisterTime();
+            String strDate = sdf.format(date);
+            member.setCreateTime(strDate);
+        }
         model.addAttribute("member", member);
         Map<String,Object> map = new HashMap<>();
         map.put("state",1);

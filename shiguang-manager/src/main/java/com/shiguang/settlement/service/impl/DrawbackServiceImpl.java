@@ -130,7 +130,8 @@ public class DrawbackServiceImpl implements DrawbackService {
 		String[] storeDescribe = salesDO.getStoreDescribe().split(",");
 		Map<String,Object> map = new HashMap<>();
 		map.put("companyId",ShiroUtils.getUser().getCompanyId());
-		PositionDO positionDO = stockService.findBuHegePosition(map);
+		map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+		PositionDO positionDO = stockService.findPosition(map);
 		for (int i=0;i<goodsCode.length;i++){
 			StockDO stockDO = new StockDO();
 			stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));

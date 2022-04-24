@@ -355,7 +355,7 @@
     </update>
 
     <select id="listMemberJinan" resultType="com.shiguang.line.domain.YgLineMemberJinanDO">
-        select `id`,`member_name`,`sex`,`consult_room`,`line_time` from ygline_member_jinan
+        select `id`,`member_number`,`member_name`,`sex`,`consult_room`,`line_time` from ygline_member_jinan
         <where>
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
         </where>
@@ -386,6 +386,7 @@
     <insert id="saveLineMemberJinan" parameterType="com.shiguang.line.domain.YgLineMemberJinanDO" useGeneratedKeys="true" keyProperty="id">
 		insert into ygline_member_jinan
 		(
+		    `member_number`,
 		    `member_name`,
 		    `sex`,
 		    `consult_room`,
@@ -393,14 +394,22 @@
 		)
 		values
 		(
+		    #{memberNumber},
 			#{memberName},
 			#{sex},
 			#{consultRoom},
 			#{lineTime}
 		)
 	</insert>
+    <select id="getMemberNumber" resultType="com.shiguang.line.domain.YgLineMemberJinanDO">
+        select member_number,member_name,sex,consult_room,line_time  from ygline_member_jinan
+        <where>
+            <if test="memberNumber != null and memberNumber != ''">and member_number = #{memberNumber}</if>
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+        </where>
+    </select>
     <delete id="removeMemberjinan">
-		delete from ygline_member_jinan where id = #{value}
+		delete from ygline_member_jinan where member_number = #{value}
 	</delete>
     <delete id="removejinan">
         delete from ygline_jinan where id = #{value}

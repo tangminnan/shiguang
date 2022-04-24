@@ -129,8 +129,13 @@ public class OptometryLineServiceImpl implements OptometryLineService {
     }
 
     @Override
-    public int removeMemberjinan(Long id) {
-        return optometryLineDao.removeMember(id);
+    public YgLineMemberJinanDO getMemberNumber(Map<String,Object> map) {
+        return optometryLineDao.getMemberNumber(map);
+    }
+
+    @Override
+    public int removeMemberjinan(String id) {
+        return optometryLineDao.removeMemberjinan(id);
     }
 
     @Override
