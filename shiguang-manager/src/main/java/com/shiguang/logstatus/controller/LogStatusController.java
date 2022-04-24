@@ -848,7 +848,9 @@ public class LogStatusController {
             }
             Map<String,Object> maps = new HashMap<>();
             maps.put("companyId", companyId);
-            maps.put("departNumber",ShiroUtils.getUser().getStoreNum());
+            if("3".equals(ShiroUtils.getUser().getCompanyId())){
+                maps.put("positionId","7");
+            }
             PositionDO positionDO = stockService.findHegePosition(maps);
             for (int a=0;a<storeDescribe.length;a++){
                 if (!"镜架".equals(storeDescribe[a]) && !"自架".equals(storeDescribe[a]) && !"自片".equals(storeDescribe[a]) ){
