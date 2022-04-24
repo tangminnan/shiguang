@@ -701,8 +701,8 @@
                     </td>
                     <td><input class="input_text" id="addRightz" name="addRightz" type="text" onblur="zhengfu(this)"
                                oninput="getmoney(this,10)" autofocus th:value="${tryresultsDO.addRightz}"/></td>
-                    <td><input class="input_text" id="yuanRz" name="yuanRz" type="text" th:value="${tryresultsDO.yuanRz}" /></td>
-                    <td><input class="input_text" id="nearRightz" name="nearRightz" type="text" th:value="${tryresultsDO.nearRightz}"/></td>
+                    <td><input class="input_text" id="yuanRz" name="yuanRz" type="text" th:value="${tryresultsDO.yuanRz}" onblur="Tj(this)"/></td>
+                    <td><input class="input_text" id="nearRightz" name="nearRightz" type="text" th:value="${tryresultsDO.nearRightz}" onblur="Tj(this)"/></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -746,9 +746,9 @@
                     <td><input class="input_text" id="addLeftz" name="addLeftz" type="text" onblur="zhengfu(this)"
                                oninput="getmoney(this,10)" autofocus th:value="${tryresultsDO.addLeftz}"/>
                     </td>
-                    <td><input class="input_text" id="yuanLz" name="yuanLz" type="text" th:value="${tryresultsDO.yuanLz}"/>
+                    <td><input class="input_text" id="yuanLz" name="yuanLz" type="text" th:value="${tryresultsDO.yuanLz}" onblur="Tj(this)"/>
                     </td>
-                    <td><input class="input_text"  id="nearLeftz" name="nearLeftz" type="text" th:value="${tryresultsDO.nearLeftz}"/>
+                    <td><input class="input_text"  id="nearLeftz" name="nearLeftz" type="text" th:value="${tryresultsDO.nearLeftz}" onblur="Tj(this)"/>
                     </td>
                     <td></td>
                 </tr>
@@ -818,11 +818,11 @@
                                oninput="getmoney(this,10)" autofocus th:value="${tryresultsDO.addRighttry}"/>
                     </td>
                     <td>
-                        <input class="input_text" id="yuanRrty" name="yuanRrty" type="text" th:value="${tryresultsDO.yuanRrty}" />
+                        <input class="input_text" id="yuanRrty" name="yuanRrty" type="text" th:value="${tryresultsDO.yuanRrty}" onblur="Tj(this)" />
                     </td>
                     <td>
 
-                        <input class="input_text" id="nearRighttry" name="nearRighttry" type="text" th:value="${tryresultsDO.nearRighttry}"/>
+                        <input class="input_text" id="nearRighttry" name="nearRighttry" type="text" th:value="${tryresultsDO.nearRighttry}" onblur="Tj(this)"/>
                     </td>
                 </tr>
                 <tr>
@@ -870,7 +870,7 @@
                         <input class="input_text" id="yuanLrty" name="yuanLrty" type="text" th:value="${tryresultsDO.yuanLrty}"/>
                     </td>
                     <td>
-                        <input class="input_text" id="nearLefttry" name="nearLefttry" type="text" th:value="${tryresultsDO.nearLefttry}"/>
+                        <input class="input_text" id="nearLefttry" name="nearLefttry" type="text" th:value="${tryresultsDO.nearLefttry}" onblur="Tj(this)"/>
                     </td>
                 </tr>
                 </tbody>
@@ -1020,6 +1020,20 @@
             e.value = val.toFixed(2);
         }
     };
+
+
+
+    //保留一位0.0
+    function Tj(e) {//正负用onblur事件触发
+        var val = parseFloat(e.value);
+        if (val > 0) {
+            e.value =  val.toFixed(1)
+        } else if (val <= 0) {
+            e.value = val.toFixed(1)
+        }
+    };
+
+
     /**
      * 限制输入框只能输入数字和最大长度* 如果是小数只能输入到小数点后两位
      */
