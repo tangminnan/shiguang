@@ -198,49 +198,42 @@
 
         <h3>度数录入</h3>
         <table id="jpdushu" class="tabB" border="0" cellspacing="0" cellpadding="0"></table>
-        <table id="tab1"  class="tabB" border="0" cellspacing="0" cellpadding="0">
+        <table id="tab2"  class="tabB1" border="0" cellspacing="0" cellpadding="0">
             <tr>
                 <td></td>
                 <td>球镜</td>
                 <td>柱镜</td>
                 <td>轴向</td>
-                <td>ADD</td>
-                <td>三菱镜</td>
-                <td>基底</td>
-                <td>瞳距（远）</td>
-                <td>瞳距（近）</td>
+                <td>曲率</td>
+                <td>直径</td>
                 <!--				<td>选择</td>-->
             </tr>
             <tr>
                 <td>OD</td>
-                <td><input id="rightsph" name="rightsph" onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text"/></td>
-                <td><input id="rightcyl" name="rightcyl" onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text"/></td>
-                <td><input id="rightzx" name="rightzx" onblur="zhouxiang(this)" type="text"/></td>
-                <td><input id="rightAdd" name="rightAdd" type="text"/></td>
-                <td><input id="rightSlj" name="rightSlj" type="text"/></td>
-                <td><input id="rightJd" name="rightJd" type="text"/></td>
-                <td><input id="rightFartj" name="rightFartj" type="text"/></td>
-                <td><input id="rightNeartj" name="rightNeartj" type="text"/></td>
-                <!--				<td><input type="button" class="Add" value="单品添加商品" onclick="getGoods()" /></td>-->
+                <td><input id="rightsphyx" name="rightsphyx" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                           type="text"/></td>
+                <td><input id="rightcylyx" name="rightcylyx" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                           type="text"/></td>
+                <td><input id="rightzxyx" name="rightzxyx" onblur="zhouxiang(this)" type="text"/></td>
+                <td><input id="rightqulv" name="rightqulv" type="text"/></td>
+                <td><input id="rightzj" name="rightzj" type="text"/></td>
+                <!--				<td><input type="button" class="Add1" value="单品添加商品" /></td>-->
             </tr>
             <tr>
                 <td>OS</td>
-                <td><input id="leftsph" name="leftsph" onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text"/>
-                </td>
-                <td><input id="leftcyl" name="leftcyl" onblur="zhengfu(this)" onkeydown="xiaoshu(this)" type="text"/>
-                </td>
-                <td><input id="leftzx" name="leftzx" onblur="zhouxiang(this)" type="text"/></td>
-                <td><input id="leftAdd" name="leftAdd" type="text"/></td>
-                <td><input id="leftSlj" name="leftSlj" type="text"/></td>
-                <td><input id="leftJd" name="leftJd" type="text"/></td>
-                <td><input id="leftFartj" name="leftFartj" type="text"/></td>
-                <td><input id="leftNeartj" name="leftNeartj" type="text"/></td>
-                <!--				<td><input type="button" class="Add" value="单品添加商品" onclick="getGoods()"/></td>-->
+                <td><input id="leftsphyx" name="leftsphyx" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                           type="text"/></td>
+                <td><input id="leftcylyx" name="leftcylyx" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"
+                           type="text"/></td>
+                <td><input id="leftzxyx" name="leftzxyx" onblur="zhouxiang(this)" type="text"/></td>
+                <td><input id="leftqulv" name="leftqulv" type="text"/></td>
+                <td><input id="leftzj" name="leftzj" type="text"/></td>
+                <!--				<td><input type="button" class="Add1" value="单品添加商品" /></td>-->
             </tr>
         </table>
         <h3>商品列表</h3>
         <table id="jp" class="tabC" border="0" cellspacing="0" cellpadding="0"></table>
-        <table id="tab2"   class="tabC" border="0" cellspacing="0" cellpadding="0">
+        <table id="tab4"  class="tabC" border="0" cellspacing="0" cellpadding="0">
             <tr>
                 <td width="250">商品代码</td>
                 <td width="250">商品名称</td>
@@ -248,13 +241,11 @@
                 <td>球镜</td>
                 <td>柱镜</td>
                 <td>轴向</td>
-                <td>下加</td>
-                <td>棱镜</td>
-                <td>基底</td>
-                <td>瞳高</td>
+                <td>曲率</td>
+                <td>直径</td>
                 <td>数量</td>
-                <td width="300">加工要求</td>
-                <!--<td width="100">操作</td>-->
+                <td width="300">特殊加工要求</td>
+                <!--				<td width="100">操作</td>-->
             </tr>
             <tr>
                 <td><input type="text"/></td>
@@ -267,12 +258,8 @@
                 <td><input type="text"/></td>
                 <td><input type="text"/></td>
                 <td><input type="text"/></td>
-                <td><input type="text"/></td>
-                <td><input type="text"/></td>
             </tr>
             <tr>
-                <td><input type="text"/></td>
-                <td><input type="text"/></td>
                 <td><input type="text"/></td>
                 <td><input type="text"/></td>
                 <td><input type="text"/></td>
@@ -315,8 +302,8 @@
     var departnameArry = new Array();
 
     function PeiJing() {
-        $("#tab1").remove();
         $("#tab2").remove();
+        $("#tab4").remove();
         var html = "";
         var bhtml = "";
         var xsNumber="";
@@ -354,9 +341,9 @@
             area: ['800px', '520px'],
             content: "/stock/weiwai/PeiJing/" + eyeStyle+ "/" +  mfrsid + "/" +  mfrsname,// iframe的url
             cancel: function (index, layero) {
-
+            alert("!!!!!!!!!!!!");
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-                // alert(JSON.stringify(rows));
+                alert(JSON.stringify(rows));
                 for (var i = 0; i < rows.length; i++) {
                     // $("#departname").val(rows[0].mirorAddress);
                     xsNumber += rows[i].saleNumber + ',';
@@ -482,7 +469,6 @@
                         var goodClasstypes = goodsClasstypes.split(",");//定做还是成品
                         var processAsk = processAsks;//加工要求
                         var yaoqiu=processAsk.replaceAll(',', '!');
-
                         // alert(yaoqiu);
                         var hyName = hyNames.split(",");
                         var hyNumber = hyNumbers.split(",");

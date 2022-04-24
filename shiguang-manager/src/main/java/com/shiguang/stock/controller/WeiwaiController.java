@@ -88,7 +88,6 @@ public class WeiwaiController {
                 query.put("companyId",ShiroUtils.getUser().getCompanyId());
             }
         }
-//        query.put("companyId",ShiroUtils.getUser().getCompanyId());
         List<WeiwaiDO> weiwaiList = weiwaiService.list(query);
         int total = weiwaiService.count(query);
         PageUtils pageUtils = new PageUtils(weiwaiList, total);
@@ -116,7 +115,7 @@ public class WeiwaiController {
             Map<String, Object> map = new HashMap<>();
             map.put("companyid", companyid);
             map.put("positionOrder", 2);
-            if(companyId.equals(3)||companyId.equals("3")){
+            if (companyId.equals("3")||companyId.equals(3)){
                 map.put("positionId", 7);
             }
             DepartmentDO departmentDO = weiwaiService.phoneOrAddres(map);
@@ -753,74 +752,72 @@ public class WeiwaiController {
             map.put("danjuNumber", danjuNumber);
             map.put("saleNumber", saleNumber);
             List<WeiwaiDO> weiwaiOrders = weiwaiService.selectWeiwaiOrder(map);
-
             for (WeiwaiDO weiwaiDO : weiwaiOrders) {
                 String eyeStyle = weiwaiDO.getEyeStyle();
-//                String saleNumber = weiwaiDO.getSaleNumber();
                 LogStatusDO logStatusDO = new LogStatusDO();
                 List<LogStatusDO> statusDOList=new ArrayList<>();
                 if ("3".equals(eyeStyle)) {
-                    String yaoqiu = weiwaiDO.getYaoqiu();
-                    Integer flag = yaoqiu.indexOf("委外代加工");
-                    if (flag != -1) {
-                        logStatusDO.setSaleNumber(saleNumber);
-                        logStatusDO.setLogisticStatus("配送");
-                        WorkRecoedDO workRecoedDO = new WorkRecoedDO();
-                        workRecoedDO.setUserName(psname);
-                        workRecoedDO.setType("配送");
-                        workRecoedDO.setDateTime(new Date());
-
-                        Map<String,Object> statusmap=new HashMap<>();
-                        statusmap.put("saleNumber",saleNumber);
-                        statusmap.put("logisticStatus","配送");
-                         statusDOList=statusService.list(statusmap);
-                        if (statusDOList.size()==0){
-                            statusService.saveRecord(workRecoedDO);
-                        }
-                        //减库存
-                        String num = weiwaiDO.getNum();
-                        String code = weiwaiDO.getCode();
-                        Long positionId = weiwaiDO.getPositionId();
-                        String count = weiwaiDO.getCount();
-                        StockDO stock = new StockDO();
-                        stock.setGoodsNum(num);
-                        stock.setGoodsCode(code);
-                        stock.setPositionId(positionId.toString());
-                        StockDO goodsList = stockService.haveNum(stock);
-                        if (null != goodsList) {
-                            Integer kcCount = Integer.valueOf(goodsList.getGoodsCount());
-                            Integer psCount = Integer.valueOf(count);
-                            Integer countNews = kcCount - psCount;
-                            stock.setGoodsCount(countNews.toString());
-                            stockService.updateGoodsCount(stock);//修改数量
-
-                            ///log
-                            StocklogDO stocklogDO = new StocklogDO();
-                            stocklogDO.setDanjunum(danjuNumber);
-                            stocklogDO.setNum(goodsList.getGoodsNum());
-                            stocklogDO.setCode(goodsList.getGoodsCode());
-                            stocklogDO.setName(goodsList.getGoodsName());
-                            stocklogDO.setGoodsid(goodsList.getGoodsType());
-                            stocklogDO.setMfrsnum(goodsList.getMfrsid());
-                            stocklogDO.setBrandname(goodsList.getBrandname());
-                            stocklogDO.setMoney(goodsList.getRetailPrice());
-                            stocklogDO.setUseday(goodsList.getUseday());
-                            stocklogDO.setBacth(goodsList.getBatch());
-                            stocklogDO.setCounts(String.valueOf(countNews));
-                            stocklogDO.setInpositionId(null);
-                            stocklogDO.setOutpositionId(positionId);
-                            stocklogDO.setZhidanPeople(psname);
-                            //———获取当前系统时间—————
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
-                            Date date = new Date();
-                            String newDate = sdf.format(date);
-                            stocklogDO.setDay(newDate);
-                            stocklogDO.setWay("委外出库");
-                            //———获取当前登录用户的工号————
-                            stocklogDO.setUsername(ShiroUtils.getUser().getUsername());
-                            stocklogService.save(stocklogDO);
-                        }
-                    } else {
+//                    String yaoqiu = weiwaiDO.getYaoqiu();
+//                    Integer flag = yaoqiu.indexOf("委外代加工");
+//                    if (flag != -1) {
+//                        logStatusDO.setSaleNumber(saleNumber);
+//                        logStatusDO.setLogisticStatus("配送");
+//                        WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+//                        workRecoedDO.setUserName(psname);
+//                        workRecoedDO.setType("配送");
+//                        workRecoedDO.setDateTime(new Date());
+//
+//                        Map<String,Object> statusmap=new HashMap<>();
+//                        statusmap.put("saleNumber",saleNumber);
+//                        statusmap.put("logisticStatus","配送");
+//                         statusDOList=statusService.list(statusmap);
+//                        if (statusDOList.size()==0){
+//                            statusService.saveRecord(workRecoedDO);
+//                        }
+//                        //减库存
+//                        String num = weiwaiDO.getNum();
+//                        String code = weiwaiDO.getCode();
+//                        Long positionId = weiwaiDO.getPositionId();
+//                        String count = weiwaiDO.getCount();
+//                        StockDO stock = new StockDO();
+//                        stock.setGoodsNum(num);
+//                        stock.setGoodsCode(code);
+//                        stock.setPositionId(positionId.toString());
+//                        StockDO goodsList = stockService.haveNum(stock);
+//                        if (null != goodsList) {
+//                            Integer kcCount = Integer.valueOf(goodsList.getGoodsCount());
+//                            Integer psCount = Integer.valueOf(count);
+//                            Integer countNews = kcCount - psCount;
+//                            stock.setGoodsCount(countNews.toString());
+//                            stockService.updateGoodsCount(stock);//修改数量
+//
+//                            ///log
+//                            StocklogDO stocklogDO = new StocklogDO();
+//                            stocklogDO.setDanjunum(danjuNumber);
+//                            stocklogDO.setNum(goodsList.getGoodsNum());
+//                            stocklogDO.setCode(goodsList.getGoodsCode());
+//                            stocklogDO.setName(goodsList.getGoodsName());
+//                            stocklogDO.setGoodsid(goodsList.getGoodsType());
+//                            stocklogDO.setMfrsnum(goodsList.getMfrsid());
+//                            stocklogDO.setBrandname(goodsList.getBrandname());
+//                            stocklogDO.setMoney(goodsList.getRetailPrice());
+//                            stocklogDO.setUseday(goodsList.getUseday());
+//                            stocklogDO.setBacth(goodsList.getBatch());
+//                            stocklogDO.setCounts(String.valueOf(countNews));
+//                            stocklogDO.setInpositionId(null);
+//                            stocklogDO.setOutpositionId(positionId);
+//                            stocklogDO.setZhidanPeople(psname);
+//                            //———获取当前系统时间—————
+//                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+//                            Date date = new Date();
+//                            String newDate = sdf.format(date);
+//                            stocklogDO.setDay(newDate);
+//                            stocklogDO.setWay("委外出库");
+//                            //———获取当前登录用户的工号————
+//                            stocklogDO.setUsername(ShiroUtils.getUser().getUsername());
+//                            stocklogService.save(stocklogDO);
+//                        }
+//                    } else {
                         logStatusDO.setSaleNumber(saleNumber);
                         logStatusDO.setLogisticStatus("委外完成");
                         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
@@ -835,6 +832,64 @@ public class WeiwaiController {
                         if (statusDOList.size()==0) {
                             statusService.saveRecord(workRecoedDO);
                         }
+//                    }
+                }else if("4".equals(eyeStyle)){
+                    logStatusDO.setSaleNumber(saleNumber);
+                    logStatusDO.setLogisticStatus("配送");
+                    WorkRecoedDO workRecoedDO = new WorkRecoedDO();
+                    workRecoedDO.setUserName(psname);
+                    workRecoedDO.setType("配送");
+                    workRecoedDO.setDateTime(new Date());
+
+                    Map<String,Object> statusmap=new HashMap<>();
+                    statusmap.put("saleNumber",saleNumber);
+                    statusmap.put("logisticStatus","配送");
+                    statusDOList=statusService.list(statusmap);
+                    if (statusDOList.size()==0){
+                        statusService.saveRecord(workRecoedDO);
+                    }
+                    //减库存
+                    String num = weiwaiDO.getNum();
+                    String code = weiwaiDO.getCode();
+                    Long positionId = weiwaiDO.getPositionId();
+                    String count = weiwaiDO.getCount();
+                    StockDO stock = new StockDO();
+                    stock.setGoodsNum(num);
+                    stock.setGoodsCode(code);
+                    stock.setPositionId(positionId.toString());
+                    StockDO goodsList = stockService.haveNum(stock);
+                    if (null != goodsList) {
+                        Integer kcCount = Integer.valueOf(goodsList.getGoodsCount());
+                        Integer psCount = Integer.valueOf(count);
+                        Integer countNews = kcCount - psCount;
+                        stock.setGoodsCount(countNews.toString());
+                        stockService.updateGoodsCount(stock);//修改数量
+
+                        ///log
+                        StocklogDO stocklogDO = new StocklogDO();
+                        stocklogDO.setDanjunum(danjuNumber);
+                        stocklogDO.setNum(goodsList.getGoodsNum());
+                        stocklogDO.setCode(goodsList.getGoodsCode());
+                        stocklogDO.setName(goodsList.getGoodsName());
+                        stocklogDO.setGoodsid(goodsList.getGoodsType());
+                        stocklogDO.setMfrsnum(goodsList.getMfrsid());
+                        stocklogDO.setBrandname(goodsList.getBrandname());
+                        stocklogDO.setMoney(goodsList.getRetailPrice());
+                        stocklogDO.setUseday(goodsList.getUseday());
+                        stocklogDO.setBacth(goodsList.getBatch());
+                        stocklogDO.setCounts(String.valueOf(countNews));
+                        stocklogDO.setInpositionId(null);
+                        stocklogDO.setOutpositionId(positionId);
+                        stocklogDO.setZhidanPeople(psname);
+                        //———获取当前系统时间—————
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                        Date date = new Date();
+                        String newDate = sdf.format(date);
+                        stocklogDO.setDay(newDate);
+                        stocklogDO.setWay("委外出库");
+                        //———获取当前登录用户的工号————
+                        stocklogDO.setUsername(ShiroUtils.getUser().getUsername());
+                        stocklogService.save(stocklogDO);
                     }
                 }
                 if (statusDOList.size()==0){
@@ -1104,250 +1159,3 @@ public class WeiwaiController {
 
 
 }
-
-
-
-
-
-
-
-
-//    /**
-//     * 导出
-//     *
-//     * @throws IOException
-//     */
-//    @GetMapping("/out")
-//    @RequiresPermissions("stock:weiwai:out")
-//    public String out(String[] danjuNumbers, String[] saleNumbers, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
-//        List<WeiwaiDO> weiwaiDOList = weiwaiService.weiwaiOrderOut(danjuNumbers, saleNumbers);
-//        model.addAttribute("weiwaiDOList", weiwaiDOList);
-//
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//        String filename = "配镜单明细" + format.format(new Date().getTime()) + ".xls";
-//        response.setContentType("application/ms-excel;charset=UTF-8");
-//        response.setHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes(), "iso-8859-1"));
-//
-//        OutputStream out = response.getOutputStream();
-//
-//        try {
-//            ExcelExportUtil4DIY.exportToFile(, out);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            out.close();
-//        }
-//    }
-
-
-
-
-
-
-
-
-
-
-
-//
-//    /**
-//     * 取镜处收货或者加工检验----配送减库存
-//     */
-//    @PostMapping("/editShouhuo")
-//    @ResponseBody
-//    public R editShouhuo(String danjuNumber, String salenumbery, String shstatus, String psname, String eyeStyle,
-//                         String yaoqiu  ) {
-//        Map<String, Object> map = new HashMap<>();
-//        String conpanyId = ShiroUtils.getUser().getCompanyId();
-//        map.put("conpanyId", conpanyId);
-//        map.put("userName", psname);
-//        UserDO userDO = userService.getUserName(map);
-//        if (null == userDO) {
-//            return R.error("该工号不存在");
-//        } else {
-//            LogStatusDO logStatusDO = new LogStatusDO();
-////        String[] array = yaoqiu.split(",");
-////        boolean flag = false;
-////        flag = Arrays.asList(array).contains("委外代加工");
-//            String str = yaoqiu;
-//            Integer flag = str.indexOf("委外代加工");  // true
-//            if ("3".equals(eyeStyle.trim())) {//去除空格
-//                if (flag != -1) {
-//                    logStatusDO.setSaleNumber(salenumbery);
-//                    logStatusDO.setLogisticStatus("配送");
-//                    WorkRecoedDO workRecoedDO = new WorkRecoedDO();
-//                    workRecoedDO.setUserName(psname);
-//                    workRecoedDO.setType("配送");
-//                    workRecoedDO.setDateTime(new Date());
-//                    statusService.saveRecord(workRecoedDO);
-//                    //减库存
-//                    WeiwaiDO weiwaiOrders = weiwaiService.weiwaiOrder(danjuNumber);
-//                    String[] mfrsids = weiwaiOrders.getGoodsmfrsid().split(",");
-//                    String[] brandnames = weiwaiOrders.getGoodsbrandname().split(",");
-//                    String[] nums = weiwaiOrders.getNum().split(",");
-//                    String[] codes = weiwaiOrders.getCode().split(",");
-//                    String[] counts = weiwaiOrders.getCount().split(",");
-//                    for (int i = 0; i < nums.length; i++) {
-//                        StockDO stock = new StockDO();
-//                        //减库存
-//                        stock.setPositionId(String.valueOf(weiwaiOrders.getPositionId()));
-//                        String mfrsid = mfrsids[i];
-//                        stock.setMfrsid(mfrsid);
-//                        String brandname = brandnames[i];
-//                        stock.setBrandnum(brandname);
-//                        String goodsNum = nums[i];
-//                        stock.setGoodsNum(goodsNum);
-//                        String goodsCode = codes[i];
-//                        stock.setGoodsCode(goodsCode);
-//                        String count = counts[i];
-//                        stock.setCount(count);
-//                        StockDO goodsList = stockService.haveNum(stock);
-//                        if (null != goodsList) {
-//                            String countStock = goodsList.getGoodsCount();
-//                            Integer newcount = Integer.valueOf(count);
-//                            Integer yuancounts = Integer.valueOf(countStock);
-//                            Integer newCount = yuancounts - newcount;
-//                            stock.setGoodsCount(String.valueOf(newCount));
-//                            stockService.updateGoodsCount(stock);//修改数量
-//
-//                            ///log
-//                            StocklogDO stocklogDO=new StocklogDO();
-//                            stocklogDO.setDanjunum(danjuNumber);
-//                            stocklogDO.setNum(goodsList.getGoodsNum());
-//                            stocklogDO.setCode(goodsList.getGoodsCode());
-//                            stocklogDO.setName(goodsList.getGoodsName());
-//                            stocklogDO.setGoodsid(goodsList.getGoodsType());
-//                            stocklogDO.setMfrsnum(goodsList.getMfrsid());
-//                            stocklogDO.setBrandname(goodsList.getBrandname());
-//                            stocklogDO.setMoney(goodsList.getRetailPrice());
-//                            stocklogDO.setUseday(goodsList.getUseday());
-//                            stocklogDO.setBacth(goodsList.getBatch());
-//                            stocklogDO.setCounts(String.valueOf(newcount));
-//                            stocklogDO.setInpositionId(null);
-//                            stocklogDO.setOutpositionId(weiwaiOrders.getPositionId());
-//                            stocklogDO.setZhidanPeople(psname);
-////                //———获取当前系统时间—————
-//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
-//                    Date date = new Date();
-//                    String newDate = sdf.format(date);
-//                            stocklogDO.setDay(newDate);
-////                    stocklogDO.setWay(orderkc.getZhidanPeople()+"批调"+orderkc.getGoodsCount()+"个"+orderkc.getGoodsName());
-//                            stocklogDO.setWay("委外出库");
-//                            //———获取当前登录用户的工号————
-//                            stocklogDO.setUsername(ShiroUtils.getUser().getUsername());
-//                            stocklogService.save(stocklogDO);
-//                        }
-//                    }
-//
-//                } else {
-//                    logStatusDO.setSaleNumber(salenumbery);
-//                    logStatusDO.setLogisticStatus("委外完成");
-//                    WorkRecoedDO workRecoedDO = new WorkRecoedDO();
-//                    workRecoedDO.setUserName(psname);
-//                    workRecoedDO.setType("委外完成");
-//                    workRecoedDO.setDateTime(new Date());
-//                    statusService.saveRecord(workRecoedDO);
-//                }
-//
-//            } else if ("4".equals(eyeStyle.trim())) {//去除空格
-//                logStatusDO.setSaleNumber(salenumbery);
-//                logStatusDO.setLogisticStatus("配送");
-//                WorkRecoedDO workRecoedDO = new WorkRecoedDO();
-//                workRecoedDO.setUserName(psname);
-//                workRecoedDO.setType("配送");
-//                workRecoedDO.setDateTime(new Date());
-//                statusService.saveRecord(workRecoedDO);
-//
-//
-//                //减库存
-//                WeiwaiDO weiwaiOrders = weiwaiService.weiwaiOrder(danjuNumber);
-//                String[] mfrsids = weiwaiOrders.getGoodsmfrsid().split(",");
-//                String[] brandnames = weiwaiOrders.getGoodsbrandname().split(",");
-//                String[] nums = weiwaiOrders.getNum().split(",");
-//                String[] codes = weiwaiOrders.getCode().split(",");
-//                String[] counts = weiwaiOrders.getCount().split(",");
-//                for (int i = 0; i < nums.length; i++) {
-//                    StockDO stock = new StockDO();
-//                    //减库存
-//                    stock.setPositionId(String.valueOf(weiwaiOrders.getPositionId()));
-//                    String mfrsid = mfrsids[i];
-//                    stock.setMfrsid(mfrsid);
-//                    String brandname = brandnames[i];
-//                    stock.setBrandnum(brandname);
-//                    String goodsNum = nums[i];
-//                    stock.setGoodsNum(goodsNum);
-//                    String goodsCode = codes[i];
-//                    stock.setGoodsCode(goodsCode);
-//                    String count = counts[i];
-//                    stock.setCount(count);
-//                    StockDO goodsList = stockService.haveNum(stock);
-//                    if (null != goodsList) {
-//                        String countStock = goodsList.getGoodsCount();
-//                        Integer newcount = Integer.valueOf(count);
-//                        Integer yuancounts = Integer.valueOf(countStock);
-//                        Integer newCount = yuancounts - newcount;
-//                        stock.setGoodsCount(String.valueOf(newCount));
-//                        stockService.updateGoodsCount(stock);//修改数量
-//
-//                        ///log
-//                        StocklogDO stocklogDO=new StocklogDO();
-//                        stocklogDO.setDanjunum(danjuNumber);
-//                        stocklogDO.setNum(goodsList.getGoodsNum());
-//                        stocklogDO.setCode(goodsList.getGoodsCode());
-//                        stocklogDO.setName(goodsList.getGoodsName());
-//                        stocklogDO.setGoodsid(goodsList.getGoodsType());
-//                        stocklogDO.setMfrsnum(goodsList.getMfrsid());
-//                        stocklogDO.setBrandname(goodsList.getBrandname());
-//                        stocklogDO.setMoney(goodsList.getRetailPrice());
-//                        stocklogDO.setUseday(goodsList.getUseday());
-//                        stocklogDO.setBacth(goodsList.getBatch());
-//                        stocklogDO.setCounts(String.valueOf(newcount));
-//                        stocklogDO.setInpositionId(null);
-//                        stocklogDO.setOutpositionId(weiwaiOrders.getPositionId());
-//                        stocklogDO.setZhidanPeople(psname);
-////                //———获取当前系统时间—————
-//                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
-//                        Date date = new Date();
-//                        String newDate = sdf.format(date);
-//                        stocklogDO.setDay(newDate);
-////                    stocklogDO.setWay(orderkc.getZhidanPeople()+"批调"+orderkc.getGoodsCount()+"个"+orderkc.getGoodsName());
-//                        stocklogDO.setWay("委外出库");
-//                        //———获取当前登录用户的工号————
-//                        stocklogDO.setUsername(ShiroUtils.getUser().getUsername());
-//                        stocklogService.save(stocklogDO);
-//
-//                    }
-//                }
-//
-//
-//            }
-//
-//            if (statusService.save(logStatusDO) > 0) {
-//                WeiwaiDO weiwaiDO = new WeiwaiDO();
-//                weiwaiDO.setDanjuNumber(danjuNumber);
-//                weiwaiDO.setShstatus(shstatus);
-//                weiwaiDO.setPsname(psname);
-//                //———获取当前系统时间—————
-//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
-//                Date date = new Date();
-//                String newDate = sdf.format(date);
-//                weiwaiDO.setPstime(newDate);
-//                weiwaiService.updateStatus(weiwaiDO);
-//
-//
-//                WeiwaikcDO weiwaikcDO = new WeiwaikcDO();
-//                weiwaikcDO.setDanjuNumber(danjuNumber);
-//                weiwaikcDO.setShstatus(shstatus);
-//                weiwaikcDO.setPsname(psname);
-//                //———获取当前系统时间—————
-//                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
-//                Date date1 = new Date();
-//                String newDate1 = sdf.format(date1);
-//                weiwaiDO.setPstime(newDate1);
-//                weiwaikcService.updateStatus(weiwaikcDO);
-//                return R.ok();
-//            }
-//            return R.error();
-//        }
-//    }
-//

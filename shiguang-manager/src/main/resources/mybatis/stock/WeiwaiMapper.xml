@@ -30,6 +30,7 @@
         <where>
             <if test="id != null and id != ''"> and s.id = #{id} </if>
             <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number  LIKE concat(concat('%', #{danjuNumber}),'%')</if>
+            <if test="salenumbery != null and salenumbery != ''">and s.sale_number  LIKE concat(concat('%', #{salenumbery}),'%')</if>
 
             <if test="danjuDay != null and danjuDay != ''"> and s.danju_day = #{danjuDay} </if>
             <if test="eyeStyle != null and eyeStyle != ''"> and s.eye_style = #{eyeStyle} </if>
