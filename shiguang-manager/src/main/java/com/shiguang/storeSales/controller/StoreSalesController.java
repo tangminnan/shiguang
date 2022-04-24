@@ -1247,7 +1247,12 @@ public class StoreSalesController {
                     weiwaiDO.setGkname(weiwaishujuDO.getGkname());
                     weiwaiDO.setHyknum(weiwaishujuDO.getHyknum());
                     weiwaiDO.setPhone(weiwaishujuDO.getPhone());
-                    weiwaiDO.setStatus("");
+                    weiwaiDO.setUsername("");
+                    weiwaiDO.setStatus("1");
+                    weiwaiDO.setShTime("");
+                    weiwaiDO.setShstatus("");
+                    weiwaiDO.setPsname("");
+                    weiwaiDO.setPstime("");
                     weiwaiDO.setCompanyName(ShiroUtils.getUser().getCompany());
                     weiwaiDO.setDepartname(ShiroUtils.getUser().getStore());
                     weiwaiDO.setViewGoodName(jpdzDO.getViewGoodName());
