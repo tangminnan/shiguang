@@ -2099,8 +2099,8 @@
           JOIN c_position po ON s.position_id = po.position_id
         <where>
 
-            <if test="goodsNum != null and goodsNum != ''">and  s.goods_num= #{goodsNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and  s.goods_code= #{goodsCode}</if>
+            <if test="goodsNum != null and goodsNum != ''">and  s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and  s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 
             <if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
@@ -2136,101 +2136,6 @@
             limit #{offset}, #{limit}
         </if>
     </select>
-    <!--<select id="kccxList" resultType="com.shiguang.stock.domain.StockDO">-->
-        <!--SELECT-->
-        <!--s.danju_number,-->
-        <!--s.goods_num,-->
-        <!--s.goods_code,-->
-        <!--s.goods_name,-->
-        <!--s.goods_count,-->
-        <!--g.goodsname AS 'gdname',-->
-        <!--g.goodsid,-->
-        <!--m.mfrsname,-->
-        <!--s.brandname,-->
-        <!--s.retail_price,-->
-        <!--s.price_sum,-->
-        <!--s.cost_price,-->
-        <!--s.cost_sum,-->
-        <!--s.whole_price,-->
-        <!--s.whole_sum,-->
-        <!--po.position_name,-->
-        <!--s.batch,-->
-        <!--s.zhuce_number,-->
-        <!--s.produce_day,-->
-        <!--s.useday,-->
-        <!--s.factory,-->
-        <!--s.mfrsid,-->
-        <!--s.unit,-->
-        <!--s.classtype,-->
-        <!--s.returnzt,-->
-        <!--jj.produc_factorycolor AS jjColor,-->
-        <!--jpcp.sph_id AS jpcpSph,-->
-        <!--jpcp.cyl_id AS jpcpCyl,-->
-        <!--jpdz.sph_up AS jpcpSphUp,-->
-        <!--jpdz.sph_down AS jpcpSphDown,-->
-        <!--jpdz.cyl_up AS jpcpCylUp,-->
-        <!--jpdz.cyl_down AS jpcpCylDown,-->
-        <!--yxcp.sph_id AS yxcpSph,-->
-        <!--yxcp.cyl_id AS yxcpCyl,-->
-        <!--yxdz.sph_up AS yxdzSphUp,-->
-        <!--yxdz.sph_down AS yxdzSphDown,-->
-        <!--yxdz.cyl_up AS yxdzCylUp,-->
-        <!--yxdz.cyl_down AS yxdzCylDown,-->
-        <!--tyj.produc_factorycolor AS tyjColor,-->
-        <!--lhj.old_id AS lhjSph-->
-        <!--FROM-->
-        <!--stock s-->
-        <!--LEFT JOIN c_goods g ON s.goods_type = g.goodsid-->
-        <!--LEFT JOIN c_mfrs m ON s.mfrsid = m.mfrsnum-->
-        <!--LEFT JOIN c_position po ON s.position_id = po.position_id-->
-        <!--LEFT JOIN c_brand b ON s.brandname = b.brandname AND s.`mfrsid` = b.`mfrsid`-->
-        <!--LEFT JOIN department d ON po.depart_number = d.depart_number  and po.company_id=d.company_id-->
-        <!--LEFT JOIN aa_produca jj ON jj.produc_num = s.goods_num-->
-        <!--LEFT JOIN aa_jpcp jpcp ON jpcp.produc_num = s.goods_num-->
-        <!--LEFT JOIN aa_jpdz jpdz ON jpdz.produc_num = s.goods_num-->
-        <!--LEFT JOIN aa_yxcp yxcp ON yxcp.produc_num = s.goods_num-->
-        <!--LEFT JOIN aa_yxdz yxdz ON yxdz.produc_num = s.goods_num-->
-        <!--LEFT JOIN aa_tyj tyj ON tyj.produc_num = s.goods_num-->
-        <!--LEFT JOIN aa_oldlens lhj ON lhj.produc_num = s.goods_num-->
-        <!--<where>-->
-
-            <!--<if test="goodsNum != null and goodsNum != ''">and  s.goods_num= #{goodsNum}</if>-->
-            <!--<if test="goodsCode != null and goodsCode != ''">and  s.goods_code= #{goodsCode}</if>-->
-
-            <!--<if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>-->
-            <!--<if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>-->
-
-            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>-->
-            <!--<if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>-->
-
-            <!--<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>-->
-            <!--<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>-->
-
-            <!--<if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>-->
-            <!--<if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>-->
-            <!--<if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>-->
-            <!--<if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>-->
-            <!--<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>-->
-            <!--<if test="classtype != null and classtype != ''">and s.classtype = #{classtype}</if>-->
-            <!--<if test="status != null and status != ''">and s.status = #{status}</if>-->
-            <!--<if test="outPosition != null and outPosition != ''">and  po.position_id  = #{outPosition}</if>-->
-
-            <!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
-            <!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
-
-        <!--</where>-->
-        <!--<choose>-->
-            <!--<when test="sort != null and sort.trim() != ''">-->
-                <!--order by ${sort} ${order}-->
-            <!--</when>-->
-            <!--<otherwise>-->
-             <!--group by s.id-->
-            <!--</otherwise>-->
-        <!--</choose>-->
-        <!--<if test="offset != null and limit != null">-->
-            <!--limit #{offset}, #{limit}-->
-        <!--</if>-->
-    <!--</select>-->
 
     <select id="countall" resultType="int">
         SELECT ifnull(sum(s.goods_count),0)   FROM
@@ -2240,8 +2145,8 @@
         JOIN c_position po ON s.position_id = po.position_id
         <where>
 
-            <if test="goodsNum != null and goodsNum != ''">and  s.goods_num= #{goodsNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and  s.goods_code= #{goodsCode}</if>
+            <if test="goodsNum != null and goodsNum != ''">and  s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and  s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 
             <if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
@@ -2274,8 +2179,8 @@
         JOIN c_position po ON s.position_id = po.position_id
         <where>
 
-            <if test="goodsNum != null and goodsNum != ''">and  s.goods_num= #{goodsNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and  s.goods_code= #{goodsCode}</if>
+            <if test="goodsNum != null and goodsNum != ''">and  s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and  s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 
             <if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
@@ -2300,6 +2205,82 @@
 
         </where>
     </select>
+    <!--<select id="kccxListCount" resultType="int">-->
+        <!--SELECT-->
+        <!--count( 0 )-->
+        <!--FROM-->
+        <!--(-->
+        <!--SELECT-->
+        <!--s.danju_number,-->
+        <!--s.goods_num,-->
+        <!--s.goods_code,-->
+        <!--s.goods_name,-->
+        <!--s.goods_count,-->
+        <!--g.goodsname AS 'gdname',-->
+        <!--g.goodsid,-->
+        <!--m.mfrsname,-->
+        <!--s.brandname,-->
+        <!--s.retail_price,-->
+        <!--s.price_sum,-->
+        <!--s.cost_price,-->
+        <!--s.cost_sum,-->
+        <!--s.whole_price,-->
+        <!--s.whole_sum,-->
+        <!--po.position_name,-->
+        <!--s.batch,-->
+        <!--s.zhuce_number,-->
+        <!--s.produce_day,-->
+        <!--s.useday,-->
+        <!--s.factory,-->
+        <!--s.mfrsid,-->
+        <!--s.unit,-->
+        <!--s.classtype,-->
+        <!--s.returnzt-->
+        <!--FROM-->
+        <!--stock s-->
+        <!--JOIN c_goods g ON s.goods_type = g.goodsid-->
+        <!--JOIN c_mfrs m ON s.mfrsid = m.mfrsnum-->
+        <!--JOIN c_position po ON s.position_id = po.position_id-->
+        <!--<where>-->
+
+            <!--<if test="goodsNum != null and goodsNum != ''">and  s.goods_num LIKE concat(concat('%', #{goodsNum}),'%')</if>-->
+            <!--<if test="goodsCode != null and goodsCode != ''">and  s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>-->
+
+            <!--<if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>-->
+            <!--<if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>-->
+
+            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>-->
+            <!--<if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>-->
+
+            <!--<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>-->
+            <!--<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>-->
+
+            <!--<if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>-->
+            <!--<if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>-->
+            <!--<if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>-->
+            <!--<if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>-->
+            <!--<if test="companyId != null and companyId != ''">and FIND_IN_SET(po.company_id,#{companyId})</if>-->
+            <!--<if test="classtype != null and classtype != ''">and s.classtype = #{classtype}</if>-->
+            <!--<if test="status != null and status != ''">and s.status = #{status}</if>-->
+            <!--<if test="outPosition != null and outPosition != ''">and  po.position_id  = #{outPosition}</if>-->
+
+            <!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+            <!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+        <!--</where>-->
+        <!--<choose>-->
+            <!--<when test="sort != null and sort.trim() != ''">-->
+                <!--order by ${sort} ${order}-->
+            <!--</when>-->
+            <!--<otherwise>-->
+                <!--group by s.id-->
+            <!--</otherwise>-->
+        <!--</choose>-->
+        <!--<if test="offset != null and limit != null">-->
+            <!--limit #{offset}, #{limit}-->
+        <!--</if>-->
+        <!--) aia-->
+    <!--</select>-->
 
     <update id="updateStatus" parameterType="com.shiguang.stock.domain.StockDO">
         update stock

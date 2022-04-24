@@ -10,12 +10,23 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
 
+<<<<<<< HEAD
     #url: jdbc:mysql://119.3.238.84:3306/shiguangzhongxincln?useUnicode=true&characterEncoding=utf8
     #url: jdbc:mysql://121.36.12.219:3306/shiguangzhongxin?useUnicode=true&characterEncoding=utf8
     url: jdbc:mysql://192.168.0.2:3306/shiguangzhongxin?useUnicode=true&characterEncoding=utf8
     username: root
     #password: Dm202003
     password: Dm202112
+=======
+
+    url: jdbc:mysql://119.3.238.84:3306/shiguangzhongxincln?useUnicode=true&characterEncoding=utf8
+#    url: jdbc:mysql://121.36.12.219:3306/shiguangzhongxin?useUnicode=true&characterEncoding=utf8
+#    url: jdbc:mysql://192.168.0.2:3306/shiguangzhongxin?useUnicode=true&characterEncoding=utf8
+
+    username: root
+    password: Dm202003
+#    password: Dm202112
+>>>>>>> bc14bf00b93887da8303164776ed4bc97365477e
     initialSize: 1
     minIdle: 3
     maxActive: 20

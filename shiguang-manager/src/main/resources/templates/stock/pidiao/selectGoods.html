@@ -243,24 +243,7 @@
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
             </td>
         </tr>
-        <!--<tr>-->
-            <!--<td>仓位名称：</td>-->
-            <!--<td>-->
-                <!--<div class="col-sm-8">-->
-                    <!--<label class="radio-inline">-->
-                        <!--<input type="radio" name="xsstate" value="0" checked onchange="positionChange()"/> 启用仓-->
-                    <!--</label>-->
-                    <!--<label class="radio-inline">-->
-                        <!--<input type="radio" name="xsstate" value="1" onchange="positionChange()"/> 停用仓-->
-                    <!--</label>-->
-                <!--</div>-->
-                <!--<span>-->
-					<!--<select id="positionName" name="positionName">-->
-						<!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-					<!--</select>-->
-				<!--</span>-->
-            <!--</td>-->
-        <!--</tr>-->
+
         <tr>
             <input id="kccount" type="kccount"  value="1" hidden/>
             <input id="outPosition" type="hidden" th:value="${outPosition}"/>
@@ -284,31 +267,44 @@
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/stock/pidiao/pidiao.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        var xsstate=$("input[name='xsstate']:checked").val();
-        var positionName = $('#positionName option:selected').text();
-        var positionNames = "";
-        if (positionName == "--请选择--") {
-            positionName = positionNames;
-        }
-        var outPosition = document.getElementById('outPosition').value;
-        $(".cw").remove();
-        $.ajax({
-            url: '/kucun/stock/selectPosion',
-            type: 'post',
-            dataType: "json",
-            data: {
-                'xsstate': xsstate
+    // $(document).ready(function () {
+    //     var xsstate=$("input[name='xsstate']:checked").val();
+    //     var positionName = $('#positionName option:selected').text();
+    //     var positionNames = "";
+    //     if (positionName == "--请选择--") {
+    //         positionName = positionNames;
+    //     }
+    //     var outPosition = document.getElementById('outPosition').value;
+    //     $(".cw").remove();
+    //     $.ajax({
+    //         url: '/kucun/stock/selectPosion',
+    //         type: 'post',
+    //         dataType: "json",
+    //         data: {
+    //             'xsstate': xsstate
+    //
+    //         },
+    //         success: function (position) {
+    //             for (var i = 0; i < position.length; i++) {
+    //                 $("#positionName").append("" +
+    //                     "<option class='cw'>" + position[i].positionName + "</option>");
+    //             }
+    //         }
+    //     });
+    // });
 
-            },
-            success: function (position) {
-                for (var i = 0; i < position.length; i++) {
-                    $("#positionName").append("" +
-                        "<option class='cw'>" + position[i].positionName + "</option>");
-                }
+    window.onload=function(){
+        var ock=document.getElementById("ck");
+        var obt=document.getElementById("bt");
+        var odiv=document.getElementById("thediv");
+        obt.onload=function(){
+            if(ock.checked==true){
+                odiv.innerHTML="复选框被选中";
+            } else{
+                odiv.innerHTML="复选框没有被选中";
             }
-        });
-    });
+        }
+    }
 
 
     $(function () {
@@ -419,57 +415,7 @@
                         {
                             field: 'useday ',
                             title: '效期'
-                        },
-
-
-
-                        // {
-                        //     field: 'priceSum ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'costPrice ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'costSum ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'wholePrice ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'wholeSum ',
-                        //     title: ''
-                        // },
-
-                        // {
-                        //     field: 'classtype ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'mfrsid ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'brandname ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'unit ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'goodsid ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'goodsxinxiid ',
-                        //     title: ''
-                        // },
-
-
+                        }
                     ]
                 });
 

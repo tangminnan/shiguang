@@ -689,8 +689,8 @@
                     </td>
                     <td><input class="input_text" id="addRightz" name="addRightz" type="text" onblur="zhengfu(this)"
                                oninput="getmoney(this,10)" autofocus/></td>
-                    <td><input class="input_text" id="yuanRz" name="yuanRz" type="text" /></td>
-                    <td><input class="input_text" id="nearRightz" name="nearRightz" type="text"/></td>
+                    <td><input class="input_text" id="yuanRz" name="yuanRz" type="text" onblur="Tj(this)"/></td>
+                    <td><input class="input_text" id="nearRightz" name="nearRightz" type="text"  onblur="Tj(this)"/></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -733,9 +733,9 @@
                     <td><input class="input_text" id="addLeftz" name="addLeftz" type="text" onblur="zhengfu(this)"
                                oninput="getmoney(this,10)" autofocus/>
                     </td>
-                    <td><input class="input_text" id="yuanLz" name="yuanLz" type="text"/>
+                    <td><input class="input_text" id="yuanLz" name="yuanLz" type="text" onblur="Tj(this)"/>
                     </td>
-                    <td><input class="input_text"  id="nearLeftz" name="nearLeftz" type="text"/>
+                    <td><input class="input_text"  id="nearLeftz" name="nearLeftz" type="text" onblur="Tj(this)"/>
                     </td>
                     <td></td>
                 </tr>
@@ -804,11 +804,11 @@
                                oninput="getmoney(this,10)" autofocus/>
                     </td>
                     <td>
-                        <input class="input_text" id="yuanRrty" name="yuanRrty" type="text"  />
+                        <input class="input_text" id="yuanRrty" name="yuanRrty" type="text"  onblur="Tj(this)" />
                     </td>
                     <td>
 
-                        <input class="input_text" id="nearRighttry" name="nearRighttry" type="text" />
+                        <input class="input_text" id="nearRighttry" name="nearRighttry" type="text" onblur="Tj(this)"/>
                     </td>
                 </tr>
                 <tr>
@@ -852,10 +852,10 @@
                                oninput="getmoney(this,10)" autofocus/>
                     </td>
                     <td>
-                        <input class="input_text" id="yuanLrty" name="yuanLrty" type="text" />
+                        <input class="input_text" id="yuanLrty" name="yuanLrty" type="text" onblur="Tj(this)"/>
                     </td>
                     <td>
-                        <input class="input_text" id="nearLefttry" name="nearLefttry" type="text" />
+                        <input class="input_text" id="nearLefttry" name="nearLefttry" type="text" onblur="Tj(this)" />
                     </td>
                 </tr>
                 </tbody>
@@ -943,7 +943,29 @@
         }
     };
 
+    //保留一位0.0
+    function Tj(e) {//正负用onblur事件触发
+        var val = parseFloat(e.value);
+        if (val > 0) {
+            e.value =  val.toFixed(1)
+        } else if (val <= 0) {
+            e.value = val.toFixed(1)
+        }
+    };
 
+    // function xiaoshu(e) {//用 onkeyup 或者 onkeydown事件 法配合正负方使用【限制输入在两位位数】
+    //     var val = parseFloat(e.value);
+    //     var val1 = e.value;bjingyi
+    //     // console.log(val);
+    //     var num = val1.indexOf(".") + 2;
+    //     console.log(num);
+    //     if (val1.length > num) {
+    //         console.log(123);
+    //         var val2 = 0 | val * 100;
+    //         console.log(val2)
+    //         e.value = val2 / 100
+    //     }
+    // }
 
 
     /**

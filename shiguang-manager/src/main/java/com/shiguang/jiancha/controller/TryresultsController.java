@@ -117,6 +117,51 @@ public class TryresultsController {
         Map<String, Object> map = new HashMap<>();
         map.put("ptometryNumber", ptometryNumber);
         List<TryresultsDO> list = tryresultsService.haveYanguangNum(map);
+
+        if ("".equals(tryresults.getSphereRightz())) {
+            tryresults.setSphereRightz("0.00");
+        }
+        if ("".equals(tryresults.getSphereLeftz())) {
+            tryresults.setSphereLeftz("0.00");
+        }
+        if ("".equals(tryresults.getCylinderRightz())) {
+            tryresults.setCylinderRightz("-0.00");
+        }
+        if ("".equals(tryresults.getCylinderLeftz())) {
+            tryresults.setCylinderLeftz("-0.00");
+        }
+
+        if ("".equals(tryresults.getSphereRighttry())) {
+            tryresults.setSphereRighttry("0.00");
+        }
+        if ("".equals(tryresults.getSphereLefttry())) {
+            tryresults.setSphereLefttry("0.00");
+        }
+        if ("".equals(tryresults.getCylinderRighttry())) {
+            tryresults.setCylinderRighttry("-0.00");
+        }
+        if ("".equals(tryresults.getCylinderLefttry())) {
+            tryresults.setCylinderLefttry("-0.00");
+        }
+
+
+        if ("".equals(tryresults.getAddRightz())) {
+            tryresults.setAddRightz("0.00");
+        }
+        if ("".equals(tryresults.getAddLeftz())) {
+            tryresults.setAddLeftz("-0.00");
+        }
+
+
+        if ("".equals(tryresults.getAddRighttry())) {
+            tryresults.setAddRighttry("0.00");
+        }
+        if ("".equals(tryresults.getAddLefttry())) {
+            tryresults.setAddLefttry("0.00");
+        }
+
+
+
         if (list.size() > 0) {
             tryresultsService.updateTry(tryresults);
             return R.ok();
@@ -232,6 +277,49 @@ public class TryresultsController {
     @ResponseBody
     @RequestMapping("/updateTry")
     public R updateTry(TryresultsDO tryresults) {
+        if ("".equals(tryresults.getSphereRightz())) {
+            tryresults.setSphereRightz("0.00");
+        }
+        if ("".equals(tryresults.getSphereLeftz())) {
+            tryresults.setSphereLeftz("0.00");
+        }
+        if ("".equals(tryresults.getCylinderRightz())) {
+            tryresults.setCylinderRightz("-0.00");
+        }
+        if ("".equals(tryresults.getCylinderLeftz())) {
+            tryresults.setCylinderLeftz("-0.00");
+        }
+
+        if ("".equals(tryresults.getSphereRighttry())) {
+            tryresults.setSphereRighttry("0.00");
+        }
+        if ("".equals(tryresults.getSphereLefttry())) {
+            tryresults.setSphereLefttry("0.00");
+        }
+        if ("".equals(tryresults.getCylinderRighttry())) {
+            tryresults.setCylinderRighttry("-0.00");
+        }
+        if ("".equals(tryresults.getCylinderLefttry())) {
+            tryresults.setCylinderLefttry("-0.00");
+        }
+
+
+        if ("".equals(tryresults.getAddRightz())) {
+            tryresults.setAddRightz("0.00");
+        }
+        if ("".equals(tryresults.getAddLeftz())) {
+            tryresults.setAddLeftz("-0.00");
+        }
+
+
+        if ("".equals(tryresults.getAddRighttry())) {
+            tryresults.setAddRighttry("0.00");
+        }
+        if ("".equals(tryresults.getAddLefttry())) {
+            tryresults.setAddLefttry("0.00");
+        }
+
+
         tryresultsService.updateTry(tryresults);
         return R.ok();
     }
