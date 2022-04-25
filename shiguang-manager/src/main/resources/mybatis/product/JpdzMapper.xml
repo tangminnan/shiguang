@@ -43,8 +43,9 @@
         left join c_unit u on u.unitid=j.unitid
         left join p_light lig on lig.light_id=j.light_id
         <where>
-            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and j.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -92,8 +93,9 @@
         left join c_unit u on u.unitid=j.unitid
         left join p_light lig on lig.light_id=j.light_id
         <where>
-            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and j.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>

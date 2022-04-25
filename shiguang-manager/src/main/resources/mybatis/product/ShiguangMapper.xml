@@ -21,8 +21,9 @@
         from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid`
         left join c_unit u on s.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and s.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and s.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and s.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -56,8 +57,9 @@
         select count(*)  from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid`
         left join c_unit u on s.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and s.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and s.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and s.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -111,7 +113,8 @@
         LEFT JOIN c_unit u ON s.unitid = u.unitid
 
         <where>
-            <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
+
+            <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             and  s.xsstate= 0
             AND s.state = 1
             AND m.xsstate = 0
@@ -141,8 +144,7 @@
         LEFT JOIN c_unit u ON s.unitid = u.unitid
 
         <where>
-            <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
-            <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
+            <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             and  s.xsstate= 0
             AND s.state = 1
             AND m.xsstate = 0

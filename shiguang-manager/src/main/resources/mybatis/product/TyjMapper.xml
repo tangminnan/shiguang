@@ -20,8 +20,9 @@
         from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsnum left join c_brand b on t.brandnum=b.brandnum AND t.`mfrsid`=b.`mfrsid`
         left join c_unit u on t.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and t.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and t.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and t.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and t.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -60,8 +61,9 @@
         select count(*)   from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsnum left join c_brand b on t.brandnum=b.brandnum AND t.`mfrsid`=b.`mfrsid`
         left join c_unit u on t.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and t.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and t.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and t.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and t.produc_name LIKE concat(concat('%', #{producName}),'%')</if>

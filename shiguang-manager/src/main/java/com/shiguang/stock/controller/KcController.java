@@ -41,6 +41,9 @@ public class KcController {
     //商品类别
     @Autowired
     private GoodsService goodsService;
+    //折射率
+    @Autowired
+    private RefractivityService refractivityService;
     //仓位
     @Autowired
     private PositionService positionService;
@@ -66,6 +69,9 @@ public class KcController {
 //        map.put("goodstypeName", "隐形");
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
         return "stock/stock/kccx";
     }
 
