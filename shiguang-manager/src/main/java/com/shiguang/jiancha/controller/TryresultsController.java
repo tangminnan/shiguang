@@ -125,10 +125,10 @@ public class TryresultsController {
             tryresults.setSphereLeftz("0.00");
         }
         if ("".equals(tryresults.getCylinderRightz())) {
-            tryresults.setCylinderRightz("-0.00");
+            tryresults.setCylinderRightz("0.00");
         }
         if ("".equals(tryresults.getCylinderLeftz())) {
-            tryresults.setCylinderLeftz("-0.00");
+            tryresults.setCylinderLeftz("0.00");
         }
 
         if ("".equals(tryresults.getSphereRighttry())) {
@@ -138,10 +138,10 @@ public class TryresultsController {
             tryresults.setSphereLefttry("0.00");
         }
         if ("".equals(tryresults.getCylinderRighttry())) {
-            tryresults.setCylinderRighttry("-0.00");
+            tryresults.setCylinderRighttry("0.00");
         }
         if ("".equals(tryresults.getCylinderLefttry())) {
-            tryresults.setCylinderLefttry("-0.00");
+            tryresults.setCylinderLefttry("0.00");
         }
 
 
@@ -149,7 +149,7 @@ public class TryresultsController {
             tryresults.setAddRightz("0.00");
         }
         if ("".equals(tryresults.getAddLeftz())) {
-            tryresults.setAddLeftz("-0.00");
+            tryresults.setAddLeftz("0.00");
         }
 
 
@@ -284,10 +284,10 @@ public class TryresultsController {
             tryresults.setSphereLeftz("0.00");
         }
         if ("".equals(tryresults.getCylinderRightz())) {
-            tryresults.setCylinderRightz("-0.00");
+            tryresults.setCylinderRightz("0.00");
         }
         if ("".equals(tryresults.getCylinderLeftz())) {
-            tryresults.setCylinderLeftz("-0.00");
+            tryresults.setCylinderLeftz("0.00");
         }
 
         if ("".equals(tryresults.getSphereRighttry())) {
@@ -297,10 +297,10 @@ public class TryresultsController {
             tryresults.setSphereLefttry("0.00");
         }
         if ("".equals(tryresults.getCylinderRighttry())) {
-            tryresults.setCylinderRighttry("-0.00");
+            tryresults.setCylinderRighttry("0.00");
         }
         if ("".equals(tryresults.getCylinderLefttry())) {
-            tryresults.setCylinderLefttry("-0.00");
+            tryresults.setCylinderLefttry("0.00");
         }
 
 
@@ -308,7 +308,7 @@ public class TryresultsController {
             tryresults.setAddRightz("0.00");
         }
         if ("".equals(tryresults.getAddLeftz())) {
-            tryresults.setAddLeftz("-0.00");
+            tryresults.setAddLeftz("0.00");
         }
 
 

@@ -141,10 +141,10 @@ public class ResultController {
                     tryresultsDO.setSphereLeftz("0.00");
                 }
                 if ("".equals(tryresultsDO.getCylinderRightz())) {
-                    tryresultsDO.setCylinderRightz("-0.00");
+                    tryresultsDO.setCylinderRightz("0.00");
                 }
                 if ("".equals(tryresultsDO.getCylinderLeftz())) {
-                    tryresultsDO.setCylinderLeftz("-0.00");
+                    tryresultsDO.setCylinderLeftz("0.00");
                 }
 
                 if ("".equals(tryresultsDO.getSphereRighttry())) {
@@ -154,10 +154,10 @@ public class ResultController {
                     tryresultsDO.setSphereLefttry("0.00");
                 }
                 if ("".equals(tryresultsDO.getCylinderRighttry())) {
-                    tryresultsDO.setCylinderRighttry("-0.00");
+                    tryresultsDO.setCylinderRighttry("0.00");
                 }
                 if ("".equals(tryresultsDO.getCylinderLefttry())) {
-                    tryresultsDO.setCylinderLefttry("-0.00");
+                    tryresultsDO.setCylinderLefttry("0.00");
                 }
 
 
@@ -165,7 +165,7 @@ public class ResultController {
                     tryresultsDO.setAddRightz("0.00");
                 }
                 if ("".equals(tryresultsDO.getAddLeftz())) {
-                    tryresultsDO.setAddLeftz("-0.00");
+                    tryresultsDO.setAddLeftz("0.00");
                 }
 
 
@@ -453,10 +453,10 @@ public class ResultController {
                     tryresultsDO.setSphereLeftz("0.00");
                 }
                 if ("".equals(tryresultsDO.getCylinderRightz())) {
-                    tryresultsDO.setCylinderRightz("-0.00");
+                    tryresultsDO.setCylinderRightz("0.00");
                 }
                 if ("".equals(tryresultsDO.getCylinderLeftz())) {
-                    tryresultsDO.setCylinderLeftz("-0.00");
+                    tryresultsDO.setCylinderLeftz("0.00");
                 }
 
                 if ("".equals(tryresultsDO.getSphereRighttry())) {
@@ -466,10 +466,10 @@ public class ResultController {
                     tryresultsDO.setSphereLefttry("0.00");
                 }
                 if ("".equals(tryresultsDO.getCylinderRighttry())) {
-                    tryresultsDO.setCylinderRighttry("-0.00");
+                    tryresultsDO.setCylinderRighttry("0.00");
                 }
                 if ("".equals(tryresultsDO.getCylinderLefttry())) {
-                    tryresultsDO.setCylinderLefttry("-0.00");
+                    tryresultsDO.setCylinderLefttry("0.00");
                 }
 
 
@@ -477,7 +477,7 @@ public class ResultController {
                     tryresultsDO.setAddRightz("0.00");
                 }
                 if ("".equals(tryresultsDO.getAddLeftz())) {
-                    tryresultsDO.setAddLeftz("-0.00");
+                    tryresultsDO.setAddLeftz("0.00");
                 }
 
 
