@@ -1223,8 +1223,8 @@ public class StoreSalesController {
                         weiwaiDO.setMfrsid(salesDO.getMfrsid());
                         JpdzDO jpdzDO = jpdzService.getJpdzInfomation(goodNumstr[s]);
                         weiwaiDO.setMfrsname(jpdzDO.getMfrsname());
-                        weiwaiDO.setBrandnum(jpdzDO.getBrandname());
-                        weiwaiDO.setBrandname(brandName[s]);
+                        weiwaiDO.setBrandnum(jpdzDO.getBrandnum());
+                        weiwaiDO.setBrandname(jpdzDO.getBrandname());
                         Map<String, Object> posMap = new HashMap<>();
                         posMap.put("companyId", ShiroUtils.getUser().getCompanyId());
                         if ("3".equals(ShiroUtils.getUser().getCompanyId())) {

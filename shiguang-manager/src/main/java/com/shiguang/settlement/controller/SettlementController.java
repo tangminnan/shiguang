@@ -183,8 +183,12 @@ public class SettlementController {
 			if (null == cardDO){
 				cardDO = new CardDO();
 				cardDO.setCardNumber("");
+				cardDO.setCardMoney("");
+			} else {
+				cardDO.setCardNumMoney(cardDO.getCardNumber() + "(余额："+ cardDO.getCardMoney() + ")");
+				cardDOS.add(cardDO);
 			}
-			cardDOS.add(cardDO);
+
 		}
 		model.addAttribute("cardDOS",cardDOS);
 		Map<String,Object> map = new HashMap<>();
@@ -477,29 +481,34 @@ public class SettlementController {
 		settlement.setSaleName(ShiroUtils.getUser().getName());
 		settlement.setSaleAcount(ShiroUtils.getUser().getUsername());
 		settlement.setSettleDate(new Date());
-		if ("6".equals(settlement.getPayModel().substring(0,settlement.getPayModel().length()-1))){
-			String cardNumber = settlement.getChuzhiNumber();
-			CardDO cardDO = cardService.getCardNum(cardNumber);
-			if (null != cardDO){
-				if (cardDO.getPassword().equals(settlement.getChuzhiPasd())){
-					if (Double.valueOf(cardDO.getCardMoney()) > Double.valueOf(settlement.getModelMoney().substring(0,settlement.getModelMoney().length()-1))){
-						double money = Double.valueOf(cardDO.getCardMoney()) - Double.valueOf(settlement.getModelMoney().substring(0,settlement.getModelMoney().length()-1));
-						cardDO.setCardMoney(money+"");
-						cardService.update(cardDO);
-						if(settlementService.save(settlement)>0){
-							return R.ok();
+		String[] paymodel = settlement.getPayModel().split(",");
+		String[] modelMoney = settlement.getModelMoney().split(",");
+		for (int i = 0;i<paymodel.length;i++){
+			if ("6".equals(paymodel[i])){
+				String cardNumber = settlement.getChuzhiNumber();
+				CardDO cardDO = cardService.getCardNum(cardNumber);
+				if (null != cardDO){
+					if (cardDO.getPassword().equals(settlement.getChuzhiPasd())){
+						if (Double.valueOf(cardDO.getCardMoney()) > Double.valueOf(modelMoney[i])){
+							double money = Double.valueOf(cardDO.getCardMoney()) - Double.valueOf(modelMoney[i]);
+							cardDO.setCardMoney(money+"");
+							cardService.update(cardDO);
+							if(settlementService.save(settlement)>0){
+								return R.ok();
+							}
+						} else {
+							return R.error("余额不足");
 						}
-					} else {
-						return R.error("余额不足");
-					}
 
-				} else {
-					return R.error("密码输入错误");
+					} else {
+						return R.error("密码输入错误");
+					}
+				} else{
+					return R.error("该用户没有绑定储值卡");
 				}
-			} else{
-				return R.error("该用户没有绑定储值卡");
 			}
 		}
+
 		if(settlementService.save(settlement)>0){
 			return R.ok();
 		}

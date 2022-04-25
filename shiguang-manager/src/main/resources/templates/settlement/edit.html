@@ -90,13 +90,14 @@
 									<!--<input id="chuzhiNumber" name="chuzhiNumber" style="width: 20%;" type="text">-->
 									<select id="chuzhiNumber"  name="chuzhiNumber" style="width: 30%" >
 										<option th:each="ls:${cardDOS}"
-												th:text="${ls.cardNumber}"
+												th:text="${ls.cardNumMoney}"
 												th:value="${ls.cardNumber}"></option>
 									</select>
 									&nbsp;&nbsp;&nbsp;&nbsp;密码：<input id="chuzhiPasd" name="chuzhiPasd" style="width: 20%;" type="text">
 									&nbsp;&nbsp;&nbsp;&nbsp;
 								</div>
 							</div>
+
 														<!--<div class="form-group">-->
 								<!--<label class="col-sm-3 control-label">找零金额：</label>-->
 								<!--<div class="col-sm-8">-->
@@ -118,18 +119,25 @@
 							<div class="form-group" style="display: none" id="jffs">
 								<label class="col-sm-3 control-label">缴费方式：</label>
 								<div class="col-sm-8">
-									<select  name="payModel" id="payModel" style="width: 30%">
+									<select  name="payModel" id="payModel" style="width: 30%" onclick="chuzhika()">
 										<option value="">请选择</option>
 										<option value="0">微信</option>
 										<option value="1">支付宝</option>
 										<option value="2">医院收费处</option>
 										<option value="3">一卡通</option>
 										<option value="4">现金</option>
+										<option value="5">银联卡</option>
+										<option value="6">储值卡</option>
+										<option value="7">.</option>
+										<option value="8">..</option>
+										<option value="9">积分</option>
+										<option value="10">微信平台</option>
 									</select>
 									&nbsp;&nbsp;&nbsp;&nbsp;<input id="modelMoneys" name="modelMoney" onchange="cop()" style="width: 20%" type="text">
 								</div>
 								<img src="/img/dec.jpg" width="20" height="20" onclick="desc(this)">
 							</div>
+
 																					<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
 									<button type="submit" class="btn btn-primary">提交</button>

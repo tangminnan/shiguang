@@ -21,6 +21,8 @@ public class CardDO implements Serializable {
 	private String cardNumber;
 	//储值金额
 	private String cardMoney;
+	//
+	private String cardNumMoney;
 	//会员卡号
 	private String memberNumber;
 	//会员姓名
@@ -62,6 +64,15 @@ public class CardDO implements Serializable {
 	public String getCardNumber() {
 		return cardNumber;
 	}
+
+	public String getCardNumMoney() {
+		return cardNumMoney;
+	}
+
+	public void setCardNumMoney(String cardNumMoney) {
+		this.cardNumMoney = cardNumMoney;
+	}
+
 	/**
 	 * 设置：储值金额
 	 */
