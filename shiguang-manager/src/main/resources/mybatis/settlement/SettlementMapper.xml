@@ -208,12 +208,13 @@
 		select count(*)
 		from settlement sl
 		join member m on sl.member_number = m.card_number
-		join cost c on c.id = sl.cost_id
+		join store_sales ss on sl.sale_number = ss.sale_number
 		<if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
 		<if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+		<if test="name != null and name != ''"> and m.name like concat('%', #{name},'%') </if>
+		<if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
 		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number like concat('%', #{saleNumber},'%') </if>
-		<if test="payWay != null and payWay != ''"> and sl.pay_way = #{payWay}</if>
-		<if test="type != null and type != ''"> and c.type != #{type}</if>
+		<!--<if test="type != null and type != ''"> and c.type != #{type}</if>-->
 		<if test="state != null and state != ''"> and m.state = #{state} </if>
 	</select>
 

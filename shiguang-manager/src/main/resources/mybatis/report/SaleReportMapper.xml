@@ -139,7 +139,7 @@
 
 	<!-- 查询中心店的营业员的报表 -->
 	<select id="findSaleReportForms" resultType="com.shiguang.settlement.domain.SettlementDO">
-		select s.`id`,s.`cost_id`,s.`sale_number`,s.`member_number`,s.`sale_name`,s.`actual_money`,s.`payment_money`,s.`change_money`,s.`pay_model`,
+		select s.`id`,s.`cost_id`,s.`sale_number`,s.`member_number`,s.`sale_name`,s.`sale_acount`,s.`actual_money`,s.`payment_money`,s.`change_money`,s.`pay_model`,
 		s.`model_money`,s.`pay_money`,s.`pay_way`,s.`front_money`,s.`settle_date`,s.`front_time`,dt.`depart_name` as departmentName
 		from settlement s join member m on m.card_number = s.member_number join department dt on dt.company_id = m.company_id
 		<where>
@@ -149,6 +149,7 @@
 			<if test="state !=null and state != ''">and m.state = #{state}</if>
 			<if test="departNumber !=null and departNumber != ''">and dt.depart_number = #{departNumber}</if>
 			<if test="departType !=null and departType != ''">and dt.depart_type = #{departType}</if>
+			<if test="saleAccount != null and saleAccount != ''"> s.`sale_acount` = #{saleAccount}</if>
 
 		</where>
 		GROUP BY s.sale_number
@@ -162,6 +163,7 @@
 		s.`sale_number`,
 		s.`member_number`,
 		s.`sale_name`,
+		s.`sale_acount`,
 		s.`actual_money`,
 		s.`payment_money`,
 		s.`change_money`,
@@ -187,6 +189,7 @@
 			<if test="state !=null and state != ''">and m.state = #{state}</if>
 			<if test="departNumber !=null and departNumber != ''">and dt.depart_number = #{departNumber}</if>
 			<if test="departType !=null and departType != ''">and dt.depart_type = #{departType}</if>
+			<if test="saleAccount != null and saleAccount != ''"> s.`sale_acount` = #{saleAccount}</if>
 		</where>
 		GROUP BY s.sale_number
 		order by dt.depart_number

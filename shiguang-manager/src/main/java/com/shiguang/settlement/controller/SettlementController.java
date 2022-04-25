@@ -1156,6 +1156,24 @@ public class SettlementController {
 				} else if ("4".equals(paymodel[i])){
 					model.addAttribute("paymodel","现金");
 					payModels.append("现金:"+moneyPay[i]+",");
+				} else if ("5".equals(paymodel[i])){
+					model.addAttribute("paymodel","银联卡");
+					payModels.append("银联卡:"+moneyPay[i]+",");
+				} else if ("6".equals(paymodel[i])){
+					model.addAttribute("paymodel","储值卡");
+					payModels.append("储值卡:"+moneyPay[i]+",");
+				} else if ("7".equals(paymodel[i])){
+					model.addAttribute("paymodel",".");
+					payModels.append("储值卡:"+moneyPay[i]+",");
+				} else if ("8".equals(paymodel[i])){
+					model.addAttribute("paymodel","..");
+					payModels.append("储值卡:"+moneyPay[i]+",");
+				} else if ("9".equals(paymodel[i])){
+					model.addAttribute("paymodel","积分");
+					payModels.append("积分:"+moneyPay[i]+",");
+				}else if ("10".equals(paymodel[i])){
+					model.addAttribute("paymodel","微信平台");
+					payModels.append("微信平台:"+moneyPay[i]+",");
 				}
 			}
 			model.addAttribute("payModels",payModels.deleteCharAt(payModels.length()-1));

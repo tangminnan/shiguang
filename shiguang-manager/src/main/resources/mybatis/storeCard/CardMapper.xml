@@ -107,6 +107,14 @@
 		</set>
 		where id = #{id}
 	</update>
+
+	<update id="updateMoney" parameterType="com.shiguang.storeCard.domain.CardDO">
+		update stored_card
+		<set>
+			<if test="cardMoney != null">`card_money` = #{cardMoney} </if>
+		</set>
+		where card_number = #{cardNumber}
+	</update>
 	
 	<delete id="remove">
 		delete from stored_card where id = #{value}

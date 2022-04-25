@@ -299,15 +299,17 @@ public class StoreSalesController {
                 salesDO.setIsJp(0L);
                 salesDO.setIsJj("无");
             }
-            if (!salesDO.getStoreDescribe().contains("隐形")){
-                if ("镜架".equals(salesDO.getStoreDescribe())
-                        || "镜片".equals(salesDO.getStoreDescribe())) {
-                    if (salesDO.getIsJp() < 2 && "无".equals(salesDO.getIsJj())) {
+            if (null !=salesDO.getStoreDescribe()){
+                if (!salesDO.getStoreDescribe().contains("隐形")){
+                    if ("镜架".equals(salesDO.getStoreDescribe())
+                            || "镜片".equals(salesDO.getStoreDescribe())) {
+                        if (salesDO.getIsJp() < 2 && "无".equals(salesDO.getIsJj())) {
+                            return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
+                        }
+                    }
+                    if (salesDO.getIsJp() < 2 ) {
                         return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
                     }
-                }
-                if (salesDO.getIsJp() < 2 ) {
-                    return R.error("镜片数量不足（框镜销售至少包含 镜架*1 镜片*2）！");
                 }
             }
                String[] leftRight = salesDO.getLeftRight().split(",");
@@ -1004,259 +1006,261 @@ public class StoreSalesController {
         SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if (salesService.save(salesDO) > 0) {
             //this.editsetle(salesDO,model);
-            String goodsCode = salesDO.getGoodsCode();
-            String goodsNum = salesDO.getGoodsNum();
-            String storeDesc = salesDO.getStoreDescribe();
-            String[] goodsStr = goodsCode.split(",");
-            String[] goodNumstr = goodsNum.split(",");
-            String[] goodsDescribe = storeDesc.split(",");
-            String[] goodsName = salesDO.getStoreName().split(",");
-            String[] goodsCount = salesDO.getStoreCount().split(",");
-            String[] classType = salesDO.getClasstype().split(",");
-            String[] brandName = salesDO.getBrandName().split(",");
-            String[] leftRight = salesDO.getLeftRight().split(",");
-            String weiwaiNumber = "W"+GuuidUtil.getUUID();
-            String danjuNumber = "OUT"+GuuidUtil.getUUID();
-            for (int s=0;s<goodsDescribe.length;s++){
-                if ("镜片".equals(goodsDescribe[s]) && "2".equals(classType[s])){
-                    WeiwaishujuDO weiwaishujuDO = new WeiwaishujuDO();
-                    weiwaishujuDO.setNumber(weiwaiNumber);
-                    weiwaishujuDO.setDanjuDay(sim.format(new Date()));
-                    weiwaishujuDO.setDepartname(ShiroUtils.getUser().getStore());
-                    weiwaishujuDO.setZhidanPeople(ShiroUtils.getUser().getName());
-                    weiwaishujuDO.setTimetime(sim.format(salesDO.getMirrorTime()));
-                    weiwaishujuDO.setDanjuStyle("1");
-                    weiwaishujuDO.setSaleNumber(salesDO.getSaleNumber());
-                    weiwaishujuDO.setWeiwaiStyle("委外订单");
-                    weiwaishujuDO.setBeizhu("");
-                    weiwaishujuDO.setGkname(salesDO.getMemberName());
-                    weiwaishujuDO.setHyknum(salesDO.getMemberNumber());
-                    weiwaishujuDO.setPhone(salesDO.getMemberTel());
-                    if("框镜".equals(salesDO.getEyeType())){
-                        weiwaishujuDO.setJcStyle("框镜订做");
-                        //weiwaishujuDO.setSph();
-                        if (salesDO.getLeftRight().equals("左")){
-                            //处方
-                            if ("2".equals(salesDO.getOptometrywlName())){
-                                if (salesDO.getRecipelwlType() == 1){
-                                    weiwaishujuDO.setSph(salesDO.getLeftsph());
-                                    weiwaishujuDO.setCyl(salesDO.getLeftcyl());
-                                    weiwaishujuDO.setZx(salesDO.getLeftzx());
-                                    weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingjy());
-                                    weiwaishujuDO.setJd(salesDO.getLeftjidijy());
-                                    weiwaishujuDO.setFartj("");
-                                    weiwaishujuDO.setNeartj(salesDO.getLeftyuanyongtjjy());
-                                } else if (salesDO.getRecipelwlType() == 2){
-                                    weiwaishujuDO.setSph(salesDO.getLeftsph());
-                                    weiwaishujuDO.setCyl(salesDO.getLeftcyl());
-                                    weiwaishujuDO.setZx(salesDO.getLeftzx());
-                                    weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingyy());
-                                    weiwaishujuDO.setJd(salesDO.getLeftjidiyy());
-                                    weiwaishujuDO.setFartj("");
-                                    weiwaishujuDO.setNeartj(salesDO.getLeftyuanyongtjyy());
-                                }else if (salesDO.getRecipelwlType() == 3){
-                                    weiwaishujuDO.setSph(salesDO.getLeftsph());
-                                    weiwaishujuDO.setCyl(salesDO.getLeftcyl());
-                                    weiwaishujuDO.setZx(salesDO.getLeftzx());
-                                    weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingsg());
-                                    weiwaishujuDO.setJd(salesDO.getLeftjidisg());
-                                    weiwaishujuDO.setFartj("");
-                                    weiwaishujuDO.setNeartj("");
-                                }else if (salesDO.getRecipelwlType() == 4){
-                                    weiwaishujuDO.setSph(salesDO.getLeftsph());
-                                    weiwaishujuDO.setCyl(salesDO.getLeftcyl());
-                                    weiwaishujuDO.setZx(salesDO.getLeftzx());
-                                    weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingzy());
-                                    weiwaishujuDO.setJd(salesDO.getLeftjidizy());
-                                    weiwaishujuDO.setFartj("");
-                                    weiwaishujuDO.setNeartj("");
+            if (null != salesDO.getGoodsNum()) {
+                String goodsCode = salesDO.getGoodsCode();
+                String goodsNum = salesDO.getGoodsNum();
+                String storeDesc = salesDO.getStoreDescribe();
+                String[] goodsStr = goodsCode.split(",");
+                String[] goodNumstr = goodsNum.split(",");
+                String[] goodsDescribe = storeDesc.split(",");
+                String[] goodsName = salesDO.getStoreName().split(",");
+                String[] goodsCount = salesDO.getStoreCount().split(",");
+                String[] classType = salesDO.getClasstype().split(",");
+                String[] brandName = salesDO.getBrandName().split(",");
+                String[] leftRight = salesDO.getLeftRight().split(",");
+                String weiwaiNumber = "W" + GuuidUtil.getUUID();
+                String danjuNumber = "OUT" + GuuidUtil.getUUID();
+                for (int s = 0; s < goodsDescribe.length; s++) {
+                    if ("镜片".equals(goodsDescribe[s]) && "2".equals(classType[s])) {
+                        WeiwaishujuDO weiwaishujuDO = new WeiwaishujuDO();
+                        weiwaishujuDO.setNumber(weiwaiNumber);
+                        weiwaishujuDO.setDanjuDay(sim.format(new Date()));
+                        weiwaishujuDO.setDepartname(ShiroUtils.getUser().getStore());
+                        weiwaishujuDO.setZhidanPeople(ShiroUtils.getUser().getName());
+                        weiwaishujuDO.setTimetime(sim.format(salesDO.getMirrorTime()));
+                        weiwaishujuDO.setDanjuStyle("1");
+                        weiwaishujuDO.setSaleNumber(salesDO.getSaleNumber());
+                        weiwaishujuDO.setWeiwaiStyle("委外订单");
+                        weiwaishujuDO.setBeizhu("");
+                        weiwaishujuDO.setGkname(salesDO.getMemberName());
+                        weiwaishujuDO.setHyknum(salesDO.getMemberNumber());
+                        weiwaishujuDO.setPhone(salesDO.getMemberTel());
+                        if ("框镜".equals(salesDO.getEyeType())) {
+                            weiwaishujuDO.setJcStyle("框镜订做");
+                            //weiwaishujuDO.setSph();
+                            if (salesDO.getLeftRight().equals("左")) {
+                                //处方
+                                if ("2".equals(salesDO.getOptometrywlName())) {
+                                    if (salesDO.getRecipelwlType() == 1) {
+                                        weiwaishujuDO.setSph(salesDO.getLeftsph());
+                                        weiwaishujuDO.setCyl(salesDO.getLeftcyl());
+                                        weiwaishujuDO.setZx(salesDO.getLeftzx());
+                                        weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingjy());
+                                        weiwaishujuDO.setJd(salesDO.getLeftjidijy());
+                                        weiwaishujuDO.setFartj("");
+                                        weiwaishujuDO.setNeartj(salesDO.getLeftyuanyongtjjy());
+                                    } else if (salesDO.getRecipelwlType() == 2) {
+                                        weiwaishujuDO.setSph(salesDO.getLeftsph());
+                                        weiwaishujuDO.setCyl(salesDO.getLeftcyl());
+                                        weiwaishujuDO.setZx(salesDO.getLeftzx());
+                                        weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingyy());
+                                        weiwaishujuDO.setJd(salesDO.getLeftjidiyy());
+                                        weiwaishujuDO.setFartj("");
+                                        weiwaishujuDO.setNeartj(salesDO.getLeftyuanyongtjyy());
+                                    } else if (salesDO.getRecipelwlType() == 3) {
+                                        weiwaishujuDO.setSph(salesDO.getLeftsph());
+                                        weiwaishujuDO.setCyl(salesDO.getLeftcyl());
+                                        weiwaishujuDO.setZx(salesDO.getLeftzx());
+                                        weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingsg());
+                                        weiwaishujuDO.setJd(salesDO.getLeftjidisg());
+                                        weiwaishujuDO.setFartj("");
+                                        weiwaishujuDO.setNeartj("");
+                                    } else if (salesDO.getRecipelwlType() == 4) {
+                                        weiwaishujuDO.setSph(salesDO.getLeftsph());
+                                        weiwaishujuDO.setCyl(salesDO.getLeftcyl());
+                                        weiwaishujuDO.setZx(salesDO.getLeftzx());
+                                        weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingzy());
+                                        weiwaishujuDO.setJd(salesDO.getLeftjidizy());
+                                        weiwaishujuDO.setFartj("");
+                                        weiwaishujuDO.setNeartj("");
+                                    }
+                                } else {
+                                    if ("远用".equals(salesDO.getRecipelType())) {
+                                        KjyyDO kjyyDO = kjyyService.chufangall(salesDO.getPtometryNumber(), "1");
+                                        weiwaishujuDO.setSph(kjyyDO.getKjyySphos());
+                                        weiwaishujuDO.setCyl(kjyyDO.getKjyyCylos());
+                                        weiwaishujuDO.setZx(kjyyDO.getKjyyAxialos());
+                                        weiwaishujuDO.setSlj(kjyyDO.getKjyyPrismos());
+                                        weiwaishujuDO.setJd(kjyyDO.getKjyyJdos());
+                                        weiwaishujuDO.setFartj(kjyyDO.getKjyyYytjos());
+                                        weiwaishujuDO.setNeartj("");
+                                    } else if ("近用".equals(salesDO.getRecipelType())) {
+                                        KjjyDO kjjyDO = kjjyService.chufangall(salesDO.getPtometryNumber(), "1");
+                                        weiwaishujuDO.setSph(kjjyDO.getKjjySphos());
+                                        weiwaishujuDO.setCyl(kjjyDO.getKjjyCylos());
+                                        weiwaishujuDO.setZx(kjjyDO.getKjjyAxialos());
+                                        weiwaishujuDO.setSlj(kjjyDO.getKjjyPrismos());
+                                        weiwaishujuDO.setJd(kjjyDO.getKjjyJdos());
+                                        weiwaishujuDO.setNeartj(kjjyDO.getKjjyYytjos());
+                                        weiwaishujuDO.setFartj("");
+                                    } else if ("渐进/双光".equals(salesDO.getRecipelType())) {
+                                        SgjjDO sgjjDO = sgjjService.chufangall(salesDO.getPtometryNumber(), "1");
+                                        weiwaishujuDO.setSph(sgjjDO.getSgjjSphos());
+                                        weiwaishujuDO.setCyl(sgjjDO.getSgjjCylos());
+                                        weiwaishujuDO.setZx(sgjjDO.getSgjjAxialos());
+                                        weiwaishujuDO.setSlj("");
+                                        weiwaishujuDO.setJd("");
+                                        weiwaishujuDO.setNeartj(sgjjDO.getSgjjJytjos());
+                                        weiwaishujuDO.setFartj(sgjjDO.getSgjjYytjos());
+                                    } else if ("中用".equals(salesDO.getRecipelType())) {
+                                        ZyDO zyDO = zyService.chufangall(salesDO.getPtometryNumber(), "1");
+                                        weiwaishujuDO.setSph(zyDO.getZySphos());
+                                        weiwaishujuDO.setCyl(zyDO.getZyCylos());
+                                        weiwaishujuDO.setZx(zyDO.getZyAxialos());
+                                        weiwaishujuDO.setSlj(zyDO.getZyPrismos());
+                                        weiwaishujuDO.setJd(zyDO.getZyJdos());
+                                        weiwaishujuDO.setNeartj("");
+                                        weiwaishujuDO.setFartj("");
+                                    }
                                 }
+                                weiwaishujuDO.setTg(salesDO.getLefttg());
                             } else {
-                                if("远用".equals(salesDO.getRecipelType())){
-                                    KjyyDO kjyyDO = kjyyService.chufangall(salesDO.getPtometryNumber(),"1");
-                                    weiwaishujuDO.setSph(kjyyDO.getKjyySphos());
-                                    weiwaishujuDO.setCyl(kjyyDO.getKjyyCylos());
-                                    weiwaishujuDO.setZx(kjyyDO.getKjyyAxialos());
-                                    weiwaishujuDO.setSlj(kjyyDO.getKjyyPrismos());
-                                    weiwaishujuDO.setJd(kjyyDO.getKjyyJdos());
-                                    weiwaishujuDO.setFartj(kjyyDO.getKjyyYytjos());
-                                    weiwaishujuDO.setNeartj("");
-                                } else if ("近用".equals(salesDO.getRecipelType())){
-                                    KjjyDO kjjyDO = kjjyService.chufangall(salesDO.getPtometryNumber(),"1");
-                                    weiwaishujuDO.setSph(kjjyDO.getKjjySphos());
-                                    weiwaishujuDO.setCyl(kjjyDO.getKjjyCylos());
-                                    weiwaishujuDO.setZx(kjjyDO.getKjjyAxialos());
-                                    weiwaishujuDO.setSlj(kjjyDO.getKjjyPrismos());
-                                    weiwaishujuDO.setJd(kjjyDO.getKjjyJdos());
-                                    weiwaishujuDO.setNeartj(kjjyDO.getKjjyYytjos());
-                                    weiwaishujuDO.setFartj("");
-                                } else if ("渐进/双光".equals(salesDO.getRecipelType())){
-                                    SgjjDO sgjjDO = sgjjService.chufangall(salesDO.getPtometryNumber(),"1");
-                                    weiwaishujuDO.setSph(sgjjDO.getSgjjSphos());
-                                    weiwaishujuDO.setCyl(sgjjDO.getSgjjCylos());
-                                    weiwaishujuDO.setZx(sgjjDO.getSgjjAxialos());
-                                    weiwaishujuDO.setSlj("");
-                                    weiwaishujuDO.setJd("");
-                                    weiwaishujuDO.setNeartj(sgjjDO.getSgjjJytjos());
-                                    weiwaishujuDO.setFartj(sgjjDO.getSgjjYytjos());
-                                } else if ("中用".equals(salesDO.getRecipelType())){
-                                    ZyDO zyDO = zyService.chufangall(salesDO.getPtometryNumber(),"1");
-                                    weiwaishujuDO.setSph(zyDO.getZySphos());
-                                    weiwaishujuDO.setCyl(zyDO.getZyCylos());
-                                    weiwaishujuDO.setZx(zyDO.getZyAxialos());
-                                    weiwaishujuDO.setSlj(zyDO.getZyPrismos());
-                                    weiwaishujuDO.setJd(zyDO.getZyJdos());
-                                    weiwaishujuDO.setNeartj("");
-                                    weiwaishujuDO.setFartj("");
+                                //处方
+                                if ("2".equals(salesDO.getOptometrywlName())) {
+                                    if (salesDO.getRecipelwlType() == 1) {
+                                        weiwaishujuDO.setSph(salesDO.getRightsph());
+                                        weiwaishujuDO.setCyl(salesDO.getRightcyl());
+                                        weiwaishujuDO.setZx(salesDO.getRightzx());
+                                        weiwaishujuDO.setSlj(salesDO.getRightsanlingjingjy());
+                                        weiwaishujuDO.setJd(salesDO.getRightjidijy());
+                                        weiwaishujuDO.setFartj("");
+                                        weiwaishujuDO.setNeartj(salesDO.getRightyuanyongtjjy());
+                                    } else if (salesDO.getRecipelwlType() == 2) {
+                                        weiwaishujuDO.setSph(salesDO.getRightsph());
+                                        weiwaishujuDO.setCyl(salesDO.getRightcyl());
+                                        weiwaishujuDO.setZx(salesDO.getRightzx());
+                                        weiwaishujuDO.setSlj(salesDO.getRightsanlingjingyy());
+                                        weiwaishujuDO.setJd(salesDO.getRightjidiyy());
+                                        weiwaishujuDO.setFartj("");
+                                        weiwaishujuDO.setNeartj(salesDO.getRightyuanyongtjyy());
+                                    } else if (salesDO.getRecipelwlType() == 3) {
+                                        weiwaishujuDO.setSph(salesDO.getRightsph());
+                                        weiwaishujuDO.setCyl(salesDO.getRightcyl());
+                                        weiwaishujuDO.setZx(salesDO.getRightzx());
+                                        weiwaishujuDO.setSlj(salesDO.getRightsanlingjingsg());
+                                        weiwaishujuDO.setJd(salesDO.getRightjidisg());
+                                        weiwaishujuDO.setFartj("");
+                                        weiwaishujuDO.setNeartj("");
+                                    } else if (salesDO.getRecipelwlType() == 4) {
+                                        weiwaishujuDO.setSph(salesDO.getRightsph());
+                                        weiwaishujuDO.setCyl(salesDO.getRightcyl());
+                                        weiwaishujuDO.setZx(salesDO.getRightzx());
+                                        weiwaishujuDO.setSlj(salesDO.getRightsanlingjingzy());
+                                        weiwaishujuDO.setJd(salesDO.getRightjidizy());
+                                        weiwaishujuDO.setFartj("");
+                                        weiwaishujuDO.setNeartj("");
+                                    }
+                                } else {
+                                    if ("远用".equals(salesDO.getRecipelType())) {
+                                        KjyyDO kjyyDO = kjyyService.chufangall(salesDO.getPtometryNumber(), "1");
+                                        weiwaishujuDO.setSph(kjyyDO.getKjyySphod());
+                                        weiwaishujuDO.setCyl(kjyyDO.getKjyyCylod());
+                                        weiwaishujuDO.setZx(kjyyDO.getKjyyAxialod());
+                                        weiwaishujuDO.setSlj(kjyyDO.getKjyyPrismod());
+                                        weiwaishujuDO.setJd(kjyyDO.getKjyyJdod());
+                                        weiwaishujuDO.setFartj(kjyyDO.getKjyyYytjod());
+                                        weiwaishujuDO.setNeartj("");
+                                    } else if ("近用".equals(salesDO.getRecipelType())) {
+                                        KjjyDO kjjyDO = kjjyService.chufangall(salesDO.getPtometryNumber(), "1");
+                                        weiwaishujuDO.setSph(kjjyDO.getKjjySphod());
+                                        weiwaishujuDO.setCyl(kjjyDO.getKjjyCylod());
+                                        weiwaishujuDO.setZx(kjjyDO.getKjjyAxialod());
+                                        weiwaishujuDO.setSlj(kjjyDO.getKjjyPrismod());
+                                        weiwaishujuDO.setJd(kjjyDO.getKjjyJdod());
+                                        weiwaishujuDO.setNeartj(kjjyDO.getKjjyYytjod());
+                                        weiwaishujuDO.setFartj("");
+                                    } else if ("渐进/双光".equals(salesDO.getRecipelType())) {
+                                        SgjjDO sgjjDO = sgjjService.chufangall(salesDO.getPtometryNumber(), "1");
+                                        weiwaishujuDO.setSph(sgjjDO.getSgjjSphod());
+                                        weiwaishujuDO.setCyl(sgjjDO.getSgjjCylod());
+                                        weiwaishujuDO.setZx(sgjjDO.getSgjjAxialod());
+                                        weiwaishujuDO.setSlj("");
+                                        weiwaishujuDO.setJd("");
+                                        weiwaishujuDO.setNeartj(sgjjDO.getSgjjJytjod());
+                                        weiwaishujuDO.setFartj(sgjjDO.getSgjjYytjod());
+                                    } else if ("中用".equals(salesDO.getRecipelType())) {
+                                        ZyDO zyDO = zyService.chufangall(salesDO.getPtometryNumber(), "1");
+                                        weiwaishujuDO.setSph(zyDO.getZySphod());
+                                        weiwaishujuDO.setCyl(zyDO.getZyCylod());
+                                        weiwaishujuDO.setZx(zyDO.getZyAxialod());
+                                        weiwaishujuDO.setSlj(zyDO.getZyPrismod());
+                                        weiwaishujuDO.setJd(zyDO.getZyJdod());
+                                        weiwaishujuDO.setNeartj("");
+                                        weiwaishujuDO.setFartj("");
+                                    }
                                 }
-                            }
-                            weiwaishujuDO.setTg(salesDO.getLefttg());
-                        } else {
-                            //处方
-                            if ("2".equals(salesDO.getOptometrywlName())){
-                                if (salesDO.getRecipelwlType() == 1){
-                                    weiwaishujuDO.setSph(salesDO.getRightsph());
-                                    weiwaishujuDO.setCyl(salesDO.getRightcyl());
-                                    weiwaishujuDO.setZx(salesDO.getRightzx());
-                                    weiwaishujuDO.setSlj(salesDO.getRightsanlingjingjy());
-                                    weiwaishujuDO.setJd(salesDO.getRightjidijy());
-                                    weiwaishujuDO.setFartj("");
-                                    weiwaishujuDO.setNeartj(salesDO.getRightyuanyongtjjy());
-                                } else if (salesDO.getRecipelwlType() == 2){
-                                    weiwaishujuDO.setSph(salesDO.getRightsph());
-                                    weiwaishujuDO.setCyl(salesDO.getRightcyl());
-                                    weiwaishujuDO.setZx(salesDO.getRightzx());
-                                    weiwaishujuDO.setSlj(salesDO.getRightsanlingjingyy());
-                                    weiwaishujuDO.setJd(salesDO.getRightjidiyy());
-                                    weiwaishujuDO.setFartj("");
-                                    weiwaishujuDO.setNeartj(salesDO.getRightyuanyongtjyy());
-                                }else if (salesDO.getRecipelwlType() == 3){
-                                    weiwaishujuDO.setSph(salesDO.getRightsph());
-                                    weiwaishujuDO.setCyl(salesDO.getRightcyl());
-                                    weiwaishujuDO.setZx(salesDO.getRightzx());
-                                    weiwaishujuDO.setSlj(salesDO.getRightsanlingjingsg());
-                                    weiwaishujuDO.setJd(salesDO.getRightjidisg());
-                                    weiwaishujuDO.setFartj("");
-                                    weiwaishujuDO.setNeartj("");
-                                }else if (salesDO.getRecipelwlType() == 4){
-                                    weiwaishujuDO.setSph(salesDO.getRightsph());
-                                    weiwaishujuDO.setCyl(salesDO.getRightcyl());
-                                    weiwaishujuDO.setZx(salesDO.getRightzx());
-                                    weiwaishujuDO.setSlj(salesDO.getRightsanlingjingzy());
-                                    weiwaishujuDO.setJd(salesDO.getRightjidizy());
-                                    weiwaishujuDO.setFartj("");
-                                    weiwaishujuDO.setNeartj("");
-                                }
-                            } else {
-                                if("远用".equals(salesDO.getRecipelType())){
-                                    KjyyDO kjyyDO = kjyyService.chufangall(salesDO.getPtometryNumber(),"1");
-                                    weiwaishujuDO.setSph(kjyyDO.getKjyySphod());
-                                    weiwaishujuDO.setCyl(kjyyDO.getKjyyCylod());
-                                    weiwaishujuDO.setZx(kjyyDO.getKjyyAxialod());
-                                    weiwaishujuDO.setSlj(kjyyDO.getKjyyPrismod());
-                                    weiwaishujuDO.setJd(kjyyDO.getKjyyJdod());
-                                    weiwaishujuDO.setFartj(kjyyDO.getKjyyYytjod());
-                                    weiwaishujuDO.setNeartj("");
-                                } else if ("近用".equals(salesDO.getRecipelType())){
-                                    KjjyDO kjjyDO = kjjyService.chufangall(salesDO.getPtometryNumber(),"1");
-                                    weiwaishujuDO.setSph(kjjyDO.getKjjySphod());
-                                    weiwaishujuDO.setCyl(kjjyDO.getKjjyCylod());
-                                    weiwaishujuDO.setZx(kjjyDO.getKjjyAxialod());
-                                    weiwaishujuDO.setSlj(kjjyDO.getKjjyPrismod());
-                                    weiwaishujuDO.setJd(kjjyDO.getKjjyJdod());
-                                    weiwaishujuDO.setNeartj(kjjyDO.getKjjyYytjod());
-                                    weiwaishujuDO.setFartj("");
-                                } else if ("渐进/双光".equals(salesDO.getRecipelType())){
-                                    SgjjDO sgjjDO = sgjjService.chufangall(salesDO.getPtometryNumber(),"1");
-                                    weiwaishujuDO.setSph(sgjjDO.getSgjjSphod());
-                                    weiwaishujuDO.setCyl(sgjjDO.getSgjjCylod());
-                                    weiwaishujuDO.setZx(sgjjDO.getSgjjAxialod());
-                                    weiwaishujuDO.setSlj("");
-                                    weiwaishujuDO.setJd("");
-                                    weiwaishujuDO.setNeartj(sgjjDO.getSgjjJytjod());
-                                    weiwaishujuDO.setFartj(sgjjDO.getSgjjYytjod());
-                                } else if ("中用".equals(salesDO.getRecipelType())){
-                                    ZyDO zyDO = zyService.chufangall(salesDO.getPtometryNumber(),"1");
-                                    weiwaishujuDO.setSph(zyDO.getZySphod());
-                                    weiwaishujuDO.setCyl(zyDO.getZyCylod());
-                                    weiwaishujuDO.setZx(zyDO.getZyAxialod());
-                                    weiwaishujuDO.setSlj(zyDO.getZyPrismod());
-                                    weiwaishujuDO.setJd(zyDO.getZyJdod());
-                                    weiwaishujuDO.setNeartj("");
-                                    weiwaishujuDO.setFartj("");
-                                }
-                            }
-                            weiwaishujuDO.setTg(salesDO.getRighttg());
+                                weiwaishujuDO.setTg(salesDO.getRighttg());
 
+                            }
+                            weiwaishujuDO.setNum(goodNumstr[s]);
+                            weiwaishujuDO.setCode(goodsStr[s]);
+                            weiwaishujuDO.setName(goodsName[s]);
+                            weiwaishujuDO.setLeftRight(leftRight[s]);
+                            weiwaishujuDO.setCount(goodsCount[s]);
+                            weiwaishujuDO.setYaoqiu(salesDO.getProcessAsk());
+                        } else if ("隐形".equals(salesDO.getEyeType())) {
+                            //处方
+                            //weiwaishujuDO.setSphyx("");
+                            weiwaishujuDO.setSphyx("");
+                            weiwaishujuDO.setCylyx("");
+                            weiwaishujuDO.setZxyx("");
+                            weiwaishujuDO.setQulv("");
+                            weiwaishujuDO.setZj("");
+                            weiwaishujuDO.setNumyx(goodNumstr[s]);
+                            weiwaishujuDO.setCodeyx(goodsStr[s]);
+                            weiwaishujuDO.setName(goodsName[s]);
+                            weiwaishujuDO.setLeftRightYx(leftRight[s]);
+                            weiwaishujuDO.setCountyx(goodsCount[s]);
+                            weiwaishujuDO.setYaoqiuyx(salesDO.getProcessAsk());
                         }
-                        weiwaishujuDO.setNum(goodNumstr[s]);
-                        weiwaishujuDO.setCode(goodsStr[s]);
-                        weiwaishujuDO.setName(goodsName[s]);
-                        weiwaishujuDO.setLeftRight(leftRight[s]);
-                        weiwaishujuDO.setCount(goodsCount[s]);
-                        weiwaishujuDO.setYaoqiu(salesDO.getProcessAsk());
-                    } else if ("隐形".equals(salesDO.getEyeType())){
-                        //处方
-                        //weiwaishujuDO.setSphyx("");
-                        weiwaishujuDO.setSphyx("");
-                        weiwaishujuDO.setCylyx("");
-                        weiwaishujuDO.setZxyx("");
-                        weiwaishujuDO.setQulv("");
-                        weiwaishujuDO.setZj("");
-                        weiwaishujuDO.setNumyx(goodNumstr[s]);
-                        weiwaishujuDO.setCodeyx(goodsStr[s]);
-                        weiwaishujuDO.setName(goodsName[s]);
-                        weiwaishujuDO.setLeftRightYx(leftRight[s]);
-                        weiwaishujuDO.setCountyx(goodsCount[s]);
-                        weiwaishujuDO.setYaoqiuyx(salesDO.getProcessAsk());
-                    }
-                    weiwaishujuService.save(weiwaishujuDO);
-                    WeiwaiDO weiwaiDO = new WeiwaiDO();
-                    weiwaiDO.setSaleNumber(salesDO.getSaleNumber());
-                    weiwaiDO.setDanjuNumber(danjuNumber);
-                    weiwaiDO.setDanjuDay(sim.format(new Date()));
-                    weiwaiDO.setEyeStyle("3");
-                    weiwaiDO.setZhidanPeople(ShiroUtils.getUser().getName());
-                    weiwaiDO.setMfrsid(salesDO.getMfrsid());
-                    JpdzDO jpdzDO = jpdzService.getJpdzInfomation(goodNumstr[s]);
-                    weiwaiDO.setMfrsname(jpdzDO.getMfrsname());
-                    weiwaiDO.setBrandnum(jpdzDO.getBrandname());
-                    weiwaiDO.setBrandname(brandName[s]);
-                    Map<String,Object> posMap = new HashMap<>();
-                    posMap.put("companyId",ShiroUtils.getUser().getCompanyId());
-                    if ("3".equals(ShiroUtils.getUser().getCompanyId())){
-                        posMap.put("positionId","7");
-                    }
-                    PositionDO positionDO = stockService.findHegePosition(posMap);
+                        weiwaishujuService.save(weiwaishujuDO);
+                        WeiwaiDO weiwaiDO = new WeiwaiDO();
+                        weiwaiDO.setSaleNumber(salesDO.getSaleNumber());
+                        weiwaiDO.setDanjuNumber(danjuNumber);
+                        weiwaiDO.setDanjuDay(sim.format(new Date()));
+                        weiwaiDO.setEyeStyle("3");
+                        weiwaiDO.setZhidanPeople(ShiroUtils.getUser().getName());
+                        weiwaiDO.setMfrsid(salesDO.getMfrsid());
+                        JpdzDO jpdzDO = jpdzService.getJpdzInfomation(goodNumstr[s]);
+                        weiwaiDO.setMfrsname(jpdzDO.getMfrsname());
+                        weiwaiDO.setBrandnum(jpdzDO.getBrandname());
+                        weiwaiDO.setBrandname(brandName[s]);
+                        Map<String, Object> posMap = new HashMap<>();
+                        posMap.put("companyId", ShiroUtils.getUser().getCompanyId());
+                        if ("3".equals(ShiroUtils.getUser().getCompanyId())) {
+                            posMap.put("positionId", "7");
+                        }
+                        PositionDO positionDO = stockService.findHegePosition(posMap);
 
-                    weiwaiDO.setPositionId(positionDO.getPositionId());
-                    weiwaiDO.setPositionName(positionDO.getPositionName());
-                    weiwaiDO.setWeiwaisaleNumber(weiwaishujuDO.getNumber());
-                    weiwaiDO.setMirrorTime(sim.format(salesDO.getMirrorTime()));
-                    weiwaiDO.setNum(goodNumstr[s]);
-                    weiwaiDO.setCode(goodsStr[s]);
-                    weiwaiDO.setName(goodsName[s]);
-                    weiwaiDO.setStyle("委外订单");
-                    weiwaiDO.setRl(classType[s]);
-                    weiwaiDO.setCount(goodsCount[s]);
-                    weiwaiDO.setSph(weiwaishujuDO.getSph());
-                    weiwaiDO.setCyl(weiwaishujuDO.getCyl());
-                    weiwaiDO.setZx(weiwaishujuDO.getZx());
-                    weiwaiDO.setFartj(weiwaishujuDO.getFartj());
-                    weiwaiDO.setNeartj(weiwaishujuDO.getNeartj());
-                    weiwaiDO.setGkname(weiwaishujuDO.getGkname());
-                    weiwaiDO.setHyknum(weiwaishujuDO.getHyknum());
-                    weiwaiDO.setPhone(weiwaishujuDO.getPhone());
-                    weiwaiDO.setUsername("");
-                    weiwaiDO.setStatus("1");
-                    weiwaiDO.setShTime("");
-                    weiwaiDO.setShstatus("");
-                    weiwaiDO.setPsname("");
-                    weiwaiDO.setPstime("");
-                    weiwaiDO.setCompanyName(ShiroUtils.getUser().getCompany());
-                    weiwaiDO.setDepartname(ShiroUtils.getUser().getStore());
-                    weiwaiDO.setViewGoodName(jpdzDO.getViewGoodName());
-                    weiwaiService.save(weiwaiDO);
+                        weiwaiDO.setPositionId(positionDO.getPositionId());
+                        weiwaiDO.setPositionName(positionDO.getPositionName());
+                        weiwaiDO.setWeiwaisaleNumber(weiwaishujuDO.getNumber());
+                        weiwaiDO.setMirrorTime(sim.format(salesDO.getMirrorTime()));
+                        weiwaiDO.setNum(goodNumstr[s]);
+                        weiwaiDO.setCode(goodsStr[s]);
+                        weiwaiDO.setName(goodsName[s]);
+                        weiwaiDO.setStyle("委外订单");
+                        weiwaiDO.setRl(classType[s]);
+                        weiwaiDO.setCount(goodsCount[s]);
+                        weiwaiDO.setSph(weiwaishujuDO.getSph());
+                        weiwaiDO.setCyl(weiwaishujuDO.getCyl());
+                        weiwaiDO.setZx(weiwaishujuDO.getZx());
+                        weiwaiDO.setFartj(weiwaishujuDO.getFartj());
+                        weiwaiDO.setNeartj(weiwaishujuDO.getNeartj());
+                        weiwaiDO.setGkname(weiwaishujuDO.getGkname());
+                        weiwaiDO.setHyknum(weiwaishujuDO.getHyknum());
+                        weiwaiDO.setPhone(weiwaishujuDO.getPhone());
+                        weiwaiDO.setUsername("");
+                        weiwaiDO.setStatus("1");
+                        weiwaiDO.setShTime("");
+                        weiwaiDO.setShstatus("");
+                        weiwaiDO.setPsname("");
+                        weiwaiDO.setPstime("");
+                        weiwaiDO.setCompanyName(ShiroUtils.getUser().getCompany());
+                        weiwaiDO.setDepartname(ShiroUtils.getUser().getStore());
+                        weiwaiDO.setViewGoodName(jpdzDO.getViewGoodName());
+                        weiwaiService.save(weiwaiDO);
+                    }
                 }
             }
             return R.ok();
@@ -1605,6 +1609,9 @@ public class StoreSalesController {
         }
         if (null != departNumber) {
             map.put("departNumber", departNumber);
+            if("3".equals(ShiroUtils.getUser().getCompanyId())){
+                map.put("positionId","7");
+            }
             PositionDO positionDO = stockService.findHegePosition(map);
             Long positionId = null;
             if (null != positionDO) {

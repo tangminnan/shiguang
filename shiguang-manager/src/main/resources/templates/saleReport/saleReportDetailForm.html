@@ -114,7 +114,8 @@
             var list = [[${list}]];
             var html =0;
             for (var i=0;i<list.length;i++){
-                html = "<tr><td>"+list[i].saleAccount+"</td>";
+                var account = list[i].saleAccount;
+                html = "<tr><td><a href='#' onclick='reportSaleName(\""+account+"\")'>"+list[i].saleAccount+"</a></td>";
                 html += "<td>"+list[i].saleName+"</td>";
                 html += "<td>"+list[i].jjMoney+"</td>";
                 html += "<td>"+list[i].jpMoney+"</td>";
@@ -135,6 +136,11 @@
                 $("#detailId").append(html);
 			}
         });
+        function reportSaleName(obj){
+            var settleDateStart =  $("#settleDateStart").val();
+            var settleDateEnd = $("#settleDateEnd").val();
+            window.open("/information/saleReport/reportNameDetailList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd + "&saleAccount="+obj);
+        }
 	</script>
 </body>
 </html>

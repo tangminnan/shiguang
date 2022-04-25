@@ -61,5 +61,10 @@ public class CardServiceImpl implements CardService {
 	public int batchRemove(Long[] ids){
 		return cardDao.batchRemove(ids);
 	}
+
+	@Override
+	public int updateMoney(CardDO card){
+		return cardDao.updateMoney(card);
+	}
 	
 }

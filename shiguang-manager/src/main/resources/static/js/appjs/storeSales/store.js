@@ -637,6 +637,11 @@ function getYinxing(){
         rightYuanYongZJ = $("#rightYinxingZJ").val();
         leftYuanYongQJ = $("#leftYinxingQJ").val();
         leftYuanYongZJ = $("#leftYinxingZJ").val();
+    } else if (cfType == 6){
+        rightYuanYongQJ = $("#rightJiaoMosxQJ").val();
+        rightYuanYongZJ = $("#rightJiaoMosxZJ").val();
+        leftYuanYongQJ = $("#leftJiaoMosxQJ").val();
+        leftYuanYongZJ = $("#leftJiaoMosxZJ").val();
     } else if (cfType == 7){
         rightYuanYongQJ = $("#rightShiJuexlQJ").val();
         rightYuanYongZJ = $("#rightShiJuexlZJ").val();
@@ -674,6 +679,11 @@ function getYinxing(){
             rightYuanYongZJ = $("#rightYinxingZJ").val();
             leftYuanYongQJ = $("#leftYinxingQJ").val();
             leftYuanYongZJ = $("#leftYinxingZJ").val();
+        } else if (shoutianCFType == 6){
+            rightYuanYongQJ = $("#rightJiaoMosxQJ").val();
+            rightYuanYongZJ = $("#rightJiaoMosxZJ").val();
+            leftYuanYongQJ = $("#leftJiaoMosxQJ").val();
+            leftYuanYongZJ = $("#leftJiaoMosxZJ").val();
         } else if (shoutianCFType == 7){
             rightYuanYongQJ = $("#rightShiJuexlQJ").val();
             rightYuanYongZJ = $("#rightShiJuexlZJ").val();
