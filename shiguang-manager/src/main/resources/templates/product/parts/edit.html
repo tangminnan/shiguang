@@ -138,6 +138,7 @@
                     <select id="refractivityid" name="refractivityid" th:value="${parts.refractivityid}"
                             class="form-control" style="width:200px"
                             data-actions-box="false" data-size="5">
+                        <option value="">--请选择--</option>
                         <option th:each="ls:${refractivityDOList}"
                                 th:text="${ls.refractivityvalue}"
                                 th:value="${ls.refractivityvalue}"

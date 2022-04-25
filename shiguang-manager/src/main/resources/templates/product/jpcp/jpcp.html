@@ -314,7 +314,7 @@
                     <option value="">--请选择--</option>
                     <option th:each="ls:${refractivityDOList}"
                             th:text="${ls.refractivityvalue}"
-                            th:value="${ls.refractivityid}"
+                            th:value="${ls.refractivityvalue}"
                     ></option>
                 </select>
             </td>
@@ -330,18 +330,18 @@
             </td>
         </tr>
         <tr>
-            <!--<td>球镜范围：</td>-->
-            <!--<td>-->
-                <!--<input id="sph" name="sph"type="text" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>-->
-                <!--~-->
-                <!--<input id="sph2" name="sph2"type="text"onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>-->
-            <!--</td>-->
-            <!--<td>柱镜范围：</td>-->
-            <!--<td>-->
-                <!--<input id="cyl" name="cyl"type="text"onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>-->
-                <!--~-->
-                <!--<input id="cyl2" name="cyl2"type="text"onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>-->
-            <!--</td>-->
+            <td>球镜范围：</td>
+            <td>
+                <input id="sph" name="sph"type="text" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>
+                ~
+                <input id="sph2" name="sph2"type="text"onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>
+            </td>
+            <td>柱镜范围：</td>
+            <td>
+                <input id="cyl" name="cyl"type="text"onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>
+                ~
+                <input id="cyl2" name="cyl2"type="text"onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>
+            </td>
             <td>启用状态：</td>
             <td>
                 <select id="xsstate" name="xsstate">

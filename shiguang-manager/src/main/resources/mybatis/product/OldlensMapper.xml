@@ -20,8 +20,9 @@
         from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsnum left join c_brand b on o.brandnum=b.brandnum AND o.`mfrsid`=b.`mfrsid`
         left join c_unit u on o.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and o.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and o.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and o.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and o.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and o.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -59,8 +60,9 @@
         select count(*)   from aa_oldlens o left join c_mfrs m on o.mfrsid=m.mfrsnum left join c_brand b on o.brandnum=b.brandnum AND o.`mfrsid`=b.`mfrsid`
         left join c_unit u on o.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and o.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and o.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and o.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and o.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and o.produc_name LIKE concat(concat('%', #{producName}),'%')</if>

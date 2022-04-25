@@ -23,8 +23,10 @@
         from aa_hc h left join c_mfrs m on h.mfrsid=m.mfrsnum left join c_brand b on h.brandnum=b.brandnum AND h.`mfrsid`=b.`mfrsid`
         left join c_unit u on h.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and h.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and h.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and h.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and h.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -60,8 +62,10 @@
         select count(*)  from aa_hc h left join c_mfrs m on h.mfrsid=m.mfrsnum left join c_brand b on h.brandnum=b.brandnum AND h.`mfrsid`=b.`mfrsid`
         left join c_unit u on h.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and h.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and h.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and h.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and h.produc_name LIKE concat(concat('%', #{producName}),'%')</if>

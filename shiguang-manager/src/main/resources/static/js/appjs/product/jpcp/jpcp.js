@@ -45,10 +45,10 @@ function load() {
                         lensId:$('#lensId').val().trim(),
                         refractivityid:$('#refractivityid').val().trim(),
                         lightId:$('#lightId').val().trim(),
-                        // sph:$('#sph').val().trim(),
-                        // sph2:$('#sph2').val().trim(),
-                        // cyl:$('#cyl').val().trim(),
-                        // cyl2:$('#cyl2').val().trim(),
+                        sph:$('#sph').val().trim(),
+                        sph2:$('#sph2').val().trim(),
+                        cyl:$('#cyl').val().trim(),
+                        cyl2:$('#cyl2').val().trim(),
                         xsstate:$('#xsstate').val().trim()
                     };
                 },

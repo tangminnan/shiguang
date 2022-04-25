@@ -27,8 +27,10 @@
         left join p_gradual g on g.gradual_id = j.gradual_id
         left join p_function f on f.function_id = j.function_id
         <where>
-            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and j.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -43,10 +45,10 @@
             <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
 
             <if test="sph != null and sph != ''">
-            and s.sph between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+            and j.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
         </if>
             <if test="cyl != null and cyl != ''">
-                and l.cyl between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+                and j.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
             </if>
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
@@ -81,8 +83,9 @@
         left join c_refractivity r on r.refractivityid = j.refractivityid
         left join p_function f on f.function_id = j.function_id
         <where>
-            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and j.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
