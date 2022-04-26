@@ -4,11 +4,11 @@
 <mapper namespace="com.shiguang.stock.dao.WeiwaishujuDao">
 
 	<select id="get" resultType="com.shiguang.stock.domain.WeiwaishujuDO">
-		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,`sale_number`,`weiwai_style`,`beizhu`,`sph`,`cyl`,`zx`,`add`,`slj`,`jd`,`fartj`,`neartj`,`tg`,`qulv`,`zj`,`sphyx`,`cylyx`,`zxyx`,`num`,`code`,`name`,`left_right`,`count`,`yaoqiu`,`numyx`,`codeyx`,`nameyx`,`left_right_yx`,`countyx`,`yaoqiuyx`,`gkname`,`hyknum`,`phone` from stock_weiwaishuju where id = #{value}
+		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,`sale_number`,`weiwai_style`,`beizhu`,`sph`,`cyl`,`zx`,`add`,`slj`,`jd`,`fartj`,`neartj`,`tg`,`qulv`,`zj`,`sphyx`,`cylyx`,`zxyx`,`jdyx`,`num`,`code`,`name`,`left_right`,`count`,`yaoqiu`,`numyx`,`codeyx`,`nameyx`,`left_right_yx`,`countyx`,`yaoqiuyx`,`gkname`,`hyknum`,`phone` from stock_weiwaishuju where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.stock.domain.WeiwaishujuDO">
-		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,`sale_number`,`weiwai_style`,`beizhu`,`sph`,`cyl`,`zx`,`add`,`slj`,`jd`,`fartj`,`neartj`,`tg`,`qulv`,`zj`,`sphyx`,`cylyx`,`zxyx`,`num`,`code`,`name`,`left_right`,`count`,`yaoqiu`,`numyx`,`codeyx`,`nameyx`,`left_right_yx`,`countyx`,`yaoqiuyx`,`gkname`,`hyknum`,`phone` from stock_weiwaishuju
+		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,`sale_number`,`weiwai_style`,`beizhu`,`sph`,`cyl`,`zx`,`add`,`slj`,`jd`,`fartj`,`neartj`,`tg`,`qulv`,`zj`,`sphyx`,`cylyx`,`zxyx`,`jdyx`,`num`,`code`,`name`,`left_right`,`count`,`yaoqiu`,`numyx`,`codeyx`,`nameyx`,`left_right_yx`,`countyx`,`yaoqiuyx`,`gkname`,`hyknum`,`phone` from stock_weiwaishuju
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="number != null and number != ''"> and number = #{number} </if>
@@ -137,7 +137,8 @@
 			`sphyx`, 
 			`cylyx`, 
 			`zxyx`, 
-			`num`, 
+			`jdyx`,
+			`num`,
 			`code`, 
 			`name`, 
 			`left_right`, 
@@ -179,7 +180,8 @@
 			#{sphyx}, 
 			#{cylyx}, 
 			#{zxyx}, 
-			#{num}, 
+			#{jdyx},
+			#{num},
 			#{code}, 
 			#{name}, 
 			#{leftRight}, 
@@ -224,6 +226,7 @@
 			<if test="sphyx != null">`sphyx` = #{sphyx}, </if>
 			<if test="cylyx != null">`cylyx` = #{cylyx}, </if>
 			<if test="zxyx != null">`zxyx` = #{zxyx}, </if>
+			<if test="jdyx != null">`jdyx` = #{jdyx}, </if>
 			<if test="num != null">`num` = #{num}, </if>
 			<if test="code != null">`code` = #{code}, </if>
 			<if test="name != null">`name` = #{name}, </if>
@@ -257,7 +260,7 @@
 	</delete>
 
 	<select id="getWeiwaiShuju" resultType="com.shiguang.stock.domain.WeiwaishujuDO">
-		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,`sale_number`,`weiwai_style`,`beizhu`,`sph`,`cyl`,`zx`,`add`,`slj`,`jd`,`fartj`,`neartj`,`tg`,`qulv`,`zj`,`sphyx`,`cylyx`,`zxyx`,`num`,`code`,`name`,`left_right`,`count`,`yaoqiu`,`numyx`,`codeyx`,`nameyx`,`left_right_yx`,`countyx`,`yaoqiuyx`,`gkname`,`hyknum`,`phone` from stock_weiwaishuju
+		select `id`,`number`,`danju_day`,`departname`,`zhidan_people`,`jc_style`,`timetime`,`danju_style`,`sale_number`,`weiwai_style`,`beizhu`,`sph`,`cyl`,`zx`,`add`,`slj`,`jd`,`fartj`,`neartj`,`tg`,`qulv`,`zj`,`sphyx`,`cylyx`,`zxyx`,`jdyx`,`num`,`code`,`name`,`left_right`,`count`,`yaoqiu`,`numyx`,`codeyx`,`nameyx`,`left_right_yx`,`countyx`,`yaoqiuyx`,`gkname`,`hyknum`,`phone` from stock_weiwaishuju
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="number != null and number != ''"> and number = #{number} </if>
@@ -284,6 +287,7 @@
 			<if test="sphyx != null and sphyx != ''"> and sphyx = #{sphyx} </if>
 			<if test="cylyx != null and cylyx != ''"> and cylyx = #{cylyx} </if>
 			<if test="zxyx != null and zxyx != ''"> and zxyx = #{zxyx} </if>
+			<if test="jdyx != null and jdyx != ''"> and jdyx = #{jdyx} </if>
 			<if test="num != null and num != ''"> and num = #{num} </if>
 			<if test="code != null and code != ''"> and code = #{code} </if>
 			<if test="name != null and name != ''"> and name = #{name} </if>

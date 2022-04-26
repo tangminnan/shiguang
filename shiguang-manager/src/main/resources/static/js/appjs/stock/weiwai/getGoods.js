@@ -261,6 +261,48 @@ function batchSelect() {
         }
         obj.classtype=classtype;
 
+
+
+
+// alert(row['rightqulv'])
+        //rightqulv
+        if (null == row['rightqulv']){
+            var rightqulv = "";
+        }else {
+            var rightqulv= row['rightqulv'];
+        }
+        obj.rightqulv=rightqulv;
+
+
+        //leftqulv
+        if (null == row['leftqulv']){
+            var leftqulv = "";
+        }else {
+            var leftqulv= row['leftqulv'];
+        }
+        obj.leftqulv=leftqulv;
+
+
+        //rightzj
+        if (null == row['rightzj']){
+            var rightzj = "";
+        }else {
+            var rightzj= row['rightzj'];
+        }
+        obj.rightzj=rightzj;
+        //leftzj
+        if (null == row['leftzj']){
+            var leftzj = "";
+        }else {
+            var leftzj= row['leftzj'];
+        }
+        obj.leftzj=leftzj;
+
+
+
+
+
+
         objArray.push(obj);
     });
 

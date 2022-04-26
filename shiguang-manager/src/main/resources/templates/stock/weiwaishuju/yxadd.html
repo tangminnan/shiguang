@@ -197,7 +197,7 @@
         </table>
 
         <h3>度数录入</h3>
-        <table id="jpdushu" class="tabB" border="0" cellspacing="0" cellpadding="0"></table>
+        <table id="jpdushu" class="tabB1" border="0" cellspacing="0" cellpadding="0"></table>
         <table id="tab2"  class="tabB1" border="0" cellspacing="0" cellpadding="0">
             <tr>
                 <td></td>
@@ -310,22 +310,18 @@
         var rightsphs="";
         var rightcyls="";
         var rightzxs="";
-        var rightAdds="";
-        var rightSljs="";
         var rightJds="";
-        var rightFartjs="";
-        var rightNeartjs="";
+        var rightqulvs="";
+        var rightzjs="";
+
 
         var leftsphs="";
         var leftcyls="";
         var leftzxs="";
-        var leftAdds="";
-        var leftSljs="";
         var leftJds="";
-        var leftFartjs="";
-        var leftNeartjs="";
-        var righttgs="";
-        var lefttgs="";
+        var leftqulvs="";
+        var leftzjs="";
+
 
 
 
@@ -341,33 +337,23 @@
             area: ['800px', '520px'],
             content: "/stock/weiwai/PeiJing/" + eyeStyle+ "/" +  mfrsid + "/" +  mfrsname,// iframe的url
             cancel: function (index, layero) {
-            alert("!!!!!!!!!!!!");
                 var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
-                alert(JSON.stringify(rows));
                 for (var i = 0; i < rows.length; i++) {
-                    // $("#departname").val(rows[0].mirorAddress);
                     xsNumber += rows[i].saleNumber + ',';
                     rightsphs += rows[i].rightsph + ',';
                     rightcyls += rows[i].rightcyl + ',';
                     rightzxs += rows[i].rightzx + ',';
-                    rightAdds += rows[i].rightAdd + ',';
-                    rightSljs += rows[i].rightSlja + ',';
                     rightJds += rows[i].rightJd + ',';
-                    rightFartjs += rows[i].rightFartj + ',';
-                    rightNeartjs += rows[i].rightNeartj + ',';
+                    rightqulvs += rows[i].rightqulv + ',';
+                    rightzjs += rows[i].rightzj + ',';
 
                     leftsphs += rows[i].leftsph + ',';
                     leftcyls += rows[i].leftcyl + ',';
                     leftzxs += rows[i].leftzx + ',';
-                    leftAdds += rows[i].leftAdd + ',';
-                    leftSljs += rows[i].leftSlja + ',';
                     leftJds += rows[i].leftJd + ',';
-                    leftFartjs += rows[i].leftFartj + ',';
-                    leftNeartjs += rows[i].leftNeartj + ',';
+                    leftqulvs += rows[i].leftqulv + ',';
+                    leftzjs += rows[i].leftzj + ',';
 
-                    // alert( rows[i].righttg);
-                    righttgs += rows[i].righttg + ',';
-                    lefttgs += rows[i].lefttg + ',';
 
                     numAry[i]=rows[i].goodsNum;
                     codeAry[i]=rows[i].goodsCode;
@@ -384,29 +370,28 @@
 
 
                 }
-                if (eyeStyle == 3) {
-                    //镜片
+                if (eyeStyle == 4) {
                     var allLength=xsNumber.split(",");//单据
 
                     var rightsph=rightsphs.split(",");
                     var rightcyl=rightcyls.split(",");
                     var rightzx=rightzxs.split(",");
-                    var rightAdd=rightAdds.split(",");
-                    var rightSlj=rightJds.split(",");
                     var rightJd=rightJds.split(",");
-                    var rightFartj=rightFartjs.split(",");
-                    var rightNeartj=rightNeartjs.split(",");
+                    var rightql=rightqulvs.split(",");
+                    var rightzj=rightzjs.split(",");
+
+
+
 
                     var leftsph=leftsphs.split(",");
                     var leftcyl=leftcyls.split(",");
                     var leftzx=leftzxs.split(",");
-                    var leftAdd=leftAdds.split(",");
-                    var leftSlj=leftSljs.split(",");
+
                     var leftJd=leftJds.split(",");
-                    var leftFartj=leftFartjs.split(",");
-                    var leftNeartj=leftNeartjs.split(",");
-                    var righttg=righttgs.split(",");
-                    var lefttg=lefttgs.split(",");
+                    var leftql=leftqulvs.split(",");
+                    var leftzj=leftzjs.split(",");
+
+
 
                     for (var b = 0; b< allLength.length-1; b++) {
                         html += "<tr>";
@@ -414,33 +399,25 @@
                         html+="<td>球镜</td>";
                         html+="<td>柱镜</td>";
                         html+="<td>轴向</td>";
-                        html+="<td>ADD</td>";
-                        html+="<td>三菱镜</td>";
-                        html+="<td>基底</td>";
-                        html+="<td>瞳距（远）</td>";
-                        html+="<td>瞳距（近）</td>";
+                        html+="<td>曲率</td>";
+                        html+="<td>直径</td>";
                         html+="</tr>";
                         html+="<tr>";
                         html+="<td>OD</td>";
-                        html+="<td><input id='rightsph' value='"+rightsph[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
-                        html+="<td><input id='rightcyl'  value='"+rightcyl[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
-                        html+="<td><input id='rightzx'  value='"+rightzx[b]+"' onblur='zhouxiang(this)' type='text'/></td>";
-                        html+="<td><input id='rightAdd'  value='"+rightAdd[b]+"' type='text'/></td>";
-                        html+="<td><input id='rightSlj'  value='"+rightSlj[b]+"' type='text'/></td>";
-                        html+="<td><input id='rightJd'  value='"+rightJd[b]+"' type='text'/></td>";
-                        html+="<td><input id='rightFartj'  value='"+rightFartj[b]+"' type='text'/></td>";
-                        html+="<td><input id='rightNeartj'  value='"+rightNeartj[b]+"'  type='text'/></td>";
+
+                        html+="<td><input id='rightsphyx' value='"+rightsph[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
+                        html+="<td><input id='rightcylyx'  value='"+rightcyl[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
+                        html+="<td><input id='rightzxyx'  value='"+rightzx[b]+"' onblur='zhouxiang(this)' type='text'/></td>";
+                        html+="<td><input id='rightqulv'  value='"+rightql[b]+"' type='text'/></td>";
+                        html+="<td><input id='rightzj'  value='"+rightzj[b]+"'  type='text'/></td>";
                         html+="</tr>";
                         html+="<tr>";
                         html+="<td>OS</td>";
-                        html+="<td><input id='leftsph'   value='"+leftsph[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
-                        html+="<td><input id='leftcyl'   value='"+leftcyl[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
-                        html+="<td><input id='leftzx'  value='"+leftzx[b]+"'onblur='zhouxiang(this)' type='text'/></td>";
-                        html+="<td><input id='leftAdd'   value='"+leftAdd[b]+"' type='text'/></td>";
-                        html+="<td><input id='leftSlj'   value='"+leftSlj[b]+"' type='text'/></td>";
-                        html+="<td><input id='leftJd'   value='"+leftJd[b]+"' type='text'/></td>";
-                        html+="<td><input id='leftFartj'   value='"+leftFartj[b]+"' type='text'/></td>";
-                        html+="<td><input id='leftNeartj'   value='"+leftNeartj[b]+"' type='text'/></td>";
+                        html+="<td><input id='leftsphyx'   value='"+leftsph[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
+                        html+="<td><input id='leftcylyx'   value='"+leftcyl[b]+"' onblur='zhengfu(this)' onkeydown='xiaoshu(this)' type='text'/></td>";
+                        html+="<td><input id='leftzxyx'  value='"+leftzx[b]+"'onblur='zhouxiang(this)' type='text'/></td>";
+                        html+="<td><input id='leftqulv'  value='"+leftql[b]+"' type='text'/></td>";
+                        html+="<td><input id='leftzj'  value='"+leftzj[b]+"'  type='text'/></td>";
                         html+="</tr>";
 
 
@@ -451,6 +428,7 @@
                         var goodsDescribes=storeDescribeArry[b];
                         var goodsCounts=storeCountArry[b];
                         var goodsClasstypes=classtypeArry[b];
+
 
                         // alert(processAskArry);
                         var processAsks= processAskArry[b];//加工要求
@@ -469,15 +447,11 @@
                         var goodClasstypes = goodsClasstypes.split(",");//定做还是成品
                         var processAsk = processAsks;//加工要求
                         var yaoqiu=processAsk.replaceAll(',', '!');
-                        // alert(yaoqiu);
                         var hyName = hyNames.split(",");
                         var hyNumber = hyNumbers.split(",");
                         var phone = phones.split(",");
                         var departname = departnames.split(",");
-                        // alert(goodsNums);
-                        // alert(goodNums+"拆分");
-                        // alert(goodNums.length+"长度");
-                        // alert(processAsk);
+
                         bhtml += "<tr>";
                         bhtml += "<td width='250'>商品代码</td>";
                         bhtml += "<td width='250'>商品名称</td>";
@@ -485,13 +459,12 @@
                         bhtml += "<td>球镜</td>";
                         bhtml += "<td>柱镜</td>";
                         bhtml += "<td>轴向</td>";
-                        bhtml += "<td>下加</td>";
-                        bhtml += "<td>棱镜</td>";
-                        bhtml += "<td>基底</td>";
-                        bhtml += "<td>瞳高</td>";
+                        bhtml += "<td>曲率</td>";
+                        bhtml += "<td>直径</td>";
                         bhtml += "<td>数量</td>";
                         bhtml += "<td width='300'>加工要求</td>";
                         bhtml += "</tr>";
+
                         for(var c= 0; c<goodNums.length; c++) {
                             // alert(goodNums[c]+"？代码");
                             // alert(goodCodes[c]+"？条码");
@@ -503,35 +476,37 @@
                             // alert(processAsk);
 
 
-                            if (gooodDescribes[c] == "镜片") {
+                            if (gooodDescribes[c] == "隐形") {
                                 if (leftRights[c] == "右") {
                                     var sph = rightsph[b];
                                     var cyl = rightcyl[b];
                                     var zx = rightzx[b];
-                                    var xj = rightAdd[b];
-                                    var lj = rightSlj[b];
+
                                     var jd = rightJd[b];
-                                    var tg = righttg[b];
-                                    var far = rightFartj[b];
-                                    var near = rightNeartj[b];
+
+                                    var ql = rightql[b];
+                                    var zj = rightzj[b];
+
+
+
                                     if (goodClasstypes[c] == "2") {
                                         bhtml += "<tr>";
-                                        bhtml += "<td><input id='num' name='num'  value='" + goodNums[c] + "' type='text' /></td>";
-                                        bhtml += "<td><input id='name' name='name'  value='" + goodNames[c] + "' type='text' /></td>";
-                                        bhtml += "<td><input id='leftRight' name='leftRight'  value='" + leftRights[c] + "' type='text' /></td>";
-                                        bhtml += "<td><input id='sph' name='sph'  value='" + sph + "' type='text' /></td>";
-                                        bhtml += "<td><input id='cyl' name='cyl' value='" + cyl + "' type='text' /></td>";
-                                        bhtml += "<td><input id='zx'  name='zx' value='" + zx + "' type='text' /></td>";
-                                        bhtml += "<td><input id='add'  name='add' value='" + xj + "' type='text' /></td>";
-                                        bhtml += "<td><input id='slj'  name='slj' value='" + lj + "' type='text' /></td>";
-                                        bhtml += "<td><input id='jd' name='jd' value='" + jd + "' type='text' /></td>";
-                                        bhtml += "<td><input id='tg' name='tg' value='" +  tg+ "' type='text' /></td>";
-                                        bhtml += "<td style='display: none'><input id='fartj' name='fartj' value='" +  far+ "' type='text' /></td>";
-                                        bhtml += "<td style='display: none'><input id='neartj' name='neartj' value='" +  near+ "' type='text' /></td>";
-                                        bhtml += "<td><input id='count' name='count'  value='" + goodCounts[c] + "' type='text'/></td>";
-                                        bhtml += "<td><input id='yaoqiu' name='yaoqiu' value='" + yaoqiu  + "' type='text' /></td>";
+                                        bhtml += "<td><input id='numyx' name='numyx'  value='" + goodNums[c] + "' type='text' /></td>";
+                                        bhtml += "<td><input id='nameyx' name='nameyx'  value='" + goodNames[c] + "' type='text' /></td>";
+                                        bhtml += "<td><input id='leftRightYx' name='leftRightYx'  value='" + leftRights[c] + "' type='text' /></td>";
+                                        bhtml += "<td><input id='sphyx' name='sphyx'  value='" + sph + "' type='text' /></td>";
+                                        bhtml += "<td><input id='cylyx' name='cylyx' value='" + cyl + "' type='text' /></td>";
+                                        bhtml += "<td><input id='zxyx'  name='zxyx' value='" + zx + "' type='text' /></td>";
+                                        bhtml += "<td><input id='qulv'  name='qulv' value='" + ql + "' type='text' /></td>";
+                                        bhtml += "<td><input id='zj'  name='zj' value='" + zj + "' type='text' /></td>";
 
-                                        bhtml += "<td style='display: none'><input id='code' name='code' value='" + goodCodes[c] + "' type='text' /></td>";
+                                        bhtml += "<td style='display: none'><input id='jdyx' name='jdyx' value='" + jd + "' type='text' /></td>";
+
+
+                                        bhtml += "<td><input id='countyx' name='countyx'  value='" + goodCounts[c] + "' type='text'/></td>";
+                                        bhtml += "<td><input id='yaoqiuyx' name='yaoqiuyx' value='" + yaoqiu  + "' type='text' /></td>";
+
+                                        bhtml += "<td style='display: none'><input id='codeyx' name='codeyx' value='" + goodCodes[c] + "' type='text' /></td>";
                                         bhtml += "<td style='display: none'><input id='saleNumber' name='saleNumber' value='" + allLength[b] + "' type='text'/></td>";
                                         bhtml += "<td style='display: none'><input id='gkname' name='gkname' value='" + hyName[0] + "' type='text'/></td>";
                                         bhtml += "<td style='display: none'><input id='hyknum' name='hyknum' value='" + hyNumber[0] + "' type='text'/></td>";
@@ -543,30 +518,30 @@
                                     var sph = leftsph[b];
                                     var cyl = leftcyl[b];
                                     var zx = leftzx[b];
-                                    var xj = leftAdd[b];
-                                    var lj = leftSlj[b];
+
                                     var jd = leftJd[b];
-                                    var tg = lefttg[b];
-                                    var far = leftFartj[b];
-                                    var near = leftNeartj[b];
+
+
+                                    var ql = leftql[b];
+                                    var zj = leftzj[b];
                                     if (goodClasstypes[c] == "2") {
                                         bhtml += "<tr>";
-                                        bhtml += "<td><input id='num' name='num'  value='" + goodNums[c] + "' type='text' /></td>";
-                                        bhtml += "<td><input id='name' name='name'  value='" + goodNames[c] + "' type='text' /></td>";
-                                        bhtml += "<td><input id='leftRight' name='leftRight'  value='" + leftRights[c] + "' type='text' /></td>";
-                                        bhtml += "<td><input id='sph' name='sph'  value='" + sph + "' type='text' /></td>";
-                                        bhtml += "<td><input id='cyl' name='cyl' value='" + cyl + "' type='text' /></td>";
-                                        bhtml += "<td><input id='zx'  name='zx' value='" + zx + "' type='text' /></td>";
-                                        bhtml += "<td><input id='add'  name='add' value='" + xj + "' type='text' /></td>";
-                                        bhtml += "<td><input id='slj'  name='slj' value='" + lj + "' type='text' /></td>";
-                                        bhtml += "<td><input id='jd' name='jd' value='" + jd + "' type='text' /></td>";
-                                        bhtml += "<td><input id='tg' name='tg' value='" +  tg+ "' type='text' /></td>";
-                                        bhtml += "<td style='display: none'><input id='fartj' name='fartj' value='" +  far+ "' type='text' /></td>";
-                                        bhtml += "<td style='display: none'><input id='neartj' name='neartj' value='" +  near+ "' type='text' /></td>";
-                                        bhtml += "<td><input id='count' name='count'  value='" + goodCounts[c] + "' type='text'/></td>";
-                                        bhtml += "<td><input id='yaoqiu' name='yaoqiu' value='" + yaoqiu  + "' type='text' /></td>";
+                                        bhtml += "<td><input id='numyx' name='numyx'  value='" + goodNums[c] + "' type='text' /></td>";
+                                        bhtml += "<td><input id='nameyx' name='nameyx'  value='" + goodNames[c] + "' type='text' /></td>";
+                                        bhtml += "<td><input id='leftRightYx' name='leftRightYx'  value='" + leftRights[c] + "' type='text' /></td>";
+                                        bhtml += "<td><input id='sphyx' name='sphyx'  value='" + sph + "' type='text' /></td>";
+                                        bhtml += "<td><input id='cylyx' name='cylyx' value='" + cyl + "' type='text' /></td>";
+                                        bhtml += "<td><input id='zxyx'  name='zxyx' value='" + zx + "' type='text' /></td>";
+                                        bhtml += "<td><input id='qulv'  name='qulv' value='" + ql + "' type='text' /></td>";
+                                        bhtml += "<td><input id='zj'  name='zj' value='" + zj + "' type='text' /></td>";
 
-                                        bhtml += "<td style='display: none'><input id='code' name='code' value='" + goodCodes[c] + "' type='text' /></td>";
+                                        bhtml += "<td style='display: none'><input id='jdyx' name='jdyx' value='" + jd + "' type='text' /></td>";
+
+
+                                        bhtml += "<td><input id='countyx' name='countyx'  value='" + goodCounts[c] + "' type='text'/></td>";
+                                        bhtml += "<td><input id='yaoqiuyx' name='yaoqiuyx' value='" + yaoqiu  + "' type='text' /></td>";
+
+                                        bhtml += "<td style='display: none'><input id='codeyx' name='codeyx' value='" + goodCodes[c] + "' type='text' /></td>";
                                         bhtml += "<td style='display: none'><input id='saleNumber' name='saleNumber' value='" + allLength[b] + "' type='text'/></td>";
                                         bhtml += "<td style='display: none'><input id='gkname' name='gkname' value='" + hyName[0] + "' type='text'/></td>";
                                         bhtml += "<td style='display: none'><input id='hyknum' name='hyknum' value='" + hyNumber[0] + "' type='text'/></td>";
