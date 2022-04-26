@@ -7,6 +7,8 @@ import com.shiguang.checkout.service.CostService;
 import com.shiguang.common.utils.*;
 import com.shiguang.giveaway.domain.GiveawayDO;
 import com.shiguang.giveaway.service.GiveawayService;
+import com.shiguang.integral.domain.IntegralDO;
+import com.shiguang.integral.service.IntegralService;
 import com.shiguang.jiancha.domain.*;
 import com.shiguang.jiancha.service.*;
 import com.shiguang.logstatus.domain.LogStatusDO;
@@ -136,6 +138,8 @@ public class StoreSalesController {
     private MfrsService mfrsService;
     @Autowired
     private CardService cardService;
+    @Autowired
+    private IntegralService integralService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -991,12 +995,15 @@ public class StoreSalesController {
             ss.deleteCharAt(ss.length() - 1);
             salesDO.setStoreDescribe(ss.toString());
         }
+        double jifenNum=0;
         if (null != salesDO.getGoodsNum()){
             String goodsCode = salesDO.getGoodsCode();
             String storeDesc = salesDO.getStoreDescribe();
             String[] goodsStr = goodsCode.split(",");
             String[] goodsDescribe = storeDesc.split(",");
             String[] goodsCount = salesDO.getStoreCount().split(",");
+            String[] price = salesDO.getStoreUnit().split(",");
+            String[] classType = salesDO.getClasstype().split(",");
             String companyId = "";
             PositionDO positionDO = null;
             if (null != ShiroUtils.getUser().getCompanyId()) {
@@ -1022,7 +1029,59 @@ public class StoreSalesController {
                     stockDO.setGoodsCount(String.valueOf(count));
                     stockService.updateGoodsCount(stockDO);
                 }
+                Map<String,Object> jifenmap = new HashMap<>();
+                jifenmap.put("storeNum",salesDO.getStoreNum());
+                jifenmap.put("companyId",ShiroUtils.getUser().getCompanyId());
+                List<IntegralDO> integralDOList = integralService.getPoints(jifenmap);
+                for (IntegralDO integralDO : integralDOList){
+                    if("1".equals(classType[e])){
+                        if ("镜片".equals(goodsDescribe[e]) && "镜片(成品片)".equals(integralDO.getGoodsType())){
+                            jifenNum = jifenNum +  Double.valueOf(price[e])*Double.valueOf(goodsCount[e])*Double.valueOf(integralDO.getRedeemPoints());
+                            continue;
+                        }
+                        if ("隐形".equals(goodsDescribe[e]) && "隐形(成品片)".equals(integralDO.getGoodsType())){
+                            jifenNum = jifenNum +  Double.valueOf(price[e])*Double.valueOf(goodsCount[e])*Double.valueOf(integralDO.getRedeemPoints());
+                            continue;
+                        }
+                    } else {
+                        if ("镜片".equals(goodsDescribe[e]) && "镜片(订做片)".equals(integralDO.getGoodsType())){
+                            jifenNum = jifenNum +  Double.valueOf(price[e])*Double.valueOf(goodsCount[e])*Double.valueOf(integralDO.getRedeemPoints());
+                            continue;
+                        }
+                        if ("隐形".equals(goodsDescribe[e]) && "隐形(订做片)".equals(integralDO.getGoodsType())){
+                            jifenNum = jifenNum +  Double.valueOf(price[e])*Double.valueOf(goodsCount[e])*Double.valueOf(integralDO.getRedeemPoints());
+                            continue;
+                        }
+                    }
+                    if ("镜架".equals(goodsDescribe[e]) && "镜架".equals(integralDO.getGoodsType())){
+                        jifenNum = jifenNum +  Double.valueOf(price[e])*Double.valueOf(goodsCount[e])*Double.valueOf(integralDO.getRedeemPoints());
+                        continue;
+                    }
+                    if ("护理液".equals(goodsDescribe[e]) && "护理液".equals(integralDO.getGoodsType())){
+                        jifenNum = jifenNum +  Double.valueOf(price[e])*Double.valueOf(goodsCount[e])*Double.valueOf(integralDO.getRedeemPoints());
+                        continue;
+                    }
+                    if ("太阳镜".equals(goodsDescribe[e]) && "太阳镜".equals(integralDO.getGoodsType())){
+                        jifenNum = jifenNum +  Double.valueOf(price[e])*Double.valueOf(goodsCount[e])*Double.valueOf(integralDO.getRedeemPoints());
+                        continue;
+                    }
+                    if ("老花镜".equals(goodsDescribe[e]) && "老花镜".equals(integralDO.getGoodsType())){
+                        jifenNum = jifenNum +  Double.valueOf(price[e])*Double.valueOf(goodsCount[e])*Double.valueOf(integralDO.getRedeemPoints());
+                        continue;
+                    }
+                    if ("视光".equals(goodsDescribe[e]) && "视光".equals(integralDO.getGoodsType())){
+                        jifenNum = jifenNum +  Double.valueOf(price[e])*Double.valueOf(goodsCount[e])*Double.valueOf(integralDO.getRedeemPoints());
+                        continue;
+                    }
+                }
             }
+        }
+        if (jifenNum !=0.0){
+            MemberDO memberDO = memberService.getCardNumber(salesDO.getMemberNumber());
+            int jifen = (int) jifenNum;
+            int jifentotal = memberDO.getIntegral() + jifen;
+            memberDO.setIntegral(jifentotal);
+            memberService.updateInteger(memberDO);
         }
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
         workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
@@ -1031,6 +1090,11 @@ public class StoreSalesController {
         logStatusService.saveRecord(workRecoedDO);
         salesDO.setCompanyId(ShiroUtils.getUser().getCompanyId());
         SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Map<String,Object> userMap = new HashMap<>();
+        userMap.put("userName",salesDO.getUserName());
+        userMap.put("companyId",ShiroUtils.getUser().getCompanyId());
+        UserDO userDO =userService.getUserName(userMap);
+        salesDO.setSaleName(userDO.getName());
         if (salesService.save(salesDO) > 0) {
             //this.editsetle(salesDO,model);
             if (null != salesDO.getGoodsNum()) {

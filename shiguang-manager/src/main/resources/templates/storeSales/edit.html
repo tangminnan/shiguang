@@ -35,7 +35,7 @@
 		</span>
 		<span class="s5">
 			<input type="button" onclick="updatePerson()" value="更换销售人员" />
-				<select id="saleName" name="saleName" readonly="readonly">
+				<select id="saleName" name="userName" readonly="readonly">
 					<option></option>
 					<option th:each="ls:${userDOList}"
 							th:text="${ls.name}"
@@ -2605,7 +2605,7 @@
             //$("#rightjidi").val(jidi);
             $("#rightFLjidi").find("[value='"+jidi+"']").attr("selected",true);
 
-            $("#rightFLyuanyTj").val(data.rightyytj);
+            $("#rightFLyuanyTj").val(data.rightjytj);
             // if (data.rightyytj != ''){
              //    document.getElementById("rightFLyuanyTj").readOnly=true;
 			// }
@@ -2629,7 +2629,7 @@
             // }
             var leftjidi = data.leftjd;
             $("#leftFLjidi").find("[value='"+leftjidi+"']").attr("selected",true);
-            $("#leftFLyuanyTj").val(data.leftyytj);
+            $("#leftFLyuanyTj").val(data.leftjytj);
             // if (data.leftyytj != ''){
             //     document.getElementById("leftFLyuanyTj").readOnly=true;
             // }

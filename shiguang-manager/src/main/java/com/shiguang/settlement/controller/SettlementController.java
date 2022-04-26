@@ -385,10 +385,10 @@ public class SettlementController {
 		//costDO.setId(settlement.getCostId());
 		SalesDO salesDO1 = salesService.getSaleNumber(settlement.getSaleNumber());
 		if (null != salesDO1){
-			Map<String,Object> map = new HashMap<>();
-			map.put("storeNum",salesDO1.getStoreNum());
-			map.put("companyId",ShiroUtils.getUser().getCompanyId());
-			IntegralDO integralDO = integralService.getPoints(map);
+//			Map<String,Object> map = new HashMap<>();
+//			map.put("storeNum",salesDO1.getStoreNum());
+//			map.put("companyId",ShiroUtils.getUser().getCompanyId());
+//			IntegralDO integralDO = integralService.getPoints(map);
 			if ("定金".equals(settlement.getPayWay())){
 				salesDO.setSaleType("2");
 				settlement.setFrontMoney(settlement.getPayMoney());
@@ -483,13 +483,15 @@ public class SettlementController {
 		settlement.setSettleDate(new Date());
 		String[] paymodel = settlement.getPayModel().split(",");
 		String[] modelMoney = settlement.getModelMoney().split(",");
+		java.text.NumberFormat numberformat=java.text.NumberFormat.getInstance();
+		numberformat.setMaximumFractionDigits(1);
 		for (int i = 0;i<paymodel.length;i++){
 			if ("6".equals(paymodel[i])){
 				String cardNumber = settlement.getChuzhiNumber();
 				CardDO cardDO = cardService.getCardNum(cardNumber);
 				if (null != cardDO){
 					if (cardDO.getPassword().equals(settlement.getChuzhiPasd())){
-						if (Double.valueOf(cardDO.getCardMoney()) > Double.valueOf(modelMoney[i])){
+						if (Double.valueOf(cardDO.getCardMoney()) >= Double.valueOf(modelMoney[i])){
 							double money = Double.valueOf(cardDO.getCardMoney()) - Double.valueOf(modelMoney[i]);
 							cardDO.setCardMoney(money+"");
 							cardService.update(cardDO);
@@ -507,6 +509,11 @@ public class SettlementController {
 					return R.error("该用户没有绑定储值卡");
 				}
 			}
+//			else if ("9".equals(paymodel[i])){
+//				double zhifuJifen = Double.valueOf(modelMoney[i]);
+//				String jifenMoney = numberformat.format((float)zhifuJifen/(float)20);
+//				modelMoney[i] = jifenMoney;
+//			}
 		}
 
 		if(settlementService.save(settlement)>0){

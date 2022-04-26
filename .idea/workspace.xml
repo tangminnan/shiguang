@@ -5,23 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54bd22e9-50f4-4638-823e-6e311d26c305" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/shiguang_manager_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/shiguang_manager_war_exploded.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shiguang-manager/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shiguang-manager/shiguang-manager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/shiguang-manager.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/baseinfomation/domain/DepartmentDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/baseinfomation/domain/DepartmentDO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/member/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/member/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/integral/dao/IntegralDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/integral/dao/IntegralDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/integral/service/IntegralService.java" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/integral/service/IntegralService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/integral/service/impl/IntegralServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/integral/service/impl/IntegralServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/settlement/controller/SettlementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/settlement/controller/SettlementController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/controller/StoreSalesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/controller/StoreSalesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/domain/SalesDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/domain/SalesDO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/baseinfomation/DepartmentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/baseinfomation/DepartmentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/storeSales/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/storeSales/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/storeSales/yinxing.js" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/storeSales/yinxing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/baseinfomation/department/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/baseinfomation/department/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/baseinfomation/department/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/baseinfomation/department/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/member/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/member/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/member/MemberMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/member/MemberMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/storeSales/SalesMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/storeSales/SalesMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/system/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/system/UserMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/jingpian.html" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/jingpian.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/shiguang-manager/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -179,10 +176,10 @@
     <session id="1890981571">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="11" />
+          <entry key="project.closed" value="12" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="1" />
-          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.13" value="2" />
           <entry key="project.open.time.14" value="3" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
@@ -190,50 +187,50 @@
           <entry key="project.open.time.21" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.76" value="1" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="11" />
-          <entry key="html" value="111" />
-          <entry key="java" value="230" />
-          <entry key="js" value="51" />
+          <entry key="class" value="12" />
+          <entry key="html" value="114" />
+          <entry key="java" value="245" />
+          <entry key="js" value="52" />
           <entry key="rnc" value="1" />
-          <entry key="xml" value="65" />
-          <entry key="yml" value="18" />
+          <entry key="xml" value="72" />
+          <entry key="yml" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="11" />
-          <entry key="HTML" value="111" />
-          <entry key="JAVA" value="230" />
-          <entry key="JavaScript" value="51" />
+          <entry key="CLASS" value="12" />
+          <entry key="HTML" value="114" />
+          <entry key="JAVA" value="245" />
+          <entry key="JavaScript" value="52" />
           <entry key="RNG Compact" value="1" />
-          <entry key="XML" value="65" />
-          <entry key="YAML" value="18" />
+          <entry key="XML" value="72" />
+          <entry key="YAML" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="70" />
-          <entry key="html" value="2052" />
-          <entry key="java" value="7748" />
+          <entry key="html" value="2083" />
+          <entry key="java" value="8662" />
           <entry key="js" value="967" />
-          <entry key="xml" value="863" />
-          <entry key="yml" value="84" />
+          <entry key="xml" value="878" />
+          <entry key="yml" value="95" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="2052" />
-          <entry key="JAVA" value="7748" />
+          <entry key="HTML" value="2083" />
+          <entry key="JAVA" value="8662" />
           <entry key="JavaScript" value="967" />
           <entry key="PLAIN_TEXT" value="70" />
-          <entry key="SQL" value="77" />
-          <entry key="XML" value="786" />
-          <entry key="YAML" value="84" />
+          <entry key="SQL" value="79" />
+          <entry key="XML" value="799" />
+          <entry key="YAML" value="95" />
         </counts>
       </usages-collector>
     </session>
@@ -241,28 +238,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/member/add.html">
+        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/edit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="122" column="55" selection-start-line="122" selection-start-column="55" selection-end-line="122" selection-end-column="55" />
+            <state relative-caret-position="102">
+              <caret line="2592" column="35" selection-start-line="2592" selection-start-column="35" selection-end-line="2592" selection-end-column="35" />
+              <folding>
+                <element signature="n#style#0;n#select#0;n#div#1;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/member/edit.html">
+        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/settlement/controller/SettlementController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1238">
-              <caret line="279" column="46" lean-forward="true" selection-start-line="279" selection-start-column="46" selection-end-line="279" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/jingpian.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-662">
-              <caret line="71" column="64" selection-start-line="71" selection-start-column="64" selection-end-line="71" selection-end-column="64" />
+            <state relative-caret-position="3161">
+              <caret line="507" column="23" selection-start-line="507" selection-start-column="23" selection-end-line="507" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -270,75 +267,73 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/controller/StoreSalesController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="200" column="41" lean-forward="true" selection-start-line="200" selection-start-column="41" selection-end-line="200" selection-end-column="41" />
+            <state relative-caret-position="280">
+              <caret line="214" column="51" selection-start-line="214" selection-start-column="51" selection-end-line="214" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/member/MemberMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/integral/IntegralMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="193">
+              <caret line="81" column="25" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/system/UserMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="350">
+              <caret line="20" column="31" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/application-dev.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/baseinfomation/department/add.html">
+        <entry file="file://$PROJECT_DIR$/shiguang-manager/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-876">
-              <caret line="118" column="56" selection-start-line="118" selection-start-column="48" selection-end-line="118" selection-end-column="56" />
+            <state relative-caret-position="375">
+              <caret line="321" selection-start-line="321" selection-end-line="336" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/baseinfomation/department/edit.html">
+        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/domain/SalesDO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-110">
-              <caret line="189" column="70" lean-forward="true" selection-start-line="189" selection-start-column="70" selection-end-line="189" selection-end-column="70" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/member/controller/MemberController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="168" column="19" lean-forward="true" selection-start-line="168" selection-start-column="19" selection-end-line="168" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/baseinfomation/DepartmentMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="134" column="33" lean-forward="true" selection-start-line="134" selection-start-column="33" selection-end-line="134" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/baseinfomation/controller/DepartmentController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="89" column="14" selection-start-line="89" selection-start-column="14" selection-end-line="89" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/baseinfomation/domain/DepartmentDO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="314" column="23" selection-start-line="314" selection-start-column="15" selection-end-line="314" selection-end-column="23" />
+            <state relative-caret-position="285">
+              <caret line="2892" column="32" selection-start-line="2892" selection-start-column="24" selection-end-line="2892" selection-end-column="32" />
               <folding>
-                <element signature="e#5709#5710#0" expanded="true" />
-                <element signature="e#5743#5744#0" expanded="true" />
-                <element signature="e#5797#5798#0" expanded="true" />
-                <element signature="e#5843#5844#0" expanded="true" />
-                <element signature="e#5878#5879#0" expanded="true" />
-                <element signature="e#5909#5910#0" expanded="true" />
-                <element signature="e#5957#5958#0" expanded="true" />
-                <element signature="e#5997#5998#0" expanded="true" />
-                <element signature="e#6032#6033#0" expanded="true" />
-                <element signature="e#6063#6064#0" expanded="true" />
-                <element signature="e#6111#6112#0" expanded="true" />
-                <element signature="e#6151#6152#0" expanded="true" />
+                <element signature="e#2519#2520#0" expanded="true" />
+                <element signature="e#2545#2546#0" expanded="true" />
+                <element signature="e#2598#2599#0" expanded="true" />
+                <element signature="e#2637#2638#0" expanded="true" />
+                <element signature="e#2678#2679#0" expanded="true" />
+                <element signature="e#2709#2710#0" expanded="true" />
+                <element signature="e#2772#2773#0" expanded="true" />
+                <element signature="e#2821#2822#0" expanded="true" />
+                <element signature="e#3453#3454#0" expanded="true" />
+                <element signature="e#3475#3476#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -348,29 +343,15 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>memberList</find>
-      <find>请选择球镜度数</find>
-      <find>leftYuanYongQJ</find>
-      <find>角膜塑形镜</find>
-      <find>shoutianCFType</find>
-      <find>getYinxing</find>
-      <find>getType</find>
-      <find>getLogStatusBySaleNum</find>
-      <find>现金</find>
-      <find>jingjia</find>
-      <find>chuzhika</find>
-      <find>findHegePosition</find>
       <find>findPosition</find>
       <find>隐形</find>
       <find>保存</find>
-      <find>镜架</find>
       <find>getSummoney</find>
       <find>alert</find>
       <find>zipian</find>
       <find>userDOList</find>
       <find>salenames</find>
       <find>saleAccount</find>
-      <find>getCardNumber</find>
       <find>镜片</find>
       <find>saleNum</find>
       <find>distpicker</find>
@@ -378,6 +359,20 @@
       <find>identityType</find>
       <find>departName</find>
       <find>tab2</find>
+      <find>镜架</find>
+      <find>getJingjia</find>
+      <find>Inte</find>
+      <find>积分</find>
+      <find>unit</find>
+      <find>integralDO</find>
+      <find>integralService</find>
+      <find>getPoints</find>
+      <find>getCardNumber</find>
+      <find>username</find>
+      <find>saleName</find>
+      <find>getRoleNumList</find>
+      <find>rightFLyuanyTj</find>
+      <find>leftFLyuanyTj</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -416,11 +411,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/settlement/controller/GlassessController.java" />
-        <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/settlement/domain/SettlementDO.java" />
-        <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/settlement/settlement.js" />
-        <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/glassess/glassess.js" />
-        <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/settlement/tuikuandan.html" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/logstatus/controller/LogStatusController.java" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/settlement/SettlementMapper.xml" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/saleReport/saleReportForm.html" />
@@ -449,24 +439,29 @@
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/huliye.html" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/storeSales/add.js" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeCard/domain/CardDO.java" />
-        <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/settlement/controller/SettlementController.java" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/settlement/edit.html" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/storeSales/store.js" />
-        <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/application-dev.yml" />
-        <option value="$PROJECT_DIR$/shiguang-manager/pom.xml" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/storeSales/yinxing.js" />
-        <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/domain/SalesDO.java" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/jingpian.html" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/storeSales/jingpian.js" />
-        <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/member/MemberMapper.xml" />
-        <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/controller/StoreSalesController.java" />
-        <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/edit.html" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/member/add.html" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/baseinfomation/domain/DepartmentDO.java" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/baseinfomation/department/add.html" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/baseinfomation/DepartmentMapper.xml" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/baseinfomation/department/edit.html" />
         <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/member/controller/MemberController.java" />
+        <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/domain/SalesDO.java" />
+        <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/integral/service/IntegralService.java" />
+        <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/integral/service/impl/IntegralServiceImpl.java" />
+        <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/integral/dao/IntegralDao.java" />
+        <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/storeSales/SalesMapper.xml" />
+        <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/system/UserMapper.xml" />
+        <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/member/MemberMapper.xml" />
+        <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/controller/StoreSalesController.java" />
+        <option value="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/settlement/controller/SettlementController.java" />
+        <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/edit.html" />
+        <option value="$PROJECT_DIR$/shiguang-manager/src/main/resources/application-dev.yml" />
+        <option value="$PROJECT_DIR$/shiguang-manager/pom.xml" />
       </list>
     </option>
   </component>
@@ -518,8 +513,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -608,6 +602,25 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="shiguang" type="462c0819:PsiDirectoryNode" />
+              <item name="report" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shiguang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shiguang-manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shiguang" type="462c0819:PsiDirectoryNode" />
+              <item name="report" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shiguang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shiguang-manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="shiguang" type="462c0819:PsiDirectoryNode" />
               <item name="settlement" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -619,46 +632,6 @@
               <item name="shiguang" type="462c0819:PsiDirectoryNode" />
               <item name="settlement" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shiguang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shiguang-manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shiguang" type="462c0819:PsiDirectoryNode" />
-              <item name="storeCard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shiguang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shiguang-manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shiguang" type="462c0819:PsiDirectoryNode" />
-              <item name="storeCard" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shiguang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shiguang-manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shiguang" type="462c0819:PsiDirectoryNode" />
-              <item name="storeCard" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shiguang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shiguang-manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shiguang" type="462c0819:PsiDirectoryNode" />
-              <item name="storeCard" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="shiguang" type="b2602c69:ProjectViewProjectNode" />
@@ -712,6 +685,15 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="mybatis" type="462c0819:PsiDirectoryNode" />
               <item name="baseinfomation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="shiguang" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shiguang-manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
+              <item name="integral" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="shiguang" type="b2602c69:ProjectViewProjectNode" />
@@ -937,7 +919,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -950,7 +933,7 @@
     <property name="SearchEverywhereHistoryKey" value="shujudaochu&#9;PSI&#9;JAVA://com.shiguang.logstatus.controller.PeiJingSingleController#shujudaochu&#10;/information/member&#9;null&#9;null&#10;shaicha&#9;PSI&#9;JAVA://org.springframework.web.socket.server.support.HandshakeInterceptorChain" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1650957541777" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1650965624096" />
     <property name="last_opened_file_path" value="D:/shiguanggongzhonghao/shiguanggongzhonghao" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -1131,12 +1114,13 @@
       <workItem from="1650876772018" duration="11053000" />
       <workItem from="1650890515078" duration="4094000" />
       <workItem from="1650933763897" duration="11080000" />
-      <workItem from="1650950597322" duration="6272000" />
+      <workItem from="1650950597322" duration="13494000" />
+      <workItem from="1650977531202" duration="5319000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1099236000" />
+    <option name="totallyTimeSpent" value="1111777000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1149,8 +1133,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31449893" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31769723" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -1163,7 +1148,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.28730512" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.4946695" visible="true" weight="0.40979955" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.4946695" weight="0.13919821" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.21583514" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.329718" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.329718" />
@@ -1246,87 +1231,14 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/settlement/controller/SettlementController.java</url>
-          <line>1148</line>
+          <line>1155</line>
           <properties />
           <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/controller/StoreSalesController.java</url>
-          <line>323</line>
-          <properties />
-          <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeCard/dao/CardDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="767">
-          <caret line="36" column="19" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeCard/service/CardService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="767">
-          <caret line="35" selection-start-line="35" selection-end-line="35" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/settlement/domain/DrawbackDO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="86" column="18" selection-start-line="86" selection-start-column="18" selection-end-line="86" selection-end-column="18" />
-          <folding>
-            <element signature="e#1581#1582#0" expanded="true" />
-            <element signature="e#1608#1609#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/drawback/edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="59" column="81" selection-start-line="59" selection-start-column="69" selection-end-line="59" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/storeCard/CardMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="28" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/taiyangjing.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="14" column="97" selection-start-line="14" selection-start-column="97" selection-end-line="14" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/jingjia.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" column="97" selection-start-line="14" selection-start-column="97" selection-end-line="14" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/jingjiapj.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="56" selection-start-line="15" selection-start-column="56" selection-end-line="15" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/laohuajing.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="56" selection-start-line="15" selection-start-column="56" selection-end-line="15" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/peijian.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
@@ -1403,13 +1315,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/member/domain/MemberDO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="875">
-          <caret line="36" column="25" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/logstatus/LogStatusMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6125">
@@ -1456,64 +1361,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1500">
           <caret line="72" column="40" selection-start-line="72" selection-start-column="28" selection-end-line="72" selection-end-column="40" />
-          <folding>
-            <element signature="e#1028#1029#0" expanded="true" />
-            <element signature="e#1054#1055#0" expanded="true" />
-            <element signature="e#1107#1108#0" expanded="true" />
-            <element signature="e#1146#1147#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/storeSales/add.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1000">
-          <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="11" column="59" lean-forward="true" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/system/domain/UserDO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="14" column="27" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/application-dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/member/MemberMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="12" column="140" selection-start-line="12" selection-start-column="140" selection-end-line="12" selection-end-column="140" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30300">
-          <caret line="1212" column="24" selection-start-line="1212" selection-start-column="24" selection-end-line="1212" selection-end-column="24" />
-          <folding>
-            <element signature="n#style#0;n#select#0;n#div#1;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/settlement/controller/SettlementController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3000">
-          <caret line="171" selection-start-line="171" selection-end-line="191" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -1521,26 +1368,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="9" column="71" selection-start-line="9" selection-start-column="71" selection-end-line="9" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/settlement/edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2250">
-          <caret line="90" selection-start-line="90" selection-end-line="94" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/domain/SalesDO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56000">
-          <caret line="2844" selection-start-line="2844" selection-end-line="2844" />
-          <folding>
-            <element signature="e#57000#57001#0" expanded="true" />
-            <element signature="e#57022#57023#0" expanded="true" />
-            <element signature="e#57067#57068#0" expanded="true" />
-            <element signature="e#57098#57099#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1558,13 +1385,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/controller/StoreSalesController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="200" column="41" lean-forward="true" selection-start-line="200" selection-start-column="41" selection-end-line="200" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/member/add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
@@ -1576,27 +1396,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="377">
           <caret line="314" column="23" selection-start-line="314" selection-start-column="15" selection-end-line="314" selection-end-column="23" />
-          <folding>
-            <element signature="e#5709#5710#0" expanded="true" />
-            <element signature="e#5743#5744#0" expanded="true" />
-            <element signature="e#5797#5798#0" expanded="true" />
-            <element signature="e#5843#5844#0" expanded="true" />
-            <element signature="e#5878#5879#0" expanded="true" />
-            <element signature="e#5909#5910#0" expanded="true" />
-            <element signature="e#5957#5958#0" expanded="true" />
-            <element signature="e#5997#5998#0" expanded="true" />
-            <element signature="e#6032#6033#0" expanded="true" />
-            <element signature="e#6063#6064#0" expanded="true" />
-            <element signature="e#6111#6112#0" expanded="true" />
-            <element signature="e#6151#6152#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/baseinfomation/DepartmentMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="406">
-          <caret line="134" column="33" lean-forward="true" selection-start-line="134" selection-start-column="33" selection-end-line="134" selection-end-column="33" />
+          <caret line="134" column="33" selection-start-line="134" selection-start-column="33" selection-end-line="134" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -1604,13 +1410,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
           <caret line="89" column="14" selection-start-line="89" selection-start-column="14" selection-end-line="89" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/member/controller/MemberController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="168" column="19" lean-forward="true" selection-start-line="168" selection-start-column="19" selection-end-line="168" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1624,14 +1423,14 @@
     <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/member/edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1238">
-          <caret line="279" column="46" lean-forward="true" selection-start-line="279" selection-start-column="46" selection-end-line="279" selection-end-column="46" />
+          <caret line="279" column="46" selection-start-line="279" selection-start-column="46" selection-end-line="279" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/baseinfomation/department/edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-110">
-          <caret line="189" column="70" lean-forward="true" selection-start-line="189" selection-start-column="70" selection-end-line="189" selection-end-column="70" />
+          <caret line="189" column="70" selection-start-line="189" selection-start-column="70" selection-end-line="189" selection-end-column="70" />
         </state>
       </provider>
     </entry>
@@ -1639,6 +1438,178 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-876">
           <caret line="118" column="56" selection-start-line="118" selection-start-column="48" selection-end-line="118" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/member/controller/MemberController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6621">
+          <caret line="193" column="17" selection-start-line="193" selection-start-column="13" selection-end-line="193" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/integral/service/IntegralService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="31" column="20" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/integral/service/impl/IntegralServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="56" column="32" lean-forward="true" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/system/domain/UserDO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/storeSales/SalesMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4625">
+          <caret line="185" column="24" selection-start-line="185" selection-start-column="24" selection-end-line="185" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/member/domain/MemberDO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12500">
+          <caret line="679" column="16" selection-start-line="679" selection-start-column="16" selection-end-line="679" selection-end-column="16" />
+          <folding>
+            <element signature="e#13127#13128#0" expanded="true" />
+            <element signature="e#13167#13168#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/integral/dao/IntegralDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="700">
+          <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/storeSales/add.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="12" column="31" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/integral/IntegralMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="81" column="25" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.3.13.RELEASE/spring-core-4.3.13.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="33" column="110" selection-start-line="33" selection-start-column="110" selection-end-line="33" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/system/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="51" column="10" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/member/MemberMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/domain/SalesDO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="2892" column="32" selection-start-line="2892" selection-start-column="24" selection-end-line="2892" selection-end-column="32" />
+          <folding>
+            <element signature="e#2519#2520#0" expanded="true" />
+            <element signature="e#2545#2546#0" expanded="true" />
+            <element signature="e#2598#2599#0" expanded="true" />
+            <element signature="e#2637#2638#0" expanded="true" />
+            <element signature="e#2678#2679#0" expanded="true" />
+            <element signature="e#2709#2710#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+            <element signature="e#2821#2822#0" expanded="true" />
+            <element signature="e#3453#3454#0" expanded="true" />
+            <element signature="e#3475#3476#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/settlement/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="819">
+          <caret line="90" selection-start-line="90" selection-end-line="94" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/report/controller/SaleGoodsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="171" column="76" selection-start-line="171" selection-start-column="76" selection-end-line="171" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/mybatis/system/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="20" column="31" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/settlement/controller/SettlementController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3161">
+          <caret line="507" column="23" selection-start-line="507" selection-start-column="23" selection-end-line="507" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/storeSales/controller/StoreSalesController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="214" column="51" selection-start-line="214" selection-start-column="51" selection-end-line="214" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/templates/storeSales/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="2592" column="35" selection-start-line="2592" selection-start-column="35" selection-end-line="2592" selection-end-column="35" />
+          <folding>
+            <element signature="n#style#0;n#select#0;n#div#1;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/application-dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="321" selection-start-line="321" selection-end-line="336" selection-end-column="21" />
         </state>
       </provider>
     </entry>

@@ -128,6 +128,28 @@ public class SalesDO implements Serializable {
 	private String companyId;
 
 	private String role_id;
+
+	//单个商品打折的折扣
+	private String saleDiscount;
+	//打折扣后的商品金额
+	private String saleDiscountPrice;
+
+	public String getSaleDiscount() {
+		return saleDiscount;
+	}
+
+	public void setSaleDiscount(String saleDiscount) {
+		this.saleDiscount = saleDiscount;
+	}
+
+	public String getSaleDiscountPrice() {
+		return saleDiscountPrice;
+	}
+
+	public void setSaleDiscountPrice(String saleDiscountPrice) {
+		this.saleDiscountPrice = saleDiscountPrice;
+	}
+
 	public void setRighttg(String righttg) {this.righttg = righttg;}
 
 	public String getRighttg() {return righttg;}

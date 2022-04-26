@@ -23,7 +23,7 @@
 	</select>
 
 	<select id="getRoleList" resultType="com.shiguang.system.domain.UserDO">
-		select u.name,u.user_id,r.role_name from sys_user u left join sys_user_role ur on ur.user_id = u.user_id left join sys_role r on r.role_id = ur.role_id
+		select u.`username`,u.name,u.user_id,r.role_name from sys_user u left join sys_user_role ur on ur.user_id = u.user_id left join sys_role r on r.role_id = ur.role_id
 		<where>
 			<!--<if test="roleType != null and roleType != ''"> and r.role_type = #{roleType} </if>-->
 			<if test="companyId != null and companyId != ''"> and u.company_id = #{companyId} </if>
@@ -35,7 +35,7 @@
 	</select>
 
 	<select id="getRoleNumList" resultType="com.shiguang.system.domain.UserDO">
-		select u.name,u.user_id,r.role_name from sys_user u left join sys_user_role ur on ur.user_id = u.user_id left join sys_role r on r.role_id = ur.role_id
+		select u.`username`,u.name,u.user_id,r.role_name from sys_user u left join sys_user_role ur on ur.user_id = u.user_id left join sys_role r on r.role_id = ur.role_id
 		<where>
 			<if test="companyId != null and companyId != ''"> and u.company_id = #{companyId} </if>
 			<if test="roleTypes2 != null and roleTypes2 != '' ">
