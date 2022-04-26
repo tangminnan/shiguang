@@ -244,6 +244,47 @@
             </td>
         </tr>
 
+
+        <tr>
+            <td>厂家型号:</td>
+            <td>
+                <input id="factory" name="factory" type="text"/>
+            </td>
+            <td>厂家型色号:</td>
+            <td>
+                <input id="factoryColor" name="factoryColor" type="text"/>
+            </td>
+
+        </tr>
+        <tr>
+
+            <td>球镜范围：</td>
+            <td>
+                <input id="sph" name="sph"type="text"  />
+                ~
+                <input id="sph2" name="sph2"type="text" />
+            </td>
+            <td>柱镜范围：</td>
+            <td>
+                <input id="cyl" name="cyl"type="text" />
+                ~
+                <input id="cyl2" name="cyl2"type="text" />
+            </td>
+
+            <td>镜片折射率：</td>
+            <td>
+                <select id="refractivityid" name="refractivityid" >
+                    <option value="">--请选择--</option>
+                    <option th:each="ls:${refractivityDOList}"
+                            th:text="${ls.refractivityvalue}"
+                            th:value="${ls.refractivityvalue}"
+                    ></option>
+                </select>
+            </td>
+        </tr>
+
+
+
         <tr>
             <input id="kccount" type="kccount"  value="1" hidden/>
             <input id="outPosition" type="hidden" th:value="${outPosition}"/>
@@ -267,44 +308,6 @@
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/stock/pidiao/pidiao.js"></script>
 <script type="text/javascript">
-    // $(document).ready(function () {
-    //     var xsstate=$("input[name='xsstate']:checked").val();
-    //     var positionName = $('#positionName option:selected').text();
-    //     var positionNames = "";
-    //     if (positionName == "--请选择--") {
-    //         positionName = positionNames;
-    //     }
-    //     var outPosition = document.getElementById('outPosition').value;
-    //     $(".cw").remove();
-    //     $.ajax({
-    //         url: '/kucun/stock/selectPosion',
-    //         type: 'post',
-    //         dataType: "json",
-    //         data: {
-    //             'xsstate': xsstate
-    //
-    //         },
-    //         success: function (position) {
-    //             for (var i = 0; i < position.length; i++) {
-    //                 $("#positionName").append("" +
-    //                     "<option class='cw'>" + position[i].positionName + "</option>");
-    //             }
-    //         }
-    //     });
-    // });
-
-    window.onload=function(){
-        var ock=document.getElementById("ck");
-        var obt=document.getElementById("bt");
-        var odiv=document.getElementById("thediv");
-        obt.onload=function(){
-            if(ock.checked==true){
-                odiv.innerHTML="复选框被选中";
-            } else{
-                odiv.innerHTML="复选框没有被选中";
-            }
-        }
-    }
 
 
     $(function () {
@@ -353,9 +356,22 @@
                             // positionId : $('#positionId option:selected').val(),
                             outPosition : $('#outPosition').val(),
                             classtype : $("#classtype").val(),
-                            kccount : $('#kccount').val()
+                            kccount : $('#kccount').val(),
                             // name:$('#searchName').val(),
                             // username:$('#searchName').val()
+
+
+                            factory:$('#factory').val().trim(),
+                            factoryColor:$('#factoryColor').val().trim(),
+
+
+                            sph:$('#sph').val().trim(),
+                            sph2:$('#sph2').val().trim(),
+                            cyl:$('#cyl').val().trim(),
+                            cyl2:$('#cyl2').val().trim(),
+                            refractivityid:$('#refractivityid').val().trim()
+
+
                         };
                     },
                     columns: [

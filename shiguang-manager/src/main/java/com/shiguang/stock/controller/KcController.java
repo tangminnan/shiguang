@@ -186,6 +186,14 @@ public class KcController {
             @RequestParam("retailPrice2") String retailPrice2,
             @RequestParam("xsstate") String xsstate,
             @RequestParam("classtype") String classtype,
+
+            @RequestParam("factory") String factory,
+            @RequestParam("factoryColor") String factoryColor,
+            @RequestParam("sph") String sph,
+            @RequestParam("sph2") String sph2,
+            @RequestParam("cyl") String cyl,
+            @RequestParam("cyl2") String cyl2,
+            @RequestParam("refractivityid") String refractivityid,
                             Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("positionId",positionId);
@@ -205,6 +213,15 @@ public class KcController {
         map.put("retailPrice2",retailPrice2);
         map.put("xsstate",xsstate);
         map.put("classtype",classtype);
+
+
+        map.put("factory",factory);
+        map.put("factoryColor",factoryColor);
+        map.put("sph",sph);
+        map.put("sph2",sph2);
+        map.put("cyl",cyl);
+        map.put("cyl2",cyl2);
+        map.put("refractivityid",refractivityid);
 
         if(ShiroUtils.getUser().getCompanyId().equals("3")){
             map.put("companyId","");

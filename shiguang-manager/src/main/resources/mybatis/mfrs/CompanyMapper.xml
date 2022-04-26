@@ -60,7 +60,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                group by id order by id desc
+                group by id order by id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
