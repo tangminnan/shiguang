@@ -36,6 +36,8 @@ import com.shiguang.stock.domain.WeiwaishujuDO;
 import com.shiguang.stock.service.StockService;
 import com.shiguang.stock.service.WeiwaiService;
 import com.shiguang.stock.service.WeiwaishujuService;
+import com.shiguang.storeCard.domain.CardDO;
+import com.shiguang.storeCard.service.CardService;
 import com.shiguang.storeSales.domain.*;
 import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.system.domain.UserDO;
@@ -132,6 +134,8 @@ public class StoreSalesController {
     private WeiwaiService weiwaiService;
     @Autowired
     private MfrsService mfrsService;
+    @Autowired
+    private CardService cardService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -180,6 +184,29 @@ public class StoreSalesController {
             memberDO.setSexx("女");
         }
         model.addAttribute("memberDO", memberDO);
+        //储值卡
+        Map<String,Object> mapphone = new HashMap<>();
+        if (null != memberDO.getPhone1() && !"".equals(memberDO.getPhone1())){
+            mapphone.put("phone1",memberDO.getPhone1());
+        } else {
+            mapphone.put("phone1",memberDO.getPhone2());
+        }
+        List<MemberDO> memberList = memberService.list(mapphone);
+        List<CardDO> cardDOS = new ArrayList<>();
+        for (MemberDO memberDO1 : memberList){
+            CardDO cardDO = new CardDO();
+            cardDO = cardService.getMemberNum(memberDO1.getCardNumber());
+            if (null == cardDO){
+                cardDO = new CardDO();
+                cardDO.setCardNumber("");
+                cardDO.setCardMoney("");
+            } else {
+                cardDO.setCardNumMoney(cardDO.getCardNumber() + "(余额："+ cardDO.getCardMoney() + ")");
+                cardDOS.add(cardDO);
+            }
+
+        }
+        model.addAttribute("cardDOS",cardDOS);
         //通过验光师手动输入数据
         Map<String, Object> maps = new HashMap<>();
         maps.put("memberInumber", cardNumber);
@@ -1700,14 +1727,14 @@ public class StoreSalesController {
                                 rightqj = Math.abs(Double.parseDouble(params.get("rightYuanYongQJ").toString()));
                                 stockSphUp = Math.abs(Double.parseDouble(stockDO.getSphUp()));
                                 stockSphDown = Math.abs(Double.parseDouble(stockDO.getSphDown()));
-                                if (rightqj > stockSphUp || rightqj < stockSphDown){
+                                if (rightqj < stockSphUp || rightqj > stockSphDown){
                                     stockDO.setGoodsCode("1");
                                 }
                             } else if (params.get("rightYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("+") && stockDO.getSphDown().contains("+")){
                                 rightqj = Double.parseDouble(params.get("rightYuanYongQJ").toString());
                                 stockSphUp = Double.parseDouble(stockDO.getSphUp());
                                 stockSphDown = Double.parseDouble(stockDO.getSphDown());
-                                if (rightqj < stockSphUp || rightqj > stockSphDown){
+                                if (rightqj > stockSphUp || rightqj < stockSphDown){
                                     stockDO.setGoodsCode("1");
                                 }
                             } else if (params.get("rightYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("+") && stockDO.getSphDown().contains("+")){
@@ -1732,14 +1759,14 @@ public class StoreSalesController {
                                 rightzj = Math.abs(Double.parseDouble(params.get("rightYuanYongZJ").toString()));
                                 stockCylUp = Math.abs(Double.parseDouble(stockDO.getCylUp()));
                                 stockCylDown = Math.abs(Double.parseDouble(stockDO.getCylDown()));
-                                if (rightzj > stockCylUp || rightzj < stockCylDown){
+                                if (rightzj < stockCylUp || rightzj > stockCylDown){
                                     stockDO.setGoodsCode("1");
                                 }
                             } else if (params.get("rightYuanYongZJ").toString().contains("+") && stockDO.getCylUp().contains("+") && stockDO.getCylDown().contains("+")){
                                 rightzj = Double.parseDouble(params.get("rightYuanYongZJ").toString());
                                 stockCylUp = Double.parseDouble(stockDO.getCylUp());
                                 stockCylDown = Double.parseDouble(stockDO.getCylDown());
-                                if (rightzj < stockCylUp || rightzj > stockCylDown){
+                                if (rightzj > stockCylUp || rightzj < stockCylDown){
                                     stockDO.setGoodsCode("1");
                                 }
                             } else if (params.get("rightYuanYongZJ").toString().contains("-") && stockDO.getCylUp().contains("+") && stockDO.getCylDown().contains("+")){
@@ -1765,14 +1792,14 @@ public class StoreSalesController {
                                 leftqj = Math.abs(Double.parseDouble(params.get("leftYuanYongQJ").toString()));
                                 stockSphUp = Math.abs(Double.parseDouble(stockDO.getSphUp()));
                                 stockSphDown = Math.abs(Double.parseDouble(stockDO.getSphDown()));
-                                if (leftqj > stockSphUp || leftqj < stockSphDown){
+                                if (leftqj < stockSphUp || leftqj > stockSphDown){
                                     stockDO.setGoodsCode("1");
                                 }
                             } else if (params.get("leftYuanYongQJ").toString().contains("+") && stockDO.getSphUp().contains("+") && stockDO.getSphDown().contains("+")){
                                 leftqj = Double.parseDouble(params.get("leftYuanYongQJ").toString());
                                 stockSphUp = Double.parseDouble(stockDO.getSphUp());
                                 stockSphDown = Double.parseDouble(stockDO.getSphDown());
-                                if (leftqj < stockSphUp || leftqj > stockSphDown){
+                                if (leftqj > stockSphUp || leftqj < stockSphDown){
                                     stockDO.setGoodsCode("1");
                                 }
                             } else if (params.get("leftYuanYongQJ").toString().contains("-") && stockDO.getSphUp().contains("+") && stockDO.getSphDown().contains("+")){

@@ -39,7 +39,7 @@
 					<option></option>
 					<option th:each="ls:${userDOList}"
 							th:text="${ls.name}"
-							th:value="${ls.name}"></option>
+							th:value="${ls.username}"></option>
 					<input id="salenames" name="saleNames" th:value="${saleName}" type="hidden"/>
 				</select>
 		</span>
@@ -54,6 +54,11 @@
 		会员卡类型：<input type="text" id="memberType" th:value="${memberDO.cardType}" disabled/>
 		积分：<input type="text" id="memberPoint" value="200" disabled/>
 		来源：<input type="text" id="memberSource" th:value="${memberDO.source}" disabled/>
+		储值卡：<select id="chuzhiNumber"  name="chuzhiNumber" style="width: 10%" >
+					<option th:each="ls:${cardDOS}"
+							th:text="${ls.cardNumMoney}"
+							th:value="${ls.cardNumber}"></option>
+				</select>
 		<input id="memberId" name="memberId" th:value="${memberDO.id}"  type="hidden">
 		<input id="memberInumber" name="memberInumber" th:value="${memberDO.cardNumber}"  type="hidden">
 		<input id="memname" name="memname" th:value="${memberDO.name}"  type="hidden">
@@ -1204,6 +1209,8 @@
 <script type="text/javascript" src="/js/appjs/storeSales/beishu.js"></script>
 <script type="text/javascript">
     $().ready(function(){
+        //储值卡
+        $("#chuzhiNumber option:first").prop("selected", 'selected');
         //sessionStorage.clear();
         $("#ula").empty();
         var lis="";
@@ -1691,9 +1698,9 @@
                     html = "<tr><td><input id='grp1' name=\"cho\" onchange='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")' type=\"checkbox\" /></td>";
                     html += "<td style=\"white-space: nowrap; text-overflow: ellipsis; overflow: hidden;\">"+rows[i].goodsName+"</td>";
                     html += "<td></td>";
-                    html += "<td>"+rows[i].retailPrice+"</td>";
+                    html += "<td id='danjiaMoneyjj"+a+"'>"+rows[i].retailPrice+"</td>";
                     html += "<td>"+rows[i].goodsCount+"</td>";
-                    html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
+                    html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' oninput='getSummoney(this,\""+desc+"\")' onporpertychange='getSummoney(this,\""+desc+"\")'/></td>";
                     html += "<td>"+rows[i].retailPrice+"</td>";
                     html += "<td id='zhekoulv"+i+"'>0.00</td>";
                     html += "<td id='zhekoujj"+a+"'>0.00</td>";
@@ -1774,7 +1781,8 @@
 		if ("镜架" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyjj"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
+            var danjia = $("#danjiaMoneyjj"+targetStr+"").text();
+            var dd = (parseFloat(danjia)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyjj"+targetStr+"").text(dd);
             $("#ula").empty();
@@ -1791,7 +1799,8 @@
 		} else if ("护理液" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyhly"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
+            var danjia = $("#danjiaMoneyhly"+targetStr+"").text();
+            var dd = (parseFloat(danjia)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyhly"+targetStr+"").text(dd);
             $("#ula").empty();
@@ -1808,7 +1817,8 @@
 		} else if ("镜片" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyjp"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
+            var danjia = $("#danjiaMoneyjp"+targetStr+"").text();
+            var dd = (parseFloat(danjia)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyjp"+targetStr+"").text(dd);
             $("#ula").empty();
@@ -1825,7 +1835,8 @@
         } else if ("框镜" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyjjpj"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
+            var danjia = $("#danjiaMoneyjjpj"+targetStr+"").text();
+            var dd = (parseFloat(danjia)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyjjpj"+targetStr+"").text(dd);
             $("#ula").empty();
@@ -1842,7 +1853,8 @@
         } else if ("太阳镜" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneytyj"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
+            var danjia = $("#danjiaMoneytyj"+targetStr+"").text();
+            var dd = (parseFloat(danjia)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneytyj"+targetStr+"").text(dd);
             $("#ula").empty();
@@ -1859,7 +1871,8 @@
         } else if ("耗材" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyhc"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
+            var danjia = $("#danjiaMoneyhc"+targetStr+"").text();
+            var dd = (parseFloat(danjia)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyhc"+targetStr+"").text(dd);
             $("#ula").empty();
@@ -1876,7 +1889,8 @@
         } else if ("老花镜" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneylhj"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
+            var danjia = $("#danjiaMoneylhj"+targetStr+"").text();
+            var dd = (parseFloat(danjia)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneylhj"+targetStr+"").text(dd);
             $("#ula").empty();
@@ -1893,7 +1907,8 @@
 		} else if ("视光" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneysg"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
+            var danjia = $("#danjiaMoneysg"+targetStr+"").text();
+            var dd = (parseFloat(danjia)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneysg"+targetStr+"").text(dd);
             $("#ula").empty();
@@ -1910,7 +1925,8 @@
 		} else if ("配件" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneypj"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
+            var danjia = $("#danjiaMoneypj"+targetStr+"").text();
+            var dd = (parseFloat(danjia)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneypj"+targetStr+"").text(dd);
             $("#ula").empty();
@@ -1927,7 +1943,8 @@
         } else if ("隐形" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyyx"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1)
+            var danjia = $("#danjiaMoneyyx"+targetStr+"").text();
+            var dd = (parseFloat(danjia)*parseFloat(sdf)).toFixed(1)
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyyx"+targetStr+"").text(dd);
             $("#ula").empty();
@@ -1944,7 +1961,8 @@
         } else if ("隐形配件" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneyyxpj"+targetStr+"").text();
-            var dd = (parseFloat(ss)*parseFloat(sdf)).toFixed(1);
+            var danjia = $("#danjiaMoneyyxpj"+targetStr+"").text();
+            var dd = (parseFloat(danjia)*parseFloat(sdf)).toFixed(1);
             price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             $("#yingshouMoneyyxpj"+targetStr+"").text(dd);
             $("#ula").empty();
@@ -2115,7 +2133,7 @@
                     html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                     html += "<td style=\"text-overflow: ellipsis; overflow: hidden;\">"+rows[i][0].goodsName+"</td>";
                     html += "<td>"+rows[i][0].leftRight+"</td>";
-                    html += "<td>"+rows[i][0].retailPrice+"</td>";
+                    html += "<td id='danjiaMoneyjp"+a+"'>"+rows[i][0].retailPrice+"</td>";
                     html += "<td>"+rows[i][0].goodsCount+"</td>";
                     html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                     html += "<td>"+rows[i][0].retailPrice+"</td>";

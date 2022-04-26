@@ -21,7 +21,7 @@ function getKjpeijian() {
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td></td>";
-                html += "<td>"+rows[i].retailPrice+"</td>";
+                html += "<td id='danjiaMoneyjjpj"+a+"'>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
@@ -104,7 +104,7 @@ function getTaiyangjing(){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td></td>";
-                html += "<td>"+rows[i].retailPrice+"</td>";
+                html += "<td id='danjiaMoneytyj"+a+"'>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
@@ -187,7 +187,7 @@ function getHaocai() {
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td></td>";
-                html += "<td>"+rows[i].retailPrice+"</td>";
+                html += "<td id='danjiaMoneyhc"+a+"'>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
@@ -270,7 +270,7 @@ function getLaohuajing() {
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td></td>";
-                html += "<td>"+rows[i].retailPrice+"</td>";
+                html += "<td id='danjiaMoneylhj"+a+"'>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
@@ -359,7 +359,7 @@ function getShiguang(){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td></td>";
-                html += "<td>"+rows[i].retailPrice+"</td>";
+                html += "<td id='danjiaMoneysg"+a+"'>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
@@ -442,7 +442,7 @@ function getHuliye(){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td></td>";
-                html += "<td>"+rows[i].retailPrice+"</td>";
+                html += "<td id='danjiaMoneyhly"+a+"'>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+dsc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
@@ -547,7 +547,7 @@ function getPeijian(){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td></td>";
-                html += "<td>"+rows[i].retailPrice+"</td>";
+                html += "<td id='danjiaMoneypj"+a+"'>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
@@ -739,7 +739,7 @@ function getYinxing(){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i][0].goodsName+"</td>";
                 html += "<td>"+rows[i][0].leftRight+"</td>";
-                html += "<td>"+rows[i][0].retailPrice+"</td>";
+                html += "<td id='danjiaMoneyyx"+a+"'>"+rows[i][0].retailPrice+"</td>";
                 html += "<td>"+rows[i][0].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i][0].retailPrice+"</td>";
@@ -824,7 +824,7 @@ function getYinxingpj(){
                 html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
                 html += "<td>"+rows[i].goodsName+"</td>";
                 html += "<td></td>";
-                html += "<td>"+rows[i].retailPrice+"</td>";
+                html += "<td id='danjiaMoneyyxpj"+a+"'>"+rows[i].retailPrice+"</td>";
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";

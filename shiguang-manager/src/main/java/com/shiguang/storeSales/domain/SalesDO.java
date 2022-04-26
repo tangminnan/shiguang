@@ -42,7 +42,9 @@ public class SalesDO implements Serializable {
 	private String phone1;
 	//销售人员
 	private String saleName;
-	//销售员工工号
+	//销售人员工号
+	private String userName;
+	//打折销售员工工号
 	private String saleAccount;
 	//用户名
 	private String saleNum;
@@ -2861,4 +2863,11 @@ public class SalesDO implements Serializable {
 		this.leftVAcrt = leftVAcrt;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 }

@@ -162,6 +162,10 @@ public class MemberController {
         List<InterestDO> interestDOList = interestService.list(map);
         model.addAttribute("interestDOList",interestDOList);
         model.addAttribute("companyId",ShiroUtils.getUser().getCompanyId());
+        DepartmentDO departmentDO = departmentService.getDepartName(ShiroUtils.getUser().getStoreNum());
+        model.addAttribute("provice",departmentDO.getProviceName());
+        model.addAttribute("city",departmentDO.getCityName());
+        model.addAttribute("area",departmentDO.getAreaName());
         return "member/add";
     }
 

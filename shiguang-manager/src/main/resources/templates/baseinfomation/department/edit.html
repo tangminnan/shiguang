@@ -118,6 +118,19 @@
 							<!--</div>-->
 
 							<div class="form-group">
+								<label class="col-sm-3 control-label">地区(3级)：</label>
+								<div class="col-sm-8 form-inline" data-toggle="distpicker" id="distpicker">
+									<select id="proviceName" name="proviceName" class="form-control chosen-select" ></select>
+									<select id="cityName"  name="cityName" class="form-control chosen-select" ></select>
+									<select id="areaName" name="areaName" class="form-control chosen-select" ></select>
+									<span style="color: red">*</span>
+								</div>
+							</div>
+							<input id="proviceNamehi" name="proviceNamehi" th:value="${department.proviceName}" class="form-control" type="hidden">
+							<input id="citynamehi" name="citynamehi" th:value="${department.cityName}" class="form-control" type="hidden">
+							<input id="areanamehi" name="areanamehi" th:value="${department.areaName}" class="form-control" type="hidden">
+
+							<div class="form-group">
 								<label class="col-sm-3 control-label">部门全称：</label>
 								<div class="col-sm-8">
 									<input id="departFullName" name="departFullName" th:value="${department.departFullName}" type="text">
@@ -171,18 +184,26 @@
             $("#companyId").find("[value='"+companyIds+"']").attr("selected",true);
             if (departTypes == '销售门店'){
                 tab1.style="display: block";
-                tab2.style="display: block";
+                //tab2.style="display: block";
                 tab3.style="display: block";
 			}
+            var provincename = $("input[name='proviceNamehi']").val();
+            var cityname = $("input[name='citynamehi']").val();
+            var areaname = $("input[name='areanamehi']").val();
+            $("#proviceName").find("[value='"+provincename+"']").attr("selected",true);
+            $("#proviceName").trigger("change");
+            $("#cityName").find("[value='"+cityname+"']").attr("selected",true);
+            $("#cityName").trigger("change");
+            $("#areaName").find("[value='"+areaname+"']").attr("selected",true);
         });
 		function setChange(value){
             if (value == '销售门店'){
                 tab1.style="display: block";
-                tab2.style="display: block";
+                //tab2.style="display: block";
                 tab3.style="display: block";
             } else {
                 tab1.style="display: none";
-                tab2.style="display: none";
+                //tab2.style="display: none";
                 tab3.style="display: none";
                 tab4.style="display: none";
             }
