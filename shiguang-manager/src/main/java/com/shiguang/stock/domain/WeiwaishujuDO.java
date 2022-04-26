@@ -65,6 +65,8 @@ public class WeiwaishujuDO implements Serializable {
 	private String cylyx;
 	//轴向yx
 	private String zxyx;
+	//基地隐形
+	private String jdyx;
 	//商品代码
 	private String num;
 	//商品条码
@@ -390,11 +392,24 @@ public class WeiwaishujuDO implements Serializable {
 	public void setZxyx(String zxyx) {
 		this.zxyx = zxyx;
 	}
+
 	/**
 	 * 获取：轴向yx
 	 */
 	public String getZxyx() {
 		return zxyx;
+	}
+	/**
+	 * 获取：基底yx
+	 */
+	public String getJdyx() {
+		return jdyx;
+	}
+	/**
+	 * 设置：基底yx
+	 */
+	public void setJdyx(String jdyx) {
+		this.jdyx = jdyx;
 	}
 	/**
 	 * 设置：商品代码

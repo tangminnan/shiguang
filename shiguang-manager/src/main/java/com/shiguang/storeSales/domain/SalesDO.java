@@ -2293,7 +2293,7 @@ public class SalesDO implements Serializable {
 	private String leftqulv;//OS曲率
 	private String rightzj;//OD直径
 	private String leftzj;//OS直径
-	private String leftRight;
+	private String leftRight;//左右
 
 	public String getRightqulv() {
 		return rightqulv;
