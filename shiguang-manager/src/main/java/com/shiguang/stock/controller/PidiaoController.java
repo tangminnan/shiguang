@@ -9,9 +9,11 @@ import com.shiguang.common.utils.*;
 import com.shiguang.mfrs.domain.CompanyDO;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.domain.PositionDO;
+import com.shiguang.mfrs.domain.RefractivityDO;
 import com.shiguang.mfrs.service.CompanyService;
 import com.shiguang.mfrs.service.GoodsService;
 import com.shiguang.mfrs.service.PositionService;
+import com.shiguang.mfrs.service.RefractivityService;
 import com.shiguang.stock.domain.*;
 import com.shiguang.stock.service.StockService;
 import com.shiguang.stock.service.StocklogService;
@@ -53,6 +55,11 @@ public class PidiaoController {
     //仓位
     @Autowired
     private PositionService positionService;
+
+    //折射率
+    @Autowired
+    private RefractivityService refractivityService;
+
     //库存
     @Autowired
     private StockService stockService;
@@ -189,6 +196,11 @@ public class PidiaoController {
         List<PositionDO> positionList = positionService.positionList(map);
         model.addAttribute("positionList", positionList);
         model.addAttribute("outPosition", outPosition);
+
+
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
         return "/stock/pidiao/selectGoods";
     }
 

@@ -335,7 +335,7 @@
 			<if test="inCompany != null and inCompany != ''">and d.company_id = #{inCompany}</if>
 			and po.xsstate=0 and  po.state=1
 		</where>
-		group by po.position_id order by  po.position_id
+		group by po.position_id order by  po.position_id desc
 	</select>
 	<select id="indepartment" resultType="com.shiguang.stock.domain.PidiaoDO">
 		select  d.depart_number,d.id,d.depart_name,c.name from department d left join c_company c on d.company_id=c.id
@@ -343,7 +343,7 @@
 			<if test="inCompany != null and inCompany != ''">and c.id = #{inCompany}</if>
 			and   d.status=0 and d.state=1
 		</where>
-		group by d.id order by  d.id desc
+		group by d.id order by  d.id
 	</select>
 	<select id="selectPidiao" resultType="com.shiguang.stock.domain.PidiaoDO">
 		select `goods_num`,`goods_name`,`need_count`,`goods_count`,

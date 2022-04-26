@@ -30,7 +30,6 @@
             <if test="producNum != null and producNum != ''">and j.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
             <if test="goodsCode != null and goodsCode != ''">and j.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
 
-
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -44,12 +43,25 @@
             <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
             <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
 
-            <if test="sph != null and sph != ''">
-            and j.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
-        </if>
-            <if test="cyl != null and cyl != ''">
+
+            <if test="(sph2 != null and sph2 != '') or (sph != null and sph != '')   ">
+                and j.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+            </if>
+            <if test="(cyl2 != null and cyl2 != '') or (cyl != null and cyl != '')   ">
                 and j.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
             </if>
+
+
+
+            <!--<if test="sph != null and sph != ''">and  (j.sph_id) >=  (#{sph})</if>-->
+            <!--<if test="sph2 != null and sph2 != ''">and  (j.sph_id) &lt;=  (#{sph2})</if>-->
+
+
+            <!--<if test="cyl!= null and cyl != ''">and  (j.cyl_id) >=  (#{cyl})</if>-->
+            <!--<if test="cyl2 != null and cyl2 != ''">and  (j.cyl_id) &lt;=  (#{cyl2})</if>-->
+
+
+
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
@@ -100,12 +112,24 @@
             <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
             <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
 
-            <if test="sph != null and sph != ''">
-                and s.sph between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+
+            <if test="(sph2 != null and sph2 != '') or (sph != null and sph != '')   ">
+                and j.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
             </if>
-            <if test="cyl != null and cyl != ''">
-                and l.cyl between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+            <if test="(cyl2 != null and cyl2 != '') or (cyl != null and cyl != '')   ">
+                and j.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
             </if>
+
+
+            <!--<if test="sph != null and sph != ''">and  (j.sph_id) >=  (#{sph})</if>-->
+            <!--<if test="sph2 != null and sph2 != ''">and  (j.sph_id) &lt;=  (#{sph2})</if>-->
+
+
+            <!--<if test="cyl!= null and cyl != ''">and  (j.cyl_id) >=  (#{cyl})</if>-->
+            <!--<if test="cyl2 != null and cyl2 != ''">and  (j.cyl_id) &lt;=  (#{cyl2})</if>-->
+
+
+
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>

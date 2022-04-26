@@ -44,11 +44,13 @@
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and y.view_good_name = #{viewGoodName}</if>
 
-            <if test="sph != null and sph != ''">
-                and s.sph between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+
+
+            <if test="(sph2 != null and sph2 != '') or (sph != null and sph != '')   ">
+                and y.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
             </if>
-            <if test="cyl != null and cyl != ''">
-                and l.cyl between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+            <if test="(cyl2 != null and cyl2 != '') or (cyl != null and cyl != '')   ">
+                and y.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
             </if>
 
             <if test="num != null and num != ''">and y.produc_num LIKE concat(concat('%', #{num}),'%')</if>
@@ -93,12 +95,14 @@
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and y.view_good_name = #{viewGoodName}</if>
 
-            <if test="sph != null and sph != ''">
-                and s.sph between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+            <if test="(sph2 != null and sph2 != '') or (sph != null and sph != '')   ">
+                and y.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
             </if>
-            <if test="cyl != null and cyl != ''">
-                and l.cyl between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+            <if test="(cyl2 != null and cyl2 != '') or (cyl != null and cyl != '')   ">
+                and y.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
             </if>
+
+
             and y.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
 
