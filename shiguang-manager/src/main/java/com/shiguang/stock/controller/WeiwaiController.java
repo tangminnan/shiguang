@@ -243,10 +243,210 @@ public class WeiwaiController {
                 try {
                     String num = nums[a];
                     //商品品牌信息
-                    JpdzDO jpdzDO = weiwaiService.getBrand(num);
+                    JpdzDO jpdzDO = weiwaiService.getBrandJp(num);
                     String brandnum = jpdzDO.getBrandnum();
                     String brandname = jpdzDO.getBrandname();
                     String viewGoodName = jpdzDO.getViewGoodName();
+                    weiwaiDO.setNum(num);
+                    weiwaiDO.setBrandnum(brandnum);
+                    weiwaiDO.setBrandname(brandname);
+                    weiwaiDO.setViewGoodName(viewGoodName);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setNum("");
+                    weiwaiDO.setBrandnum("");
+                    weiwaiDO.setBrandname("");
+                }
+                try {
+                    String code = codes[a];
+                    weiwaiDO.setCode(code);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setCode("");
+                }
+                try {
+                    String name = names[a];
+                    weiwaiDO.setName(name);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setName("");
+                }
+                try {
+                    String style = styles[a];
+                    weiwaiDO.setStyle(style);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setStyle("");
+                }
+                try {
+                    String rl = rls[a];
+                    weiwaiDO.setRl(rl);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setRl("");
+                }
+                try {
+                    String count = counts[a];
+                    weiwaiDO.setCount(count);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setCount("");
+                }
+                try {
+                    String sph = sphs[a];
+                    weiwaiDO.setSph(sph);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setSph("");
+                }
+                try {
+                    String cyl = cyls[a];
+                    weiwaiDO.setCyl(cyl);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setCyl("");
+                }
+                try {
+                    String zx = zxs[a];
+                    weiwaiDO.setZx(zx);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setZx("");
+                }
+                try {
+                    String add = adds[a];
+                    weiwaiDO.setAdd(add);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setAdd("");
+                }
+                try {
+                    String slj = sljs[a];
+                    weiwaiDO.setSlj(slj);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setSlj("");
+                }
+                try {
+                    String zj = zjs[a];
+                    weiwaiDO.setZj(zj);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setZj("");
+                }
+                try {
+                    String yaoqiu = yaoqius[a];
+                    weiwaiDO.setYaoqiu(yaoqiu);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setYaoqiu("");
+                }
+                try {
+                    String gkname = gknames[a];
+                    weiwaiDO.setGkname(gkname);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setGkname("");
+                }
+                try {
+                    String hyknum = hyknums[a];
+                    weiwaiDO.setHyknum(hyknum);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setHyknum("");
+                }
+                try {
+                    String phone = phones[a];
+                    weiwaiDO.setPhone(phone);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setPhone("");
+                }
+                weiwaiDO.setStatus(status);
+                weiwaiDO.setUsername(username);
+                weiwaiDO.setShTime("");
+                weiwaiDO.setShstatus("");
+                weiwaiDO.setPstime("");
+                weiwaiDO.setPsname("");
+                try {
+                    String saleNumber = saleNumbers[a];
+                    weiwaiDO.setSaleNumber(saleNumber);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setSaleNumber("");
+                }
+                try {
+                    String departname = departnames[a];
+                    weiwaiDO.setDepartname(departname);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setDepartname("");
+                }
+                try {
+                    String fartj = fartjs[a];
+                    weiwaiDO.setFartj(fartj);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setFartj("");
+                }
+                try {
+                    String neartj = neartjs[a];
+                    weiwaiDO.setNeartj(neartj);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setNeartj("");
+                }
+                try {
+                    String tg = tgs[a];
+                    weiwaiDO.setTg(tg);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setTg("");
+                }
+                weiwaiService.save(weiwaiDO);
+            }
+        }
+
+
+
+     else    if ("4".equals(eyeStyle)) {
+            String[] weiwaisaleNumbers = weiwai.getWeiwaisaleNumber().split(",");
+            String[] mirrortimes = weiwai.getMirrorTime().split(",");
+            String[] nums = weiwai.getNum().split(",");
+            String[] codes = weiwai.getCode().split(",");
+            String[] names = weiwai.getName().split(",");
+            String[] styles = weiwai.getStyle().split(",");
+            String[] rls = weiwai.getRl().split(",");
+            String[] counts = weiwai.getCount().split(",");
+            String[] sphs = weiwai.getSph().split(",");
+            String[] cyls = weiwai.getCyl().split(",");
+            String[] zxs = weiwai.getZx().split(",");
+            String[] adds = weiwai.getAdd().split(",");
+            String[] sljs = weiwai.getSlj().split(",");
+            String[] zjs = weiwai.getZj().split(",");
+            String[] yaoqius = weiwai.getYaoqiu().split(",");
+            String[] gknames = weiwai.getGkname().split(",");
+            String[] hyknums = weiwai.getHyknum().split(",");
+            String[] phones = weiwai.getPhone().split(",");
+            String[] saleNumbers = weiwai.getSaleNumber().split(",");
+            String[] departnames = weiwai.getDepartname().split(",");
+            String[] fartjs = weiwai.getFartj().split(",");
+            String[] neartjs = weiwai.getNeartj().split(",");
+            String[] tgs = weiwai.getTg().split(",");
+            for (int a = 0; a < weiwaisaleNumbers.length; a++) {
+                WeiwaiDO weiwaiDO = new WeiwaiDO();
+                weiwaiDO.setCompanyName(companyName);
+                weiwaiDO.setDanjuNumber(danjuNumber);
+                weiwaiDO.setDanjuDay(danjuDay);
+                weiwaiDO.setEyeStyle(eyeStyle);
+                weiwaiDO.setZhidanPeople(zhidanPeople);
+                weiwaiDO.setMfrsid(mfrsid);
+                weiwaiDO.setMfrsname(mfrsname);
+                weiwaiDO.setPositionId(positionId);
+                weiwaiDO.setPositionName(positionName);
+                weiwaiDO.setShouhuoPeople(shouhuoPeople);
+                weiwaiDO.setShouhuoPhone(shouhuoPhone);
+                weiwaiDO.setShouhuoAddress(shouhuoAddress);
+
+                weiwaiDO.setBeizhu(beizhu);
+                try {
+                    String weiwaisaleNumber = weiwaisaleNumbers[a];
+                    weiwaiDO.setWeiwaisaleNumber(weiwaisaleNumber);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setWeiwaisaleNumber("");
+                }
+                try {
+                    String mirrortime = mirrortimes[a];
+                    weiwaiDO.setMirrorTime(mirrortime);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setMirrorTime("");
+                }
+                try {
+                    String num = nums[a];
+                    //商品品牌信息
+                    YxdzDO yxdzDO = weiwaiService.getBrandYx(num);
+                    String brandnum = yxdzDO.getBrandnum();
+                    String brandname = yxdzDO.getBrandname();
+                    String viewGoodName = yxdzDO.getViewGoodName();
                     weiwaiDO.setNum(num);
                     weiwaiDO.setBrandnum(brandnum);
                     weiwaiDO.setBrandname(brandname);
@@ -416,25 +616,7 @@ public class WeiwaiController {
         }
         return R.error();
     }
-//    /**
-//     * 删除
-//     */
-//    @PostMapping("/remove")
-//    @ResponseBody
-//    @RequiresPermissions("stock:weiwai:remove")
-//    public R remove(Long id) {
-//        WeiwaiDO weiwaiDO = weiwaiService.get(id);
-//        String[] saleNumbers = weiwaiDO.getSaleNumber().split(",");
-//        String saleNumber = weiwaiDO.getSaleNumber();
-//        for (int i = 0; i < 1; i++) {
-//            String number = saleNumbers[0];
-//        }
-//
-//        if (weiwaiService.removes(saleNumber) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
+
 
     /**
      * 删除
@@ -722,6 +904,105 @@ public class WeiwaiController {
 
                         }
                     }
+
+
+                    else   if ("4".equals(goodsType)) {
+                        StockDO stockDO2 = new StockDO();
+                        stockDO2.setGoodsNum(num);
+                        StockDO yinxingdzs = stockService.yinxingdzs(stockDO2);
+                        // 代码 条码 名称 数量 类别 制造商 品牌 单位 价钱 仓位 classtype ..型号
+                        String goodsNums = num;
+                        String goodsCodes = code;
+                        String goodsNames = name;
+                        String counts = count;
+                        String goodsTypes = goodsType;//类别
+                        String mfrsids = mfrsid;
+                        String brandnames = brandname;
+                        String unitnames = yinxingdzs.getUnitname();
+                        String retailPrices = yinxingdzs.getRetailPrice();
+                        stockDO.setPositionId(positionId.toString());
+                        String classtypes = yinxingdzs.getClasstype();
+                        String factorys = yinxingdzs.getProducFactory();
+
+                        stockDO.setGoodsNum(goodsNums);
+                        stockDO.setGoodsCode(goodsCodes);
+                        stockDO.setGoodsName(goodsNames);
+                        stockDO.setGoodsCount(counts);
+                        stockDO.setGoodsType(Integer.valueOf(goodsTypes));
+                        stockDO.setMfrsid(mfrsids);
+                        stockDO.setBrandname(brandnames);
+                        stockDO.setUnit(unitnames);
+                        stockDO.setRetailPrice(retailPrices);
+                        stockDO.setClasstype(classtypes);
+                        stockDO.setFactory(factorys);
+                        //收货状态
+                        //———生成单据编号————
+                        String danjuNumbers = weiwai.getDanjuNumber();
+                        //———入库时间—————
+                        SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                        Date date = new Date();
+                        String createTimes = createTimenew.format(date);
+                        stockDO.setCreateTime(createTimes);
+                        stockDO.setDanjuNumber(danjuNumbers);
+                        //------制单人------
+                        String zhidanPeoples = ShiroUtils.getUser().getName();
+                        stockDO.setZhidanPeople(zhidanPeoples);
+                        //---单据日期--
+                        stockDO.setDanjuDay(createTimes);
+                        stockDO.setStatus("1");
+                        stockDO.setUsername("未收货");
+                        stockDO.setReturnzt("1");
+
+
+                        ///log
+                        StocklogDO stocklogDO = new StocklogDO();
+                        stocklogDO.setDanjunum(danjuNumber);
+                        stocklogDO.setNum(goodsNums);
+                        stocklogDO.setCode(goodsCodes);
+                        stocklogDO.setName(goodsNames);
+                        stocklogDO.setGoodsid(Integer.valueOf(goodsTypes));
+                        stocklogDO.setMfrsnum(mfrsids);
+                        stocklogDO.setBrandname(brandnames);
+                        stocklogDO.setMoney(retailPrices);
+                        stocklogDO.setUseday("");
+                        stocklogDO.setBacth("");
+                        stocklogDO.setCounts(counts);
+                        stocklogDO.setInpositionId(positionId);
+                        stocklogDO.setOutpositionId(null);
+                        stocklogDO.setZhidanPeople(zhidanPeoples);
+                        stocklogDO.setDay(createTimes);
+                        stocklogDO.setWay("委外入库");
+                        //———获取当前登录用户的工号————
+                        stocklogDO.setUsername(ShiroUtils.getUser().getUsername());
+                        stocklogService.save(stocklogDO);
+
+                        if (stockService.save(stockDO) > 0) {
+                            WeiwaiDO weiwaiDO = new WeiwaiDO();
+                            weiwaiDO.setDanjuNumber(danjuNumber);
+                            weiwaiDO.setSaleNumber(saleNumber);
+                            weiwaiDO.setStatus(status);
+                            weiwaiDO.setUsername(username);
+                            //———获取当前系统时间—————
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            Date dates = new Date();
+                            String shTime = sdf.format(dates);
+                            weiwaiDO.setShTime(shTime);
+                            weiwaiDO.setStockorder(danjuNumbers);
+                            weiwaiService.updateStatus(weiwaiDO);
+                            StockDO stockDOs = new StockDO();
+                            stockDOs.setDanjuNumber(danjuNumber);
+                            stockDOs.setStatus(status);
+                            stockDOs.setUsername(username);
+                            stockService.updateStatus(stockDOs);
+
+                        }
+                    }
+
+
+
+
+
+
                 }
             }
         }

@@ -1002,9 +1002,14 @@
 
     <!--</select>-->
 
-    <select id="getBrand" resultType="com.shiguang.product.domain.JpdzDO">
+    <select id="getBrandJp" resultType="com.shiguang.product.domain.JpdzDO">
       select b.brandnum,b.brandname ,jpdz.view_good_name from   aa_jpdz jpdz join c_brand b on jpdz.mfrsid=b.mfrsid and jpdz.brandnum=b.brandnum
       where jpdz.produc_num = #{value}
+    </select>
+
+    <select id="getBrandYx" resultType="com.shiguang.product.domain.YxdzDO">
+      select b.brandnum,b.brandname ,yxdz.view_good_name from   aa_yxdz yxdz join c_brand b on yxdz.mfrsid=b.mfrsid and yxdz.brandnum=b.brandnum
+      where yxdz.produc_num = #{value}
     </select>
 
 

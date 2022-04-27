@@ -478,7 +478,7 @@
          </Row>
           <Row ss:Height="20">
               <Cell ss:StyleID="s80" ss:MergeAcross="21">
-                  <Data ss:Type="String">框镜委外订单</Data>
+                  <Data ss:Type="String">委外订单</Data>
               </Cell>
           </Row>
          <Row ss:Height="20">

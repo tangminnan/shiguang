@@ -296,6 +296,16 @@ public class WeiwaishujuController {
 					weiwaishujuDO.setZxyx(zx);
 				}catch (ArrayIndexOutOfBoundsException e){
 					weiwaishujuDO.setZxyx("");
+				}try {
+					String ql = qulvs[a];
+					weiwaishujuDO.setQulv(ql);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setQulv("");
+				}try {
+					String zj = zjs[a];
+					weiwaishujuDO.setZj(zj);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setZj("");
 				}
 
 				try {
