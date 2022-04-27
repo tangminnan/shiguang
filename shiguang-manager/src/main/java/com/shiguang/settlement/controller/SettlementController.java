@@ -509,11 +509,16 @@ public class SettlementController {
 					return R.error("该用户没有绑定储值卡");
 				}
 			}
-//			else if ("9".equals(paymodel[i])){
-//				double zhifuJifen = Double.valueOf(modelMoney[i]);
-//				String jifenMoney = numberformat.format((float)zhifuJifen/(float)20);
-//				modelMoney[i] = jifenMoney;
-//			}
+			else if ("9".equals(paymodel[i])){
+				double jifenMoney = Double.valueOf(modelMoney[i]) * 20;
+				int integral = (int) jifenMoney;
+				MemberDO memberDO = memberService.getCardNumber(settlement.getMemberNumber());
+				if (null != memberDO.getIntegral()){
+					Integer integralnew = Integer.parseInt(memberDO.getIntegral()) - integral;
+					memberDO.setIntegral(String.valueOf(integralnew));
+					memberService.updateInteger(memberDO);
+				}
+			}
 		}
 
 		if(settlementService.save(settlement)>0){

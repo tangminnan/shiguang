@@ -52,7 +52,7 @@
 		性别：<input class="short" type="text" id="memberSex" th:value="${memberDO.sexx}" disabled/>
 		年龄：<input class="short" type="text" id="memberAge" th:value="${memberDO.age}" disabled/>
 		会员卡类型：<input type="text" id="memberType" th:value="${memberDO.cardType}" disabled/>
-		积分：<input type="text" id="memberPoint" value="200" disabled/>
+		积分：<input type="text" id="memberPoint" th:value="${memberDO.integral}" disabled/>
 		来源：<input type="text" id="memberSource" th:value="${memberDO.source}" disabled/>
 		储值卡：<select id="chuzhiNumber"  name="chuzhiNumber" style="width: 10%" >
 					<option th:each="ls:${cardDOS}"
@@ -1017,8 +1017,10 @@
 		<ul class="ulC">
 			<li>实收金额：<input type="text" id="amountMoney" name="amountMoney" readonly onchange="getShishou()"/><input type="hidden" id="primeMoney" name="primeMoney"/></li>
 			<li>商品打折：<input type="text" id="saleDiscounts" name="saleDiscounts" onchange="getDiscount()"/><input type="hidden" id="saleAccount" name="saleAccount"/></li>
+			<li>积分抵扣：<input type="text" id="saleJifen" name="saleJifen" onchange="getJifen()"/></li>
 			<li>一口价：<input type="text" id="fisPrice" onchange="getFixedPrice()" /><input type="button" class="qianpi" value="签批" /><input type="button" onclick="getfidHy()" value="还原" /></li>
 			<li>抹零金额：<input type="text" value="0.00" id="molingMoney" onfocus="if (value =='0.00'){value =''}" onblur="if (value ==''){value='0.00'}" name="molingMoney" onchange="getChangeValue()"/></li>
+		    <input id="totalDiscount" name="totalDiscount" type="hidden" />
 		</ul>
 		<div class="JSbtn"><input type="submit" value="结算"/></div>
 	</div>
@@ -1307,6 +1309,7 @@
                         lis += "<li>实收金额："+saleDz+"</li>";
                         $("#ula").append(lis)
                         $("#amountMoney").val(saleDz)
+						$("#totalDiscount").val(zkMoney);
                         $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
                         $("#saleAccount").val(rows);
 					}
@@ -1331,6 +1334,25 @@
         $("#amountMoney").val(firstPrice)
         $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 	}
+	
+	function getJifen() {
+		var saleJifen = $("#saleJifen").val();
+		var jifenMoney = parseFloat(saleJifen) /20;
+		var shishouMoney = $("#amountMoney").val();
+		var jifenPrice = shishouMoney - jifenMoney;
+        $("#ula").empty();
+        var lis="";
+        lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
+        lis += "<li>折扣金额：0.00</li>";
+        lis += "<li>优惠金额：0.00</li>";
+        lis += "<li>抹零金额："+molingPrice+"</li>";
+        lis += "<li>应收金额："+price+"</li>";
+		lis += "<li>实收金额："+jifenPrice+"</li>";
+		$("#amountMoney").val(jifenPrice)
+        $("#ula").append(lis)
+        $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
+
+    }
 	
 	function getfidHy() {
         $("#ula").empty();
@@ -2275,6 +2297,7 @@
             lis += "<li>实收金额："+yjyhPrice+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(yjyhPrice)
+			$("#totalDiscount").val(dazhePrice);
             $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 		} else {
             $("#ula").empty();
@@ -2287,6 +2310,7 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
+			$("#totalDiscount").val(dazhePrice)
             $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 		}
 
@@ -2390,6 +2414,7 @@
             lis += "<li>实收金额："+price+"</li>";
             $("#ula").append(lis)
             $("#amountMoney").val(price)
+			$("#totalDiscount").val(dazhePrice)
             $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 		}
         addinal.remove(addinalname);
@@ -2458,6 +2483,7 @@
         lis += "<li>实收金额："+price+"</li>";
         $("#ula").append(lis)
         $("#amountMoney").val(price)
+        $("#totalDiscount").val(zkMoney)
 
         //$("#amountMoney").val(price);
     }

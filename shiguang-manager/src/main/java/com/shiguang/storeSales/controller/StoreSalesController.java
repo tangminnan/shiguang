@@ -1030,8 +1030,8 @@ public class StoreSalesController {
                     stockService.updateGoodsCount(stockDO);
                 }
                 Map<String,Object> jifenmap = new HashMap<>();
-                jifenmap.put("storeNum",salesDO.getStoreNum());
-                jifenmap.put("companyId",ShiroUtils.getUser().getCompanyId());
+//                jifenmap.put("storeNum",salesDO.getStoreNum());
+//                jifenmap.put("companyId",ShiroUtils.getUser().getCompanyId());
                 List<IntegralDO> integralDOList = integralService.getPoints(jifenmap);
                 for (IntegralDO integralDO : integralDOList){
                     if("1".equals(classType[e])){
@@ -1076,13 +1076,18 @@ public class StoreSalesController {
                 }
             }
         }
-        if (jifenNum !=0.0){
-            MemberDO memberDO = memberService.getCardNumber(salesDO.getMemberNumber());
-            int jifen = (int) jifenNum;
-            int jifentotal = memberDO.getIntegral() + jifen;
-            memberDO.setIntegral(jifentotal);
-            memberService.updateInteger(memberDO);
-        }
+//        if(!"1".equals(ShiroUtils.getUser().getCompanyId())){
+            if (jifenNum !=0.0){
+                MemberDO memberDO = memberService.getCardNumber(salesDO.getMemberNumber());
+                if (null != memberDO.getIntegral()){
+                    int jifen = (int) jifenNum;
+                    int jifentotal = Integer.parseInt(memberDO.getIntegral()) + jifen;
+                    memberDO.setIntegral(String.valueOf(jifentotal));
+                    memberService.updateInteger(memberDO);
+                }
+            }
+//        }
+
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
         workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());
         workRecoedDO.setType("销售");
@@ -1311,8 +1316,8 @@ public class StoreSalesController {
                         weiwaiDO.setDanjuDay(sim.format(new Date()));
                         weiwaiDO.setEyeStyle("3");
                         weiwaiDO.setZhidanPeople(ShiroUtils.getUser().getName());
-                        weiwaiDO.setMfrsid(salesDO.getMfrsid());
                         JpdzDO jpdzDO = jpdzService.getJpdzInfomation(goodNumstr[s]);
+                        weiwaiDO.setMfrsid(jpdzDO.getMfrsid());
                         weiwaiDO.setMfrsname(jpdzDO.getMfrsname());
                         weiwaiDO.setBrandnum(jpdzDO.getBrandnum());
                         weiwaiDO.setBrandname(jpdzDO.getBrandname());
@@ -1744,6 +1749,8 @@ public class StoreSalesController {
                 }
             }
             if ("0".equals(dzType)) {
+                maps.put("limit",query.getLimit());
+                maps.put("offset",query.getOffset());
                 List<StockDO> jpcpDOList = stockService.listJpcp(maps);
                 if (null != jpcpDOList && jpcpDOList.size() > 0){
                     for (StockDO stockDO : jpcpDOList){

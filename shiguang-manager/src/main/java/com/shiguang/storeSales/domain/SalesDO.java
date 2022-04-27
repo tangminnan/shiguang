@@ -133,6 +133,8 @@ public class SalesDO implements Serializable {
 	private String saleDiscount;
 	//打折扣后的商品金额
 	private String saleDiscountPrice;
+	//总商品折扣金额
+	private String totalDiscount;
 
 	public String getSaleDiscount() {
 		return saleDiscount;
@@ -148,6 +150,14 @@ public class SalesDO implements Serializable {
 
 	public void setSaleDiscountPrice(String saleDiscountPrice) {
 		this.saleDiscountPrice = saleDiscountPrice;
+	}
+
+	public String getTotalDiscount() {
+		return totalDiscount;
+	}
+
+	public void setTotalDiscount(String totalDiscount) {
+		this.totalDiscount = totalDiscount;
 	}
 
 	public void setRighttg(String righttg) {this.righttg = righttg;}
@@ -1748,6 +1758,23 @@ public class SalesDO implements Serializable {
 	 * 三棱镜OD
 	 */
 	public String getRightsanlingjingsg() {return rightsanlingjingsg;}
+
+	public String getRightaddsg() {
+		return rightaddsg;
+	}
+
+	public void setRightaddsg(String rightaddsg) {
+		this.rightaddsg = rightaddsg;
+	}
+
+	public String getLeftaddsg() {
+		return leftaddsg;
+	}
+
+	public void setLeftaddsg(String leftaddsg) {
+		this.leftaddsg = leftaddsg;
+	}
+
 	/**
 	 * 基地OD
 	 */

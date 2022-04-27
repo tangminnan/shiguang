@@ -20,6 +20,7 @@
 								<div class="col-sm-8">
 									<input id="memberNumber" name="memberNumber" th:value="${memberDO.cardNumber}" type="text" readonly>
 									&nbsp;&nbsp;&nbsp;&nbsp;顾客姓名：<input id="cardName" name="cardName" th:value="${memberDO.name}" type="text" readonly>
+									&nbsp;&nbsp;&nbsp;&nbsp;积分：<input id="integral" th:value="${memberDO.integral}" type="text" readonly>
 								</div>
 							</div>
 							<h1 style="float: left;font-size: 20px">查询信息</h1>
@@ -119,7 +120,7 @@
 							<div class="form-group" style="display: none" id="jffs">
 								<label class="col-sm-3 control-label">缴费方式：</label>
 								<div class="col-sm-8">
-									<select  name="payModel" id="payModel" style="width: 30%" onclick="chuzhika()">
+									<select  name="payModel" id="payModel" style="width: 30%" onclick="chuzhika1()">
 										<option value="">请选择</option>
 										<option value="0">微信</option>
 										<option value="1">支付宝</option>
@@ -166,9 +167,13 @@
         $("#ee").text(sumMoney)
     });
 
+    let flag = '0';
+
     function cop(){
         var str=document.getElementById("modelMoney").value;
         var strs = document.getElementById("modelMoneys").value;
+        var jifen = document.getElementById("chuzhi").value;
+        var jifen1 = document.getElementById("payModel").value;
         var actualMoney = $("#actualMoney").val();
         var payWay = $("#payWay").val();
         // if ("全款" == payWay){
@@ -176,6 +181,16 @@
          //        return alert("缴费金额不能小于实际缴费金额")
          //    }
 		// }
+		if (jifen == '9' && flag == '0'){
+            str = parseFloat(str) / 20
+			$("#modelMoney").val(str);
+             flag = 1;
+		}
+		if (jifen1 == '9' && flag == '0'){
+            strs = parseFloat(strs) / 20
+			$("#modelMoneys").val(strs);
+             flag = 1;
+		}
 		if (strs == ''){
             strs = 0;
 		}
@@ -196,12 +211,22 @@
 		var chuzhika = $("#chuzhi").val();
 		if(chuzhika == '6'){
             czk.style = "display:block;"
-		}else {
+		} else {
             czk.style = "display:none;"
 			$("#chuzhiNumber").val('');
             $("#chuzhiPasd").val('');
 		}
     }
+    function chuzhika1(){
+        var chuzhika = $("#payModel").val();
+        if(chuzhika == '6'){
+            czk.style = "display:block;"
+        } else {
+            czk.style = "display:none;"
+            $("#chuzhiNumber").val('');
+            $("#chuzhiPasd").val('');
+        }
+	}
 	
 	
 	function addMoney(obj){

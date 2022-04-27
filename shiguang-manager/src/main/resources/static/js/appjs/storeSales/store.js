@@ -48,6 +48,10 @@ function getKjpeijian() {
                 html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneyjjpj"+a+"").text(rows[i].retailPrice)
+                var amountMoney = $("#amountMoney").val();
+                if (amountMoney != ''){
+                    price = amountMoney;
+                }
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 arraycount.push(1)
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
@@ -131,6 +135,10 @@ function getTaiyangjing(){
                 html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneytyj"+a+"").text(rows[i].retailPrice)
+                var amountMoney = $("#amountMoney").val();
+                if (amountMoney != ''){
+                    price = amountMoney;
+                }
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 //arraystore.push(rows[i].goodsName);
@@ -214,6 +222,10 @@ function getHaocai() {
                 html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneyhc"+a+"").text(rows[i].retailPrice)
+                var amountMoney = $("#amountMoney").val();
+                if (amountMoney != ''){
+                    price = amountMoney;
+                }
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 //arraystore.push(rows[i].goodsName);
@@ -296,6 +308,10 @@ function getLaohuajing() {
                 html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneylhj"+a+"").text(rows[i].retailPrice)
+                var amountMoney = $("#amountMoney").val();
+                if (amountMoney != ''){
+                    price = amountMoney;
+                }
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(2);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 //arraystore.push(rows[i].goodsName);
@@ -386,6 +402,10 @@ function getShiguang(){
                 html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneysg"+a+"").text(rows[i].retailPrice)
+                var amountMoney = $("#amountMoney").val();
+                if (amountMoney != ''){
+                    price = amountMoney;
+                }
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(1);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 //arraystore.push(rows[i].goodsName);
@@ -469,6 +489,10 @@ function getHuliye(){
                 html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneyhly"+a+"").text(rows[i].retailPrice)
+                // var amountMoney = $("#amountMoney").val();
+                // if (amountMoney != ''){
+                //     price = amountMoney;
+                // }
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(1);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 //arraystore.push(rows[i].goodsName);
@@ -574,6 +598,10 @@ function getPeijian(){
                 html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneypj"+a+"").text(rows[i].retailPrice)
+                var amountMoney = $("#amountMoney").val();
+                if (amountMoney != ''){
+                    price = amountMoney;
+                }
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(1);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 //arraystore.push(rows[i].goodsName);
@@ -851,6 +879,10 @@ function getYinxingpj(){
                 html += "</tr>";
                 $("#goods").append(html);
                 $("#yingshouMoneyyxpj"+a+"").text(rows[i].retailPrice)
+                var amountMoney = $("#amountMoney").val();
+                if (amountMoney != ''){
+                    price = amountMoney;
+                }
                 price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(1);
                 //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                 //arraystore.push(rows[i].goodsName);
