@@ -18,7 +18,7 @@
          order by p.position_id
     </select>
     <select id="list" resultType="com.shiguang.mfrs.domain.PositionDO">
-        select po.`position_id`,po.`company_id`,po.`position_num`,po.`position_name`,d.`depart_name`,po.`position_order`,po.`state_id`,po.`xsstate`,po.`state`
+        select po.`position_id`,po.`company_id`,po.`position_num`,po.`position_name`,po.`depart_number`,d.`depart_name`,po.`position_order`,po.`state_id`,po.`xsstate`,po.`state`
         from c_position po  join department d on po.depart_number=d.depart_number and po.company_id=d.company_id
         JOIN c_company c on po.company_id=c.id
         <where>

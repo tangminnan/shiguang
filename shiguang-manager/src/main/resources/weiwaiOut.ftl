@@ -551,6 +551,9 @@
           <Data ss:Type="String">直径</Data>
         </Cell>
         <Cell ss:StyleID="s57">
+          <Data ss:Type="String">曲率</Data>
+        </Cell>
+        <Cell ss:StyleID="s57">
           <Data ss:Type="String">数量</Data>
         </Cell>
         <Cell ss:StyleID="s57">
@@ -593,9 +596,15 @@
         <Cell ss:StyleID="s61">
           <Data ss:Type="String">${list.cylR!''}</Data>
         </Cell>
+
         <Cell ss:StyleID="s61">
           <Data ss:Type="String">${list.zxR!''}</Data>
         </Cell>
+
+        <Cell ss:StyleID="s61">
+          <Data ss:Type="String">${list.qlR!''}</Data>
+        </Cell>
+
         <Cell ss:StyleID="s60">
           <Data ss:Type="String">${list.fartjR!''}</Data>
         </Cell>
@@ -680,16 +689,24 @@
           <Cell ss:StyleID="s58">
               <Data ss:Type="String">${list.jdL!''}</Data>
           </Cell>
+
           <Cell ss:StyleID="s58">
               <Data ss:Type="String">${list.zjL!''}</Data>
           </Cell>
+
+
+          <Cell ss:StyleID="s58">
+              <Data ss:Type="String">${list.qlL!''}</Data>
+          </Cell>
+
+
         <Cell ss:StyleID="s58">
           <Data ss:Type="Number">${list.countL!''}</Data>
         </Cell>
         <Cell ss:StyleID="s75">
             <Data ss:Type="String">${list.tiimeL!''}</Data>
         </Cell>
-          <Cell ss:Index="22" ss:StyleID="s77">
+          <Cell  ss:StyleID="s77">
               <Data ss:Type="String">${list.beizhuL!''}</Data>
           </Cell>
       </Row>
@@ -699,7 +716,7 @@
         <Cell ss:StyleID="s88" ss:MergeAcross="11">
           <Data ss:Type="String">备注：请发顺丰！！！ </Data>
         </Cell>
-        <Cell ss:StyleID="s89" ss:MergeAcross="2">
+        <Cell ss:StyleID="s89" ss:MergeAcross="3">
           <Data ss:Type="String">合 计：</Data>
         </Cell>
         <Cell ss:StyleID="s57">

@@ -45,7 +45,8 @@ public interface WeiwaiDao {
 	List<SalesDO> selectOrder(Map<String, Object> map);
 	int selectOrderCount(Map<String, Object> map);
 	//	商品品牌信息
-	JpdzDO getBrand(String  num);
+	JpdzDO getBrandJp(String  num);
+	YxdzDO getBrandYx(String  num);
 	//委外详情列表
 	List<WeiwaiDO> selectWeiwaiOrder(Map<String, Object> map);
 

@@ -5,6 +5,7 @@ import com.shiguang.common.config.BootdoConfig;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.product.domain.JpdzDO;
+import com.shiguang.product.domain.YxdzDO;
 import com.shiguang.storeSales.domain.SalesDO;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -97,9 +98,15 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 	}
 
 	@Override
-	public JpdzDO getBrand(String num) {
-		return weiwaiDao.getBrand(num);
+	public JpdzDO getBrandJp(String num) {
+		return weiwaiDao.getBrandJp(num);
 	}
+
+	@Override
+	public YxdzDO getBrandYx(String num) {
+		return weiwaiDao.getBrandYx(num);
+	}
+
 	@Override
 	public List<WeiwaiDO> selectWeiwaiOrder(Map<String, Object> map) {
 		return weiwaiDao.selectWeiwaiOrder(map);
@@ -238,6 +245,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						String sljR=(String) allList.get(j).get("slj");
 						String jdR=(String) allList.get(j).get("jd");
 						String zjR=(String) allList.get(j).get("zj");
+						String qlR=(String) allList.get(j).get("qulv");
 						String countR=(String) allList.get(j).get("count");
 						count1=Integer.valueOf(countR);
 						String tiimeR=(String) allList.get(j).get("mirrorTime");
@@ -260,6 +268,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						map.put("sljR",sljR);
 						map.put("jdR",jdR);
 						map.put("zjR",zjR);
+						map.put("qlR",qlR);
 						map.put("countR",countR);
 						map.put("tiimeR",tiimeR);
 						map.put("gkname",gkname);
@@ -284,6 +293,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						String sljL=(String) allList.get(j).get("slj");
 						String jdL=(String) allList.get(j).get("jd");
 						String zjL=(String) allList.get(j).get("zj");
+						String qlL=(String) allList.get(j).get("qulv");
 						String countL=(String) allList.get(j).get("count");
 						count2=Integer.valueOf(countL);
 						String tiimeL=(String) allList.get(j).get("mirrorTime");
@@ -302,6 +312,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						map.put("sljL",sljL);
 						map.put("jdL",jdL);
 						map.put("zjL",zjL);
+						map.put("qlL",qlL);
 						map.put("countL",countL);
 						map.put("tiimeL",tiimeL);
 						map.put("beizhuL",beizhuL);
@@ -325,6 +336,10 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 		Map<String,Object> mapxinxi=new HashMap<>();
 		mapxinxi.put("companyid",companyIdNow);
 		mapxinxi.put("positionOrder", 2);
+		if(companyIdNow.equals(3)||companyIdNow.equals("3")){
+			mapxinxi.put("positionId", 7);
+		}
+
 		DepartmentDO departmentDO = phoneOrAddres(mapxinxi);
 
 		List<Map<String, Object>> xinxi = new ArrayList<>();
