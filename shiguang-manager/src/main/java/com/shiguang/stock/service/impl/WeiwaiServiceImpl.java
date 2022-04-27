@@ -245,6 +245,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						String sljR=(String) allList.get(j).get("slj");
 						String jdR=(String) allList.get(j).get("jd");
 						String zjR=(String) allList.get(j).get("zj");
+						String qlR=(String) allList.get(j).get("qulv");
 						String countR=(String) allList.get(j).get("count");
 						count1=Integer.valueOf(countR);
 						String tiimeR=(String) allList.get(j).get("mirrorTime");
@@ -267,6 +268,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						map.put("sljR",sljR);
 						map.put("jdR",jdR);
 						map.put("zjR",zjR);
+						map.put("qlR",qlR);
 						map.put("countR",countR);
 						map.put("tiimeR",tiimeR);
 						map.put("gkname",gkname);
@@ -291,6 +293,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						String sljL=(String) allList.get(j).get("slj");
 						String jdL=(String) allList.get(j).get("jd");
 						String zjL=(String) allList.get(j).get("zj");
+						String qlL=(String) allList.get(j).get("qulv");
 						String countL=(String) allList.get(j).get("count");
 						count2=Integer.valueOf(countL);
 						String tiimeL=(String) allList.get(j).get("mirrorTime");
@@ -309,6 +312,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						map.put("sljL",sljL);
 						map.put("jdL",jdL);
 						map.put("zjL",zjL);
+						map.put("qlL",qlL);
 						map.put("countL",countL);
 						map.put("tiimeL",tiimeL);
 						map.put("beizhuL",beizhuL);

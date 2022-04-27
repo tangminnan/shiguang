@@ -67,8 +67,15 @@
 		  		  <if test="returnzt != null and returnzt != ''"> and p.returnzt = #{returnzt} </if>
 		  		  <if test="stockorder != null and stockorder != ''"> and p.stockorder = #{stockorder} </if>
 
-			<if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>
-			<if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>
+			<!--<if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>-->
+			<!--<if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>-->
+
+			<if test="(departNumber != null and departNumber != '')  ">
+				and (
+				p.in_departmentid LIKE concat(concat('%', #{departNumber}),'%')
+				or p.out_departmentid  LIKE concat(concat('%', #{departNumber}),'%')
+				)
+			</if>
 
 			<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
 			<!--<if test="companyId != null and companyId != ''">or FIND_IN_SET(de.company_id,#{companyId})</if>-->
@@ -139,8 +146,15 @@
 			 <if test="returnzt != null and returnzt != ''"> and p.returnzt = #{returnzt} </if>
 			 <if test="stockorder != null and stockorder != ''"> and p.stockorder = #{stockorder} </if>
 
-			 <if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>
-			 <if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>
+			 <!--<if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>-->
+			 <!--<if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>-->
+
+			 <if test="(departNumber != null and departNumber != '')  ">
+				 and (
+				 p.in_departmentid LIKE concat(concat('%', #{departNumber}),'%')
+				 or p.out_departmentid  LIKE concat(concat('%', #{departNumber}),'%')
+				 )
+			 </if>
 
 			 <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
 			 <!--<if test="companyId != null and companyId != ''">or FIND_IN_SET(de.company_id,#{companyId})</if>-->

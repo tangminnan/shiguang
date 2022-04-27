@@ -30,7 +30,9 @@ public class UserDO implements Serializable {
     // 部门
     private Long deptId;
     private String deptName;
-    
+    //仓位id
+    private Long positionId;
+
     private String roleName;
     // 邮箱
     private String email;
@@ -216,6 +218,19 @@ public class UserDO implements Serializable {
     public void setDeptName(String deptName) {
         this.deptName = deptName;
     }
+
+
+
+    public Long getPositionId() {
+        return positionId;
+    }
+
+    public void setPositionId(Long positionId) {
+        this.positionId = positionId;
+    }
+
+
+
 
     public String getEmail() {
         return email;
