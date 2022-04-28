@@ -970,7 +970,10 @@
         select u.name from sys_user u
         left join sys_user_role ur on u.user_id=ur.user_id
         left join  sys_role r on r.role_id=ur.role_id
-        where r.role_name= #{roleName}
+        <where>
+            <if test="roleName != null and roleName != ''"> and r.role_name = #{roleName} </if>
+            <if test="companyId != null and companyId != ''"> and u.company_id = #{companyId} </if>
+        </where>
     </select>
 <select id="listYanguang" resultType="com.shiguang.jiancha.domain.TryresultsDO">
     select u.name from sys_user u
