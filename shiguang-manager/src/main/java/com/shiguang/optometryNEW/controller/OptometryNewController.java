@@ -67,7 +67,7 @@ public class OptometryNewController {
     @RequiresPermissions("information:optometryNew:optometryNew")
     String Optometry(Model model) {
         Map<String,Object> map=new HashMap<>();
-//        Integer companyId=ShiroUtils.getUser().getCompanyId();
+
         String companyId = null;
         if (null != ShiroUtils.getUser().getCompanyId()) {
             companyId = ShiroUtils.getUser().getCompanyId();
@@ -76,14 +76,7 @@ public class OptometryNewController {
         map.put("companyId",companyId);
         List<TryresultsDO> listYanguang = tryresultsService.listYanguang(map);
         model.addAttribute("listYanguang",listYanguang);
-//        if (companyId==null){
-//            companyId="0";
-//        }
-//        if (companyId.equals("1")){
-//            return "optometryNew/optometryNews";
-//        }else {
-//            return "optometryNew/optometryNew";
-//        }
+
         model.addAttribute("companyId",companyId);
         return "optometryNew/optometry";
     }
@@ -395,12 +388,21 @@ public class OptometryNewController {
         }
 
         model.addAttribute("tryresultsDO", tryresultsDO);
+
+
+        String companyId = null;
+        if (null != ShiroUtils.getUser().getCompanyId()) {
+            companyId = ShiroUtils.getUser().getCompanyId();
+        }
         //医生
         Map<String,Object> map=new HashMap<>();
         map.put("roleName","医生");
+        map.put("companyId",companyId);
         List<TryresultsDO> listDoctor = tryresultsService.listDoctor(map);
         model.addAttribute("listDoctor",listDoctor);
+
         map.put("YangguangName","验光师");
+
         List<TryresultsDO> listYanguang = tryresultsService.listYanguang(map);
         model.addAttribute("listYanguang",listYanguang);
 
