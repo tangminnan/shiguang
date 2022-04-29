@@ -334,11 +334,11 @@
                         </td>
                     </tr>
                     <!--<tr>-->
-                        <!--<td>综合验光仪瞳距：</td>-->
-                        <!--<td colspan="3">-->
-                            <!--<input id="sgnAllygytj1" name="sgnAllygytj1" th:value="${tryresultsDO.sgnAllygytj1}" readonly   type="text"  /> △-->
-                            <!--<input id="sgnAllygytj2" name="sgnAllygytj2" th:value="${tryresultsDO.sgnAllygytj2}" readonly   type="text"   /></td>-->
-                        <!--<td colspan="5"></td>-->
+                    <!--<td>综合验光仪瞳距：</td>-->
+                    <!--<td colspan="3">-->
+                    <!--<input id="sgnAllygytj1" name="sgnAllygytj1" th:value="${tryresultsDO.sgnAllygytj1}" readonly   type="text"  /> △-->
+                    <!--<input id="sgnAllygytj2" name="sgnAllygytj2" th:value="${tryresultsDO.sgnAllygytj2}" readonly   type="text"   /></td>-->
+                    <!--<td colspan="5"></td>-->
                     <!--</tr>-->
 
 
@@ -809,7 +809,7 @@
                             <option value="下">下</option>
                         </select>
                         <input id="jdlTrys" name="jdlTrys" th:value="${tryresultsDO.jdlTry}"
-                              readonly type="hidden">
+                               readonly type="hidden">
                     </td>
                     <td>
                         <input id="heightLefttry" name="heightLefttry" th:value="${tryresultsDO.heightLefttry}" readonly type="text" />
@@ -842,931 +842,321 @@
         </div>
     </div>
 
-        <!--处方-->
-        <div class="m40 tabS">
-            <h3>处方</h3>
-            <table id="tab1" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody id="kuangjiayy">
-                <tr>
-                    <td class="PL30" colspan="2">1 框架--远用
-                        <input type="hidden" class="input_del" id="remove1" th:value="${resultDO.kjyyPrescriptionType}" readonly/>
-                    </td>
-                    <td style="text-align: right" colspan="3">医生：</td>
-                    <td><input id="kjyyDoctor" name="kjyyDoctor" th:value="${resultDO.kjyyDoctor}" type="text" readonly></td>
-                    <td style="text-align: right" >验光师：</td>
-                    <td><input id="kjyyOptometryName" name="kjyyOptometryName" th:value="${resultDO.kjyyOptometryName}" type="text" readonly></td>
-                </tr>
-                <tr class="tabS_bg">
-                    <td class="w170">&nbsp;</td>
-                    <td>球镜</td>
-                    <td>柱镜</td>
-                    <td>轴向</td>
-                    <td>三棱镜</td>
-                    <td>基底</td>
-                    <td>远用瞳距(mm)</td>
-                    <td>瞳高(mm)</td>
-                    <td>远用VA</td>
-                </tr>
-                <tr>
-                    <td>OD</td>
-                    <td>
-                        <input name="kjyySphod" th:value="${resultDO.kjyySphod}" readonly type="text"/>
-                    </td>
-                    <td>
-                        <input name="kjyyCylod" th:value="${resultDO.kjyyCylod}" readonly type="text"/>
-                    </td>
-                    <td>
-                        <input name="kjyyAxialod" th:value="${resultDO.kjyyAxialod}" readonly type="text"/>
-                    </td>
-                    <td>
-                        <input name="kjyyPrismod" th:value="${resultDO.kjyyPrismod}" class="short" readonly type="text"/>
-                        △
-                    </td>
-                    <td>
-                        <select id="kjyyJdod" name="kjyyJdod" th:value="${resultDO.kjyyJdod}" disabled>
-                            <option value=""></option>
-                            <option value="内">内</option>
-                            <option value="外">外</option>
-                            <option value="上">上</option>
-                            <option value="下">下</option>
-                        </select>
-                        <input id="kjyyJdods" name="kjyyJdods" th:value="${resultDO.kjyyJdod}" readonly type="hidden">
-                    </td>
-                    <td><input  name="kjyyYytjod" th:value="${resultDO.kjyyYytjod}" readonly type="text"/></td>
-                    <td><input  name="kjyyTgod" th:value="${resultDO.kjyyTgod}" readonly type="text"/></td>
-                    <td><input name="kjyyVaod" th:value="${resultDO.kjyyVaod}" readonly type="text"/></td>
-                </tr>
-                <tr>
-                    <td>OS</td>
-                    <td>
-                        <input name="kjyySphos" th:value="${resultDO.kjyySphos}" readonly type="text"/>
-                    </td>
-                    <td>
-                        <input name="kjyyCylos" th:value="${resultDO.kjyyCylos}" readonly type="text"/>
-                    </td>
-                    <td>
-                        <input name="kjyyAxialos" th:value="${resultDO.kjyyAxialos}" readonly type="text"/>
-                    </td>
-                    <td>
-                        <input   name="kjyyPrismos" th:value="${resultDO.kjyyPrismos}"  class="short" readonly type="text"/> △
-                    </td>
-                    <td>
-                        <select id="kjyyJdos" name="kjyyJdos"  th:value="${resultDO.kjyyJdos}" disabled>
-                            <option value=""></option>
-                            <option value="内">内</option>
-                            <option value="外">外</option>
-                            <option value="上">上</option>
-                            <option value="下">下</option>
-                        </select>
-                        <input id="kjyyJdoss" name="kjyyJdoss" th:value="${resultDO.kjyyJdos}" readonly
-                               type="hidden">
-                    </td>
-                    <td><input name="kjyyYytjos" th:value="${resultDO.kjyyYytjos}" readonly type="text"/></td>
-                    <td><input name="kjyyTgos" th:value="${resultDO.kjyyTgos}" readonly type="text"/></td>
-                    <td><input name="kjyyVaos" th:value="${resultDO.kjyyVaos}" readonly type="text"/></td>
-                </tr>
-                <tr>
-                    <td rowspan="2" colspan="1">建议镜片材质:</td>
-                    <td rowspan="1" colspan="2" class="daK">
-                        <select id="kjyyJpcz" name="kjyyJpcz" th:value="${resultDO.kjyyJpcz}" disabled>
-                            <option value="">--请选择--</option>
-                            <option value="1">老花渐进</option>
-                            <option value="2">青少年渐进</option>
-                            <option value="3">老非球面树脂花渐进</option>
-                            <option value="4">抗辐射镜片</option>
-                            <option value="5">染色镜片</option>
-                            <option value="6">变色镜片</option>
-                            <option value="7">普通树脂</option>
-                            <option value="8">高折玻璃</option>
-                            <option value="9">玻璃片</option>
-                            <option value="10">树脂抗疲劳镜片</option>
-                            <option value="11">树脂偏光镜片（茶/灰）</option>
-                        </select>
-                        <input id="kjyyJpczs" name="kjyyJpczs" th:value="${resultDO.kjyyJpcz}" readonly type="hidden">
-                    </td>
-                    <td rowspan="1" colspan="1">处理方式:</td>
-                    <td rowspan="1" colspan="2" class="daK">
-                        <select id="kjyyClfs" name="kjyyClfs"  th:value="${resultDO.kjyyClfs}" disabled>
-                            <option value="">--请选择--</option>
-                            <option value="1">足矫</option>
-                            <option value="2">欠矫</option>
-                            <option value="3">过矫</option>
-                            <option value="4">附加棱镜</option>
-                            <option value="5">调整</option>
-                            <option value="6">平衡</option>
-                            <option value="7">医嘱</option>
-                            <option value="8">全矫</option>
-                            <option value="9">患者要求减度</option>
-                        </select>
-                        <input id="kjyyClfss" name="kjyyClfss" th:value="${resultDO.kjyyClfs}" readonly type="hidden">
-                    </td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr></tr>
-                <tr>
-                    <td rowspan="1" colspan="1">中距离：</td>
-                    <td rowspan="1" colspan="2" class="daK">
-                        <label><input name="kjyyJykj" value="建议镜框" type="checkbox" readonly/> 建议镜框：</label>
-                        <select style="width: 30%;" id="kjyyKjlx" name="kjyyKjlx" th:value="${resultDO.kjyyKjlx}" disabled>
-                            <option value="">--请选择--</option>
-                            <option value="1">打孔</option>
-                            <option value="2">拉丝</option>
-                            <option value="3">板材</option>
-                            <option value="4">框高</option>
-                        </select>
-                        <input id="kjyyKjlxs" name="kjyyKjlxs" th:value="${resultDO.kjyyKjlx}" readonly type="hidden">
-                        <input name="kjyyText" th:value="${resultDO.kjyyText}" style="width: 40%;"  readonly type="text"/>
-                    </td>
-                    <td rowspan="1" colspan="1">备注</td>
-                    <td rowspan="1" colspan="2">
-                        <textarea rows="3" id="kjyyBeizhu" name="kjyyBeizhu"  th:text="${resultDO.kjyyBeizhu}" type="text" readonly></textarea>
-                    </td>
-                    <td colspan="3"></td>
-                </tr>
-                </tbody>
-            </table>
+    <!--处方-->
+    <div class="m40 tabS">
+        <h3>处方</h3>
+        <table id="tab1"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="kjyy" >
+            <input id="remove1" th:value="${remove1}"/>
+            <input id="kjyyDoctor"  th:value='${kjyyDoctor}' type="hidden"/>
+            <input id="kjyyOptometryName"  th:value='${kjyyOptometryName}' type="hidden"/>
+            <input id="kjyySphod"  th:value='${kjyySphod}' type="hidden"/>
+            <input id="kjyyCylod"  th:value='${kjyyCylod}' type="hidden"/>
+            <input id="kjyyAxialod"  th:value='${kjyyAxialod}' type="hidden"/>
+            <input id="kjyyPrismod"  th:value='${kjyyPrismod}' type="hidden"/>
+            <input id="kjyyJdod"  th:value='${kjyyJdod}' type="hidden"/>
+            <input id="kjyyYytjod"  th:value='${kjyyYytjod}' type="hidden"/>
+            <input id="kjyyTgod"  th:value='${kjyyTgod}' type="hidden"/>
+            <input id="kjyyVaod"  th:value='${kjyyVaod}' type="hidden"/>
 
-            <table id="tab2" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody id="kuangjiajy">
-                <tr>
-                    <td class="PL30" colspan="2">2 框架--近用
-                        <input type="hidden" readonly class="input_del" id="remove2"  th:value="${resultDO.kjjyPrescriptionType}"/></td>
-
-                    <td style="text-align: right" colspan="3">医生：</td>
-                    <td><input id="kjjyDoctor" name="kjjyDoctor" th:value="${resultDO.kjjyDoctor}" type="text" readonly></td>
-                    <td style="text-align: right"  >验光师：</td>
-                    <td><input id="kjjyOptometryName" name="kjjyOptometryName" th:value="${resultDO.kjjyOptometryName}" type="text" readonly></td>
-                </tr>
-                <tr class="tabS_bg">
-                    <td class="w170">&nbsp;</td>
-                    <td>球镜</td>
-                    <td>柱镜</td>
-                    <td>轴向</td>
-                    <td>三棱镜</td>
-                    <td>基底</td>
-                    <td>近用瞳距(mm)</td>
-                    <td>瞳高(mm)</td>
-                    <td>近用VA</td>
-                </tr>
-                <tr>
-                    <td>OD</td>
-                    <td><input name="kjjySphod" th:value="${resultDO.kjjySphod}" readonly type="text"/></td>
-                    <td><input name="kjjyCylod" th:value="${resultDO.kjjyCylod}" readonly type="text"/></td>
-                    <td><input name="kjjyAxialod" th:value="${resultDO.kjjyAxialod}"  readonly type="text"/></td>
-                    <td><input name="kjjyPrismod" th:value="${resultDO.kjjyPrismod}" class="short" readonly type="text"/> △
-                    </td>
-                    <td>
-                        <select id="kjjyJdod" name="kjjyJdod" th:value="${resultDO.kjjyJdod}"disabled>
-                            <option value=""></option>
-                            <option value="内">内</option>
-                            <option value="外">外</option>
-                            <option value="上">上</option>
-                            <option value="下">下</option>
-                        </select>
-                        <input id="kjjyJdods" name="kjjyJdods" th:value="${resultDO.kjjyJdod}" readonly type="hidden">
-                    </td>
-                    <td><input  name="kjjyYytjod" th:value="${resultDO.kjjyYytjod}" readonly type="text"/></td>
-                    <td><input name="kjjyTgod" th:value="${resultDO.kjjyTgod}" readonly type="text"/></td>
-                    <td><input name="kjjyVaod" th:value="${resultDO.kjjyVaod}" readonly type="text"/></td>
-                </tr>
-                <tr>
-                    <td>OS</td>
-                    <td><input name="kjjySphos" th:value="${resultDO.kjjySphos}" readonly type="text"/></td>
-                    <td><input name="kjjyCylos" th:value="${resultDO.kjjyCylos}" readonly type="text"/></td>
-                    <td><input name="kjjyAxialos" th:value="${resultDO.kjjyAxialos}" readonly type="text"/></td>
-                    <td><input name="kjjyPrismos" th:value="${resultDO.kjjyPrismos}" readonly class="short" type="text"/> △</td>
-                    <td>
-                        <select id="kjjyJdos" name="kjjyJdos" th:value="${resultDO.kjjyJdos}"  disabled>
-                            <option value=""> </option>
-                            <option value="内">内</option>
-                            <option value="外">外</option>
-                            <option value="上">上</option>
-                            <option value="下">下</option>
-                        </select>
-                        <input id="kjjyJdoss" name="kjjyJdoss" th:value="${resultDO.kjjyJdos}" readonly type="hidden">
-                    </td>
-                    <td><input name="kjjyYytjos" th:value="${resultDO.kjjyYytjos}" readonly type="text"/></td>
-                    <td><input name="kjjyTgos" th:value="${resultDO.kjjyTgos}"  readonly type="text"/></td>
-                    <td><input name="kjjyVaos" th:value="${resultDO.kjjyVaos}" readonly type="text"/></td>
-                </tr>
-                <tr>
-                    <td rowspan="2" colspan="1">建议镜片材质:</td>
-                    <td rowspan="1" colspan="2" class="daK">
-                        <select id="kjjyJpcz" name="kjjyJpcz" th:value="${resultDO.kjjyJpcz}" disabled>
-                            <option value="">--请选择--</option>
-                            <option value="1">老花渐进</option>
-                            <option value="2">青少年渐进</option>
-                            <option value="3">老非球面树脂花渐进</option>
-                            <option value="4">抗辐射镜片</option>
-                            <option value="5">染色镜片</option>
-                            <option value="6">变色镜片</option>
-                            <option value="7">普通树脂</option>
-                            <option value="8">高折玻璃</option>
-                            <option value="9">玻璃片</option>
-                            <option value="10">树脂抗疲劳镜片</option>
-                            <option value="11">树脂偏光镜片（茶/灰）</option>
-                        </select>
-                        <input id="kjjyJpczs" name="kjjyJpczs" th:value="${resultDO.kjjyJpcz}"  readonly type="hidden">
-                    </td>
-                    <td rowspan="1" colspan="1">处理方式:</td>
-                    <td rowspan="1" colspan="2" class="daK">
-                        <select id="kjjyClfs" name="kjjyClfs" th:value="${resultDO.kjjyClfs}" disabled>
-                            <option value="">--请选择--</option>
-                            <option value="1">足矫</option>
-                            <option value="2">欠矫</option>
-                            <option value="3">过矫</option>
-                            <option value="4">附加棱镜</option>
-                            <option value="5">调整</option>
-                            <option value="6">平衡</option>
-                            <option value="7">医嘱</option>
-                            <option value="8">全矫</option>
-                            <option value="9">患者要求减度</option>
-                        </select>
-                        <input id="kjjyClfss" name="kjjyClfss" th:value="${resultDO.kjjyClfs}" readonly type="hidden">
-                    </td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr></tr>
-                <tr>
-                    <td rowspan="1" colspan="1">中距离：</td>
-                    <td rowspan="1" colspan="2" class="daK">
-                        <label><input name="kjjyJykj" value="建议镜框" type="checkbox" readonly /> 建议镜框：</label>
-                        <select style="width: 30%;" id="kjjyKjlx" name="kjjyKjlx" th:value="${resultDO.kjjyKjlx}" disabled>
-                            <option value="">--请选择--</option>
-                            <option value="1">打孔</option>
-                            <option value="2">拉丝</option>
-                            <option value="3">板材</option>
-                            <option value="4">框高</option>
-                        </select>
-                        <input id="kjjyKjlxs" name="kjjyKjlxs" th:value="${resultDO.kjjyKjlx}" readonly type="hidden">
-                        <input name="kjjyText"th:value="${resultDO.kjjyText}" style="width: 40%;" readonly type="text"/>
-                    </td>
-                    <td rowspan="1" colspan="1">备注</td>
-                    <td rowspan="1" colspan="2">
-                        <textarea rows="3" id="kjjyBeizhu" name="kjjyBeizhu"  th:text="${resultDO.kjjyBeizhu}" type="text" readonly></textarea>
-                    </td>
-                    <td colspan="3"></td>
-                </tr>
-                </tbody>
-            </table>
-
-            <table id="tab3" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody id="jianjsg">
-                <tr>
-                    <td class="PL30" colspan="2">3
-                        框架--双光/渐进 <input type="hidden" readonly class="input_del" id="remove3" th:value="${resultDO.sgjjPrescriptionType}"/>
-                    </td>
+            <input id="kjyySphos"  th:value='${kjyySphos}' type="hidden"/>
+            <input id="kjyyCylos"  th:value='${kjyyCylos}' type="hidden"/>
+            <input id="kjyyAxialos"  th:value='${kjyyAxialos}' type="hidden"/>
+            <input id="kjyyPrismos"  th:value='${kjyyPrismos}' type="hidden"/>
+            <input id="kjyyJdos"  th:value='${kjyyJdos}' type="hidden"/>
+            <input id="kjyyYytjos"  th:value='${kjyyYytjos}' type="hidden"/>
+            <input id="kjyyTgos"  th:value='${kjyyTgos}' type="hidden"/>
+            <input id="kjyyVaos"  th:value='${kjyyVaos}' type="hidden"/>
+            <input id="kjyyJpcz"  th:value='${kjyyJpcz}' type="hidden"/>
+            <input id="kjyyClfs"  th:value='${kjyyClfs}' type="hidden"/>
+            <input id="kjyyBeizhu"  th:value='${kjyyBeizhu}' type="hidden"/>
 
 
-                    <td style="text-align: right" colspan="3">医生：</td>
-                    <td><input id="sgjjDoctor" name="sgjjDoctor" th:value="${resultDO.sgjjDoctor}" type="text" readonly></td>
-                    <td style="text-align: right"  >验光师：</td>
-                    <td><input id="sgjjOptometryName" name="sgjjOptometryName" th:value="${resultDO.sgjjOptometryName}"  type="text" readonly></td>
-                </tr>
+            </tbody>
+        </table>
 
-                <tr class="tabS_bg">
-                    <td class="w170">&nbsp;</td>
-                    <td>球镜</td>
-                    <td>柱镜</td>
-                    <td>轴向</td>
-                    <td>Add</td>
-                    <td>远用瞳距(mm)</td>
-                    <td>近用瞳距(mm)</td>
-                    <td>瞳高(mm)</td>
-                    <td>远用VA</td>
-                    <td>近用VA</td>
-                </tr>
-                <tr>
-                    <td>OD</td>
-                    <td><input th:value="${resultDO.sgjjSphod}" name="sgjjSphod" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.sgjjCylod}" name="sgjjCylod" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.sgjjAxialod}" name="sgjjAxialod" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.sgjjAddod}" name="sgjjAddod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sgjjYytjod}" name="sgjjYytjod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sgjjJytjod}" name="sgjjJytjod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sgjjTgod}" name="sgjjTgod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sgjjYyvaod}" name="sgjjYyvaod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sgjjJyvaod}" name="sgjjJyvaod" readonly type="text"/></td>
-                </tr>
-                <tr>
-                    <td>OS</td>
-                    <td><input th:value="${resultDO.sgjjSphos}" name="sgjjSphos" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.sgjjCylos}" name="sgjjCylos" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.sgjjAxialos}" name="sgjjAxialos" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.sgjjAddos}" name="sgjjAddos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sgjjYytjos}" name="sgjjYytjos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sgjjJytjos}" name="sgjjJytjos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sgjjTgos}" name="sgjjTgos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sgjjYyvaos}" name="sgjjYyvaos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sgjjJyvaos}" name="sgjjJyvaos" readonly type="text"/></td>
-                </tr>
-                <tr>
-                    <td rowspan="2" colspan="1">建议镜片材质:</td>
-                    <td rowspan="1" colspan="3" class="daK">
-                        <select id="sgjjJpcz" name="sgjjJpcz" th:value="${resultDO.sgjjJpcz}" disabled>
-                            <option value="">--请选择--</option>
-                            <option value="1">老花渐进</option>
-                            <option value="2">青少年渐进</option>
-                            <option value="3">老非球面树脂花渐进</option>
-                            <option value="4">抗辐射镜片</option>
-                            <option value="5">染色镜片</option>
-                            <option value="6">变色镜片</option>
-                            <option value="7">普通树脂</option>
-                            <option value="8">高折玻璃</option>
-                            <option value="9">玻璃片</option>
-                            <option value="10">树脂抗疲劳镜片</option>
-                            <option value="11">树脂偏光镜片（茶/灰）</option>
-                        </select>
-                        <input id="sgjjJpczs" name="sgjjJpczs" th:value="${resultDO.sgjjJpcz}" readonly type="hidden">
-                    </td>
-                    <td rowspan="1" colspan="1">处理方式:</td>
-                    <td rowspan="1" colspan="3" class="daK">
-                        <select id="sgjjClfs" name="sgjjClfs" th:value="${resultDO.sgjjClfs}" disabled>
-                            <option value="">--请选择--</option>
-                            <option value="1">足矫</option>
-                            <option value="2">欠矫</option>
-                            <option value="3">过矫</option>
-                            <option value="4">附加棱镜</option>
-                            <option value="5">调整</option>
-                            <option value="6">平衡</option>
-                            <option value="7">医嘱</option>
-                            <option value="8">全矫</option>
-                            <option value="9">患者要求减度</option>
-                        </select>
-                        <input id="sgjjClfss" name="sgjjClfss" th:value="${resultDO.sgjjClfs}" readonly type="hidden">
-                    </td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr></tr>
-                <tr>
-                    <td rowspan="1" colspan="1">中距离：</td>
-                    <td rowspan="1" colspan="3" class="daK">
-                        <label><input name="sgjjJykj" value="建议镜框" type="checkbox" readonly/> 建议镜框：</label>
-                        <select style="width: 30%;" id="sgjjKjlx" name="sgjjKjlx" th:value="${resultDO.sgjjKjlx}" disabled>
-                            <option value="">--请选择--</option>
-                            <option value="1">打孔</option>
-                            <option value="2">拉丝</option>
-                            <option value="3">板材</option>
-                            <option value="4">框高</option>
-                        </select>
-                        <input id="sgjjKjlxs" name="sgjjKjlxs" th:value="${resultDO.sgjjKjlx}" readonly type="hidden">
-                        <input name="sgjjText" th:value="${resultDO.sgjjText}" style="width: 40%;" readonly type="text"/>
-                    </td>
-                    <td rowspan="1" colspan="1">备注</td>
-                    <td rowspan="1" colspan="2">
-                    <textarea rows="3" id="sgjjBeizhu" name="sgjjBeizhu"  th:text="${resultDO.sgjjBeizhu}" type="text" readonly></textarea>
-                    <td colspan="3"></td>
-                </tr>
-                </tbody>
-            </table>
+        <table id="tab2"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="kjjy" >
+            <input id="remove2" th:value="${remove2}"/>
+            <input id="kjjyDoctor"  th:value='${kjjyDoctor}' type="hidden"/>
+            <input id="kjjyOptometryName"  th:value='${kjjyOptometryName}' type="hidden"/>
+            <input id="kjjySphod"  th:value='${kjjySphod}' type="hidden"/>
+            <input id="kjjyCylod"  th:value='${kjjyCylod}' type="hidden"/>
+            <input id="kjjyAxialod"  th:value='${kjjyAxialod}' type="hidden"/>
+            <input id="kjjyPrismod"  th:value='${kjjyPrismod}' type="hidden"/>
+            <input id="kjjyJdod"  th:value='${kjjyJdod}' type="hidden"/>
+            <input id="kjjyYytjod"  th:value='${kjjyYytjod}' type="hidden"/>
+            <input id="kjjyTgod"  th:value='${kjjyTgod}' type="hidden"/>
+            <input id="kjjyVaod"  th:value='${kjjyVaod}' type="hidden"/>
 
-            <table id="tab4" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody id="ruanxjmjcj">
-                <tr>
-                    <td class="PL30" colspan="2">4 软性角膜接触镜
-                        <input type="hidden" class="input_del" id="remove4" th:value="${resultDO.rxPrescriptionType}" readonly/>
-                    </td>
+            <input id="kjjySphos"  th:value='${kjjySphos}' type="hidden"/>
+            <input id="kjjyCylos"  th:value='${kjjyCylos}' type="hidden"/>
+            <input id="kjjyAxialos"  th:value='${kjjyAxialos}' type="hidden"/>
+            <input id="kjjyPrismos"  th:value='${kjjyPrismos}' type="hidden"/>
+            <input id="kjjyJdos"  th:value='${kjjyJdos}' type="hidden"/>
+            <input id="kjjyYytjos"  th:value='${kjjyYytjos}' type="hidden"/>
+            <input id="kjjyTgos"  th:value='${kjjyTgos}' type="hidden"/>
+            <input id="kjjyVaos"  th:value='${kjjyVaos}' type="hidden"/>
+            <input id="kjjyJpcz"  th:value='${kjjyJpcz}' type="hidden"/>
+            <input id="kjjyClfs"  th:value='${kjjyClfs}' type="hidden"/>
+            <input id="kjjyKjlx"  th:value='${kjjyKjlx}' type="hidden"/>
+            <input id="kjjyText"  th:value='${kjjyText}' type="hidden"/>
+            <input id="kjjyBeizhu"  th:value='${kjjyBeizhu}' type="hidden"/>
+            </tbody>
+
+        </table>
+
+        <table id="tab3"   class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="sgjj">
+            <input id="remove3" th:value="${remove3}" type="hidden"/>
+            <input id="sgjjDoctor" th:value="${sgjjDoctor}" type="hidden"/>
+            <input id="sgjjOptometryName" th:value="${sgjjOptometryName}" type="hidden"/>
+            <input id="sgjjSphod" th:value="${sgjjSphod}" type="hidden"/>
+            <input id="sgjjCylod" th:value="${sgjjCylod}" type="hidden"/>
+            <input id="sgjjAxialod" th:value="${sgjjAxialod}" type="hidden"/>
+            <input id="sgjjAddod" th:value="${sgjjAddod}" type="hidden"/>
+            <input id="sgjjYytjod" th:value="${sgjjYytjod}" type="hidden"/>
+            <input id="sgjjJytjod" th:value="${sgjjJytjod}" type="hidden"/>
+            <input id="sgjjTgod" th:value="${sgjjTgod}" type="hidden"/>
+            <input id="sgjjYyvaod" th:value="${sgjjYyvaod}" type="hidden"/>
+            <input id="sgjjJyvaod" th:value="${sgjjJyvaod}" type="hidden"/>
+
+            <input id="sgjjSphos" th:value="${sgjjSphos}" type="hidden"/>
+            <input id="sgjjCylos" th:value="${sgjjCylos}" type="hidden"/>
+            <input id="sgjjAxialos" th:value="${sgjjAxialos}" type="hidden"/>
+            <input id="sgjjAddos" th:value="${sgjjAddos}" type="hidden"/>
+            <input id="sgjjYytjos" th:value="${sgjjYytjos}" type="hidden"/>
+            <input id="sgjjJytjos" th:value="${sgjjJytjos}" type="hidden"/>
+            <input id="sgjjTgos" th:value="${sgjjTgos}" type="hidden"/>
+            <input id="sgjjYyvaos" th:value="${sgjjYyvaos}" type="hidden"/>
+            <input id="sgjjJyvaos" th:value="${sgjjJyvaos}" type="hidden"/>
 
 
-                    <td style="text-align: right" colspan="3">医生：</td>
-                    <td><input id="rxDoctor" name="rxDoctor" th:value="${resultDO.rxDoctor}" type="text" readonly></td>
-                    <td style="text-align: right"  >验光师：</td>
-                    <td><input id="rxOptometryName" name="rxOptometryName" th:value="${resultDO.rxOptometryName}"   type="text" readonly></td>
-                </tr>
-                <tr class="tabS_bg">
-                    <td class="w170">&nbsp;</td>
-                    <td>BC</td>
-                    <td>球镜</td>
-                    <td>柱镜</td>
-                    <td>轴向</td>
-                    <td>直径</td>
-                    <td>软性角膜接触镜VA</td>
-                    <td>软性角膜接触镜镜片</td>
-                    <td>片/盒数</td>
-                    <td width="220">软性角膜接触镜处理方式</td>
-                </tr>
-                <tr>
-                    <td>OD</td>
-                    <td><input th:value="${resultDO.rxBcod}" name="rxBcod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.rxSphod}" name="rxSphod" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.rxCylod}" name="rxCylod" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.rxAxialod}" name="rxAxialod" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.rxZjod}" name="rxZjod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.rxVaod}" name="rxVaod" readonly type="text"/></td>
-                    <td>适用镜片：<input name="rxSyjpod" th:value="${resultDO.rxSyjpod}" style="width:60%" readonly type="text"/></td>
-                    <td><input name="rxUnitod" th:value="${resultDO.rxUnitod}" readonly type="text"/></td>
-                    <td rowspan="2">
-                        <select id="rxClfs" name="rxClfs" style="width: 70%;" th:value="${resultDO.rxClfs}" disabled>
-                            <option value="1">足矫</option>
-                            <option value="2">欠矫</option>
-                            <option value="3">过矫</option>
-                        </select>
-                        <input id="rxClfss" name="rxClfss" th:value="${resultDO.rxClfs}" readonly type="hidden">
-                    </td>
-                </tr>
-                <tr>
-                    <td>OS</td>
-                    <td><input th:value="${resultDO.rxBcos}" name="rxBcos" readonly  type="text"/></td>
-                    <td><input th:value="${resultDO.rxSphos}" name="rxSphos" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.rxCylos}" name="rxCylos" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.rxAxialos}" name="rxAxialos" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.rxZjos}" name="rxZjos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.rxVaos}" name="rxVaos" readonly type="text"/></td>
-                    <td>适用镜片：<input name="rxSyjpos" th:value="${resultDO.rxSyjpos}"  readonly style="width:60%" type="text"/></td>
-                    <td><input name="rxUnitos"  th:value="${resultDO.rxUnitos}" readonly type="text"/></td>
-                </tr>
-                <tr>
-                    <td>护理液品种：</td>
-                    <td colspan="9">
-                        <label class="text">
-                            <textarea rows="3" id="hlys" name="rxHlypz"  th:text="${resultDO.rxHlypz}" type="text" readonly></textarea>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>备注</td>
-                    <td colspan="9">
-                        <textarea rows="3"  name="rxBeizhu"  th:text="${resultDO.rxBeizhu}" type="text" readonly></textarea>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-            <table id="tab5" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody id="kuangjiazy">
-                <tr>
-                    <td class="PL30" colspan="2">5 框架--中用
-                        <input type="hidden" class="input_del" id="remove5" th:value="${resultDO.zyPrescriptionType}" readonly/>
-                    </td>
+            <input id="sgjjJpcz" th:value="${sgjjJpcz}" type="hidden"/>
+            <input id="sgjjClfs" th:value="${sgjjClfs}" type="hidden"/>
+            <input id="sgjjKjlx" th:value="${sgjjKjlx}" type="hidden"/>
+            <input id="sgjjBeizhu" th:value="${sgjjBeizhu}" type="hidden"/>
 
 
-                    <td style="text-align: right" colspan="3">医生：</td>
-                    <td><input id="zyDoctor" name="zyDoctor" th:value="${resultDO.zyDoctor}"  type="text" readonly></td>
-                    <td style="text-align: right">验光师：</td>
-                    <td><input id="zyOptometryName" name="zyOptometryName" th:value="${resultDO.zyOptometryName}"    type="text" readonly></td>
-                </tr>
-                <tr class="tabS_bg">
-                    <td class="w170">&nbsp;</td>
-                    <td>球镜</td>
-                    <td>柱镜</td>
-                    <td>轴向</td>
-                    <td>三棱镜</td>
-                    <td>基底</td>
-                    <td>中用瞳距(mm)</td>
-                    <td>瞳高(mm)</td>
-                    <td>近用VA</td>
-                </tr>
-                <tr>
-                    <td>OD</td>
-                    <td>
-                        <input  name="zySphod"  th:value="${resultDO.zySphod}" readonly type="text" />
-                    </td>
-                    <td>
-                        <input  name="zyCylod" th:value="${resultDO.zyCylod}" readonly type="text" />
-                    </td>
-                    <td>
-                        <input  name="zyAxialod" th:value="${resultDO.zyAxialod}" readonly type="text" /></td>
-                    <td>
-                        <input  name="zyPrismod" th:value="${resultDO.zyPrismod}" class="short" readonly type="text"/> △
-                    </td>
-                    <td>
-                        <select id="zyJdod" name="zyJdod" th:value="${resultDO.zyJdod}" disabled>
-                            <option value=""></option>
-                            <option value="内">内</option>
-                            <option value="外">外</option>
-                            <option value="上">上</option>
-                            <option value="下">下</option>
-                        </select>
-                        <input id="zyJdods" name="zyJdods" th:value="${resultDO.zyJdod}" readonly type="hidden">
-                    </td>
-                    <td><input th:value="${resultDO.zyZytjod}" name="zyZytjod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.zyTgod}" name="zyTgod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.zyVaod}" name="zyVaod" readonly type="text"/></td>
-                </tr>
-                <tr>
-                    <td>OS</td>
-                    <td><input th:value="${resultDO.zySphos}" name="zySphos" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.zyCylos}" name="zyCylos" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.zyAxialos}" name="zyAxialos" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.zyPrismos}" name="zyPrismos" class="short" readonly type="text"/> △</td>
-                    <td>
-                        <select id="zyJdos" name="zyJdos" th:value="${resultDO.zyJdos}" disabled>
-                            <option value=""> </option>
-                            <option value="内">内</option>
-                            <option value="外">外</option>
-                            <option value="上">上</option>
-                            <option value="下">下</option>
-                        </select>
-                        <input id="zyJdoss" name="zyJdoss" th:value="${resultDO.zyJdos}" readonly type="hidden">
-                    </td>
-                    <td><input th:value="${resultDO.zyZytjos}" name="zyZytjos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.zyTgos}" name="zyTgos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.zyVaos}" name="zyVaos" readonly type="text"/></td>
-                </tr>
-                <tr>
-                    <td rowspan="2" colspan="1">建议镜片材质:</td>
-                    <td rowspan="1" colspan="3" class="daK">
-                        <select id="zyJpcz" name="zyJpcz" th:value="${resultDO.zyJpcz}" disabled>
-                            <option value="">--请选择--</option>
-                            <option value="1">老花渐进</option>
-                            <option value="2">青少年渐进</option>
-                            <option value="3">老非球面树脂花渐进</option>
-                            <option value="4">抗辐射镜片</option>
-                            <option value="5">染色镜片</option>
-                            <option value="6">变色镜片</option>
-                            <option value="7">普通树脂</option>
-                            <option value="8">高折玻璃</option>
-                            <option value="9">玻璃片</option>
-                            <option value="10">树脂抗疲劳镜片</option>
-                            <option value="11">树脂偏光镜片（茶/灰）</option>
-                        </select>
-                        <input id="zyJpczs" name="zyJpczs" th:value="${resultDO.zyJpcz}" readonly type="hidden">
-                    </td>
-                    <td rowspan="1" colspan="1">处理方式:</td>
-                    <td rowspan="1" colspan="3" class="daK">
-                        <select id="zyClfs" name="zyClfs" th:value="${resultDO.zyClfs}" disabled>
-                            <option value="">--请选择--</option>
-                            <option value="1">足矫</option>
-                            <option value="2">欠矫</option>
-                            <option value="3">过矫</option>
-                            <option value="4">附加棱镜</option>
-                            <option value="5">调整</option>
-                            <option value="6">平衡</option>
-                            <option value="7">医嘱</option>
-                            <option value="8">全矫</option>
-                            <option value="9">患者要求减度</option>
-                        </select>
-                        <input id="zyClfss" name="zyClfss" th:value="${resultDO.zyClfs}" readonly type="hidden">
-                    </td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr></tr>
-                <tr>
-                    <td rowspan="1" colspan="1">中距离：</td>
-                    <td rowspan="1" colspan="3" class="daK">
-                        <label><input name="zyJyjk" value="建议镜框" type="checkbox" readonly/> 建议镜框：</label>
-                        <select style="width: 30%;" id="zyJklx" name="zyJklx"  th:value="${resultDO.zyJklx}" disabled>
-                            <option value="">--请选择--</option>
-                            <option value="1">打孔</option>
-                            <option value="2">拉丝</option>
-                            <option value="3">板材</option>
-                            <option value="4">框高</option>
-                        </select>
-                        <input id="zyJklxs" name="zyJklxs" th:value="${resultDO.zyJklx}" readonly type="hidden">
-                        <input name="zyText"  th:value="${resultDO.zyText}" style="width: 40%;" readonly type="text"/>
-                    </td>
-                    <td rowspan="1" colspan="1">备注</td>
-                    <td rowspan="1" colspan="2">
-                    <textarea rows="3" id="zyBeizhu" name="zyBeizhu"  th:text="${resultDO.zyBeizhu}" type="text" readonly></textarea>
-                    <td colspan="3"></td>
-                </tr>
-                </tbody>
-            </table>
+            </tbody>
+        </table>
 
-            <table id="tab6" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody id="shijxl">
-                <tr>
-                    <td class="PL30" colspan="2">6 视觉训练
-                        <input type="hidden" class="input_del" id="remove6" th:value="${resultDO.sjxlPrescriptionType}" readonly/></td>
+        <table id="tab4"   class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="rxjmjcj"  >
+            <input id="remove4" th:value="${remove4}" type="hidden"/>
+            <input id="rxDoctor" th:value="${rxDoctor}" type="hidden"/>
+            <input id="rxOptometryName" th:value="${rxOptometryName}" type="hidden"/>
+            <input id="rxBcod" th:value="${rxBcod}" type="hidden"/>
+            <input id="rxSphod" th:value="${rxSphod}" type="hidden"/>
+            <input id="rxCylod" th:value="${rxCylod}" type="hidden"/>
+            <input id="rxAxialod" th:value="${rxAxialod}" type="hidden"/>
+            <input id="rxZjod" th:value="${rxZjod}" type="hidden"/>
+            <input id="rxVaod" th:value="${rxVaod}" type="hidden"/>
+            <input id="rxSyjpod" th:value="${rxSyjpod}" type="hidden"/>
+            <input id="rxUnitod" th:value="${rxUnitod}" type="hidden"/>
 
-                    <td style="text-align: right" colspan="3">医生：</td>
-                    <td><input id="sjxlDoctor" name="sjxlDoctor" th:value="${resultDO.sjxlDoctor}" type="text" readonly></td>
-                    <td style="text-align: right">验光师：</td>
-                    <td><input id="sjxlOptometryName" name="sjxlOptometryName" th:value="${resultDO.sjxlOptometryName}" type="text" readonly></td>
-                </tr>
-                <tr class="tabS_bg">
-                    <td class="w170">&nbsp;</td>
-                    <td>球镜</td>
-                    <td>柱镜</td>
-                    <td>轴向</td>
-                    <td>三棱镜</td>
-                    <td>基底</td>
-                    <td>远用瞳距(mm)</td>
-                    <td>近用瞳距(mm)</td>
-                    <td>瞳高(mm)</td>
-                    <td>近用VA</td>
-                    <td>近用VA</td>
-                </tr>
-                <tr>
-                    <td>OD</td>
-                    <td><input th:value="${resultDO.sjxlSphod}" name="sjxlSphod" type="text" readonly /></td>
-                    <td><input th:value="${resultDO.sjxlCylod}" name="sjxlCylod" type="text" readonly/></td>
-                    <td><input th:value="${resultDO.sjxlAxialod}" name="sjxlAxialod" type="text" readonly/></td>
-                    <td><input th:value="${resultDO.sjxlSljod}" name="sjxlSljod" class="short" type="text" readonly/> △</td>
-                    <td>
-                        <select id="sjxlJdod" name="sjxlJdod"th:value="${resultDO.sjxlJdod}" disabled>
-                            <option value=""> </option>
-                            <option value="内">内</option>
-                            <option value="外">外</option>
-                            <option value="上">上</option>
-                            <option value="下">下</option>
-                        </select>
-                        <input id="sjxlJdods" name="sjxlJdods" th:value="${resultDO.sjxlJdod}" type="hidden" readonly>
-                    </td>
-                    <td><input th:value="${resultDO.sjxlYytjod}" name="sjxlYytjod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sjxlJytjod}" name="sjxlJytjod" readonly type="text"/></td>
+            <input id="rxBcos" th:value="${rxBcos}" type="hidden"/>
+            <input id="rxSphos" th:value="${rxSphos}" type="hidden"/>
+            <input id="rxCylos" th:value="${rxCylos}" type="hidden"/>
+            <input id="rxAxialos" th:value="${rxAxialos}" type="hidden"/>
+            <input id="rxZjos" th:value="${rxZjos}" type="hidden"/>
+            <input id="rxVaos" th:value="${rxVaos}" type="hidden"/>
+            <input id="rxSyjpos" th:value="${rxSyjpos}" type="hidden"/>
+            <input id="rxUnitos" th:value="${rxUnitos}" type="hidden"/>
+            <input id="rxClfs" th:value="${rxClfs}" type="hidden"/>
+            <input id="rxHlypz" th:value="${rxHlypz}" type="hidden"/>
+            <input id="rxBeizhu" th:value="${rxBeizhu}" type="hidden"/>
 
-                    <td><input th:value="${resultDO.sjxlTgod}"  name="sjxlTgod" type="text"/></td>
+            </tbody>
+        </table>
 
-                    <td><input th:value="${resultDO.sjxlYyvaod}" name="sjxlYyvaod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sjxlJyvaod}" name="sjxlJyvaod" readonly type="text"/></td>
-                </tr>
-                <tr>
-                    <td>OS</td>
-                    <td><input th:value="${resultDO.sjxlSphos}" name="sjxlSphos" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.sjxlCylos}" name="sjxlCylos" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.sjxlAxialos}" name="sjxlAxialos" readonly type="text" /></td>
-                    <td><input th:value="${resultDO.sjxlSljos}" name="sjxlSljos" class="short" readonly type="text"/> △</td>
-                    <td>
-                        <select id="sjxlJdos" name="sjxlJdos" th:value="${resultDO.sjxlJdos}" disabled>
-                            <option value=""> </option>
-                            <option value="内">内</option>
-                            <option value="外">外</option>
-                            <option value="上">上</option>
-                            <option value="下">下</option>
-                        </select>
-                        <input id="sjxlJdoss" name="sjxlJdoss" th:value="${resultDO.sjxlJdos}" readonly type="hidden">
-                    </td>
-                    <td><input th:value="${resultDO.sjxlYytjos}" name="sjxlYytjos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sjxlJytjos}" name="sjxlJytjos" readonly type="text"/></td>
+        <table id="tab5"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="zy" >
+            <input id="remove5" th:value="${remove5}" type="hidden"/>
+            <input id="zyDoctor" th:value="${zyDoctor}" type="hidden"/>
+            <input id="zyOptometryName" th:value="${zyOptometryName}" type="hidden"/>
+            <input id="zySphod" th:value="${zySphod}" type="hidden"/>
+            <input id="zyCylod" th:value="${zyCylod}" type="hidden"/>
+            <input id="zyAxialod" th:value="${zyAxialod}" type="hidden"/>
+            <input id="zyPrismod" th:value="${zyPrismod}" type="hidden"/>
+            <input id="zyJdod" th:value="${zyJdod}" type="hidden"/>
+            <input id="zyZytjod" th:value="${zyZytjod}" type="hidden"/>
+            <input id="zyTgod" th:value="${zyTgod}" type="hidden"/>
+            <input id="zyVaod" th:value="${zyVaod}" type="hidden"/>
 
-                    <td><input th:value="${resultDO.sjxlTgos}"  name="sjxlTgos" type="text"/></td>
+            <input id="zySphos" th:value="${zySphos}" type="hidden"/>
+            <input id="zyCylos" th:value="${zyCylos}" type="hidden"/>
+            <input id="zyAxialos" th:value="${zyAxialos}" type="hidden"/>
+            <input id="zyPrismos" th:value="${zyPrismos}" type="hidden"/>
+            <input id="zyJdos" th:value="${zyJdos}" type="hidden"/>
+            <input id="zyZytjos" th:value="${zyZytjos}" type="hidden"/>
+            <input id="zyTgos" th:value="${zyTgos}" type="hidden"/>
+            <input id="zyVaos" th:value="${zyVaos}" type="hidden"/>
+            <input id="zyJpcz" th:value="${zyJpcz}" type="hidden"/>
+            <input id="zyClfs" th:value="${zyClfs}" type="hidden"/>
+            <input id="zyJklx" th:value="${zyJklx}" type="hidden"/>
+            <input id="zyText" th:value="${zyText}" type="hidden"/>
+            <input id="zyBeizhu" th:value="${zyBeizhu}" type="hidden"/>
 
-                    <td><input th:value="${resultDO.sjxlYyvaos}" name="sjxlYyvaos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.sjxlJyvaos}" name="sjxlJyvaos" readonly type="text"/></td>
-                </tr>
-                <tr>
-                    <td>家庭训练：</td>
-                    <td colspan="4">
-                        <label class="text">
-                            <textarea rows="3" id="jtxlsg" name="sjxlJtxl"  th:text="${resultDO.sjxlJtxl}" type="text" readonly></textarea>
-                        </label>
-                    </td>
-                    <td>训练室训练：</td>
-                    <td colspan="4">
-                        <label class="text">
-                            <textarea rows="3" id="xlsxlsg" name="sjxlXlsxl"  th:text="${resultDO.sjxlXlsxl}" type="text" readonly></textarea>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>备注</td>
-                    <td colspan="9">
-                        <textarea rows="3" id="sjxlBeizhu" name="sjxlBeizhu"  th:text="${resultDO.sjxlBeizhu}" type="text" readonly></textarea>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            </tbody>
+        </table>
 
-            <table id="tab7" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody id="jmvst">
-                <tr>
-                    <td class="PL30" colspan="2">7 角膜接触镜VST
-                        <input type="hidden" class="input_del" id="remove7" th:value="${resultDO.vstPrescriptionType}" readonly/>
-                    </td>
+        <table id="tab6"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="sjxl" >
+            <input id="remove6" th:value="${remove6}" type="hidden"/>
+            <input id="sjxlDoctor" th:value="${sjxlDoctor}" type="hidden"/>
+            <input id="sjxlOptometryName" th:value="${sjxlOptometryName}" type="hidden"/>
+            <input id="sjxlSphod" th:value="${sjxlSphod}" type="hidden"/>
+            <input id="sjxlCylod" th:value="${sjxlCylod}" type="hidden"/>
+            <input id="sjxlAxialod" th:value="${sjxlAxialod}" type="hidden"/>
+            <input id="sjxlSljod" th:value="${sjxlSljod}" type="hidden"/>
+            <input id="sjxlJdod" th:value="${sjxlJdod}" type="hidden"/>
+            <input id="sjxlYytjod" th:value="${sjxlYytjod}" type="hidden"/>
+            <input id="sjxlJytjod" th:value="${sjxlJytjod}" type="hidden"/>
+            <input id="sjxlTgod" th:value="${sjxlTgod}" type="hidden"/>
+            <input id="sjxlYyvaod" th:value="${sjxlYyvaod}" type="hidden"/>
+            <input id="sjxlJyvaod" th:value="${sjxlJyvaod}" type="hidden"/>
 
-                    <td style="text-align: right" colspan="3">医生：</td>
-                    <td> <input id="vstDoctor" name="vstDoctor" th:value="${resultDO.vstDoctor}" readonly type="text"></td>
-                    <td style="text-align: right">验光师：</td>
-                    <td><input id="vstOptometryName" name="vstOptometryName" th:value="${resultDO.vstOptometryName}" readonly type="text"></td>
-                </tr>
-                <tr class="tabS_bg">
-                    <td class="w170">&nbsp;</td>
-                    <td>球镜</td>
-                    <td>柱镜</td>
-                    <td>轴向</td>
-                    <td>试戴片编号</td>
-                    <td>FK</td>
-                    <td>曲率半径</td>
-                    <td>AC</td>
-                    <td>降幅</td>
-                    <td>DIA</td>
-                    <td>BC</td>
-                    <td>CP/CLY</td>
-                    <td>E值</td>
-                    <td>VA</td>
-                    <td>镜片颜色</td>
-                    <td width="300">品牌</td>
-                </tr>
-                <tr>
-                    <td>OD</td>
-                    <td><input th:value="${resultDO.vstSphod}" name="vstSphod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.vstCylod}" name="vstCylod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.vstAxialod}" name="vstAxialod" readonly type="text"/></td>
 
-                    <td><input th:value="${resultDO.vstSdbhod}" name="vstSdbhod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.vstFkod}" name="vstFkod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.vstQlbjod}" name="vstQlbjod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.vstAcod}" name="vstAcod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.vstJfod}" name="vstJfod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.vstDiaod}" name="vstDiaod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.vstBcod}" name="vstBcod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.vstCpclyod}" name="vstCpclyod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.vstEod}" name="vstEod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.vstVaod}" name="vstVaod" readonly type="text"/></td>
-                    <td>
-                        <select name="vstJpysod" th:value="${resultDO.vstJpysod}" disabled></select>
-                    </td>
-                    <td>适用镜片： <input name="vstSyjpod" th:value="${resultDO.vstSyjpod}"  style="width: 60%;text-align: left;" readonly type="text"/></td>
-                </tr>
-                <tr>
-                    <td>OS</td>
-                    <td><input th:value="${resultDO.vstSphos}" name="vstSphos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.vstCylos}" name="vstCylos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.vstAxialos}" name="vstAxialos" readonly type="text"/></td>
+            <input id="sjxlSphos" th:value="${sjxlSphos}" type="hidden"/>
+            <input id="sjxlCylos" th:value="${sjxlCylos}" type="hidden"/>
+            <input id="sjxlAxialos" th:value="${sjxlAxialos}" type="hidden"/>
+            <input id="sjxlSljos" th:value="${sjxlSljos}" type="hidden"/>
+            <input id="sjxlJdos" th:value="${sjxlJdos}" type="hidden"/>
+            <input id="sjxlYytjos" th:value="${sjxlYytjos}" type="hidden"/>
+            <input id="sjxlJytjos" th:value="${sjxlJytjos}" type="hidden"/>
+            <input id="sjxlTgos" th:value="${sjxlTgos}" type="hidden"/>
+            <input id="sjxlYyvaos" th:value="${sjxlYyvaos}" type="hidden"/>
+            <input id="sjxlJyvaos" th:value="${sjxlJyvaos}" type="hidden"/>
+            <input id="sjxlJtxl" th:value="${sjxlJtxl}" type="hidden"/>
+            <input id="sjxlXlsxl" th:value="${sjxlXlsxl}" type="hidden"/>
+            <input id="sjxlBeizhu" th:value="${sjxlBeizhu}" type="hidden"/>
 
-                    <td><input readonly th:value="${resultDO.vstSdbhos}" name="vstSdbhos" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.vstFkos}" name="vstFkos" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.vstQlbjos}" name="vstQlbjos" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.vstAcos}" name="vstAcos" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.vstJfos}" name="vstJfos" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.vstDiaos}" name="vstDiaos" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.vstBcos}" name="vstBcos" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.vstCpclyos}" name="vstCpclyos" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.vstEos}" name="vstEos" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.vstVaos}" name="vstVaos" type="text"/></td>
-                    <td>
-                        <select name="vstJpysos" th:value="${resultDO.vstJpysos}" disabled></select>
-                    </td>
-                    <td>适用镜片： <input name="vstSyjpos" th:value="${resultDO.vstSyjpos}" style="width: 60%;text-align: left;" readonly type="text"/></td>
-                </tr>
-                <tr>
-                    <td>备注</td>
-                    <td colspan="12">
+            </tbody>
+        </table>
 
-                        <textarea rows="3" id="vstBeizhu" name="vstBeizhu"  th:text="${resultDO.vstBeizhu}" type="text" readonly></textarea>
-                </tr>
-                </tbody>
-            </table>
+        <table id="tab7"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="vst"  >
+            <input id="remove7" th:value="${remove7}" type="hidden"/>
+            <input id="vstDoctor" th:value="${vstDoctor}" type="hidden"/>
+            <input id="vstOptometryName" th:value="${vstOptometryName}" type="hidden"/>
+            <input id="vstSphod" th:value="${vstSphod}" type="hidden"/>
+            <input id="vstCylod" th:value="${vstCylod}" type="hidden"/>
+            <input id="vstAxialod" th:value="${vstAxialod}" type="hidden"/>
+            <input id="vstSdbhod" th:value="${vstSdbhod}" type="hidden"/>
+            <input id="vstFkod" th:value="${vstFkod}" type="hidden"/>
+            <input id="vstQlbjod" th:value="${vstQlbjod}" type="hidden"/>
+            <input id="vstAcod" th:value="${vstAcod}" type="hidden"/>
+            <input id="vstJfod" th:value="${vstJfod}" type="hidden"/>
+            <input id="vstDiaod" th:value="${vstDiaod}" type="hidden"/>
+            <input id="vstBcod" th:value="${vstBcod}" type="hidden"/>
+            <input id="vstCpclyod" th:value="${vstCpclyod}" type="hidden"/>
+            <input id="vstEod" th:value="${vstEod}" type="hidden"/>
+            <input id="vstVaod" th:value="${vstVaod}" type="hidden"/>
+            <input id="vstJpysod" th:value="${vstJpysod}" type="hidden"/>
+            <input id="vstSyjpod" th:value="${vstSyjpod}" type="hidden"/>
 
-            <table id="tab8" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody id="jmcrt">
-                <tr>
-                    <td class="PL30" colspan="2">8 角膜接触镜CRT <input type="hidden" class="input_del" id="remove8" readonly th:value="${resultDO.crtPrescriptionType}"/>
-                    </td>
+            <input id="vstSphos" th:value="${vstSphos}" type="hidden"/>
+            <input id="vstCylos" th:value="${vstCylos}" type="hidden"/>
+            <input id="vstAxialos" th:value="${vstAxialos}" type="hidden"/>
+            <input id="vstSdbhos" th:value="${vstSdbhos}" type="hidden"/>
+            <input id="vstFkos" th:value="${vstFkos}" type="hidden"/>
+            <input id="vstQlbjos" th:value="${vstQlbjos}" type="hidden"/>
+            <input id="vstAcos" th:value="${vstAcos}" type="hidden"/>
+            <input id="vstJfos" th:value="${vstJfos}" type="hidden"/>
+            <input id="vstDiaos" th:value="${vstDiaos}" type="hidden"/>
+            <input id="vstBcos" th:value="${vstBcos}" type="hidden"/>
+            <input id="vstCpclyos" th:value="${vstCpclyos}" type="hidden"/>
+            <input id="vstEos" th:value="${vstEos}" type="hidden"/>
+            <input id="vstVaos" th:value="${vstVaos}" type="hidden"/>
+            <input id="vstJpysos" th:value="${vstJpysos}" type="hidden"/>
+            <input id="vstSyjpos" th:value="${vstSyjpos}" type="hidden"/>
+            <input id="vstBeizhu" th:value="${vstBeizhu}" type="hidden"/>
 
-                    <td style="text-align: right" colspan="3">医生：</td>
-                    <td> <input id="crtDoctor" name="crtDoctor" th:value="${resultDO.crtDoctor}" readonly  type="text"></td>
-                    <td style="text-align: right">验光师：</td>
-                    <td> <input id="crtOptometryName" name="crtOptometryName" th:value="${resultDO.crtOptometryName}" readonly type="text"></td>
-                </tr>
-                <tr class="tabS_bg">
-                    <td class="w170">&nbsp;</td>
-                    <td>球镜</td>
-                    <td>柱镜</td>
-                    <td>轴向</td>
-                    <td>试戴片编号</td>
-                    <td>BC</td>
-                    <td>RZD</td>
-                    <td>LZA</td>
-                    <td>RZD2</td>
-                    <td>LZA2</td>
-                    <td>降幅</td>
-                    <td>DIA</td>
-                    <td>VA</td>
-                    <td>镜片颜色</td>
-                    <td width="300">品牌</td>
-                </tr>
-                <tr>
-                    <td>OD</td>
-                    <td><input th:value="${resultDO.crtSphod}" name="crtSphod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.crtCylod}" name="crtCylod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.crtAxialod}" name="crtAxialod" readonly type="text"/></td>
 
-                    <td><input readonly th:value="${resultDO.crtSdbhod}" name="crtSdbhod" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.ctrBcod}" name="ctrBcod" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.crtRzdod}" name="crtRzdod" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.crtLzaod}" name="crtLzaod" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.crtRzd2od}" name="crtRzd2od" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.crtLza2od}" name="crtLza2od" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.crtJfod}" name="crtJfod" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.crtDiaod}" name="crtDiaod" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.crtVaod}" name="crtVaod" type="text"/></td>
-                    <td>
-                        <select name="crtJpysod"  th:value="${resultDO.crtJpysod}" disabled></select>
-                    </td>
-                    <td>适用镜片： <input name="crtSyjpod"  readonly th:value="${resultDO.crtSyjpod}"  style="width: 60%;text-align: left;" type="text"/></td>
-                </tr>
-                <tr>
-                    <td>OS</td>
-                    <td><input th:value="${resultDO.crtSphos}" name="crtSphos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.crtCylos}" name="crtCylos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.crtAxialos}" name="crtAxialos" readonly type="text"/></td>
+            </tbody>
+        </table>
 
-                    <td><input  readonly th:value="${resultDO.crtSdbhos}" name="crtSdbhos" type="text"/></td>
-                    <td><input  readonly th:value="${resultDO.crtBcos}" name="crtBcos" type="text"/></td>
-                    <td><input  readonly th:value="${resultDO.crtRzdos}" name="crtRzdos" type="text"/></td>
-                    <td><input  readonly th:value="${resultDO.crtLzaos}" name="crtLzaos" type="text"/></td>
-                    <td><input  readonly th:value="${resultDO.crtRzd2os}" name="crtRzd2os" type="text"/></td>
-                    <td><input  readonly th:value="${resultDO.crtLza2os}" name="crtLza2os" type="text"/></td>
-                    <td><input  readonly th:value="${resultDO.crtJfos}" name="crtJfos" type="text"/></td>
-                    <td><input  readonly th:value="${resultDO.crtDiaos}" name="crtDiaos" type="text"/></td>
-                    <td><input  readonly th:value="${resultDO.crtVaos}" name="crtVaos" type="text"/></td>
-                    <td>
-                        <select name="crtJpysos"  th:value="${resultDO.crtJpysos}" disabled></select>
-                    </td>
-                    <td>适用镜片： <input name="crtSyjpos" th:value="${resultDO.crtSyjpos}"  readonly style="width: 60%;text-align: left;" type="text"/></td>
-                </tr>
-                <tr>
-                    <td>备注</td>
-                    <td colspan="11">
-                        <textarea rows="3" id="crtBeizhu" name="crtBeizhu"  th:text="${resultDO.crtBeizhu}" type="text" readonly></textarea>
-                </tr>
-                </tbody>
-            </table>
+        <table id="tab8"   class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="crt" >
+            <input id="remove8" th:value="${remove8}" type="hidden"/>
+            <input id="crtDoctor" th:value="${crtDoctor}" type="hidden"/>
+            <input id="crtOptometryName" th:value="${crtOptometryName}" type="hidden"/>
+            <input id="crtSphod" th:value="${crtSphod}" type="hidden"/>
+            <input id="crtCylod" th:value="${crtCylod}" type="hidden"/>
+            <input id="crtAxialod" th:value="${crtAxialod}" type="hidden"/>
+            <input id="crtSdbhod" th:value="${crtSdbhod}" type="hidden"/>
+            <input id="ctrBcod" th:value="${ctrBcod}" type="hidden"/>
+            <input id="crtRzdod" th:value="${crtRzdod}" type="hidden"/>
+            <input id="crtLzaod" th:value="${crtLzaod}" type="hidden"/>
+            <input id="crtRzd2od" th:value="${crtRzd2od}" type="hidden"/>
+            <input id="crtLza2od" th:value="${crtLza2od}" type="hidden"/>
+            <input id="crtJfod" th:value="${crtJfod}" type="hidden"/>
+            <input id="crtDiaod" th:value="${crtDiaod}" type="hidden"/>
+            <input id="crtVaod" th:value="${crtVaod}" type="hidden"/>
+            <input id="crtJpysod" th:value="${crtJpysod}" type="hidden"/>
+            <input id="crtSyjpod" th:value="${crtSyjpod}" type="hidden"/>
 
-            <table id="tab9" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody id="jcrgp">
-                <tr>
-                    <td class="PL30" colspan="2">9 RGP
-                        <input type="hidden" class="input_del" id="remove9" readonly th:value="${resultDO.rgpPrescriptionType}"/></td>
+            <input id="crtSphos" th:value="${crtSphos}" type="hidden"/>
+            <input id="crtCylos" th:value="${crtCylos}" type="hidden"/>
+            <input id="crtAxialos" th:value="${crtAxialos}" type="hidden"/>
+            <input id="crtSdbhos" th:value="${crtSdbhos}" type="hidden"/>
+            <input id="crtBcos" th:value="${crtBcos}" type="hidden"/>
+            <input id="crtRzdos" th:value="${crtRzdos}" type="hidden"/>
+            <input id="crtLzaos" th:value="${crtLzaos}" type="hidden"/>
+            <input id="crtRzd2os" th:value="${crtRzd2os}" type="hidden"/>
+            <input id="crtLza2os" th:value="${crtLza2os}" type="hidden"/>
+            <input id="crtJfos" th:value="${crtJfos}" type="hidden"/>
+            <input id="crtDiaos" th:value="${crtDiaos}" type="hidden"/>
+            <input id="crtVaos" th:value="${crtVaos}" type="hidden"/>
+            <input id="crtJpysos" th:value="${crtJpysos}" type="hidden"/>
+            <input id="crtSyjpos" th:value="${crtSyjpos}" type="hidden"/>
+            <input id="crtBeizhu" th:value="${crtBeizhu}" type="hidden"/>
+            </tbody>
+        </table>
 
-                    <td style="text-align: right" colspan="3">医生：</td>
-                    <td>  <input id="rgpDoctor" name="rgpDoctor"  th:value="${resultDO.rgpDoctor}"  readonly type="text"></td>
-                    <td style="text-align: right">验光师：</td>
-                    <td><input id="rgpOptometryName" name="rgpOptometryName"  th:value="${resultDO.rgpOptometryName}" type="text"></td>
-                </tr>
-                <tr class="tabS_bg">
-                    <td class="w170">&nbsp;</td>
-                    <td>球镜</td>
-                    <td>柱镜</td>
-                    <td>轴向</td>
-                    <td>屈光度</td>
-                    <td>BC</td>
-                    <td>DIA</td>
-                    <td>散光</td>
-                    <td>镜片颜色</td>
-                    <td>特殊设计</td>
-                    <td width="300">品牌</td>
-                </tr>
-                <tr>
-                    <td>OD</td>
-                    <td><input th:value="${resultDO.rgpSphod}" name="rgpSphod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.rgpCylod}" name="rgpCylod" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.rgpAxialod}" name="rgpAxialod" readonly type="text"/></td>
+        <table id="tab9"   class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="rgp"  >
+            <input id="remove9" th:value="${remove9}" type="hidden"/>
+            <input id="rgpDoctor" th:value="${rgpDoctor}" type="hidden"/>
+            <input id="rgpOptometryName" th:value="${rgpOptometryName}" type="hidden"/>
+            <input id="rgpSphod" th:value="${rgpSphod}" type="hidden"/>
+            <input id="rgpCylod" th:value="${rgpCylod}" type="hidden"/>
+            <input id="rgpAxialod" th:value="${rgpAxialod}" type="hidden"/>
+            <input id="rgpQgdod" th:value="${rgpQgdod}" type="hidden"/>
+            <input id="rgpBcod" th:value="${rgpBcod}" type="hidden"/>
+            <input id="rgpDiaod" th:value="${rgpDiaod}" type="hidden"/>
+            <input id="rgpSgod" th:value="${rgpSgod}" type="hidden"/>
+            <input id="rgpJpysod" th:value="${rgpJpysod}" type="hidden"/>
+            <input id="rgpTssjod" th:value="${rgpTssjod}" type="hidden"/>
+            <input id="rgpSyjpod" th:value="${rgpSyjpod}" type="hidden"/>
 
-                    <td><input readonly th:value="${resultDO.rgpQgdod}" name="rgpQgdod" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.rgpBcod}" name="rgpBcod" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.rgpDiaod}" name="rgpDiaod" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.rgpSgod}" name="rgpSgod" type="text"/></td>
-                    <td>
-                        <select name="rgpJpysod" th:value="${resultDO.rgpJpysod}" disabled></select>
-                    </td>
-                    <td><input name="rgpTssjod" readonly th:value="${resultDO.rgpTssjod}" type="text"/></td>
-                    <td>适用镜片： <input name="rgpSyjpod" readonly th:value="${resultDO.rgpSyjpod}" style="width: 60%;text-align: left;" type="text"/></td>
-                </tr>
-                <tr>
-                    <td>OS</td>
-                    <td><input th:value="${resultDO.rgpSphos}" name="rgpSphos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.rgpCylos}" name="rgpCylos" readonly type="text"/></td>
-                    <td><input th:value="${resultDO.rgpAxialos}" name="rgpAxialos" readonly type="text"/></td>
+            <input id="rgpSphos" th:value="${rgpSphos}" type="hidden"/>
+            <input id="rgpCylos" th:value="${rgpCylos}" type="hidden"/>
+            <input id="rgpAxialos" th:value="${rgpAxialos}" type="hidden"/>
+            <input id="rgpQgdos" th:value="${rgpQgdos}" type="hidden"/>
+            <input id="rgpBcos" th:value="${rgpBcos}" type="hidden"/>
+            <input id="rgpDiaos" th:value="${rgpDiaos}" type="hidden"/>
+            <input id="rgpSgos" th:value="${rgpSgos}" type="hidden"/>
+            <input id="rgpJpysos" th:value="${rgpJpysos}" type="hidden"/>
+            <input id="rgpTssjos" th:value="${rgpTssjos}" type="hidden"/>
+            <input id="rgpSyjpos" th:value="${rgpSyjpos}" type="hidden"/>
+            <input id="rgpBeizhu" th:value="${rgpBeizhu}" type="hidden"/>
 
-                    <td><input readonly th:value="${resultDO.rgpQgdos}" name="rgpQgdos" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.rgpBcos}" name="rgpBcos" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.rgpDiaos}" name="rgpDiaos" type="text"/></td>
-                    <td><input readonly th:value="${resultDO.rgpSgos}" name="rgpSgos" type="text"/></td>
-                    <td>
-                        <select name="rgpJpysos" th:value="${resultDO.rgpJpysos}" disabled></select>
-                    </td>
-                    <td><input readonly name="rgpTssjos" th:value="${resultDO.rgpTssjos}" type="text"/></td>
-                    <td>适用镜片： <input readonly name="rgpSyjpos" th:value="${resultDO.rgpSyjpos}" style="width: 60%;text-align: left;" type="text"/></td>
-                </tr>
-                <tr>
-                    <td>备注</td>
-                    <td colspan="7">
-                        <textarea rows="3" id="rgpBeizhu" name="rgpBeizhu"  th:text="${resultDO.rgpBeizhu}" type="text" readonly></textarea>
-                </tr>
-                </tbody>
-            </table>
 
-            <table id="tab10" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
-                <tbody id="jcyp">
-                <tr>
-                    <td class="PL30" colspan="2">10 药品
-                        <input readonly type="hidden" class="input_del" id="remove10" th:value="${resultDO.ypPrescriptionType}"/></td>
+            </tbody>
+        </table>
 
-                    <td style="text-align: right" colspan="3">医生：</td>
-                    <td>  <input id="ypDoctor" name="ypDoctor" th:value="${resultDO.ypDoctor}" readonly type="text"></td>
-                    <td style="text-align: right">验光师：</td>
-                    <td><input id="ypOptometryName" name="ypOptometryName" readonly th:value="${resultDO.ypOptometryName}" type="text"></td>
-                </tr>
-                <tr>
-                    <td class="w170">内容：</td>
-                    <td colspan="2">
-                        <textarea rows="3" id="ypNr" name="ypNr"  th:text="${resultDO.ypNr}" type="text" readonly></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>药名：</td>
-                    <td colspan="2">
-                        <label class="text">
-                            <textarea rows="2" id="ypYm" name="ypYm"  th:text="${resultDO.ypYm}" type="text" readonly></textarea>
-                        </label>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <table id="tab10"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+            <tbody id="yp"  >
+            <input id="remove10" th:value="${remove10}" type="hidden"/>
+            <input id="ypDoctor" th:value="${ypDoctor}" type="hidden"/>
+            <input id="ypOptometryName" th:value="${ypOptometryName}" type="hidden"/>
+            <input id="ypNr" th:value="${ypNr}" type="hidden"/>
+            <input id="ypYm" th:value="${ypYm}" type="hidden"/>
+            </tbody>
+        </table>
+    </div>
     </div>
 </form>
 <div th:include="include :: footer"></div>
@@ -1824,140 +1214,931 @@
 
 
 
-        var remove1 = document.getElementById('remove1').value;
-        var remove2 = document.getElementById('remove2').value;
-        var remove3 = document.getElementById('remove3').value;
-        var remove4 = document.getElementById('remove4').value;
-        var remove5 = document.getElementById('remove5').value;
-        var remove6 = document.getElementById('remove6').value;
-        var remove7 = document.getElementById('remove7').value;
-        var remove8 = document.getElementById('remove8').value;
-        var remove9 = document.getElementById('remove9').value;
-        var remove10 = document.getElementById('remove10').value;
+        var remove1 = $("#remove1").val();
+        var kjyyDoctor = $("#kjyyDoctor").val();
+        var kjyyOptometryName = $("#kjyyOptometryName").val();
+        var kjyySphod = $("#kjyySphod").val();
+        var kjyyCylod = $("#kjyyCylod").val();
+        var kjyyAxialod = $("#kjyyAxialod").val();
+        var kjyyPrismod = $("#kjyyPrismod").val();
+        var kjyyJdod = $("#kjyyJdod").val();
+        var kjyyYytjod = $("#kjyyYytjod").val();
+        var kjyyTgod = $("#kjyyTgod").val();
+        var kjyyVaod = $("#kjyyVaod").val();
+        var kjyySphos = $("#kjyySphos").val();
+        var kjyyCylos = $("#kjyyCylos").val();
+        var kjyyAxialos = $("#kjyyAxialos").val();
+        var kjyyPrismos = $("#kjyyPrismos").val();
+        var kjyyJdos = $("#kjyyJdos").val();
+        var kjyyYytjos = $("#kjyyYytjos").val();
+        var kjyyTgos = $("#kjyyTgos").val();
+        var kjyyVaos = $("#kjyyVaos").val();
+        var kjyyJpcz = $("#kjyyJpcz").val();
+        var kjyyClfs = $("#kjyyClfs").val();
+        var kjyyBeizhu = $("#kjyyBeizhu").val();
+
+        var remove1Html="";
         if (remove1 == '2'){
-            tab1.style = "display: block";
-            var kjyyDoctors = $("input[name='kjyyDoctors']").val();
-            // alert(kjyyDoctors)
-            $("#kjyyDoctor").find("[value='" + kjyyDoctors + "']").attr("selected", true);
-            var kjyyOptometryNames = $("input[name= 'kjyyOptometryNames']").val();
-            $("#kjyyOptometryName").find("[value='" + kjyyOptometryNames + "']").attr("selected", true);
-            var kjyyJdods = $("input[name='kjyyJdods']").val();
-            $("#kjyyJdod").find("[value='" + kjyyJdods + "']").attr("selected", true);
-            var kjyyJdoss = $("input[name='kjyyJdoss']").val();
-            $("#kjyyJdos").find("[value='" + kjyyJdoss + "']").attr("selected", true);
-            var kjyyJpczs = $("input[name='kjyyJpczs']").val();
-            $("#kjyyJpcz").find("[value='" + kjyyJpczs + "']").attr("selected", true);
-            var kjyyClfss = $("input[name='kjyyClfss']").val();
-            $("#kjyyClfs").find("[value='" + kjyyClfss + "']").attr("selected", true);
-            var kjyyKjlxs = $("input[name='kjyyKjlxs']").val();
-            $("#kjyyKjlx").find("[value='" + kjyyKjlxs + "']").attr("selected", true);
+            remove1Html+="<tr>";
+            remove1Html+="<td class='PL30' colspan='2'>1 框架--远用 </td>";
+            remove1Html+="<td style='text-align: right' colspan='3'>医生：</td>";
+            remove1Html+="<td><input id='kjyyDoctor' name='kjyyDoctor' value='"+kjyyDoctor+"' type='text' readonly></td>";
+            remove1Html+="<td style='text-align: right' >验光师：</td>";
+            remove1Html+="<td><input id='kjyyOptometryName' name='kjyyOptometryName' value='"+kjyyOptometryName+"' type='text' readonly></td>";
+            remove1Html+="</tr>";
+            remove1Html+="<tr class='tabS_bg'>";
+            remove1Html+="<td class='w170'>&nbsp;</td>";
+            remove1Html+="<td>球镜</td>";
+            remove1Html+="<td>柱镜</td>";
+            remove1Html+="<td>轴向</td>";
+            remove1Html+="<td>三棱镜</td>+";
+            remove1Html+="<td>基底</td>+";
+            remove1Html+="<td>远用瞳距(mm)</td>+";
+            remove1Html+="<td>瞳高(mm)</td>+";
+            remove1Html+="<td>远用VA</td>+";
+            remove1Html+="</tr>";
+            remove1Html+="<tr>";
+            remove1Html+="<td>OD</td>";
+            remove1Html+="<td><input name='kjyySphod' value='"+kjyySphod+"' readonly type='text'/></td>";
+            remove1Html+="<td><input name='kjyyCylod' value='"+kjyyCylod+"' readonly type='text'/></td>";
+            remove1Html+="<td><input name='kjyyAxialod' value='"+kjyyAxialod+"' readonly type='text'/></td>";
+            remove1Html+="<td><input name='kjyyPrismod' value='"+kjyyPrismod+"' class='short' readonly type='text'/>△</td>";
+            remove1Html+="<td><input id='kjyyJdod' name='kjyyJdod' value='"+kjyyJdod+"' readonly type='text'></td>";
+            remove1Html+="<td><input  name='kjyyYytjod' value='"+kjyyYytjod+"' readonly type='text'/></td>";
+            remove1Html+="<td><input  name='kjyyTgod' value='"+kjyyTgod+"' readonly type='text'/></td>";
+            remove1Html+="<td><input name='kjyyVaod' value='"+kjyyVaod+"' readonly type='text'/></td>";
+            remove1Html+="</tr>";
+            remove1Html+="<tr>";
+            remove1Html+="<td>OS</td>";
+            remove1Html+="<td><input name='kjyySphos' value='"+kjyySphos+"' readonly type='text'/></td>";
+            remove1Html+="<td><input name='kjyyCylos' value='"+kjyyCylos+"' readonly type='text'/></td>";
+            remove1Html+="<td><input name='kjyyAxialos' value='"+kjyyAxialos+"' readonly type='text'/></td>";
+            remove1Html+="<td><input name='kjyyPrismos' value='"+kjyyPrismos+"' class='short' readonly type='text'/>△</td>";
+            remove1Html+="<td><input id='kjyyJdos' name='kjyyJdos' value='"+kjyyJdos+"' readonly type='text'></td>";
+            remove1Html+="<td><input  name='kjyyYytjos' value='"+kjyyYytjos+"' readonly type='text'/></td>";
+            remove1Html+="<td><input  name='kjyyTgos' value='"+kjyyTgos+"' readonly type='text'/></td>";
+            remove1Html+="<td><input name='kjyyVaos' value='"+kjyyVaos+"' readonly type='text'/></td>";
+            remove1Html+="</tr>";
+            remove1Html+="<tr>";
+            remove1Html+="<td rowspan='2' colspan='1'>建议镜片材质:</td>";
+            remove1Html+="<td rowspan='1' colspan='2' class='daK'><input id='kjyyJpcz' name='kjyyJpcz' value='"+kjyyJpcz+"' readonly type='text'></td>";
+            remove1Html+="<td rowspan='1' colspan='1'>处理方式:</td>";
+            remove1Html+="<td rowspan='1' colspan='2' class='daK'><input id='kjyyClfs' name='kjyyClfs' value='"+kjyyClfs+"' readonly type='text'></td>";
+            remove1Html+="<td colspan='3'></td>";
+            remove1Html+="</tr>";
+            remove1Html+="<tr></tr>";
+            remove1Html+="<tr>";
+            remove1Html+="<td rowspan='1' colspan='1'>中距离：</td>";
+            remove1Html+="<td rowspan='1' colspan='2' class='daK'>";
+            remove1Html+="<label><input name='kjyyJykj' value='建议镜框' type='checkbox' readonly/> 建议镜框：</label>";
+            remove1Html+="<input id='kjyyKjlx' name='kjyyKjlx' th:value='${kjyyKjlx}' readonly type='text'>";
+            remove1Html+="<input name='kjyyText' th:value='${kjyyText}' style='width: 40%;'  readonly type='text'/>";
+            remove1Html+="</td>";
+            remove1Html+="<td rowspan='1' colspan='1'>备注</td>";
+            remove1Html+="<td rowspan='1' colspan='2'><input rows='3' id='kjyyBeizhu' name='kjyyBeizhu'  value='"+kjyyBeizhu+"' type='text' readonly></input></td>";
+            remove1Html+="<td colspan='3'></td>";
+            remove1Html+="</tr>";
+            remove1Html+="";
+        }
+        $("#kjyy").append(remove1Html);
 
-        }
-        if (remove2=='1'){
-            tab2.style = "display: block";
-            var kjjyDoctors = $("input[name='kjjyDoctors']").val();
-            $("#kjjyDoctor").find("[value='" + kjjyDoctors + "']").attr("selected", true);
-            var kjjyOptometryNames = $("input[name='kjjyOptometryNames']").val();
-            $("#kjjyOptometryName").find("[value='" + kjjyOptometryNames + "']").attr("selected", true);
-            var kjjyJdods = $("input[name='kjjyJdods']").val();
-            $("#kjjyJdod").find("[value='" + kjjyJdods + "']").attr("selected", true);
-            var kjjyJdoss = $("input[name='kjjyJdoss']").val();
-            $("#kjjyJdos").find("[value='" + kjjyJdoss + "']").attr("selected", true);
-            var kjjyJpczs = $("input[name='kjjyJpczs']").val();
-            $("#kjjyJpcz").find("[value='" + kjjyJpczs + "']").attr("selected", true);
-            var kjjyClfss = $("input[name='kjjyClfss']").val();
-            $("#kjjyClfs").find("[value='" + kjjyClfss + "']").attr("selected", true);
-            var kjjyKjlxs = $("input[name='kjjyKjlxs']").val();
-            $("#kjjyKjlx").find("[value='" + kjjyKjlxs + "']").attr("selected", true);
 
-        }
-        if (remove3=='3'){
-            tab3.style = "display: block";
-            var sgjjDoctors = $("input[name='sgjjDoctors']").val();
-            $("#sgjjDoctor").find("[value='" + sgjjDoctors + "']").attr("selected", true);
-            var sgjjOptometryNames = $("input[name='sgjjOptometryNames']").val();
-            $("#sgjjOptometryName").find("[value='" + sgjjOptometryNames + "']").attr("selected", true);
-            var sgjjJpczs = $("input[name='sgjjJpczs']").val();
-            $("#sgjjJpcz").find("[value='" + sgjjJpczs + "']").attr("selected", true);
-            var sgjjClfss = $("input[name='sgjjClfss']").val();
-            $("#sgjjClfs").find("[value='" + sgjjClfss + "']").attr("selected", true);
-            var sgjjKjlxs = $("input[name='sgjjKjlxs']").val();
-            $("#sgjjKjlx").find("[value='" + sgjjKjlxs + "']").attr("selected", true);
+        var remove2 = $("#remove2").val();
+        var kjjyDoctor = $("#kjjyDoctor").val();
+        var kjjyOptometryName = $("#kjjyOptometryName").val();
+        var kjjySphod = $("#kjjySphod").val();
+        var kjjyCylod = $("#kjjyCylod").val();
+        var kjjyAxialod = $("#kjjyAxialod").val();
+        var kjjyPrismod = $("#kjjyPrismod").val();
+        var kjjyJdod = $("#kjjyJdod").val();
+        var kjjyYytjod = $("#kjjyYytjod").val();
+        var kjjyTgod = $("#kjjyTgod").val();
+        var kjjyVaod = $("#kjjyVaod").val();
 
+        var kjjySphos = $("#kjjySphos").val();
+        var kjjyCylos = $("#kjjyCylos").val();
+        var kjjyAxialos = $("#kjjyAxialos").val();
+        var kjjyPrismos = $("#kjjyPrismos").val();
+        var kjjyJdos = $("#kjjyJdos").val();
+        var kjjyYytjos = $("#kjjyYytjos").val();
+        var kjjyTgos = $("#kjjyTgos").val();
+        var kjjyVaos = $("#kjjyVaos").val();
+        var kjjyJpcz = $("#kjjyJpcz").val();
+        var kjjyClfs = $("#kjjyClfs").val();
+        var kjjyKjlx = $("#kjjyKjlx").val();
+        var kjjyText = $("#kjjyText").val();
+        var kjjyBeizhu = $("#kjjyBeizhu").val();
+
+        var  remove2Html="";
+        if (remove2=="1"){
+            remove2Html+="<tr>";
+            remove2Html+="<td class='PL30' colspan='2'>2 框架--近用";
+            remove2Html+="<td style='text-align: right' colspan='3'>医生：</td>";
+            remove2Html+="<td><input id='kjjyDoctor' name='kjjyDoctor' value='"+kjjyDoctor+"'  type='text' readonly></td>";
+            remove2Html+="<td style='text-align: right'  >验光师：</td>";
+            remove2Html+="<td><input id='kjjyOptometryName' name='kjjyOptometryName' value='"+kjjyOptometryName+"'  type='text'  readonly></td>";
+            remove2Html+="</tr>";
+            remove2Html+="<tr class='tabS_bg'>";
+            remove2Html+="<td class='w170'>&nbsp;</td>";
+            remove2Html+="<td>球镜</td>";
+            remove2Html+="<td>柱镜</td>";
+            remove2Html+="<td>轴向</td>";
+            remove2Html+="<td>三棱镜</td>";
+            remove2Html+="<td>基底</td>";
+            remove2Html+="<td>近用瞳距(mm)</td>";
+            remove2Html+="<td>瞳高(mm)</td>";
+            remove2Html+="<td>近用VA</td>";
+            remove2Html+="</tr>";
+            remove2Html+="<tr>";
+            remove2Html+="<td>OD</td>";
+            remove2Html+="<td><input name='kjjySphod' value='"+kjjySphod+"' readonly type='text'/></td>";
+            remove2Html+="<td><input name='kjjyCylod' value='"+kjjyCylod+"' readonly type='text'/></td>";
+            remove2Html+="<td><input name='kjjyAxialod' value='"+kjjyAxialod+"'  readonly type='text'/></td>";
+            remove2Html+="<td><input name='kjjyPrismod' value='"+kjjyPrismod+"' class='short' readonly type='text'/> △";
+            remove2Html+="</td>";
+            remove2Html+="<td>";
+            remove2Html+="<input id='kjjyJdod' name='kjjyJdod' value='"+kjjyJdod+"' readonly type='text'>";
+            remove2Html+="</td>";
+            remove2Html+="<td><input name='kjjyYytjod' value='"+kjjyYytjod+"' readonly type='text'/></td>";
+            remove2Html+="<td><input name='kjjyTgod' value='"+kjjyTgod+"' readonly type='text'/></td>";
+            remove2Html+="<td><input name='kjjyVaod' value='"+kjjyVaod+"' readonly type='text'/></td>";
+            remove2Html+="</tr>";
+            remove2Html+="<tr>";
+            remove2Html+="<td>OS</td>";
+            remove2Html+="<td><input name='kjjySphos' value='"+kjjySphos+"' readonly type='text'/></td>";
+            remove2Html+="<td><input name='kjjyCylos' value='"+kjjyCylos+"' readonly type='text'/></td>";
+            remove2Html+="<td><input name='kjjyAxialos' value='"+kjjyAxialos+"'  readonly type='text'/></td>";
+            remove2Html+="<td><input name='kjjyPrismos' value='"+kjjyPrismos+"' class='short' readonly type='text'/> △";
+            remove2Html+="</td>";
+            remove2Html+="<td>";
+            remove2Html+="<input id='kjjyJdos' name='kjjyJdos' value='"+kjjyJdos+"' readonly type='text'>";
+            remove2Html+="</td>";
+            remove2Html+="<td><input name='kjjyYytjos' value='"+kjjyYytjos+"' readonly type='text'/></td>";
+            remove2Html+="<td><input name='kjjyTgos' value='"+kjjyTgos+"' readonly type='text'/></td>";
+            remove2Html+="<td><input name='kjjyVaos' value='"+kjjyVaos+"' readonly type='text'/></td>";
+            remove2Html+="</tr>";
+
+            remove2Html+="<tr>";
+            remove2Html+="<td rowspan='2' colspan='1'>建议镜片材质:</td>";
+            remove2Html+="<td rowspan='1' colspan='2' class='daK'>";
+            remove2Html+="<input id='kjjyJpcz' name='kjjyJpcz' value='"+kjjyJpcz+"'  readonly type='hidden'>";
+            remove2Html+="</td>";
+            remove2Html+="<td rowspan='1' colspan='1'>处理方式:</td>";
+            remove2Html+="<td rowspan='1' colspan='2' class='daK'>";
+            remove2Html+="<input id='kjjyClfs' name='kjjyClfs' value='"+kjjyClfs+"' readonly type='text'>";
+            remove2Html+="</td>";
+            remove2Html+="<td colspan='3'></td>";
+            remove2Html+="</tr>";
+            remove2Html+="<tr></tr>";
+            remove2Html+="<tr>";
+            remove2Html+="<td rowspan='1' colspan='1'>中距离：</td>";
+            remove2Html+="<td rowspan='1' colspan='2' class='daK'>";
+            remove2Html+="<label><input name='kjjyJykj' value='建议镜框' type='checkbox' readonly /> 建议镜框：</label>";
+            remove2Html+="<input id='kjjyKjlx' name='kjjyKjlx' value='"+kjjyKjlx+"' readonly type='text'>";
+            remove2Html+="<input name='kjjyText' value='"+kjjyText+"' style='width: 40%;' readonly type='text'/>";
+            remove2Html+="</td>";
+            remove2Html+="<td rowspan='1' colspan='1'>备注</td>";
+            remove2Html+="<td rowspan='1' colspan='2'>";
+            remove2Html+="<input rows='3' id='kjjyBeizhu' name='kjjyBeizhu'  value='"+kjjyBeizhu+"' type='text' readonly></input>";
+            remove2Html+="</td>";
+            remove2Html+="<td colspan='3'></td>";
+            remove2Html+="</tr>";
         }
-        if (remove4=='5'){
-            tab4.style = "display: block";
-            var rxDoctors = $("input[name='rxDoctors']").val();
-            $("#rxDoctor").find("[value='" + rxDoctors + "']").attr("selected", true);
-            var rxOptometryNames = $("input[name='rxOptometryNames']").val();
-            $("#rxOptometryName").find("[value='" + rxOptometryNames + "']").attr("selected", true);
-            var rxClfss = $("input[name='rxClfss']").val();
-            $("#rxClfs").find("[value='" + rxClfss + "']").attr("selected", true);
+        $("#kjjy").append(remove2Html);
+
+
+
+        var remove3 = $("#remove3").val();
+        var sgjjDoctor=$("#sgjjDoctor").val();
+        var sgjjOptometryName=$("#sgjjOptometryName").val();
+        var sgjjSphod=$("#sgjjSphod").val();
+        var sgjjCylod=$("#sgjjCylod").val();
+        var sgjjAxialod=$("#sgjjAxialod").val();
+        var sgjjAddod=$("#sgjjAddod").val();
+        var sgjjYytjod=$("#sgjjYytjod").val();
+        var sgjjJytjod=$("#sgjjJytjod").val();
+        var sgjjTgod=$("#sgjjTgod").val();
+        var sgjjYyvaod=$("#sgjjYyvaod").val();
+        var sgjjJyvaod=$("#sgjjJyvaod").val();
+
+        var sgjjSphos=$("#sgjjSphos").val();
+        var sgjjCylos=$("#sgjjCylos").val();
+        var sgjjAxialos=$("#sgjjAxialos").val();
+        var sgjjAddos=$("#sgjjAddos").val();
+        var sgjjYytjos=$("#sgjjYytjos").val();
+        var sgjjJytjos=$("#sgjjJytjos").val();
+        var sgjjTgos=$("#sgjjTgos").val();
+        var sgjjYyvaos=$("#sgjjYyvaos").val();
+        var sgjjJyvaos=$("#sgjjJyvaos").val();
+        var sgjjJpcz=$("#sgjjJpcz").val();
+        var sgjjClfs=$("#sgjjClfs").val();
+        var sgjjKjlx=$("#sgjjKjlx").val();
+        var sgjjBeizhu=$("#sgjjBeizhu").val();
+
+
+        var  remove3Html="";
+        if(remove3=='3'){
+            remove3Html+="<tr>";
+            remove3Html+="<td class='PL30' colspan='2'>3框架--双光/渐进</td>";
+            remove3Html+="<td style='text-align: right' colspan='3'>医生：</td>";
+            remove3Html+="<td><input id='sgjjDoctor' name='sgjjDoctor' value='"+sgjjDoctor+"' type='text' readonly></td>";
+            remove3Html+="<td style='text-align: right'  >验光师：</td>";
+            remove3Html+="<td><input id='sgjjOptometryName' name='sgjjOptometryName' value='"+sgjjOptometryName+"' type='text' readonly></td>";
+            remove3Html+="</tr>";
+            remove3Html+="<tr class='tabS_bg'>";
+            remove3Html+="<td class='w170'>&nbsp;</td>";
+            remove3Html+="<td>球镜</td>";
+            remove3Html+="<td>柱镜</td>";
+            remove3Html+="<td>轴向</td>";
+            remove3Html+="<td>Add</td>";
+            remove3Html+="<td>远用瞳距(mm)</td>";
+            remove3Html+="<td>近用瞳距(mm)</td>";
+            remove3Html+="<td>瞳高(mm)</td>";
+            remove3Html+="<td>远用VA</td>";
+            remove3Html+="<td>近用VA</td>";
+            remove3Html+="</tr>";
+            remove3Html+="<tr>";
+            remove3Html+="<td>OD</td>";
+            remove3Html+="<td><input value='"+sgjjSphod+"' name='sgjjSphod' readonly type='text' /></td>";
+            remove3Html+="<td><input value='"+sgjjCylod+"' name='sgjjCylod' readonly type='text' /></td>";
+            remove3Html+="<td><input value='"+sgjjAxialod+"' name='sgjjAxialod' readonly type='text' /></td>";
+            remove3Html+="<td><input value='"+sgjjAddod+"' name='sgjjAddod' readonly type='text'/></td>";
+            remove3Html+="<td><input value='"+sgjjYytjod+"' name='sgjjYytjod' readonly type='text'/></td>";
+            remove3Html+="<td><input value='"+sgjjJytjod+"' name='sgjjJytjod' readonly type='text'/></td>";
+            remove3Html+="<td><input value='"+sgjjTgod+"' name='sgjjTgod' readonly type='text'/></td>";
+            remove3Html+="<td><input value='"+sgjjYyvaod +"' name='sgjjYyvaod' readonly type='text'/></td>";
+            remove3Html+="<td><input value='"+sgjjJyvaod +"' name='sgjjJyvaod' readonly type='text'/></td>";
+            remove3Html+="</tr>";
+            remove3Html+="<tr>";
+            remove3Html+="<td>OS</td>";
+            remove3Html+="<td><input value='"+sgjjSphos+"' name='sgjjSphos' readonly type='text' /></td>";
+            remove3Html+="<td><input value='"+sgjjCylos+"' name='sgjjCylos' readonly type='text' /></td>";
+            remove3Html+="<td><input value='"+sgjjAxialos+"' name='sgjjAxialos' readonly type='text' /></td>";
+            remove3Html+="<td><input value='"+sgjjAddos+"' name='sgjjAddos' readonly type='text'/></td>";
+            remove3Html+="<td><input value='"+sgjjYytjos+"' name='sgjjYytjos' readonly type='text'/></td>";
+            remove3Html+="<td><input value='"+sgjjJytjos+"' name='sgjjJytjos' readonly type='text'/></td>";
+            remove3Html+="<td><input value='"+sgjjTgos+"' name='sgjjTgos' readonly type='text'/></td>";
+            remove3Html+="<td><input value='"+sgjjYyvaos +"' name='sgjjYyvaos' readonly type='text'/></td>";
+            remove3Html+="<td><input value='"+sgjjJyvaos +"' name='sgjjJyvaos' readonly type='text'/></td>";
+            remove3Html+="</tr>";
+            remove3Html+="<tr>";
+            remove3Html+="<td rowspan='2' colspan='1'>建议镜片材质:</td>";
+            remove3Html+="<td rowspan='1' colspan='3' class='daK'>";
+            remove3Html+="<input id='sgjjJpcz' name='sgjjJpcz' value='"+sgjjJpcz+"' readonly type='text'>";
+            remove3Html+="</td>";
+            remove3Html+="<td rowspan='1' colspan='1'>处理方式:</td>";
+            remove3Html+="<td rowspan='1' colspan='3' class='daK'>";
+            remove3Html+="<input id='sgjjClfs' name='sgjjClfs' value='"+sgjjClfs+"' readonly type='text'>";
+            remove3Html+="</td>";
+            remove3Html+="<td colspan='3'></td>";
+            remove3Html+="</tr>";
+            remove3Html+="<tr></tr>";
+            remove3Html+="<tr>";
+            remove3Html+="<td rowspan='1' colspan='1'>中距离：</td>";
+            remove3Html+="<td rowspan='1' colspan='3' class='daK'>";
+            remove3Html+="<label><input name='sgjjJykj' value='建议镜框' type='checkbox' readonly/> 建议镜框：</label>";
+            remove3Html+="<input id='sgjjKjlx' name='sgjjKjlx' value='"+sgjjKjlx+"' readonly type='hidden'>";
+            remove3Html+="<input name='sgjjText' th:value='${resultDO.sgjjText}' style='width: 40%;' readonly type='text'/>";
+            remove3Html+="</td>";
+            remove3Html+="<td rowspan='1' colspan='1'>备注</td>";
+            remove3Html+="<td rowspan='1' colspan='2'>";
+            remove3Html+="<input rows='3' id='sgjjBeizhu' name='sgjjBeizhu'  value='"+sgjjBeizhu+"' type='text' readonly></input>";
+            remove3Html+="<td colspan='3'></td>";
+            remove3Html+="</tr>";
         }
+        $("#sgjj").append(remove3Html);
+
+        var remove4 =  $("#remove4").val();
+        var rxDoctor=$("#rxDoctor").val();
+        var rxOptometryName=$("#rxOptometryName").val();
+        var rxBcod=$("#rxBcod").val();
+        var rxSphod=$("#rxSphod").val();
+        var rxCylod=$("#rxCylod").val();
+        var rxAxialod=$("#rxAxialod").val();
+        var rxZjod=$("#rxZjod").val();
+        var rxVaod=$("#rxVaod").val();
+        var rxSyjpod=$("#rxSyjpod").val();
+        var rxUnitod=$("#rxUnitod").val();
+
+        var rxBcos=$("#rxBcos").val();
+        var rxSphos=$("#rxSphos").val();
+        var rxCylos=$("#rxCylos").val();
+        var rxAxialos=$("#rxAxialos").val();
+        var rxZjos=$("#rxZjos").val();
+        var rxVaos=$("#rxVaos").val();
+        var rxSyjpos=$("#rxSyjpos").val();
+        var rxUnitos=$("#rxUnitos").val();
+
+        var rxClfs=$("#rxClfs").val();
+        var rxHlypz=$("#rxHlypz").val();
+        var rxBeizhu=$("#rxBeizhu").val();
+        var remove4Html="";
+        if(remove4=='5'){
+            remove4Html+="<tr>";
+            remove4Html+="<td class='PL30' colspan='2'>4 软性角膜接触镜";
+            remove4Html+="</td>";
+            remove4Html+="<td style='text-align: right' colspan='3'>医生：</td>";
+            remove4Html+="<td><input id='rxDoctor' name='rxDoctor' value='"+rxDoctor+"' type='text' readonly></td>";
+            remove4Html+="<td style='text-align: right'  >验光师：</td>";
+            remove4Html+="<td><input id='rxOptometryName' name='rxOptometryName' value='"+rxOptometryName+"'   type='text' readonly></td>";
+            remove4Html+="</tr>";
+            remove4Html+="<tr class='tabS_bg'>";
+            remove4Html+="<td class='w170'>&nbsp;</td>";
+            remove4Html+="<td>BC</td>";
+            remove4Html+="<td>球镜</td>";
+            remove4Html+="<td>柱镜</td>";
+            remove4Html+="<td>轴向</td>";
+            remove4Html+="<td>直径</td>";
+            remove4Html+="<td>软性角膜接触镜VA</td>";
+            remove4Html+="<td>软性角膜接触镜镜片</td>";
+            remove4Html+="<td>片/盒数</td>";
+            remove4Html+="<td width='220'>软性角膜接触镜处理方式</td>";
+            remove4Html+="</tr>";
+            remove4Html+="<tr>";
+            remove4Html+="<td>OD</td>";
+            remove4Html+="<td><input value='"+rxBcod+"' name='rxBcod' readonly type='text'/></td>";
+            remove4Html+="<td><input value='"+rxSphod+"' name='rxSphod' readonly type='text' /></td>";
+            remove4Html+="<td><input value='"+rxCylod+"' name='rxCylod' readonly type='text' /></td>";
+            remove4Html+="<td><input value='"+rxAxialod+"' name='rxAxialod' readonly type='text' /></td>";
+            remove4Html+="<td><input value='"+rxZjod+"' name='rxZjod' readonly type='text'/></td>";
+            remove4Html+="<td><input value='"+rxVaod+"' name='rxVaod' readonly type='text'/></td>";
+            remove4Html+="<td>适用镜片：<input name='rxSyjpod' value='"+rxSyjpod+"' style='width:60%' readonly type='text'/></td>";
+            remove4Html+="<td><input name='rxUnitod' value='"+rxUnitod+"' readonly type='text'/></td>";
+            remove4Html+="<td rowspan='2'>";
+            remove4Html+="<input id='rxClfs' name='rxClfs' value='"+rxClfs+"' readonly type='text'>";
+            remove4Html+="</td>";
+            remove4Html+="</tr>";
+            remove4Html+="<tr>";
+            remove4Html+="<td>OS</td>";
+            remove4Html+="<td><input value='"+rxBcos+"' name='rxBcos' readonly  type='text'/></td>";
+            remove4Html+="<td><input value='"+rxSphos+"' name='rxSphos' readonly type='text' /></td>";
+            remove4Html+="<td><input value='"+rxCylos+"' name='rxCylos' readonly type='text' /></td>";
+            remove4Html+="<td><input value='"+rxAxialos+"' name='rxAxialos' readonly type='text' /></td>";
+            remove4Html+="<td><input value='"+rxZjos+"' name='rxZjos' readonly type='text'/></td>";
+            remove4Html+="<td><input value='"+rxVaos+"' name='rxVaos' readonly type='text'/></td>";
+            remove4Html+="<td>适用镜片：<input name='rxSyjpos' value='"+rxSyjpos+"'  readonly style='width:60%' type='text'/></td>";
+            remove4Html+="<td><input name='rxUnitos'  value='"+rxUnitos+"' readonly type='text'/></td>";
+            remove4Html+="</tr>";
+            remove4Html+="<tr>";
+            remove4Html+="<td>护理液品种：</td>";
+            remove4Html+="<td colspan='9'>";
+            remove4Html+="<label class='text'>";
+            remove4Html+="<input rows='3' id='hlys' name='rxHlypz'  value='"+rxHlypz+"' type='text' readonly></input>";
+            remove4Html+="</label>";
+            remove4Html+="</td>";
+            remove4Html+="</tr>";
+            remove4Html+="<tr>";
+            remove4Html+="<td>备注</td>";
+            remove4Html+="<td colspan='9'>";
+            remove4Html+="<input rows='3'  name='rxBeizhu'  value='"+rxBeizhu+"' type='text' readonly></input>";
+            remove4Html+="</td>";
+            remove4Html+="</tr>";
+        }
+        $("#rxjmjcj").append(remove4Html);
+
+        var remove5 =  $("#remove5").val();
+        var zyDoctor =  $("#zyDoctor").val();
+        var zyOptometryName =  $("#zyOptometryName").val();
+        var zySphod =  $("#zySphod").val();
+        var zyCylod =  $("#zyCylod").val();
+        var zyAxialod =  $("#zyAxialod").val();
+        var zyPrismod =  $("#zyPrismod").val();
+        var zyJdod =  $("#zyJdod").val();
+        var zyZytjod =  $("#zyZytjod").val();
+        var zyTgod =  $("#zyTgod").val();
+        var zyVaod =  $("#zyVaod").val();
+
+        var zySphos =  $("#zySphos").val();
+        var zyCylos =  $("#zyCylos").val();
+        var zyAxialos =  $("#zyAxialos").val();
+        var zyPrismos =  $("#zyPrismos").val();
+        var zyJdos =  $("#zyJdos").val();
+        var zyZytjos =  $("#zyZytjos").val();
+        var zyTgos =  $("#zyTgos").val();
+        var zyVaos =  $("#zyVaos").val();
+        var zyJpcz =  $("#zyJpcz").val();
+        var zyClfs =  $("#zyClfs").val();
+        var zyJklx =  $("#zyJklx").val();
+        var zyText =  $("#zyText").val();
+        var zyBeizhu =  $("#zyBeizhu").val();
+
+
+        var remove5Html="";
         if (remove5=='4'){
-            tab5.style = "display: block";
-            var zyDoctors = $("input[name='zyDoctors']").val();
-            $("#zyDoctor").find("[value='" + zyDoctors + "']").attr("selected", true);
-            var zyOptometryNames = $("input[name='zyOptometryNames']").val();
-            $("#zyOptometryName").find("[value='" + zyOptometryNames + "']").attr("selected", true);
-            var zyJdods = $("input[name='zyJdods']").val();
-            $("#zyJdod").find("[value='" + zyJdods + "']").attr("selected", true);
-            var zyJdoss = $("input[name='zyJdoss']").val();
-            $("#zyJdos").find("[value='" + zyJdoss + "']").attr("selected", true);
-            var zyJpczs = $("input[name='zyJpczs']").val();
-            $("#zyJpcz").find("[value='" + zyJpczs + "']").attr("selected", true);
-            var zyClfss = $("input[name='zyClfss']").val();
-            $("#zyClfs").find("[value='" + zyClfss + "']").attr("selected", true);
-            var zyJklxs = $("input[name='zyJklxs']").val();
-            $("#zyJklx").find("[value='" + zyJklxs + "']").attr("selected", true);
+            remove5Html+="<tr>";
+            remove5Html+="<td class='PL30' colspan='2'>5 框架--中用";
+            remove5Html+="</td>";
+            remove5Html+="<td style='text-align: right' colspan='3'>医生：</td>";
+            remove5Html+="<td><input id='zyDoctor' name='zyDoctor' value='"+zyDoctor+"'  type='text' readonly></td>";
+            remove5Html+="<td style='text-align: right'>验光师：</td>";
+            remove5Html+="<td><input id='zyOptometryName' name='zyOptometryName' value='"+zyOptometryName+"'    type='text' readonly></td>";
+            remove5Html+="</tr>";
+            remove5Html+="<tr class='tabS_bg'>";
+            remove5Html+="<td class='w170'>&nbsp;</td>";
+            remove5Html+="<td>球镜</td>";
+            remove5Html+="<td>柱镜</td>";
+            remove5Html+="<td>轴向</td>";
+            remove5Html+="<td>三棱镜</td>";
+            remove5Html+="<td>基底</td>";
+            remove5Html+="<td>中用瞳距(mm)</td>";
+            remove5Html+="<td>瞳高(mm)</td>";
+            remove5Html+="<td>近用VA</td>";
+            remove5Html+="</tr>";
+            remove5Html+="<tr>";
+            remove5Html+="<td>OD</td>";
+            remove5Html+="<td>";
+            remove5Html+="<input  name='zySphod'  value='"+zySphod+"' readonly type='text' />";
+            remove5Html+="</td>";
+            remove5Html+="<td>";
+            remove5Html+="<input  name='zyCylod' value='"+zyCylod+"' readonly type='text' />";
+            remove5Html+="</td>";
+            remove5Html+="<td>";
+            remove5Html+="<input  name='zyAxialod' value='"+zyAxialod+"' readonly type='text' /></td>";
+            remove5Html+="<td>";
+            remove5Html+="<input  name='zyPrismod' value='"+zyPrismod+"' class='short' readonly type='text'/> △";
+            remove5Html+="</td>";
+            remove5Html+="<td>";
+            remove5Html+="<input id='zyJdod' name='zyJdod' value='"+zyJdod+"' readonly type='text'>";
+            remove5Html+="</td>";
+            remove5Html+="<td><input value='"+zyZytjod+"' name='zyZytjod' readonly type='text'/></td>";
+            remove5Html+="<td><input value='"+zyTgod+"' name='zyTgod' readonly type='text'/></td>";
+            remove5Html+="<td><input value='"+zyVaod+"' name='zyVaod' readonly type='text'/></td>";
+            remove5Html+="</tr>";
+            remove5Html+="<tr>";
+            remove5Html+="<td>OS</td>";
+            remove5Html+="<td><input value='"+zySphos+"' name='zySphos' readonly type='text' /></td>";
+            remove5Html+="<td><input value='"+zyCylos+"' name='zyCylos' readonly type='text' /></td>";
+            remove5Html+="<td><input value='"+zyAxialos+"' name='zyAxialos' readonly type='text' /></td>";
+            remove5Html+="<td><input value='"+zyPrismos+"' name='zyPrismos' class='short' readonly type='text'/> △</td>";
+            remove5Html+="<td>";
+            remove5Html+="<input id='zyJdos' name='zyJdos' value='"+zyJdos+"' readonly type='text'>";
+            remove5Html+="</td>";
+            remove5Html+="<td><input value='"+zyZytjos+"' name='zyZytjos' readonly type='text'/></td>";
+            remove5Html+="<td><input value='"+zyTgos+"' name='zyTgos' readonly type='text'/></td>";
+            remove5Html+="<td><input value='"+zyVaos+"' name='zyVaos' readonly type='text'/></td>";
+            remove5Html+="</tr>";
+            remove5Html+="<tr>";
+            remove5Html+="<td rowspan='2' colspan='1'>建议镜片材质:</td>";
+            remove5Html+="<td rowspan='1' colspan='3' class='daK'>";
+            remove5Html+="<input id='zyJpcz' name='zyJpcz' value='"+zyJpcz+"' readonly type='text'>";
+            remove5Html+="</td>";
+            remove5Html+="<td rowspan='1' colspan='1'>处理方式:</td>";
+            remove5Html+="<td rowspan='1' colspan='3' class='daK'>";
+            remove5Html+="<input id='zyClfs' name='zyClfs' value='"+zyClfs+"' readonly type='text'>";
+            remove5Html+="</td>";
+            remove5Html+="<td colspan='3'></td>";
+            remove5Html+="</tr>";
+            remove5Html+="<tr></tr>";
+            remove5Html+="<tr>";
+            remove5Html+="<td rowspan='1' colspan='1'>中距离：</td>";
+            remove5Html+="<td rowspan='1' colspan='3' class='daK'>";
+            remove5Html+="<label><input name='zyJyjk' value='建议镜框' type='checkbox' readonly/> 建议镜框：</label>";
+            remove5Html+="<input id='zyJklx' name='zyJklx' value='"+zyJklx+"' readonly type='text'>";
+            remove5Html+="<input name='zyText'  value='"+zyText+"' style='width: 40%;' readonly type='text'/>";
+            remove5Html+="</td>";
+            remove5Html+="<td rowspan='1' colspan='1'>备注</td>";
+            remove5Html+="<td rowspan='1' colspan='2'>";
+            remove5Html+="<input rows='3' id='zyBeizhu' name='zyBeizhu'  value='"+zyBeizhu+"' type='text' readonly></input>";
+            remove5Html+="<td colspan='3'></td>";
+            remove5Html+="</tr>";
+        }
+        $("#zy").append(remove5Html);
 
+        var remove6=$("#remove6").val();
+        var sjxlDoctor=$("#sjxlDoctor").val();
+        var sjxlOptometryName=$("#sjxlOptometryName").val();
+        var sjxlSphod=$("#sjxlSphod").val();
+        var sjxlCylod=$("#sjxlCylod").val();
+        var sjxlAxialod=$("#sjxlAxialod").val();
+        var sjxlSljod=$("#sjxlSljod").val();
+        var sjxlJdod=$("#sjxlJdod").val();
+        var sjxlYytjod=$("#sjxlYytjod").val();
+        var sjxlJytjod=$("#sjxlJytjod").val();
+        var sjxlTgod=$("#sjxlTgod").val();
+        var sjxlYyvaod=$("#sjxlYyvaod").val();
+        var sjxlJyvaod=$("#sjxlJyvaod").val();
+
+        var sjxlSphos=$("#sjxlSphos").val();
+        var sjxlCylos=$("#sjxlCylos").val();
+        var sjxlAxialos=$("#sjxlAxialos").val();
+        var sjxlSljos=$("#sjxlSljos").val();
+        var sjxlJdos=$("#sjxlJdos").val();
+        var sjxlYytjos=$("#sjxlYytjos").val();
+        var sjxlJytjos=$("#sjxlJytjos").val();
+        var sjxlTgos=$("#sjxlTgos").val();
+        var sjxlYyvaos=$("#sjxlYyvaos").val();
+        var sjxlJyvaos=$("#sjxlJyvaos").val();
+        var sjxlJtxl=$("#sjxlJtxl").val();
+        var sjxlXlsxl=$("#sjxlXlsxl").val();
+        var sjxlBeizhu=$("#sjxlBeizhu").val();
+
+        var remove6Html="";
+        if(remove6=='7'){
+            remove6Html+="<tr>";
+            remove6Html+="<td class='PL30' colspan='2'>6 视觉训练";
+            remove6Html+="<td style='text-align: right' colspan='3'>医生：</td>";
+            remove6Html+="<td><input id='sjxlDoctor' name='sjxlDoctor' value='"+sjxlDoctor+"' type='text' readonly></td>";
+            remove6Html+="<td style='text-align: right'>验光师：</td>";
+            remove6Html+="<td><input id='sjxlOptometryName' name='sjxlOptometryName' value='"+sjxlOptometryName+"' type='text' readonly></td>";
+            remove6Html+="</tr>";
+            remove6Html+="<tr class='tabS_bg'>";
+            remove6Html+="<td class='w170'>&nbsp;</td>";
+            remove6Html+="<td>球镜</td>";
+            remove6Html+="<td>柱镜</td>";
+            remove6Html+="<td>轴向</td>";
+            remove6Html+="<td>三棱镜</td>";
+            remove6Html+="<td>基底</td>";
+            remove6Html+="<td>远用瞳距(mm)</td>";
+            remove6Html+="<td>近用瞳距(mm)</td>";
+            remove6Html+="<td>瞳高(mm)</td>";
+            remove6Html+="<td>近用VA</td>";
+            remove6Html+="<td>近用VA</td>";
+            remove6Html+="</tr>";
+            remove6Html+="<tr>";
+            remove6Html+="<td>OD</td>";
+            remove6Html+="<td><input value='"+sjxlSphod+"' name='sjxlSphod' type='text' readonly /></td>";
+            remove6Html+="<td><input value='"+sjxlCylod+"' name='sjxlCylod' type='text' readonly/></td>";
+            remove6Html+="<td><input value='"+sjxlAxialod+"' name='sjxlAxialod' type='text' readonly/></td>";
+            remove6Html+="<td><input value='"+sjxlSljod+"' name='sjxlSljod' class='short' type='text' readonly/> △</td>";
+            remove6Html+="<td>";
+            remove6Html+="<input id='sjxlJdod' name='sjxlJdod' value='"+sjxlJdod+"' type='text' readonly>";
+            remove6Html+="</td>";
+            remove6Html+="<td><input value='"+sjxlYytjod+"' name='sjxlYytjod' readonly type='text'/></td>";
+            remove6Html+="<td><input value='"+sjxlJytjod+"' name='sjxlJytjod' readonly type='text'/></td>";
+            remove6Html+="<td><input value='"+sjxlTgod+"'  name='sjxlTgod' type='text'/></td>";
+            remove6Html+="<td><input value='"+sjxlYyvaod+"' name='sjxlYyvaod' readonly type='text'/></td>";
+            remove6Html+="<td><input value='"+sjxlJyvaod+"' name='sjxlJyvaod' readonly type='text'/></td>";
+            remove6Html+="</tr>";
+            remove6Html+="<tr>";
+            remove6Html+="<td>OS</td>";
+            remove6Html+="<td><input value='"+sjxlSphos+"' name='sjxlSphos' readonly type='text' /></td>";
+            remove6Html+="<td><input value='"+sjxlCylos+"' name='sjxlCylos' readonly type='text' /></td>";
+            remove6Html+="<td><input value='"+sjxlAxialos+"' name='sjxlAxialos' readonly type='text' /></td>";
+            remove6Html+="<td><input value='"+sjxlSljos+"' name='sjxlSljos' class='short' readonly type='text'/> △</td>";
+            remove6Html+="<td>";
+            remove6Html+="<input id='sjxlJdos' name='sjxlJdos' value='"+sjxlJdos+"' readonly type='text'>";
+            remove6Html+="</td>";
+            remove6Html+="<td><input value='"+sjxlYytjos+"' name='sjxlYytjos' readonly type='text'/></td>";
+            remove6Html+="<td><input value='"+sjxlJytjos+"' name='sjxlJytjos' readonly type='text'/></td>";
+            remove6Html+="<td><input value='"+sjxlTgos+"'  name='sjxlTgos' type='text'/></td>";
+            remove6Html+="<td><input value='"+sjxlYyvaos+"' name='sjxlYyvaos' readonly type='text'/></td>";
+            remove6Html+="<td><input value='"+sjxlJyvaos+"' name='sjxlJyvaos' readonly type='text'/></td>";
+            remove6Html+="</tr>";
+            remove6Html+="<tr>";
+            remove6Html+="<td>家庭训练：</td>";
+            remove6Html+="<td colspan='4'>";
+            remove6Html+="<label class='text'>";
+            remove6Html+="<input rows='3' id='jtxlsg' name='sjxlJtxl'  value='"+sjxlJtxl+"' type='text' readonly></input>";
+            remove6Html+="</label>";
+            remove6Html+="</td>";
+            remove6Html+="<td>训练室训练：</td>";
+            remove6Html+="<td colspan='4'>";
+            remove6Html+="<label class='text'>";
+            remove6Html+="<input rows='3' id='xlsxlsg' name='sjxlXlsxl'  value='"+sjxlXlsxl+"' type='text' readonly></input>";
+            remove6Html+="</label>";
+            remove6Html+="</td>";
+            remove6Html+="</tr>";
+            remove6Html+="<tr>";
+            remove6Html+="<td>备注</td>";
+            remove6Html+="<td colspan='9'>";
+            remove6Html+="<input rows='3' id='sjxlBeizhu' name='sjxlBeizhu'  value='"+sjxlBeizhu+"' type='text' readonly></input>";
+            remove6Html+="</td>";
+            remove6Html+="</tr>";
         }
-        if (remove6=='7'){
-            tab6.style = "display: block";
-            var sjxlDoctors = $("input[name='sjxlDoctors']").val();
-            $("#sjxlDoctor").find("[value='" + sjxlDoctors + "']").attr("selected", true);
-            var sjxlOptometryNames = $("input[name='sjxlOptometryNames']").val();
-            $("#sjxlOptometryName").find("[value='" + sjxlOptometryNames + "']").attr("selected", true);
-            var sjxlJdods = $("input[name='sjxlJdods']").val();
-            // alert(sjxlJdods)
-            $("#sjxlJdod").find("[value='" + sjxlJdods + "']").attr("selected", true);
-            var sjxlJdoss = $("input[name='sjxlJdoss']").val();
-            $("#sjxlJdos").find("[value='" + sjxlJdoss + "']").attr("selected", true);
-        }
+        $("#sjxl").append(remove6Html);
+
+
+        var remove7=$("#remove7").val();
+        var vstDoctor=$("#vstDoctor").val();
+        var vstOptometryName=$("#vstOptometryName").val();
+        var vstSphod=$("#vstSphod").val();
+        var vstCylod=$("#vstCylod").val();
+        var vstAxialod=$("#vstAxialod").val();
+        var vstSdbhod=$("#vstSdbhod").val();
+        var vstFkod=$("#vstFkod").val();
+        var vstQlbjod=$("#vstQlbjod").val();
+        var vstAcod=$("#vstAcod").val();
+        var vstJfod=$("#vstJfod").val();
+        var vstDiaod=$("#vstDiaod").val();
+        var vstBcod=$("#vstBcod").val();
+        var vstCpclyod=$("#vstCpclyod").val();
+        var vstEod=$("#vstEod").val();
+        var vstVaod=$("#vstVaod").val();
+        var vstJpysod=$("#vstJpysod").val();
+        var vstSyjpod=$("#vstSyjpod").val();
+
+        var vstSphos=$("#vstSphos").val();
+        var vstCylos=$("#vstCylos").val();
+        var vstAxialos=$("#vstAxialos").val();
+        var vstSdbhos=$("#vstSdbhos").val();
+        var vstFkos=$("#vstFkos").val();
+        var vstQlbjos=$("#vstQlbjos").val();
+        var vstAcos=$("#vstAcos").val();
+        var vstJfos=$("#vstJfos").val();
+        var vstDiaos=$("#vstDiaos").val();
+        var vstBcos=$("#vstBcos").val();
+        var vstCpclyos=$("#vstCpclyos").val();
+        var vstEos=$("#vstEos").val();
+        var vstVaos=$("#vstVaos").val();
+        var vstJpysos=$("#vstJpysos").val();
+        var vstSyjpos=$("#vstSyjpos").val();
+        var vstBeizhu=$("#vstBeizhu").val();
+        var remove7Html="";
         if (remove7=='8'){
-            tab7.style = "display: block";
-            var vstDoctors = $("input[name='vstDoctors']").val();
-            $("#vstDoctor").find("[value='" + vstDoctors + "']").attr("selected", true);
-            var vstOptometryNames = $("input[name='vstOptometryNames']").val();
-            $("#vstOptometryName").find("[value='" + vstOptometryNames + "']").attr("selected", true);
+            remove7Html+="<tr>";
+            remove7Html+="<td class='PL30' colspan='2'>7 角膜接触镜VST";
+            remove7Html+="</td>";
+            remove7Html+="<td style='text-align: right' colspan='3'>医生：</td>";
+            remove7Html+="<td> <input id='vstDoctor' name='vstDoctor' value='"+vstDoctor+"' readonly type='text'></td>";
+            remove7Html+="<td style='text-align: right'>验光师：</td>";
+            remove7Html+="<td><input id='vstOptometryName' name='vstOptometryName' value='"+vstOptometryName+"' readonly type='text'></td>";
+            remove7Html+="</tr>";
+            remove7Html+="<tr class='tabS_bg'>";
+            remove7Html+="<td class='w170'>&nbsp;</td>";
+            remove7Html+="<td>球镜</td>";
+            remove7Html+="<td>柱镜</td>";
+            remove7Html+="<td>轴向</td>";
+            remove7Html+="<td>试戴片编号</td>";
+            remove7Html+="<td>FK</td>";
+            remove7Html+="<td>曲率半径</td>";
+            remove7Html+="<td>AC</td>";
+            remove7Html+="<td>降幅</td>";
+            remove7Html+="<td>DIA</td>";
+            remove7Html+="<td>BC</td>";
+            remove7Html+="<td>CP/CLY</td>";
+            remove7Html+="<td>E值</td>";
+            remove7Html+="<td>VA</td>";
+            remove7Html+="<td>镜片颜色</td>";
+            remove7Html+="<td width='300'>品牌</td>";
+            remove7Html+="</tr>";
+            remove7Html+="<tr>";
+            remove7Html+="<td>OD</td>";
+            remove7Html+="<td><input value='"+vstSphod+"' name='vstSphod' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstCylod+"' name='vstCylod' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstAxialod+"' name='vstAxialod' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstSdbhod+"' name='vstSdbhod' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstFkod+"' name='vstFkod' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstQlbjod+"' name='vstQlbjod' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstAcod+"' name='vstAcod' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstJfod+"' name='vstJfod' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstDiaod+"' name='vstDiaod' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstBcod+"' name='vstBcod' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstCpclyod+"' name='vstCpclyod' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstEod+"' name='vstEod' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstVaod+"' name='vstVaod' readonly type='text'/></td>";
+            remove7Html+="<td>";
+            remove7Html+="<select name='vstJpysod' value='"+vstJpysod+"' disabled></select>";
+            remove7Html+="</td>";
+            remove7Html+="<td>适用镜片： <input name='vstSyjpod' value='"+vstSyjpod+"'  style='width: 60%;text-align: left;' readonly type='text'/></td>";
+            remove7Html+="</tr>";
+            remove7Html+="<tr>";
+            remove7Html+="<td>OS</td>";
+            remove7Html+="<td><input value='"+vstSphos+"' name='vstSphos' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstCylos+"' name='vstCylos' readonly type='text'/></td>";
+            remove7Html+="<td><input value='"+vstAxialos+"' name='vstAxialos' readonly type='text'/></td>";
+            remove7Html+="<td><input readonly value='"+vstSdbhos+"' name='vstSdbhos' type='text'/></td>";
+            remove7Html+="<td><input readonly value='"+vstFkos+"' name='vstFkos' type='text'/></td>";
+            remove7Html+="<td><input readonly value='"+vstQlbjos+"' name='vstQlbjos' type='text'/></td>";
+            remove7Html+="<td><input readonly value='"+vstAcos+"' name='vstAcos' type='text'/></td>";
+            remove7Html+="<td><input readonly value='"+vstJfos+"' name='vstJfos' type='text'/></td>";
+            remove7Html+="<td><input readonly value='"+vstDiaos+"' name='vstDiaos' type='text'/></td>";
+            remove7Html+="<td><input readonly value='"+vstBcos+"' name='vstBcos' type='text'/></td>";
+            remove7Html+="<td><input readonly value='"+vstCpclyos+"' name='vstCpclyos' type='text'/></td>";
+            remove7Html+="<td><input readonly value='"+vstEos+"' name='vstEos' type='text'/></td>";
+            remove7Html+="<td><input readonly value='"+vstVaos+"' name='vstVaos' type='text'/></td>";
+            remove7Html+="<td><input readonly value='"+vstJpysos+"' name='vstJpysos' type='text'/></td>";
+            remove7Html+="<td>适用镜片： <input name='vstSyjpos' value='"+vstSyjpos+"' style='width: 60%;text-align: left;' readonly type='text'/></td>";
+            remove7Html+="</tr>";
+            remove7Html+="<tr>";
+            remove7Html+="<td>备注</td>";
+            remove7Html+="<td colspan='12'>";
+            remove7Html+="<input rows='3' id='vstBeizhu' name='vstBeizhu'  value='"+vstBeizhu+"' type='text' readonly></input>";
+            remove7Html+="</tr>";
 
         }
+        $("#vst").append(remove7Html);
+
+
+        var remove8=$("#remove8").val();
+        var crtDoctor=$("#crtDoctor").val();
+        var crtOptometryName=$("#crtOptometryName").val();
+        var crtSphod=$("#crtSphod").val();
+        var crtCylod=$("#crtCylod").val();
+        var crtAxialod=$("#crtAxialod").val();
+        var crtSdbhod=$("#crtSdbhod").val();
+        var ctrBcod=$("#ctrBcod").val();
+        var crtRzdod=$("#crtRzdod").val();
+        var crtLzaod=$("#crtLzaod").val();
+        var crtRzd2od=$("#crtRzd2od").val();
+        var crtLza2od=$("#crtLza2od").val();
+        var crtJfod=$("#crtJfod").val();
+        var crtDiaod=$("#crtDiaod").val();
+        var crtVaod=$("#crtVaod").val();
+        var crtJpysod=$("#crtJpysod").val();
+        var crtSyjpod=$("#crtSyjpod").val();
+
+        var crtSphos=$("#crtSphos").val();
+        var crtCylos=$("#crtCylos").val();
+        var crtAxialos=$("#crtAxialos").val();
+        var crtSdbhos=$("#crtSdbhos").val();
+        var crtBcos=$("#crtBcos").val();
+        var crtRzdos=$("#crtRzdos").val();
+        var crtLzaos=$("#crtLzaos").val();
+        var crtRzd2os=$("#crtRzd2os").val();
+        var crtLza2os=$("#crtLza2os").val();
+        var crtJfos=$("#crtJfos").val();
+        var crtDiaos=$("#crtDiaos").val();
+        var crtVaos=$("#crtVaos").val();
+        var crtJpysos=$("#crtJpysos").val();
+        var crtSyjpos=$("#crtSyjpos").val();
+        var crtBeizhu=$("#crtBeizhu").val();
+
+        var remove8Html="";
         if (remove8=='9'){
-            tab8.style = "display: block";
-            var crtDoctors = $("input[name='crtDoctors']").val();
-            $("#crtDoctor").find("[value='" + crtDoctors + "']").attr("selected", true);
-            var crtOptometryNames = $("input[name='crtOptometryNames']").val();
-            $("#crtOptometryName").find("[value='" + crtOptometryNames + "']").attr("selected", true);
-
+            remove8Html+="<tr>";
+            remove8Html+="<td class='PL30' colspan='2'>8 角膜接触镜CRT";
+            remove8Html+="</td>";
+            remove8Html+="<td style='text-align: right' colspan='3'>医生：</td>";
+            remove8Html+="<td> <input id='crtDoctor' name='crtDoctor' value='"+crtDoctor+"' readonly  type='text'></td>";
+            remove8Html+="<td style='text-align: right'>验光师：</td>";
+            remove8Html+="<td> <input id='crtOptometryName' name='crtOptometryName' value='"+crtOptometryName+"' readonly type='text'></td>";
+            remove8Html+="</tr>";
+            remove8Html+="<tr class='tabS_bg'>";
+            remove8Html+="<td class='w170'>&nbsp;</td>";
+            remove8Html+="<td>球镜</td>";
+            remove8Html+="<td>柱镜</td>";
+            remove8Html+="<td>轴向</td>";
+            remove8Html+="<td>试戴片编号</td>";
+            remove8Html+="<td>BC</td>";
+            remove8Html+="<td>RZD</td>";
+            remove8Html+="<td>LZA</td>";
+            remove8Html+="<td>RZD2</td>";
+            remove8Html+="<td>LZA2</td>";
+            remove8Html+="<td>降幅</td>";
+            remove8Html+="<td>DIA</td>";
+            remove8Html+="<td>VA</td>";
+            remove8Html+="<td>镜片颜色</td>";
+            remove8Html+="<td width='300'>品牌</td>";
+            remove8Html+="</tr>";
+            remove8Html+="<tr>";
+            remove8Html+="<td>OD</td>";
+            remove8Html+="<td><input value='"+crtSphod+"' name='crtSphod' readonly type='text'/></td>";
+            remove8Html+="<td><input value='"+crtCylod+"' name='crtCylod' readonly type='text'/></td>";
+            remove8Html+="<td><input value='"+crtAxialod+"' name='crtAxialod' readonly type='text'/></td>";
+            remove8Html+="<td><input readonly value='"+crtSdbhod+"' name='crtSdbhod' type='text'/></td>";
+            remove8Html+="<td><input readonly value='"+ctrBcod+"' name='ctrBcod' type='text'/></td>";
+            remove8Html+="<td><input readonly value='"+crtRzdod+"' name='crtRzdod' type='text'/></td>";
+            remove8Html+="<td><input readonly value='"+crtLzaod+"' name='crtLzaod' type='text'/></td>";
+            remove8Html+="<td><input readonly value='"+crtRzd2od+"' name='crtRzd2od' type='text'/></td>";
+            remove8Html+="<td><input readonly value='"+crtLza2od+"' name='crtLza2od' type='text'/></td>";
+            remove8Html+="<td><input readonly value='"+crtJfod+"' name='crtJfod' type='text'/></td>";
+            remove8Html+="<td><input readonly value='"+crtDiaod+"' name='crtDiaod' type='text'/></td>";
+            remove8Html+="<td><input readonly value='"+crtVaod+"' name='crtVaod' type='text'/></td>";
+            remove8Html+="<td><input  readonly value='"+crtJpysod+"' name='crtJpysod' type='text'/></td>";
+            remove8Html+="<td>适用镜片： <input name='crtSyjpod'  readonly value='"+crtSyjpod+"'  style='width: 60%;text-align: left;' type='text'/></td>";
+            remove8Html+="</tr>";
+            remove8Html+="<tr>";
+            remove8Html+="<td>OS</td>";
+            remove8Html+="<td><input value='"+crtSphos+"' name='crtSphos' readonly type='text'/></td>";
+            remove8Html+="<td><input value='"+crtCylos+"' name='crtCylos' readonly type='text'/></td>";
+            remove8Html+="<td><input value='"+crtAxialos+"' name='crtAxialos' readonly type='text'/></td>";
+            remove8Html+="<td><input  readonly value='"+crtSdbhos+"' name='crtSdbhos' type='text'/></td>";
+            remove8Html+="<td><input  readonly value='"+crtBcos+"' name='crtBcos' type='text'/></td>";
+            remove8Html+="<td><input  readonly value='"+crtRzdos+"' name='crtRzdos' type='text'/></td>";
+            remove8Html+="<td><input  readonly value='"+crtLzaos+"' name='crtLzaos' type='text'/></td>";
+            remove8Html+="<td><input  readonly value='"+crtRzd2os+"' name='crtRzd2os' type='text'/></td>";
+            remove8Html+="<td><input  readonly value='"+crtLza2os+"' name='crtLza2os' type='text'/></td>";
+            remove8Html+="<td><input  readonly value='"+crtJfos+"' name='crtJfos' type='text'/></td>";
+            remove8Html+="<td><input  readonly value='"+crtDiaos+"' name='crtDiaos' type='text'/></td>";
+            remove8Html+="<td><input  readonly value='"+crtVaos+"' name='crtVaos' type='text'/></td>";
+            remove8Html+="<td><input  readonly value='"+crtJpysos+"' name='crtJpysos' type='text'/></td>";
+            remove8Html+="<td>适用镜片： <input name='crtSyjpos' value='"+crtSyjpos+"'  readonly style='width: 60%;text-align: left;' type='text'/></td>";
+            remove8Html+="</tr>";
+            remove8Html+="<tr>";
+            remove8Html+="<td>备注</td>";
+            remove8Html+="<td colspan='11'>";
+            remove8Html+="<input rows='3' id='crtBeizhu' name='crtBeizhu'  value='"+crtBeizhu+"' type='text' readonly></input>";
+            remove8Html+="</tr>";
         }
+        $("#crt").append(remove8Html);
+
+
+        var remove9=$("#remove9").val();
+        var rgpDoctor=$("#rgpDoctor").val();
+        var rgpOptometryName=$("#rgpOptometryName").val();
+        var rgpSphod=$("#rgpSphod").val();
+        var rgpCylod=$("#rgpCylod").val();
+        var rgpAxialod=$("#rgpAxialod").val();
+        var rgpQgdod=$("#rgpQgdod").val();
+        var rgpBcod=$("#rgpBcod").val();
+        var rgpDiaod=$("#rgpDiaod").val();
+        var rgpSgod=$("#rgpSgod").val();
+        var rgpJpysod=$("#rgpJpysod").val();
+        var rgpTssjod=$("#rgpTssjod").val();
+        var rgpSyjpod=$("#rgpSyjpod").val();
+
+        var rgpSphos=$("#rgpSphos").val();
+        var rgpCylos=$("#rgpCylos").val();
+        var rgpAxialos=$("#rgpAxialos").val();
+        var rgpQgdos=$("#rgpQgdos").val();
+        var rgpBcos=$("#rgpBcos").val();
+        var rgpDiaos=$("#rgpDiaos").val();
+        var rgpSgos=$("#rgpSgos").val();
+        var rgpJpysos=$("#rgpJpysos").val();
+        var rgpTssjos=$("#rgpTssjos").val();
+        var rgpSyjpos=$("#rgpSyjpos").val();
+
+        var rgpBeizhu=$("#rgpBeizhu").val();
+        var remove9Html="";
         if (remove9=='10'){
-            tab9.style = "display: block";
-            var rgpDoctors = $("input[name='rgpDoctors']").val();
-            $("#rgpDoctor").find("[value='" + rgpDoctors + "']").attr("selected", true);
-            var rgpOptometryNames = $("input[name='rgpOptometryNames']").val();
-            $("#rgpOptometryName").find("[value='" + rgpOptometryNames + "']").attr("selected", true);
+            remove9Html+="<tr>";
+            remove9Html+="<td class='PL30' colspan='2'>9 RGP</td>";
+            remove9Html+="<td style='text-align: right' colspan='3'>医生：</td>";
+            remove9Html+="<td>  <input id='rgpDoctor' name='rgpDoctor'  value='"+rgpDoctor+"'  readonly type='text'></td>";
+            remove9Html+="<td style='text-align: right'>验光师：</td>";
+            remove9Html+="<td><input id='rgpOptometryName' name='rgpOptometryName'  value='"+rgpOptometryName+"' type='text'></td>";
+            remove9Html+="</tr>";
+            remove9Html+="<tr class='tabS_bg'>";
+            remove9Html+="<td class='w170'>&nbsp;</td>";
+            remove9Html+="<td>球镜</td>";
+            remove9Html+="<td>柱镜</td>";
+            remove9Html+="<td>轴向</td>";
+            remove9Html+="<td>屈光度</td>";
+            remove9Html+="<td>BC</td>";
+            remove9Html+="<td>DIA</td>";
+            remove9Html+="<td>散光</td>";
+            remove9Html+="<td>镜片颜色</td>";
+            remove9Html+="<td>特殊设计</td>";
+            remove9Html+="<td width='300'>品牌</td>";
+            remove9Html+="</tr>";
+            remove9Html+="<tr>";
+            remove9Html+="<td>OD</td>";
+            remove9Html+="<td><input value='"+rgpSphod+"' name='rgpSphod' readonly type='text'/></td>";
+            remove9Html+="<td><input value='"+rgpCylod+"' name='rgpCylod' readonly type='text'/></td>";
+            remove9Html+="<td><input value='"+rgpAxialod+"' name='rgpAxialod' readonly type='text'/></td>";
+            remove9Html+="<td><input readonly value='"+rgpQgdod+"' name='rgpQgdod' type='text'/></td>";
+            remove9Html+="<td><input readonly value='"+rgpBcod+"' name='rgpBcod' type='text'/></td>";
+            remove9Html+="<td><input readonly value='"+rgpDiaod+"' name='rgpDiaod' type='text'/></td>";
+            remove9Html+="<td><input readonly value='"+rgpSgod+"' name='rgpSgod' type='text'/></td>";
+            remove9Html+="<td><input readonly value='"+rgpJpysod+"' name='rgpJpysod' type='text'/></td>";
+            remove9Html+="<td><input name='rgpTssjod' readonly value='"+rgpTssjod+"' type='text'/></td>";
+            remove9Html+="<td>适用镜片： <input name='rgpSyjpod' readonly value='"+rgpSyjpod+"' style='width: 60%;text-align: left;' type='text'/></td>";
+            remove9Html+="</tr>";
+            remove9Html+="<tr>";
+            remove9Html+="<td>OS</td>";
+            remove9Html+="<td><input value='"+rgpSphos+"' name='rgpSphos' readonly type='text'/></td>";
+            remove9Html+="<td><input value='"+rgpCylos+"' name='rgpCylos' readonly type='text'/></td>";
+            remove9Html+="<td><input value='"+rgpAxialos+"' name='rgpAxialos' readonly type='text'/></td>";
+            remove9Html+="<td><input readonly value='"+rgpQgdos+"' name='rgpQgdos' type='text'/></td>";
+            remove9Html+="<td><input readonly value='"+rgpBcos+"' name='rgpBcos' type='text'/></td>";
+            remove9Html+="<td><input readonly value='"+rgpDiaos+"' name='rgpDiaos' type='text'/></td>";
+            remove9Html+="<td><input readonly value='"+rgpSgos+"' name='rgpSgos' type='text'/></td>";
+            remove9Html+="<td><input readonly value='"+rgpJpysos+"' name='rgpJpysos' type='text'/></td>";
+            remove9Html+="<td><input readonly name='rgpTssjos' value='"+rgpTssjos+"' type='text'/></td>";
+            remove9Html+="<td>适用镜片： <input readonly name='rgpSyjpos' value='"+rgpSyjpos+"' style='width: 60%;text-align: left;' type='text'/></td>";
+            remove9Html+="</tr>";
+            remove9Html+="<tr>";
+            remove9Html+="<td>备注</td>";
+            remove9Html+="<td colspan='7'>";
+            remove9Html+="<input rows='3' id='rgpBeizhu' name='rgpBeizhu'  value='"+rgpBeizhu+"' type='text' readonly></input>";
+            remove9Html+="</tr>";
 
         }
+        $("#rgp").append(remove9Html);
+
+        var remove10=$("#remove10").val();
+        var ypDoctor=$("#ypDoctor").val();
+        var ypOptometryName=$("#ypOptometryName").val();
+        var ypNr=$("#ypNr").val();
+        var ypYm=$("#ypYm").val();
+        alert(ypNr);
+        alert(ypYm);
+        var remove10Html="";
         if (remove10=='11'){
-            tab10.style = "display: block";
-            var ypDoctors = $("input[name='ypDoctors']").val();
-            $("#ypDoctor").find("[value='" + ypDoctors + "']").attr("selected", true);
-
-            var ypOptometryNames = $("input[name='ypOptometryNames']").val();
-            $("#ypOptometryName").find("[value='" + ypOptometryNames + "']").attr("selected", true);
+            remove10Html+="<tr>";
+            remove10Html+="<td class='PL30' colspan='2'>10 药品</td>";
+            remove10Html+="<td style='text-align: right' colspan='3'>医生：</td>";
+            remove10Html+="<td>  <input id='ypDoctor' name='ypDoctor' value='"+ypDoctor+"' readonly type='text'></td>";
+            remove10Html+="<td style='text-align: right'>验光师：</td>";
+            remove10Html+="<td><input id='ypOptometryName' name='ypOptometryName' readonly value='"+ypOptometryName+"' type='text'></td>";
+            remove10Html+="</tr>";
+            remove10Html+="<tr>";
+            remove10Html+="<td class='w170'>内容：</td>";
+            remove10Html+="<td colspan='2'>";
+            remove10Html+="<input rows='3' id='ypNr' name='ypNr'  value='"+ypNr+"' type='text' readonly></input>";
+            remove10Html+="</td>";
+            remove10Html+="</tr>";
+            remove10Html+="<tr>";
+            remove10Html+="<td>药名：</td>";
+            remove10Html+="<td colspan='2'>";
+            remove10Html+="<label class='text'>";
+            remove10Html+="<input rows='2' id='ypYm' name='ypYm'  value='"+ypYm+"' type='text' readonly></input>";
+            remove10Html+="</label>";
+            remove10Html+="</td>";
+            remove10Html+="</tr>";
 
         }
-
+        $("#yp").append(remove10Html);
     });
 
 </script>
