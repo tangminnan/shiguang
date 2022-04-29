@@ -135,6 +135,8 @@ public class SalesDO implements Serializable {
 	private String saleDiscountPrice;
 	//总商品折扣金额
 	private String totalDiscount;
+	//积分
+	private String jifen;
 
 	public String getSaleDiscount() {
 		return saleDiscount;
@@ -158,6 +160,14 @@ public class SalesDO implements Serializable {
 
 	public void setTotalDiscount(String totalDiscount) {
 		this.totalDiscount = totalDiscount;
+	}
+
+	public String getJifen() {
+		return jifen;
+	}
+
+	public void setJifen(String jifen) {
+		this.jifen = jifen;
 	}
 
 	public void setRighttg(String righttg) {this.righttg = righttg;}

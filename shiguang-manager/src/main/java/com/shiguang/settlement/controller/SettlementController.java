@@ -411,56 +411,6 @@ public class SettlementController {
 					logStatusService.save(logStatusDO);
 				}
 			}
-			//积分积累
-//			String[] describe = salesDO1.getStoreDescribe().split(",");
-//			String[] classType = salesDO1.getClasstype().split(",");
-//			String[] price = salesDO1.getStoreUnit().split(",");
-//			String[] count = salesDO1.getStoreCount().split(",");
-//			double jpcpPoint = 0;
-//			double jpdzPoint =0;
-//			double jjPoint=0;
-//			double yxcpPoint=0;
-//			double yxdzPoint=0;
-//			double pjPoint=0;
-//			double hlyPoint=0;
-//			double tyjPoint=0;
-//			double lhjPoint=0;
-//			double hcPoint=0;
-//			double sgPoint=0;
-//			if (null != integralDO){
-//				for (int i=0;i<describe.length;i++){
-//					if ("1".equals(classType[i])){
-//						if ("镜片".equals(describe[i]) && "镜片(成品片)".equals(integralDO.getGoodsType())){
-//							jpcpPoint=  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//						}
-//						if ("隐形".equals(describe[i]) && "隐形(成品片)".equals(integralDO.getGoodsType())){
-//							yxcpPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//						}
-//					} else if ("2".equals(classType[i])){
-//						if ("镜片".equals(describe[i]) && "镜片(订做片)".equals(integralDO.getGoodsType())){
-//							jpdzPoint=  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//						}
-//						if ("隐形".equals(describe[i]) && "隐形(订做片)".equals(integralDO.getGoodsType())){
-//							yxdzPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//						}
-//					}
-//					jjPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//					pjPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//					hlyPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//					tyjPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//					lhjPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//					hcPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//					sgPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//				}
-//			}
-//			BigDecimal sumPoint = BigDecimal.valueOf(jpcpPoint).add(BigDecimal.valueOf(jpdzPoint))
-//					.add(BigDecimal.valueOf(yxcpPoint)).add(BigDecimal.valueOf(yxdzPoint)).add(BigDecimal.valueOf(jjPoint))
-//					.add(BigDecimal.valueOf(pjPoint)).add(BigDecimal.valueOf(hlyPoint)).add(BigDecimal.valueOf(tyjPoint))
-//					.add(BigDecimal.valueOf(lhjPoint)).add(BigDecimal.valueOf(hcPoint)).add(BigDecimal.valueOf(sgPoint));
-//			MemberDO memberDO = new MemberDO();
-//			memberDO.setCardNumber(salesDO1.getMemberNumber());
-//			memberDO.setIntegral(sumPoint.intValue());
-//			memberService.updateInteger(memberDO);
 		} else {
 			Map<String,Object> map = new HashMap<>();
 			map.put("saleNumber",settlement.getSaleNumber());
@@ -520,7 +470,6 @@ public class SettlementController {
 				}
 			}
 		}
-
 		if(settlementService.save(settlement)>0){
 			return R.ok();
 		}

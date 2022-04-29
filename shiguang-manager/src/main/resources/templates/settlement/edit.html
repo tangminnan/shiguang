@@ -167,7 +167,7 @@
         $("#ee").text(sumMoney)
     });
 
-    let flag = '0';
+    // let flag = '0';
 
     function cop(){
         var str=document.getElementById("modelMoney").value;
@@ -176,17 +176,12 @@
         var jifen1 = document.getElementById("payModel").value;
         var actualMoney = $("#actualMoney").val();
         var payWay = $("#payWay").val();
-        // if ("全款" == payWay){
-         //    if ( parseFloat(str) < parseFloat(actualMoney)){
-         //        return alert("缴费金额不能小于实际缴费金额")
-         //    }
-		// }
-		if (jifen == '9' && flag == '0'){
+		if (jifen == '9' && jifen1 == ''){
             str = parseFloat(str) / 20
 			$("#modelMoney").val(str);
              flag = 1;
 		}
-		if (jifen1 == '9' && flag == '0'){
+		if (jifen1 == '9' && jifen != '9'){
             strs = parseFloat(strs) / 20
 			$("#modelMoneys").val(strs);
              flag = 1;
@@ -201,11 +196,42 @@
         if (payWay == '定金'){
             $("#qiankuanMoney").val(dd);
 		}else {
-            $("#changeMoney").val(dd)
+            $("#changeMoney").val(dd);
 		}
-
         $("#payMoney").val(js);
 	}
+
+    // function cop(){
+    //     var str=document.getElementById("modelMoney").value;
+    //     var strs = document.getElementById("modelMoneys").value;
+    //     var jifen = document.getElementById("chuzhi").value;
+    //     var jifen1 = document.getElementById("payModel").value;
+    //     var actualMoney = $("#actualMoney").val();
+    //     var payWay = $("#payWay").val();
+    //     if (jifen == '9'){
+    //         str = parseFloat(str) / 20
+    //         $("#modelMoney").val(str);
+    //         flag = 1;
+    //     }
+    //     if (jifen1 == '9'){
+    //         strs = parseFloat(strs) / 20
+    //         $("#modelMoneys").val(strs);
+    //         flag = 1;
+    //     }
+    //     if (strs == ''){
+    //         strs = 0;
+    //     }
+    //     var js = parseFloat(str) + parseFloat(strs);
+    //     var change = js - actualMoney;
+    //     var dd = change.toFixed(2);
+    //     var payWay = $("#payWay").val();
+    //     if (payWay == '定金'){
+    //         $("#qiankuanMoney").val(dd);
+    //     }else {
+    //         $("#changeMoney").val(dd)
+    //     }
+    //     $("#payMoney").val(js);
+    // }
 
 	function chuzhika() {
 		var chuzhika = $("#chuzhi").val();

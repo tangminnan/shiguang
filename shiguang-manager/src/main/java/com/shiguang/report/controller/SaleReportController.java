@@ -291,35 +291,42 @@ public class SaleReportController {
                         if (null != settlementDO.getChangeMoney()){
                             xianjinMoney = xianjinMoney - settlementDO.getChangeMoney();
                         }
-
+                        if (null != settlementDO.getJifen()){
+                            jifenmoney = jifenmoney + Double.valueOf(settlementDO.getJifen());
+                        }
                     }
 
                 }
                 if (null != drawList && drawList.size() > 0){
                     for (SettlementDO settlementDO : drawList){
-                        if ("0".equals(settlementDO.getDrawBackWay())){
-                            weixinMoney = weixinMoney-Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("1".equals(settlementDO.getDrawBackWay())){
-                            zfbMoney = zfbMoney - Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("2".equals(settlementDO.getDrawBackWay())){
-                            yyshoufeichuMoney = yyshoufeichuMoney - Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("3".equals(settlementDO.getDrawBackWay())){
-                            yikatongoney = yikatongoney - Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("4".equals(settlementDO.getDrawBackWay())){
-                            xianjinMoney = xianjinMoney - Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("5".equals(settlementDO.getDrawBackWay())){
-                            yinliankamoney = yinliankamoney - Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("6".equals(settlementDO.getDrawBackWay())){
-                            chuzhikamoney = chuzhikamoney - Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("7".equals(settlementDO.getDrawBackWay())){
-                            dianmoney = dianmoney - Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("8".equals(settlementDO.getDrawBackWay())){
-                            diandianmoney = diandianmoney - Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("9".equals(settlementDO.getDrawBackWay())){
-                            jifenmoney = jifenmoney - Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("10".equals(settlementDO.getDrawBackWay())){
-                            weixinpt = weixinpt - Double.valueOf(settlementDO.getDrawBackMoney());
+                        String[] drackbackWay = settlementDO.getDrawBackWay().split(",");
+                        String[] drackMoney = settlementDO.getDrawBackMoney().split(",");
+                        for (int a=0;a<drackbackWay.length;a++){
+                            if ("0".equals(drackbackWay[a])){
+                                weixinMoney = weixinMoney-Double.valueOf(drackMoney[a]);
+                            } else if ("1".equals(drackbackWay[a])){
+                                zfbMoney = zfbMoney - Double.valueOf(drackMoney[a]);
+                            } else if ("2".equals(drackbackWay[a])){
+                                yyshoufeichuMoney = yyshoufeichuMoney - Double.valueOf(drackMoney[a]);
+                            } else if ("3".equals(drackbackWay[a])){
+                                yikatongoney = yikatongoney - Double.valueOf(drackMoney[a]);
+                            } else if ("4".equals(drackbackWay[a])){
+                                xianjinMoney = xianjinMoney - Double.valueOf(drackMoney[a]);
+                            } else if ("5".equals(drackbackWay[a])){
+                                yinliankamoney = yinliankamoney - Double.valueOf(drackMoney[a]);
+                            } else if ("6".equals(drackbackWay[a])){
+                                chuzhikamoney = chuzhikamoney - Double.valueOf(drackMoney[a]);
+                            } else if ("7".equals(drackbackWay[a])){
+                                dianmoney = dianmoney - Double.valueOf(drackMoney[a]);
+                            } else if ("8".equals(drackbackWay[a])){
+                                diandianmoney = diandianmoney - Double.valueOf(drackMoney[a]);
+                            } else if ("9".equals(drackbackWay[a])){
+                                jifenmoney = jifenmoney - Double.valueOf(drackMoney[a]);
+                            } else if ("10".equals(drackbackWay[a])){
+                                weixinpt = weixinpt - Double.valueOf(drackMoney[a]);
+                            }
                         }
+
                     }
                 }
                 qtsubTotal = weixinMoney + zfbMoney;

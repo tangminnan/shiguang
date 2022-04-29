@@ -74,6 +74,8 @@ public class SettlementDO implements Serializable {
 	private String chuzhiPasd;
 	//付款状态
 	private String isSale;
+	//销售积分
+	private String jifen;
 
 	public String getIsSale() {
 		return isSale;
@@ -286,5 +288,13 @@ public class SettlementDO implements Serializable {
 
 	public void setModelGgMoney(String modelGgMoney) {
 		this.modelGgMoney = modelGgMoney;
+	}
+
+	public String getJifen() {
+		return jifen;
+	}
+
+	public void setJifen(String jifen) {
+		this.jifen = jifen;
 	}
 }

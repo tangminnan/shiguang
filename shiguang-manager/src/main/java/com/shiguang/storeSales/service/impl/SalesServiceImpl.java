@@ -39,6 +39,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -268,6 +269,13 @@ public class SalesServiceImpl implements SalesService {
 				}
 			}
 
+		}
+		if (null != salesDO.getJifen() && !"".equals(salesDO.getJifen())){
+			int jifennum = Integer.parseInt(salesDO.getJifen());
+			int num = 20;
+			DecimalFormat df=new DecimalFormat("0.0");
+			String jifen = df.format((float)jifennum / num);
+			salesDO.setJifen(jifen);
 		}
 		Long saleNumber = GuuidUtil.getUUID();
 		salesDO.setSaleNumber("X" + saleNumber);

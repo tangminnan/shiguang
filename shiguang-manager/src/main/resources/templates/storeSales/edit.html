@@ -1017,7 +1017,7 @@
 		<ul class="ulC">
 			<li>实收金额：<input type="text" id="amountMoney" name="amountMoney" readonly onchange="getShishou()"/><input type="hidden" id="primeMoney" name="primeMoney"/></li>
 			<li>商品打折：<input type="text" id="saleDiscounts" name="saleDiscounts" onchange="getDiscount()"/><input type="hidden" id="saleAccount" name="saleAccount"/></li>
-			<li>积分抵扣：<input type="text" id="saleJifen" name="saleJifen" onchange="getJifen()"/></li>
+			<li>积分抵扣：<input type="text" id="saleJifen" name="jifen" onchange="getJifen()"/></li>
 			<li>一口价：<input type="text" id="fisPrice" onchange="getFixedPrice()" /><input type="button" class="qianpi" value="签批" /><input type="button" onclick="getfidHy()" value="还原" /></li>
 			<li>抹零金额：<input type="text" value="0.00" id="molingMoney" onfocus="if (value =='0.00'){value =''}" onblur="if (value ==''){value='0.00'}" name="molingMoney" onchange="getChangeValue()"/></li>
 		    <input id="totalDiscount" name="totalDiscount" type="hidden" />
@@ -1753,10 +1753,10 @@
                     $("#goods").append(html);
                     //document.getElementById("yingshouMoney"+rows[i].goodsNum+"").text=rows[i].retailPrice
                     $("#yingshouMoneyjj"+a+"").text(rows[i].retailPrice)
-                    var amountMoney = $("#amountMoney").val();
-                    if (amountMoney != ''){
-                        price = amountMoney;
-                    }
+                    // var amountMoney = $("#amountMoney").val();
+                    // if (amountMoney != ''){
+                    //     price = amountMoney;
+                    // }
                     price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(1);
                     //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
                     //arraystore.push(rows[i].goodsName);
@@ -2081,12 +2081,16 @@
         var targetStr = str[str.length-1]
 		alert(targetStr);
         var yingshouPrice = "";
+        var yingshous = "";
+        var yingshousss = "";
         if ("镜架" == type){
             yingshouPrice = $("#yingshouMoneyjj"+targetStr+"").text();
         } else if ("镜片" == type){
             alert("e3er");
-            yingshouPrice = $("#yingshouMoneyjp"+targetStr+"").text()
+            yingshouPrice = $("#yingshouMoneyjp"+targetStr+"").text();
+            yingshous = $("#yingshouMoneyjp"+targetStr+"").val();
             alert(yingshouPrice);
+            alert(yingshous);
 		}
 		alert(yingshouPrice);
         prices = yingshouPrice;
@@ -2275,7 +2279,7 @@
                     html += "<td id='molingMoneyjp"+a+"'>0.00</td>";
                     html += "<td id='yingshouMoneyjp"+a+"'>0.00</td>";
                     html += "<td>镜片</td>";
-                    html += "<td><em id='shanchu"+a+"' onclick='del(this,\"" + rows[i][0].retailPrice + "\",\""+rows[i][0].goodsName+"\")'></em></td>";
+                    html += "<td><em id='shanchu"+a+"' onclick='shanchu(this,\"" + rows[i][0].retailPrice + "\",\""+rows[i][0].goodsName+"\",\""+desc+"\")'></em></td>";
                     html += "<input id='unit' name='unit' type='hidden' value='"+rows[i][0].unit+"'/>"
                     html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i][0].goodsName+"'/>"
                     html += "<input id='jpGoodsName'name='jpGoodsName' type='hidden' value='"+rows[i][0].goodsName+"'/>"

@@ -122,27 +122,28 @@ public class DrawbackServiceImpl implements DrawbackService {
 			salesDOs.setSaleNumber(drawbackDO.getSaleNumber());
 			salesService.updateSale(salesDOs);
 		}
-		if ("6".equals(drawbackDO.getDrackbackWay())){
-			String memberNumber = drawbackDO.getMemberNumber();
-			MemberDO memberDO1 = memberService.getCardNumber(memberNumber);
-			Map<String,Object> mapphone = new HashMap<>();
-			if (null != memberDO1.getPhone1() && !"".equals(memberDO1.getPhone1())){
-				mapphone.put("phone1",memberDO1.getPhone1());
-			} else {
-				mapphone.put("phone1",memberDO1.getPhone2());
-			}
-			List<MemberDO> memberList = memberService.list(mapphone);
-			List<CardDO> cardDOS = new ArrayList<>();
-			for (MemberDO memberDO2 : memberList){
-				CardDO cardDO = new CardDO();
-				cardDO = cardService.getMemberNum(memberDO2.getCardNumber());
-				if (null != cardDO){
-					double tuikuanMoney = Double.valueOf(cardDO.getCardMoney()) + Double.valueOf(drawbackDO.getDrawbackMoney());
-					cardDO.setCardMoney(tuikuanMoney+"");
-					cardService.updateMoney(cardDO);
+		if (null != drawbackDO.getDrawbacktkMoney()){
+			drawbackDO.setDrawbackMoney(drawbackDO.getDrawbacktkMoney());
+		}
+		String[] drackWay = drawbackDO.getDrackbackWay().split(",");
+		String[] drackMoney = drawbackDO.getDrawbackMoney().split(",");
+		for (int i=0;i<drackWay.length;i++){
+			if ("6".equals(drackWay[i])){
+				CardDO cardDO = cardService.getCardNum(drawbackDO.getChuzhiNumber());
+				double tuikuanMoney = Double.valueOf(cardDO.getCardMoney()) + Double.valueOf(drackMoney[i]);
+				cardDO.setCardMoney(tuikuanMoney+"");
+				cardService.updateMoney(cardDO);
+			} else if ("9".equals(drackWay[i])){
+				double jifenMoney = Double.valueOf(drackMoney[i]) * 20;
+				int integral = (int) jifenMoney;
+				if (null != memberDO.getIntegral()){
+					Integer integralnew = Integer.parseInt(memberDO.getIntegral()) + integral;
+					memberDO.setIntegral(String.valueOf(integralnew));
+					memberService.updateInteger(memberDO);
 				}
 			}
 		}
+
 //		CostDO costDO = new CostDO();
 //		costDO.setId(settlementDO.getCostId());
 //		costDO.setIsSale(2L);

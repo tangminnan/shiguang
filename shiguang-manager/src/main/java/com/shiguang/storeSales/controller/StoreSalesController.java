@@ -246,7 +246,7 @@ public class StoreSalesController {
         UserDO userDO = ShiroUtils.getUser();
         String storeName = userDO.getStore();
         model.addAttribute("storeName", storeName);
-        String saleName = ShiroUtils.getUser().getName();
+        String saleName = ShiroUtils.getUser().getUsername();
         model.addAttribute("saleName", saleName);
         String storeNum = userDO.getStoreNum();
         model.addAttribute("storeNum",storeNum);

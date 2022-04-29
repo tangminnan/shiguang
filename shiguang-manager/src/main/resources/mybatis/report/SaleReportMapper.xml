@@ -140,8 +140,9 @@
 	<!-- 查询中心店的营业员的报表 -->
 	<select id="findSaleReportForms" resultType="com.shiguang.settlement.domain.SettlementDO">
 		select s.`id`,s.`cost_id`,s.`sale_number`,s.`member_number`,s.`sale_name`,s.`sale_acount`,s.`actual_money`,s.`payment_money`,s.`change_money`,s.`pay_model`,
-		s.`model_money`,s.`pay_money`,s.`pay_way`,s.`front_money`,s.`settle_date`,s.`front_time`,dt.`depart_name` as departmentName
+		s.`model_money`,s.`pay_money`,s.`pay_way`,s.`front_money`,s.`settle_date`,s.`front_time`,ss.jifen,dt.`depart_name` as departmentName
 		from settlement s join member m on m.card_number = s.member_number join department dt on dt.company_id = m.company_id
+		join store_sales ss on ss.sale_number = s.sale_number
 		<where>
 			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
 			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
