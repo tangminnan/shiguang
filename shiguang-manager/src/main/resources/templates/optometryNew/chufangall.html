@@ -845,9 +845,9 @@
     <!--处方-->
     <div class="m40 tabS">
         <h3>处方</h3>
-        <table id="tab1"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+        <table id="tab1"  style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="kjyy" >
-            <input id="remove1" th:value="${remove1}"/>
+            <input id="remove1" th:value="${remove1}" type="hidden"/>
             <input id="kjyyDoctor"  th:value='${kjyyDoctor}' type="hidden"/>
             <input id="kjyyOptometryName"  th:value='${kjyyOptometryName}' type="hidden"/>
             <input id="kjyySphod"  th:value='${kjyySphod}' type="hidden"/>
@@ -875,9 +875,9 @@
             </tbody>
         </table>
 
-        <table id="tab2"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+        <table id="tab2" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="kjjy" >
-            <input id="remove2" th:value="${remove2}"/>
+            <input id="remove2" th:value="${remove2}" type="hidden"/>
             <input id="kjjyDoctor"  th:value='${kjjyDoctor}' type="hidden"/>
             <input id="kjjyOptometryName"  th:value='${kjjyOptometryName}' type="hidden"/>
             <input id="kjjySphod"  th:value='${kjjySphod}' type="hidden"/>
@@ -906,7 +906,7 @@
 
         </table>
 
-        <table id="tab3"   class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+        <table id="tab3"  style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="sgjj">
             <input id="remove3" th:value="${remove3}" type="hidden"/>
             <input id="sgjjDoctor" th:value="${sgjjDoctor}" type="hidden"/>
@@ -941,7 +941,7 @@
             </tbody>
         </table>
 
-        <table id="tab4"   class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+        <table id="tab4" style="display: none"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="rxjmjcj"  >
             <input id="remove4" th:value="${remove4}" type="hidden"/>
             <input id="rxDoctor" th:value="${rxDoctor}" type="hidden"/>
@@ -970,7 +970,7 @@
             </tbody>
         </table>
 
-        <table id="tab5"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+        <table id="tab5" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="zy" >
             <input id="remove5" th:value="${remove5}" type="hidden"/>
             <input id="zyDoctor" th:value="${zyDoctor}" type="hidden"/>
@@ -1001,7 +1001,7 @@
             </tbody>
         </table>
 
-        <table id="tab6"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+        <table id="tab6" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="sjxl" >
             <input id="remove6" th:value="${remove6}" type="hidden"/>
             <input id="sjxlDoctor" th:value="${sjxlDoctor}" type="hidden"/>
@@ -1035,7 +1035,7 @@
             </tbody>
         </table>
 
-        <table id="tab7"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+        <table id="tab7" style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="vst"  >
             <input id="remove7" th:value="${remove7}" type="hidden"/>
             <input id="vstDoctor" th:value="${vstDoctor}" type="hidden"/>
@@ -1077,7 +1077,7 @@
             </tbody>
         </table>
 
-        <table id="tab8"   class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+        <table id="tab8" style="display: none"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="crt" >
             <input id="remove8" th:value="${remove8}" type="hidden"/>
             <input id="crtDoctor" th:value="${crtDoctor}" type="hidden"/>
@@ -1115,7 +1115,7 @@
             </tbody>
         </table>
 
-        <table id="tab9"   class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+        <table id="tab9"   style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="rgp"  >
             <input id="remove9" th:value="${remove9}" type="hidden"/>
             <input id="rgpDoctor" th:value="${rgpDoctor}" type="hidden"/>
@@ -1147,7 +1147,7 @@
             </tbody>
         </table>
 
-        <table id="tab10"  class="tabJ tabMB20" cellspacing="0" cellpadding="0">
+        <table id="tab10"  style="display: none" class="tabJ tabMB20" cellspacing="0" cellpadding="0">
             <tbody id="yp"  >
             <input id="remove10" th:value="${remove10}" type="hidden"/>
             <input id="ypDoctor" th:value="${ypDoctor}" type="hidden"/>
@@ -1239,6 +1239,7 @@
 
         var remove1Html="";
         if (remove1 == '2'){
+            tab1.style="display:block";
             remove1Html+="<tr>";
             remove1Html+="<td class='PL30' colspan='2'>1 框架--远用 </td>";
             remove1Html+="<td style='text-align: right' colspan='3'>医生：</td>";
@@ -1331,6 +1332,7 @@
 
         var  remove2Html="";
         if (remove2=="1"){
+            tab2.style="display:block";
             remove2Html+="<tr>";
             remove2Html+="<td class='PL30' colspan='2'>2 框架--近用";
             remove2Html+="<td style='text-align: right' colspan='3'>医生：</td>";
@@ -1438,6 +1440,7 @@
 
         var  remove3Html="";
         if(remove3=='3'){
+            tab3.style="display:block";
             remove3Html+="<tr>";
             remove3Html+="<td class='PL30' colspan='2'>3框架--双光/渐进</td>";
             remove3Html+="<td style='text-align: right' colspan='3'>医生：</td>";
@@ -1534,6 +1537,7 @@
         var rxBeizhu=$("#rxBeizhu").val();
         var remove4Html="";
         if(remove4=='5'){
+            tab4.style="display:block";
             remove4Html+="<tr>";
             remove4Html+="<td class='PL30' colspan='2'>4 软性角膜接触镜";
             remove4Html+="</td>";
@@ -1625,6 +1629,7 @@
 
         var remove5Html="";
         if (remove5=='4'){
+            tab5.style="display:block";
             remove5Html+="<tr>";
             remove5Html+="<td class='PL30' colspan='2'>5 框架--中用";
             remove5Html+="</td>";
@@ -1734,6 +1739,7 @@
 
         var remove6Html="";
         if(remove6=='7'){
+            tab6.style="display:block";
             remove6Html+="<tr>";
             remove6Html+="<td class='PL30' colspan='2'>6 视觉训练";
             remove6Html+="<td style='text-align: right' colspan='3'>医生：</td>";
@@ -1845,6 +1851,7 @@
         var vstBeizhu=$("#vstBeizhu").val();
         var remove7Html="";
         if (remove7=='8'){
+            tab7.style="display:block";
             remove7Html+="<tr>";
             remove7Html+="<td class='PL30' colspan='2'>7 角膜接触镜VST";
             remove7Html+="</td>";
@@ -1955,6 +1962,7 @@
 
         var remove8Html="";
         if (remove8=='9'){
+            tab8.style="display:block";
             remove8Html+="<tr>";
             remove8Html+="<td class='PL30' colspan='2'>8 角膜接触镜CRT";
             remove8Html+="</td>";
@@ -2051,6 +2059,7 @@
         var rgpBeizhu=$("#rgpBeizhu").val();
         var remove9Html="";
         if (remove9=='10'){
+            tab9.style="display:block";
             remove9Html+="<tr>";
             remove9Html+="<td class='PL30' colspan='2'>9 RGP</td>";
             remove9Html+="<td style='text-align: right' colspan='3'>医生：</td>";
@@ -2111,10 +2120,11 @@
         var ypOptometryName=$("#ypOptometryName").val();
         var ypNr=$("#ypNr").val();
         var ypYm=$("#ypYm").val();
-        alert(ypNr);
-        alert(ypYm);
+        // alert(ypNr);
+        // alert(ypYm);
         var remove10Html="";
         if (remove10=='11'){
+            tab10.style="display:block";
             remove10Html+="<tr>";
             remove10Html+="<td class='PL30' colspan='2'>10 药品</td>";
             remove10Html+="<td style='text-align: right' colspan='3'>医生：</td>";
