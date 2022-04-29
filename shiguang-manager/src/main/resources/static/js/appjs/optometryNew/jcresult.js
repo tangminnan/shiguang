@@ -16,11 +16,11 @@ function saveCF() {
 
 
         var followTime= $('#followTime').val();
-        var chufangType = $("#chufangType").val();
+        // var chufangType = $("#chufangType").val();
 
-        if (chufangType == ""){
-            return layer.alert("请选择处方类型！");
-        }
+        // if (chufangType == ""){
+        //     return layer.alert("请选择处方类型！");
+        // }
         if (followTime == ""){
             return layer.alert("请选择复诊时间！")
         }
