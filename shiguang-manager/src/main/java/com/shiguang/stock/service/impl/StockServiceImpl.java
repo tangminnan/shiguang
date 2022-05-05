@@ -507,6 +507,7 @@ public class StockServiceImpl implements StockService {
                         String goodsNums = ExcelUtils.getCellFormatValue(row.getCell((short) 0)).replaceAll("[\t\n' ']", "");    // 代码
                         String counts  = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    //  数量
                         String usedays= ExcelUtils.getCellFormatValue(row.getCell((short) 2)).replaceAll("[\t\n' ']", "");    //  效期
+                        String batchs= ExcelUtils.getCellFormatValue(row.getCell((short) 3)).replaceAll("[\t\n' ']", "");    // 批号
                         Integer goodstype=goodsType;
                         String styles=dzlx;
 
@@ -544,15 +545,16 @@ public class StockServiceImpl implements StockService {
                             stockDO.setClasstype(classtype);
                             //数量
                             stockDO.setGoodsCount(counts);
+                            //批号
+                            stockDO.setBatch(batchs);
                             //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-                            String code="";
+//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
-                                    //student.setLastCheckTime(dd);
                                 } else {
                                     Calendar calendar = new GregorianCalendar(1900, 0, -1);
                                     Date d = calendar.getTime();
@@ -563,14 +565,25 @@ public class StockServiceImpl implements StockService {
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-                                    //code =yeah + yue + ri;
-                                    code = yeah+yue + ri+"AA";
+//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
-
                             stockDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                stockDO.setGoodsCode(goodsCode+code);
+                            String batchsNew="";
+                            if (batchs !="" && batchs !=null){
+                                Integer bacthLength=batchs.length();
+                                String  ph="";
+                                if (bacthLength<8){
+                                    Integer phscd=8-bacthLength;
+                                    for (int  i=0;i<phscd;i++){
+                                        ph+="0";
+                                    }
+                                    batchsNew=ph+batchs;
+                                }else {
+                                    batchs=batchs.substring(bacthLength-8, bacthLength);
+                                    batchsNew=ph+batchs;
+                                }
+                                stockDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
@@ -610,13 +623,14 @@ public class StockServiceImpl implements StockService {
                             orderDO.setGoodsNum(goodsNum);
 //                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                orderDO.setGoodsCode(goodsCode+code);
+                            if (batchs !="" && batchs !=null){
+                                orderDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 orderDO.setGoodsCode(goodsCode+"00000000");
                             }
                             orderDO.setGoodsName(goodsName);
                             orderDO.setGoodsCount(counts);
+                            orderDO.setBatch(batchs);
                             orderDO.setGoodsType(goodstype);
                             orderDO.setMfrsid(mfrsid);
                             orderDO.setBrandname(brandname);
@@ -671,15 +685,16 @@ public class StockServiceImpl implements StockService {
                             stockDO.setClasstype(classtype);
                             //数量
                             stockDO.setGoodsCount(counts);
+                            //批号
+                            stockDO.setBatch(batchs);
                             //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-                            String code="";
+//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
-                                    //student.setLastCheckTime(dd);
                                 } else {
                                     Calendar calendar = new GregorianCalendar(1900, 0, -1);
                                     Date d = calendar.getTime();
@@ -690,14 +705,25 @@ public class StockServiceImpl implements StockService {
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-                                    //code =yeah + yue + ri;
-                                    code = yeah+yue + ri+"AA";
+//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
-
                             stockDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                stockDO.setGoodsCode(goodsCode+code);
+                            String batchsNew="";
+                            if (batchs !="" && batchs !=null){
+                                Integer bacthLength=batchs.length();
+                                String  ph="";
+                                if (bacthLength<8){
+                                    Integer phscd=8-bacthLength;
+                                    for (int  i=0;i<phscd;i++){
+                                        ph+="0";
+                                    }
+                                    batchsNew=ph+batchs;
+                                }else {
+                                    batchs=batchs.substring(bacthLength-8, bacthLength);
+                                    batchsNew=ph+batchs;
+                                }
+                                stockDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
@@ -737,13 +763,14 @@ public class StockServiceImpl implements StockService {
                             orderDO.setGoodsNum(goodsNum);
 //                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                orderDO.setGoodsCode(goodsCode+code);
+                            if (batchs !="" && batchs !=null){
+                                orderDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 orderDO.setGoodsCode(goodsCode+"00000000");
                             }
                             orderDO.setGoodsName(goodsName);
                             orderDO.setGoodsCount(counts);
+                            orderDO.setBatch(batchs);
                             orderDO.setGoodsType(goodstype);
                             orderDO.setMfrsid(mfrsid);
                             orderDO.setBrandname(brandname);
@@ -808,15 +835,16 @@ public class StockServiceImpl implements StockService {
                             stockDO.setClasstype(classtype);
                             //数量
                             stockDO.setGoodsCount(counts);
+                            //批号
+                            stockDO.setBatch(batchs);
                             //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-                            String code="";
+//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
-                                    //student.setLastCheckTime(dd);
                                 } else {
                                     Calendar calendar = new GregorianCalendar(1900, 0, -1);
                                     Date d = calendar.getTime();
@@ -827,14 +855,31 @@ public class StockServiceImpl implements StockService {
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-                                    //code =yeah + yue + ri;
-                                    code = yeah+yue + ri+"AA";
+//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
-
                             stockDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                stockDO.setGoodsCode(goodsCode+code);
+//                            if (usedays !="" && usedays !=null){
+//                                stockDO.setGoodsCode(goodsCode+code);
+//                            }else {
+//                                stockDO.setGoodsCode(goodsCode+"00000000");
+//                            }
+
+                            String batchsNew="";
+                            if (batchs !="" && batchs !=null){
+                                Integer bacthLength=batchs.length();
+                                String  ph="";
+                                if (bacthLength<8){
+                                    Integer phscd=8-bacthLength;
+                                    for (int  i=0;i<phscd;i++){
+                                        ph+="0";
+                                    }
+                                    batchsNew=ph+batchs;
+                                }else {
+                                    batchs=batchs.substring(bacthLength-8, bacthLength);
+                                    batchsNew=ph+batchs;
+                                }
+                                stockDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
@@ -874,13 +919,14 @@ public class StockServiceImpl implements StockService {
                             orderDO.setGoodsNum(goodsNum);
 //                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                orderDO.setGoodsCode(goodsCode+code);
+                            if (batchs !="" && batchs !=null){
+                                orderDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 orderDO.setGoodsCode(goodsCode+"00000000");
                             }
                             orderDO.setGoodsName(goodsName);
                             orderDO.setGoodsCount(counts);
+                            orderDO.setBatch(batchs);
                             orderDO.setGoodsType(goodstype);
                             orderDO.setMfrsid(mfrsid);
                             orderDO.setBrandname(brandname);
@@ -946,15 +992,16 @@ public class StockServiceImpl implements StockService {
                             stockDO.setClasstype(classtype);
                             //数量
                             stockDO.setGoodsCount(counts);
+                            //批号
+                            stockDO.setBatch(batchs);
                             //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-                            String code="";
+//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
-                                    //student.setLastCheckTime(dd);
                                 } else {
                                     Calendar calendar = new GregorianCalendar(1900, 0, -1);
                                     Date d = calendar.getTime();
@@ -965,14 +1012,25 @@ public class StockServiceImpl implements StockService {
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-                                    //code =yeah + yue + ri;
-                                    code = yeah+yue + ri+"AA";
+//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
-
                             stockDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                stockDO.setGoodsCode(goodsCode+code);
+                            String batchsNew="";
+                            if (batchs !="" && batchs !=null){
+                                Integer bacthLength=batchs.length();
+                                String  ph="";
+                                if (bacthLength<8){
+                                    Integer phscd=8-bacthLength;
+                                    for (int  i=0;i<phscd;i++){
+                                        ph+="0";
+                                    }
+                                    batchsNew=ph+batchs;
+                                }else {
+                                    batchs=batchs.substring(bacthLength-8, bacthLength);
+                                    batchsNew=ph+batchs;
+                                }
+                                stockDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
@@ -1012,13 +1070,14 @@ public class StockServiceImpl implements StockService {
                             orderDO.setGoodsNum(goodsNum);
 //                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                orderDO.setGoodsCode(goodsCode+code);
+                            if (batchs !="" && batchs !=null){
+                                orderDO.setGoodsCode(goodsCode+batchs);
                             }else {
                                 orderDO.setGoodsCode(goodsCode+"00000000");
                             }
                             orderDO.setGoodsName(goodsName);
                             orderDO.setGoodsCount(counts);
+                            orderDO.setBatch(batchs);
                             orderDO.setGoodsType(goodstype);
                             orderDO.setMfrsid(mfrsid);
                             orderDO.setBrandname(brandname);
@@ -1073,15 +1132,16 @@ public class StockServiceImpl implements StockService {
                             stockDO.setClasstype(classtype);
                             //数量
                             stockDO.setGoodsCount(counts);
+                            //批号
+                            stockDO.setBatch(batchs);
                             //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-                            String code="";
+//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
-                                    //student.setLastCheckTime(dd);
                                 } else {
                                     Calendar calendar = new GregorianCalendar(1900, 0, -1);
                                     Date d = calendar.getTime();
@@ -1092,14 +1152,25 @@ public class StockServiceImpl implements StockService {
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-                                    //code =yeah + yue + ri;
-                                    code = yeah+yue + ri+"AA";
+//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
-
                             stockDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                stockDO.setGoodsCode(goodsCode+code);
+                            String batchsNew="";
+                            if (batchs !="" && batchs !=null){
+                                Integer bacthLength=batchs.length();
+                                String  ph="";
+                                if (bacthLength<8){
+                                    Integer phscd=8-bacthLength;
+                                    for (int  i=0;i<phscd;i++){
+                                        ph+="0";
+                                    }
+                                    batchsNew=ph+batchs;
+                                }else {
+                                    batchs=batchs.substring(bacthLength-8, bacthLength);
+                                    batchsNew=ph+batchs;
+                                }
+                                stockDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
@@ -1139,13 +1210,14 @@ public class StockServiceImpl implements StockService {
                             orderDO.setGoodsNum(goodsNum);
 //                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                orderDO.setGoodsCode(goodsCode+code);
+                            if (batchs !="" && batchs !=null){
+                                orderDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 orderDO.setGoodsCode(goodsCode+"00000000");
                             }
                             orderDO.setGoodsName(goodsName);
                             orderDO.setGoodsCount(counts);
+                            orderDO.setBatch(batchs);
                             orderDO.setGoodsType(goodstype);
                             orderDO.setMfrsid(mfrsid);
                             orderDO.setBrandname(brandname);
@@ -1200,15 +1272,16 @@ public class StockServiceImpl implements StockService {
                             stockDO.setClasstype(classtype);
                             //数量
                             stockDO.setGoodsCount(counts);
+                            //批号
+                            stockDO.setBatch(batchs);
                             //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-                            String code="";
+//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
-                                    //student.setLastCheckTime(dd);
                                 } else {
                                     Calendar calendar = new GregorianCalendar(1900, 0, -1);
                                     Date d = calendar.getTime();
@@ -1219,14 +1292,25 @@ public class StockServiceImpl implements StockService {
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-                                    //code =yeah + yue + ri;
-                                    code = yeah+yue + ri+"AA";
+//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
-
                             stockDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                stockDO.setGoodsCode(goodsCode+code);
+                            String batchsNew="";
+                            if (batchs !="" && batchs !=null){
+                                Integer bacthLength=batchs.length();
+                                String  ph="";
+                                if (bacthLength<8){
+                                    Integer phscd=8-bacthLength;
+                                    for (int  i=0;i<phscd;i++){
+                                        ph+="0";
+                                    }
+                                    batchsNew=ph+batchs;
+                                }else {
+                                    batchs=batchs.substring(bacthLength-8, bacthLength);
+                                    batchsNew=ph+batchs;
+                                }
+                                stockDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
@@ -1266,13 +1350,14 @@ public class StockServiceImpl implements StockService {
                             orderDO.setGoodsNum(goodsNum);
 //                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                orderDO.setGoodsCode(goodsCode+code);
+                            if (batchs !="" && batchs !=null){
+                                orderDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 orderDO.setGoodsCode(goodsCode+"00000000");
                             }
                             orderDO.setGoodsName(goodsName);
                             orderDO.setGoodsCount(counts);
+                            orderDO.setBatch(batchs);
                             orderDO.setGoodsType(goodstype);
                             orderDO.setMfrsid(mfrsid);
                             orderDO.setBrandname(brandname);
@@ -1327,15 +1412,17 @@ public class StockServiceImpl implements StockService {
                             stockDO.setClasstype(classtype);
                             //数量
                             stockDO.setGoodsCount(counts);
+                            //批号
+                            stockDO.setBatch(batchs);
+                            //效期
                             //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-                            String code="";
+//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
-                                    //student.setLastCheckTime(dd);
                                 } else {
                                     Calendar calendar = new GregorianCalendar(1900, 0, -1);
                                     Date d = calendar.getTime();
@@ -1346,14 +1433,25 @@ public class StockServiceImpl implements StockService {
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-                                    //code =yeah + yue + ri;
-                                    code = yeah+yue + ri+"AA";
+//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
-
                             stockDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                stockDO.setGoodsCode(goodsCode+code);
+                            String batchsNew="";
+                            if (batchs !="" && batchs !=null){
+                                Integer bacthLength=batchs.length();
+                                String  ph="";
+                                if (bacthLength<8){
+                                    Integer phscd=8-bacthLength;
+                                    for (int  i=0;i<phscd;i++){
+                                        ph+="0";
+                                    }
+                                    batchsNew=ph+batchs;
+                                }else {
+                                    batchs=batchs.substring(bacthLength-8, bacthLength);
+                                    batchsNew=ph+batchs;
+                                }
+                                stockDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
@@ -1393,13 +1491,14 @@ public class StockServiceImpl implements StockService {
                             orderDO.setGoodsNum(goodsNum);
 //                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                orderDO.setGoodsCode(goodsCode+code);
+                            if (batchs !="" && batchs !=null){
+                                orderDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 orderDO.setGoodsCode(goodsCode+"00000000");
                             }
                             orderDO.setGoodsName(goodsName);
                             orderDO.setGoodsCount(counts);
+                            orderDO.setBatch(batchs);
                             orderDO.setGoodsType(goodstype);
                             orderDO.setMfrsid(mfrsid);
                             orderDO.setBrandname(brandname);
@@ -1454,15 +1553,17 @@ public class StockServiceImpl implements StockService {
                             stockDO.setClasstype(classtype);
                             //数量
                             stockDO.setGoodsCount(counts);
+                            //批号
+                            stockDO.setBatch(batchs);
+                            //效期
                             //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-                            String code="";
+//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
-                                    //student.setLastCheckTime(dd);
                                 } else {
                                     Calendar calendar = new GregorianCalendar(1900, 0, -1);
                                     Date d = calendar.getTime();
@@ -1473,14 +1574,25 @@ public class StockServiceImpl implements StockService {
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-                                    //code =yeah + yue + ri;
-                                    code = yeah+yue + ri+"AA";
+//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
-
                             stockDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                stockDO.setGoodsCode(goodsCode+code);
+                            String batchsNew="";
+                            if (batchs !="" && batchs !=null){
+                                Integer bacthLength=batchs.length();
+                                String  ph="";
+                                if (bacthLength<8){
+                                    Integer phscd=8-bacthLength;
+                                    for (int  i=0;i<phscd;i++){
+                                        ph+="0";
+                                    }
+                                    batchsNew=ph+batchs;
+                                }else {
+                                    batchs=batchs.substring(bacthLength-8, bacthLength);
+                                    batchsNew=ph+batchs;
+                                }
+                                stockDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
@@ -1520,13 +1632,14 @@ public class StockServiceImpl implements StockService {
                             orderDO.setGoodsNum(goodsNum);
 //                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                orderDO.setGoodsCode(goodsCode+code);
+                            if (batchs !="" && batchs !=null){
+                                orderDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 orderDO.setGoodsCode(goodsCode+"00000000");
                             }
                             orderDO.setGoodsName(goodsName);
                             orderDO.setGoodsCount(counts);
+                            orderDO.setBatch(batchs);
                             orderDO.setGoodsType(goodstype);
                             orderDO.setMfrsid(mfrsid);
                             orderDO.setBrandname(brandname);
@@ -1581,15 +1694,17 @@ public class StockServiceImpl implements StockService {
                             stockDO.setClasstype(classtype);
                             //数量
                             stockDO.setGoodsCount(counts);
+                            //批号
+                            stockDO.setBatch(batchs);
+                            //效期
                             //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-                            String code="";
+//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
-                                    //student.setLastCheckTime(dd);
                                 } else {
                                     Calendar calendar = new GregorianCalendar(1900, 0, -1);
                                     Date d = calendar.getTime();
@@ -1600,14 +1715,25 @@ public class StockServiceImpl implements StockService {
                                     String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
                                     String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-                                    //code =yeah + yue + ri;
-                                    code =yeah + yue + ri+"AA";
+//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
-
                             stockDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                stockDO.setGoodsCode(goodsCode+code);
+                            String batchsNew="";
+                            if (batchs !="" && batchs !=null){
+                                Integer bacthLength=batchs.length();
+                                String  ph="";
+                                if (bacthLength<8){
+                                    Integer phscd=8-bacthLength;
+                                    for (int  i=0;i<phscd;i++){
+                                        ph+="0";
+                                    }
+                                    batchsNew=ph+batchs;
+                                }else {
+                                    batchs=batchs.substring(bacthLength-8, bacthLength);
+                                    batchsNew=ph+batchs;
+                                }
+                                stockDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
@@ -1647,13 +1773,14 @@ public class StockServiceImpl implements StockService {
                             orderDO.setGoodsNum(goodsNum);
 //                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
-                            if (usedays !="" && usedays !=null){
-                                orderDO.setGoodsCode(goodsCode+code);
+                            if (batchs !="" && batchs !=null){
+                                orderDO.setGoodsCode(goodsCode+batchsNew);
                             }else {
                                 orderDO.setGoodsCode(goodsCode+"00000000");
                             }
                             orderDO.setGoodsName(goodsName);
                             orderDO.setGoodsCount(counts);
+                            orderDO.setBatch(batchs);
                             orderDO.setGoodsType(goodstype);
                             orderDO.setMfrsid(mfrsid);
                             orderDO.setBrandname(brandname);
@@ -1684,7 +1811,7 @@ public class StockServiceImpl implements StockService {
 
                 }
                 if (listSize.size() > 0) {
-                    return R.ok("上传成功,共增加[" + num + "]条,第" + sl + "行导入失败，原因：商品代码已存在");
+                    return R.ok("上传成功,共增加[" + num + "]条,第" + sl + "行导入失败，原因：商品代码不存在");
                 } else {
                     if (sl != "") {
                         return R.ok("上传成功,共增加[" + num + "]条,第" + sl + "行导入失败，原因：商品代码不存在");
@@ -1699,7 +1826,7 @@ public class StockServiceImpl implements StockService {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
+        }finally {
             try {
                 if (book != null)
                     book.close();
