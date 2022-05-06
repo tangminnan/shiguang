@@ -10,8 +10,10 @@ import com.shiguang.common.utils.*;
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.domain.PositionDO;
+import com.shiguang.mfrs.domain.RefractivityDO;
 import com.shiguang.mfrs.service.BrandService;
 import com.shiguang.mfrs.service.GoodsService;
+import com.shiguang.mfrs.service.RefractivityService;
 import com.shiguang.product.domain.ProducaDO;
 import com.shiguang.stock.domain.PidiaoDO;
 import com.shiguang.stock.domain.StockDO;
@@ -61,6 +63,14 @@ public class TuihuoController {
 	private StockService stockService ;
 	@Autowired
 	private StocklogService stocklogService;
+	@Autowired
+	private RefractivityService refractivityService;
+
+
+
+	private Double retailPrice;
+	private Double retailPrice2;
+
 	@GetMapping()
 	@RequiresPermissions("stock:tuihuo:tuihuo")
 	String Tuihuo(){
@@ -360,6 +370,10 @@ public class TuihuoController {
 		}
 		model.addAttribute("mfrsid", mfrsid);
 		model.addAttribute("mfrsName", mfrsName);
+
+		//折射率
+		List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+		model.addAttribute("refractivityDOList", refractivityDOList);
 		return "/stock/tuihuo/getGood";
 	}
 
@@ -376,6 +390,16 @@ public PageUtils selectjingjia(@RequestParam Map<String, Object> params) {
 	}else if (kucount.equals("1")){
 		query.put("kccount1","0");
 	}
+//	// 钱转换
+//	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//		retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//	if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//		retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//
+//
+//	query.put("retailPrice", retailPrice);
+//	query.put("retailPrice2", retailPrice2);
+
 	List<StockDO> jingjiagoods = tuihuoService.selectJingjia(query);
 	int total = tuihuoService.selectJingjiacount(query);
 	PageUtils pageUtils = new PageUtils(jingjiagoods, total);
@@ -397,6 +421,16 @@ public PageUtils selectpeijian(@RequestParam Map<String, Object> params) {
 	}else if (kucount.equals("1")){
 		query.put("kccount1","0");
 	}
+
+//	// 钱转换
+//	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//		retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//	if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//		retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//
+//
+//	query.put("retailPrice", retailPrice);
+//	query.put("retailPrice2", retailPrice2);
 	List<StockDO> partsgoods  = tuihuoService.selectPeijian(query);
 	int total = tuihuoService.selectPeijiancount(query);
 	PageUtils pageUtils = new PageUtils(partsgoods, total);
@@ -416,6 +450,16 @@ public PageUtils selectJpcp(@RequestParam Map<String, Object> params) {
 	}else if (kucount.equals("1")){
 		query.put("kccount1","0");
 	}
+
+//	// 钱转换
+//	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//		retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//	if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//		retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//
+//
+//	query.put("retailPrice", retailPrice);
+	query.put("retailPrice2", retailPrice2);
 	List<StockDO> jpcpgoods = tuihuoService.selectJpcp(query);
 	int total = tuihuoService.selectJpcpcount(query);
 	PageUtils pageUtils = new PageUtils(jpcpgoods, total);
@@ -435,6 +479,16 @@ public PageUtils selectJpdz(@RequestParam Map<String, Object> params) {
 	}else if (kucount.equals("1")){
 		query.put("kccount1","0");
 	}
+
+//	// 钱转换
+//	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//		retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//	if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//		retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//
+//
+//	query.put("retailPrice", retailPrice);
+//	query.put("retailPrice2", retailPrice2);
 	List<StockDO> jpdzgoods = tuihuoService.selectJpdz(query);
 	int total = tuihuoService.selectJpdzcount(query);
 	PageUtils pageUtils = new PageUtils(jpdzgoods, total);
@@ -454,6 +508,16 @@ public PageUtils selectYxcp(@RequestParam Map<String, Object> params) {
 	}else if (kucount.equals("1")){
 		query.put("kccount1","0");
 	}
+
+//	// 钱转换
+//	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//		retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//	if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//		retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//
+//
+//	query.put("retailPrice", retailPrice);
+//	query.put("retailPrice2", retailPrice2);
 	List<StockDO> yxcpgoods = tuihuoService.selectYxcp(query);
 	int total = tuihuoService.selectYxcpcount(query);
 	PageUtils pageUtils = new PageUtils(yxcpgoods, total);
@@ -474,6 +538,16 @@ public PageUtils selectYxdz(@RequestParam Map<String, Object> params) {
 	}else if (kucount.equals("1")){
 		query.put("kccount1","0");
 	}
+
+//	// 钱转换
+//	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//		retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//	if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//		retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//
+//
+//	query.put("retailPrice", retailPrice);
+//	query.put("retailPrice2", retailPrice2);
 	List<StockDO> yxdzgoods  = tuihuoService.selectYxdz(query);
 	int total = tuihuoService.selectYxdzcount(query);
 	PageUtils pageUtils = new PageUtils(yxdzgoods, total);
@@ -493,6 +567,15 @@ public PageUtils selecthly(@RequestParam Map<String, Object> params) {
 	}else if (kucount.equals("1")){
 		query.put("kccount1","0");
 	}
+//	// 钱转换
+//	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//		retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//	if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//		retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//
+//
+//	query.put("retailPrice", retailPrice);
+//	query.put("retailPrice2", retailPrice2);
 	List<StockDO> hlygoods = tuihuoService.selectHly(query);
 	int total = tuihuoService.selectHlycount(query);
 	PageUtils pageUtils = new PageUtils(hlygoods, total);
@@ -512,6 +595,16 @@ public PageUtils selecttyj(@RequestParam Map<String, Object> params) {
 	}else if (kucount.equals("1")){
 		query.put("kccount1","0");
 	}
+
+//	// 钱转换
+//	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//		retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//	if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//		retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//
+//
+//	query.put("retailPrice", retailPrice);
+//	query.put("retailPrice2", retailPrice2);
 	List<StockDO> tyjgoods = tuihuoService.selectTyj(query);
 	int total = tuihuoService.selectTyjcount(query);
 	PageUtils pageUtils = new PageUtils(tyjgoods, total);
@@ -531,6 +624,16 @@ public PageUtils selectLhj(@RequestParam Map<String, Object> params) {
 	}else if (kucount.equals("1")){
 		query.put("kccount1","0");
 	}
+
+//	// 钱转换
+//	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//		retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//	if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//		retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//
+//
+//	query.put("retailPrice", retailPrice);
+//	query.put("retailPrice2", retailPrice2);
 	List<StockDO> lhjgoods = tuihuoService.selectLhj(query);
 	int total = tuihuoService.selectLhjcount(query);
 	PageUtils pageUtils = new PageUtils(lhjgoods, total);
@@ -550,6 +653,16 @@ public PageUtils selectHc(@RequestParam Map<String, Object> params) {
 	}else if (kucount.equals("1")){
 		query.put("kccount1","0");
 	}
+
+//	// 钱转换
+//	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//		retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//	if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//		retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//
+//
+//	query.put("retailPrice", retailPrice);
+	query.put("retailPrice2", retailPrice2);
 	List<StockDO> hcgoods = tuihuoService.selectHc(query);
 	int total = tuihuoService.selectHccount(query);
 	PageUtils pageUtils = new PageUtils(hcgoods, total);
@@ -569,6 +682,16 @@ public PageUtils selectSg(@RequestParam Map<String, Object> params) {
 	}else if (kucount.equals("1")){
 		query.put("kccount1","0");
 	}
+
+//	// 钱转换
+//	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//		retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//	if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//		retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//
+//
+//	query.put("retailPrice", retailPrice);
+//	query.put("retailPrice2", retailPrice2);
 	List<StockDO> sggoods = tuihuoService.selectSg(query);
 	int total = tuihuoService.selectSgcount(query);
 	PageUtils pageUtils = new PageUtils(sggoods, total);

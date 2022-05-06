@@ -133,4 +133,11 @@
          </where>
         group by position_id order by  position_id
     </select>
+
+
+    <!-- 根据仓位代码查询仓位名称 -->
+    <select id="getComponid" resultType="com.shiguang.mfrs.domain.PositionDO">
+          select company_id,depart_name,depart_number from department where depart_number=#{value}
+    </select>
+
 </mapper>

@@ -99,20 +99,20 @@ ProducaController {
 
         Query query = new Query(params);
 
-        // 钱转换
-        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
-              retailPrice = Double.parseDouble(params.get("retailPrice").toString());
-        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
-             retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
-        if (StringUtils.isNotBlank(params.get("taxPrice").toString()))
-             taxPrice = Double.parseDouble(params.get("taxPrice").toString());
-        if (StringUtils.isNotBlank(params.get("taxPrice2").toString()))
-             taxPrice2 = Double.parseDouble(params.get("taxPrice2").toString());
-
-         query.put("retailPrice", retailPrice);
-         query.put("retailPrice2", retailPrice2);
-         query.put("taxPrice", taxPrice);
-         query.put("taxPrice2", taxPrice2);
+//        // 钱转换
+//        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//              retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//             retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//        if (StringUtils.isNotBlank(params.get("taxPrice").toString()))
+//             taxPrice = Double.parseDouble(params.get("taxPrice").toString());
+//        if (StringUtils.isNotBlank(params.get("taxPrice2").toString()))
+//             taxPrice2 = Double.parseDouble(params.get("taxPrice2").toString());
+//
+//         query.put("retailPrice", retailPrice);
+//         query.put("retailPrice2", retailPrice2);
+//         query.put("taxPrice", taxPrice);
+//         query.put("taxPrice2", taxPrice2);
 
         List<ProducaDO> producaList = producaService.list(query);
         int total = producaService.count(query);

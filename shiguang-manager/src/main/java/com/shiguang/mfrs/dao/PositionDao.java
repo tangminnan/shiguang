@@ -1,5 +1,6 @@
 package com.shiguang.mfrs.dao;
 
+import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.mfrs.domain.PositionDO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -42,4 +43,8 @@ public interface PositionDao {
 
     //     <!--库存查询相对应的仓库-->
     List<PositionDO> positionList(Map<String, Object> map);
+
+
+    DepartmentDO getComponid(String departNumber);
+
 }

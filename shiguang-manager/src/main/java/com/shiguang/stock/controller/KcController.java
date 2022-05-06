@@ -110,15 +110,15 @@ public class KcController {
             }
         }
 
-        // 钱转换
-        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
-            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
-        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
-            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
-
-
-        query.put("retailPrice", retailPrice);
-        query.put("retailPrice2", retailPrice2);
+//        // 钱转换
+//        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//
+//
+//        query.put("retailPrice", retailPrice);
+//        query.put("retailPrice2", retailPrice2);
         String kucount=params.get("kccount").toString();
         if (kucount.equals("0")){
             query.put("kccount0",kucount);
