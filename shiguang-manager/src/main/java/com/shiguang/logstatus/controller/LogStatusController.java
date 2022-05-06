@@ -736,7 +736,7 @@ public class LogStatusController {
                     maps.put("companyId", companyId);
                     //maps.put("departNumber",ShiroUtils.getUser().getStoreNum());
                     if ("3".equals(companyId)){
-                        maps.put("position_id","7");
+                        maps.put("positionId","7");
                     }
                     positionDO = stockService.findHegePosition(maps);
                     StockDO stockDOs = new StockDO();

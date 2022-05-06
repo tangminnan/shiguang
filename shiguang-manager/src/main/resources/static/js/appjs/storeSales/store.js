@@ -25,7 +25,7 @@ function getKjpeijian() {
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td id='zhekoulv"+a+"'>0.00</td>";
+                html += "<td><input id='zhekoulvjjpj"+a+"' name='saleDiscount' value='0.00' oninput='getZhekoulv(this,\""+desc+"\")'/></td>";
                 html += "<td id='zhekoujjpj"+a+"'>0.00</td>";
                 html += "<td id='zhekouMoneyjjpj"+a+"'>0.00</td>";
                 html += "<td id='youhuiMoneyjjpj"+a+"'>0.00</td>";
@@ -112,7 +112,7 @@ function getTaiyangjing(){
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td id='zhekoulv"+a+"'>0.00</td>";
+                html += "<td><input id='zhekoulvtyj"+a+"' name='saleDiscount' value='0.00' oninput='getZhekoulv(this,\""+desc+"\")'/></td>";
                 html += "<td id='zhekoutyj"+a+"'>0.00</td>";
                 html += "<td id='zhekouMoneytyj"+a+"'>0.00</td>";
                 html += "<td id='youhuiMoneytyj"+a+"'>0.00</td>";
@@ -199,7 +199,7 @@ function getHaocai() {
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td id='zhekoulv"+a+"'>0.00</td>";
+                html += "<td><input id='zhekoulvhc"+a+"' name='saleDiscount' value='0.00' oninput='getZhekoulv(this,\""+desc+"\")'/></td>";
                 html += "<td id='zhekouhc"+a+"'>0.00</td>";
                 html += "<td id='zhekouMoneyhc"+a+"'>0.00</td>";
                 html += "<td id='youhuiMoneyhc"+a+"'>0.00</td>";
@@ -286,7 +286,7 @@ function getLaohuajing() {
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td id='zhekoulv"+a+"'>0.00</td>";
+                html += "<td><input id='zhekoulvlhj"+a+"' name='saleDiscount' value='0.00' oninput='getZhekoulv(this,\""+desc+"\")'/></td>";
                 html += "<td id='zhekoulhj"+a+"'>0.00</td>";
                 html += "<td id='zhekouMoneylhj"+a+"'>0.00</td>";
                 html += "<td id='youhuiMoneylhj"+a+"'>0.00</td>";
@@ -379,7 +379,7 @@ function getShiguang(){
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td id='zhekoulv"+a+"'>0.00</td>";
+                html += "<td><input id='zhekoulvsg"+a+"' name='saleDiscount' value='0.00' oninput='getZhekoulv(this,\""+desc+"\")'/></td>";
                 html += "<td id='zhekousg"+a+"'>0.00</td>";
                 html += "<td id='zhekouMoneysg"+a+"'>0.00</td>";
                 html += "<td id='youhuiMoneysg"+a+"'>0.00</td>";
@@ -466,7 +466,7 @@ function getHuliye(){
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+dsc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td id='zhekoulv"+a+"'>0.00</td>";
+                html += "<td><input id='zhekoulvhly"+a+"' name='saleDiscount' value='0.00' oninput='getZhekoulv(this,\""+desc+"\")'/></td>";
                 html += "<td id='zhekouhly"+a+"'>0.00</td>";
                 html += "<td id='zhekouMoneyhly"+a+"'>0.00</td>";
                 html += "<td id='youhuiMoneyhly"+a+"'>0.00</td>";
@@ -575,7 +575,7 @@ function getPeijian(){
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td id='zhekoulv"+a+"'>0.00</td>";
+                html += "<td><input id='zhekoulvpj"+a+"' name='saleDiscount' value='0.00' oninput='getZhekoulv(this,\""+desc+"\")'/></td>";
                 html += "<td id='zhekouhpj"+a+"'>0.00</td>";
                 html += "<td id='zhekouMoneypj"+a+"'>0.00</td>";
                 html += "<td id='youhuiMoneypj"+a+"'>0.00</td>";
@@ -771,7 +771,7 @@ function getYinxing(){
                 html += "<td>"+rows[i][0].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i][0].retailPrice+"</td>";
-                html += "<td id='zhekoulv"+a+"'>0.00</td>";
+                html += "<td><input id='zhekoulvyx"+a+"' name='saleDiscount' value='0.00' oninput='getZhekoulv(this,\""+desc+"\")'/></td>";
                 html += "<td id='zhekouhyx"+a+"'>0.00</td>";
                 html += "<td id='zhekouMoneyyx"+a+"'>0.00</td>";
                 html += "<td id='youhuiMoneyyx"+a+"'>0.00</td>";
@@ -856,7 +856,7 @@ function getYinxingpj(){
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td id='zhekoulv"+a+"'>0.00</td>";
+                html += "<td><input id='zhekoulvyxpj"+a+"' name='saleDiscount' value='0.00' oninput='getZhekoulv(this,\""+desc+"\")'/></td>";
                 html += "<td id='zhekouhyxpj"+a+"'>0.00</td>";
                 html += "<td id='zhekouMoneyyxpj"+a+"'>0.00</td>";
                 html += "<td id='youhuiMoneyyxpj"+a+"'>0.00</td>";

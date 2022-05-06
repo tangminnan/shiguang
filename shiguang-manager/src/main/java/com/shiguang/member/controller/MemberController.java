@@ -886,14 +886,14 @@ public class MemberController {
                 return R.error("会员卡号已存在");
             }
         } else {
-            if ("1".equals(ShiroUtils.getUser().getCompanyId())){
-                map.put("identityId",member.getIdentityId());
-                map.put("state","1");
-                List<MemberDO> list = memberService.list(map);
-                if (list.size() > 0){
-                    return R.error("该会员已存在");
-                }
-            }
+//            if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+//                map.put("identityId",member.getIdentityId());
+//                map.put("state","1");
+//                List<MemberDO> list = memberService.list(map);
+//                if (list.size() > 0){
+//                    return R.error("该会员已存在");
+//                }
+//            }
             member.setCardNumber("H"+GuuidUtil.getUUID());
         }
         if ("".equals(member.getCardType())){

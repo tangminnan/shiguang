@@ -59,6 +59,7 @@ public class SaleGoodsController {
         }
         if (!"".equals(departNumber)){
             query.put("departNumber",departNumber);
+            model.addAttribute("departNumber",departNumber);
         }
         List<SalesDO> salesDOList = saleReportService.findGoodsList(query);
         int jjcount = 0;
@@ -564,7 +565,7 @@ public class SaleGoodsController {
     }
 
     @GetMapping("/salegoodsNameList")
-    public String salegoodNamesList(String settleDateStart,String settleDateEnd,String goodsType,Model model) {
+    public String salegoodNamesList(String settleDateStart,String settleDateEnd,String goodsType,String departmentName,Model model) {
         Map<String,Object> query = new HashMap<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -581,6 +582,11 @@ public class SaleGoodsController {
         } else {
             query.put("settleDateEnd",simpleDateFormat.format(date));
             model.addAttribute("settleDateEnd",simpleDateFormat.format(date));
+        }
+        if (!"".equals(departmentName)){
+            query.put("departNumber",departmentName);
+        } else {
+            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
         }
         List<SalesDO> salesDOList = saleReportService.findGoodsList(query);
         int zjcount = 0;
@@ -999,7 +1005,7 @@ public class SaleGoodsController {
     }
 
     @GetMapping("/salegoodsBrandNameList")
-    public String salegoodsBrandNameList(String settleDateStart,String settleDateEnd,String brandName,String goodsType,Model model){
+    public String salegoodsBrandNameList(String settleDateStart,String settleDateEnd,String brandName,String goodsType,String departNumber,Model model){
         Map<String,Object> query = new HashMap<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -1016,6 +1022,11 @@ public class SaleGoodsController {
         } else {
             query.put("settleDateEnd",simpleDateFormat.format(date));
             model.addAttribute("settleDateEnd",simpleDateFormat.format(date));
+        }
+        if (!"".equals(departNumber)){
+            query.put("departNumber",departNumber);
+        } else {
+            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
         }
         List<SalesDO> salesDOList = saleReportService.findGoodsList(query);
         int zjcount = 0;
