@@ -1,5 +1,6 @@
 package com.shiguang.mfrs.service;
 
+import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.mfrs.domain.PositionDO;
 
 import java.util.List;
@@ -40,4 +41,7 @@ public interface PositionService {
 
     // <!--库存查询相对应的仓库-->
     List<PositionDO> positionList(Map<String, Object> map);
+
+    DepartmentDO getComponid(String departNumber);
+
 }

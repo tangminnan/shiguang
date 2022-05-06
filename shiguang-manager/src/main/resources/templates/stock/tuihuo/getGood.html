@@ -250,14 +250,52 @@
                 <input id="positionName" name="positionName" th:value="${positionName}" readonly type="text"/>
             </td>
         </tr>
+        <tr>
+            <td>厂家型号:</td>
+            <td>
+                <input id="factory" name="factory" type="text"/>
+            </td>
+
+            <td>标准零售价格：</td>
+            <td>
+                <input id="retailPrice" name="retailPrice" type="text"/> ~ <input id="retailPrice2" name="retailPrice2" type="text"/>
+            </td>
+        </tr>
         <!--<tr>-->
-            <!--<input id="outPosition" type="hidden" th:value="${outPosition}"/>-->
-            <!--<td>标准零售价格：</td>-->
+
+            <!--<td>球镜范围：</td>-->
             <!--<td>-->
-                <!--<input id="retailPrice" name="retailPrice" type="text"/>-->
-                <!--~ <input name="retailPrice2" type="text"/>-->
+                <!--<input id="sph" name="sph"type="text"  />-->
+                <!--~-->
+                <!--<input id="sph2" name="sph2"type="text" />-->
             <!--</td>-->
+            <!--<td>柱镜范围：</td>-->
+            <!--<td>-->
+                <!--<input id="cyl" name="cyl"type="text" />-->
+                <!--~-->
+                <!--<input id="cyl2" name="cyl2"type="text" />-->
+            <!--</td>-->
+
+            <!--<td>厂家色号:</td>-->
+            <!--<td>-->
+                <!--<input id="factoryColor" name="factoryColor" type="text"/>-->
+            <!--</td>-->
+            <!--<td>镜片折射率：</td>-->
+            <!--<td>-->
+                <!--<select id="refractivityid" name="refractivityid" style="width: 39%">-->
+                    <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
+                    <!--<option th:each="ls:${refractivityDOList}"-->
+                            <!--th:text="${ls.refractivityvalue}"-->
+                            <!--th:value="${ls.refractivityvalue}"-->
+                    <!--&gt;</option>-->
+                <!--</select>-->
+            <!--</td>-->
+
+           <!---->
         <!--</tr>-->
+
+
+
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
@@ -376,7 +414,19 @@
                                     goodsName : $("#goodsName").val(),
                                     brandname : $("#brandname").val(),
                                     classtype : $("#classtype").val(),
-                                    kccount : $('#kccount').val()
+                                    kccount : $('#kccount').val(),
+
+
+                                    retailPrice : $("#retailPrice").val(),
+                                    retailPrice2 : $("#retailPrice2").val(),
+                                    factory:$('#factory').val()
+                                    // factoryColor:$('#factoryColor').val(),
+                                    // sph:$('#sph').val(),
+                                    // sph2:$('#sph2').val(),
+                                    // cyl:$('#cyl').val(),
+                                    // cyl2:$('#cyl2').val(),
+                                    // refractivityid:$('#refractivityid').val()
+
                                 };
                             },
                             columns: [
@@ -468,7 +518,17 @@
                                 goodsName : $("#goodsName").val(),
                                 brandname : $("#brandname").val(),
                                 classtype : $("#classtype").val(),
-                                kccount : $('#kccount').val()
+                                kccount : $('#kccount').val(),
+
+                                retailPrice : $("#retailPrice").val(),
+                                retailPrice2 : $("#retailPrice2").val(),
+                                factory:$('#factory').val()
+                                // factoryColor:$('#factoryColor').val(),
+                                // sph:$('#sph').val(),
+                                // sph2:$('#sph2').val(),
+                                // cyl:$('#cyl').val(),
+                                // cyl2:$('#cyl2').val(),
+                                // refractivityid:$('#refractivityid').val()
 
                             };
                         },
@@ -553,7 +613,17 @@
                                     goodsName: $("#goodsName").val(),
                                     brandname: $("#brandname").val(),
                                     classtype : $("#classtype").val(),
-                                    kccount : $('#kccount').val()
+                                    kccount : $('#kccount').val(),
+
+                                    retailPrice : $("#retailPrice").val(),
+                                    retailPrice2 : $("#retailPrice2").val(),
+                                    factory:$('#factory').val()
+                                    // factoryColor:$('#factoryColor').val(),
+                                    // sph:$('#sph').val(),
+                                    // sph2:$('#sph2').val(),
+                                    // cyl:$('#cyl').val(),
+                                    // cyl2:$('#cyl2').val(),
+                                    // refractivityid:$('#refractivityid').val()
 
 
                                 };
@@ -661,7 +731,17 @@
                                     goodsName: $("#goodsName").val(),
                                     brandname: $("#brandname").val(),
                                     classtype : $("#classtype").val(),
-                                    kccount : $('#kccount').val()
+                                    kccount : $('#kccount').val(),
+
+                                    retailPrice : $("#retailPrice").val(),
+                                    retailPrice2 : $("#retailPrice2").val(),
+                                    factory:$('#factory').val()
+                                    // factoryColor:$('#factoryColor').val(),
+                                    // sph:$('#sph').val(),
+                                    // sph2:$('#sph2').val(),
+                                    // cyl:$('#cyl').val(),
+                                    // cyl2:$('#cyl2').val(),
+                                    // refractivityid:$('#refractivityid').val()
 
                                 };
                             },
@@ -771,7 +851,17 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
 
                                     };
                                 },
@@ -874,7 +964,17 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
 
                                     };
                                 },
@@ -978,7 +1078,17 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
 
                                     };
                                 },
@@ -1065,7 +1175,17 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
 
                                     };
                                 },
@@ -1152,7 +1272,18 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
 
                                     };
                                 },
@@ -1244,7 +1375,18 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
 
                                     };
                                 },
@@ -1324,7 +1466,19 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
+
+
 
                                     };
                                 },

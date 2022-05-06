@@ -123,6 +123,10 @@ public class PositionController {
     @RequestMapping("/update")
     @RequiresPermissions("mfrs:position:edit")
     public R update(PositionDO position) {
+        String departNumber=position.getDepartNumber();
+        DepartmentDO departmentDO=positionService.getComponid(departNumber);
+        Integer companyId=departmentDO.getCompanyId();
+        position.setCompanyId(companyId.toString());
         positionService.update(position);
         return R.ok();
     }
