@@ -83,11 +83,13 @@ public class TuihuoController {
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
-		String companyId = null;
-		if (null != ShiroUtils.getUser().getCompanyId()) {
-			companyId = ShiroUtils.getUser().getCompanyId();
+		if (null != ShiroUtils.getUser().getCompanyId()){
+			if(ShiroUtils.getUser().getCompanyId().equals("3")){
+				query.put("companyId","");
+			}else {
+				query.put("companyId",ShiroUtils.getUser().getCompanyId());
+			}
 		}
-		query.put("companyId",companyId);
 		List<TuihuoDO> tuihuoList = tuihuoService.orderList(query);
 		int total = tuihuoService.orderCount(query);
 		PageUtils pageUtils = new PageUtils(tuihuoList, total);
@@ -168,7 +170,7 @@ public class TuihuoController {
 		String[] count1 = stockDO.getCount().split(",");
 		String[] goodsCode1 = stockDO.getGoodsCode().split(",");
 //		String[] goodsxinxiid1 = stockDO.getGoodsxinxiid().split(",");
-		String[] style1 = stockDO.getStyle().split(",");
+		String style = stockDO.getStyle();
 		String[] retailProce1 = stockDO.getRetailPrice().split(",");
 
 		for (int i = 0; i < goodsNum1.length; i++) {
@@ -256,7 +258,6 @@ public class TuihuoController {
 					tuihuoDO.setGoodsCode("");
 				}
 				try {
-					String style = style1[i];
 					tuihuoDO.setStyle(style);
 				}catch (ArrayIndexOutOfBoundsException e){
 					tuihuoDO.setStyle("");
@@ -294,7 +295,7 @@ public class TuihuoController {
 				stocklogDO.setZhidanPeople(tuihuo.getZhidanPeople());
 				stocklogDO.setDay(tuihuo.getDanjuDay());
 //                    stocklogDO.setWay(orderkc.getZhidanPeople()+"批调"+orderkc.getGoodsCount()+"个"+orderkc.getGoodsName());
-				stocklogDO.setWay(style1[0]);
+				stocklogDO.setWay(style);
 				stocklogDO.setUsername(ShiroUtils.getUser().getUsername());
 				stocklogService.save(stocklogDO);
 
@@ -384,12 +385,12 @@ public class TuihuoController {
 public PageUtils selectjingjia(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
-	String kucount=params.get("kccount").toString();
-	if (kucount.equals("0")){
-		query.put("kccount0",kucount);
-	}else if (kucount.equals("1")){
-		query.put("kccount1","0");
-	}
+//	String kucount=params.get("kccount").toString();
+//	if (kucount.equals("0")){
+//		query.put("kccount0",kucount);
+//	}else if (kucount.equals("1")){
+//		query.put("kccount1","0");
+//	}
 //	// 钱转换
 //	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
 //		retailPrice = Double.parseDouble(params.get("retailPrice").toString());
@@ -415,12 +416,12 @@ public PageUtils selectjingjia(@RequestParam Map<String, Object> params) {
 public PageUtils selectpeijian(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
-	String kucount=params.get("kccount").toString();
-	if (kucount.equals("0")){
-		query.put("kccount0",kucount);
-	}else if (kucount.equals("1")){
-		query.put("kccount1","0");
-	}
+//	String kucount=params.get("kccount").toString();
+//	if (kucount.equals("0")){
+//		query.put("kccount0",kucount);
+//	}else if (kucount.equals("1")){
+//		query.put("kccount1","0");
+//	}
 
 //	// 钱转换
 //	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
@@ -444,12 +445,12 @@ public PageUtils selectpeijian(@RequestParam Map<String, Object> params) {
 public PageUtils selectJpcp(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
-	String kucount=params.get("kccount").toString();
-	if (kucount.equals("0")){
-		query.put("kccount0",kucount);
-	}else if (kucount.equals("1")){
-		query.put("kccount1","0");
-	}
+//	String kucount=params.get("kccount").toString();
+//	if (kucount.equals("0")){
+//		query.put("kccount0",kucount);
+//	}else if (kucount.equals("1")){
+//		query.put("kccount1","0");
+//	}
 
 //	// 钱转换
 //	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
@@ -473,12 +474,12 @@ public PageUtils selectJpcp(@RequestParam Map<String, Object> params) {
 public PageUtils selectJpdz(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
-	String kucount=params.get("kccount").toString();
-	if (kucount.equals("0")){
-		query.put("kccount0",kucount);
-	}else if (kucount.equals("1")){
-		query.put("kccount1","0");
-	}
+//	String kucount=params.get("kccount").toString();
+//	if (kucount.equals("0")){
+//		query.put("kccount0",kucount);
+//	}else if (kucount.equals("1")){
+//		query.put("kccount1","0");
+//	}
 
 //	// 钱转换
 //	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
@@ -502,12 +503,12 @@ public PageUtils selectJpdz(@RequestParam Map<String, Object> params) {
 public PageUtils selectYxcp(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
-	String kucount=params.get("kccount").toString();
-	if (kucount.equals("0")){
-		query.put("kccount0",kucount);
-	}else if (kucount.equals("1")){
-		query.put("kccount1","0");
-	}
+//	String kucount=params.get("kccount").toString();
+//	if (kucount.equals("0")){
+//		query.put("kccount0",kucount);
+//	}else if (kucount.equals("1")){
+//		query.put("kccount1","0");
+//	}
 
 //	// 钱转换
 //	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
@@ -532,12 +533,12 @@ public PageUtils selectYxcp(@RequestParam Map<String, Object> params) {
 public PageUtils selectYxdz(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
-	String kucount=params.get("kccount").toString();
-	if (kucount.equals("0")){
-		query.put("kccount0",kucount);
-	}else if (kucount.equals("1")){
-		query.put("kccount1","0");
-	}
+//	String kucount=params.get("kccount").toString();
+//	if (kucount.equals("0")){
+//		query.put("kccount0",kucount);
+//	}else if (kucount.equals("1")){
+//		query.put("kccount1","0");
+//	}
 
 //	// 钱转换
 //	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
@@ -561,12 +562,12 @@ public PageUtils selectYxdz(@RequestParam Map<String, Object> params) {
 public PageUtils selecthly(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
-	String kucount=params.get("kccount").toString();
-	if (kucount.equals("0")){
-		query.put("kccount0",kucount);
-	}else if (kucount.equals("1")){
-		query.put("kccount1","0");
-	}
+//	String kucount=params.get("kccount").toString();
+//	if (kucount.equals("0")){
+//		query.put("kccount0",kucount);
+//	}else if (kucount.equals("1")){
+//		query.put("kccount1","0");
+//	}
 //	// 钱转换
 //	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
 //		retailPrice = Double.parseDouble(params.get("retailPrice").toString());
@@ -589,12 +590,12 @@ public PageUtils selecthly(@RequestParam Map<String, Object> params) {
 public PageUtils selecttyj(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
-	String kucount=params.get("kccount").toString();
-	if (kucount.equals("0")){
-		query.put("kccount0",kucount);
-	}else if (kucount.equals("1")){
-		query.put("kccount1","0");
-	}
+//	String kucount=params.get("kccount").toString();
+//	if (kucount.equals("0")){
+//		query.put("kccount0",kucount);
+//	}else if (kucount.equals("1")){
+//		query.put("kccount1","0");
+//	}
 
 //	// 钱转换
 //	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
@@ -618,12 +619,12 @@ public PageUtils selecttyj(@RequestParam Map<String, Object> params) {
 public PageUtils selectLhj(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
-	String kucount=params.get("kccount").toString();
-	if (kucount.equals("0")){
-		query.put("kccount0",kucount);
-	}else if (kucount.equals("1")){
-		query.put("kccount1","0");
-	}
+//	String kucount=params.get("kccount").toString();
+//	if (kucount.equals("0")){
+//		query.put("kccount0",kucount);
+//	}else if (kucount.equals("1")){
+//		query.put("kccount1","0");
+//	}
 
 //	// 钱转换
 //	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
@@ -647,12 +648,12 @@ public PageUtils selectLhj(@RequestParam Map<String, Object> params) {
 public PageUtils selectHc(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
-	String kucount=params.get("kccount").toString();
-	if (kucount.equals("0")){
-		query.put("kccount0",kucount);
-	}else if (kucount.equals("1")){
-		query.put("kccount1","0");
-	}
+//	String kucount=params.get("kccount").toString();
+//	if (kucount.equals("0")){
+//		query.put("kccount0",kucount);
+//	}else if (kucount.equals("1")){
+//		query.put("kccount1","0");
+//	}
 
 //	// 钱转换
 //	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
@@ -676,12 +677,12 @@ public PageUtils selectHc(@RequestParam Map<String, Object> params) {
 public PageUtils selectSg(@RequestParam Map<String, Object> params) {
 	//查询列表数据
 	Query query = new Query(params);
-	String kucount=params.get("kccount").toString();
-	if (kucount.equals("0")){
-		query.put("kccount0",kucount);
-	}else if (kucount.equals("1")){
-		query.put("kccount1","0");
-	}
+//	String kucount=params.get("kccount").toString();
+//	if (kucount.equals("0")){
+//		query.put("kccount0",kucount);
+//	}else if (kucount.equals("1")){
+//		query.put("kccount1","0");
+//	}
 
 //	// 钱转换
 //	if (StringUtils.isNotBlank(params.get("retailPrice").toString()))

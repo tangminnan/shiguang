@@ -35,6 +35,7 @@
             <if test="goodsCount != null and goodsCount != ''">and s.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname  LIKE concat(concat('%', #{mfrsname}),'%')</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">and s.retail_price = #{retailPrice}</if>
             <if test="priceSum != null and priceSum != ''">and s.price_sum = #{priceSum}</if>
@@ -70,6 +71,10 @@
             <if test="returnzt != null and returnzt != ''">and s.returnzt = #{returnzt} </if>
             <if test="stockorder != null and stockorder != ''">and s.stockorder = #{stockorder} </if>
             <if test="goodsid != null and goodsid != ''">and g.goodsid = #{goodsid} </if>
+
+            <if test="day1 !=null and day1 != ''"> and date_format(s.danju_day ,'%Y-%m-%d' ) >= (#{day1})</if>
+            <if test="day2 !=null and day2 != ''"> and date_format(s.danju_day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
+
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -100,6 +105,7 @@
             <if test="goodsCount != null and goodsCount != ''">and s.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname  LIKE concat(concat('%', #{mfrsname}),'%')</if>
             <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
             <if test="retailPrice != null and retailPrice != ''">and s.retail_price = #{retailPrice}</if>
             <if test="priceSum != null and priceSum != ''">and s.price_sum = #{priceSum}</if>
@@ -135,6 +141,9 @@
             <if test="returnzt != null and returnzt != ''">and s.returnzt = #{returnzt} </if>
             <if test="stockorder != null and stockorder != ''">and s.stockorder = #{stockorder} </if>
             <if test="goodsid != null and goodsid != ''">and g.goodsid = #{goodsid} </if>
+
+            <if test="day1 !=null and day1 != ''"> and date_format(s.danju_day ,'%Y-%m-%d' ) >= (#{day1})</if>
+            <if test="day2 !=null and day2 != ''"> and date_format(s.danju_day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
         </where>
     </select>
 

@@ -58,7 +58,11 @@ public class PositionController {
         Query query = new Query(params);
         //———获取当前登录用户的公司id————
         if (null != ShiroUtils.getUser().getCompanyId()){
-            query.put("companyId",ShiroUtils.getUser().getCompanyId());
+            if(ShiroUtils.getUser().getCompanyId().equals("3")){
+                query.put("companyId","");
+            }else {
+                query.put("companyId",ShiroUtils.getUser().getCompanyId());
+            }
         }
         query.put("state",1);
         List<PositionDO> positionList = positionService.list(query);
