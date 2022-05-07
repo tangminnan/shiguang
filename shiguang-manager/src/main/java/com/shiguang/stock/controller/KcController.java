@@ -121,9 +121,11 @@ public class KcController {
 //        query.put("retailPrice2", retailPrice2);
         String kucount=params.get("kccount").toString();
         if (kucount.equals("0")){
-            query.put("kccount0",kucount);
+            query.put("kccount0","0");
         }else if (kucount.equals("1")){
             query.put("kccount1","0");
+        }else if (kucount.equals("2")){
+            query.put("kccount2","0");
         }
         List<StockDO> stockDOS = stockService.kccxList(query);
 
@@ -207,6 +209,8 @@ public class KcController {
             map.put("kccount0",kccount);
         }else if (kccount.equals("1")){
             map.put("kccount1","0");
+        }else if (kccount.equals("2")){
+            map.put("kccount2","0");
         }
 
         map.put("retailPrice",retailPrice);

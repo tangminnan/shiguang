@@ -2141,9 +2141,10 @@
     <if test="status != null and status != ''">and s.status = #{status}</if>
     <if test="outPosition != null and outPosition != ''">and  po.position_id  = #{outPosition}</if>
 
-    <if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-    <if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
 
+        <if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
+        <if test="kccount1 != null and kccount1 != ''">and  s.goods_count > #{kccount1}</if>
+        <if test="kccount2 != null and kccount2 != ''">and  s.goods_count &lt; #{kccount2}</if>
 
         <if test="factory != null and factory != ''">and s.factory LIKE concat(concat('%', #{factory}),'%')</if>
         <if test="(factoryColor != null and factoryColor != '') ">
@@ -2233,7 +2234,9 @@
             <if test="outPosition != null and outPosition != ''">and  po.position_id  = #{outPosition}</if>
 
             <if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-            <if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+            <if test="kccount1 != null and kccount1 != ''">and  s.goods_count > #{kccount1}</if>
+            <if test="kccount2 != null and kccount2 != ''">and  s.goods_count &lt; #{kccount2}</if>
+
 
 
             <if test="factory != null and factory != ''">and s.factory LIKE concat(concat('%', #{factory}),'%')</if>
@@ -2311,7 +2314,8 @@
             <if test="outPosition != null and outPosition != ''">and  po.position_id  = #{outPosition}</if>
 
             <if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-            <if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+            <if test="kccount1 != null and kccount1 != ''">and  s.goods_count > #{kccount1}</if>
+            <if test="kccount2 != null and kccount2 != ''">and  s.goods_count &lt; #{kccount2}</if>
 
 
             <if test="factory != null and factory != ''">and s.factory LIKE concat(concat('%', #{factory}),'%')</if>
