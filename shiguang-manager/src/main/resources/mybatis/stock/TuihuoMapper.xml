@@ -20,7 +20,7 @@
 		from stock_tuihuo
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num = #{tuihuoNum} </if>
+		  		  <if test="tuihuoNum != null and tuihuoNum != ''"> and tuihuo_num LIKE concat(concat('%', #{tuihuoNum}),'%')</if>
 		  		  <if test="zhidanPeople != null and zhidanPeople != ''"> and zhidan_people = #{zhidanPeople} </if>
 		  		  <if test="danjuDay != null and danjuDay != ''"> and danju_day = #{danjuDay} </if>
 		  		  <if test="mfrsid != null and mfrsid != ''"> and mfrsid = #{mfrsid} </if>
@@ -179,8 +179,9 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 
 
@@ -205,8 +206,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -227,8 +230,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -251,9 +256,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
 
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -296,9 +302,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
 
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -321,8 +328,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -362,8 +371,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -385,8 +396,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -410,8 +423,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -433,8 +448,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -457,9 +474,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
 
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -481,9 +499,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
 
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -505,9 +524,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
 
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -530,8 +550,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -554,8 +576,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -578,8 +602,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -603,8 +629,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -627,8 +655,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -650,8 +680,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -674,8 +706,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -697,8 +731,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -720,8 +756,10 @@
 			<if test="goodsCode != null and goodsCode != ''">and s.goods_code LIKE concat(concat('%', #{goodsCode}),'%')</if>
 			<if test="goodsName != null and goodsName != ''">and s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
 			<if test="brandname != null and brandname != ''"> and s.brandname = #{brandname} </if>
-			<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-			<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+			<!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
+			<!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
+
+			<if test="kccount != null and kccount != ''">and  s.goods_count > #{kccount}</if>
 
 			<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
 			<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
@@ -731,15 +769,16 @@
 	<select id="orderList" resultType="com.shiguang.stock.domain.TuihuoDO">
 		select t.`id`,t.`tuihuo_num`,t.`zhidan_people`,t.`danju_day`,t.`mfrsid`,m.`mfrsname`,t.`position_id`,p.position_name,t.`beizhu`,t.`style`,p.company_id
 		from stock_tuihuo t
-		left join c_mfrs m on t.mfrsid=m.mfrsnum
-		left join c_position p on t.position_id=t.position_id
+		  join c_mfrs m on t.mfrsid=m.mfrsnum
+		  join c_position p on t.position_id=p.position_id
 		<where>
 			<if test="id != null and id != ''"> and t.id = #{id} </if>
-			<if test="tuihuoNum != null and tuihuoNum != ''"> and t.tuihuo_num = #{tuihuoNum} </if>
+			<if test="tuihuoNum != null and tuihuoNum != ''"> and t.tuihuo_num LIKE concat(concat('%', #{tuihuoNum}),'%')</if>
+
 			<if test="zhidanPeople != null and zhidanPeople != ''"> and t.zhidan_people = #{zhidanPeople} </if>
 			<if test="danjuDay != null and danjuDay != ''"> and t.danju_day = #{danjuDay} </if>
 			<if test="mfrsid != null and mfrsid != ''"> and t.mfrsid = #{mfrsid} </if>
-			<if test="mfrsname != null and mfrsname != ''"> and m.mfrsname = #{mfrsname} </if>
+			<if test="mfrsname != null and mfrsname != ''"> and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
 			<if test="positionId != null and positionId != ''"> and t.position_id = #{positionId} </if>
 			<if test="beizhu != null and beizhu != ''"> and t.beizhu = #{beizhu} </if>
 			<if test="goodsxinxiid != null and goodsxinxiid != ''"> and t.goodsxinxiid = #{goodsxinxiid} </if>
@@ -752,8 +791,19 @@
 			<if test="goodsCode != null and goodsCode != ''"> and t.goods_code = #{goodsCode} </if>
 			<if test="style != null and style != ''"> and t.style = #{style} </if>
 			<if test="companyId != null and companyId != ''"> and p.company_id = #{companyId} </if>
+
+
+			<if test="day1 !=null and day1 != ''"> and date_format(t.danju_day ,'%Y-%m-%d' ) >= (#{day1})</if>
+			<if test="day2 !=null and day2 != ''"> and date_format(t.danju_day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
 		</where>
-		group by t.tuihuo_num  order by t.id desc
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				group by t.tuihuo_num  order by t.id desc
+			</otherwise>
+		</choose>
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
@@ -761,15 +811,15 @@
 	<select id="orderCount" resultType="int">
 		SELECT COUNT(DISTINCT tuihuo_num)
 		from stock_tuihuo t
-		left join c_mfrs m on t.mfrsid=m.mfrsnum
-		left join c_position p on t.position_id=t.position_id
+		  join c_mfrs m on t.mfrsid=m.mfrsnum
+		  join c_position p on t.position_id=p.position_id
 		<where>
 			<if test="id != null and id != ''"> and t.id = #{id} </if>
-			<if test="tuihuoNum != null and tuihuoNum != ''"> and t.tuihuo_num = #{tuihuoNum} </if>
+			<if test="tuihuoNum != null and tuihuoNum != ''"> and t.tuihuo_num LIKE concat(concat('%', #{tuihuoNum}),'%')</if>
 			<if test="zhidanPeople != null and zhidanPeople != ''"> and t.zhidan_people = #{zhidanPeople} </if>
 			<if test="danjuDay != null and danjuDay != ''"> and t.danju_day = #{danjuDay} </if>
 			<if test="mfrsid != null and mfrsid != ''"> and t.mfrsid = #{mfrsid} </if>
-			<if test="mfrsname != null and mfrsname != ''"> and m.mfrsname = #{mfrsname} </if>
+			<if test="mfrsname != null and mfrsname != ''"> and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
 			<if test="positionId != null and positionId != ''"> and t.position_id = #{positionId} </if>
 			<if test="beizhu != null and beizhu != ''"> and t.beizhu = #{beizhu} </if>
 			<if test="goodsxinxiid != null and goodsxinxiid != ''"> and t.goodsxinxiid = #{goodsxinxiid} </if>
@@ -782,6 +832,9 @@
 			<if test="goodsCode != null and goodsCode != ''"> and t.goods_code = #{goodsCode} </if>
 			<if test="style != null and style != ''"> and t.style = #{style} </if>
 			<if test="companyId != null and companyId != ''"> and p.company_id = #{companyId} </if>
+
+			<if test="day1 !=null and day1 != ''"> and date_format(t.danju_day ,'%Y-%m-%d' ) >= (#{day1})</if>
+			<if test="day2 !=null and day2 != ''"> and date_format(t.danju_day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
 		</where>
 	</select>
 

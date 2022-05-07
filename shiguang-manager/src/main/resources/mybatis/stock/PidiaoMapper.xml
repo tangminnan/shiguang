@@ -67,6 +67,10 @@
 		  		  <if test="returnzt != null and returnzt != ''"> and p.returnzt = #{returnzt} </if>
 		  		  <if test="stockorder != null and stockorder != ''"> and p.stockorder = #{stockorder} </if>
 
+			<if test="day1 !=null and day1 != ''"> and date_format(p.danju_day ,'%Y-%m-%d' ) >= (#{day1})</if>
+			<if test="day2 !=null and day2 != ''"> and date_format(p.danju_day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
+
+
 			<!--<if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>-->
 			<!--<if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>-->
 
@@ -145,6 +149,10 @@
 			 <if test="shTime != null and shTime != ''"> and p.sh_time = #{shTime} </if>
 			 <if test="returnzt != null and returnzt != ''"> and p.returnzt = #{returnzt} </if>
 			 <if test="stockorder != null and stockorder != ''"> and p.stockorder = #{stockorder} </if>
+
+			 <if test="day1 !=null and day1 != ''"> and date_format(p.danju_day ,'%Y-%m-%d' ) >= (#{day1})</if>
+			 <if test="day2 !=null and day2 != ''"> and date_format(p.danju_day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
+
 
 			 <!--<if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>-->
 			 <!--<if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>-->

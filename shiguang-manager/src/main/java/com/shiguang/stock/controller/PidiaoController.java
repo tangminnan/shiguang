@@ -68,7 +68,13 @@ public class PidiaoController {
 
     @GetMapping()
     @RequiresPermissions("stock:pidiao:pidiao")
-    String Pidiao() {
+    String Pidiao(Model model)
+    {
+        Map<String,Object> map=new HashMap<>();
+        map.put("xsstate", "0");
+        map.put("state", "1");
+        List<PositionDO> positionList = positionService.positionList(map);
+        model.addAttribute("positionList", positionList);
         return "stock/pidiao/pidiao";
     }
 
@@ -97,6 +103,13 @@ public class PidiaoController {
         }else if (null != ShiroUtils.getUser().getStoreNum()) {
             departNumber = ShiroUtils.getUser().getStoreNum();
             query.put("departNumber", departNumber);
+        }
+        String status=  String.valueOf(params.get("status")) ;
+        if (status.equals("2")){
+            query.put("status","1");
+            query.put("returnzt","0");
+        }else {
+            query.put("status",status);
         }
 
         List<PidiaoDO> pidiaoList = pidiaoService.list(query);

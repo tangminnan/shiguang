@@ -34,8 +34,11 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-                                pidiaoNumber:$('#pidiaoNumber').val().trim()
-					           // name:$('#searchName').val(),
+                                pidiaoNumber:$('#pidiaoNumber').val().trim(),
+                                inPositionid:$('#inPositionid').val().trim(),
+                                day1:$('#day1').val().trim(),
+                                day2:$('#day2').val().trim(),
+                                status:$('#status').val().trim()
 					           // username:$('#searchName').val()
 							};
 						},
