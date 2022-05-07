@@ -33,7 +33,18 @@
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(po.company_id,#{companyId})</if>
             and  po.state=1 and d.status=0 and d.state=1  and c.xsstate=0 and c.state=1
         </where>
-        group by po.position_id order by  po.position_id desc
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                group by po.position_id order by  po.position_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+
     </select>
 
     <select id="count" resultType="int">

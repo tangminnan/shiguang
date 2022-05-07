@@ -349,7 +349,7 @@
 			<if test="inCompany != null and inCompany != ''">and d.company_id = #{inCompany}</if>
 			and po.xsstate=0 and  po.state=1
 		</where>
-		group by po.position_id order by  po.position_id desc
+		group by po.position_id order by  po.position_id
 	</select>
 	<select id="indepartment" resultType="com.shiguang.stock.domain.PidiaoDO">
 		select  d.depart_number,d.id,d.depart_name,c.name from department d left join c_company c on d.company_id=c.id

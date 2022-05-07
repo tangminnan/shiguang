@@ -72,94 +72,104 @@ public class PidiaoController {
         return "stock/pidiao/pidiao";
     }
 
-//    @ResponseBody
-//    @GetMapping("/list")
-//    @RequiresPermissions("stock:pidiao:pidiao")
-//    public PageUtils list(@RequestParam Map<String, Object> params) {
-//        //查询列表数据
-//        Query query = new Query(params);
-//        //———获取当前登录用户的公司id————
-//        String companyId ="";
-//        String departNumber = "";
-//        if (null != ShiroUtils.getUser().getCompanyId()) {
-//            companyId = ShiroUtils.getUser().getCompanyId();
-//            query.put("companyId", companyId);
-//        } else if (null != ShiroUtils.getUser().getStoreNum()) {
-//            departNumber = ShiroUtils.getUser().getStoreNum();
-//            query.put("departNumber", departNumber);
-//        }
-//
-//        List<PidiaoDO> pidiaoList = pidiaoService.list(query);
-//        for (PidiaoDO pidiaoDO : pidiaoList) {
-//            if (companyId != "") {
-//                if (companyId.equals(pidiaoDO.getInCompanyid())) {
-//                    pidiaoDO.setFlags("0");
-//                } else {
-//                    pidiaoDO.setFlags("1");
-//                }
-//            }
-//            else {
-//                pidiaoDO.setFlags("0");
-//            }
-//
-//            if (departNumber.equals(pidiaoDO.getOutDepartmentid())) {
-//                pidiaoDO.setFlags("1");//发出部门
-//
-//            }
-//            if (departNumber.equals(pidiaoDO.getInDepartmentid())) {
-//                pidiaoDO.setFlags("0");//接收部门
-//            }
-//        }
-//        int total = pidiaoService.count(query);
-//        PageUtils pageUtils = new PageUtils(pidiaoList, total);
-//        return pageUtils;
-//    }
-//
-
-
     @ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("stock:pidiao:pidiao")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        //———获取当前登录用户的部门————
+        //———获取当前登录用户的公司id————
+        String companyId ="";
         String departNumber = "";
-        if (null != ShiroUtils.getUser().getStoreNum()) {
+//        if (null != ShiroUtils.getUser().getCompanyId()) {
+//            companyId = ShiroUtils.getUser().getCompanyId();
+//            query.put("companyId", companyId);
+//        }else if (null != ShiroUtils.getUser().getStoreNum()) {
+//            departNumber = ShiroUtils.getUser().getStoreNum();
+//            query.put("departNumber", departNumber);
+//        }
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            if(ShiroUtils.getUser().getCompanyId().equals("3")){
+                query.put("companyId","");
+            }else {
+                query.put("companyId",ShiroUtils.getUser().getCompanyId());
+            }
+        }else if (null != ShiroUtils.getUser().getStoreNum()) {
             departNumber = ShiroUtils.getUser().getStoreNum();
             query.put("departNumber", departNumber);
-        }else {
-            query.put("departNumber","");
         }
-
-        Map<String,Object> map=new HashMap<>();
-        map.put("departNumber",departNumber);
-        List<PositionDO> positionDOS=positionService.list(map);
-
 
         List<PidiaoDO> pidiaoList = pidiaoService.list(query);
         for (PidiaoDO pidiaoDO : pidiaoList) {
-            for (PositionDO positionDO:positionDOS){
-                String positionId=String.valueOf(positionDO.getPositionId());
-                String outPositionid=pidiaoDO.getOutPositionid();
-                String inPositionid=pidiaoDO.getInPositionid();
-                if (positionId.equals(outPositionid)) {
-                    pidiaoDO.setFlags("1");//发出仓位
-
+            if (companyId != "") {
+                if (companyId.equals(pidiaoDO.getInCompanyid())) {
+                    pidiaoDO.setFlags("0");
+                } else {
+                    pidiaoDO.setFlags("1");
                 }
-                if (positionId.equals(inPositionid)) {
-                    pidiaoDO.setFlags("0");//接收仓位
-                }
-
+            }
+            else {
+                pidiaoDO.setFlags("0");
             }
 
+            if (departNumber.equals(pidiaoDO.getOutDepartmentid())) {
+                pidiaoDO.setFlags("1");//发出部门
 
-
+            }
+            if (departNumber.equals(pidiaoDO.getInDepartmentid())) {
+                pidiaoDO.setFlags("0");//接收部门
+            }
         }
         int total = pidiaoService.count(query);
         PageUtils pageUtils = new PageUtils(pidiaoList, total);
         return pageUtils;
     }
+
+
+
+//    @ResponseBody
+//    @GetMapping("/list")
+//    @RequiresPermissions("stock:pidiao:pidiao")
+//    public PageUtils list(@RequestParam Map<String, Object> params) {
+//        //查询列表数据
+//        Query query = new Query(params);
+//        //———获取当前登录用户的部门————
+//        String departNumber = "";
+//        if (null != ShiroUtils.getUser().getStoreNum()) {
+//            departNumber = ShiroUtils.getUser().getStoreNum();
+//            query.put("departNumber", departNumber);
+//        }else {
+//            query.put("departNumber","");
+//        }
+//
+//        Map<String,Object> map=new HashMap<>();
+//        map.put("departNumber",departNumber);
+//        List<PositionDO> positionDOS=positionService.list(map);
+//
+//
+//        List<PidiaoDO> pidiaoList = pidiaoService.list(query);
+//        for (PidiaoDO pidiaoDO : pidiaoList) {
+//            for (PositionDO positionDO:positionDOS){
+//                String positionId=String.valueOf(positionDO.getPositionId());
+//                String outPositionid=pidiaoDO.getOutPositionid();
+//                String inPositionid=pidiaoDO.getInPositionid();
+//                if (positionId.equals(outPositionid)) {
+//                    pidiaoDO.setFlags("1");//发出仓位
+//
+//                }
+//                if (positionId.equals(inPositionid)) {
+//                    pidiaoDO.setFlags("0");//接收仓位
+//                }
+//
+//            }
+//
+//
+//
+//        }
+//        int total = pidiaoService.count(query);
+//        PageUtils pageUtils = new PageUtils(pidiaoList, total);
+//        return pageUtils;
+//    }
 
 
     @GetMapping("/add")
