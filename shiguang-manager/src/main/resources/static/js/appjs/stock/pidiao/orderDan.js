@@ -120,6 +120,7 @@ function load() {
 
 
             });
+
 }
 
 function reLoad() {
@@ -133,111 +134,240 @@ document.onkeydown = function(e){
 
 
 
-
-function remove(id) {
-    layer.confirm('确定要删除选中的记录？', {
-        btn : [ '确定', '取消' ]
-    }, function() {
-        $.ajax({
-            url : "/stock/stock/remove",
-            type : "post",
-            data : {
-                'id' : id
-            },
-            success : function(r) {
-                if (r.code==0) {
-                    layer.msg(r.msg);
-                    reLoad();
-                }else{
-                    layer.msg(r.msg);
-                }
-            }
-        });
-    })
-}
-
-
-
-
-
-
-
-//打印条码
-function code(goodsType,danjuNumber){
-    if (goodsType==1 || goodsType==6){
-        window.open("/stock/stock/codeJingjia?danjuNumber="+danjuNumber + "&goodsType=" + goodsType);
-    } else {
-        window.open("/stock/stock/code?danjuNumber="+danjuNumber);
-    }
-
-}
-
-function userNum(danjuNumber) {
-    var staus="1";
-    if (staus == "1"){
-        // alert("输入工号")
-        layer.open({
-            type : 2,
-            title : '输入工号',
-            maxmin : true,
-            shadeClose : false, // 点击遮罩关闭层
-            area : [ '800px', '520px' ],
-            content :"/stock/order/userNum/"+ danjuNumber
-        });
-
-    }
-}
-//修改启用状态
-function updateEnable() {
-    var danjuNumber = document.getElementById('danjuNumber').value;
-    var username = document.getElementById('username').value;
-    // alert(username)
-    var status = "0";
-    if (username !=""){
-        $.ajax({
-            url: "/stock/order/updateStatus",
-            type: "post",
-            data: {
-                'danjuNumber': danjuNumber,
-                'status': status,
-                'username':username
-            },
-            dataType: 'JSON',
-            async: false,
-            success: function (data) {
-                if (data.code == 0) {
-                    parent.layer.msg("操作成功");
-                    parent.reLoad();
-                    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                    parent.layer.close(index);
-
-                } else {
-                    parent.layer.alert(data.msg)
-                }
-
-            }
-        });
-    } else {
-        layer.alert("请输入工号！");
-        // return this;
-    }
-
-
-}
-
-
-/**
- * 模板导入商品
- */
-function importtemplate(){
-    var checkType='PU_TONG';
+function detial(id) {
+    var prefix = "/stock/stock";
     var toIndex = layer.open({
-        type : 2,
-        title : '批调导入',
-        maxmin : true,
-        shadeClose : false, // 点击遮罩关闭层
-        area : [ '800px', '520px' ],
-        content : '/stock/stock/information/'+checkType // iframe的url
+        type: 2,
+        title: '详情',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '520px'],
+        content: prefix + '/detial/' + id // iframe的url
     });
-    layer.full(toIndex)
+    layer.full(toIndex);
+}
+
+
+
+
+function showCol() {
+    var check = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+    var objArray = [];
+    alert(JSON.stringify(check));
+    $.each(check, function(i, row) {
+        // ids[i] = row['id'];
+
+        var obj = {};
+        //———获取当前系统时间—————
+        var timeNow = new Date();
+        var year = timeNow.getFullYear();
+        var month = timeNow.getMonth() + 1 > 10 ? timeNow.getMonth() + 1 : '0' + (timeNow.getMonth() + 1);
+        var date = timeNow.getDate() > 10 ? timeNow.getDate() : "0" + timeNow.getDate();
+        obj.createTime = year + "-" + month + "-" + date;
+
+        if(null == row['goodsNum']){
+            var goodsNum ="";
+        }else {
+            var goodsNum = row['goodsNum'];
+        }
+
+        if(null == row['goodsCode']){
+            var goodsCode  ="";
+        }else {
+            var goodsCode = row['goodsCode'] ;
+        }
+
+        if(null == row['goodsName']){
+            var goodsName  ="";
+        }else {
+            var goodsName = row['goodsName'] ;
+
+        }
+        if(null == row['goodsCount']){
+            var goodsCount  ="";
+        }else {
+            var goodsCount = row['goodsCount'];
+        }
+
+        if(null == row['gdname']){
+            var gdname  ="";
+        }else {
+            var gdname = row['gdname'] ;
+        }
+        if(null == row['goods']){
+            var goods  ="";
+        }else {
+            var goods = row['goods'] ;
+        }
+
+        if(null == row['mfrsname']){
+            var mfrsname  ="";
+        }else {
+            var mfrsname = row['mfrsname'] ;
+        }
+
+        if(null == row['factory']){
+            var factory  ="";
+        }else {
+            var factory = row['factory'] ;
+        }
+
+        if(null == row['retailPrice']){
+            var retailPrice  ="";
+        }else {
+            var retailPrice = row['retailPrice'] ;
+        }
+
+        if(null == row['priceSum']){
+            var priceSum  ="";
+        }else {
+            var priceSum = row['priceSum'] ;
+        }
+
+        if(null == row['costPrice']){
+            var costPrice  ="";
+        }else {
+            var costPrice = row['costPrice'] ;
+        }
+
+        if(null == row['costSum']){
+            var costSum  ="";
+        }else {
+            var costSum = row['costSum'] ;
+        }
+
+        if(null == row['wholePrice']){
+            var wholePrice  ="";
+        }else {
+            var wholePrice = row['wholePrice'] ;
+        }
+
+        if(null == row['wholeSum']){
+            var wholeSum  ="";
+        }else {
+            var wholeSum = row['wholeSum'] ;
+        }
+
+        if(null == row['positionName']){
+            var positionName  ="";
+        }else {
+            var positionName = row['positionName'] ;
+        }
+
+        if(null == row['batch']){
+            var batch  ="";
+        }else {
+            var batch = row['batch'];
+        }
+
+        if(null == row['zhuceNumber']){
+            var zhuceNumber  ="";
+        }else {
+            var zhuceNumber = row['zhuceNumber'] ;
+        }
+
+        if(null == row['produceDay']){
+            var produceDay  ="";
+        }else {
+            var produceDay = row['produceDay'] ;
+        }
+
+        if(null == row['useday']){
+            var useday  ="";
+        }else {
+            var useday = row['useday'] ;
+        }
+
+        if(null == row['classtype']){
+            var classtype  ="";
+        }else {
+            var classtype = row['classtype'] ;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        obj.goodsNum = goodsNum;
+        obj.goodsCode = goodsCode;
+        obj.goodsName = goodsName;
+        obj.goodsCount = goodsCount;
+        obj.gdname = gdname;
+        obj.goods = goods;
+        obj.factory = factory;
+        obj.mfrsname = mfrsname;
+
+        obj.retailPrice = retailPrice;
+        obj.priceSum = priceSum;
+        obj.costPrice = costPrice;
+        obj.costSum = costSum;
+        obj.wholePrice = wholePrice;
+        obj.wholeSum = wholeSum;
+
+        obj.positionName = positionName;
+        obj.batch = batch;
+        obj.zhuceNumber = zhuceNumber;
+        obj.produceDay = produceDay;
+        obj.useday = useday;
+        obj.classtype = classtype;
+
+        if(null == row['mfrsid']){
+            var mfrsid  ="";
+        }else {
+            var mfrsid = row['mfrsid'] ;
+        }
+
+        obj.mfrsid = mfrsid;
+
+        if(null == row['brandname']){
+            var brandname  ="";
+        }else {
+            var brandname = row['brandname'] ;
+        }
+
+        obj.brandname = brandname;
+
+
+        if(null == row['unit']){
+            var unit  ="";
+        }else {
+            var unit = row['unit'] ;
+        }
+        obj.unit = unit;
+
+        if(null == row['goodsid']){
+            var goodsid  ="";
+        }else {
+            var goodsid = row['goodsid'] ;
+        }
+        obj.goodsid = goodsid;
+
+        if(null == row['goodsxinxiid']){
+            var goodsxinxiid  ="";
+        }else {
+            var goodsxinxiid = row['goodsxinxiid'] ;
+        }
+        obj.goodsxinxiid = goodsxinxiid;
+
+        if(null == row['danjuNumber']){
+            var danjuNumber  ="";
+        }else {
+            var danjuNumber = row['danjuNumber'] ;
+        }
+        obj.danjuNumber = danjuNumber;
+
+        obj.useCount = 1;
+
+
+        objArray.push(obj);
+    });
+    return objArray;
 }

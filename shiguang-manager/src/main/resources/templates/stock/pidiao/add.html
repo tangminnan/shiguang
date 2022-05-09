@@ -80,7 +80,7 @@
 	<div class="HH_btns">
 		<div class="Xbtn">
 			<input type="button" value="单品添加商品" onclick="choiceGoods()" />
-			<!--<input type="button" value="按收货单添加商品" onclick="orderDan()"/>-->
+			<input type="button" value="按收货单添加商品" onclick="orderDan()"/>
 			<input id="barcode" type="button" onclick="getBarcode()" value="条码扫描" />
 
 		</div>
@@ -542,6 +542,93 @@ function inposion() {
                 shadeClose : false, // 点击遮罩关闭层
                 area : [ '800px', '520px' ],
                 content : "/stock/pidiao/orderDan/" + outPosition+'/'+outPositionName,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    for (var i = 0; i < rows.length; i++) {
+                        a = a + 1;
+                        barHtml += "<tr class='val'>";
+                        barHtml += "<td name='goodsNum'>" + rows[i].goodsNum + "</td>";
+                        barHtml += "<input name='goodsNum' type='hidden' value='" + rows[i].goodsNum + "'>";
+                        barHtml += "<td name='goodsName'>" + rows[i].goodsName + "</td>";
+                        barHtml += "<input name='goodsName' type='hidden' value='" + rows[i].goodsName + "'>";
+                        barHtml += "<td name='factory'>" + rows[i].factory + "</td>";
+                        barHtml += "<input name='factory' type='hidden' value='" + rows[i].factory + "'>";
+                        barHtml += "<td name='goodsCount'>" + rows[i].goodsCount + "</td>";
+                        barHtml += "<input id='goodsCount" + a + "' name='goodsCount' type='hidden' value='" + rows[i].goodsCount + "'>";
+                        barHtml += "<td >" + "<input id='useCount" + a + "' index = a  name='useCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text' onchange='hejiadd(this.value)' value='" + rows[i].useCount + "'/>" + "</td>";
+                        barHtml += "<td name='goodsCode'>" + rows[i].goodsCode + "</td>";
+                        barHtml += "<input name='goodsCode' type='hidden' value='" + rows[i].goodsCode + "'>";
+                        barHtml += "<td name='useday'>" + rows[i].useday + "</td>";
+                        barHtml += "<input name='useday' type='hidden' value='" + rows[i].useday + "'>";
+                        barHtml += "<td name='batch'>" + rows[i].batch + "</td>";
+                        barHtml += "<input name='batch' type='hidden' value='" + rows[i].batch + "'>";
+                        barHtml += "<td name='zhuceNumber'>" + rows[i].zhuceNumber + "</td>";
+                        barHtml += "<input name='zhuceNumber' type='hidden' value='" + rows[i].zhuceNumber + "'>";
+                        barHtml += "<td name='produceDay'>" + rows[i].produceDay + "</td>";
+                        barHtml += "<input name='produceDay' type='hidden' value='" + rows[i].produceDay + "'>";
+
+
+                        barHtml += "<td name='classtype' style='display: none'>" + rows[i].classtype + "</td>";
+                        barHtml += "<input name='classtype' type='hidden' value='" + rows[i].classtype + "'>";
+                        barHtml += "<td name='goodsid' style='display: none'>" + rows[i].goodsid + "</td>";
+                        barHtml += "<input name='goods' type='hidden' value='" + rows[i].goodsid + "'>";
+
+                        barHtml += "<td name='mfrsid' style='display: none'>" + rows[i].mfrsid + "</td>";
+                        barHtml += "<input name='mfrsid' type='hidden' value='" + rows[i].mfrsid + "'>";
+                        barHtml += "<td name='brandname' style='display: none'>" + rows[i].brandname + "</td>";
+                        barHtml += "<input name='brandname' type='hidden' value='" + rows[i].brandname + "'>";
+                        barHtml += "<td name='unit' style='display: none'>" + rows[i].unit + "</td>";
+                        barHtml += "<input name='unit' type='hidden' value='" + rows[i].unit + "'>";
+
+                        barHtml += "<td name='money' style='display: none'>" + rows[i].retailPrice + "</td>";
+                        barHtml += "<input name='money' type='hidden' value='" + rows[i].retailPrice + "'>";
+
+                        // barHtml += "<td name='goodsxinxiid' style='display: none'>" + rows[i].goodsxinxiid + "</td>";
+                        // barHtml += "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>";
+
+                        barHtml += "<td name='stockorder' style='display: none'>" + rows[i].danjuNumber + "</td>";
+                        barHtml += "<input name='stockorder' type='hidden' value='" + rows[i].danjuNumber + "'>";
+
+                        barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
+                        barHtml += "</tr>";
+                        // alert($("input[name=goodsCode]").length+"长度");
+                        if ($("input[name=goodsCode]").length == 0) {
+                            $("#inventoryId").append(barHtml);
+                            barHtml = "";
+                        } else if ($("input[name=goodsCode]").length != 0) {
+
+
+                            for (var as = 0; as < $("input[name=goodsCode]").length; as++) {
+                                var goodsCode = $("input[name=goodsCode]").eq(as).val();
+                                var useCount = $("input[name=useCount]").eq(as).val();
+                                arr[as] = goodsCode;
+                                countarr[as] = useCount;
+                            }
+
+                            for (var index = 0; index < arr.length; index++) {
+                                if (arr[index] == rows[i].goodsCode) {
+                                    flag = "1";
+                                    flags = "修改";
+                                    // alert("扫码和原来的一样数量加1");
+                                    var count = countarr[index];
+                                    $("input[name=useCount]").eq(index).val(parseInt(count) + parseInt(1));
+                                    barHtml = "";
+                                    // break lable;
+                                } else if (arr[index] != rows[i].goodsCode) {
+                                    // alert("新增111");
+                                    flag = "0";
+                                    flags = "新增";
+                                }
+                            }
+                        }
+                        if (flags == "新增" && flag == "0") {
+                            // alert("条码没有过新增");
+                            $("#inventoryId").append(barHtml);
+                            barHtml = "";
+                        }
+                    }
+                    hejiadd();
+                }
             });
             layer.full(toIndex);
 		}

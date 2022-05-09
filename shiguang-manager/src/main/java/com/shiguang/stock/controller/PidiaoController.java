@@ -113,7 +113,10 @@ public class PidiaoController {
             query.put("returnzt","0");
         }else {
             query.put("status",status);
-            query.put("returnzt","1");
+            if (status!=""){
+                query.put("returnzt","1");
+            }
+
         }
 
         List<PidiaoDO> pidiaoList = pidiaoService.list(query);

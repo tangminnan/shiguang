@@ -21,7 +21,7 @@
 		join c_position po on p.out_positionid=po.position_id
 		join c_position pos on p.in_positionid=pos.position_id
 		join department d on p.out_departmentid=d.depart_number  and po.company_id=d.company_id
-		join department de on p.in_departmentid= de.depart_number  and po.company_id=de.company_id
+		join department de on p.in_departmentid= de.depart_number  and pos.company_id=de.company_id
         <where>  
 		  		  <if test="id != null and id != ''"> and p.id = #{id} </if>
 			      <if test="pidiaoNumber != null and pidiaoNumber != ''">and  p.pidiao_number LIKE concat(concat('%', #{pidiaoNumber}),'%')</if>
@@ -104,7 +104,7 @@
 		 join c_position po on p.out_positionid=po.position_id
 		 join c_position pos on p.in_positionid=pos.position_id
 		 join department d on p.out_departmentid=d.depart_number  and po.company_id=d.company_id
-		 join department de on p.in_departmentid= de.depart_number  and po.company_id=de.company_id
+		 join department de on p.in_departmentid= de.depart_number  and pos.company_id=de.company_id
 		 <where>
 			 <if test="id != null and id != ''"> and p.id = #{id} </if>
 			 <if test="pidiaoNumber != null and pidiaoNumber != ''">and  p.pidiao_number LIKE concat(concat('%', #{pidiaoNumber}),'%')</if>
