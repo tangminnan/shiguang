@@ -63,6 +63,24 @@
                         </select>
                         <input id="classtype" type="hidden" value="" />
                     </div>
+                    <div class="columns pull-right col-md-2 nopadding">
+                        <select id="positionId" name="positionId" class="form-control" data-actions-box="false"
+                                data-size="5">
+                            <option value="">--请选择仓位--</option>
+                            <option th:each="ls:${positionDOList}" th:text="${ls.positionName}"
+                                    th:value="${ls.positionId}"></option>
+                        </select>
+                    </div>
+                    <div class="columns pull-right col-md-2 nopadding">
+                        <select name="status" id="status" class="form-control" data-actions-box="false"
+                                data-size="5">
+                            <option value="">--请选择收货状态--</option>
+                            <option value="0">收货</option>
+                            <option value="1">未收货</option>
+
+
+                        </select>
+                    </div>
 
 
                 </div>

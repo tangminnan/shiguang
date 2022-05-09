@@ -112,6 +112,12 @@ public class OptometryNewController {
     @RequiresPermissions("information:optometryNew:edit")
     String edit(@PathVariable("cardNumber") String cardNumber, Model model) {
         Map<String,Object> YGmap=new HashMap<>();
+
+        String companyId = null;
+        if (null != ShiroUtils.getUser().getCompanyId()) {
+            companyId = ShiroUtils.getUser().getCompanyId();
+        }
+        YGmap.put("companyId",companyId);
         YGmap.put("YangguangName","验光师");
         List<TryresultsDO> listYanguang = tryresultsService.listYanguang(YGmap);
         model.addAttribute("listYanguang",listYanguang);

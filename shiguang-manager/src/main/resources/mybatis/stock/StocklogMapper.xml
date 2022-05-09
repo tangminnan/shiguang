@@ -9,14 +9,19 @@
 
 	<select id="list" resultType="com.shiguang.stock.domain.StocklogDO">
 		SELECT
-		log.*,s.mfrsname,inp.position_name as inposition_name,outp.position_name as outposition_name,goodsname,
-		outp.company_id
+		log.*, s.mfrsname,
+		inp.position_name AS inposition_name,
+		outp.position_name AS outposition_name,
+		goodsname,
+		outp.company_id,
+		u.name as shname
 		FROM
 		stock_stocklog log
-		join c_mfrs s on log.mfrsnum=s.mfrsnum
-		join c_goods g on log.goodsid=g.goodsid
-		left join c_position inp on log.inposition_id=inp.position_id
-		left join c_position outp on log.outposition_id=outp.position_id
+		JOIN c_mfrs s ON log.mfrsnum = s.mfrsnum
+		JOIN sys_user u ON log.username = u.username
+		JOIN c_goods g ON log.goodsid = g.goodsid
+		LEFT JOIN c_position inp ON log.inposition_id = inp.position_id
+		LEFT JOIN c_position outp ON log.outposition_id = outp.position_id
         <where>  
 		  		  <if test="id != null and id != ''"> and log.id = #{id} </if>
 		  		  <if test="danjunum != null and danjunum != ''"> and log.danjunum = #{danjunum} </if>
@@ -54,10 +59,11 @@
  	<select id="count" resultType="int">
 		select count(*) FROM
 		stock_stocklog log
-		join c_mfrs s on log.mfrsnum=s.mfrsnum
-		join c_goods g on log.goodsid=g.goodsid
-		left join c_position inp on log.inposition_id=inp.position_id
-		left join c_position outp on log.outposition_id=outp.position_id
+		JOIN c_mfrs s ON log.mfrsnum = s.mfrsnum
+		JOIN sys_user u ON log.username = u.username
+		JOIN c_goods g ON log.goodsid = g.goodsid
+		LEFT JOIN c_position inp ON log.inposition_id = inp.position_id
+		LEFT JOIN c_position outp ON log.outposition_id = outp.position_id
 		<where>
 			<if test="id != null and id != ''"> and log.id = #{id} </if>
 			<if test="danjunum != null and danjunum != ''"> and log.danjunum = #{danjunum} </if>

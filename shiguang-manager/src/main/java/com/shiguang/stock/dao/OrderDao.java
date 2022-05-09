@@ -41,4 +41,10 @@ public interface OrderDao {
 
 	//是否有这个单号
 	List<OrderDO> haveOrderNum(Map<String, Object> map);
+
+
+	List<OrderDO> orderDanList(Map<String, Object> map);
+	int orderDanListcount(Map<String, Object> map);
+
+
 }

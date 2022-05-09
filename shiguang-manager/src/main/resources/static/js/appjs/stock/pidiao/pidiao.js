@@ -36,6 +36,7 @@ function load() {
 								offset:params.offset,
                                 pidiaoNumber:$('#pidiaoNumber').val().trim(),
                                 inPositionid:$('#inPositionid').val().trim(),
+                                outPositionid:$('#outPositionid').val().trim(),
                                 day1:$('#day1').val().trim(),
                                 day2:$('#day2').val().trim(),
                                 status:$('#status').val().trim()

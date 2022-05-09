@@ -8,22 +8,8 @@
         <div class="ibox">
             <div class="ibox-body">
                 <div class="fixed-table-toolbar">
-                    <div class="columns pull-left">
-                        <button shiro:hasPermission="stock:stock:add" type="button" class="btn  btn-primary"
-                                onclick="add()">
-                            <i class="fa fa-plus" aria-hidden="true"></i>添加
-                        </button>
-                        <button shiro:hasPermission="stock:stock:information" type="button" class="btn  btn-default" onclick="importtemplate()">
-                            批量导入
-                        </button>
-                        <button shiro:hasPermission="stock:stock:adddz" type="button" class="btn  btn-primary" onclick="adddz()">
-                            订做片新增
-                        </button>
-                        <button shiro:hasPermission="stock:stock:batchRemove" type="button" class="btn  btn-danger"
-                                onclick="batchRemove()">
-                            <i class="fa fa-trash" aria-hidden="true"></i>删除
-                        </button>
-                    </div>
+                    <input id="outPosition" name="outPosition" th:value="${outPosition}"  type="hidden"/>
+                    <input id="status" name="status" value="0" type="hidden" />
                     <div class="columns pull-right">
                         <button class="btn btn-success" onclick="reLoad()">查询</button>
                     </div>
@@ -43,6 +29,9 @@
                     <div class="columns pull-right col-md-2 nopadding">
                         <input id="mfrsname" type="text" class="form-control"
                                placeholder="制造商">
+                    </div>
+                    <div class="columns pull-right col-md-2 nopadding">
+                        <input  th:value="${outPositionName}"   class="form-control" type="text" readonly/>
                     </div>
                     <div class="columns pull-right col-md-2 nopadding">
                         <select name="goodsid" id="goodsid" class="form-control" data-actions-box="false"
@@ -112,12 +101,11 @@
 </div>
 </div>
 <div th:include="include :: footer"></div>
-<!--订单列表-->
-<script type="text/javascript" src="/js/appjs/stock/order/order.js"></script>
-
-<!--操作-->
-<script type="text/javascript" src="/js/appjs/stock/stock/stock.js"></script>
+<script type="text/javascript" src="/js/appjs/stock/pidiao/orderDan.js"></script>
 <script type="text/javascript">
+
+
+
     laydate.render({
         elem: '#day1',
         format: 'yyyy-MM-dd',

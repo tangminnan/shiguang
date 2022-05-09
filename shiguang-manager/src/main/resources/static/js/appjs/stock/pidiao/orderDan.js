@@ -1,16 +1,14 @@
-var prefix = "/stock/order"
 $(function () {
     load();
 });
 
 function load() {
-    // alert($("#danjuNumber").val())
-    // alert("采购订单列表")
+
     $('#exampleTable')
         .bootstrapTable(
             {
                 method: 'get', // 服务器数据的请求方式 get or post
-                url: "/stock/stock" + "/list", // 服务器数据的加载地址
+                url: "/stock/pidiao" + "/orderDanList", // 服务器数据的加载地址
                 //	showRefresh : true,
                 //	showToggle : true,
                 //	showColumns : true,
@@ -35,16 +33,14 @@ function load() {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
                         limit: params.limit,
                         offset: params.offset,
-                        // name:$('#searchName').val(),
-                        // username:$('#searchName').val()
                         danjuNumber :$('#danjuNumber').val().trim(),
                         goodsid :$('#goodsid').val().trim(),
                         classtype :$('#classtype').val().trim(),
                         mfrsname :$('#mfrsname').val().trim(),
                         day1 :$('#day1').val().trim(),
                         day2 :$('#day2').val().trim(),
+                        outPosition :$('#outPosition').val().trim(),
                         status :$('#status').val().trim(),
-                        positionId :$('#positionId').val().trim()
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -54,9 +50,9 @@ function load() {
                 // sortOrder.
                 // 返回false将会终止请求
                 columns: [
-                    // {
-                    //     // checkbox: true
-                    // },
+                    {
+                        checkbox: true
+                    },
                     // {
                     //     field: 'id',
                     //     title: '主键'
@@ -115,27 +111,9 @@ function load() {
                         field: 'danjuNumber',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            // alert(row.danjuNumber)
-                            if (row.status == "1") {
-                                var b = '<span class="btn btn-info btn-sm '+s_edit_h+'" href="#" title="修改"  mce_href="#" onclick="edit(\''
-                                    + row.id + '\')">修改</span> ';
-                                var a = '<span class="btn btn-primary btn-sm '+s_detial_h+'" href="#" title="详情"  mce_href="#" onclick="detial(\''
-                                    + row.id + '\')">详情</span> ';
-                                var f = '<span class="btn btn-success btn-sm" href="#" title="收货"  mce_href="#"  onclick="userNum(\''
-                                    + row.danjuNumber + '\')">收货</span> ';
-                                var r= '<span class="btn btn-danger btn-sm" href="#" title="删除"  mce_href="#"  onclick="remove(\''
-                                    + row.id + '\')">删除</span> ';
-                                var n = '';
-                            } else if (row.status == "0") {
-                                var b ='';
                                 var a = '<span class="btn btn-primary btn-sm'+s_detial_h+'" href="#" title="详情"  mce_href="#" onclick="detial(\''
                                     + row.id + '\')">详情</span> ';
-                                var f = '';
-                                var n = '<span class="btn btn-warning btn-sm"  href="#" title="条码"  mce_href="#" onclick="code(\''
-                                    + row.goodsType+" ','"+ row.danjuNumber + '\')">条码</span> ';
-                                var r ='';
-                            }
-                            return b + a + f + n + r ;
+                            return a ;
                         }
                     }
                 ]

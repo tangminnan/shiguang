@@ -28,7 +28,7 @@
 		  		  <if test="guanlianNumber != null and guanlianNumber != ''"> and p.guanlian_number = #{guanlianNumber} </if>
 
 		  		  <if test="outDepartmentid != null and outDepartmentid != ''"> and p.out_departmentid = #{outDepartmentid} </if>
-		  		  <if test="outPositionid != null and outPositionid != ''"> and p.out_pzositionid = #{outPositionid} </if>
+		  		  <if test="outPositionid != null and outPositionid != ''"> and p.out_positionid = #{outPositionid} </if>
 		  		  <if test="inPositionid != null and inPositionid != ''"> and p.in_positionid = #{inPositionid} </if>
 		  		  <if test="inCompanyid != null and inCompanyid != ''"> and p.in_companyid = #{inCompanyid} </if>
 		  		  <if test="inDepartmentid != null and inDepartmentid != ''"> and p.in_departmentid = #{inDepartmentid} </if>
@@ -111,7 +111,7 @@
 			 <if test="guanlianNumber != null and guanlianNumber != ''"> and p.guanlian_number = #{guanlianNumber} </if>
 
 			 <if test="outDepartmentid != null and outDepartmentid != ''"> and p.out_departmentid = #{outDepartmentid} </if>
-			 <if test="outPositionid != null and outPositionid != ''"> and p.out_pzositionid = #{outPositionid} </if>
+			 <if test="outPositionid != null and outPositionid != ''"> and p.out_positionid = #{outPositionid} </if>
 			 <if test="inPositionid != null and inPositionid != ''"> and p.in_positionid = #{inPositionid} </if>
 			 <if test="inCompanyid != null and inCompanyid != ''"> and p.in_companyid = #{inCompanyid} </if>
 			 <if test="inDepartmentid != null and inDepartmentid != ''"> and p.in_departmentid = #{inDepartmentid} </if>

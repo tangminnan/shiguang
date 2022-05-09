@@ -80,7 +80,7 @@
 	<div class="HH_btns">
 		<div class="Xbtn">
 			<input type="button" value="单品添加商品" onclick="choiceGoods()" />
-			<input type="button" value="按收货单添加商品" onclick="orderDan()"/>
+			<!--<input type="button" value="按收货单添加商品" onclick="orderDan()"/>-->
 			<input id="barcode" type="button" onclick="getBarcode()" value="条码扫描" />
 
 		</div>
@@ -485,9 +485,7 @@ function inposion() {
         }
         if(x=="确定"){
             var index = $("input[name=useCount]").index($(this));
-            // $("#ad ul li").index(this)
-            // console.log($("input[name=useCount]"));
-            // alert(index);
+
             for (var i = index; i < $("input[name=useCount]").length; i++) {
                 $("input[name=useCount]").eq(i).val($(this).val())
             }
@@ -524,6 +522,7 @@ function inposion() {
     function orderDan() {
         var outDepartment = $('#outDepartment').val();
         var outPosition = $('#outPosition').val();
+        var outPositionName = $('#outPosition option:selected').text();
         var inCompany = $('#inCompany').val();
         var inDepartment = $('#inDepartment').val();
         if (outDepartment == "") {
@@ -535,17 +534,17 @@ function inposion() {
         } else if (inDepartment == "") {
             layer.alert("请选择接收部门！");
         }
-        // else {
-        //     var toIndex = layer.open({
-        //         type : 2,
-        //         title : '增加',
-        //         maxmin : true,
-        //         shadeClose : false, // 点击遮罩关闭层
-        //         area : [ '800px', '520px' ],
-        //         content : "/stock/stock/orderDan/" + mfrsid + "/" + mfrsname,// iframe的url
-        //     });
-        //     layer.full(toIndex);
-		// }
+        else {
+            var toIndex = layer.open({
+                type : 2,
+                title : '收货列表',
+                maxmin : true,
+                shadeClose : false, // 点击遮罩关闭层
+                area : [ '800px', '520px' ],
+                content : "/stock/pidiao/orderDan/" + outPosition+'/'+outPositionName,// iframe的url
+            });
+            layer.full(toIndex);
+		}
 
 
     }
