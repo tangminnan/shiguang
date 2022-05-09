@@ -86,9 +86,18 @@ public class StockController {
     @RequiresPermissions("stock:stock:stock")
     String Stock(Model model) {
         Map<String, Object> map = new HashMap<>();
-//        //商品
-//        List<GoodsDO> goodsDOList = goodsService.list(map);
-//        model.addAttribute("goodsDOList", goodsDOList);
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            if(ShiroUtils.getUser().getCompanyId().equals("3")){
+                map.put("companyId","");
+            }else {
+                map.put("companyId",ShiroUtils.getUser().getCompanyId());
+            }
+
+
+        }
+        //仓位
+        List<PositionDO> positionDOList = positionService.list(map);
+        model.addAttribute("positionDOList", positionDOList);
         return "stock/stock/stock";
     }
 

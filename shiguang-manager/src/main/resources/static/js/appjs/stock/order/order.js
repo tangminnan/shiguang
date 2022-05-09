@@ -42,7 +42,9 @@ function load() {
                         classtype :$('#classtype').val().trim(),
                         mfrsname :$('#mfrsname').val().trim(),
                         day1 :$('#day1').val().trim(),
-                        day2 :$('#day2').val().trim()
+                        day2 :$('#day2').val().trim(),
+                        status :$('#status').val().trim(),
+                        positionId :$('#positionId').val().trim()
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果

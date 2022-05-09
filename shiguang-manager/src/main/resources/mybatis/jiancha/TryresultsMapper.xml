@@ -967,7 +967,7 @@
 
 </select>
     <select id="listDoctor" resultType="com.shiguang.jiancha.domain.TryresultsDO">
-        select u.name from sys_user u
+        select u.name,u.username from sys_user u
         left join sys_user_role ur on u.user_id=ur.user_id
         left join  sys_role r on r.role_id=ur.role_id
         <where>
@@ -976,7 +976,7 @@
         </where>
     </select>
 <select id="listYanguang" resultType="com.shiguang.jiancha.domain.TryresultsDO">
-    select u.name from sys_user u
+    select u.name,u.username from sys_user u
     left join sys_user_role ur on u.user_id=ur.user_id
     left join  sys_role r on r.role_id=ur.role_id
     <where>

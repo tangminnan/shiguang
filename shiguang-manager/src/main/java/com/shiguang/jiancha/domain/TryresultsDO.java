@@ -37,6 +37,7 @@ public class TryresultsDO implements Serializable {
     private String ptometryNumber;
     //验光师
     private String optometryName;
+    private String username;
     //创建时间
     private Date createTime;
     //转诊医生
@@ -343,6 +344,7 @@ public class TryresultsDO implements Serializable {
         this.newOld = newOld;
     }
 
+
     /**
      * 设置：试戴镜结果id
      */
@@ -405,6 +407,19 @@ public class TryresultsDO implements Serializable {
      */
     public String getOptometryName() {
         return optometryName;
+    }
+    /**
+     * 设置：验光师
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * 获取：验光师
+     */
+    public String getUsername() {
+        return username;
     }
 
     /**

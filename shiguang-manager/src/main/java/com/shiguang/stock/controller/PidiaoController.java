@@ -15,6 +15,7 @@ import com.shiguang.mfrs.service.GoodsService;
 import com.shiguang.mfrs.service.PositionService;
 import com.shiguang.mfrs.service.RefractivityService;
 import com.shiguang.stock.domain.*;
+import com.shiguang.stock.service.OrderService;
 import com.shiguang.stock.service.StockService;
 import com.shiguang.stock.service.StocklogService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -65,6 +66,8 @@ public class PidiaoController {
     private StockService stockService;
     @Autowired
     private StocklogService stocklogService;
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping()
     @RequiresPermissions("stock:pidiao:pidiao")
@@ -110,6 +113,10 @@ public class PidiaoController {
             query.put("returnzt","0");
         }else {
             query.put("status",status);
+            if (status!=""){
+                query.put("returnzt","1");
+            }
+
         }
 
         List<PidiaoDO> pidiaoList = pidiaoService.list(query);
@@ -283,6 +290,7 @@ public class PidiaoController {
         model.addAttribute("pidiao", pidiao);
         return "stock/pidiao/detial";
     }
+
 
     @ResponseBody
     @RequestMapping(value = "/selectPidiao")
@@ -1159,6 +1167,73 @@ public class PidiaoController {
         List<StockDO> stockDOS = stockService.kccxList(map);
         return stockDOS;
     }
+
+
+
+
+
+    @GetMapping("/orderDan/{outPosition}/{outPositionName}")
+    String orderDan(@PathVariable("outPosition") String outPosition,@PathVariable("outPositionName") String outPositionName, Model model) {
+        model.addAttribute("outPosition",outPosition);
+        model.addAttribute("outPositionName",outPositionName);
+        return "stock/pidiao/orderDan";
+    }
+
+
+    @ResponseBody
+    @GetMapping("/orderDanList")
+    public PageUtils orderDanList(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        //———获取当前登录用户的公司id————
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            if(ShiroUtils.getUser().getCompanyId().equals("3")){
+                query.put("companyId","");
+            }else {
+                query.put("companyId",ShiroUtils.getUser().getCompanyId());
+            }
+        }
+        Object gdname=query.get("goodsid");
+        if ("镜架".equals(gdname)){
+            query.put("goodsid",1);
+            query.put("classtype","1");
+        }else if ("配件".equals(gdname)){
+            query.put("goodsid",2);
+            query.put("classtype","1");
+        }else if ("镜片".equals(gdname)){
+            query.put("goodsid",3);
+            query.put("classtype","1");
+        }else if ("订做镜片".equals(gdname)){
+            query.put("goodsid",3);
+            query.put("classtype","2");
+        }else if ("隐形".equals(gdname)){
+            query.put("goodsid",4);
+            query.put("classtype","1");
+        }else if ("订做隐形".equals(gdname)){
+            query.put("goodsid",4);
+            query.put("classtype","2");
+        }else if ("护理液".equals(gdname)){
+            query.put("goodsid",5);
+            query.put("classtype","1");
+        }else if ("太阳镜".equals(gdname)){
+            query.put("goodsid",6);
+            query.put("classtype","1");
+        }else if ("老花镜".equals(gdname)){
+            query.put("goodsid",7);
+            query.put("classtype","1");
+        }else if ("耗材".equals(gdname)){
+            query.put("goodsid",8);
+            query.put("classtype","1");
+        }else if ("视光".equals(gdname)) {
+            query.put("goodsid",9);
+            query.put("classtype","1");
+        }
+        List<OrderDO> orderDOList = orderService.orderDanList(query);
+        int total = orderService.orderDanListcount(query);
+        PageUtils pageUtils = new PageUtils(orderDOList, total);
+        return pageUtils;
+    }
+
 }
 
 

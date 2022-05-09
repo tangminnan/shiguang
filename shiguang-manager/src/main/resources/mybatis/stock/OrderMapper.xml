@@ -440,4 +440,65 @@
             <if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>
         </where>
     </select>
+
+
+
+
+    <select id="orderDanList" resultType="com.shiguang.stock.domain.OrderDO">
+        select
+        s.`id`,s.`goods_num`,s.`goods_code`,s.`goods_name`,s.`goods_count`,s.`goods_type`,g.`goodsname` as gdname, s.`mfrsid`,s.`brandname`,s.`retail_price`,
+        s.`price_sum`, s.`cost_price`, s.`cost_sum`, s.`whole_price`, s.`whole_sum`,s.`position_id`, po.`position_name`, s.`create_time`,
+        s.`danju_number`, s.`order_number`, s.`yundan_number`, s.`zhidan_people`, s.`danju_day`, s.`tuihuo_number`,
+        s.`factory_number`, s.`beizhu`, s.`unit`,m.mfrsname,s.`batch`,s.`zhuce_number`,s.`produce_day`,s.`useday`,s.`classtype`,
+        s.`factory`,s.`status`,s.`username`,s.`returnzt`,s.`stockorder`
+        from stock_order s
+        join c_mfrs m on s.mfrsid=m.mfrsnum
+        join c_position po on s.position_id=po.position_id
+        join c_goods g on s.goods_type=g.goodsid
+        <where>
+            <if test="outPosition != null and outPosition != ''">and s.position_id = #{outPosition}</if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(po.company_id,#{companyId})</if>
+            <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number LIKE concat(concat('%', #{danjuNumber}),'%')</if>
+            <if test="goodsid != null and goodsid != ''">and g.goodsid = #{goodsid} </if>
+            <if test="classtype != null and classtype != ''">and s.classtype = #{classtype} </if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname  LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="status != null and status != ''">and s.status = #{status} </if>
+            <if test="day1 !=null and day1 != ''"> and date_format(s.danju_day ,'%Y-%m-%d' ) >= (#{day1})</if>
+            <if test="day2 !=null and day2 != ''"> and date_format(s.danju_day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
+
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                group by danju_number
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="orderDanListcount" resultType="int">
+        SELECT COUNT(DISTINCT danju_number)
+        from stock_order s
+        join c_mfrs m on s.mfrsid=m.mfrsnum
+        join c_position po on s.position_id=po.position_id
+        join department d on po.depart_number= d.depart_number
+        join c_goods g on s.goods_type=g.goodsid
+        <where>
+            <if test="outPosition != null and outPosition != ''">and s.position_id = #{outPosition}</if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(po.company_id,#{companyId})</if>
+            <if test="danjuNumber != null and danjuNumber != ''">and s.danju_number LIKE concat(concat('%', #{danjuNumber}),'%')</if>
+            <if test="goodsid != null and goodsid != ''">and g.goodsid = #{goodsid} </if>
+            <if test="classtype != null and classtype != ''">and s.classtype = #{classtype} </if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname  LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="status != null and status != ''">and s.status = #{status} </if>
+            <if test="day1 !=null and day1 != ''"> and date_format(s.danju_day ,'%Y-%m-%d' ) >= (#{day1})</if>
+            <if test="day2 !=null and day2 != ''"> and date_format(s.danju_day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
+
+        </where>
+    </select>
 </mapper>

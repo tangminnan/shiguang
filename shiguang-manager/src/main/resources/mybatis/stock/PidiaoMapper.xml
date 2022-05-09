@@ -21,14 +21,14 @@
 		join c_position po on p.out_positionid=po.position_id
 		join c_position pos on p.in_positionid=pos.position_id
 		join department d on p.out_departmentid=d.depart_number  and po.company_id=d.company_id
-		join department de on p.in_departmentid= de.depart_number  and po.company_id=de.company_id
+		join department de on p.in_departmentid= de.depart_number  and pos.company_id=de.company_id
         <where>  
 		  		  <if test="id != null and id != ''"> and p.id = #{id} </if>
 			      <if test="pidiaoNumber != null and pidiaoNumber != ''">and  p.pidiao_number LIKE concat(concat('%', #{pidiaoNumber}),'%')</if>
 		  		  <if test="guanlianNumber != null and guanlianNumber != ''"> and p.guanlian_number = #{guanlianNumber} </if>
 
 		  		  <if test="outDepartmentid != null and outDepartmentid != ''"> and p.out_departmentid = #{outDepartmentid} </if>
-		  		  <if test="outPositionid != null and outPositionid != ''"> and p.out_pzositionid = #{outPositionid} </if>
+		  		  <if test="outPositionid != null and outPositionid != ''"> and p.out_positionid = #{outPositionid} </if>
 		  		  <if test="inPositionid != null and inPositionid != ''"> and p.in_positionid = #{inPositionid} </if>
 		  		  <if test="inCompanyid != null and inCompanyid != ''"> and p.in_companyid = #{inCompanyid} </if>
 		  		  <if test="inDepartmentid != null and inDepartmentid != ''"> and p.in_departmentid = #{inDepartmentid} </if>
@@ -104,14 +104,14 @@
 		 join c_position po on p.out_positionid=po.position_id
 		 join c_position pos on p.in_positionid=pos.position_id
 		 join department d on p.out_departmentid=d.depart_number  and po.company_id=d.company_id
-		 join department de on p.in_departmentid= de.depart_number  and po.company_id=de.company_id
+		 join department de on p.in_departmentid= de.depart_number  and pos.company_id=de.company_id
 		 <where>
 			 <if test="id != null and id != ''"> and p.id = #{id} </if>
 			 <if test="pidiaoNumber != null and pidiaoNumber != ''">and  p.pidiao_number LIKE concat(concat('%', #{pidiaoNumber}),'%')</if>
 			 <if test="guanlianNumber != null and guanlianNumber != ''"> and p.guanlian_number = #{guanlianNumber} </if>
 
 			 <if test="outDepartmentid != null and outDepartmentid != ''"> and p.out_departmentid = #{outDepartmentid} </if>
-			 <if test="outPositionid != null and outPositionid != ''"> and p.out_pzositionid = #{outPositionid} </if>
+			 <if test="outPositionid != null and outPositionid != ''"> and p.out_positionid = #{outPositionid} </if>
 			 <if test="inPositionid != null and inPositionid != ''"> and p.in_positionid = #{inPositionid} </if>
 			 <if test="inCompanyid != null and inCompanyid != ''"> and p.in_companyid = #{inCompanyid} </if>
 			 <if test="inDepartmentid != null and inDepartmentid != ''"> and p.in_departmentid = #{inDepartmentid} </if>

@@ -36,6 +36,7 @@ function load() {
 								offset:params.offset,
                                 pidiaoNumber:$('#pidiaoNumber').val().trim(),
                                 inPositionid:$('#inPositionid').val().trim(),
+                                outPositionid:$('#outPositionid').val().trim(),
                                 day1:$('#day1').val().trim(),
                                 day2:$('#day2').val().trim(),
                                 status:$('#status').val().trim()
@@ -396,7 +397,7 @@ function showCol() {
         var year = timeNow.getFullYear();
         var month = timeNow.getMonth() + 1 > 10 ? timeNow.getMonth() + 1 : '0' + (timeNow.getMonth() + 1);
         var date = timeNow.getDate() > 10 ? timeNow.getDate() : "0" + timeNow.getDate();
-        obj.createTime = year + "-" + month + "-" + date;
+        // obj.createTime = year + "-" + month + "-" + date;
 
         if(null == row['goodsNum']){
             var goodsNum ="";
