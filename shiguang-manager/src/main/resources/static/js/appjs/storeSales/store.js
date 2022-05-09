@@ -466,7 +466,7 @@ function getHuliye(){
                 html += "<td>"+rows[i].goodsCount+"</td>";
                 html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+dsc+"\")'/></td>";
                 html += "<td>"+rows[i].retailPrice+"</td>";
-                html += "<td><input id='zhekoulvhly"+a+"' name='saleDiscount' value='0.00' oninput='getZhekoulv(this,\""+desc+"\")'/></td>";
+                html += "<td><input id='zhekoulvhly"+a+"' name='saleDiscount' value='0.00' oninput='getZhekoulv(this,\""+dsc+"\")'/></td>";
                 html += "<td id='zhekouhly"+a+"'>0.00</td>";
                 html += "<td id='zhekouMoneyhly"+a+"'>0.00</td>";
                 html += "<td id='youhuiMoneyhly"+a+"'>0.00</td>";
@@ -1170,11 +1170,13 @@ function getTaocanXz(){
                         var prePrice = rows[i].preferentialPrice;
                         var rebat = rows[i].preferentialRebate;
                         var tjPrice = rows[i].specialPrice;
+                        alert(tjPrice);
                         preWay = preWay.split(",");
                         prePrice = prePrice.split(",");
                         goosNum = goosNum.split(",");
                         goosType = goosType.split(",");
                         rebat = rebat.split(",");
+                        tjPrice = tjPrice.split(",");
                         for (var t=0;t<goosType.length;t++){
 
                             if ("镜架" == goosType[t]){
@@ -1588,6 +1590,7 @@ function getTaocanXz(){
 
                                 }
                                 else if ("特价" == preWay[t]){
+                                    alert(tjPrice[t])
                                     var yingshou = $("#yingshouhly"+t+"").val();
                                     if (undefined != yingshou){
                                         $("#yingshouMoneyhly"+t+"").text(tjPrice[t]);

@@ -411,7 +411,13 @@ public class StoreSalesController {
     public PageUtils taocanxzlist(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        query.put("goodsCode", params.get("checkVal"));
+        if (null != params.get("checkVal")){
+            String[] goodscodestr = params.get("checkVal").toString().substring(0,params.get("checkVal").toString().length()-1).split(",");
+            query.put("goodsCode", goodscodestr[0]);
+        } else {
+            query.put("goodsCode", params.get("checkVal"));
+        }
+
         params.put("retailCountPrice",params.get("retailCountPrice"));
 //        List<PackageInfoDO> packageInfoDOList = packageInfoService.list(query);
 //        int total = packageInfoService.count(query);
