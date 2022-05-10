@@ -281,6 +281,7 @@ public class SaleYanguangController {
         model.addAttribute("settleDateEnd", settleDateEnd);
         model.addAttribute("departments", departments);
         model.addAttribute("newOld", newOld);
+
         return "saleReport/saleYanguangForm";
     }
 
@@ -999,4 +1000,5 @@ public String Brand(String settleDateStart, String settleDateEnd,
         model.addAttribute("createTime", createTime);
         return "saleReport/ygDoctor";
     }
+
 }

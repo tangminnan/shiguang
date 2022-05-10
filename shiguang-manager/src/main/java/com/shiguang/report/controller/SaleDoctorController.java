@@ -884,4 +884,97 @@ public String Brand(String settleDateStart, String settleDateEnd,
         model.addAttribute("createTime", createTime);
         return "saleReport/doctorGoods";
     }
+
+
+    @GetMapping("/Yg")
+    public String Yg(String settleDateStart, String settleDateEnd,
+                        String username,String newOld, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("settleDateStart", settleDateStart);
+        map.put("settleDateEnd", settleDateEnd);
+        map.put("username", username);
+        map.put("newOld", newOld);
+        model.addAttribute("settleDateStart", settleDateStart);
+        model.addAttribute("settleDateEnd", settleDateEnd);
+        model.addAttribute("username", username);
+        List<SalesDO> yg = saleReportService.Yg(map);
+        List namelist=new ArrayList();
+        for (int i=0;i<yg.size();i++){
+            namelist.add(yg.get(i).getYg());
+        }
+        int count=1;
+        List<Map<String, Object>> doctorsCount = new ArrayList<>();
+
+        for (int i=0;i<namelist.size();i++){
+            count=1;
+            for (int j=i+1;j<namelist.size();j++){
+                if (namelist.get(i).equals(namelist.get(j))){
+                    count++;
+                    namelist.remove(j);
+                    j--;
+                }
+            }
+            String  doctors= (String) namelist.get(i);
+            Integer counts= count;
+            Map<String, Object> ygDoctormap = new HashMap<>();
+            ygDoctormap.put("doctors",doctors);
+            ygDoctormap.put("counts",counts);
+            doctorsCount.add( ygDoctormap);
+        }
+        model.addAttribute("doctorsCount", doctorsCount);
+        //———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String createTime = sdf.format(date);
+        model.addAttribute("createTime", createTime);
+        return "saleReport/yg";
+    }
+
+
+    @GetMapping("/YgUse")
+    public String YgUse(String settleDateStart, String settleDateEnd,
+                        String username,String newOld, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("settleDateStart", settleDateStart);
+        map.put("settleDateEnd", settleDateEnd);
+        map.put("username", username);
+        map.put("newOld", newOld);
+        model.addAttribute("settleDateStart", settleDateStart);
+        model.addAttribute("settleDateEnd", settleDateEnd);
+        model.addAttribute("username", username);
+        List<SalesDO> ygUse = saleReportService.YgUse(map);
+        List namelist=new ArrayList();
+        for (int i=0;i<ygUse.size();i++){
+            namelist.add(ygUse.get(i).getYg());
+        }
+        int count=1;
+        List<Map<String, Object>> doctorsCount = new ArrayList<>();
+
+        for (int i=0;i<namelist.size();i++){
+            count=1;
+            for (int j=i+1;j<namelist.size();j++){
+                if (namelist.get(i).equals(namelist.get(j))){
+                    count++;
+                    namelist.remove(j);
+                    j--;
+                }
+            }
+            String  doctors= (String) namelist.get(i);
+            Integer counts= count;
+            Map<String, Object> ygDoctormap = new HashMap<>();
+            ygDoctormap.put("doctors",doctors);
+            ygDoctormap.put("counts",counts);
+            doctorsCount.add( ygDoctormap);
+        }
+        model.addAttribute("doctorsCount", doctorsCount);
+        //———获取当前系统时间—————
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+        Date date = new Date();
+        String createTime = sdf.format(date);
+        model.addAttribute("createTime", createTime);
+        return "saleReport/yg";
+    }
+
+
+
 }

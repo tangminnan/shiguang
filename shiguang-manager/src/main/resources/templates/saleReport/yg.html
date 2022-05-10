@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>验光数量（验光师）</title>
+<style type="text/css">
+	*{padding: 0;margin: 0;box-sizing: border-box;font-size: 14px;}
+	.fl{float: left;}
+	.fr{float: right;}
+	.container {margin:50px auto;width:600px;}
+	h3{font-size: 20px;text-align: center;letter-spacing: 1px;margin-bottom:15px;}
+	table{width: 100%;border-left:1px solid #000;border-top:1px solid #000;text-align: center;color:#333;}
+	table td{border-right:1px solid #000;border-bottom:1px solid #000;padding:6px 2px;}
+	.thead{background: #dcdcdc;font-weight: bold;color:#000;}
+	.tfoot{background: #fecccc;font-weight: bold;}
+	.tfoot td{color: #fd0c0c !important;}
+	.txt{overflow: hidden;margin:15px 0;font-weight: bold;}
+	.cBlue{color:#2063fd;}
+</style>
+
+</head>
+<body>
+<input type="hidden" id="settleDateStart" th:value="${settleDateStart}">
+<input type="hidden" id="settleDateEnd" th:value="${settleDateEnd}">
+<input type="hidden" id="username" th:value="${username}">
+<input type="hidden" id="storeDescribe" th:value="${storeDescribe}">
+<input type="hidden" id="selectGoods" th:value="${selectGoods}">
+	<div class="container">
+		<h3>验光数量（医生）</h3>
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tbody id="detailId">
+			<tr class="thead">
+			  <td>验光师</td>
+			  <td>数量</td>
+			</tr>
+
+			</tbody>
+			</tr>
+		</table>
+		<div class="txt">
+			<p class="fl">打印日期：<span th:text="${createTime}"></span></p>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+<script type="text/javascript"></script>
+<script th:inline="javascript">
+        $().ready(function() {
+            var doctorsCount = [[${doctorsCount}]];
+            var html = "";
+            var allCount = 0;
+
+            for (var i = 0; i < doctorsCount.length; i++) {
+                html += "<tr>";
+                html += "<td >" + doctorsCount[i].doctors + "</td>";
+                html += "<td >" + doctorsCount[i].counts+ "</td>";
+                html += "</tr>";
+                allCount+=doctorsCount[i].counts;
+            }
+            html+="<tr class='tfoot'>";
+            html+="<td colspan='1'>总合计：</td>";
+            html+="<td>"+allCount+"</td>";
+            html+="</tr>";
+            $("#detailId").append(html);
+        });
+
+
+
+	</script>
+</body>
+</html>

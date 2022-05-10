@@ -124,6 +124,31 @@ public class SalesDO implements Serializable {
 	private String doctor;
 //	公司id
 	private String companyId;
+	private String yg;
+
+	public String getYg() {
+		return yg;
+	}
+
+	public void setYg(String yg) {
+		this.yg = yg;
+	}
+
+	public String getRightaddsg() {
+		return rightaddsg;
+	}
+
+	public void setRightaddsg(String rightaddsg) {
+		this.rightaddsg = rightaddsg;
+	}
+
+	public String getLeftaddsg() {
+		return leftaddsg;
+	}
+
+	public void setLeftaddsg(String leftaddsg) {
+		this.leftaddsg = leftaddsg;
+	}
 
 	private String role_id;
 	public void setRighttg(String righttg) {this.righttg = righttg;}
