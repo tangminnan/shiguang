@@ -355,6 +355,7 @@
 			<if test="inDepartment != null and inDepartment != ''">and d.depart_number = #{inDepartment}</if>
 			<if test="companyIdOut != null and companyIdOut != ''">and d.company_id = #{companyIdOut}</if>
 			<if test="inCompany != null and inCompany != ''">and d.company_id = #{inCompany}</if>
+			<if test="companyId != null and companyId != ''">and d.company_id = #{companyId}</if>
 			and po.xsstate=0 and  po.state=1
 		</where>
 		group by po.position_id order by  po.position_id
