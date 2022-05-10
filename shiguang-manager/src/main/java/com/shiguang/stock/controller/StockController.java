@@ -2003,8 +2003,8 @@ public class StockController {
     @PostMapping("/importStock")
     @ResponseBody
 //    @RequiresPermissions("information:member:member")
-    public R importStock(Integer goodsType, String positionId,String checkType,String dzlx, MultipartFile file) {
-        return stockService.importStock(goodsType,positionId, checkType,dzlx, file);
+    public R importStock(Integer goodsType, String positionId, String beizhu,String checkType,String dzlx, MultipartFile file) {
+        return stockService.importStock(goodsType,positionId, beizhu, checkType,dzlx, file);
 
     }
 

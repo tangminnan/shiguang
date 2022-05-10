@@ -154,7 +154,7 @@ public interface StockService {
     List<OrderDO> getShouhuoList(Map<String, Object> map);
 
     //采购批量导入
-    R importStock(Integer goodsType,String positionId, String checkType, String dzlx, MultipartFile file);
+    R importStock(Integer goodsType,String positionId, String beizhu, String checkType, String dzlx, MultipartFile file);
 
 
 
