@@ -2385,4 +2385,381 @@
 	</select>
 
 
+    <select id="Yg" resultType="com.shiguang.storeSales.domain.SalesDO">
+        SELECT
+        ptometry_number,
+        yg,
+        company_id,
+        username,
+        role_id,
+        create_time,
+        store,
+        new_old
+        FROM
+        (
+        SELECT
+        k.ptometry_number,
+        k.kjjy_optometry_name as yg,
+        u.company_id,
+        u.username,
+        ur.role_id,
+        jg.create_time,
+        u.store,
+        k.new_old
+        FROM
+        jc_kjjy k
+        LEFT JOIN jc_result jg ON jg.ptometry_number = k.ptometry_number
+        LEFT JOIN sys_user u ON k.kjjy_doctor = u. NAME
+        LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+        UNION ALL
+        SELECT
+        ky.ptometry_number,
+        ky.kjyy_optometry_name as yg,
+        u.company_id,
+        u.username,
+        ur.role_id,
+        jg.create_time,
+        u.store,
+        ky.new_old
+        FROM
+        jc_kjyy ky
+        LEFT JOIN jc_result jg ON jg.ptometry_number = ky.ptometry_number
+        LEFT JOIN sys_user u ON ky.kjyy_doctor = u. NAME
+        LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+        UNION ALL
+        SELECT
+        sg.ptometry_number,
+        sg.sgjj_optometry_name as yg,
+        u.company_id,
+        u.username,
+        ur.role_id,
+        jg.create_time,
+        u.store,
+        sg.new_old
+        FROM
+        jc_sgjj sg
+        LEFT JOIN jc_result jg ON jg.ptometry_number = sg.ptometry_number
+        LEFT JOIN sys_user u ON sg.sgjj_doctor = u. NAME
+        LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+        UNION ALL
+        SELECT
+        z.ptometry_number,
+        z.zy_optometry_name as yg,
+        u.company_id,
+        u.username,
+        ur.role_id,
+        jg.create_time,
+        u.store,
+        z.new_old
+        FROM
+        jc_zy z
+        LEFT JOIN jc_result jg ON jg.ptometry_number = z.ptometry_number
+        LEFT JOIN sys_user u ON z.zy_doctor = u. NAME
+        LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+        UNION ALL
+        SELECT
+        x.ptometry_number,
+        x.rx_optometry_name as yg,
+        u.company_id,
+        u.username,
+        ur.role_id,
+        jg.create_time,
+        u.store,
+        x.new_old
+        FROM
+        jc_rxjmjcj x
+        LEFT JOIN jc_result jg ON jg.ptometry_number = x.ptometry_number
+        LEFT JOIN sys_user u ON x.rx_doctor = u. NAME
+        LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+        UNION ALL
+        SELECT
+        sx.ptometry_number,
+        sx.sjxl_optometry_name as yg,
+        u.company_id,
+        u.username,
+        ur.role_id,
+        jg.create_time,
+        u.store,
+        sx.new_old
+        FROM
+        jc_sjxl sx
+        LEFT JOIN jc_result jg ON jg.ptometry_number = sx.ptometry_number
+        LEFT JOIN sys_user u ON sx.sjxl_doctor = u. NAME
+        LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+        UNION ALL
+        SELECT
+        rg.ptometry_number,
+        rg.rgp_optometry_name as yg,
+        u.company_id,
+        u.username,
+        ur.role_id,
+        jg.create_time,
+        u.store,
+        rg.new_old
+        FROM
+        jc_rgp rg
+        LEFT JOIN jc_result jg ON jg.ptometry_number = rg.ptometry_number
+        LEFT JOIN sys_user u ON rg.rgp_doctor = u. NAME
+        LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+        UNION ALL
+        SELECT
+        cr.ptometry_number,
+        cr.crt_optometry_name as yg,
+        u.company_id,
+        u.username,
+        ur.role_id,
+        jg.create_time,
+        u.store,
+        cr.new_old
+        FROM
+        jc_crt cr
+        LEFT JOIN jc_result jg ON jg.ptometry_number = cr.ptometry_number
+        LEFT JOIN sys_user u ON cr.crt_doctor = u. NAME
+        LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+        UNION ALL
+        SELECT
+        vst.ptometry_number,
+        vst.vst_optometry_name as yg,
+        u.company_id,
+        u.username,
+        ur.role_id,
+        jg.create_time,
+        u.store,
+        vst.new_old
+        FROM
+        jc_vst vst
+        LEFT JOIN jc_result jg ON jg.ptometry_number = vst.ptometry_number
+        LEFT JOIN sys_user u ON vst.vst_doctor = u. NAME
+        LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+        UNION ALL
+        SELECT
+        yp.ptometry_number,
+        yp.yp_optometry_name as yg,
+        u.company_id,
+        u.username,
+        ur.role_id,
+        jg.create_time,
+        u.store,
+        yp.new_old
+        FROM
+        jc_yaopin yp
+        LEFT JOIN jc_result jg ON jg.ptometry_number = yp.ptometry_number
+        LEFT JOIN sys_user u ON yp.yp_doctor = u. NAME
+        LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+        ) aia
+        <where>
+            <if test="companyId !=null and companyId != ''">and  company_id in (#{companyId})</if>
+            <if test="settleDateStart !=null and settleDateStart != ''"> and date_format( create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+            <if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+            <if test="department !=null and department != ''">and  store = #{department}</if>
+            <if test="username !=null and username != ''">and  username = #{username}</if>
+            <if test="newOld !=null and newOld != ''">and  new_old = #{newOld}</if>
+            <if test="storeDescribe != null and storeDescribe != ''">and  store_describe LIKE concat(concat('%', #{storeDescribe}),'%')</if>
+            <if test="brandname != null and brandname != ''">and   store_name LIKE concat(concat('%', #{brandname}),'%')</if>
+            and ( role_id = 9)
+        </where>
+
+
+
+    </select>
+    <select id="YgUse" resultType="com.shiguang.storeSales.domain.SalesDO">
+		SELECT
+		ptometry_number,
+		yg,
+		company_id,
+		username,
+		role_id,
+		create_time,
+		store,
+		sale_type,
+		new_old
+		FROM
+		(
+		SELECT
+		k.ptometry_number,
+		k.kjjy_optometry_name as yg,
+		u.company_id,
+		u.username,
+		ur.role_id,
+		jg.create_time,
+		u.store,
+		sa.sale_type,
+		k.new_old
+		FROM
+		jc_kjjy k
+		JOIN store_sales sa ON sa.ptometry_number = k.ptometry_number
+		JOIN jc_result jg ON jg.ptometry_number = k.ptometry_number
+		JOIN sys_user u ON k.kjjy_doctor = u. NAME
+		JOIN sys_user_role ur ON u.user_id = ur.user_id
+		UNION ALL
+		SELECT
+		ky.ptometry_number,
+		ky.kjyy_optometry_name as yg,
+		u.company_id,
+		u.username,
+		ur.role_id,
+		jg.create_time,
+		u.store,
+		sa.sale_type,
+		ky.new_old
+		FROM
+		jc_kjyy ky
+		JOIN store_sales sa ON sa.ptometry_number = ky.ptometry_number
+		JOIN jc_result jg ON jg.ptometry_number = ky.ptometry_number
+		JOIN sys_user u ON ky.kjyy_doctor = u. NAME
+		JOIN sys_user_role ur ON u.user_id = ur.user_id
+		UNION ALL
+		SELECT
+		sg.ptometry_number,
+		sg.sgjj_optometry_name as yg,
+		u.company_id,
+		u.username,
+		ur.role_id,
+		jg.create_time,
+		u.store,
+		sa.sale_type,
+		sg.new_old
+		FROM
+		jc_sgjj sg
+		JOIN store_sales sa ON sa.ptometry_number = sg.ptometry_number
+		JOIN jc_result jg ON jg.ptometry_number = sg.ptometry_number
+		JOIN sys_user u ON sg.sgjj_doctor = u. NAME
+		JOIN sys_user_role ur ON u.user_id = ur.user_id
+		UNION ALL
+		SELECT
+		z.ptometry_number,
+		z.zy_optometry_name as yg,
+		u.company_id,
+		u.username,
+		ur.role_id,
+		jg.create_time,
+		u.store,
+		sa.sale_type,
+		z.new_old
+		FROM
+		jc_zy z
+		JOIN store_sales sa ON sa.ptometry_number = z.ptometry_number
+		JOIN jc_result jg ON jg.ptometry_number = z.ptometry_number
+		JOIN sys_user u ON z.zy_doctor = u. NAME
+		JOIN sys_user_role ur ON u.user_id = ur.user_id
+		UNION ALL
+		SELECT
+		x.ptometry_number,
+		x.rx_optometry_name as yg,
+		u.company_id,
+		u.username,
+		ur.role_id,
+		jg.create_time,
+		u.store,
+		sa.sale_type,
+		x.new_old
+		FROM
+		jc_rxjmjcj x
+		LEFT JOIN store_sales sa ON sa.ptometry_number = x.ptometry_number
+		JOIN jc_result jg ON jg.ptometry_number = x.ptometry_number
+		JOIN sys_user u ON x.rx_doctor = u. NAME
+		JOIN sys_user_role ur ON u.user_id = ur.user_id
+		UNION ALL
+		SELECT
+		sx.ptometry_number,
+		sx.sjxl_optometry_name as yg,
+		u.company_id,
+		u.username,
+		ur.role_id,
+		jg.create_time,
+		u.store,
+		sa.sale_type,
+		sx.new_old
+		FROM
+		jc_sjxl sx
+		JOIN store_sales sa ON sa.ptometry_number = sx.ptometry_number
+		JOIN jc_result jg ON jg.ptometry_number = sx.ptometry_number
+		JOIN sys_user u ON sx.sjxl_doctor = u. NAME
+		JOIN sys_user_role ur ON u.user_id = ur.user_id
+		UNION ALL
+		SELECT
+		rg.ptometry_number,
+		rg.rgp_optometry_name as yg,
+		u.company_id,
+		u.username,
+		ur.role_id,
+		jg.create_time,
+		u.store,
+		sa.sale_type,
+		rg.new_old
+		FROM
+		jc_rgp rg
+		JOIN store_sales sa ON sa.ptometry_number = rg.ptometry_number
+		JOIN jc_result jg ON jg.ptometry_number = rg.ptometry_number
+		JOIN sys_user u ON rg.rgp_doctor = u. NAME
+		JOIN sys_user_role ur ON u.user_id = ur.user_id
+		UNION ALL
+		SELECT
+		cr.ptometry_number,
+		cr.crt_optometry_name as yg,
+		u.company_id,
+		u.username,
+		ur.role_id,
+		jg.create_time,
+		u.store,
+		sa.sale_type,
+		cr.new_old
+		FROM
+		jc_crt cr
+		JOIN store_sales sa ON sa.ptometry_number = cr.ptometry_number
+		JOIN jc_result jg ON jg.ptometry_number = cr.ptometry_number
+		JOIN sys_user u ON cr.crt_doctor = u. NAME
+		JOIN sys_user_role ur ON u.user_id = ur.user_id
+		UNION ALL
+		SELECT
+		vst.ptometry_number,
+		vst.vst_optometry_name as yg,
+		u.company_id,
+		u.username,
+		ur.role_id,
+		jg.create_time,
+		u.store,
+		sa.sale_type,
+		vst.new_old
+		FROM
+		jc_vst vst
+		JOIN store_sales sa ON sa.ptometry_number = vst.ptometry_number
+		JOIN jc_result jg ON jg.ptometry_number = vst.ptometry_number
+		JOIN sys_user u ON vst.vst_doctor = u. NAME
+		JOIN sys_user_role ur ON u.user_id = ur.user_id
+		UNION ALL
+		SELECT
+		yp.ptometry_number,
+		yp.yp_optometry_name as yg,
+		u.company_id,
+		u.username,
+		ur.role_id,
+		jg.create_time,
+		u.store,
+		sa.sale_type,
+		yp.new_old
+		FROM
+		jc_yaopin yp
+		JOIN store_sales sa ON sa.ptometry_number = yp.ptometry_number
+		JOIN jc_result jg ON jg.ptometry_number = yp.ptometry_number
+		JOIN sys_user u ON yp.yp_doctor = u. NAME
+		JOIN sys_user_role ur ON u.user_id = ur.user_id
+		) aia
+        <where>
+            <if test="companyId !=null and companyId != ''">and  company_id in (#{companyId})</if>
+            <if test="settleDateStart !=null and settleDateStart != ''"> and date_format( create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+            <if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+            <if test="department !=null and department != ''">and  store = #{department}</if>
+            <if test="username !=null and username != ''">and  username = #{username}</if>
+            <if test="newOld !=null and newOld != ''">and  new_old = #{newOld}</if>
+            <if test="storeDescribe != null and storeDescribe != ''">and  store_describe LIKE concat(concat('%', #{storeDescribe}),'%')</if>
+            <if test="brandname != null and brandname != ''">and   store_name LIKE concat(concat('%', #{brandname}),'%')</if>
+            AND (role_id = 9)
+            AND (sale_type = 1)
+        </where>
+
+
+
+    </select>
+
 </mapper>

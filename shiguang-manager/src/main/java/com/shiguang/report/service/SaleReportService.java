@@ -55,10 +55,19 @@ public interface SaleReportService {
     List<SalesDO> ygDoctor(Map<String,Object> map);
 
 
+
+
+
     List<SalesDO> findDoctorPeople(Map<String,Object> map);
     int findCfCount(Map<String,Object> map);
     int findCfUseCount(Map<String,Object> map);
     int findCfamountMoney(Map<String,Object> map);
     List<SalesDO> findDoctorGoods(Map<String,Object> map);
+
+
+
+    List<SalesDO> Yg(Map<String,Object> map);
+
+    List<SalesDO> YgUse(Map<String,Object> map);
 
 }
