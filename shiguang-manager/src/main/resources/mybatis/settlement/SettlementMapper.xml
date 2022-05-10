@@ -218,4 +218,46 @@
 		<if test="state != null and state != ''"> and m.state = #{state} </if>
 	</select>
 
+	<select id="findJcGlassesData" resultType="com.shiguang.settlement.domain.SettlementDO">
+		select sl.`id`,sl.`sale_number`,sl.`member_number`,m.`name` as memberName,m.`sex` as sex,m.`age` as age,sl.`actual_money`,sl.`pay_money`,sl.`model_money`,sl.`pay_way`,
+		sl.`front_money`,sl.`settle_date`,c.`is_sale` as isSale
+		from settlement sl
+		join member m on sl.member_number = m.card_number
+		join cost c on c.sale_number = sl.sale_number and c.is_sale = 1
+		<if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
+		<if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+		<if test="name != null and name != ''"> and m.name like concat('%', #{name},'%') </if>
+		<if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number like concat('%', #{saleNumber},'%') </if>
+		<!--<if test="type != null and type != ''"> and c.type != #{type}</if>-->
+		<if test="state != null and state != ''"> and m.state = #{state} </if>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				GROUP BY sl.id
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				GROUP BY sl.id
+				order by sl.`settle_date` desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="findJcGlassesDataCount" resultType="int">
+		select count(*)
+		from settlement sl
+		join member m on sl.member_number = m.card_number
+		join cost c on c.sale_number = sl.sale_number and c.is_sale = 1
+		<if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
+		<if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+		<if test="name != null and name != ''"> and m.name like concat('%', #{name},'%') </if>
+		<if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+		<if test="saleNumber != null and saleNumber != ''"> and sl.sale_number like concat('%', #{saleNumber},'%') </if>
+		<!--<if test="type != null and type != ''"> and c.type != #{type}</if>-->
+		<if test="state != null and state != ''"> and m.state = #{state} </if>
+	</select>
+
 </mapper>

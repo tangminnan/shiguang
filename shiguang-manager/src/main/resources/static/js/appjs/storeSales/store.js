@@ -1170,7 +1170,6 @@ function getTaocanXz(){
                         var prePrice = rows[i].preferentialPrice;
                         var rebat = rows[i].preferentialRebate;
                         var tjPrice = rows[i].specialPrice;
-                        alert(tjPrice);
                         preWay = preWay.split(",");
                         prePrice = prePrice.split(",");
                         goosNum = goosNum.split(",");
@@ -1590,7 +1589,6 @@ function getTaocanXz(){
 
                                 }
                                 else if ("特价" == preWay[t]){
-                                    alert(tjPrice[t])
                                     var yingshou = $("#yingshouhly"+t+"").val();
                                     if (undefined != yingshou){
                                         $("#yingshouMoneyhly"+t+"").text(tjPrice[t]);

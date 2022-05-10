@@ -18,6 +18,8 @@ public class MemberDO implements Serializable {
     private Long costId;
     //是否缴费
     private Long isSale;
+    //检查费
+    private Long isjcSale;
     //顾客性别(0:男1:女)
     private Long sex;
     private String sexx;
@@ -177,6 +179,22 @@ public class MemberDO implements Serializable {
      */
     public Long getIsSale() {
         return isSale;
+    }
+
+    /**
+     * 设置： 检查费
+     * @return
+     */
+    public Long getIsjcSale() {
+        return isjcSale;
+    }
+
+    /**
+     * 获取：检查费
+     * @param isjcSale
+     */
+    public void setIsjcSale(Long isjcSale) {
+        this.isjcSale = isjcSale;
     }
 
     /**

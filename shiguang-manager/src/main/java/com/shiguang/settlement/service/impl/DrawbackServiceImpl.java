@@ -1,6 +1,7 @@
 package com.shiguang.settlement.service.impl;
 
 import com.shiguang.checkout.domain.CostDO;
+import com.shiguang.checkout.service.CostService;
 import com.shiguang.common.utils.GuuidUtil;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
@@ -57,6 +58,8 @@ public class DrawbackServiceImpl implements DrawbackService {
 	private JpcpService jpcpService;
 	@Autowired
 	private CardService cardService;
+	@Autowired
+	private CostService costService;
 	
 	@Override
 	public DrawbackDO get(Long id){
@@ -362,5 +365,63 @@ public class DrawbackServiceImpl implements DrawbackService {
 		}
 		return R.error();
 	}
-	
+
+	@Override
+	public List<MemberDO> memberJcList(Map<String, Object> map){
+		return drawbackDao.memberJcList(map);
+	}
+
+	@Override
+	public int memberJcCount(Map<String, Object> map){
+		return drawbackDao.memberJcCount(map);
+	}
+
+	@Override
+	@Transactional
+	public R saveJcMoney(DrawbackDO drawbackDO){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		MemberDO memberDO = memberService.getCardNumber(drawbackDO.getMemberNumber());
+		DrawbackDO drawbackDOs = new DrawbackDO();
+		drawbackDO.setDrawbackNumber(String.valueOf(GuuidUtil.getUUID()));
+		drawbackDO.setCreaterName(ShiroUtils.getUser().getName());
+		drawbackDO.setCreateTime(new Date());
+		drawbackDO.setDrawbackName(memberDO.getName());
+		SettlementDO settlementDO = settlementService.getSaleNumers(drawbackDO.getSaleNumber());
+		drawbackDO.setDrawbackMoney(String.valueOf(settlementDO.getPayMoney()));
+		if (null != drawbackDO.getDrawbacktkMoney()){
+			drawbackDO.setDrawbackMoney(drawbackDO.getDrawbacktkMoney());
+		}
+		String[] drackWay = drawbackDO.getDrackbackWay().split(",");
+		String[] drackMoney = drawbackDO.getDrawbackMoney().split(",");
+		for (int i=0;i<drackWay.length;i++){
+			if ("6".equals(drackWay[i])){
+				CardDO cardDO = cardService.getCardNum(drawbackDO.getChuzhiNumber());
+				double tuikuanMoney = Double.valueOf(cardDO.getCardMoney()) + Double.valueOf(drackMoney[i]);
+				cardDO.setCardMoney(tuikuanMoney+"");
+				cardService.updateMoney(cardDO);
+			} else if ("9".equals(drackWay[i])){
+				double jifenMoney = Double.valueOf(drackMoney[i]) * 20;
+				int integral = (int) jifenMoney;
+				if (null != memberDO.getIntegral()){
+					Integer integralnew = Integer.parseInt(memberDO.getIntegral()) + integral;
+					memberDO.setIntegral(String.valueOf(integralnew));
+					memberService.updateInteger(memberDO);
+				}
+			}
+		}
+		List<CostDO> costDOS =costService.getSaleNumber(drawbackDO.getSaleNumber());
+		if (null != costDOS){
+			for (CostDO costDO : costDOS){
+				CostDO costDO1 = new CostDO();
+				costDO1.setId(costDO.getId());
+				costDO1.setIsSale(2L);
+				costService.update(costDO1);
+			}
+		}
+		if(this.save(drawbackDO)>0){
+			return R.ok("退款成功");
+		}
+		return R.error();
+	}
+
 }

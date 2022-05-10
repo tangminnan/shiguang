@@ -107,7 +107,8 @@
             var list = [[${resultList}]];
             var html =0;
             for (var i=0;i<list.length;i++){
-                html = "<tr><td><a href='#'  onclick='reportDefinte()'>"+list[i].departmentName+"</a></td>";
+                var departmentNum = list[i].departmentNum;
+                html = "<tr><td><a href='#'  onclick='reportDefinte(\""+departmentNum+"\")'>"+list[i].departmentName+"</a></td>";
                 html += "<td>"+list[i].shihsouTotal+"</td>"
 				html += "<td>"+list[i].xianjinMoney+"</td>"
 				html += "<td>"+list[i].chuzhikamoney+"</td>";
@@ -124,10 +125,10 @@
 				$("#reportId").append(html);
 			}
         });
-        function reportDefinte(){
+        function reportDefinte(departmentNum){
             var settleDateStart =  $("#settleDateStart").val();
             var settleDateEnd = $("#settleDateEnd").val();
-            window.open("/information/saleReport/reportDetailList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd);
+            window.open("/information/saleReport/reportDetailList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&departmentNum="+departmentNum);
 		}
 	</script>
 </body>

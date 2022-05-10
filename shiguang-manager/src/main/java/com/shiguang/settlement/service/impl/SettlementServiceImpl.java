@@ -155,4 +155,15 @@ public class SettlementServiceImpl implements SettlementService {
 		this.remove(id);
 		return R.ok();
 	}
+
+	@Override
+	public List<SettlementDO> findJcGlassesData(Map<String, Object> map){
+		return settlementDao.findJcGlassesData(map);
+	}
+
+	@Override
+	public int findJcGlassesDataCount(Map<String, Object> map){
+		return settlementDao.findJcGlassesDataCount(map);
+	}
+
 }

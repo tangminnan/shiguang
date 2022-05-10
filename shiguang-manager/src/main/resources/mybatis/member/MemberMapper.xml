@@ -64,7 +64,6 @@
             <if test="state != null and state != ''"> and m.state = #{state} </if>
             <if test="agestart != null and agestart !=''"> and m.age >= #{agestart} </if>
             <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
-            and m.status = 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -292,7 +291,6 @@
             <if test="state != null and state != ''"> and m.state = #{state} </if>
             <if test="agestart != null and agestart !=''"> and m.age >= #{agestart} </if>
             <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
-            and m.status = 0
         </where>
     </select>
 
