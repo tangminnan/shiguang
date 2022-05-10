@@ -1234,6 +1234,20 @@ public class PidiaoController {
         return pageUtils;
     }
 
+
+
+
+
+    ///采购列表
+    @ResponseBody
+    @RequestMapping(value = "/selectOrder")
+    public List<OrderDO> selectOrder(String danjuNumber,Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("danjuNumber", danjuNumber);
+        List<OrderDO> orderDOList = orderService.selectOrder(map);
+        model.addAttribute("orderDOList", orderDOList);
+        return orderDOList;
+    }
 }
 
 
