@@ -114,12 +114,13 @@ public class TuihuoController {
 		//部门
 		Map<String, Object> map = new HashMap<>();
 		//———获取当前登录用户的公司id————
-		String companyId=ShiroUtils.getUser().getCompanyId();
-		if(companyId == null){
-			String outDepartment=ShiroUtils.getUser().getStoreNum();
-			map.put("outDepartment",outDepartment);
-		}else if (companyId != null){
-			map.put("companyId",companyId);
+
+		if (null != ShiroUtils.getUser().getCompanyId()){
+			if(ShiroUtils.getUser().getCompanyId().equals("3")){
+				map.put("companyId","");
+			}else {
+				map.put("companyId",ShiroUtils.getUser().getCompanyId());
+			}
 		}
 		List<PidiaoDO> outPositiion = pidiaoService.outPosition(map);
 		model.addAttribute("outPositiion", outPositiion);

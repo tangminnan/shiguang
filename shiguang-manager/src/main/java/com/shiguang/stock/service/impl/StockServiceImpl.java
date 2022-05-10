@@ -467,7 +467,7 @@ public class StockServiceImpl implements StockService {
      */
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED)
-    public R importStock(Integer goodsType, String positionId,String checkType,String dzlx, MultipartFile file) {
+    public R importStock(Integer goodsType, String positionId, String beizhu,String checkType,String dzlx, MultipartFile file) {
         System.out.println("==============file================" + file);
         int num = 0;
         String sl = "";
@@ -527,9 +527,13 @@ public class StockServiceImpl implements StockService {
                             String retailPrice=jingjias.getRetailPrice();
                             String unitname=jingjias.getUnitname();
                             String factory=jingjias.getProducFactory();
+                            if (factory==null){
+                                factory="";
+                            }
                             String classtype=jingjias.getClasstype();
 
                             stockDO.setPositionId(positionId);
+                            stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
 
                             stockDO.setGoodsNum(goodsNum);
@@ -541,6 +545,7 @@ public class StockServiceImpl implements StockService {
                             stockDO.setMfrsid(mfrsid);
                             //型号
                             stockDO.setFactory(factory);
+
                             //类型
                             stockDO.setClasstype(classtype);
                             //数量
@@ -637,6 +642,7 @@ public class StockServiceImpl implements StockService {
                             orderDO.setUnit(unitname);
                             orderDO.setRetailPrice(retailPrice);
                             orderDO.setPositionId(positionId);
+                            orderDO.setBeizhu(beizhu);
                             orderDO.setCreateTime(createTime);
                             orderDO.setDanjuNumber(danjuNumber);
                             orderDO.setZhidanPeople(zhidanPeople);
@@ -667,9 +673,13 @@ public class StockServiceImpl implements StockService {
                             String retailPrice=peijians.getRetailPrice();
                             String unitname=peijians.getUnitname();
                             String factory=peijians.getProducFactory();
+                            if (factory==null){
+                                factory="";
+                            }
                             String classtype=peijians.getClasstype();
 
                             stockDO.setPositionId(positionId);
+                            stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
 
                             stockDO.setGoodsNum(goodsNum);
@@ -777,6 +787,7 @@ public class StockServiceImpl implements StockService {
                             orderDO.setUnit(unitname);
                             orderDO.setRetailPrice(retailPrice);
                             orderDO.setPositionId(positionId);
+                            orderDO.setBeizhu(beizhu);
                             orderDO.setCreateTime(createTime);
                             orderDO.setDanjuNumber(danjuNumber);
                             orderDO.setZhidanPeople(zhidanPeople);
@@ -817,9 +828,13 @@ public class StockServiceImpl implements StockService {
                             String retailPrice=jingpians.getRetailPrice();
                             String unitname=jingpians.getUnitname();
                             String factory=jingpians.getProducFactory();
+                            if (factory==null){
+                                factory="";
+                            }
                             String classtype=jingpians.getClasstype();
 
                             stockDO.setPositionId(positionId);
+                            stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
 
                             stockDO.setGoodsNum(goodsNum);
@@ -933,6 +948,7 @@ public class StockServiceImpl implements StockService {
                             orderDO.setUnit(unitname);
                             orderDO.setRetailPrice(retailPrice);
                             orderDO.setPositionId(positionId);
+                            orderDO.setBeizhu(beizhu);
                             orderDO.setCreateTime(createTime);
                             orderDO.setDanjuNumber(danjuNumber);
                             orderDO.setZhidanPeople(zhidanPeople);
@@ -974,9 +990,13 @@ public class StockServiceImpl implements StockService {
                             String retailPrice=yinxings.getRetailPrice();
                             String unitname=yinxings.getUnitname();
                             String factory=yinxings.getProducFactory();
+                            if (factory==null){
+                                factory="";
+                            }
                             String classtype=yinxings.getClasstype();
 
                             stockDO.setPositionId(positionId);
+                            stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
 
                             stockDO.setGoodsNum(goodsNum);
@@ -1084,6 +1104,7 @@ public class StockServiceImpl implements StockService {
                             orderDO.setUnit(unitname);
                             orderDO.setRetailPrice(retailPrice);
                             orderDO.setPositionId(positionId);
+                            orderDO.setBeizhu(beizhu);
                             orderDO.setCreateTime(createTime);
                             orderDO.setDanjuNumber(danjuNumber);
                             orderDO.setZhidanPeople(zhidanPeople);
@@ -1114,9 +1135,13 @@ public class StockServiceImpl implements StockService {
                             String retailPrice=huliyes.getRetailPrice();
                             String unitname=huliyes.getUnitname();
                             String factory=huliyes.getProducFactory();
+                            if (factory==null){
+                                factory="";
+                            }
                             String classtype=huliyes.getClasstype();
 
                             stockDO.setPositionId(positionId);
+                            stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
 
                             stockDO.setGoodsNum(goodsNum);
@@ -1224,6 +1249,7 @@ public class StockServiceImpl implements StockService {
                             orderDO.setUnit(unitname);
                             orderDO.setRetailPrice(retailPrice);
                             orderDO.setPositionId(positionId);
+                            orderDO.setBeizhu(beizhu);
                             orderDO.setCreateTime(createTime);
                             orderDO.setDanjuNumber(danjuNumber);
                             orderDO.setZhidanPeople(zhidanPeople);
@@ -1254,9 +1280,13 @@ public class StockServiceImpl implements StockService {
                             String retailPrice=taiyangjings.getRetailPrice();
                             String unitname=taiyangjings.getUnitname();
                             String factory=taiyangjings.getProducFactory();
+                            if (factory==null){
+                                factory="";
+                            }
                             String classtype=taiyangjings.getClasstype();
 
                             stockDO.setPositionId(positionId);
+                            stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
 
                             stockDO.setGoodsNum(goodsNum);
@@ -1364,6 +1394,7 @@ public class StockServiceImpl implements StockService {
                             orderDO.setUnit(unitname);
                             orderDO.setRetailPrice(retailPrice);
                             orderDO.setPositionId(positionId);
+                            orderDO.setBeizhu(beizhu);
                             orderDO.setCreateTime(createTime);
                             orderDO.setDanjuNumber(danjuNumber);
                             orderDO.setZhidanPeople(zhidanPeople);
@@ -1394,9 +1425,13 @@ public class StockServiceImpl implements StockService {
                             String retailPrice=laohuajings.getRetailPrice();
                             String unitname=laohuajings.getUnitname();
                             String factory=laohuajings.getProducFactory();
+                            if (factory==null){
+                                factory="";
+                            }
                             String classtype=laohuajings.getClasstype();
 
                             stockDO.setPositionId(positionId);
+                            stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
 
                             stockDO.setGoodsNum(goodsNum);
@@ -1505,6 +1540,7 @@ public class StockServiceImpl implements StockService {
                             orderDO.setUnit(unitname);
                             orderDO.setRetailPrice(retailPrice);
                             orderDO.setPositionId(positionId);
+                            orderDO.setBeizhu(beizhu);
                             orderDO.setCreateTime(createTime);
                             orderDO.setDanjuNumber(danjuNumber);
                             orderDO.setZhidanPeople(zhidanPeople);
@@ -1535,9 +1571,13 @@ public class StockServiceImpl implements StockService {
                             String retailPrice=haocais.getRetailPrice();
                             String unitname=haocais.getUnitname();
                             String factory=haocais.getProducFactory();
+                            if (factory==null){
+                                factory="";
+                            }
                             String classtype=haocais.getClasstype();
 
                             stockDO.setPositionId(positionId);
+                            stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
 
                             stockDO.setGoodsNum(goodsNum);
@@ -1646,6 +1686,7 @@ public class StockServiceImpl implements StockService {
                             orderDO.setUnit(unitname);
                             orderDO.setRetailPrice(retailPrice);
                             orderDO.setPositionId(positionId);
+                            orderDO.setBeizhu(beizhu);
                             orderDO.setCreateTime(createTime);
                             orderDO.setDanjuNumber(danjuNumber);
                             orderDO.setZhidanPeople(zhidanPeople);
@@ -1676,9 +1717,13 @@ public class StockServiceImpl implements StockService {
                             String retailPrice=shiguangs.getRetailPrice();
                             String unitname=shiguangs.getUnitname();
                             String factory=shiguangs.getProducFactory();
+                            if (factory==null){
+                                factory="";
+                            }
                             String classtype=shiguangs.getClasstype();
 
                             stockDO.setPositionId(positionId);
+                            stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
 
                             stockDO.setGoodsNum(goodsNum);
@@ -1787,6 +1832,7 @@ public class StockServiceImpl implements StockService {
                             orderDO.setUnit(unitname);
                             orderDO.setRetailPrice(retailPrice);
                             orderDO.setPositionId(positionId);
+                            orderDO.setBeizhu(beizhu);
                             orderDO.setCreateTime(createTime);
                             orderDO.setDanjuNumber(danjuNumber);
                             orderDO.setZhidanPeople(zhidanPeople);
