@@ -357,7 +357,7 @@
                                 barHtml += "<td >" + "<input  name='batch' type='text' onkeyup='tiaoma(this,this.value)'/>" + "</td>";
                                 barHtml += "<td >" + rows[i].medicinecode + "</td>";
                                 barHtml += "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>";
-                                barHtml += "<td >" + "<input readonly name='produceDay'  type='text' onblur='clickproduceDay()'  class='produceDay'/>" + "</td>";
+                                barHtml += "<td >" + "<input   name='produceDay'  type='text' onblur='clickproduceDay()'  class='produceDay'/>" + "</td>";
                                 barHtml += "<td  >" + "<input    name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'    onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "'/>" + "</td>";
                                 barHtml += "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>";
                                 barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
@@ -457,7 +457,7 @@
                                 barHtml += "<td >" + rows[i].medicinecode + "</td>";
                                 barHtml += "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>";
                                     // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                barHtml += "<td >" + "<input readonly   name='produceDay'  type=\"text\" onclick='clickproduceDay()' class='produceDay'/>" + "</td>";
+                                barHtml += "<td >" + "<input     name='produceDay'  type=\"text\" onclick='clickproduceDay()' class='produceDay'/>" + "</td>";
                                 barHtml += "<td  >" + "<input  id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'    onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "'/>" + "</td>";
                                 barHtml += "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>";
                                 barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
