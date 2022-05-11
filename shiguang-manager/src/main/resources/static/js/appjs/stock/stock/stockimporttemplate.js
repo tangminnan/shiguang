@@ -9,7 +9,7 @@ $.validator.setDefaults({
 });
 function daoru(){
 	var formData = new FormData(document.getElementById("signupForm"));
-	alert(JSON.stringify(formData));
+	// alert(JSON.stringify(formData));
 	$.ajax({
 		cache : true,
 		type : "POST",
