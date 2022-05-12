@@ -203,6 +203,10 @@ public class WeiwaiController {
             String[] adds = weiwai.getAdd().split(",");
             String[] sljs = weiwai.getSlj().split(",");
             String[] zjs = weiwai.getZj().split(",");
+//            String[] jds = weiwai.getJd().split(",");
+//            String[] qulvs = weiwai.getQulv().split(",");
+
+
             String[] yaoqius = weiwai.getYaoqiu().split(",");
             String[] gknames = weiwai.getGkname().split(",");
             String[] hyknums = weiwai.getHyknum().split(",");
@@ -317,11 +321,27 @@ public class WeiwaiController {
                     weiwaiDO.setSlj("");
                 }
                 try {
-                    String zj = zjs[a];
+                    String zj =zjs[a];
                     weiwaiDO.setZj(zj);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     weiwaiDO.setZj("");
                 }
+
+                try {
+                    String jd = "";
+                    weiwaiDO.setJd(jd);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setJd("");
+                }
+
+                try {
+                    String qulv = "";
+                    weiwaiDO.setQulv(qulv);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setQulv("");
+                }
+
+
                 try {
                     String yaoqiu = yaoqius[a];
                     weiwaiDO.setYaoqiu(yaoqiu);
@@ -401,8 +421,10 @@ public class WeiwaiController {
             String[] cyls = weiwai.getCyl().split(",");
             String[] zxs = weiwai.getZx().split(",");
             String[] adds = weiwai.getAdd().split(",");
-            String[] sljs = weiwai.getSlj().split(",");
+//            String[] sljs = weiwai.getSlj().split(",");
             String[] zjs = weiwai.getZj().split(",");
+            String[] jds = weiwai.getJd().split(",");
+            String[] qulvs = weiwai.getQulv().split(",");
             String[] yaoqius = weiwai.getYaoqiu().split(",");
             String[] gknames = weiwai.getGkname().split(",");
             String[] hyknums = weiwai.getHyknum().split(",");
@@ -511,7 +533,7 @@ public class WeiwaiController {
                     weiwaiDO.setAdd("");
                 }
                 try {
-                    String slj = sljs[a];
+                    String slj = "";
                     weiwaiDO.setSlj(slj);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     weiwaiDO.setSlj("");
@@ -521,6 +543,19 @@ public class WeiwaiController {
                     weiwaiDO.setZj(zj);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     weiwaiDO.setZj("");
+                }
+                try {
+                    String jd = jds[a];
+                    weiwaiDO.setJd(jd);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setJd("");
+                }
+
+                try {
+                    String qulv = qulvs[a];
+                    weiwaiDO.setQulv(qulv);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    weiwaiDO.setQulv("");
                 }
                 try {
                     String yaoqiu = yaoqius[a];
