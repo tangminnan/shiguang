@@ -570,7 +570,18 @@
         </Cell>
       </Row>
       <Row ss:Height="20">
-        <Cell ss:StyleID="s105" ss:MergeAcross="1" ss:MergeDown="1"/>
+          <#--<Cell ss:StyleID="s105" ss:MergeAcross="1" ss:MergeDown="1">-->
+              <#--<Data ss:Type="String">${list.viewGoodNameR!''}</Data>-->
+          <#--</Cell>-->
+        <#---->
+
+        <#if list.saleNumberR == list.saleNumberL>
+        <Cell ss:StyleID="s105" ss:MergeAcross="1" ss:MergeDown="1">
+            <Data ss:Type="String">${list.saleNumberR!''}</Data>
+        </Cell>
+        </#if>
+
+
         <#if list.viewGoodNameR == list.viewGoodNameL>
         <Cell ss:StyleID="s106" ss:MergeAcross="2" ss:MergeDown="1">
             <Data ss:Type="String">${list.viewGoodNameR!''}</Data>
