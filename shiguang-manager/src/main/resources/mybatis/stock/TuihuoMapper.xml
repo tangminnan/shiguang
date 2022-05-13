@@ -9,7 +9,7 @@
 		t.`goods_name`,t.`factory`,t.`unit`,t.`goods_count`,t.`count`,t.`goods_code`,t.`style`,t.`retail_price`,t.`stockorder`
 		from stock_tuihuo t
 		left join c_mfrs m on t.mfrsid=m.mfrsnum
-		left join c_position p on t.position_id=t.position_id
+		left join c_position p on t.position_id=p.position_id
 		where t.id = #{value}
 		group by t.id
 	</select>
