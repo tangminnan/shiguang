@@ -79,7 +79,7 @@
 		select ss.`id`,ss.`member_number`,ss.`sale_name`,ss.`sale_number`,ss.`goods_num`,ss.`goods_code`,ss.`eye_type`,ss.`amount_money`,ss.`ptometry_number`,
 		ss.`prime_money`,ss.`mirror_way`,ss.`mirror_time`,ss.`miror_address`,ss.`store_num`,ss.`urgent_status`,ss.`goods_rebate`,
 		ss.`fixed_price`,ss.`moling_money`,ss.`additional_cost`,ss.`process_ask`,ss.`store_name`,ss.`store_describe`,ls.`logistic_status` as logStatus,
-		ss.`store_unit`,ss.`store_count`,ss.`remark`,ss.`give_name`,ss.`peijing_time`,ss.`batch`,ss.`recipelwl_type`,ss.`recipel_type`,
+		ss.`store_unit`,ss.`store_count`,ss.`remark`,ss.`give_name`,ss.`peijing_time`,ss.`batch`,ss.`recipelwl_type`,ss.`recipel_type`,ss.`sale_type`,
 		sl.`settle_date` as settleDate
 		from store_sales ss left join settlement sl on sl.sale_number = ss.sale_number
 		join member m on m.card_number = ss.member_number

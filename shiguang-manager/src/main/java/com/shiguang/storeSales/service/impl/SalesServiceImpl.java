@@ -1,6 +1,8 @@
 package com.shiguang.storeSales.service.impl;
 
+import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.baseinfomation.service.AdditionalService;
+import com.shiguang.baseinfomation.service.DepartmentService;
 import com.shiguang.checkout.service.CostService;
 import com.shiguang.common.utils.GuuidUtil;
 import com.shiguang.common.utils.R;
@@ -128,6 +130,8 @@ public class SalesServiceImpl implements SalesService {
 	private CardService cardService;
 	@Autowired
 	private IntegralService integralService;
+	@Autowired
+	private DepartmentService departmentService;
 	
 	@Override
 	public SalesDO get(Long id){
@@ -1058,153 +1062,505 @@ public class SalesServiceImpl implements SalesService {
 						if ("框镜".equals(salesDO.getEyeType())) {
 							weiwaishujuDO.setJcStyle("框镜订做");
 							//weiwaishujuDO.setSph();
-							if (salesDO.getLeftRight().equals("左")) {
+							if (leftRight[s].equals("左")) {
 								//处方
-								if ("2".equals(salesDO.getOptometrywlName())) {
+								if ("2".equals(salesDO.getChufang())) {
 									if (salesDO.getRecipelwlType() == 1) {
-										weiwaishujuDO.setSph(salesDO.getLeftsph());
-										weiwaishujuDO.setCyl(salesDO.getLeftcyl());
-										weiwaishujuDO.setZx(salesDO.getLeftzx());
-										weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingjy());
-										weiwaishujuDO.setJd(salesDO.getLeftjidijy());
+										if (null == salesDO.getLeftsph()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(salesDO.getLeftsph());
+										}
+										if (null == salesDO.getLeftcyl()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(salesDO.getLeftcyl());
+										}
+										if(null == salesDO.getLeftzx()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(salesDO.getLeftzx());
+										}
+										if (null==salesDO.getLeftsanlingjingjy()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingjy());
+										}
+										if (null == salesDO.getLeftjidijy()){
+											weiwaishujuDO.setJd("");
+										} else {
+											weiwaishujuDO.setJd(salesDO.getLeftjidijy());
+										}
 										weiwaishujuDO.setFartj("");
-										weiwaishujuDO.setNeartj(salesDO.getLeftyuanyongtjjy());
+										if (null == salesDO.getLeftyuanyongtjjy()){
+											weiwaishujuDO.setNeartj("");
+										} else {
+											weiwaishujuDO.setNeartj(salesDO.getLeftyuanyongtjjy());
+										}
 									} else if (salesDO.getRecipelwlType() == 2) {
-										weiwaishujuDO.setSph(salesDO.getLeftsph());
-										weiwaishujuDO.setCyl(salesDO.getLeftcyl());
-										weiwaishujuDO.setZx(salesDO.getLeftzx());
-										weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingyy());
-										weiwaishujuDO.setJd(salesDO.getLeftjidiyy());
+										if (null == salesDO.getLeftsph()){
+											weiwaishujuDO.setSph("");
+										}else {
+											weiwaishujuDO.setSph(salesDO.getLeftsph());
+										}
+										if (null == salesDO.getLeftcyl()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(salesDO.getLeftcyl());
+										}
+										if (null == salesDO.getLeftzx()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(salesDO.getLeftzx());
+										}
+										if (null == salesDO.getLeftsanlingjingyy()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingyy());
+										}
+										if (null == salesDO.getLeftjidiyy()){
+											weiwaishujuDO.setJd("");
+										} else {
+											weiwaishujuDO.setJd(salesDO.getLeftjidiyy());
+										}
 										weiwaishujuDO.setFartj("");
-										weiwaishujuDO.setNeartj(salesDO.getLeftyuanyongtjyy());
+										if (null == salesDO.getLeftyuanyongtjyy()){
+											weiwaishujuDO.setNeartj("");
+										} else {
+											weiwaishujuDO.setNeartj(salesDO.getLeftyuanyongtjyy());
+										}
 									} else if (salesDO.getRecipelwlType() == 3) {
-										weiwaishujuDO.setSph(salesDO.getLeftsph());
-										weiwaishujuDO.setCyl(salesDO.getLeftcyl());
-										weiwaishujuDO.setZx(salesDO.getLeftzx());
-										weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingsg());
-										weiwaishujuDO.setJd(salesDO.getLeftjidisg());
+										if (null == salesDO.getLeftsph()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(salesDO.getLeftsph());
+										}
+										if (null == salesDO.getLeftcyl()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(salesDO.getLeftcyl());
+										}
+										if (null == salesDO.getLeftzx()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(salesDO.getLeftzx());
+										}
+										if (null == salesDO.getLeftsanlingjingsg()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingsg());
+										}
+										if (null== salesDO.getLeftjidisg()){
+											weiwaishujuDO.setJd("");
+										} else{
+											weiwaishujuDO.setJd(salesDO.getLeftjidisg());
+										}
 										weiwaishujuDO.setFartj("");
 										weiwaishujuDO.setNeartj("");
 									} else if (salesDO.getRecipelwlType() == 4) {
-										weiwaishujuDO.setSph(salesDO.getLeftsph());
-										weiwaishujuDO.setCyl(salesDO.getLeftcyl());
-										weiwaishujuDO.setZx(salesDO.getLeftzx());
-										weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingzy());
-										weiwaishujuDO.setJd(salesDO.getLeftjidizy());
+										if (null == salesDO.getLeftsph()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(salesDO.getLeftsph());
+										}
+										if (null == salesDO.getLeftcyl()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(salesDO.getLeftcyl());
+										}
+										if (null == salesDO.getLeftzx()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(salesDO.getLeftzx());
+										}
+										if (null == salesDO.getLeftsanlingjingzy()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(salesDO.getLeftsanlingjingzy());
+										}
+										if (null == salesDO.getLeftjidizy()){
+											weiwaishujuDO.setJd("");
+										} else {
+											weiwaishujuDO.setJd(salesDO.getLeftjidizy());
+										}
 										weiwaishujuDO.setFartj("");
 										weiwaishujuDO.setNeartj("");
 									}
 								} else {
 									if ("远用".equals(salesDO.getRecipelType())) {
 										KjyyDO kjyyDO = kjyyService.chufangall(salesDO.getPtometryNumber(), "1");
-										weiwaishujuDO.setSph(kjyyDO.getKjyySphos());
-										weiwaishujuDO.setCyl(kjyyDO.getKjyyCylos());
-										weiwaishujuDO.setZx(kjyyDO.getKjyyAxialos());
-										weiwaishujuDO.setSlj(kjyyDO.getKjyyPrismos());
-										weiwaishujuDO.setJd(kjyyDO.getKjyyJdos());
-										weiwaishujuDO.setFartj(kjyyDO.getKjyyYytjos());
+										if (null== kjyyDO.getKjyySphos()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(kjyyDO.getKjyySphos());
+										}
+										if (null == kjyyDO.getKjyyCylos()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(kjyyDO.getKjyyCylos());
+										}
+										if (null == kjyyDO.getKjyyAxialos()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(kjyyDO.getKjyyAxialos());
+										}
+										if (null == kjyyDO.getKjyyPrismos()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(kjyyDO.getKjyyPrismos());
+										}
+										if (null == kjyyDO.getKjyyJdos()){
+											weiwaishujuDO.setJd("");
+										} else {
+											weiwaishujuDO.setJd(kjyyDO.getKjyyJdos());
+										}
+										if (null == kjyyDO.getKjyyYytjos()){
+											weiwaishujuDO.setFartj("");
+										} else {
+											weiwaishujuDO.setFartj(kjyyDO.getKjyyYytjos());
+										}
 										weiwaishujuDO.setNeartj("");
 									} else if ("近用".equals(salesDO.getRecipelType())) {
 										KjjyDO kjjyDO = kjjyService.chufangall(salesDO.getPtometryNumber(), "1");
-										weiwaishujuDO.setSph(kjjyDO.getKjjySphos());
-										weiwaishujuDO.setCyl(kjjyDO.getKjjyCylos());
-										weiwaishujuDO.setZx(kjjyDO.getKjjyAxialos());
-										weiwaishujuDO.setSlj(kjjyDO.getKjjyPrismos());
-										weiwaishujuDO.setJd(kjjyDO.getKjjyJdos());
-										weiwaishujuDO.setNeartj(kjjyDO.getKjjyYytjos());
+										if (null == kjjyDO.getKjjySphos()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(kjjyDO.getKjjySphos());
+										}
+										if (null == kjjyDO.getKjjyCylos()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(kjjyDO.getKjjyCylos());
+										}
+										if (null == kjjyDO.getKjjyAxialos()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(kjjyDO.getKjjyAxialos());
+										}
+										if (null == kjjyDO.getKjjyPrismos()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(kjjyDO.getKjjyPrismos());
+										}
+										if (null == kjjyDO.getKjjyJdos()){
+											weiwaishujuDO.setJd("");
+										} else {
+											weiwaishujuDO.setJd(kjjyDO.getKjjyJdos());
+										}
+										if (null == kjjyDO.getKjjyYytjos()){
+											weiwaishujuDO.setNeartj("");
+										} else {
+											weiwaishujuDO.setNeartj(kjjyDO.getKjjyYytjos());
+										}
 										weiwaishujuDO.setFartj("");
 									} else if ("渐进/双光".equals(salesDO.getRecipelType())) {
 										SgjjDO sgjjDO = sgjjService.chufangall(salesDO.getPtometryNumber(), "1");
-										weiwaishujuDO.setSph(sgjjDO.getSgjjSphos());
-										weiwaishujuDO.setCyl(sgjjDO.getSgjjCylos());
-										weiwaishujuDO.setZx(sgjjDO.getSgjjAxialos());
+										if (null == sgjjDO.getSgjjSphos()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(sgjjDO.getSgjjSphos());
+										}
+										if (null == sgjjDO.getSgjjCylos()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(sgjjDO.getSgjjCylos());
+										}
+										if (null == sgjjDO.getSgjjAxialos()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(sgjjDO.getSgjjAxialos());
+										}
+
 										weiwaishujuDO.setSlj("");
 										weiwaishujuDO.setJd("");
-										weiwaishujuDO.setNeartj(sgjjDO.getSgjjJytjos());
-										weiwaishujuDO.setFartj(sgjjDO.getSgjjYytjos());
+										if (null == sgjjDO.getSgjjJytjos()){
+											weiwaishujuDO.setNeartj("");
+										}
+										if (null == sgjjDO.getSgjjYytjos()){
+											weiwaishujuDO.setFartj("");
+										} else {
+											weiwaishujuDO.setFartj(sgjjDO.getSgjjYytjos());
+										}
+
 									} else if ("中用".equals(salesDO.getRecipelType())) {
 										ZyDO zyDO = zyService.chufangall(salesDO.getPtometryNumber(), "1");
-										weiwaishujuDO.setSph(zyDO.getZySphos());
-										weiwaishujuDO.setCyl(zyDO.getZyCylos());
-										weiwaishujuDO.setZx(zyDO.getZyAxialos());
-										weiwaishujuDO.setSlj(zyDO.getZyPrismos());
-										weiwaishujuDO.setJd(zyDO.getZyJdos());
+										if (null == zyDO.getZySphos()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(zyDO.getZySphos());
+										}
+										if (null == zyDO.getZyCylos()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(zyDO.getZyCylos());
+										}
+										if (null == zyDO.getZyAxialos()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(zyDO.getZyAxialos());
+										}
+										if (null == zyDO.getZyPrismos()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(zyDO.getZyPrismos());
+										}
+										if (null == zyDO.getZyJdos()){
+											weiwaishujuDO.setJd("");
+										} else {
+											weiwaishujuDO.setJd(zyDO.getZyJdos());
+										}
 										weiwaishujuDO.setNeartj("");
 										weiwaishujuDO.setFartj("");
 									}
 								}
 								weiwaishujuDO.setTg(salesDO.getLefttg());
-							} else {
+							} else if (leftRight[s].equals("右")){
 								//处方
-								if ("2".equals(salesDO.getOptometrywlName())) {
+								if ("2".equals(salesDO.getChufang())) {
 									if (salesDO.getRecipelwlType() == 1) {
-										weiwaishujuDO.setSph(salesDO.getRightsph());
-										weiwaishujuDO.setCyl(salesDO.getRightcyl());
-										weiwaishujuDO.setZx(salesDO.getRightzx());
-										weiwaishujuDO.setSlj(salesDO.getRightsanlingjingjy());
-										weiwaishujuDO.setJd(salesDO.getRightjidijy());
+										if (null == salesDO.getRightsph()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(salesDO.getRightsph());
+										}
+										if (null == salesDO.getRightcyl()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(salesDO.getRightcyl());
+										}
+										if (null == salesDO.getRightzx()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(salesDO.getRightzx());
+										}
+										if (null == salesDO.getRightsanlingjingjy()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(salesDO.getRightsanlingjingjy());
+										}
+										if (null == salesDO.getRightjidijy()){
+											weiwaishujuDO.setJd("");
+										} else {
+											weiwaishujuDO.setJd(salesDO.getRightjidijy());
+										}
 										weiwaishujuDO.setFartj("");
-										weiwaishujuDO.setNeartj(salesDO.getRightyuanyongtjjy());
+										if (null == salesDO.getRightyuanyongtjjy()){
+											weiwaishujuDO.setNeartj("");
+										} else {
+											weiwaishujuDO.setNeartj(salesDO.getRightyuanyongtjjy());
+										}
 									} else if (salesDO.getRecipelwlType() == 2) {
-										weiwaishujuDO.setSph(salesDO.getRightsph());
-										weiwaishujuDO.setCyl(salesDO.getRightcyl());
-										weiwaishujuDO.setZx(salesDO.getRightzx());
-										weiwaishujuDO.setSlj(salesDO.getRightsanlingjingyy());
-										weiwaishujuDO.setJd(salesDO.getRightjidiyy());
+										if (null == salesDO.getRightsph()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(salesDO.getRightsph());
+										}
+										if (null == salesDO.getRightcyl()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(salesDO.getRightcyl());
+										}
+										if (null == salesDO.getRightzx()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(salesDO.getRightzx());
+										}
+										if (null == salesDO.getRightsanlingjingyy()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(salesDO.getRightsanlingjingyy());
+										}
+										if (null == salesDO.getRightjidiyy()){
+											weiwaishujuDO.setJd("");
+										} else {
+											weiwaishujuDO.setJd(salesDO.getRightjidiyy());
+										}
 										weiwaishujuDO.setFartj("");
-										weiwaishujuDO.setNeartj(salesDO.getRightyuanyongtjyy());
+										if (null == salesDO.getRightyuanyongtjyy()){
+											weiwaishujuDO.setNeartj("");
+										} else {
+											weiwaishujuDO.setNeartj(salesDO.getRightyuanyongtjyy());
+										}
 									} else if (salesDO.getRecipelwlType() == 3) {
-										weiwaishujuDO.setSph(salesDO.getRightsph());
-										weiwaishujuDO.setCyl(salesDO.getRightcyl());
-										weiwaishujuDO.setZx(salesDO.getRightzx());
-										weiwaishujuDO.setSlj(salesDO.getRightsanlingjingsg());
-										weiwaishujuDO.setJd(salesDO.getRightjidisg());
+										if (null == salesDO.getRightsph()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(salesDO.getRightsph());
+										}
+										if (null == salesDO.getRightcyl()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(salesDO.getRightcyl());
+										}
+										if (null == salesDO.getRightzx()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(salesDO.getRightzx());
+										}
+										if (null == salesDO.getRightsanlingjingsg()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(salesDO.getRightsanlingjingsg());
+										}
+										if (null == salesDO.getRightjidisg()){
+											weiwaishujuDO.setJd("");
+										} else {
+											weiwaishujuDO.setJd(salesDO.getRightjidisg());
+										}
 										weiwaishujuDO.setFartj("");
 										weiwaishujuDO.setNeartj("");
 									} else if (salesDO.getRecipelwlType() == 4) {
-										weiwaishujuDO.setSph(salesDO.getRightsph());
-										weiwaishujuDO.setCyl(salesDO.getRightcyl());
-										weiwaishujuDO.setZx(salesDO.getRightzx());
-										weiwaishujuDO.setSlj(salesDO.getRightsanlingjingzy());
-										weiwaishujuDO.setJd(salesDO.getRightjidizy());
+										if (null == salesDO.getRightsph()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(salesDO.getRightsph());
+										}
+										if (null == salesDO.getRightcyl()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(salesDO.getRightcyl());
+										}
+										if (null == salesDO.getRightzx()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(salesDO.getRightzx());
+										}
+										if (null == salesDO.getRightsanlingjingzy()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(salesDO.getRightsanlingjingzy());
+										}
+										if (null == salesDO.getRightjidizy()){
+											weiwaishujuDO.setJd("");
+										} else {
+											weiwaishujuDO.setJd(salesDO.getRightjidizy());
+										}
 										weiwaishujuDO.setFartj("");
 										weiwaishujuDO.setNeartj("");
 									}
 								} else {
 									if ("远用".equals(salesDO.getRecipelType())) {
 										KjyyDO kjyyDO = kjyyService.chufangall(salesDO.getPtometryNumber(), "1");
-										weiwaishujuDO.setSph(kjyyDO.getKjyySphod());
-										weiwaishujuDO.setCyl(kjyyDO.getKjyyCylod());
-										weiwaishujuDO.setZx(kjyyDO.getKjyyAxialod());
-										weiwaishujuDO.setSlj(kjyyDO.getKjyyPrismod());
-										weiwaishujuDO.setJd(kjyyDO.getKjyyJdod());
-										weiwaishujuDO.setFartj(kjyyDO.getKjyyYytjod());
+										if (null== kjyyDO.getKjyySphod()){
+											weiwaishujuDO.setSph("");
+										} else{
+											weiwaishujuDO.setSph(kjyyDO.getKjyySphod());
+										}
+										if (null == kjyyDO.getKjyyCylod()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(kjyyDO.getKjyyCylod());
+										}
+										if (null == kjyyDO.getKjyyAxialod()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(kjyyDO.getKjyyAxialod());
+										}
+										if (null == kjyyDO.getKjyyPrismod()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(kjyyDO.getKjyyPrismod());
+										}
+										if (null == kjyyDO.getKjyyJdod()){
+											weiwaishujuDO.setJd("");
+										} else {
+											weiwaishujuDO.setJd(kjyyDO.getKjyyJdod());
+										}
+										if (null == kjyyDO.getKjyyYytjod()){
+											weiwaishujuDO.setFartj("");
+										} else {
+											weiwaishujuDO.setFartj(kjyyDO.getKjyyYytjod());
+										}
 										weiwaishujuDO.setNeartj("");
 									} else if ("近用".equals(salesDO.getRecipelType())) {
 										KjjyDO kjjyDO = kjjyService.chufangall(salesDO.getPtometryNumber(), "1");
-										weiwaishujuDO.setSph(kjjyDO.getKjjySphod());
-										weiwaishujuDO.setCyl(kjjyDO.getKjjyCylod());
-										weiwaishujuDO.setZx(kjjyDO.getKjjyAxialod());
-										weiwaishujuDO.setSlj(kjjyDO.getKjjyPrismod());
-										weiwaishujuDO.setJd(kjjyDO.getKjjyJdod());
-										weiwaishujuDO.setNeartj(kjjyDO.getKjjyYytjod());
+										if (null == kjjyDO.getKjjySphod()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(kjjyDO.getKjjySphod());
+										}
+										if (null == kjjyDO.getKjjyCylod()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(kjjyDO.getKjjyCylod());
+										}
+										if (null == kjjyDO.getKjjyAxialod()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(kjjyDO.getKjjyAxialod());
+										}
+										if (null == kjjyDO.getKjjyPrismod()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(kjjyDO.getKjjyPrismod());
+										}
+										if (null == kjjyDO.getKjjyJdod()){
+											weiwaishujuDO.setJd("");
+										} else {
+											weiwaishujuDO.setJd(kjjyDO.getKjjyJdod());
+										}
+										if(null == kjjyDO.getKjjyYytjod()){
+											weiwaishujuDO.setNeartj("");
+										} else {
+											weiwaishujuDO.setNeartj(kjjyDO.getKjjyYytjod());
+										}
 										weiwaishujuDO.setFartj("");
 									} else if ("渐进/双光".equals(salesDO.getRecipelType())) {
 										SgjjDO sgjjDO = sgjjService.chufangall(salesDO.getPtometryNumber(), "1");
-										weiwaishujuDO.setSph(sgjjDO.getSgjjSphod());
-										weiwaishujuDO.setCyl(sgjjDO.getSgjjCylod());
-										weiwaishujuDO.setZx(sgjjDO.getSgjjAxialod());
+										if (null == sgjjDO.getSgjjSphod()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(sgjjDO.getSgjjSphod());
+										}
+										if (null == sgjjDO.getSgjjCylod()){
+											weiwaishujuDO.setCyl("");
+										} else {
+											weiwaishujuDO.setCyl(sgjjDO.getSgjjCylod());
+										}
+										if (null == sgjjDO.getSgjjAxialod()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(sgjjDO.getSgjjAxialod());
+										}
 										weiwaishujuDO.setSlj("");
 										weiwaishujuDO.setJd("");
-										weiwaishujuDO.setNeartj(sgjjDO.getSgjjJytjod());
-										weiwaishujuDO.setFartj(sgjjDO.getSgjjYytjod());
+										if (null == sgjjDO.getSgjjJytjod()){
+											weiwaishujuDO.setNeartj("");
+										} else {
+											weiwaishujuDO.setNeartj(sgjjDO.getSgjjJytjod());
+										}
+										if (null == sgjjDO.getSgjjYytjod()){
+											weiwaishujuDO.setFartj("");
+										} else {
+											weiwaishujuDO.setFartj(sgjjDO.getSgjjYytjod());
+										}
 									} else if ("中用".equals(salesDO.getRecipelType())) {
 										ZyDO zyDO = zyService.chufangall(salesDO.getPtometryNumber(), "1");
-										weiwaishujuDO.setSph(zyDO.getZySphod());
-										weiwaishujuDO.setCyl(zyDO.getZyCylod());
-										weiwaishujuDO.setZx(zyDO.getZyAxialod());
-										weiwaishujuDO.setSlj(zyDO.getZyPrismod());
-										weiwaishujuDO.setJd(zyDO.getZyJdod());
+										if (null == zyDO.getZySphod()){
+											weiwaishujuDO.setSph("");
+										} else {
+											weiwaishujuDO.setSph(zyDO.getZySphod());
+										}
+										if (null == zyDO.getZyCylod()){
+											weiwaishujuDO.setCyl(zyDO.getZyCylod());
+										}else {
+											weiwaishujuDO.setCyl(zyDO.getZyCylod());
+										}
+										if (null == zyDO.getZyAxialod()){
+											weiwaishujuDO.setZx("");
+										} else {
+											weiwaishujuDO.setZx(zyDO.getZyAxialod());
+										}
+										if (null == zyDO.getZyPrismod()){
+											weiwaishujuDO.setSlj("");
+										} else {
+											weiwaishujuDO.setSlj(zyDO.getZyPrismod());
+										}
+										if (null == zyDO.getZyJdod()){
+											weiwaishujuDO.setJd("");
+										} else {
+											weiwaishujuDO.setJd(zyDO.getZyJdod());
+										}
 										weiwaishujuDO.setNeartj("");
 										weiwaishujuDO.setFartj("");
 									}
@@ -1231,7 +1587,12 @@ public class SalesServiceImpl implements SalesService {
 							weiwaishujuDO.setName(goodsName[s]);
 							weiwaishujuDO.setLeftRightYx(leftRight[s]);
 							weiwaishujuDO.setCountyx(goodsCount[s]);
-							weiwaishujuDO.setYaoqiuyx(salesDO.getProcessAsk());
+							if (null == salesDO.getProcessAsk()){
+								weiwaishujuDO.setYaoqiuyx("");
+							} else {
+								weiwaishujuDO.setYaoqiuyx(salesDO.getProcessAsk());
+							}
+
 						}
 						weiwaishujuService.save(weiwaishujuDO);
 						WeiwaiDO weiwaiDO = new WeiwaiDO();
@@ -1260,13 +1621,44 @@ public class SalesServiceImpl implements SalesService {
 						weiwaiDO.setCode(goodsStr[s]);
 						weiwaiDO.setName(goodsName[s]);
 						weiwaiDO.setStyle("委外订单");
-						weiwaiDO.setRl(classType[s]);
+						weiwaiDO.setRl(leftRight[s]);
 						weiwaiDO.setCount(goodsCount[s]);
 						weiwaiDO.setSph(weiwaishujuDO.getSph());
 						weiwaiDO.setCyl(weiwaishujuDO.getCyl());
 						weiwaiDO.setZx(weiwaishujuDO.getZx());
 						weiwaiDO.setFartj(weiwaishujuDO.getFartj());
 						weiwaiDO.setNeartj(weiwaishujuDO.getNeartj());
+						weiwaiDO.setTg(weiwaishujuDO.getTg());
+						if (null == weiwaishujuDO.getAdd()){
+							weiwaiDO.setAdd("");
+						} else {
+							weiwaiDO.setAdd(weiwaishujuDO.getAdd());
+						}
+						if (null == weiwaishujuDO.getSlj()){
+							weiwaiDO.setSlj("");
+						} else {
+							weiwaiDO.setSlj(weiwaishujuDO.getSlj());
+						}
+						if (null == weiwaishujuDO.getZj()){
+							weiwaiDO.setZj("");
+						} else {
+							weiwaiDO.setZj(weiwaishujuDO.getZj());
+						}
+						if (null == salesDO.getSaleremark()){
+							weiwaiDO.setYaoqiu("");
+						} else {
+							weiwaiDO.setYaoqiu(salesDO.getSaleremark());
+						}
+						if (null == weiwaishujuDO.getJd()){
+							weiwaiDO.setJd("");
+						} else {
+							weiwaiDO.setJd(weiwaishujuDO.getJd());
+						}
+						if (null == weiwaishujuDO.getQulv()){
+							weiwaiDO.setQulv("");
+						} else {
+							weiwaiDO.setQulv(weiwaishujuDO.getQulv());
+						}
 						weiwaiDO.setGkname(weiwaishujuDO.getGkname());
 						weiwaiDO.setHyknum(weiwaishujuDO.getHyknum());
 						weiwaiDO.setPhone(weiwaishujuDO.getPhone());
@@ -1279,6 +1671,10 @@ public class SalesServiceImpl implements SalesService {
 						weiwaiDO.setCompanyName(ShiroUtils.getUser().getCompany());
 						weiwaiDO.setDepartname(ShiroUtils.getUser().getStore());
 						weiwaiDO.setViewGoodName(jpdzDO.getViewGoodName());
+						DepartmentDO departmentDO = departmentService.getDepartName(positionDO.getDepartNumber());
+						weiwaiDO.setShouhuoPeople(departmentDO.getPersonCharge());
+						weiwaiDO.setShouhuoPhone(departmentDO.getDepartTel());
+						weiwaiDO.setShouhuoAddress(departmentDO.getDepartAddress());
 						weiwaiService.save(weiwaiDO);
 					}
 				}

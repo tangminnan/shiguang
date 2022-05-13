@@ -261,6 +261,7 @@ function batchSelect() {
     var rowsLeft = window.localStorage.getItem("rowsLeft");
     if ('0' == jingpianType){
         window.localStorage.setItem("rowsRight",JSON.stringify(rows))
+        $("#goodsNum").val(rows[0].goodsNum);
         if (null == rowsLeft){
             rightflag = 1;
             jp = 1;

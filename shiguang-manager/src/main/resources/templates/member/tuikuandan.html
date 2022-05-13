@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>退款单打印</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
+<body>
+<div class="Print" style="width: 50%;">
+	<h3>退款单</h3>
+	<ul class="ul3">
+		<input id="cost" th:value="${settlementDO.additionalCost}" type="hidden">
+		<input id="storeName" th:value="${settlementDO.storeName}" type="hidden">
+		<input id="unit" th:value="${settlementDO.unit}" type="hidden">
+		<input id="batchs" th:value="${settlementDO.batch}" type="hidden">
+		<input id="storeUnit" th:value="${settlementDO.storeUnit}" type="hidden">
+		<input id="storeCount" th:value="${settlementDO.storeCount}" type="hidden">
+		<li>配镜单号：<span th:text="${settlementDO.saleNumber}"></span></li>
+		<li>验配中心：<span th:text="${companyName}"></span></li>
+		<li>配镜日期：<span th:text="${settlementDO.peijingDate}"></span></li>
+	</ul>
+	<ul class="ul5">
+		<li>会员卡号：<span th:text="${settlementDO.memberNumber}"></span></li>
+		<li>姓名：<span th:text="${settlementDO.memberName}"></span></li>
+		<li>性别：<span th:text="${settlementDO.sexx}"></span></li>
+		<li>年龄：<span th:text="${settlementDO.age}"></span></li>
+		<li>联系电话：<span th:text="${settlementDO.phone1}"></span></li>
+	</ul>
+	<table class="Htab1" cellspacing="0" cellpadding="0">
+		<tr class="thead">
+			<td></td>
+			<td>球镜</td>
+			<td>柱镜</td>
+			<td>轴向</td>
+			<td>远用矫视</td>
+			<td>近用矫视</td>
+			<td>远用瞳距</td>
+			<td>近用瞳距</td>
+			<td>瞳高</td>
+			<td>ADD</td>
+			<td>棱镜</td>
+			<td>基地</td>
+			<td>处方类型</td>
+		</tr>
+		<tr>
+			<td>R</td>
+			<td><span th:text="${conclusion.rightsph}"></span></td>
+			<td><span th:text="${conclusion.rightcyl}"></span></td>
+			<td><span th:text="${conclusion.rightzx}"></span></td>
+			<td><span th:text="${conclusion.rightva}"></span></td>
+			<td><span th:text="${conclusion.rightjyva}"></span></td>
+			<td><span th:text="${conclusion.rightyytj}"></span></td>
+			<td><span th:text="${conclusion.rightjytj}"></span></td>
+			<td><span th:text="${settlementDO.righttg}"></span></td>
+			<td><span th:text="${conclusion.rightAdd}"></span></td>
+			<td><span th:text="${conclusion.rightprism}"></span></td>
+			<td><span th:text="${conclusion.rightjd}"></span></td>
+			<td><span th:text="${settlementDO.recipelType}"></span></td>
+		</tr>
+		<tr>
+			<td>L</td>
+			<td><span th:text="${conclusion.leftsph}"></span></td>
+			<td><span th:text="${conclusion.leftcyl}"></span></td>
+			<td><span th:text="${conclusion.leftzx}"></span></td>
+			<td><span th:text="${conclusion.leftva}"></span></td>
+			<td><span th:text="${conclusion.leftjyva}"></span></td>
+			<td><span th:text="${conclusion.leftyytj}"></span></td>
+			<td><span th:text="${conclusion.leftjytj}"></span></td>
+			<td><span th:text="${settlementDO.lefttg}"></span></td>
+			<td><span th:text="${conclusion.leftAdd}"></span></td>
+			<td><span th:text="${conclusion.leftprism}"></span></td>
+			<td><span th:text="${conclusion.leftjd}"></span></td>
+			<td></td>
+		</tr>
+	</table>
+	<table class="Htab2" cellpadding="0" cellspacing="0" id="tbodys">
+		<tr class="thead">
+			<td>商品名称</td>
+			<td>批号</td>
+			<td>单位</td>
+			<td>数量</td>
+			<td>原价金额</td>
+		</tr>
+		<!--<tr>-->
+			<!--<td id="goodsName"></td>-->
+			<!--<td><span id="batch"></span></td>-->
+			<!--<td><span id="unitName"></span></td>-->
+			<!--<td><span id="count"></span></td>-->
+			<!--<td><span id="price"></span></td>-->
+		<!--</tr>-->
+		<!--<tr>-->
+			<!--<td>THEREFOPO蒸汽热敷眼罩（10片/盒） </td>-->
+			<!--<td>100</td>-->
+			<!--<td>盒</td>-->
+			<!--<td>2</td>-->
+			<!--<td>598.00</td>-->
+		<!--</tr>-->
+		<!--<tr>-->
+			<!--<td>R—蔡司.5睐光D（标准通道/短通道）钻立方铂金膜渐进定制镜片</td>-->
+			<!--<td>100</td>-->
+			<!--<td>片</td>-->
+			<!--<td>2</td>-->
+			<!--<td>598.00</td>-->
+		<!--</tr>-->
+	</table>
+	<table class="Htab3" cellpadding="0" cellspacing="0">
+		<tr class="tr1" id="fujia">
+			<td></td>
+			<td>数量</td>
+			<td>单价</td>
+			<td rowspan="4" class="td1">
+				<!--<p>原价合计：<b><span th:text="${settlementDO.optometryName}"></span></b> &nbsp;&nbsp; 折扣金额：<b>408.00</b></p>-->
+				<p>原价合计：<b>-<span th:text="${settlementDO.primeMoney}"></span></b> &nbsp;&nbsp; </p>
+				<p>付款方式：<b>-<span th:text="${payModels}"></span></b></p>
+				<p>套餐：<span th:text="${settlementDO.taocanName}"></span></p>
+				<p>实收合计：<b>-<span th:text="${payMoney}"></span></b> </p>
+			</td>
+		</tr>
+		<tr>
+			<td>附加费用：<span th:text="${additionalCostList}"></span></td>
+			<td><span th:text="${countSum}"></span></td>
+			<td><span th:text="${priceSum}"></span></td>
+		</tr>
+		<tr>
+			<td>加工要求：<span th:text="${processList}"></span></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>销售备注：<span th:text="${settlementDO.saleremark}"></span></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="tr_last">
+			<td>视光师：<span th:text="${optometryName}"></span></td>
+			<td>验光师：<span th:text="${optometryName}"></span></td>
+			<td colspan="2">收银员：<span th:text="${settlementDO.saleName}"></span></td>
+		</tr>
+		<tr>
+			<td>取镜地点：<span th:text="${departmentDO.departAddress}"></span></td>
+			<td>门店电话：<span th:text="${departmentDO.departTel}"></span></td>
+			<td colspan="2">邮寄地址：<span th:text="${address}"></span></td>
+		</tr>
+	</table>
+
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript">
+    $().ready(function(){
+        var htmlt="";
+        var cost = $("#cost").val();
+        var storeName = $("#storeName").val();
+        var storeNamearray = storeName.split(",");
+        var unit = $("#unit").val();
+        var unitArray = unit.split(",");
+        var batch = $("#batchs").val();
+        var batchArray = batch.split(",");
+        var storeUnit = $("#storeUnit").val();
+        var storeUnitArray = storeUnit.split(",");
+        var storeCount = $("#storeCount").val();
+        var storeCountArray = storeCount.split(",");
+        for (var i=0;i<storeNamearray.length;i++){
+            htmlt = "<tr><td>"+storeNamearray[i]+"</td>";
+            if ('' == batchArray){
+                htmlt += "<td></td>";
+            } else if (null == batchArray[i]){
+                htmlt += "<td></td>";
+            } else if ('null' == batchArray[i]){
+                htmlt += "<td></td>";
+            } else if (undefined == batchArray[i]){
+                htmlt += "<td></td>";
+            } else if (null == batch){
+                htmlt += "<td></td>";
+            } else {
+                htmlt += "<td>"+batchArray[i]+"</td>";
+            }
+            if ('' == unitArray){
+                htmlt += "<td></td>";
+            } else if (null == unitArray[i]){
+                htmlt += "<td></td>";
+            } else if ('null' == unitArray[i]){
+                htmlt += "<td></td>";
+            } else if (undefined == unitArray[i]){
+                htmlt += "<td></td>";
+            } else {
+                htmlt += "<td>"+unitArray[i]+"</td>";
+            }
+            if ('' == storeCountArray){
+                htmlt += "<td></td>";
+            } else {
+                htmlt += "<td>-"+storeCountArray[i]+"</td>";
+            }
+            if ('' == storeUnitArray){
+                htmlt += "<td></td>";
+            } else {
+                htmlt += "<td>-"+storeUnitArray[i]+"</td>";
+            }
+            htmlt += "</tr>";
+            $("#tbodys").append(htmlt)
+		}
+    });
+</script>
+<script th:inline="javascript">
+	var jaigongList = [[${processList}]];
+	//ar html="";
+    //var str2  = str1.replace(/,/g,'<br/>');//替换所有的换行符
+	for (var i=0;i<jaigongList.length;i++){
+
+        // html = "<tr><td>"+jaigongList[i].name()+"</td><td></td><td></td></tr>";
+        // html += "<tr><td>加工要求："+jaigongList[i]+"</td><td></td><td></td></tr>";
+        //$("#fujia").append(html);
+	}
+</script>
+</body>
+</html>
