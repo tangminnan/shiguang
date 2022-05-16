@@ -908,11 +908,14 @@ public String Brand(String settleDateStart, String settleDateEnd,
         for (int i=0;i<namelist.size();i++){
             count=1;
             for (int j=i+1;j<namelist.size();j++){
-                if (namelist.get(i).equals(namelist.get(j))){
-                    count++;
-                    namelist.remove(j);
-                    j--;
+                if (namelist.get(i)!= null && namelist.get(j) !=null){
+                    if (namelist.get(i).equals(namelist.get(j))){
+                        count++;
+                        namelist.remove(j);
+                        j--;
+                    }
                 }
+
             }
             String  doctors= (String) namelist.get(i);
             Integer counts= count;
@@ -953,10 +956,12 @@ public String Brand(String settleDateStart, String settleDateEnd,
         for (int i=0;i<namelist.size();i++){
             count=1;
             for (int j=i+1;j<namelist.size();j++){
-                if (namelist.get(i).equals(namelist.get(j))){
-                    count++;
-                    namelist.remove(j);
-                    j--;
+                if (namelist.get(i)!= null && namelist.get(j) !=null){
+                    if (namelist.get(i).equals(namelist.get(j))){
+                        count++;
+                        namelist.remove(j);
+                        j--;
+                    }
                 }
             }
             String  doctors= (String) namelist.get(i);
