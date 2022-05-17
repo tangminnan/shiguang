@@ -360,7 +360,11 @@ public class SalesServiceImpl implements SalesService {
 				kjjyDO.setPtometryNumber(salesDO.getPtometryNumber());
 				kjjyDO.setCardNumber(salesDO.getMemberNumber());
 				kjjyDO.setSaleNumber(salesDO.getSaleNumber());
-				kjjyDO.setKjjyDoctor("无");
+				if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+					kjjyDO.setKjjyDoctor("无");
+				} else {
+					kjjyDO.setKjjyDoctor("无[济南]");
+				}
 				kjjyDO.setCreateTime(new Date());
 				kjjyDO.setKjjyPrescriptionType(salesDO.getRecipelwlType().toString());
 				kjjyDO.setKjjyOptometryName(salesDO.getOptometrywlName());
@@ -403,7 +407,11 @@ public class SalesServiceImpl implements SalesService {
 				kjyyDO.setNewOld(salesDO.getNewOld());
 				kjyyDO.setPtometryNumber(salesDO.getPtometryNumber());
 				kjyyDO.setCardNumber(salesDO.getMemberNumber());
-				kjyyDO.setKjyyDoctor("无");
+				if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+					kjyyDO.setKjyyDoctor("无");
+				} else {
+					kjyyDO.setKjyyDoctor("无[济南]");
+				}
 				kjyyDO.setCreateTime(new Date());
 				kjyyDO.setSaleNumber(salesDO.getSaleNumber());
 				kjyyDO.setKjyyPrescriptionType(salesDO.getRecipelwlType().toString());
@@ -449,7 +457,11 @@ public class SalesServiceImpl implements SalesService {
 				sgjjDO.setPtometryNumber(salesDO.getPtometryNumber());
 				sgjjDO.setCardNumber(salesDO.getMemberNumber());
 				sgjjDO.setSaleNumber(salesDO.getSaleNumber());
-				sgjjDO.setSgjjDoctor("无");
+				if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+					sgjjDO.setSgjjDoctor("无");
+				} else {
+					sgjjDO.setSgjjDoctor("无[济南]");
+				}
 				sgjjDO.setCreateTime(new Date());
 				sgjjDO.setSgjjPrescriptionType(salesDO.getRecipelwlType().toString());
 				sgjjDO.setSgjjOptometryName(salesDO.getOptometrywlName());
@@ -494,7 +506,11 @@ public class SalesServiceImpl implements SalesService {
 				zyDO.setPtometryNumber(salesDO.getPtometryNumber());
 				zyDO.setCardNumber(salesDO.getMemberNumber());
 				zyDO.setSaleNumber(salesDO.getSaleNumber());
-				zyDO.setZyDoctor("无");
+				if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+					zyDO.setZyDoctor("无");
+				} else {
+					zyDO.setZyDoctor("无[济南]");
+				}
 				zyDO.setCreateTime(new Date());
 				zyDO.setZyPrescriptionType(salesDO.getRecipelwlType().toString());
 				zyDO.setZyOptometryName(salesDO.getOptometrywlName());
@@ -537,7 +553,11 @@ public class SalesServiceImpl implements SalesService {
 				rxjmjcjDO.setNewOld(salesDO.getNewOld());
 				rxjmjcjDO.setPtometryNumber(salesDO.getPtometryNumber());
 				rxjmjcjDO.setCardNumber(salesDO.getMemberNumber());
-				rxjmjcjDO.setRxDoctor("无");
+				if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+					rxjmjcjDO.setRxDoctor("无");
+				} else {
+					rxjmjcjDO.setRxDoctor("无[济南]");
+				}
 				rxjmjcjDO.setCreateTime(new Date());
 				rxjmjcjDO.setSaleNumber(salesDO.getSaleNumber());
 				rxjmjcjDO.setRxPrescriptionType(salesDO.getRecipelwlType().toString());
@@ -575,7 +595,11 @@ public class SalesServiceImpl implements SalesService {
 				sjxlDO.setNewOld(salesDO.getNewOld());
 				sjxlDO.setPtometryNumber(salesDO.getPtometryNumber());
 				sjxlDO.setCardNumber(salesDO.getMemberNumber());
-				sjxlDO.setSjxlDoctor("无");
+				if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+					sjxlDO.setSjxlDoctor("无");
+				} else {
+					sjxlDO.setSjxlDoctor("无[济南]");
+				}
 				sjxlDO.setCreateTime(new Date());
 				sjxlDO.setSaleNumber(salesDO.getSaleNumber());
 				sjxlDO.setSjxlPrescriptionType(salesDO.getRecipelwlType().toString());
@@ -620,7 +644,11 @@ public class SalesServiceImpl implements SalesService {
 				vstDO.setCardNumber(salesDO.getMemberNumber());
 				vstDO.setSaleNumber(salesDO.getSaleNumber());
 				vstDO.setVstSphod(salesDO.getRightQJvst());
-				vstDO.setVstDoctor("无");
+				if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+					vstDO.setVstDoctor("无");
+				} else {
+					vstDO.setVstDoctor("无[济南]");
+				}
 				vstDO.setCreateTime(new Date());
 				vstDO.setVstSphos(salesDO.getLeftQJvst());
 				if ("".equals(salesDO.getRightZJvst()) || null == salesDO.getRightZJvst()){
@@ -671,7 +699,11 @@ public class SalesServiceImpl implements SalesService {
 				crtDO.setPtometryNumber(salesDO.getPtometryNumber());
 				crtDO.setCardNumber(salesDO.getMemberNumber());
 				crtDO.setCrtOptometryName(salesDO.getOptometrywlName());
-				crtDO.setCrtDoctor("无");
+				if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+					crtDO.setCrtDoctor("无");
+				} else {
+					crtDO.setCrtDoctor("无[济南]");
+				}
 				crtDO.setCreateTime(new Date());
 				crtDO.setCrtPrescriptionType(salesDO.getRecipelwlType().toString());
 				crtDO.setStatus("1");
@@ -721,7 +753,11 @@ public class SalesServiceImpl implements SalesService {
 				rgpDO.setNewOld(salesDO.getNewOld());
 				rgpDO.setPtometryNumber(salesDO.getPtometryNumber());
 				rgpDO.setCardNumber(salesDO.getMemberNumber());
-				rgpDO.setRgpDoctor("无");
+				if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+					rgpDO.setRgpDoctor("无");
+				} else {
+					rgpDO.setRgpDoctor("无[济南]");
+				}
 				rgpDO.setCreateTime(new Date());
 				rgpDO.setRgpPrescriptionType(salesDO.getRecipelwlType().toString());
 				rgpDO.setRgpOptometryName(salesDO.getOptometrywlName());
@@ -754,7 +790,11 @@ public class SalesServiceImpl implements SalesService {
 				yaopinDO.setNewOld(salesDO.getNewOld());
 				yaopinDO.setPtometryNumber(salesDO.getPtometryNumber());
 				yaopinDO.setCardNumber(salesDO.getMemberNumber());
-				yaopinDO.setYpDoctor("无");
+				if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+					yaopinDO.setYpDoctor("无");
+				} else {
+					yaopinDO.setYpDoctor("无[济南]");
+				}
 				yaopinDO.setCreateTime(new Date());
 				yaopinDO.setYpPrescriptionType(salesDO.getRecipelwlType().toString());
 				yaopinDO.setYpOptometryName(salesDO.getOptometrywlName());

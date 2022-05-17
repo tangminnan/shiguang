@@ -36,6 +36,8 @@ public interface WeiwaiDao {
 	int remove(Long id);
 	int removes(WeiwaiDO weiwaiDO);
 
+	int removeSale(String saleNumber);
+
 	int batchRemove(Long[] ids);
 
 

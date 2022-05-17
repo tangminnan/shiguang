@@ -23,6 +23,8 @@ import com.shiguang.settlement.service.DrawbackService;
 import com.shiguang.settlement.service.SettlementService;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
+import com.shiguang.stock.service.WeiwaiService;
+import com.shiguang.stock.service.WeiwaishujuService;
 import com.shiguang.storeCard.domain.CardDO;
 import com.shiguang.storeCard.service.CardService;
 import com.shiguang.storeSales.domain.SalesDO;
@@ -60,6 +62,10 @@ public class DrawbackServiceImpl implements DrawbackService {
 	private CardService cardService;
 	@Autowired
 	private CostService costService;
+	@Autowired
+	private WeiwaiService weiwaiService;
+	@Autowired
+	private WeiwaishujuService weiwaishujuService;
 	
 	@Override
 	public DrawbackDO get(Long id){
@@ -359,7 +365,9 @@ public class DrawbackServiceImpl implements DrawbackService {
 
 			}
 		}
-
+		String saleNumber = drawbackDO.getSaleNumber();
+		weiwaishujuService.removes(saleNumber);
+		weiwaiService.removeSale(saleNumber);
 		if(this.save(drawbackDO)>0){
 			return R.ok("退款成功");
 		}

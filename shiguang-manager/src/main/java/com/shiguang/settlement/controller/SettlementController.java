@@ -963,6 +963,11 @@ public class SettlementController {
 						}else {
 							conclusion.setRightjytj("");
 						}
+						if (null != conclusion1.getRightAdd() && !"".equals(conclusion1.getRightAdd())){
+							conclusion.setRightAdd(conclusion1.getRightAdd());
+						} else {
+							conclusion.setRightAdd("");
+						}
 						conclusion.setRighttg(conclusion1.getRighttg());
 						conclusion.setRightprism(conclusion1.getRightprism());
 						conclusion.setRightjd(conclusion1.getRightjd());
@@ -992,6 +997,11 @@ public class SettlementController {
 							conclusion.setLeftjytj(conclusion1.getLeftjytj());
 						}else {
 							conclusion.setLeftjytj("");
+						}
+						if (null != conclusion1.getLeftAdd() && !"".equals(conclusion1.getLeftAdd())){
+							conclusion.setLeftAdd(conclusion1.getLeftAdd());
+						} else {
+							conclusion.setLeftAdd("");
 						}
 						conclusion.setLefttg(conclusion1.getLefttg());
 						conclusion.setLeftprism(conclusion1.getLeftprism());

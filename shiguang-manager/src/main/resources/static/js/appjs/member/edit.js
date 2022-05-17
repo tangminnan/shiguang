@@ -104,13 +104,7 @@ function validateRule() {
 		messages : {
 			name : {
 				required : icon + "请输入名字"
-			},
-            identityType : {
-                required : icon + "请选择证件类型"
-            },
-            identityId : {
-                required : icon + "请输入证件号码"
-            }
+			}
 		}
 	})
 }

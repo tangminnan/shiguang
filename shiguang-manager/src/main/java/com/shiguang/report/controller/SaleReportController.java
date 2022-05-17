@@ -44,6 +44,10 @@ public class SaleReportController {
         Map<String, Object> map = new HashMap<>();
         map.put("departType","销售门店");
         map.put("state",1);
+        if (null != ShiroUtils.getUser().getStoreNum()){
+            map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+        }
+        map.put("companyId",ShiroUtils.getUser().getCompanyId());
         List<DepartmentDO> departmentDOList = departmentService.list(map);
         model.addAttribute("departmentDOList",departmentDOList);
         return "saleReport/saleReport";
@@ -224,6 +228,8 @@ public class SaleReportController {
             maps.put("departNumber",departNumber);
         } else {
             query.put("departType","销售门店");
+            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
+            maps.put("departNumber",ShiroUtils.getUser().getStoreNum());
         }
 //        if (!"".equals(saleNum)){
 //            query.put("saleNum",saleNum);
