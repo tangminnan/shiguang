@@ -38,4 +38,7 @@ public interface MfrsService {
 
     //删除修改状态
     int updateState(MfrsDO mfrs);
+
+    List<MfrsDO> getweiwailist(Map<String, Object> map);
+
 }

@@ -75,4 +75,9 @@ public class MfrsServiceImpl implements MfrsService {
     public int updateState(MfrsDO mfrs) {
         return mfrsDao.updateState(mfrs);
     }
+
+    @Override
+    public List<MfrsDO> getweiwailist(Map<String, Object> map) {
+        return mfrsDao.getweiwailist(map);
+    }
 }

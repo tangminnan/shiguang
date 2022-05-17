@@ -8,14 +8,14 @@
 		`payid`,`invoiceid`,`creditcode`,`creditcodeday`,`medicinecode`,`medicinecodeday`,`productscode`,`productscodeday`,`remarks`,`xsstate`,
 		`state`,`payday` from c_mfrs where mfrsid = #{value}
 	</select>
-    <!--//判断是否存在制造商代码-->
+
     <select id="haveNum" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select `mfrsid`,`mfrsnum`,`mfrsname`,`mfrscontacts`,`mfrsrealname`,`mfrstelephone`,`mfrsphone`,`goodsid`,`mfrsfax`,`mfrsaddress`,
         `payid`,`invoiceid`,`creditcode`,`creditcodeday`,`medicinecode`,`medicinecodeday`,`productscode`,`productscodeday`,
         `remarks`,`xsstate`,`state`,`payday`
          from c_mfrs WHERE mfrsnum = #{mfrsnum} and state='1' order by mfrsid
     </select>
-    <!--//【制造商页面List】-->
+
     <select id="list" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select
         m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsrealname`,m.`mfrstelephone`,m.`mfrsphone`,m.`goodsid`,m.`mfrsfax`,m.`mfrsaddress`,
@@ -58,7 +58,6 @@
         </where>
     </select>
 
-    <!--制造商查询-->
     <select id="findMfrs" resultType="com.shiguang.mfrs.domain.MfrsDO">
         select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
         from c_mfrs m
@@ -188,9 +187,37 @@
         </foreach>
     </delete>
 
-    <!--删除状态修改-->
+
     <update id="updateState" parameterType="com.shiguang.mfrs.domain.MfrsDO">
     update c_mfrs set `state` = #{state} where mfrsid = #{mfrsid}
     </update>
 
+
+    <select id="getweiwailist" resultType="com.shiguang.mfrs.domain.MfrsDO">
+        select
+        m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsrealname`,m.`mfrstelephone`,m.`mfrsphone`,m.`goodsid`,m.`mfrsfax`,m.`mfrsaddress`,
+        m.`payid`,m.`invoiceid`,m.`creditcode`,m.`creditcodeday`,m.`medicinecode`,m.`medicinecodeday`,m.`productscode`,m.`productscodeday`,m.`remarks`,
+        m.`xsstate`,m.`state`,m.`payday`
+        from c_mfrs m
+        left join c_goods g on m.goodsid=g.goodsid
+        <where>
+            <if test="mfrsnum != null and mfrsnum != ''">and m.mfrsnum LIKE concat(concat('%', #{mfrsnum}),'%')</if>
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname LIKE concat(concat('%', #{mfrsname}),'%')</if>
+            <if test="goodsid != null and goodsid != ''">and FIND_IN_SET (#{goodsid},m.goodsid)</if>
+            <if test="xsstate != null and xsstate != ''">and m.xsstate = #{xsstate}</if>
+            <if test="invoiceid != null and invoiceid != ''">and m.invoiceid = #{invoiceid}</if>
+            and m.state =1
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                group by m.mfrsid order by  m.xsstate asc ,m.mfrsid
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 </mapper>

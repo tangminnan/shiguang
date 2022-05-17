@@ -81,7 +81,7 @@
             <if test="pstime != null and pstime != ''"> and s.pstime = #{pstime} </if>
             <if test="stockorder != null and stockorder != ''"> and s.stockorder = #{stockorder} </if>
             <if test="companyName != null and companyName != ''"> and s.company_name = #{companyName} </if>
-            <if test="departname != null and departname != ''"> and s.departname = #{departname} </if>
+            <if test="departname != null and departname != ''"> and s.departname LIKE concat(concat('%', #{departname}),'%')</if>
             <if test="fartj != null and fartj != ''"> and s.fartj = #{fartj} </if>
             <if test="neartj != null and neartj != ''"> and s.neartj = #{neartj} </if>
             <if test="tg != null and tg != ''"> and s.tg = #{tg} </if>
