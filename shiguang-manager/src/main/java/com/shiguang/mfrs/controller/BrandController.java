@@ -31,40 +31,28 @@ public class BrandController {
 
     @Autowired
     private BrandService brandService;
-    //制造商
     @Autowired
     private MfrsService mfrsService;
-    //商品类别
     @Autowired
     private GoodsService goodsService;
-    //镜架材质
     @Autowired
     private MaterialService materialService;
-    //材料分类
     @Autowired
     private LensService lensService;
-    //光度分类
     @Autowired
     private LightService lightService;
-    //折射率
     @Autowired
     private RefractivityService refractivityService;
-    //镜片功能
     @Autowired
     private FunctionService functionService;
-    //渐进片分类
     @Autowired
     private GradualService gradualService;
-    //使用类型
     @Autowired
     private UsageService usageService;
-    //抛弃型分类
     @Autowired
     private TypeService typeService;
-    //计量单位
     @Autowired
     private UnitService unitService;
-    //支付方式
     @Autowired
     private PayService payService;
 
@@ -72,16 +60,12 @@ public class BrandController {
     @RequiresPermissions("mfrs:brand:brand")
     String Brand(Model model) {
         Map<String, Object> map = new HashMap<>();
-        //品牌
         List<BrandDO> brandDOList = brandService.list(map);
         model.addAttribute("brandDOList", brandDOList);
-        //商品类别
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
-        //制造商
         List<MfrsDO> mfrsDOList = mfrsService.list(map);
         model.addAttribute("mfrsDOList", mfrsDOList);
-        //支付
         List<PayDO> payDOList = payService.list(map);
         model.addAttribute("payDOList", payDOList);
 
@@ -99,7 +83,6 @@ public class BrandController {
         PageUtils pageUtils = new PageUtils(brandList, total);
         return pageUtils;
     }
-    //查询商品品种
     @ResponseBody
     @GetMapping("/findbrandList")
     public PageUtils findbrandList(@RequestParam Map<String, Object> params) {
@@ -115,37 +98,26 @@ public class BrandController {
     @RequiresPermissions("mfrs:brand:add")
     String add(Model model, BrandDO brand, HttpServletResponse resp) {
         Map<String, Object> map = new HashMap<>();
-        //制造商
         List<MfrsDO> mfrsDOList = mfrsService.list(map);
         model.addAttribute("mfrsDOList", mfrsDOList);
-        //镜架材质
         List<MaterialDO> materialDOList = materialService.list(map);
         model.addAttribute("materialDOList", materialDOList);
-        //材料分类
         List<LensDO> lensDOList = lensService.list(map);
         model.addAttribute("lensDOList", lensDOList);
-        //光度分类
         List<LightDO> lightDOList = lightService.list(map);
         model.addAttribute("lightDOList", lightDOList);
-        //折射率
         List<RefractivityDO> refractivityDOList = refractivityService.list(map);
         model.addAttribute("refractivityDOList", refractivityDOList);
-        //镜片功能
         List<FunctionDO> functionDOList = functionService.list(map);
         model.addAttribute("functionDOList", functionDOList);
-        //渐进片分类
         List<GradualDO> gradualDOList = gradualService.list(map);
         model.addAttribute("gradualDOList", gradualDOList);
-        //使用分类
         List<UsageDO> usageDOList = usageService.list(map);
         model.addAttribute("usageDOList", usageDOList);
-        //抛弃型分类
         List<TypeDO> typeDOList = typeService.list(map);
         model.addAttribute("typeDOList", typeDOList);
-        //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
-        //支付
         List<PayDO> payDOList = payService.list(map);
         model.addAttribute("payDOList", payDOList);
 
@@ -157,96 +129,68 @@ public class BrandController {
     @RequiresPermissions("mfrs:brand:edit")
     String edit(@PathVariable("brandid") Integer brandid, Model model) {
 
-        ////关联所有品牌维护所需表
         BrandDO brand = brandService.getall(brandid);
         model.addAttribute("brand", brand);
 
         Map<String, Object> map = new HashMap<>();
-        //制造商
         List<MfrsDO> mfrsDOList = mfrsService.list(map);
         model.addAttribute("mfrsDOList", mfrsDOList);
-        //商品
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
-        //镜架材质
         List<MaterialDO> materialDOList = materialService.list(map);
         model.addAttribute("materialDOList", materialDOList);
-        //材料分类
         List<LensDO> lensDOList = lensService.list(map);
         model.addAttribute("lensDOList", lensDOList);
-        //光度分类
         List<LightDO> lightDOList = lightService.list(map);
         model.addAttribute("lightDOList", lightDOList);
-        //折射率
         List<RefractivityDO> refractivityDOList = refractivityService.list(map);
         model.addAttribute("refractivityDOList", refractivityDOList);
-        //镜片功能
         List<FunctionDO> functionDOList = functionService.list(map);
         model.addAttribute("functionDOList", functionDOList);
-        //渐进片分类
         List<GradualDO> gradualDOList = gradualService.list(map);
         model.addAttribute("gradualDOList", gradualDOList);
-        //使用分类
         List<UsageDO> usageDOList = usageService.list(map);
         model.addAttribute("usageDOList", usageDOList);
-        //抛弃型分类
         List<TypeDO> typeDOList = typeService.list(map);
         model.addAttribute("typeDOList", typeDOList);
-        //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
-        //支付
         List<PayDO> payDOList = payService.list(map);
         model.addAttribute("payDOList", payDOList);
         return "mfrs/brand/edit";
     }
 
-    /**
-     * 详情
-     */
+
     @GetMapping("/detail/{brandid}")
     @RequiresPermissions("mfrs:brand:detail")
     String detail(@PathVariable("brandid") Integer brandid, Model model) {
 
-        ////关联所有品牌维护所需表
         BrandDO brand = brandService.getall(brandid);
         model.addAttribute("brand", brand);
 
         Map<String, Object> map = new HashMap<>();
-        //制造商
         List<MfrsDO> mfrsDOList = mfrsService.list(map);
         model.addAttribute("mfrsDOList", mfrsDOList);
-        //商品
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
-        //镜架材质
         List<MaterialDO> materialDOList = materialService.list(map);
         model.addAttribute("materialDOList", materialDOList);
-        //材料分类
         List<LensDO> lensDOList = lensService.list(map);
         model.addAttribute("lensDOList", lensDOList);
-        //光度分类
         List<LightDO> lightDOList = lightService.list(map);
         model.addAttribute("lightDOList", lightDOList);
-        //折射率
         List<RefractivityDO> refractivityDOList = refractivityService.list(map);
         model.addAttribute("refractivityDOList", refractivityDOList);
-        //镜片功能
         List<FunctionDO> functionDOList = functionService.list(map);
         model.addAttribute("functionDOList", functionDOList);
-        //渐进片分类
         List<GradualDO> gradualDOList = gradualService.list(map);
         model.addAttribute("gradualDOList", gradualDOList);
-        //使用分类
         List<UsageDO> usageDOList = usageService.list(map);
         model.addAttribute("usageDOList", usageDOList);
-        //抛弃型分类
         List<TypeDO> typeDOList = typeService.list(map);
         model.addAttribute("typeDOList", typeDOList);
-        //计量单位
         List<UnitDO> unitDOList = unitService.list(map);
         model.addAttribute("unitDOList", unitDOList);
-        //支付
         List<PayDO> payDOList = payService.list(map);
         model.addAttribute("payDOList", payDOList);
         return "mfrs/brand/detail";
@@ -262,7 +206,6 @@ public class BrandController {
         if (null == brand.getGoodsid()) {
             return R.error("商品类别不能为空");
         }
-        //判断是否已存在
         String mfrsid = brand.getMfrsid();
         String brandnum = brand.getBrandnum();
         Map<String, Object> map = new HashMap<>();
@@ -301,11 +244,9 @@ public class BrandController {
         return R.ok();
     }
 
-    //跳转制造商
     @GetMapping("/findmfrs/{goodsids}")
     String findmfrs(@PathVariable("goodsids") Integer goodsids, Model model) {
         Map<String, Object> map = new HashMap<>();
-        //商品
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
         model.addAttribute("goodsids", goodsids);
@@ -314,7 +255,6 @@ public class BrandController {
 
 
 
-    //制造商——商品类别菜单下来选择
     @ResponseBody
     @RequestMapping(value = "/caidan")
     List<GoodsDO> caidan(Integer mfrsid, Model model) {

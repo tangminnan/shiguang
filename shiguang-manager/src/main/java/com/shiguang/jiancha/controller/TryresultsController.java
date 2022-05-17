@@ -45,11 +45,8 @@ public class TryresultsController {
     private LineService lineService;
     @Autowired
     private OptometryLineService optometryLineService;
-
-    //散瞳用药
     @Autowired
     private PharmacyService pharmacyService;
-    //客观验光
     @Autowired
     private OptometryService optometryService;
 
@@ -117,7 +114,6 @@ public class TryresultsController {
         Map<String, Object> map = new HashMap<>();
         map.put("ptometryNumber", ptometryNumber);
         List<TryresultsDO> list = tryresultsService.haveYanguangNum(map);
-
         if ("".equals(tryresults.getSphereRightz())) {
             tryresults.setSphereRightz("0.00");
         }
@@ -130,7 +126,6 @@ public class TryresultsController {
         if ("".equals(tryresults.getCylinderLeftz())) {
             tryresults.setCylinderLeftz("0.00");
         }
-
         if ("".equals(tryresults.getSphereRighttry())) {
             tryresults.setSphereRighttry("0.00");
         }
@@ -143,25 +138,18 @@ public class TryresultsController {
         if ("".equals(tryresults.getCylinderLefttry())) {
             tryresults.setCylinderLefttry("0.00");
         }
-
-
         if ("".equals(tryresults.getAddRightz())) {
             tryresults.setAddRightz("0.00");
         }
         if ("".equals(tryresults.getAddLeftz())) {
             tryresults.setAddLeftz("0.00");
         }
-
-
         if ("".equals(tryresults.getAddRighttry())) {
             tryresults.setAddRighttry("0.00");
         }
         if ("".equals(tryresults.getAddLefttry())) {
             tryresults.setAddLefttry("0.00");
         }
-
-
-
         if (list.size() > 0) {
             tryresultsService.updateTry(tryresults);
             return R.ok();
@@ -205,9 +193,6 @@ public class TryresultsController {
         return R.ok();
     }
 
-    /**
-     * 一个会员所有验光信息
-     */
     @ResponseBody
     @GetMapping("/yanguangListShuju")
     public List<TryresultsDO> yanguangListShuju(String cardNumber, Model model) {
@@ -218,7 +203,6 @@ public class TryresultsController {
         model.addAttribute("tryresultsDOList", tryresultsDOList);
         if (null != tryresultsDOList){
             for (TryresultsDO tryresultsDO:tryresultsDOList){
-                //是否结算
                 String haveid = tryresultsDO.getHaveid();
                 if (null !=haveid && "" != haveid){
                     tryresultsDO.setHaveid("0");
@@ -230,15 +214,11 @@ public class TryresultsController {
         return tryresultsDOList;
     }
 
-    /**
-     * 修改所有验光信息详情------[][][]
-     */
+
     @GetMapping("/updateTryshuju/{ptometryNumber}")
     String updateTryshuju(@PathVariable("ptometryNumber") String ptometryNumber, Model model) {
-
         Map<String, Object> map = new HashMap<>();
         map.put("ptometryNumber", ptometryNumber);
-        //验光数据
         TryresultsDO tryresultsDO = tryresultsService.getTryresult(map);
         if (tryresultsDO.getSex() == 0) {
             tryresultsDO.setSexx("男");
@@ -249,13 +229,10 @@ public class TryresultsController {
         Date time = tryresultsDO.getCreateTime();
         String newtime = sdftime.format(time);
         model.addAttribute("newtime", newtime);
-        //————————————————散瞳用药————————————————————————————————
         List<PharmacyDO> pharmacyDOList = pharmacyService.list(map);
         model.addAttribute("pharmacyDOList", pharmacyDOList);
         model.addAttribute("tryresultsDO", tryresultsDO);
-        //———获取当前登录用户的名称————
         model.addAttribute("optometryName", ShiroUtils.getUser().getName());
-//-----------------散瞳后
         List<OptometryDO> optoList = optometryService.optoList(map);
         OptometryDO optometryDO = new OptometryDO();
         if (optoList.size() > 0) {
@@ -271,9 +248,7 @@ public class TryresultsController {
         return "optometryNew/tryedit";
     }
 
-    /**
-     * 修改验光数据
-     */
+
     @ResponseBody
     @RequestMapping("/updateTry")
     public R updateTry(TryresultsDO tryresults) {
@@ -289,7 +264,6 @@ public class TryresultsController {
         if ("".equals(tryresults.getCylinderLeftz())) {
             tryresults.setCylinderLeftz("0.00");
         }
-
         if ("".equals(tryresults.getSphereRighttry())) {
             tryresults.setSphereRighttry("0.00");
         }
@@ -302,24 +276,18 @@ public class TryresultsController {
         if ("".equals(tryresults.getCylinderLefttry())) {
             tryresults.setCylinderLefttry("0.00");
         }
-
-
         if ("".equals(tryresults.getAddRightz())) {
             tryresults.setAddRightz("0.00");
         }
         if ("".equals(tryresults.getAddLeftz())) {
             tryresults.setAddLeftz("0.00");
         }
-
-
         if ("".equals(tryresults.getAddRighttry())) {
             tryresults.setAddRighttry("0.00");
         }
         if ("".equals(tryresults.getAddLefttry())) {
             tryresults.setAddLefttry("0.00");
         }
-
-
         tryresultsService.updateTry(tryresults);
         return R.ok();
     }

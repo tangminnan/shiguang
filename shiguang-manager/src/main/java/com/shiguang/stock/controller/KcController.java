@@ -38,28 +38,18 @@ import java.util.Map;
 public class KcController {
     @Autowired
     private StockService stockService;
-    //商品类别
     @Autowired
     private GoodsService goodsService;
-    //折射率
     @Autowired
     private RefractivityService refractivityService;
-    //仓位
     @Autowired
     private PositionService positionService;
-
-    //制造商
     @Autowired
     private MfrsService mfrsService;
-    //支付方式
     @Autowired
     private PayService payService;
     @Autowired
     private  BrandService brandService;
-
-
-    private Double retailPrice;
-    private Double retailPrice2;
 
     @GetMapping()
     @RequiresPermissions("kucun:stock:stock")
@@ -146,24 +136,18 @@ public class KcController {
 
 
 
-    /**
-     * 选择商品品种
-     */
+
     @GetMapping("/findbrand/{mfrsname}/{goodsid}")
     String findbrand(@PathVariable("mfrsname") String mfrsname,@PathVariable("goodsid") Integer goodsid, Model model) {
         model.addAttribute("mfrsname", mfrsname);
         model.addAttribute("goodsid", goodsid);
         Map<String, Object> map = new HashMap<>();
-        //品牌
         List<BrandDO> brandDOList = brandService.list(map);
         model.addAttribute("brandDOList", brandDOList);
-        //商品类别
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
-        //制造商
         List<MfrsDO> mfrsDOList = mfrsService.list(map);
         model.addAttribute("mfrsDOList", mfrsDOList);
-        //支付
         List<PayDO> payDOList = payService.list(map);
         model.addAttribute("payDOList", payDOList);
         return "/product/produca/findBrand";
@@ -172,7 +156,6 @@ public class KcController {
 
 
 
-    //库存数量
     @ResponseBody
     @GetMapping("/countall")
     public Integer countall(
@@ -212,13 +195,10 @@ public class KcController {
         }else if (kccount.equals("2")){
             map.put("kccount2","0");
         }
-
         map.put("retailPrice",retailPrice);
         map.put("retailPrice2",retailPrice2);
         map.put("xsstate",xsstate);
         map.put("classtype",classtype);
-
-
         map.put("factory",factory);
         map.put("factoryColor",factoryColor);
         map.put("sph",sph);
@@ -226,7 +206,6 @@ public class KcController {
         map.put("cyl",cyl);
         map.put("cyl2",cyl2);
         map.put("refractivityid",refractivityid);
-
         if(ShiroUtils.getUser().getCompanyId().equals("3")){
             map.put("companyId","");
         }else {

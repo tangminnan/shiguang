@@ -23,17 +23,14 @@ public interface ResultService {
 	int count(Map<String, Object> map);
 	
 	int save(ResultDO result);
-	//    是否有保存这个验光号数据
 	List<ResultDO> haveYanguangNum(Map<String, Object> map);
 	int update(ResultDO result);
 	int remove(Long id);
 	int upremove(ResultDO resultDO );
 	
 	int batchRemove(Long[] ids);
-
 	List<ResultDO> shujulist(Map<String, Object> map);
 	int shujulistcount(Map<String, Object> map);
-	//所有处方
 	ResultDO getChufangAll(Map<String, Object> map);
 
 	ResultDetailDO getresult(Map<String,Object> map);

@@ -19,7 +19,6 @@ public interface PositionDao {
 
     PositionDO get(Long positionId);
 
-    //判断是否存在
     List<PositionDO> haveNum(Map<String, Object> map);
 
     List<PositionDO> list(Map<String, Object> map);
@@ -29,19 +28,16 @@ public interface PositionDao {
 
     int save(PositionDO position);
 
-    //修改停用启用
     int update(PositionDO position);
 
     int remove(Long position_id);
 
     int batchRemove(Long[] positionIds);
 
-    //删除修改状态
     int updateState(PositionDO position);
 
     PositionDO getPositionNum(String positionNum);
 
-    //     <!--库存查询相对应的仓库-->
     List<PositionDO> positionList(Map<String, Object> map);
 
 

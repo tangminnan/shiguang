@@ -490,7 +490,6 @@ public class KjjyDO implements Serializable {
     public String getKjjyBeizhu() {
         return kjjyBeizhu;
     }
-    //验光号
     private String ptometryNumber;
 
     public String getPtometryNumber() {

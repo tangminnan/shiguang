@@ -25,7 +25,6 @@ public class TryresultsServiceImpl implements TryresultsService {
         return tryresultsDao.list(map);
     }
 
-    //根据人查相对应的验光号医生时间等信息
 
     @Override
     public List<TryresultsDO> listUser(Map<String, Object> map) {
@@ -41,7 +40,6 @@ public class TryresultsServiceImpl implements TryresultsService {
     public int save(TryresultsDO tryresults) {
         return tryresultsDao.save(tryresults);
     }
-    //    <!--//判断是否存在验光号-->
 
     @Override
     public List<TryresultsDO> haveYanguangNum(Map<String, Object> map) {
@@ -62,7 +60,6 @@ public class TryresultsServiceImpl implements TryresultsService {
     public int batchRemove(Long[] ids) {
         return tryresultsDao.batchRemove(ids);
     }
-//    医生
     @Override
     public List<TryresultsDO> listDoctor(Map<String, Object> map) {
         return tryresultsDao.listDoctor(map);
@@ -79,7 +76,6 @@ public class TryresultsServiceImpl implements TryresultsService {
     }
 
 
-    //所有-验光数据
 
     @Override
     public List<TryresultsDO> yanguangListShuju(Map<String, Object> map) {
@@ -91,13 +87,11 @@ public class TryresultsServiceImpl implements TryresultsService {
         return tryresultsDao.yanguangListShujuCount(map);
     }
 
-    //下处方后修改数据的状态为0--不能修改了没有修改按钮
 
     @Override
     public int updateStatus(TryresultsDO tryresultsDO) {
         return tryresultsDao.updateStatus(tryresultsDO);
     }
-    //修改检查结论数据
 
     @Override
     public int updateTry(TryresultsDO tryresults) {

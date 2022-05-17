@@ -29,10 +29,8 @@ public class SaleDoctorController {
     private SaleReportService saleReportService;
     @Autowired
     private CompanyService companyService;
-    //商品类别
     @Autowired
     private GoodsService goodsService;
-
     @GetMapping()
     @RequiresPermissions("information:saleDoctor:saleDoctor")
     String saleDoctor(Model model) {
@@ -41,13 +39,11 @@ public class SaleDoctorController {
         model.addAttribute("companyList", companyList);
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
-        //———获取当前登录用户的公司id————
         String companyId = ShiroUtils.getUser().getCompanyId();
         model.addAttribute("companyId", companyId);
         return "saleReport/saleDoctor";
     }
 
-    //跳转制造商
     @GetMapping("/findcompany/{companyId}")
     String findcompany(@PathVariable("companyId") Integer companyId, Model model) {
         if (companyId == 0) {
@@ -81,10 +77,7 @@ public class SaleDoctorController {
             for (SalesDO doctorPeople : doctorPeoples) {
                 String username = doctorPeople.getUsername();
                 map.put("username", username);
-
-
                 int cfcount = saleReportService.findCfCount(map);
-                //销售金额，价钱，成交
                 int usecount = saleReportService.findCfUseCount(map);
                 int amountMoney = saleReportService.findCfamountMoney(map);
                 double primeMoney;
@@ -100,7 +93,6 @@ public class SaleDoctorController {
                 double lhjMoney = 0.00;
                 double hcMoney = 0.00;
                 double sgMoney = 0.00;
-
                 for (SalesDO good : Goods) {
                     String[] storeDescribes = null;
                     if (null != good.getStoreDescribe() && !"".equals(good.getStoreDescribe())) {
@@ -248,13 +240,10 @@ public class SaleDoctorController {
             }
             model.addAttribute("listMoney", listMoney);
         }
-
-        //———获取当前系统时间—————
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
         Date date = new Date();
         String createTime = sdf.format(date);
         model.addAttribute("createTime", createTime);
-
         model.addAttribute("settleDateStart", settleDateStart);
         model.addAttribute("settleDateEnd", settleDateEnd);
         model.addAttribute("departments", departments);
@@ -265,14 +254,12 @@ public class SaleDoctorController {
 @GetMapping("/Brand")
 public String Brand(String settleDateStart, String settleDateEnd,
                       String username, String storeDescribe, String selectGoods,  String newOld, Model model) {
-
     Map<String, Object> map = new HashMap<>();
     map.put("settleDateStart", settleDateStart);
     map.put("settleDateEnd", settleDateEnd);
     map.put("username", username);
     map.put("storeDescribe", storeDescribe);
     map.put("newOld", newOld);
-
     List<SalesDO> Goods = saleReportService.findDoctorGoods(map);
     List<Map<String, Object>> listBrand = new ArrayList<>();
     for (SalesDO good : Goods) {
@@ -470,7 +457,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
             }
         }
     }
-    // 利用set不允许元素重复的性质去掉相同的元素
     List<Map<String, Object>> listBrandMoney = new ArrayList<>();
     Set<String> checkDuplicates = new HashSet<String>();
     double jjMoney = 0.00;
@@ -478,8 +464,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
     String jjbrand  ;
     String jjbrandname ;
     for (int a = 0; a < listBrand.size(); a++) {
-
-
         Map<String, Object> newlistmap = new HashMap<>();
         String items =   listBrand.get(a).get("goodsBrandNum").toString();
         String goodsBrandName = listBrand.get(a).get("goodsBrandName").toString();
@@ -487,7 +471,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
         int count = Integer.valueOf(listBrand.get(a).get("count").toString());
         money=money*count;
         if (!checkDuplicates.add(items+goodsBrandName)) {
-            // 重复的元素
             String cfmoney = null;
             String cfcount = null;
             for (int b = 0; b < listBrandMoney.size(); b++) {
@@ -496,7 +479,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
                 if (String.valueOf(brandNum + brandName).equals(items + goodsBrandName)) {
                     cfmoney=listBrandMoney.get(b).get("jjMoney").toString();
                     cfcount=listBrandMoney.get(b).get("jjCount").toString();
-
                 }
             }
             jjMoney =  Double.valueOf(cfmoney) + money;
@@ -507,9 +489,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
             newlistmap.put("jjCount", jjCount);
             newlistmap.put("jjbrand", jjbrand);
             newlistmap.put("jjbrandname", jjbrandname);
-//            listBrand.remove(a);
-//            listBrand.add(newlistmap);
-
             for (int i = 0; i < listBrandMoney.size(); i++) {
                 String brandNum = listBrandMoney.get(i).get("jjbrand").toString();
                 String brandName = listBrandMoney.get(i).get("jjbrandname").toString();
@@ -525,7 +504,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
             newlistmap.put("jjbrandname", goodsBrandName);
             listBrandMoney.add(newlistmap);
         }
-
     }
     model.addAttribute("listBrandMoney", listBrandMoney);
     model.addAttribute("settleDateStart", settleDateStart);
@@ -533,7 +511,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
     model.addAttribute("username", username);
     model.addAttribute("storeDescribe", storeDescribe);
     model.addAttribute("selectGoods", selectGoods);
-    //———获取当前系统时间—————
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
     Date date = new Date();
     String createTime = sdf.format(date);
@@ -545,14 +522,12 @@ public String Brand(String settleDateStart, String settleDateEnd,
     @GetMapping("/goodsList")
     public String goodsList(String settleDateStart, String settleDateEnd, String brandnum, String brandname,
                             String username, String storeDescribe, String selectGoods, String newOld,  Model model) {
-
         Map<String, Object> map = new HashMap<>();
         map.put("settleDateStart", settleDateStart);
         map.put("settleDateEnd", settleDateEnd);
         map.put("username", username);
         map.put("storeDescribe", storeDescribe);
         map.put("newOld", newOld);
-
         List<SalesDO> Goods = saleReportService.findDoctorGoods(map);
         List<Map<String, Object>> goodsLists = new ArrayList<>();
         for (SalesDO good : Goods) {
@@ -560,7 +535,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
             if (null != good.getStoreDescribe() && !"".equals(good.getStoreDescribe())) {
                 storeDescribes = good.getStoreDescribe().split(",");
             }
-
             String[] saleNumbers = null;
             if (null != good.getSaleNumber() && !"".equals(good.getSaleNumber())) {
                 saleNumbers = good.getSaleNumber().split(",");
@@ -573,7 +547,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
             if (null != good.getStoreName()) {
                 goodsNames = good.getStoreName().split(",");
             }
-
             String[] storeCounts = null;
             if (null != good.getStoreCount() && !"".equals(good.getStoreCount())) {
                 storeCounts = good.getStoreCount().split(",");
@@ -582,23 +555,18 @@ public String Brand(String settleDateStart, String settleDateEnd,
             if (null != good.getStoreUnit()) {
                 storeUnits = good.getStoreUnit().split(",");
             }
-
             String[] classtypes = null;
             if (null != good.getClasstype() && !"".equals(good.getClasstype())) {
                 classtypes = good.getClasstype().split(",");
             }
-
             if (null != storeDescribes) {
                 for (int i = 0; i < storeDescribes.length; i++) {
 
                     String goodstype = storeDescribes[i];
-
-
-
                     String classtype = classtypes[i];
-                    String saleNumber = saleNumbers[0];//配镜单号
-                    String goodNum = goodsNums[i];//商品代码
-                    String goodName = goodsNames[i];//商品名称
+                    String saleNumber = saleNumbers[0];
+                    String goodNum = goodsNums[i];
+                    String goodName = goodsNames[i];
                     if ("镜架".equals(selectGoods) ) {
                         if("镜架".equals(goodstype) ){
                             ProducaDO producaDO = saleReportService.findJj(goodNum);
@@ -811,15 +779,10 @@ public String Brand(String settleDateStart, String settleDateEnd,
                 }
             }
         }
-
-
-
-        // 利用set不允许元素重复的性质去掉相同的元素
         List<Map<String, Object>> GoodsList = new ArrayList<>();
         Set<String> checkDuplicates = new HashSet<String>();
         double goodsMoney = 0.00;
         int goodsCount = 0;
-
         for (int a = 0; a < goodsLists.size(); a++) {
             Map<String, Object> goods = new HashMap<>();
             String saleNumber =   goodsLists.get(a).get("saleNumber").toString();
@@ -828,9 +791,7 @@ public String Brand(String settleDateStart, String settleDateEnd,
             double money =  Double.valueOf(goodsLists.get(a).get("money").toString());
             int count = Integer.valueOf(goodsLists.get(a).get("count").toString());
             money=money*count;
-
             if (!checkDuplicates.add(saleNumber+goodNum)) {
-                // 重复的元素
                 String cfmoney = null;
                 String cfcount = null;
                 for (int b = 0; b < GoodsList.size(); b++) {
@@ -839,17 +800,13 @@ public String Brand(String settleDateStart, String settleDateEnd,
                     if (String.valueOf(number + num).equals(saleNumber + goodNum)) {
                         cfcount=GoodsList.get(b).get("count").toString();
                         cfmoney=GoodsList.get(b).get("money").toString();
-
-
                     }
                 }
                 saleNumber=  goodsLists.get(a).get("saleNumber").toString();
                 goodNum=  goodsLists.get(a).get("goodNum").toString();
                 goodName=  goodsLists.get(a).get("goodName").toString();
-
                 goodsMoney =  Double.valueOf(cfmoney) + money;
                 goodsCount = Integer.valueOf(cfcount)  + count;
-
                 goods.put("saleNumber", saleNumber);
                 goods.put("goodNum", goodNum);
                 goods.put("goodName", goodName);
@@ -871,13 +828,11 @@ public String Brand(String settleDateStart, String settleDateEnd,
                 goods.put("count", count);
                 GoodsList.add(goods);
             }
-
         }
         model.addAttribute("GoodsList", GoodsList);
 
         model.addAttribute("settleDateStart", settleDateStart);
         model.addAttribute("settleDateEnd", settleDateEnd);
-        //———获取当前系统时间—————
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
         Date date = new Date();
         String createTime = sdf.format(date);
@@ -904,7 +859,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
         }
         int count=1;
         List<Map<String, Object>> doctorsCount = new ArrayList<>();
-
         for (int i=0;i<namelist.size();i++){
             count=1;
             for (int j=i+1;j<namelist.size();j++){
@@ -925,7 +879,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
             doctorsCount.add( ygDoctormap);
         }
         model.addAttribute("doctorsCount", doctorsCount);
-        //———获取当前系统时间—————
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
         Date date = new Date();
         String createTime = sdf.format(date);
@@ -952,7 +905,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
         }
         int count=1;
         List<Map<String, Object>> doctorsCount = new ArrayList<>();
-
         for (int i=0;i<namelist.size();i++){
             count=1;
             for (int j=i+1;j<namelist.size();j++){
@@ -972,7 +924,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
             doctorsCount.add( ygDoctormap);
         }
         model.addAttribute("doctorsCount", doctorsCount);
-        //———获取当前系统时间—————
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
         Date date = new Date();
         String createTime = sdf.format(date);

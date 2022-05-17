@@ -16,16 +16,12 @@ import java.util.Map;
  */
 public interface BrandService {
 
-    //    BrandDO get(Integer brandid);
-    //关联所有品牌维护所需表
     BrandDO getall(Integer brandid);
 
     List<BrandDO> list(Map<String, Object> map);
 
-    //    <!--查询商品品种-->
     List<BrandDO> finfBrand(Map<String, Object> map);
     int finfBrandcount(Map<String, Object> map);
-    //    <!--//判断是否存在制造商代码-->
     List<BrandDO> haveNum(Map<String, Object> map);
 
     int count(Map<String, Object> map);
@@ -33,17 +29,14 @@ public interface BrandService {
 
     int save(BrandDO brand);
 
-    //修改停用启用
     int update(BrandDO brand);
 
     int remove(Integer brandid);
 
     int batchRemove(Integer[] brandids);
 
-    //菜单联动显示
     List<GoodsDO> caidan(Integer mfrsid);
 
-    //删除修改状态
     int updateState(BrandDO brand);
 
 }
