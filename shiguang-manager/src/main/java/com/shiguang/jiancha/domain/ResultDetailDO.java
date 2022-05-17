@@ -7304,9 +7304,7 @@ public class ResultDetailDO implements Serializable {
         this.phone1 = phone1;
     }
 
-    //'删除状态（0已删除，1未删除）'【试戴镜】
     private String trystatus;
-    //    '删除状态（0已删除，1未删除）'【处方检查结果】
     private String rstatus;
 
     public String getTrystatus() {

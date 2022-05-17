@@ -91,14 +91,6 @@ public class RetailpriceController {
 
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		String createTime=df.format(new Date());// new Date()为获取当前系统时间
-//		Calendar cal = Calendar.getInstance();
-//		int year = cal.get(Calendar.YEAR);//获取年份
-//		int month=(cal.get(Calendar.MONTH))+1;//获取月份
-//		int day=cal.get(Calendar.DATE);//获取日
-//		int hour=cal.get(Calendar.HOUR_OF_DAY);//小时
-//		int minute=cal.get(Calendar.MINUTE);//分
-//		int second=cal.get(Calendar.SECOND);//秒
-//		String number="PC"+String.valueOf(year)+String.valueOf(month)+String.valueOf(day)+String.valueOf(hour)+String.valueOf(minute)+String.valueOf(second);
 		Long uuid = GuuidUtil.getUUID();
 		String uuidstr = "PC" + uuid.toString();
 		model.addAttribute("createTime",createTime);
@@ -154,12 +146,6 @@ public class RetailpriceController {
 			}
 		}
 		for (int i = 0; i < goodstypes.length; i++) {
-//			String goodsid = goodsids[i];
-//			String classtype = classtypes[i];
-//			String num = nums[i];
-//			String oldMoney = oldMoneys[i];
-//			String newMoney = newMoneys[i];
-
 			String goodsid = goodstypes[i];
 			String classtype = classtypess[i];
 			String num = nums[i];
@@ -170,8 +156,6 @@ public class RetailpriceController {
 			String brandname = brandnames[i];
 			String oldMoney = oldMoneys[i];
 			String newMoney = newMoneys[i];
-
-
 			Map<String, Object> map = new HashMap<>();
 			map.put("num", num);
 			map.put("oldMoney", oldMoney);
@@ -186,7 +170,6 @@ public class RetailpriceController {
 					ProducaDO.setProducName(producName);
 					ProducaDO.setRetailPrice(newMoney);
 					producaService.update(ProducaDO);
-
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
 					retailpriceDO.setDay(day);
@@ -197,10 +180,8 @@ public class RetailpriceController {
 					retailpriceDO.setClasstypes(classtype);
 					retailpriceDO.setNum(num);
 					retailpriceDO.setName(name);
-
 					retailpriceDO.setGoodsNum(producNum);
 					retailpriceDO.setGoodsName(jj.getViewGoodName() + "-型号:" + jj.getFactory() + "-色号:" + jj.getProducColor() + "-标价:" +oldMoney);
-
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
 					retailpriceDO.setBrandnum(brandnum);
@@ -219,7 +200,6 @@ public class RetailpriceController {
 					stockDO.setRetailPrice(newMoney);
 					stockService.update(stockDO);
 				}
-
 			} else if ("2".equals(goodsid)) {
 				List<PartsDO> pjs = partsService.list(map);
 				String producName = null;
@@ -231,7 +211,6 @@ public class RetailpriceController {
 					partsDO.setProducName(producName);
 					partsDO.setRetailPrice(newMoney);
 					partsService.update(partsDO);
-
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
 					retailpriceDO.setDay(day);
@@ -242,10 +221,8 @@ public class RetailpriceController {
 					retailpriceDO.setClasstypes(classtype);
 					retailpriceDO.setNum(num);
 					retailpriceDO.setName(name);
-
 					retailpriceDO.setGoodsNum(producNum);
 					retailpriceDO.setGoodsName(pj.getViewGoodName() + "-型号:" + pj.getFactory() + "-标价:" +oldMoney);
-
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
 					retailpriceDO.setBrandnum(brandnum);
@@ -275,7 +252,6 @@ public class RetailpriceController {
 					jpcpDO.setProducName(producName);
 					jpcpDO.setRetailPrice(newMoney);
 					jpcpService.update(jpcpDO);
-
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
 					retailpriceDO.setDay(day);
@@ -286,10 +262,8 @@ public class RetailpriceController {
 					retailpriceDO.setClasstypes(classtype);
 					retailpriceDO.setNum(num);
 					retailpriceDO.setName(name);
-
 					retailpriceDO.setGoodsNum(producNum);
 					retailpriceDO.setGoodsName( jpcp.getViewGoodName()+"-球镜:"+jpcp.getSphId()+"-柱镜:"+jpcp.getCylId()+"-标价:"+oldMoney);
-
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
 					retailpriceDO.setBrandnum(brandnum);
@@ -319,7 +293,6 @@ public class RetailpriceController {
 					jpdzDO.setProducName(producName);
 					jpdzDO.setRetailPrice(newMoney);
 					jpdzService.update(jpdzDO);
-
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
 					retailpriceDO.setDay(day);
@@ -330,10 +303,8 @@ public class RetailpriceController {
 					retailpriceDO.setClasstypes(classtype);
 					retailpriceDO.setNum(num);
 					retailpriceDO.setName(name);
-
 					retailpriceDO.setGoodsNum(producNum);
 					retailpriceDO.setGoodsName(jpdz.getViewGoodName()+"-球镜:"+jpdz.getSphUp()+"/"+jpdz.getSphDown()+"-柱镜:"+jpdz.getCylUp()+"/"+jpdz.getCylDown()+"-标价:"+oldMoney);
-
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
 					retailpriceDO.setBrandnum(brandnum);
@@ -363,7 +334,6 @@ public class RetailpriceController {
 					yxcpDO.setProducName(producName);
 					yxcpDO.setRetailPrice(newMoney);
 					yxcpService.update(yxcpDO);
-
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
 					retailpriceDO.setDay(day);
@@ -374,10 +344,8 @@ public class RetailpriceController {
 					retailpriceDO.setClasstypes(classtype);
 					retailpriceDO.setNum(num);
 					retailpriceDO.setName(name);
-
 					retailpriceDO.setGoodsNum(producNum);
 					retailpriceDO.setGoodsName( yxcp.getViewGoodName()+"-球镜:"+yxcp.getSphId()+"-柱镜:"+yxcp.getCylId()+"-标价:"+oldMoney);
-
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
 					retailpriceDO.setBrandnum(brandnum);
@@ -407,7 +375,6 @@ public class RetailpriceController {
 					yxdzDO.setProducName(producName);
 					yxdzDO.setRetailPrice(newMoney);
 					yxdzService.update(yxdzDO);
-
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
 					retailpriceDO.setDay(day);
@@ -418,10 +385,8 @@ public class RetailpriceController {
 					retailpriceDO.setClasstypes(classtype);
 					retailpriceDO.setNum(num);
 					retailpriceDO.setName(name);
-
 					retailpriceDO.setGoodsNum(producNum);
 					retailpriceDO.setGoodsName(yxdz.getViewGoodName()+"-球镜:"+yxdz.getSphUp()+"/"+yxdz.getSphDown()+"-柱镜:"+yxdz.getCylUp()+"/"+yxdz.getCylDown()+"-标价:"+oldMoney);
-
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
 					retailpriceDO.setBrandnum(brandnum);
@@ -451,7 +416,6 @@ public class RetailpriceController {
 					hlyDO.setProducName(producName);
 					hlyDO.setRetailPrice(newMoney);
 					hlyService.update(hlyDO);
-
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
 					retailpriceDO.setDay(day);
@@ -462,10 +426,8 @@ public class RetailpriceController {
 					retailpriceDO.setClasstypes(classtype);
 					retailpriceDO.setNum(num);
 					retailpriceDO.setName(name);
-
 					retailpriceDO.setGoodsNum(producNum);
 					retailpriceDO.setGoodsName( hly.getViewGoodName()+"-型号:"+hly.getProducFactory()+"-标价:"+oldMoney);
-
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
 					retailpriceDO.setBrandnum(brandnum);
@@ -495,7 +457,6 @@ public class RetailpriceController {
 					tyjDO.setProducName(producName);
 					tyjDO.setRetailPrice(newMoney);
 					tyjService.update(tyjDO);
-
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
 					retailpriceDO.setDay(day);
@@ -506,10 +467,8 @@ public class RetailpriceController {
 					retailpriceDO.setClasstypes(classtype);
 					retailpriceDO.setNum(num);
 					retailpriceDO.setName(name);
-
 					retailpriceDO.setGoodsNum(producNum);
 					retailpriceDO.setGoodsName(tyj.getViewGoodName()+"-型号:"+tyj.getProducFactory()+"-颜色:"+tyj.getProducFactorycolor()+"-标价:"+oldMoney);
-
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
 					retailpriceDO.setBrandnum(brandnum);
@@ -539,7 +498,6 @@ public class RetailpriceController {
 					oldlensDO.setProducName(producName);
 					oldlensDO.setRetailPrice(newMoney);
 					oldlensService.update(oldlensDO);
-
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
 					retailpriceDO.setDay(day);
@@ -550,10 +508,8 @@ public class RetailpriceController {
 					retailpriceDO.setClasstypes(classtype);
 					retailpriceDO.setNum(num);
 					retailpriceDO.setName(name);
-
 					retailpriceDO.setGoodsNum(producNum);
 					retailpriceDO.setGoodsName(lhj.getViewGoodName()+"-球镜:"+lhj.getOldId()+"-型号:"+lhj.getProducFactory()+"-标价:"+oldMoney);
-
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
 					retailpriceDO.setBrandnum(brandnum);
@@ -593,10 +549,8 @@ public class RetailpriceController {
 					retailpriceDO.setClasstypes(classtype);
 					retailpriceDO.setNum(num);
 					retailpriceDO.setName(name);
-
 					retailpriceDO.setGoodsNum(producNum);
 					retailpriceDO.setGoodsName( hc.getBrandname()+"-型号:"+hc.getFactory()+"-标价:"+oldMoney);
-
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
 					retailpriceDO.setBrandnum(brandnum);
@@ -626,7 +580,6 @@ public class RetailpriceController {
 					shiguangDO.setProducName(producName);
 					shiguangDO.setRetailPrice(newMoney);
 					shiguangService.update(shiguangDO);
-
 					RetailpriceDO retailpriceDO = new RetailpriceDO();
 					retailpriceDO.setNumber(number);
 					retailpriceDO.setDay(day);
@@ -637,10 +590,8 @@ public class RetailpriceController {
 					retailpriceDO.setClasstypes(classtype);
 					retailpriceDO.setNum(num);
 					retailpriceDO.setName(name);
-
 					retailpriceDO.setGoodsNum(producNum);
 					retailpriceDO.setGoodsName(sg.getViewGoodName()+"-型号:"+sg.getProducFactory()+"-标价:"+oldMoney);
-
 					retailpriceDO.setMfrsnum(mfrsnum);
 					retailpriceDO.setMfrsname(mfrsname);
 					retailpriceDO.setBrandnum(brandnum);
@@ -661,9 +612,6 @@ public class RetailpriceController {
 				}
 			}
 		}
-
-
-
 		return R.ok();
 	}
 	/**
@@ -701,7 +649,6 @@ public class RetailpriceController {
 		return R.ok();
 	}
 
-	//品种选择
 	@GetMapping("/getbrand")
 	String findmfrs( Model model) {
 		Map<String, Object> map = new HashMap<>();
@@ -709,7 +656,6 @@ public class RetailpriceController {
 		model.addAttribute("goodsDOList", goodsDOList);
 		return "/retailprice/retailprice/getBrand";
 	}
-	//brandslist
 	@ResponseBody
 	@RequestMapping("/brandslist")
 	public PageUtils brandslist(@RequestParam Map<String, Object> params) {
@@ -1336,7 +1282,6 @@ public class RetailpriceController {
 		model.addAttribute("retailprice", retailprice);
 		return "retailprice/retailprice/detial";
 	}
-	///详情列表
 	@ResponseBody
 	@RequestMapping(value = "/selectOrder")
 	public List<RetailpriceDO> selectOrder(String number,Model model) {
@@ -1346,7 +1291,6 @@ public class RetailpriceController {
 		model.addAttribute("retailpriceDOList", retailpriceDOList);
 		return retailpriceDOList;
 	}
-	//打印
 	@GetMapping("/danju")
 	String danju(String number, Model model) {
 		RetailpriceDO retailpriceDO = retailpriceService.getDanju(number);

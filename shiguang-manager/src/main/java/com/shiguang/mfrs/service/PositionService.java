@@ -17,7 +17,6 @@ public interface PositionService {
 
     PositionDO get(Long positionId);
 
-    //判断是否存在
     List<PositionDO> haveNum(Map<String, Object> map);
 
 
@@ -27,7 +26,6 @@ public interface PositionService {
 
     int save(PositionDO position);
 
-    //修改停用启用
     int update(PositionDO position);
 
     int remove(Long positionId);
@@ -39,7 +37,6 @@ public interface PositionService {
 
     PositionDO getPositionNum(String positionNum);
 
-    // <!--库存查询相对应的仓库-->
     List<PositionDO> positionList(Map<String, Object> map);
 
     DepartmentDO getComponid(String departNumber);

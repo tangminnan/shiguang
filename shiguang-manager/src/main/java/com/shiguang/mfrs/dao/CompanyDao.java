@@ -32,7 +32,6 @@ public interface CompanyDao {
 	
 	int batchRemove(Integer[] ids);
 
-	//删除修改状态
 	int updateState(CompanyDO companyDO);
 
 	int newOlds(UserDO userDO);

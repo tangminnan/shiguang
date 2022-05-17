@@ -51,7 +51,6 @@ public class RetailpriceDO implements Serializable {
 	private String oldPrice;
 	//调整价格
 	private String newPrice;
-	//0品种调价，1商品调价
 	private String flag;
 
 	/**

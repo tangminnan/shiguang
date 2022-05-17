@@ -24,7 +24,6 @@ public interface ResultDao {
 	int count(Map<String,Object> map);
 	
 	int save(ResultDO result);
-	//    是否有保存这个验光号数据
 	List<ResultDO> haveYanguangNum(Map<String, Object> map);
 	int update(ResultDO result);
 	int remove(Long id);
@@ -34,8 +33,6 @@ public interface ResultDao {
 
 	List<ResultDO> shujulist(Map<String, Object> map);
 	int shujulistcount(Map<String, Object> map);
-	//所有处方
 	ResultDO getChufangAll(Map<String, Object> map);
-	//所有处方
 	ResultDetailDO getresult(Map<String, Object> map);
 }

@@ -14,7 +14,6 @@ public interface YizhuService {
 
     YizhuDO get(Long yizhuId);
 
-    //医嘱
     List<YizhuDO> findYizhu(Map<String, Object> map);
 
     int findYizhucount(Map<String, Object> map);

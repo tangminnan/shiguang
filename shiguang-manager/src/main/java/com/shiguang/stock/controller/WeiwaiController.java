@@ -7,7 +7,9 @@ import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.mfrs.domain.BrandDO;
+import com.shiguang.mfrs.domain.MfrsDO;
 import com.shiguang.mfrs.service.GoodsService;
+import com.shiguang.mfrs.service.MfrsService;
 import com.shiguang.mfrs.service.PositionService;
 import com.shiguang.product.domain.JpdzDO;
 import com.shiguang.product.domain.YxdzDO;
@@ -67,10 +69,19 @@ public class WeiwaiController {
 
     @Autowired
     private StocklogService stocklogService;
+    @Autowired
+    private MfrsService mfrsService;
 
     @GetMapping()
     @RequiresPermissions("stock:weiwai:weiwai")
-    String Weiwai() {
+    String Weiwai(Model model) {
+        Map<String, Object> map = new HashMap<>();
+        //制造商
+        List<MfrsDO> mfrsDOList = mfrsService.getweiwailist(map);
+        model.addAttribute("mfrsDOList", mfrsDOList);
+        map.put("state",1);
+        List<DepartmentDO> departmentList = departmentService.list(map);
+        model.addAttribute("departmentList",departmentList);
         return "stock/weiwai/weiwai";
     }
 

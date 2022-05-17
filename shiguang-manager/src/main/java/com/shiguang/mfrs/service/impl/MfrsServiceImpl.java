@@ -20,13 +20,11 @@ public class MfrsServiceImpl implements MfrsService {
         return mfrsDao.get(mfrsid);
     }
 
-    //判断是否存在制造商代码
     @Override
     public List<MfrsDO> haveNum(Map<String, Object> map) {
         return mfrsDao.haveNum(map);
     }
 
-    //【制造商页面List】
     @Override
     public List<MfrsDO> list(Map<String, Object> map) {
         return mfrsDao.list(map);
@@ -37,7 +35,6 @@ public class MfrsServiceImpl implements MfrsService {
         return mfrsDao.count(map);
     }
 
-    //    <!--查询制造商-->
     @Override
     public List<MfrsDO> findMfrs(Map<String, Object> map) {
         return mfrsDao.findMfrs(map);
@@ -54,7 +51,6 @@ public class MfrsServiceImpl implements MfrsService {
         return mfrsDao.save(mfrs);
     }
 
-    //修改停用启用
     @Override
     public int update(MfrsDO mfrs) {
         return mfrsDao.update(mfrs);
@@ -70,9 +66,13 @@ public class MfrsServiceImpl implements MfrsService {
         return mfrsDao.batchRemove(mfrsids);
     }
 
-    //删除修改状态
     @Override
     public int updateState(MfrsDO mfrs) {
         return mfrsDao.updateState(mfrs);
+    }
+
+    @Override
+    public List<MfrsDO> getweiwailist(Map<String, Object> map) {
+        return mfrsDao.getweiwailist(map);
     }
 }

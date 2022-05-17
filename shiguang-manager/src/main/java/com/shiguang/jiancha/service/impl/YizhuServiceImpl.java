@@ -20,7 +20,6 @@ public class YizhuServiceImpl implements YizhuService {
         return yizhuDao.get(yizhuId);
     }
 
-    //医嘱
     @Override
     public List<YizhuDO> findYizhu(Map<String, Object> map) {
         return yizhuDao.findYizhu(map);

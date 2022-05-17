@@ -45,10 +45,8 @@ public class CompanyController {
 	private CompanyService companyService;
 	@Autowired
 	private BootdoConfig bootdoConfig;
-	//省
 	@Autowired
 	private ProvincesService provincesService;
-//	市
 	@Autowired
 	private CitiesService citiesService;
 
@@ -56,10 +54,8 @@ public class CompanyController {
 	@RequiresPermissions("mfrs:company:company")
 	String Company(Model model ){
 		Map<String, Object> map = new HashMap<>();
-		//省
 		List<ProvincesDO> provincesDOList = provincesService.list(map);
 		model.addAttribute("provincesDOList", provincesDOList);
-		//市
 		List<CitiesDO> citiesDOList = citiesService.list(map);
 		model.addAttribute("citiesDOList", citiesDOList);
 
@@ -83,10 +79,8 @@ public class CompanyController {
 	@RequiresPermissions("mfrs:company:add")
 	String add(Model model){
 		Map<String, Object> map = new HashMap<>();
-		//省
 		List<ProvincesDO> provincesDOList = provincesService.list(map);
 		model.addAttribute("provincesDOList", provincesDOList);
-//		市
 		List<CitiesDO> citiesDOList = citiesService.list(map);
 		model.addAttribute("citiesDOList", citiesDOList);
 	    return "mfrs/company/add";
@@ -98,10 +92,8 @@ public class CompanyController {
 		CompanyDO company = companyService.get(id);
 		model.addAttribute("company", company);
 		Map<String,Object> map = new HashMap<>();
-		//省
 		List<ProvincesDO> provincesDOList = provincesService.list(map);
 		model.addAttribute("provincesDOList", provincesDOList);
-		//		市
 		List<CitiesDO> citiesDOList = citiesService.list(map);
 		model.addAttribute("citiesDOList", citiesDOList);
 	    return "mfrs/company/edit";
@@ -114,39 +106,6 @@ public class CompanyController {
 	@PostMapping("/save")
 	@RequiresPermissions("mfrs:company:add")
 	public R save( CompanyDO company){
-//		try{
-//			MultipartFile file = company.getImgFile();
-//			if(file!=null && file.getSize()>0){
-//				String fileName = FileUtil.renameToUUID(file.getOriginalFilename());
-//				FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath()+"company/", fileName);
-//				company.setLogo("/files/company/"+fileName);
-//			}
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		try{
-//			MultipartFile file1 = company.getImgFile1();
-//			if(file1!=null && file1.getSize()>0){
-//				String fileName = FileUtil.renameToUUID(file1.getOriginalFilename());
-//				FileUtil.uploadFile(file1.getBytes(), bootdoConfig.getUploadPath()+"company/", fileName);
-//				company.setBackgroundimage("/files/company/"+fileName);
-//			}
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		try{
-//			MultipartFile file2= company.getImgFile2();
-//			if(file2!=null && file2.getSize()>0){
-//				String fileName = FileUtil.renameToUUID(file2.getOriginalFilename());
-//				FileUtil.uploadFile(file2.getBytes(), bootdoConfig.getUploadPath()+"company/", fileName);
-//				company.setDepartmentimage("/files/company/"+fileName);
-//			}
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//		}
-
-		//判断是否已存在
 		String name = company.getName();
 		Map<String, Object> map = new HashMap<>();
 		map.put("name",name);
@@ -167,9 +126,6 @@ public class CompanyController {
 	@RequestMapping("/update")
 	@RequiresPermissions("mfrs:company:edit")
 	public R update( CompanyDO company){
-//		String str = company.getProvince();
-//		String str1=str.substring(0, str.indexOf(","));
-//		company.setProvince(str1);
 		try{
 			MultipartFile file = company.getImgFile();
 			if(file!=null && file.getSize()>0){
@@ -209,29 +165,7 @@ public class CompanyController {
 		return R.ok();
 	}
 
-//	/**
-//	 * 删除
-//	 */
-//	@PostMapping( "/remove")
-//	@ResponseBody
-//	@RequiresPermissions("mfrs:company:remove")
-//	public R remove( Integer id){
-//		if(companyService.remove(id)>0){
-//		return R.ok();
-//		}
-//		return R.error();
-//	}
-//
-//	/**
-//	 * 删除
-//	 */
-//	@PostMapping( "/batchRemove")
-//	@ResponseBody
-//	@RequiresPermissions("mfrs:company:batchRemove")
-//	public R remove(@RequestParam("ids[]") Integer[] ids){
-//		companyService.batchRemove(ids);
-//		return R.ok();
-//	}
+
 	/**
 	 * 启用修改状态
 	 */

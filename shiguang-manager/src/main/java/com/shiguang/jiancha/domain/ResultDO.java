@@ -110,7 +110,6 @@ public class ResultDO implements Serializable {
     private String visitType;
     //删除状态0删除1未删除
     private String status;
-    //是否结算
     private String haveid;
 
     private String newOld;

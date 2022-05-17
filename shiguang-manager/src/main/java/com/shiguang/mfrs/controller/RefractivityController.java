@@ -69,7 +69,6 @@ public class RefractivityController {
     @RequiresPermissions("mfrs:refractivity:add")
     public R save(RefractivityDO refractivity) {
 
-        //判断是否已存在
         String refractivitynum = refractivity.getRefractivitynum();
         Map<String, Object> map = new HashMap<>();
         map.put("refractivitynum", refractivitynum);
@@ -120,19 +119,5 @@ public class RefractivityController {
         return R.ok();
     }
 
-//    /**
-//     * 删除修改状态
-//     */
-//    @ResponseBody
-//    @RequestMapping("/remove")
-//    @RequiresPermissions("mfrs:refractivity:remove")
-//    public R updateStatus(Integer refractivityid) {
-//        RefractivityDO refractivityDO = new RefractivityDO();
-//        refractivityDO.setState(0L);
-//        refractivityDO.setRefractivityid(refractivityid);
-//        if (refractivityService.updateState(refractivityDO) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
+
 }

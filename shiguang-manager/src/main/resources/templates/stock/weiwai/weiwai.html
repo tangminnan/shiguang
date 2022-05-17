@@ -26,38 +26,58 @@
 						<div class="columns pull-right">
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
 						</div>
-						<!--class="form-control"-->
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="day1" type="text" class="form-control"
+								   placeholder="开始日期">
+
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="day2" type="text" class="form-control"
+								   placeholder="结束日期">
+						</div>
 
 						<div class="columns pull-right col-md-1.5 nopadding">
-							<input id="danjuNumber" type="text"
-								   placeholder="单据编号">
+							<input id="salenumbery" type="text" class="form-control"
+								   placeholder="销售单号">
 						</div>
 						<div class="columns pull-right col-md-1.5 nopadding">
-							<input id="salenumbery" type="text"
-								   placeholder="原配镜单">
-						</div>
-						<div class="columns pull-right col-md-1.5 nopadding">
-							<input id="gkname" type="text"
+							<input id="gkname" type="text" class="form-control"
 								   placeholder="会员姓名">
 						</div>
+
 						<div class="columns pull-right col-md-1.5 nopadding">
-							<input id="hyknum" type="text"
-								   placeholder="会员卡号">
-						</div>
-						<div class="columns pull-right col-md-1.5 nopadding">
-							<input id="phone" type="text"
+							<input id="phone" type="text" class="form-control"
 								   placeholder="电话">
 						</div>
 						<div class="columns pull-right col-md-1.5 nopadding">
-							<input id="mfrsname" type="text"
-								   placeholder="制造商">
+							<select name="mfrsname" id="mfrsname" class="form-control" data-actions-box="false"
+									data-size="5">
+								<option value="">请选择制造商</option>
+								<option th:each="ls:${mfrsDOList}"
+										th:text="${ls.mfrsname}"
+										th:value="${ls.mfrsname}"></option>
+
+							</select>
 						</div>
-						<div class="columns pull-right col-md-4 nopadding">
-							<input id="day1" type="text"
-								   placeholder="开始日期">～
-							<input id="day2" type="text"
-								   placeholder="结束日期">
+						<div class="columns pull-right col-md-2 nopadding">
+							<select name="departname" id="departname" class="form-control" data-actions-box="false"
+									data-size="5">
+								<option value="">请选择销售门店</option>
+								<option th:each="ls:${departmentList}"
+										th:text="${ls.departName}"
+										th:value="${ls.departName}"></option>
+
+							</select>
 						</div>
+						<div class="columns pull-right col-md-1.5 nopadding">
+							<select id="eyeStyle" name="eyeStyle" class="form-control" data-actions-box="false"
+									data-size="5">
+									<option value="">请选择订做类型</option>
+									<option value="3">框镜订做</option>
+									<option value="4">隐形订做</option>
+							</select>
+						</div>
+
 
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
