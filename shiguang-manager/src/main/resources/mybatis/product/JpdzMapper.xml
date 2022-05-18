@@ -373,11 +373,9 @@
         </foreach>
     </delete>
 
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.JpdzDO">
     update aa_jpdz set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.JpdzDO">
         select produc_num from aa_jpdz where produc_num=#{producNum}   order by id
 	</select>

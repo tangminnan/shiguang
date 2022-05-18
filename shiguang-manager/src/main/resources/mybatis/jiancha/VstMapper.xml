@@ -374,13 +374,7 @@
 	<delete id="upremove">
 		delete from jc_vst where ptometry_number = #{ptometryNumber}
 	</delete>
-	<!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.VstDO">-->
-		<!--update jc_vst-->
-		<!--<set>-->
-			<!--<if test="status != null">`status` = #{status}</if>-->
-		<!--</set>-->
-		<!--where ptometry_number = #{ptometryNumber}-->
-	<!--</update>-->
+
 	<select id="chufangall" resultType="com.shiguang.jiancha.domain.VstDO">
 		select `vst_id`,`card_number`,`vst_prescription_type`,`vst_doctor`,`vst_optometry_name`,`vst_sdbhod`,`vst_sdbhos`,`vst_fkod`,`vst_fkos`,`vst_qlbjod`,
 		`vst_qlbjos`,`vst_acod`,`vst_acos`,`vst_jfod`,`vst_jfos`,`vst_diaod`,`vst_diaos`,`vst_bcod`,`vst_bcos`,`vst_cpclyod`,`vst_cpclyos`,`vst_eod`,`vst_eos`,

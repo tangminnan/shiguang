@@ -293,13 +293,7 @@
 	<delete id="upremove">
 		delete from jc_result where ptometry_number = #{ptometryNumber}
 	</delete>
-	<!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.ResultDO">-->
-		<!--update jc_result-->
-		<!--<set>-->
-			<!--<if test="status != null">`status` = #{status}</if>-->
-		<!--</set>-->
-		<!--where ptometry_number = #{ptometryNumber}-->
-	<!--</update>-->
+
 	
 	<delete id="batchRemove">
 		delete from jc_result where id in 

@@ -20,15 +20,12 @@ public class PidiaoDO implements Serializable {
 
 	//批调id
 	private Long id;
-	//商品信息id
 	private String goodsxinxiid;
-	//库存对应单据号
 	private String stockorder;
 	private String stockorders;
 	private String danzi;
 
 
-	//收货状态（0收货，1未收货）
 	private String status;
 	//工号
 	private String  username;
@@ -96,10 +93,8 @@ public class PidiaoDO implements Serializable {
 	private String money;
 	//收货时间
 	private String shTime;
-	//判断接收发出部门
 	private  String flags;
 	
-	//退回状态
 	private String returnzt;
 
 

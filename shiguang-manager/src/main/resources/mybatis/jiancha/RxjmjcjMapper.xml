@@ -280,13 +280,7 @@
     <delete id="upremove">
 		delete from jc_rxjmjcj where ptometry_number = #{ptometryNumber}
 	</delete>
-    <!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.RxjmjcjDO">-->
-        <!--update jc_rxjmjcj-->
-        <!--<set>-->
-            <!--<if test="status != null">`status` = #{status}</if>-->
-        <!--</set>-->
-        <!--where ptometry_number = #{ptometryNumber}-->
-    <!--</update>-->
+
 
     <delete id="batchRemove">
         delete from jc_rxjmjcj where rx_id in

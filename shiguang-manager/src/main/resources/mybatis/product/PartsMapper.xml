@@ -137,7 +137,6 @@
 			#{viewGoodName}
 		)
 	</insert>
-    <!--//修改停用启用-->
     <update id="update" parameterType="com.shiguang.product.domain.PartsDO">
         update aa_parts
         <set>
@@ -174,7 +173,6 @@
 		delete from aa_parts where id = #{value}
 	</delete>
 
-    <!-- 通过商品代码查询商品信息 -->
     <select id="getPartInfomation" resultType="com.shiguang.product.domain.PartsDO" >
       select
         p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,
@@ -191,7 +189,6 @@
             #{id}
         </foreach>
     </delete>
-    <!--查询配件制造商-->
     <select id="mglist" resultType="com.shiguang.product.domain.PartsDO">
 		select m.`mfrsid`,m.`mfrsnum`,m.`mfrsname`,m.`mfrscontacts`,m.`mfrsphone`,m.`mfrsfax` ,m.`mfrsaddress`
         from c_mfrs m left join c_goods g on g.goodsid=mg.goodsid
@@ -199,11 +196,9 @@
         group by m.mfrsid order by m.mfrsid desc
 	</select>
 
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.PartsDO">
     update aa_parts set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.PartsDO">
         select produc_num from aa_parts where produc_num=#{producNum}  order by id
 	</select>

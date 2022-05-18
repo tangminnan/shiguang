@@ -128,13 +128,7 @@
     <delete id="upremove">
 		delete from jc_yaopin  where ptometry_number = #{ptometryNumber}
 	</delete>
-    <!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.YaopinDO">-->
-        <!--update jc_yaopin-->
-        <!--<set>-->
-            <!--<if test="status != null">`status` = #{status}</if>-->
-        <!--</set>-->
-        <!--where ptometry_number = #{ptometryNumber}-->
-    <!--</update>-->
+
     <delete id="batchRemove">
         delete from jc_yaopin where yp_id in
         <foreach item="ypId" collection="array" open="(" separator="," close=")">

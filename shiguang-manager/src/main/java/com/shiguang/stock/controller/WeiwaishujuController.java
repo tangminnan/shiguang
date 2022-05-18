@@ -418,7 +418,6 @@ public class WeiwaishujuController {
 		return R.ok();
 	}
 
-//	//得到委外数据
 	@ResponseBody
 	@RequestMapping(value = "/getWeiwaiShuju")
 	public List<WeiwaishujuDO> getWeiwaiShuju(String number, Model model) {

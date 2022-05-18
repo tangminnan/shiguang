@@ -51,10 +51,8 @@ public class TuihuoDO implements Serializable {
 	private String count;
 	//商品条码
 	private String goodsCode;
-	//三种方式
 	private String style;
 	private String retailPrice;
-	//库存对应单据号
 	private String stockorder;
 
 	public String getStockorder() {

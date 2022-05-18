@@ -216,7 +216,6 @@ public class StockServiceImpl implements StockService {
         return stockDao.getGoodsNum(goodsNum);
     }
 
-    //<!--镜架【商】【品】【查】【询】-->
     @Override
     public List<ProducaDO> selectJingjia(Map<String, Object> map) {
         return stockDao.selectJingjia(map);
@@ -227,7 +226,6 @@ public class StockServiceImpl implements StockService {
         return stockDao.selectJingjiaCount(map);
     }
 
-    //<!--配件【商】【品】【查】【询】-->
     @Override
     public List<PartsDO> selectPeijian(Map<String, Object> map) {
         return stockDao.selectPeijian(map);
@@ -237,8 +235,6 @@ public class StockServiceImpl implements StockService {
     public int selectPeijianCount(Map<String, Object> map) {
         return stockDao.selectPeijianCount(map);
     }
-
-    //<!--镜片定做【商】【品】【查】【询】-->
     @Override
     public List<JpdzDO> selectJpdz(Map<String, Object> map) {
         return stockDao.selectJpdz(map);
@@ -248,8 +244,6 @@ public class StockServiceImpl implements StockService {
     public int selectJpdzCount(Map<String, Object> map) {
         return stockDao.selectJpdzCount(map);
     }
-
-    //<!--镜片成品【商】【品】【查】【询】-->
     @Override
     public List<JpcpDO> selectJpcp(Map<String, Object> map) {
         return stockDao.selectJpcp(map);
@@ -259,8 +253,6 @@ public class StockServiceImpl implements StockService {
     public int selectJpcpCount(Map<String, Object> map) {
         return stockDao.selectJpcpCount(map);
     }
-
-    //<!--隐形定做【商】【品】【查】【询】-->
     @Override
     public List<YxdzDO> selectYxdz(Map<String, Object> map) {
         return stockDao.selectYxdz(map);
@@ -270,8 +262,6 @@ public class StockServiceImpl implements StockService {
     public int selectYxdzCount(Map<String, Object> map) {
         return stockDao.selectYxdzCount(map);
     }
-
-    //<!--隐形成品【商】【品】【查】【询】-->
     @Override
     public List<YxcpDO> selectYxcp(Map<String, Object> map) {
         return stockDao.selectYxcp(map);
@@ -281,8 +271,6 @@ public class StockServiceImpl implements StockService {
     public int selectYxcpCount(Map<String, Object> map) {
         return stockDao.selectYxcpCount(map);
     }
-
-    //<!--护理液【商】【品】【查】【询】-->
     @Override
     public List<HlyDO> selectHly(Map<String, Object> map) {
         return stockDao.selectHly(map);
@@ -293,7 +281,6 @@ public class StockServiceImpl implements StockService {
         return stockDao.selectHlyCount(map);
     }
 
-    //<!--太阳镜【商】【品】【查】【询】-->
     @Override
     public List<TyjDO> selectTyj(Map<String, Object> map) {
         return stockDao.selectTyj(map);
@@ -303,8 +290,6 @@ public class StockServiceImpl implements StockService {
     public int selectTyjCount(Map<String, Object> map) {
         return stockDao.selectTyjCount(map);
     }
-
-    //<!--老花镜【商】【品】【查】【询】-->
     @Override
     public List<OldlensDO> selectLhj(Map<String, Object> map) {
         return stockDao.selectLhj(map);
@@ -314,8 +299,6 @@ public class StockServiceImpl implements StockService {
     public int selectLhjCount(Map<String, Object> map) {
         return stockDao.selectLhjCount(map);
     }
-
-    //<!--耗材【商】【品】【查】【询】-->
     @Override
     public List<HcDO> selectHc(Map<String, Object> map) {
         return stockDao.selectHc(map);
@@ -325,7 +308,6 @@ public class StockServiceImpl implements StockService {
     public int selectHcCount(Map<String, Object> map) {
         return stockDao.selectHcCount(map);
     }
-//<!--视光【商】【品】【查】【询】-->
 
     @Override
     public List<ShiguangDO> selectSg(Map<String, Object> map) {
@@ -341,7 +323,6 @@ public class StockServiceImpl implements StockService {
     public int updateGoodsCount(StockDO stock) {
         return stockDao.updateGoodsCount(stock);
     }
-    //判断是否存在商品信息
 
     @Override
     public StockDO getProduceCode(StockDO stockDO) {
@@ -358,7 +339,6 @@ public class StockServiceImpl implements StockService {
         return stockDao.haveNum(stockDO);
     }
 
-    //    【库存查询】
     @Override
     public List<StockDO> kccxList(Map<String, Object> map) {
         return stockDao.kccxList(map);
@@ -462,13 +442,10 @@ public class StockServiceImpl implements StockService {
 
 
 
-    /**
-     * excel数据导入
-     */
+
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED)
     public R importStock(Integer goodsType, String positionId, String beizhu,String checkType,String dzlx, MultipartFile file) {
-        System.out.println("==============file================" + file);
         int num = 0;
         String sl = "";
         InputStream in = null;
@@ -482,7 +459,6 @@ public class StockServiceImpl implements StockService {
                 Sheet sheet = book.getSheetAt(0);
                 Row row;
                 int lastnum = sheet.getLastRowNum();
-                //判断导入的Excel中是否有未填项
                 for (int a = 2; a <= sheet.getLastRowNum(); a++) {
                     row = sheet.getRow(a);
                     if (ExcelUtils.getCellFormatValue(row.getCell((short) 0)) != "" &&
@@ -494,23 +470,17 @@ public class StockServiceImpl implements StockService {
                         return R.error("Excel中有部分基本信息数据为空，请检查好重新导入");
                 }
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-
-
-
-
-                         //———生成单据编号————
                 Long uuid = GuuidUtil.getUUID();
                 String danjuNumber = "PIN" + uuid.toString();
                 for (int rowNum = 2; rowNum <= sheet.getLastRowNum(); rowNum++) {
                     try {
                         row = sheet.getRow(rowNum);
-                        String goodsNums = ExcelUtils.getCellFormatValue(row.getCell((short) 0)).replaceAll("[\t\n' ']", "");    // 代码
-                        String counts  = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");    //  数量
-                        String usedays= ExcelUtils.getCellFormatValue(row.getCell((short) 2)).replaceAll("[\t\n' ']", "");    //  效期
-                        String batchs= ExcelUtils.getCellFormatValue(row.getCell((short) 3)).replaceAll("[\t\n' ']", "");    // 批号
+                        String goodsNums = ExcelUtils.getCellFormatValue(row.getCell((short) 0)).replaceAll("[\t\n' ']", "");
+                        String counts  = ExcelUtils.getCellFormatValue(row.getCell((short) 1)).replaceAll("[\t\n' ']", "");
+                        String usedays= ExcelUtils.getCellFormatValue(row.getCell((short) 2)).replaceAll("[\t\n' ']", "");
+                        String batchs= ExcelUtils.getCellFormatValue(row.getCell((short) 3)).replaceAll("[\t\n' ']", "");
                         Integer goodstype=goodsType;
                         String styles=dzlx;
-
                         if (goodstype==1){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
@@ -518,7 +488,6 @@ public class StockServiceImpl implements StockService {
                             if(jingjias==null){
                                 sl = sl + "," + String.valueOf(rowNum - 1);
                             }
-
                             String goodsNum=jingjias.getProducNum();
                             String goodsCode=jingjias.getProducCode();
                             String goodsName=jingjias.getViewGoodName()+"-型号:"+jingjias.getProducFactory()+"-色号:"+jingjias.getProducFactorycolor()+"-标价:"+jingjias.getRetailPrice();
@@ -531,32 +500,22 @@ public class StockServiceImpl implements StockService {
                                 factory="";
                             }
                             String classtype=jingjias.getClasstype();
-
                             stockDO.setPositionId(positionId);
                             stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
-
                             stockDO.setGoodsNum(goodsNum);
-
                             stockDO.setGoodsName(goodsName);
                             stockDO.setBrandname(brandname);
                             stockDO.setRetailPrice(retailPrice);
                             stockDO.setUnit(unitname);
                             stockDO.setMfrsid(mfrsid);
-                            //型号
                             stockDO.setFactory(factory);
-
-                            //类型
                             stockDO.setClasstype(classtype);
-                            //数量
                             stockDO.setGoodsCount(counts);
-                            //批号
                             stockDO.setBatch(batchs);
-                            //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
@@ -565,12 +524,11 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeahs = str.substring(0, 4); //取年
-                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
-                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
-                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    String yeahs = str.substring(0, 4);
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月"));
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日"));
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
                             stockDO.setUseday(xiaoqi);
@@ -592,41 +550,19 @@ public class StockServiceImpl implements StockService {
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
-                            //———入库时间—————
-                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                             Date date = new Date();
                             String createTime = createTimenew.format(date);
                             stockDO.setCreateTime(createTime);
                             stockDO.setDanjuNumber(danjuNumber);
-                            //------制单人------
                             String zhidanPeople= ShiroUtils.getUser().getName();
                             stockDO.setZhidanPeople(zhidanPeople);
-                            //---单据日期--
                             stockDO.setDanjuDay(createTime);
-                            //收货状态
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-//                            //判断是否已存在商品
-//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-//                            if (null != goodsNumList) {
-//                                String gdcount = goodsNumList.getGoodsCount();
-//                                String  goodsCountNew = counts;
-//                                Integer gdcountNew = Integer.parseInt(gdcount);
-//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-//                                Double newGoodsCount = gdcountNew + goodsCountNews;
-//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-//
-//                                stockDao.updateGoodsCount(stockDO);//修改数量
-//                            } else if(null == goodsNumList) {
-//                                stockDao.save(stockDO);
-//                            }
-//                            stockDao.save(stockDO);
-
-//-----------------------------采购订单--------------------
                             OrderDO orderDO = new OrderDO();
                             orderDO.setGoodsNum(goodsNum);
-//                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
                             if (batchs !="" && batchs !=null){
                                 orderDO.setGoodsCode(goodsCode+batchsNew);
@@ -652,12 +588,10 @@ public class StockServiceImpl implements StockService {
                             orderDO.setStatus("1");
                             orderDO.setUsername("未收货");
                             orderDO.setReturnzt("1");
-
                             if (orderDao.save(orderDO) < 0) {
                                 return R.error();
                             }
                             num++;
-
                         }else if (goodstype==2){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
@@ -677,31 +611,22 @@ public class StockServiceImpl implements StockService {
                                 factory="";
                             }
                             String classtype=peijians.getClasstype();
-
                             stockDO.setPositionId(positionId);
                             stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
-
                             stockDO.setGoodsNum(goodsNum);
-
                             stockDO.setGoodsName(goodsName);
                             stockDO.setBrandname(brandname);
                             stockDO.setRetailPrice(retailPrice);
                             stockDO.setUnit(unitname);
                             stockDO.setMfrsid(mfrsid);
-                            //型号
                             stockDO.setFactory(factory);
-                            //类型
                             stockDO.setClasstype(classtype);
-                            //数量
                             stockDO.setGoodsCount(counts);
-                            //批号
                             stockDO.setBatch(batchs);
-                            //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
@@ -710,12 +635,11 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeahs = str.substring(0, 4); //取年
-                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
-                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
-                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    String yeahs = str.substring(0, 4);
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月"));
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日"));
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
                             stockDO.setUseday(xiaoqi);
@@ -737,41 +661,19 @@ public class StockServiceImpl implements StockService {
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
-                            //———入库时间—————
                             SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
                             Date date = new Date();
                             String createTime = createTimenew.format(date);
                             stockDO.setCreateTime(createTime);
                             stockDO.setDanjuNumber(danjuNumber);
-                            //------制单人------
                             String zhidanPeople= ShiroUtils.getUser().getName();
                             stockDO.setZhidanPeople(zhidanPeople);
-                            //---单据日期--
                             stockDO.setDanjuDay(createTime);
-                            //收货状态
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-//                            //判断是否已存在商品
-//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-//                            if (null != goodsNumList) {
-//                                String gdcount = goodsNumList.getGoodsCount();
-//                                String  goodsCountNew = counts;
-//                                Integer gdcountNew = Integer.parseInt(gdcount);
-//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-//                                Double newGoodsCount = gdcountNew + goodsCountNews;
-//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-//
-//                                stockDao.updateGoodsCount(stockDO);//修改数量
-//                            } else if(null == goodsNumList) {
-//                                stockDao.save(stockDO);
-//                            }
-//                            stockDao.save(stockDO);
-
-//-----------------------------采购订单--------------------
                             OrderDO orderDO = new OrderDO();
                             orderDO.setGoodsNum(goodsNum);
-//                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
                             if (batchs !="" && batchs !=null){
                                 orderDO.setGoodsCode(goodsCode+batchsNew);
@@ -797,12 +699,10 @@ public class StockServiceImpl implements StockService {
                             orderDO.setStatus("1");
                             orderDO.setUsername("未收货");
                             orderDO.setReturnzt("1");
-
                             if (orderDao.save(orderDO) < 0) {
                                 return R.error();
                             }
                             num++;
-
                         }else if (goodstype==3){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
@@ -832,31 +732,22 @@ public class StockServiceImpl implements StockService {
                                 factory="";
                             }
                             String classtype=jingpians.getClasstype();
-
                             stockDO.setPositionId(positionId);
                             stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
-
                             stockDO.setGoodsNum(goodsNum);
-
                             stockDO.setGoodsName(goodsName);
                             stockDO.setBrandname(brandname);
                             stockDO.setRetailPrice(retailPrice);
                             stockDO.setUnit(unitname);
                             stockDO.setMfrsid(mfrsid);
-                            //型号
                             stockDO.setFactory(factory);
-                            //类型
                             stockDO.setClasstype(classtype);
-                            //数量
                             stockDO.setGoodsCount(counts);
-                            //批号
                             stockDO.setBatch(batchs);
-                            //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
@@ -865,21 +756,14 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeahs = str.substring(0, 4); //取年
-                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
-                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
-                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    String yeahs = str.substring(0, 4);
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月"));
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日"));
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
                             stockDO.setUseday(xiaoqi);
-//                            if (usedays !="" && usedays !=null){
-//                                stockDO.setGoodsCode(goodsCode+code);
-//                            }else {
-//                                stockDO.setGoodsCode(goodsCode+"00000000");
-//                            }
-
                             String batchsNew="";
                             if (batchs !="" && batchs !=null){
                                 Integer bacthLength=batchs.length();
@@ -898,41 +782,19 @@ public class StockServiceImpl implements StockService {
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
-                            //———入库时间—————
-                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                             Date date = new Date();
                             String createTime = createTimenew.format(date);
                             stockDO.setCreateTime(createTime);
                             stockDO.setDanjuNumber(danjuNumber);
-                            //------制单人------
                             String zhidanPeople= ShiroUtils.getUser().getName();
                             stockDO.setZhidanPeople(zhidanPeople);
-                            //---单据日期--
                             stockDO.setDanjuDay(createTime);
-                            //收货状态
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-//                            //判断是否已存在商品
-//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-//                            if (null != goodsNumList) {
-//                                String gdcount = goodsNumList.getGoodsCount();
-//                                String  goodsCountNew = counts;
-//                                Integer gdcountNew = Integer.parseInt(gdcount);
-//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-//                                Double newGoodsCount = gdcountNew + goodsCountNews;
-//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-//
-//                                stockDao.updateGoodsCount(stockDO);//修改数量
-//                            } else if(null == goodsNumList) {
-//                                stockDao.save(stockDO);
-//                            }
-//                            stockDao.save(stockDO);
-
-//-----------------------------采购订单--------------------
                             OrderDO orderDO = new OrderDO();
                             orderDO.setGoodsNum(goodsNum);
-//                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
                             if (batchs !="" && batchs !=null){
                                 orderDO.setGoodsCode(goodsCode+batchsNew);
@@ -958,7 +820,6 @@ public class StockServiceImpl implements StockService {
                             orderDO.setStatus("1");
                             orderDO.setUsername("未收货");
                             orderDO.setReturnzt("1");
-
                             if (orderDao.save(orderDO) < 0) {
                                 return R.error();
                             }
@@ -984,7 +845,6 @@ public class StockServiceImpl implements StockService {
                             }
                             String goodsNum=yinxings.getProducNum();
                             String goodsCode=yinxings.getProducCode();
-
                             String mfrsid=yinxings.getMfrsid();
                             String brandname=yinxings.getBrandname();
                             String retailPrice=yinxings.getRetailPrice();
@@ -994,31 +854,22 @@ public class StockServiceImpl implements StockService {
                                 factory="";
                             }
                             String classtype=yinxings.getClasstype();
-
                             stockDO.setPositionId(positionId);
                             stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
-
                             stockDO.setGoodsNum(goodsNum);
-
                             stockDO.setGoodsName(goodsName);
                             stockDO.setBrandname(brandname);
                             stockDO.setRetailPrice(retailPrice);
                             stockDO.setUnit(unitname);
                             stockDO.setMfrsid(mfrsid);
-                            //型号
                             stockDO.setFactory(factory);
-                            //类型
                             stockDO.setClasstype(classtype);
-                            //数量
                             stockDO.setGoodsCount(counts);
-                            //批号
                             stockDO.setBatch(batchs);
-                            //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
@@ -1027,12 +878,11 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeahs = str.substring(0, 4); //取年
-                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
-                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
-                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    String yeahs = str.substring(0, 4);
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月"));
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日"));
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
                             stockDO.setUseday(xiaoqi);
@@ -1054,41 +904,19 @@ public class StockServiceImpl implements StockService {
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
-                            //———入库时间—————
                             SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
                             Date date = new Date();
                             String createTime = createTimenew.format(date);
                             stockDO.setCreateTime(createTime);
                             stockDO.setDanjuNumber(danjuNumber);
-                            //------制单人------
                             String zhidanPeople= ShiroUtils.getUser().getName();
                             stockDO.setZhidanPeople(zhidanPeople);
-                            //---单据日期--
                             stockDO.setDanjuDay(createTime);
-                            //收货状态
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-//                            //判断是否已存在商品
-//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-//                            if (null != goodsNumList) {
-//                                String gdcount = goodsNumList.getGoodsCount();
-//                                String  goodsCountNew = counts;
-//                                Integer gdcountNew = Integer.parseInt(gdcount);
-//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-//                                Double newGoodsCount = gdcountNew + goodsCountNews;
-//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-//
-//                                stockDao.updateGoodsCount(stockDO);//修改数量
-//                            } else if(null == goodsNumList) {
-//                                stockDao.save(stockDO);
-//                            }
-//                            stockDao.save(stockDO);
-
-//-----------------------------采购订单--------------------
                             OrderDO orderDO = new OrderDO();
                             orderDO.setGoodsNum(goodsNum);
-//                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
                             if (batchs !="" && batchs !=null){
                                 orderDO.setGoodsCode(goodsCode+batchs);
@@ -1114,7 +942,6 @@ public class StockServiceImpl implements StockService {
                             orderDO.setStatus("1");
                             orderDO.setUsername("未收货");
                             orderDO.setReturnzt("1");
-
                             if (orderDao.save(orderDO) < 0) {
                                 return R.error();
                             }
@@ -1139,31 +966,22 @@ public class StockServiceImpl implements StockService {
                                 factory="";
                             }
                             String classtype=huliyes.getClasstype();
-
                             stockDO.setPositionId(positionId);
                             stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
-
                             stockDO.setGoodsNum(goodsNum);
-
                             stockDO.setGoodsName(goodsName);
                             stockDO.setBrandname(brandname);
                             stockDO.setRetailPrice(retailPrice);
                             stockDO.setUnit(unitname);
                             stockDO.setMfrsid(mfrsid);
-                            //型号
                             stockDO.setFactory(factory);
-                            //类型
                             stockDO.setClasstype(classtype);
-                            //数量
                             stockDO.setGoodsCount(counts);
-                            //批号
                             stockDO.setBatch(batchs);
-                            //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
@@ -1172,12 +990,11 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeahs = str.substring(0, 4); //取年
-                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
-                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
-                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    String yeahs = str.substring(0, 4);
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月"));
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日"));
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
                             stockDO.setUseday(xiaoqi);
@@ -1199,41 +1016,19 @@ public class StockServiceImpl implements StockService {
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
-                            //———入库时间—————
                             SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
                             Date date = new Date();
                             String createTime = createTimenew.format(date);
                             stockDO.setCreateTime(createTime);
                             stockDO.setDanjuNumber(danjuNumber);
-                            //------制单人------
                             String zhidanPeople= ShiroUtils.getUser().getName();
                             stockDO.setZhidanPeople(zhidanPeople);
-                            //---单据日期--
                             stockDO.setDanjuDay(createTime);
-                            //收货状态
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-//                            //判断是否已存在商品
-//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-//                            if (null != goodsNumList) {
-//                                String gdcount = goodsNumList.getGoodsCount();
-//                                String  goodsCountNew = counts;
-//                                Integer gdcountNew = Integer.parseInt(gdcount);
-//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-//                                Double newGoodsCount = gdcountNew + goodsCountNews;
-//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-//
-//                                stockDao.updateGoodsCount(stockDO);//修改数量
-//                            } else if(null == goodsNumList) {
-//                                stockDao.save(stockDO);
-//                            }
-//                            stockDao.save(stockDO);
-
-//-----------------------------采购订单--------------------
                             OrderDO orderDO = new OrderDO();
                             orderDO.setGoodsNum(goodsNum);
-//                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
                             if (batchs !="" && batchs !=null){
                                 orderDO.setGoodsCode(goodsCode+batchsNew);
@@ -1259,12 +1054,10 @@ public class StockServiceImpl implements StockService {
                             orderDO.setStatus("1");
                             orderDO.setUsername("未收货");
                             orderDO.setReturnzt("1");
-
                             if (orderDao.save(orderDO) < 0) {
                                 return R.error();
                             }
                             num++;
-
                         }else if (goodstype==6){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
@@ -1284,31 +1077,22 @@ public class StockServiceImpl implements StockService {
                                 factory="";
                             }
                             String classtype=taiyangjings.getClasstype();
-
                             stockDO.setPositionId(positionId);
                             stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
-
                             stockDO.setGoodsNum(goodsNum);
-
                             stockDO.setGoodsName(goodsName);
                             stockDO.setBrandname(brandname);
                             stockDO.setRetailPrice(retailPrice);
                             stockDO.setUnit(unitname);
                             stockDO.setMfrsid(mfrsid);
-                            //型号
                             stockDO.setFactory(factory);
-                            //类型
                             stockDO.setClasstype(classtype);
-                            //数量
                             stockDO.setGoodsCount(counts);
-                            //批号
                             stockDO.setBatch(batchs);
-                            //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
@@ -1317,12 +1101,11 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeahs = str.substring(0, 4); //取年
-                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
-                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
-                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    String yeahs = str.substring(0, 4);
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月"));
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日"));
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
                             stockDO.setUseday(xiaoqi);
@@ -1344,41 +1127,19 @@ public class StockServiceImpl implements StockService {
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
-                            //———入库时间—————
                             SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
                             Date date = new Date();
                             String createTime = createTimenew.format(date);
                             stockDO.setCreateTime(createTime);
                             stockDO.setDanjuNumber(danjuNumber);
-                            //------制单人------
                             String zhidanPeople= ShiroUtils.getUser().getName();
                             stockDO.setZhidanPeople(zhidanPeople);
-                            //---单据日期--
                             stockDO.setDanjuDay(createTime);
-                            //收货状态
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-//                            //判断是否已存在商品
-//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-//                            if (null != goodsNumList) {
-//                                String gdcount = goodsNumList.getGoodsCount();
-//                                String  goodsCountNew = counts;
-//                                Integer gdcountNew = Integer.parseInt(gdcount);
-//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-//                                Double newGoodsCount = gdcountNew + goodsCountNews;
-//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-//
-//                                stockDao.updateGoodsCount(stockDO);//修改数量
-//                            } else if(null == goodsNumList) {
-//                                stockDao.save(stockDO);
-//                            }
-//                            stockDao.save(stockDO);
-
-//-----------------------------采购订单--------------------
                             OrderDO orderDO = new OrderDO();
                             orderDO.setGoodsNum(goodsNum);
-//                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
                             if (batchs !="" && batchs !=null){
                                 orderDO.setGoodsCode(goodsCode+batchsNew);
@@ -1404,12 +1165,10 @@ public class StockServiceImpl implements StockService {
                             orderDO.setStatus("1");
                             orderDO.setUsername("未收货");
                             orderDO.setReturnzt("1");
-
                             if (orderDao.save(orderDO) < 0) {
                                 return R.error();
                             }
                             num++;
-
                         }else if (goodstype==7){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
@@ -1429,32 +1188,22 @@ public class StockServiceImpl implements StockService {
                                 factory="";
                             }
                             String classtype=laohuajings.getClasstype();
-
                             stockDO.setPositionId(positionId);
                             stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
-
                             stockDO.setGoodsNum(goodsNum);
-
                             stockDO.setGoodsName(goodsName);
                             stockDO.setBrandname(brandname);
                             stockDO.setRetailPrice(retailPrice);
                             stockDO.setUnit(unitname);
                             stockDO.setMfrsid(mfrsid);
-                            //型号
                             stockDO.setFactory(factory);
-                            //类型
                             stockDO.setClasstype(classtype);
-                            //数量
                             stockDO.setGoodsCount(counts);
-                            //批号
                             stockDO.setBatch(batchs);
-                            //效期
-                            //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
@@ -1463,12 +1212,11 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeahs = str.substring(0, 4); //取年
-                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
-                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
-                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    String yeahs = str.substring(0, 4);
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月"));
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日"));
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
                             stockDO.setUseday(xiaoqi);
@@ -1490,41 +1238,19 @@ public class StockServiceImpl implements StockService {
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
-                            //———入库时间—————
-                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                           SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                             Date date = new Date();
                             String createTime = createTimenew.format(date);
                             stockDO.setCreateTime(createTime);
                             stockDO.setDanjuNumber(danjuNumber);
-                            //------制单人------
                             String zhidanPeople= ShiroUtils.getUser().getName();
                             stockDO.setZhidanPeople(zhidanPeople);
-                            //---单据日期--
                             stockDO.setDanjuDay(createTime);
-                            //收货状态
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-//                            //判断是否已存在商品
-//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-//                            if (null != goodsNumList) {
-//                                String gdcount = goodsNumList.getGoodsCount();
-//                                String  goodsCountNew = counts;
-//                                Integer gdcountNew = Integer.parseInt(gdcount);
-//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-//                                Double newGoodsCount = gdcountNew + goodsCountNews;
-//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-//
-//                                stockDao.updateGoodsCount(stockDO);//修改数量
-//                            } else if(null == goodsNumList) {
-//                                stockDao.save(stockDO);
-//                            }
-//                            stockDao.save(stockDO);
-
-//-----------------------------采购订单--------------------
                             OrderDO orderDO = new OrderDO();
                             orderDO.setGoodsNum(goodsNum);
-//                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
                             if (batchs !="" && batchs !=null){
                                 orderDO.setGoodsCode(goodsCode+batchsNew);
@@ -1550,12 +1276,10 @@ public class StockServiceImpl implements StockService {
                             orderDO.setStatus("1");
                             orderDO.setUsername("未收货");
                             orderDO.setReturnzt("1");
-
                             if (orderDao.save(orderDO) < 0) {
                                 return R.error();
                             }
                             num++;
-
                         }else if (goodstype==8){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
@@ -1575,32 +1299,22 @@ public class StockServiceImpl implements StockService {
                                 factory="";
                             }
                             String classtype=haocais.getClasstype();
-
                             stockDO.setPositionId(positionId);
                             stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
-
                             stockDO.setGoodsNum(goodsNum);
-
                             stockDO.setGoodsName(goodsName);
                             stockDO.setBrandname(brandname);
                             stockDO.setRetailPrice(retailPrice);
                             stockDO.setUnit(unitname);
                             stockDO.setMfrsid(mfrsid);
-                            //型号
                             stockDO.setFactory(factory);
-                            //类型
                             stockDO.setClasstype(classtype);
-                            //数量
                             stockDO.setGoodsCount(counts);
-                            //批号
                             stockDO.setBatch(batchs);
-                            //效期
-                            //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
@@ -1609,12 +1323,11 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeahs = str.substring(0, 4); //取年
-                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
-                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
-                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    String yeahs = str.substring(0, 4);
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月"));
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日"));
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
                             stockDO.setUseday(xiaoqi);
@@ -1636,41 +1349,19 @@ public class StockServiceImpl implements StockService {
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
-                            //———入库时间—————
                             SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
                             Date date = new Date();
                             String createTime = createTimenew.format(date);
                             stockDO.setCreateTime(createTime);
                             stockDO.setDanjuNumber(danjuNumber);
-                            //------制单人------
                             String zhidanPeople= ShiroUtils.getUser().getName();
                             stockDO.setZhidanPeople(zhidanPeople);
-                            //---单据日期--
                             stockDO.setDanjuDay(createTime);
-                            //收货状态
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-//                            //判断是否已存在商品
-//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-//                            if (null != goodsNumList) {
-//                                String gdcount = goodsNumList.getGoodsCount();
-//                                String  goodsCountNew = counts;
-//                                Integer gdcountNew = Integer.parseInt(gdcount);
-//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-//                                Double newGoodsCount = gdcountNew + goodsCountNews;
-//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-//
-//                                stockDao.updateGoodsCount(stockDO);//修改数量
-//                            } else if(null == goodsNumList) {
-//                                stockDao.save(stockDO);
-//                            }
-//                            stockDao.save(stockDO);
-
-//-----------------------------采购订单--------------------
                             OrderDO orderDO = new OrderDO();
                             orderDO.setGoodsNum(goodsNum);
-//                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
                             if (batchs !="" && batchs !=null){
                                 orderDO.setGoodsCode(goodsCode+batchsNew);
@@ -1696,12 +1387,10 @@ public class StockServiceImpl implements StockService {
                             orderDO.setStatus("1");
                             orderDO.setUsername("未收货");
                             orderDO.setReturnzt("1");
-
                             if (orderDao.save(orderDO) < 0) {
                                 return R.error();
                             }
                             num++;
-
                         }else if (goodstype==9){
                             StockDO stockDO = new StockDO();
                             stockDO.setGoodsNum(goodsNums);
@@ -1721,32 +1410,21 @@ public class StockServiceImpl implements StockService {
                                 factory="";
                             }
                             String classtype=shiguangs.getClasstype();
-
                             stockDO.setPositionId(positionId);
                             stockDO.setBeizhu(beizhu);
                             stockDO.setGoodsType(goodsType);
-
                             stockDO.setGoodsNum(goodsNum);
-
                             stockDO.setGoodsName(goodsName);
                             stockDO.setBrandname(brandname);
                             stockDO.setRetailPrice(retailPrice);
                             stockDO.setUnit(unitname);
                             stockDO.setMfrsid(mfrsid);
-                            //型号
-                            stockDO.setFactory(factory);
-                            //类型
                             stockDO.setClasstype(classtype);
-                            //数量
                             stockDO.setGoodsCount(counts);
-                            //批号
                             stockDO.setBatch(batchs);
-                            //效期
-                            //效期
                             Date dd = new Date();
                             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             String xiaoqi="";
-//                            String code="";
                             if (StringUtils.isNotBlank(usedays)) {
                                 if (usedays.contains("-")) {
                                     dd = sdf.parse(usedays);
@@ -1755,12 +1433,11 @@ public class StockServiceImpl implements StockService {
                                     Date d = calendar.getTime();
                                     dd = DateUtils.addDays(d, Integer.parseInt(usedays.substring(0, usedays.indexOf("."))));
                                     String str = sdf.format(dd);
-                                    String yeahs = str.substring(0, 4); //取年
-                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());//年最后两位
-                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月")); //取月
-                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日")); //取日
+                                    String yeahs = str.substring(0, 4);
+                                    String yeah=yeahs.substring(yeahs.length()-2,yeahs.length());
+                                    String yue = str.substring(str.indexOf("年") + 1, str.indexOf("月"));
+                                    String ri = str.substring(str.indexOf("月") + 1, str.indexOf("日"));
                                     xiaoqi =yeahs + "-" + yue + "-" + ri;
-//                                    code = yeah+yue + ri+"AA";
                                 }
                             }
                             stockDO.setUseday(xiaoqi);
@@ -1782,41 +1459,19 @@ public class StockServiceImpl implements StockService {
                             }else {
                                 stockDO.setGoodsCode(goodsCode+"00000000");
                             }
-                            //———入库时间—————
-                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                             Date date = new Date();
                             String createTime = createTimenew.format(date);
                             stockDO.setCreateTime(createTime);
                             stockDO.setDanjuNumber(danjuNumber);
-                            //------制单人------
                             String zhidanPeople= ShiroUtils.getUser().getName();
                             stockDO.setZhidanPeople(zhidanPeople);
-                            //---单据日期--
                             stockDO.setDanjuDay(createTime);
-                            //收货状态
                             stockDO.setStatus("1");
                             stockDO.setUsername("未收货");
                             stockDO.setReturnzt("1");
-//                            //判断是否已存在商品
-//                            StockDO goodsNumList = stockDao.haveNum(stockDO);
-//                            if (null != goodsNumList) {
-//                                String gdcount = goodsNumList.getGoodsCount();
-//                                String  goodsCountNew = counts;
-//                                Integer gdcountNew = Integer.parseInt(gdcount);
-//                                Double goodsCountNews = Double.parseDouble(goodsCountNew);
-//                                Double newGoodsCount = gdcountNew + goodsCountNews;
-//                                stockDO.setGoodsCount(String.valueOf(newGoodsCount));
-//
-//                                stockDao.updateGoodsCount(stockDO);//修改数量
-//                            } else if(null == goodsNumList) {
-//                                stockDao.save(stockDO);
-//                            }
-//                            stockDao.save(stockDO);
-
-//-----------------------------采购订单--------------------
                             OrderDO orderDO = new OrderDO();
                             orderDO.setGoodsNum(goodsNum);
-//                            orderDO.setGoodsCode(goodsCode);
                             orderDO.setUseday(xiaoqi);
                             if (batchs !="" && batchs !=null){
                                 orderDO.setGoodsCode(goodsCode+batchsNew);
@@ -1842,7 +1497,6 @@ public class StockServiceImpl implements StockService {
                             orderDO.setStatus("1");
                             orderDO.setUsername("未收货");
                             orderDO.setReturnzt("1");
-
                             if (orderDao.save(orderDO) < 0) {
                                 return R.error();
                             }
@@ -1861,7 +1515,6 @@ public class StockServiceImpl implements StockService {
                 } else {
                     if (sl != "") {
                         return R.ok("上传成功,共增加[" + num + "]条,第" + sl + "行导入失败，原因：商品代码不存在");
-//                        return R.ok("上传成功,共增加[" + num + "]条");
                     } else {
                         return R.ok("上传成功,共增加[" + num + "]条");
                     }
@@ -1891,7 +1544,6 @@ public class StockServiceImpl implements StockService {
 
 
 
-    //判断名字是否都为汉字
     private boolean checkRealName(String realName) {
         if (StringUtils.isEmpty(realName)) {
             return false;

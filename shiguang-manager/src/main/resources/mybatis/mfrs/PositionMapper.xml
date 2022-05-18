@@ -6,7 +6,6 @@
     <select id="get" resultType="com.shiguang.mfrs.domain.PositionDO">
 		select `position_id`,`position_num`,`company_id`,`depart_number`,`depart_name`,`position_name`,`position_order`,`state_id`,`xsstate`,`state` from c_position where position_id = #{value}
 	</select>
-    <!--//判断是否存在制造商代码-->
     <select id="haveNum" resultType="com.shiguang.mfrs.domain.PositionDO">
         select P.*
         from c_position p
@@ -90,7 +89,6 @@
 			#{state}
 		)
 	</insert>
-    <!--//修改停用启用-->
     <update id="update" parameterType="com.shiguang.mfrs.domain.PositionDO">
         update c_position
         <set>
@@ -117,17 +115,14 @@
             #{positionId}
         </foreach>
     </delete>
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.mfrs.domain.PositionDO">
     update c_position set `state` = #{state} where position_id = #{positionId}
     </update>
 
-    <!-- 根据仓位代码查询仓位名称 -->
     <select id="getPositionNum" resultType="com.shiguang.mfrs.domain.PositionDO">
 		select `position_id`,`position_num`,`depart_number`,`depart_name`,`position_name`,`position_order`,`state_id`,`xsstate`,`state` from c_position where position_num = #{value}
     </select>
 
-    <!--库存查询相对应的仓库-->
     <select id="positionList" resultType="com.shiguang.mfrs.domain.PositionDO">
         select po.position_id, po.position_name,po.`position_num`  from c_position po
         join department d on po.depart_number=d.depart_number and po.company_id=d.company_id
@@ -146,7 +141,6 @@
     </select>
 
 
-    <!-- 根据仓位代码查询仓位名称 -->
     <select id="getComponid" resultType="com.shiguang.mfrs.domain.PositionDO">
           select company_id,depart_name,depart_number from department where depart_number=#{value}
     </select>

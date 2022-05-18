@@ -11,9 +11,7 @@
 		select `id`,`number`,`day`,`people`,`remarks`,`goodstype`,`classtypes`,`num`,`name`,`goods_num`,`goods_name`,`mfrsnum`,`mfrsname`,`brandnum`,`brandname`,`factory`,`old_price`,`new_price`,`flag` from all_retailprice
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
-			<!--<if test="number != null and number != ''"> and number = #{number} </if>-->
-			<!--<if test="day != null and day != ''"> and day = #{day} </if>-->
-			<!--<if test="people != null and people != ''"> and people = #{people} </if>-->
+
 			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
 			<if test="goodstype != null and goodstype != ''"> and goodstype = #{goodstype} </if>
 			<if test="classtypes != null and classtypes != ''"> and classtypes = #{classtypes} </if>
@@ -53,9 +51,7 @@
 		SELECT COUNT(DISTINCT number) FROM all_retailprice
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
-			<!--<if test="number != null and number != ''"> and number = #{number} </if>-->
-			<!--<if test="day != null and day != ''"> and day = #{day} </if>-->
-			<!--<if test="people != null and people != ''"> and people = #{people} </if>-->
+
 			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
 			<if test="goodstype != null and goodstype != ''"> and goodstype = #{goodstype} </if>
 			<if test="classtypes != null and classtypes != ''"> and classtypes = #{classtypes} </if>

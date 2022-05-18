@@ -211,7 +211,6 @@
             #{id}
         </foreach>
     </delete>
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.mfrs.domain.CompanyDO">
     update c_company set `state` = #{state} where id = #{id}
     </update>

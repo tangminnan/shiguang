@@ -36,9 +36,7 @@ public interface PidiaoService {
 	PidiaoDO getOut(Long id);
 	PidiaoDO getIn(Long id);
 
-	//发出接收仓位
 	List<PidiaoDO> outPosition(Map<String, Object> map);
-	//发出接收部门
 	List<PidiaoDO> indepartment(Map<String, Object> map);
 
 	List<PidiaoDO> selectPidiao(Map<String, Object> map);
@@ -47,26 +45,18 @@ public interface PidiaoService {
 
 	List<PidiaoDO> getpidiaoList(Map<String, Object> map);
 
-	//确认收货
 	int updateStatus(PidiaoDO pidiaoDO);
 
-	//退回查询
 	List<PidiaoDO> returnList(Map<String, Object> map);
-	//退回修改状态
 	int updatereturnzt(PidiaoDO pidiaoDO);
-
-	//根据采购订单号查询库存有没有
 	List<PidiaoDO> pidiaodan(Map<String,Object>map);
 	int countall(Map<String, Object> map);
 
 	List<PidiaoDO> getCode(Map<String, Object> map);
 
-	//是否有这个单号
 	List<PidiaoDO> haveOrderNum(Map<String, Object> map);
 
 
-
-	//批调统计表
 	List<PidiaoDO> jingjiaSummary(Map<String, Object> map);
 	List<PidiaoDO> peijianSummary(Map<String, Object> map);
 	List<PidiaoDO> jpcpSummary(Map<String, Object> map);

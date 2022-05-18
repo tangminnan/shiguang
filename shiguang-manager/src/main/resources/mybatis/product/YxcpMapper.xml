@@ -229,11 +229,9 @@
         </foreach>
     </delete>
 
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.YxcpDO">
     update aa_yxcp set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.YxcpDO">
         select produc_num from aa_yxcp where produc_num=#{producNum}  order by id
 	</select>

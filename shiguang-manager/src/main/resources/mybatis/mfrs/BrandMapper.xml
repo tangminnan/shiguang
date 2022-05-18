@@ -257,13 +257,7 @@
             #{brandid}
         </foreach>
     </delete>
-    <!--菜单联动显示-->
-    <!--<select id="caidan" resultType="com.shiguang.mfrs.domain.GoodsDO">-->
-        <!--select g.goodsid,g.goodsname from c_goods g left join cc_mg mg on g.goodsid=mg.goodsid-->
-        <!--<where>-->
-            <!--<if test="mfrsid != null and mfrsid != ''">and mg.mfrsid = #{mfrsid}</if>-->
-        <!--</where>-->
-    <!--</select>-->
+
     <select id="caidan" resultType="com.shiguang.mfrs.domain.GoodsDO">
         select g.goodsid ,g.goodsname from c_mfrs m join c_goods g on
         FIND_IN_SET(g.goodsid,m.goodsid)
@@ -271,7 +265,6 @@
             <if test="mfrsid != null and mfrsid != ''">and m.mfrsid = #{mfrsid}</if>
         </where>
     </select>
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.mfrs.domain.BrandDO">
     update c_brand set `state` = #{state} where brandid = #{brandid}
     </update>
