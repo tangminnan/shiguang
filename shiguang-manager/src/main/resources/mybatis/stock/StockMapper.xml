@@ -235,7 +235,6 @@
         </set>
         where goods_num = #{goodsNum}
     </update>
-    <!--//修改库存数量-->
     <update id="updateGoodsCount" parameterType="com.shiguang.stock.domain.StockDO">
         update stock
         <set>
@@ -1139,7 +1138,6 @@
     <select id="getGoodsNum" resultType="com.shiguang.stock.domain.StockDO">
     select `id`,`goods_code`, goods_count as goodsCount  from stock where goods_code = #{value} group by goods_code
 </select>
-    <!--镜架【商】【品】【查】【询】-->
     <select id="selectJingjia" resultType="com.shiguang.product.domain.ProducaDO">
         select  p.produc_num,p.produc_name, b.brandnum,b.brandname,p.produc_factory,u.unitname,
         p.factory,p.retail_price,p.tax_price,p.produc_factorycolor,m.materialname,p.size,p.produc_code,
@@ -1152,7 +1150,6 @@
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
-            <!--<if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>-->
             <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
 
             <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
@@ -1188,7 +1185,6 @@
             limit #{offset}, #{limit}
         </if>
     </select>
-    <!--镜架【商】【品】【查】【询】【List】-->
     <select id="selectJingjiaCount" resultType="int">
         select count(*)  from aa_produca p left join c_unit u on p.unitid=u.unitid
         left join c_material m on p.materialid=m.materialid
@@ -1198,7 +1194,6 @@
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
-            <!--<if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>-->
             <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
 
             <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
@@ -1222,7 +1217,6 @@
         </where>
         order by p.id desc
     </select>
-    <!--配件【商】【品】【查】【询】-->
     <select id="selectPeijian" resultType="com.shiguang.product.domain.PartsDO">
         select  p.produc_num,p.produc_name, b.brandnum,b.brandname,p.produc_factory,u.unitname,
         p.factory,p.retail_price,p.tax_price,p.parts_style,p.produc_code,
@@ -1284,7 +1278,6 @@
         </where>
         order by p.id desc
     </select>
-    <!--镜片定做【商】【品】【查】【询】-->
     <select id="selectJpdz" resultType="com.shiguang.product.domain.JpdzDO">
         SELECT
         j.produc_num,
@@ -1395,7 +1388,6 @@
         </where>
         order by j.id desc
     </select>
-    <!--镜片成品【商】【品】【查】【询】-->
     <select id="selectJpcp" resultType="com.shiguang.product.domain.JpcpDO">
         SELECT
         j.produc_num,
@@ -1501,7 +1493,6 @@
         </where>
         order by j.id desc
     </select>
-    <!--隐形订做【商】【品】【查】【询】-->
     <select id="selectYxdz" resultType="com.shiguang.product.domain.YxdzDO">
         select
         y.produc_num,y.produc_name, y.produc_code,u.unitname,y.factory,y.retail_price,y.tax_price,y.sph_up,y.sph_down,y.cyl_up,y.cyl_down,
@@ -1574,7 +1565,6 @@
         </where>
         order by y.id desc
     </select>
-    <!--隐形成品【商】【品】【查】【询】-->
     <select id="selectYxcp" resultType="com.shiguang.product.domain.YxcpDO">
         SELECT
         y.produc_num,
@@ -1671,7 +1661,6 @@
     </select>
 
 
-    <!--护理液【商】【品】【查】【询】-->
     <select id="selectHly" resultType="com.shiguang.product.domain.HlyDO">
         select
         h.produc_num,  h.produc_name,  b.brandnum, b.brandname,h.produc_factory,h.factory,u.unitname,h.retail_price,h.tax_price,h.main_capacity,h.second_capacity,h.produc_code,
@@ -1735,7 +1724,6 @@
         </where>
         order by h.id desc
     </select>
-    <!--太阳镜【商】【品】【查】【询】-->
     <select id="selectTyj" resultType="com.shiguang.product.domain.TyjDO">
         SELECT
         t.produc_num,
@@ -1826,7 +1814,6 @@
         </where>
         order by t.id desc
     </select>
-    <!--老花镜【商】【品】【查】【询】-->
     <select id="selectLhj" resultType="com.shiguang.product.domain.OldlensDO">
         SELECT
         o.produc_num,
@@ -1918,7 +1905,6 @@
         </where>
         order by o.id desc
     </select>
-    <!--耗材【商】【品】【查】【询】-->
     <select id="selectHc" resultType="com.shiguang.product.domain.HcDO">
         select  h.produc_num,h.produc_name, h.produc_code, b.brandnum,b.brandname,u.unitname,h.retail_price,h.tax_price,h.produc_factory,
         h.produc_factory as factoty,
@@ -1978,7 +1964,6 @@
         </where>
         order by h.id desc
     </select>
-    <!--视光【商】【品】【查】【询】-->
     <select id="selectSg" resultType="com.shiguang.product.domain.ShiguangDO">
         select
         s.produc_num,s.produc_name, s.produc_code, b.brandnum,b.brandname,s.factory,s.produc_factory,u.unitname,s.retail_price,s.tax_price,
@@ -2041,7 +2026,6 @@
         </where>
         order by s.id desc
     </select>
-    <!--【是否已存在商品信息】-->
     <select id="haveNum" resultType="com.shiguang.stock.domain.StockDO">
         select  * from stock
          <where>
@@ -2058,7 +2042,6 @@
 
 
 
-    <!--【库存查询】-->
     <select id="kccxList" resultType="com.shiguang.stock.domain.StockDO">
     SELECT
     s.danju_number,
@@ -2458,7 +2441,6 @@
             <if test="goodsType != null and goodsType != ''">and o.goods_type = #{goodsType}</if>
         </where>
     </select>
-<!--a.retail_price,a.tax_price as costPrice,a.trade_price as wholePrice,a.transfer_price,-->
     <select id="jingjias" resultType="com.shiguang.stock.domain.StockDO">
         SELECT
 	a.produc_num,

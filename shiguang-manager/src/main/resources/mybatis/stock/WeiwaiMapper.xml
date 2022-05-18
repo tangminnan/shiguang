@@ -978,29 +978,7 @@
         </foreach>
     </select>
 
-    <!--<select id="weiwaiOrderOut" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
-        <!--SELECT * FROM stock_weiwai WHERE CONCAT(danju_number,sale_number) IN  #{arrys}-->
-    <!--</select>-->
-    <!--<select id="weiwaiOrderOut" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
-        <!--select * from stock_weiwai-->
-        <!--<where>-->
-            <!--<if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>-->
-            <!--<if test="saleNumber != null and saleNumber != ''">and sale_number = #{saleNumber}</if>-->
-        <!--</where>-->
-    <!--</select>-->
-    <!--<select id="weiwaiOrderOut" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
-        <!--select * from stock_weiwai-->
-        <!--where-->
-        <!--danju_number in-->
-        <!--<foreach item="danjuNumber" collection="danjuNumbers" open="(" separator="," close=")">-->
-        <!--#{danjuNumber}-->
-        <!--</foreach>-->
-        <!--and sale_number in-->
-        <!--<foreach item="saleNumber" collection="saleNumbers" open="(" separator="," close=")">-->
-        <!--#{saleNumber}-->
-        <!--</foreach>-->
 
-    <!--</select>-->
 
     <select id="getBrandJp" resultType="com.shiguang.product.domain.JpdzDO">
       select b.brandnum,b.brandname ,jpdz.view_good_name from   aa_jpdz jpdz join c_brand b on jpdz.mfrsid=b.mfrsid and jpdz.brandnum=b.brandnum
@@ -1039,82 +1017,6 @@
 
 
 
-    <!--<select id="weiwailist" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
-		<!--select s.sale_number,s.member_number,m.name,m.phone_1,sa.eye_type,s.settle_date,sa.sale_name-->
-		<!--from settlement s-->
-		<!--left join member m on s.member_number=m.card_number-->
-		<!--left join store_sales sa on s.sale_number=sa.sale_number-->
-	<!--</select>-->
-    <!--<select id="countList" resultType="int">-->
-        <!--select count(*)-->
-        <!--from settlement s-->
-        <!--left join member m on s.member_number=m.card_number-->
-        <!--left join store_sales sa on s.sale_number=sa.sale_number-->
-        <!--<where>-->
-            <!--<if test="id != null and id != ''">and s.id = #{id}</if>-->
-            <!--<if test="saleNumber != null and saleNumber != ''">and s.sale_number = #{saleNumber}</if>-->
-            <!--<if test="shouhuoNumber != null and shouhuoNumber != ''">and s.shouhuo_number = #{shouhuoNumber}</if>-->
-            <!--<if test="positionId != null and positionId != ''">and s.position_id = #{positionId}</if>-->
-            <!--<if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>-->
-            <!--<if test="name != null and name != ''">and s.name = #{name}</if>-->
-            <!--<if test="phone != null and phone != ''">and s.phone = #{phone}</if>-->
-            <!--<if test="dzStype != null and dzStype != ''">and s.dz_stype = #{dzStype}</if>-->
-            <!--<if test="mirrorTime != null and mirrorTime != ''">and s.mirror_time = #{mirrorTime}</if>-->
-            <!--<if test="eyeRight != null and eyeRight != ''">and s.eye_right = #{eyeRight}</if>-->
-            <!--<if test="eyeLeft != null and eyeLeft != ''">and s.eye_left = #{eyeLeft}</if>-->
-            <!--<if test="departNumber != null and departNumber != ''">and s.depart_number = #{departNumber}</if>-->
-            <!--<if test="sph != null and sph != ''">and s.sph = #{sph}</if>-->
-            <!--<if test="cyl != null and cyl != ''">and s.cyl = #{cyl}</if>-->
-            <!--<if test="goodsName != null and goodsName != ''">and s.goods_name = #{goodsName}</if>-->
-            <!--<if test="rl != null and rl != ''">and s.rl = #{rl}</if>-->
-            <!--<if test="goodsNum != null and goodsNum != ''">and s.goods_num = #{goodsNum}</if>-->
-            <!--<if test="factory != null and factory != ''">and s.factory = #{factory}</if>-->
-            <!--<if test="count != null and count != ''">and s.count = #{count}</if>-->
-            <!--<if test="goodsCode != null and goodsCode != ''">and s.goods_code = #{goodsCode}</if>-->
-        <!--</where>-->
-    <!--</select>-->
-    <!--<select id="selectDepartment" resultType="com.shiguang.baseinfomation.domain.DepartmentDO">-->
-	<!--select id,depart_name from department-->
-	<!--</select>-->
-
-
-
-    <!--&lt;!&ndash;打印委外框镜配镜单列表&ndash;&gt;-->
-    <!--<select id="jkPeijingdanList" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
-        <!--SELECT * FROM stock_weiwai-->
-        <!--<where>-->
-            <!--<if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>-->
-        <!--</where>-->
-    <!--</select>-->
-    <!--&lt;!&ndash;打印委外隐形配镜单&ndash;&gt;-->
-    <!--<select id="yxPeijingdan" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
-			  <!--SELECT * FROM stock_weiwai where danju_number = #{value}-->
-	<!--</select>-->
-    <!--&lt;!&ndash;打印委外框镜配镜单列表&ndash;&gt;-->
-    <!--<select id="yxPeijingdanList" resultType="com.shiguang.stock.domain.WeiwaiDO">-->
-    <!--SELECT * FROM stock_weiwai-->
-    <!--<where>-->
-        <!--<if test="danjuNumber != null and danjuNumber != ''">and danju_number = #{danjuNumber}</if>-->
-    <!--</where>-->
-    <!--</select>-->
-
-    <!--<select id="selectbrandnumjpdz" resultType="com.shiguang.product.domain.JpdzDO">-->
-		  <!--select a.mfrsid,a.brandnum ,b.brandname from  aa_jpdz a-->
-          <!--join c_brand b on a.mfrsid=b.mfrsid and a.brandnum=b.brandnum-->
-          <!--where a.produc_num=#{value}-->
-	<!--</select>-->
-    <!--<select id="selectbrandnumyxdz" resultType="com.shiguang.product.domain.YxdzDO">-->
-		  <!--select a.mfrsid,a.brandnum ,b.brandname from  aa_yxdz a-->
-          <!--join c_brand b on a.mfrsid=b.mfrsid and a.brandnum=b.brandnum-->
-          <!--where a.produc_num=#{value}-->
-	<!--</select>-->
-    <!--<select id="jkbrandname" resultType="com.shiguang.mfrs.domain.BrandDO">-->
-        <!--select brandname from c_brand-->
-        <!--<where>-->
-            <!--<if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>-->
-            <!--<if test="brandnum != null and brandnum != ''">and brandnum = #{brandnum}</if>-->
-        <!--</where>-->
-    <!--</select>-->
 
 
 </mapper>
