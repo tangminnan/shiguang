@@ -186,7 +186,6 @@ delete from aa_oldlens where id = #{value}
         </foreach>
     </delete>
 
-    <!-- 通过商品代码查询商品信息 -->
     <select id="getOldlenInfomation" resultType="com.shiguang.product.domain.OldlensDO">
                 select
         m.`mfrsname`,b.`brandname`,u.`unitname`,o.`id`,o.`produc_num`,o.`produc_code`,o.`produc_name`,o.`mfrsid`,o.`brandnum`,o.`brandid`,o.`factory`,o.`produc_factory`,
@@ -198,11 +197,9 @@ delete from aa_oldlens where id = #{value}
     </select>
 
 
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.OldlensDO">
           update aa_oldlens set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.OldlensDO">
         select produc_num from aa_oldlens where produc_num=#{producNum} and   order by id
 	</select>

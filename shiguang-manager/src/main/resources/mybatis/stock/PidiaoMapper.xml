@@ -71,8 +71,6 @@
 			<if test="day2 !=null and day2 != ''"> and date_format(p.danju_day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
 
 
-			<!--<if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>-->
-			<!--<if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>-->
 
 			<if test="(departNumber != null and departNumber != '')  ">
 				and (
@@ -153,9 +151,6 @@
 			 <if test="day1 !=null and day1 != ''"> and date_format(p.danju_day ,'%Y-%m-%d' ) >= (#{day1})</if>
 			 <if test="day2 !=null and day2 != ''"> and date_format(p.danju_day ,'%Y-%m-%d' ) &lt;= (#{day2})</if>
 
-
-			 <!--<if test="departNumber != null and departNumber != ''">and  p.in_departmentid  = #{departNumber}</if>-->
-			 <!--<if test="departNumber != null and departNumber != ''">or p.out_departmentid = #{departNumber}</if>-->
 
 			 <if test="(departNumber != null and departNumber != '')  ">
 				 and (
@@ -393,7 +388,6 @@
 		</where>
 		group by p.id
 	</select>
-	<!--确认收货-->
 	<update id="updateStatus" parameterType="com.shiguang.stock.domain.PidiaoDO">
 		update stock_pidiao
 		<set>
@@ -409,7 +403,6 @@
 		select * from stock_pidiao where pidiao_number = #{pidiaoNumber} group by id
 	</select>
 
-	<!--退回修改状态-->
 	<update id="updatereturnzt" parameterType="com.shiguang.stock.domain.PidiaoDO">
 		update stock_pidiao
 		<set>

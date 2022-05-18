@@ -306,13 +306,7 @@
     <delete id="upremove">
 		delete from jc_kjyy where ptometry_number = #{ptometryNumber}
 	</delete>
-    <!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.KjyyDO">-->
-        <!--update jc_kjyy-->
-        <!--<set>-->
-            <!--<if test="status != null">`status` = #{status}</if>-->
-        <!--</set>-->
-        <!--where ptometry_number = #{ptometryNumber}-->
-    <!--</update>-->
+
     <delete id="batchRemove">
         delete from jc_kjyy where kjyy_id in
         <foreach item="kjyyId" collection="array" open="(" separator="," close=")">

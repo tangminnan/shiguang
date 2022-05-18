@@ -952,7 +952,6 @@
             #{id}
         </foreach>
     </delete>
-    <!--//根据人查相对应的验光号医生时间等信息-->
     <select id="listUser" resultType="com.shiguang.jiancha.domain.TryresultsDO">
     select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,`chief_complaint`,
     `sphere_righttry`,`sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,`axial_lefttry`,`dva_righttry`,

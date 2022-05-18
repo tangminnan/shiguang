@@ -154,7 +154,6 @@
         </where>
 
     </select>
-    <!-- 根据商品代码查询商品信息 -->
     <select id="getShiguangInfomation" resultType="com.shiguang.product.domain.ShiguangDO">
         select m.mfrsname,b.brandname,u.unitname,
         s.`id`,s.`produc_num`,s.`produc_code`,s.`produc_name`,s.`mfrsid`,s.`brandid`,s.`brandnum`,s.`factory`,s.`produc_factory`,
@@ -260,11 +259,9 @@
         </foreach>
     </delete>
 
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.ShiguangDO">
     update aa_shiguang set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.ShiguangDO">
         select produc_num from aa_shiguang where produc_num=#{producNum}  order by id
 	</select>

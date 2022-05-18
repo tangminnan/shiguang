@@ -45,25 +45,18 @@ public interface WeiwaiService {
 
 	int batchRemove(Long[] ids);
 
-	//电话地址仓位
 	DepartmentDO phoneOrAddres(Map<String,Object> map);
-	//查询配镜单
 	List<SalesDO> selectOrder(Map<String, Object> map);
 	int selectOrderCount(Map<String, Object> map);
-	//	商品品牌信息
 	JpdzDO getBrandJp(String  num);
 	YxdzDO getBrandYx(String  num);
-	//委外详情列表
 	List<WeiwaiDO> selectWeiwaiOrder(Map<String, Object> map);
 
 
-	//<!--确认收货   [配送][][退回][][][]-->
 	int updateStatus(WeiwaiDO weiwaiDO);
 
-	//	//条码
 	WeiwaiDO getCode(String  danjuNumber);
 
-	//信息导出
 	List<WeiwaiDO>  weiwaiOrderOut(@Param("arrys") String[] arrys );
 
 	void weiwaiOut(@Param("arrys") String[] arrys,HttpServletRequest request, HttpServletResponse response);

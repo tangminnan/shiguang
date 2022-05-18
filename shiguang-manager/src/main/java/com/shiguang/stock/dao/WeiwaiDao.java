@@ -41,51 +41,20 @@ public interface WeiwaiDao {
 	int batchRemove(Long[] ids);
 
 
-	//电话地址仓位
 	DepartmentDO phoneOrAddres(Map<String,Object> map);
-	//查询配镜单
 	List<SalesDO> selectOrder(Map<String, Object> map);
 	int selectOrderCount(Map<String, Object> map);
-	//	商品品牌信息
 	JpdzDO getBrandJp(String  num);
 	YxdzDO getBrandYx(String  num);
-	//委外详情列表
 	List<WeiwaiDO> selectWeiwaiOrder(Map<String, Object> map);
 
-	//<!--确认收货   [配送][][退回][][][]-->
 	int updateStatus(WeiwaiDO weiwaiDO);
 
-	//	//条码
 	WeiwaiDO getCode(String  danjuNumber);
 
 
-	//信息导出
 	List<WeiwaiDO>  weiwaiOrderOut(@Param("arrys") String[] arrys );
 
 
-//	//配镜单
-//	List<WeiwaiDO> weiwailist(Map<String, Object> map);
-//	int countList(Map<String, Object> map);
-//
-//	//部门
-//	List<DepartmentDO> selectDepartment(Map<String,Object> map);
-////<!--确认收货   [配送][][退回][][][]-->
-//	int updateStatus(WeiwaiDO weiwaiDO);
-//
-//	//委外镜框配镜单
-//	WeiwaiDO jkPeijingdan(String danjuNumber);
-//	//委外框镜配镜单List
-//	List<WeiwaiDO> jkPeijingdanList(Map<String, Object> map);
-//
-//	//委外隐形配镜单
-//	WeiwaiDO yxPeijingdan(String danjuNumber);
-//	//委外隐形配镜单List
-//	List<WeiwaiDO> yxPeijingdanList(Map<String, Object> map);
-//	//确认收获库存偶没有
-//	WeiwaiDO weiwaiOrder(String  danjuNumber);
-//
-//
-//	//打印单查询品牌名称
-//	BrandDO jkbrandname(Map<String, Object> maps);
 
 }

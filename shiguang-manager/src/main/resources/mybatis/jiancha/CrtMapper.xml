@@ -355,13 +355,7 @@
 	<delete id="upremove">
 		delete from jc_crt where ptometry_number = #{ptometryNumber}
 	</delete>
-	<!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.CrtDO">-->
-		<!--update jc_crt-->
-		<!--<set>-->
-			<!--<if test="status != null">`status` = #{status}</if>-->
-		<!--</set>-->
-		<!--where ptometry_number = #{ptometryNumber}-->
-	<!--</update>-->
+
 
 	<select id="chufangall" resultType="com.shiguang.jiancha.domain.CrtDO">
 		select `crt_id`,`card_number`,`crt_prescription_type`,`crt_doctor`,`crt_optometry_name`,

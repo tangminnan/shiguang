@@ -17,18 +17,14 @@ public class OrderDO implements Serializable {
 
     //主键
     private Long id;
-    //商品信息id
     private String goodsxinxiid;
-    //库存对应单据号
     private String stockorder;
 
 
 
-    //状态
     private String status;
     //工号
     private String username;
-    //退回状态
     private String returnzt;
 
 

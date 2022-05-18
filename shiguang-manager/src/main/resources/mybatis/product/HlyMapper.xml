@@ -273,7 +273,6 @@
         </foreach>
     </delete>
 
-    <!-- 根据商品代码查询商品信息 -->
     <select id="getHlyInfomation" resultType="com.shiguang.product.domain.HlyDO">
                 select m.`mfrsname`,b.`brandname`,u.`unitname`,
         h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
@@ -285,11 +284,9 @@
     </select>
 
 
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.HlyDO">
     update aa_hly set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.HlyDO">
         select produc_num from aa_hly where produc_num=#{producNum} order by id
 	</select>

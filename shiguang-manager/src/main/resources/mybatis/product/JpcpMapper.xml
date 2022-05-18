@@ -12,7 +12,6 @@
         c_unit u on j.unitid= u.unitid
         where j.id = #{value}
     </select>
-    <!--//修改时显示制造商和商品品种名称-->
     <select id="list" resultType="com.shiguang.product.domain.JpcpDO">
         select
         j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
@@ -50,17 +49,6 @@
             <if test="(cyl2 != null and cyl2 != '') or (cyl != null and cyl != '')   ">
                 and j.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
             </if>
-
-
-
-            <!--<if test="sph != null and sph != ''">and  (j.sph_id) >=  (#{sph})</if>-->
-            <!--<if test="sph2 != null and sph2 != ''">and  (j.sph_id) &lt;=  (#{sph2})</if>-->
-
-
-            <!--<if test="cyl!= null and cyl != ''">and  (j.cyl_id) >=  (#{cyl})</if>-->
-            <!--<if test="cyl2 != null and cyl2 != ''">and  (j.cyl_id) &lt;=  (#{cyl2})</if>-->
-
-
 
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
@@ -119,15 +107,6 @@
             <if test="(cyl2 != null and cyl2 != '') or (cyl != null and cyl != '')   ">
                 and j.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
             </if>
-
-
-            <!--<if test="sph != null and sph != ''">and  (j.sph_id) >=  (#{sph})</if>-->
-            <!--<if test="sph2 != null and sph2 != ''">and  (j.sph_id) &lt;=  (#{sph2})</if>-->
-
-
-            <!--<if test="cyl!= null and cyl != ''">and  (j.cyl_id) >=  (#{cyl})</if>-->
-            <!--<if test="cyl2 != null and cyl2 != ''">and  (j.cyl_id) &lt;=  (#{cyl2})</if>-->
-
 
 
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
@@ -203,7 +182,6 @@
 			#{viewGoodName}
 		)
 	</insert>
-    <!--//修改停用启用-->
     <update id="update" parameterType="com.shiguang.product.domain.JpcpDO">
         update aa_jpcp
         <set>
@@ -252,7 +230,6 @@
         </foreach>
     </delete>
 
-    <!-- 通过商品代码查询商品信息 -->
     <select id="getJpcpInfomation" resultType="com.shiguang.product.domain.JpcpDO">
          select
         j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
@@ -265,11 +242,9 @@
     </select>
 
 
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.JpcpDO">
     update aa_jpcp set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.JpcpDO">
         select produc_num from aa_jpcp where produc_num=#{producNum}   order by id
 	</select>

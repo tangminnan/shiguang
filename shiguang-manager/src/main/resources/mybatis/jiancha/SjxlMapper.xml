@@ -297,13 +297,7 @@
     <delete id="upremove">
 		delete from jc_sjxl where ptometry_number = #{ptometryNumber}
 	</delete>
-    <!--<update id="upremove" parameterType="com.shiguang.jiancha.domain.SjxlDO">-->
-        <!--update jc_sjxl-->
-        <!--<set>-->
-            <!--<if test="status != null">`status` = #{status}</if>-->
-        <!--</set>-->
-        <!--where ptometry_number = #{ptometryNumber}-->
-    <!--</update>-->
+
     <delete id="batchRemove">
         delete from jc_sjxl where sjxl_id in
         <foreach item="sjxlId" collection="array" open="(" separator="," close=")">

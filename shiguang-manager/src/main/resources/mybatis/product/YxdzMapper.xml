@@ -246,7 +246,6 @@
 		delete from aa_yxdz where id = #{value}
 	</delete>
 
-	<!-- 根据商品代码查询商品信息 -->
 	<select id="getYxdzInfomation" resultType="com.shiguang.product.domain.YxdzDO">
 		select m.`mfrsname`,b.`brandname`,u.`unitname`,y.`retail_price`,
         y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`brandnum`,y.`factory`,

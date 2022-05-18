@@ -187,7 +187,6 @@
 		delete from aa_tyj where id = #{value}
 	</delete>
 
-    <!-- 根据商品代码查询商品信息 -->
     <select id="getTyjInfomation" resultType="com.shiguang.product.domain.TyjDO">
                 select
         t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`brandnum`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
@@ -204,12 +203,9 @@
             #{id}
         </foreach>
     </delete>
-
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.TyjDO">
     update aa_tyj set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.TyjDO">
         select produc_num from aa_tyj where produc_num=#{producNum}   order by id
 	</select>
