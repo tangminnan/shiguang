@@ -65,7 +65,8 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                  order by  j.id desc
+                order by m.mfrsid,b.brandid,j.id
+
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">

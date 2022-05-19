@@ -1187,7 +1187,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by p.id desc
+                order by mfrs.mfrsid,b.brandid,p.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1224,7 +1224,7 @@
 
             and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by p.id desc
+        order by mfrs.mfrsid,b.brandid,p.id
     </select>
     <select id="selectPeijian" resultType="com.shiguang.product.domain.PartsDO">
         select  p.produc_num,p.produc_name, b.brandnum,b.brandname,p.produc_factory,u.unitname,
@@ -1256,7 +1256,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by p.id desc
+                order by mfrs.mfrsid,b.brandid,p.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1285,7 +1285,7 @@
 
             and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by p.id desc
+        order by mfrs.mfrsid,b.brandid,p.id
     </select>
     <select id="selectJpdz" resultType="com.shiguang.product.domain.JpdzDO">
         SELECT
@@ -1354,7 +1354,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by j.id desc
+                order by mfrs.mfrsid,b.brandid,j.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1395,7 +1395,7 @@
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
             and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by j.id desc
+        order by mfrs.mfrsid,b.brandid,j.id
     </select>
     <select id="selectJpcp" resultType="com.shiguang.product.domain.JpcpDO">
         SELECT
@@ -1460,7 +1460,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by j.id desc
+                order by mfrs.mfrsid,b.brandid,j.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1500,7 +1500,7 @@
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by j.id desc
+        order by mfrs.mfrsid,b.brandid,j.id
     </select>
     <select id="selectYxdz" resultType="com.shiguang.product.domain.YxdzDO">
         select
@@ -1538,7 +1538,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by y.id desc
+                order by mfrs.mfrsid,b.brandid,y.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1572,7 +1572,7 @@
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
             and y.xsstate = 0 and  y.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by y.id desc
+        order by mfrs.mfrsid,b.brandid,y.id
     </select>
     <select id="selectYxcp" resultType="com.shiguang.product.domain.YxcpDO">
         SELECT
@@ -1629,7 +1629,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by y.id desc
+                order by mfrs.mfrsid,b.brandid,y.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1666,7 +1666,7 @@
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
             and y.xsstate = 0 and  y.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by y.id desc
+        order by mfrs.mfrsid,b.brandid,y.id
     </select>
 
 
@@ -1701,7 +1701,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by h.id desc
+                order by mfrs.mfrsid,b.brandid,h.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1731,7 +1731,7 @@
 
             and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by h.id desc
+        order by mfrs.mfrsid,b.brandid,h.id
     </select>
     <select id="selectTyj" resultType="com.shiguang.product.domain.TyjDO">
         SELECT
@@ -1785,7 +1785,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by t.id desc
+                order by mfrs.mfrsid,b.brandid,t.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1821,7 +1821,7 @@
 
             and t.xsstate = 0 and  t.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by t.id desc
+        order by mfrs.mfrsid,b.brandid,t.id
     </select>
     <select id="selectLhj" resultType="com.shiguang.product.domain.OldlensDO">
         SELECT
@@ -1876,7 +1876,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by o.id desc
+                order by mfrs.mfrsid,b.brandid,o.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1912,7 +1912,7 @@
 
             and o.xsstate = 0 and  o.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by o.id desc
+        order by mfrs.mfrsid,b.brandid,o.id
     </select>
     <select id="selectHc" resultType="com.shiguang.product.domain.HcDO">
         select  h.produc_num,h.produc_name, h.produc_code, b.brandnum,b.brandname,u.unitname,h.retail_price,h.tax_price,h.produc_factory,
@@ -1943,7 +1943,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by h.id desc
+                order by mfrs.mfrsid,b.brandid,h.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1971,7 +1971,7 @@
 
             and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by h.id desc
+        order by mfrs.mfrsid,b.brandid,h.id
     </select>
     <select id="selectSg" resultType="com.shiguang.product.domain.ShiguangDO">
         select
@@ -2003,7 +2003,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by s.id desc
+                order by mfrs.mfrsid,b.brandid,s.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -2033,7 +2033,7 @@
 
             and s.xsstate = 0 and  s.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by s.id desc
+        order by mfrs.mfrsid,b.brandid,s.id
     </select>
     <select id="haveNum" resultType="com.shiguang.stock.domain.StockDO">
         select  * from stock
