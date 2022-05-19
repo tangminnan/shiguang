@@ -43,7 +43,7 @@
             <if test="goodsids != null and goodsids != ''">and b.goodsid LIKE concat(concat('%', #{goodsids}),'%')</if>
             and  b.state= 1 and m.xsstate=0 and m.state=1
         </where>
-        group by b.brandid order by b.brandid desc
+        group by b.brandid order by m.mfrsid,b.brandid
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}
         </if>
@@ -86,7 +86,7 @@
              <if test="mfrsnames != null and mfrsnames != ''">and m.mfrsname  LIKE concat(concat('%', #{mfrsnames}),'%')</if>
              and  b.state= 1 and m.xsstate=0 and m.state=1
          </where>
-        group by b.brandid order by b.xsstate desc ,b.brandid desc
+        group by b.brandid order by b.xsstate desc ,m.mfrsid,b.brandid
          <if test="offset != null and limit != null">
              limit #{offset}, #{limit}
          </if>
