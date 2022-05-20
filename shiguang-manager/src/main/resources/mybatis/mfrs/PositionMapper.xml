@@ -37,7 +37,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                group by po.position_id order by  po.position_id
+                group by po.position_id order by   po.state_id , po.position_id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
