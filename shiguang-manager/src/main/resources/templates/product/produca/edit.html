@@ -66,8 +66,8 @@
                 </td>
             </tr>
             <tr>
-                <td>型号：</td>
-                <td>
+                <td style="display: none">型号：</td>
+                <td style="display: none">
                     <input th:value="${produca.producFactory}" style="background-color: #e4e4e4"
                            oninput="if(value.length>9)value=value.slice(0,9)"
                            type="text" readonly>
@@ -83,8 +83,8 @@
                            onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" readonly style="background-color: #e4e4e4">
                     <em>*</em>
                 </td>
-                <td>色号：</td>
-                <td>
+                <td style="display: none">色号：</td>
+                <td style="display: none">
                     <input th:value="${produca.producColor}" style="background-color: #e4e4e4"
                            oninput="if(value.length>4)value=value.slice(0,4)"
                            type="text" readonly>
@@ -199,7 +199,7 @@
         <h3>价格项</h3>
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
-            <tr>
+            <tr style="display: none">
                 <td>税率（%）：</td>
                 <td>
                     <input id="tax" name="tax" th:value="${produca.tax}" type="text"
@@ -221,16 +221,16 @@
                 </td>
             </tr>
             <tr>
-                <td>调货成本：</td>
-                <td>
+                <td style="display: none">调货成本：</td>
+                <td style="display: none">
                     <input id="transferPrice" name="transferPrice" th:value="${produca.transferPrice}" type="text"
                            oninput="getmoney(this,10)" onchange="shuzi(this)" readonly autofocus/>
                     <!--<em>*</em>-->
                 </td>
-                <td>标准零售价格：</td>
+                <td style="width: 15%">标准零售价格：</td>
                 <td colspan="3">
                     <input id="retailPrice" name="retailPrice" th:value="${produca.retailPrice}" type="text"
-                           style="width: 29%"
+                           style="width: 10%"
                            oninput="getmoney(this,10)" onchange="shuzi(this)" readonly autofocus/>
                     <em>*</em>
                 </td>
