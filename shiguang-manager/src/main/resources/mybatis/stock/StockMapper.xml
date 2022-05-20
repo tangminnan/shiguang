@@ -2177,7 +2177,7 @@
     order by ${sort} ${order}
     </when>
     <otherwise>
-    group by s.id
+        order by  po.state_id ,s.position_id,m.mfrsid,b.brandid
     </otherwise>
     </choose>
     <if test="offset != null and limit != null">

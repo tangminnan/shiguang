@@ -421,9 +421,6 @@
                             };
                         },
                         columns: [
-                            // {
-                            //     checkbox: true
-                            // },
                             								{
                             	field : 'goodsNum',
                             	title : '商品代码'
@@ -437,35 +434,6 @@
                                 title: '商品名称'
                             },
 
-                            // {
-                            //     title: '商品名称',
-                            //     align: 'center',
-                            //     formatter: function (value, row, index) {
-                            //         if (row.goodsid ==1) {
-                            //             return row.brandname+"-型号:"+row.factory+"-色号:"+row.jjColor+"-标价:"+row.retailPrice
-                            //         }else  if (row.goodsid ==2) {
-                            //             return row.brandname+"-型号:"+row.factory+"-标价:"+row.retailPrice
-                            //         }else  if (row.goodsid ==3 && row.classtype==1) {
-                            //             return row.brandname+"-球镜:"+row.jpcpSph+"-柱镜:"+row.jpcpCyl+"-标价:"+row.retailPrice
-                            //         }else  if (row.goodsid ==3 && row.classtype==2) {
-                            //             return row.brandname+"-球镜:"+row.jpcpSphUp+"/"+row.jpcpSphDown+"-柱镜:"+row.jpcpCylUp+"/"+row.jpcpCylDown+"-标价:"+row.retailPrice
-                            //         }else  if (row.goodsid ==4 && row.classtype==1) {
-                            //             return row.brandname+"-球镜:"+row.yxcpSph+"-柱镜:"+row.yxcpCyl+"-标价:"+row.retailPrice
-                            //         }else  if (row.goodsid ==4 && row.classtype==2) {
-                            //             return row.brandname+"-球镜:"+row.yxdzSphUp+"/"+row.yxdzSphDown+"-柱镜:"+row.yxdzCylUp+"/"+row.yxdzCylDown+"-标价:"+row.retailPrice
-                            //         }else  if (row.goodsid ==5) {
-                            //             return row.brandname+"-型号:"+row.factory+"-标价:"+row.retailPrice
-                            //         }else  if (row.goodsid ==6) {
-                            //             return row.brandname+"-型号:"+row.factory+"-颜色:"+row.tyjColor+"-标价:"+row.retailPrice
-                            //         }else  if (row.goodsid ==7) {
-                            //             return row.brandname+"-球镜:"+row.lhjSph+"-型号:"+row.factory+"-标价:"+row.retailPrice
-                            //         }else  if (row.goodsid ==8) {
-                            //             return row.brandname+"-型号:"+row.factory+"-标价:"+row.retailPrice
-                            //         }else  if (row.goodsid ==9) {
-                            //             return row.brandname+"-型号:"+row.factory+"-标价:"+row.retailPrice
-                            //         }
-                            //     }
-                            // },
                             {
                                 field: 'goodsCount',
                                 title: '数量'
@@ -486,11 +454,11 @@
                                 field: 'positionName',
                                 title: '仓位'
                             },
-                            {field:'newcount',title:'当前页数量',formatter: function(value,row,index){
+                            {field:'newcount',title:'当前页数量',visible: false,formatter: function(value,row,index){
                                     if(row.newcount !=""){
-                                        return "<span style='color: red;font-size: 15px;' readonly>"+row.newcount+"</span>";
+                                        return "<span style='color: red'>"+row.newcount+"</span>";
                                     }else{
-                                        return "<span style='color: red;font-size: 15px;' readonly>"+row.newcount+"</span>";
+                                        return "<span style='color: red'>"+row.newcount+"</span>";
                                     }
                                 }},
                         ]
