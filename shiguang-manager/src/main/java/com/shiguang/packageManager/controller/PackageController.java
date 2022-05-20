@@ -85,6 +85,9 @@ public class PackageController {
     public PageUtils list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        if(null != ShiroUtils.getUser().getStoreNum()){
+            query.put("storeNum",ShiroUtils.getUser().getStoreNum());
+        }
         List<PackageDO> packageList = packageService.list(query);
         int total = packageService.count(query);
         PageUtils pageUtils = new PageUtils(packageList, total);
@@ -143,10 +146,10 @@ public class PackageController {
     public PageUtils storelist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        if (null != ShiroUtils.getUser().getStoreNum()){
-            String storeNum = ShiroUtils.getUser().getStoreNum();
-            query.put("departNumber",storeNum);
-        }
+//        if (null != ShiroUtils.getUser().getStoreNum()){
+//            String storeNum = ShiroUtils.getUser().getStoreNum();
+//            query.put("departNumber",storeNum);
+//        }
         query.put("departType","销售门店");
         query.put("state",1);
         List<DepartmentDO> departmentDOList = departmentService.list(query);

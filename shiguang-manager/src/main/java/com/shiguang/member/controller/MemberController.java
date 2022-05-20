@@ -1403,7 +1403,7 @@ public class MemberController {
                         if (null != conclusion1.getRightyytj() && !"".equals(conclusion1.getRightyytj())){
                             conclusion.setRightyytj(conclusion1.getRightyytj());
                         } else {
-                            conclusion.setRightyytj(conclusion1.getRightjytj());
+                            conclusion.setRightyytj("");
                         }
                         if (null != conclusion1.getRightjytj() && !"".equals(conclusion1.getRightjytj())){
                             conclusion.setRightjytj(conclusion1.getRightjytj());
@@ -1433,7 +1433,7 @@ public class MemberController {
                         if (null != conclusion1.getLeftyytj() && !"".equals(conclusion1.getLeftyytj())){
                             conclusion.setLeftyytj(conclusion1.getLeftyytj());
                         } else {
-                            conclusion.setLeftyytj(conclusion1.getLeftjytj());
+                            conclusion.setLeftyytj("");
                         }
                         if (null != conclusion1.getLeftjytj() && !"".equals(conclusion1.getLeftjytj())){
                             conclusion.setLeftjytj(conclusion1.getLeftjytj());

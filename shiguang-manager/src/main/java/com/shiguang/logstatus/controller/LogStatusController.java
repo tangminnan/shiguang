@@ -21,7 +21,9 @@ import com.shiguang.settlement.service.SettlementService;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
 import com.shiguang.storeSales.domain.Conclusion;
+import com.shiguang.storeSales.domain.InfoDO;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.InfoService;
 import com.shiguang.storeSales.service.SalesService;
 import io.swagger.models.auth.In;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -69,6 +71,8 @@ public class LogStatusController {
     private LogStatusService logStatusService;
     @Autowired
     private ProducaService producaService;
+    @Autowired
+    private InfoService infoService;
 
 //    @GetMapping()
 //    @RequiresPermissions("information:logstatus:logstatus")
@@ -598,7 +602,7 @@ public class LogStatusController {
                         if (null != conclusion1.getRightyytj() && !"".equals(conclusion1.getRightyytj())){
                             conclusion.setRightyytj(conclusion1.getRightyytj());
                         } else {
-                            conclusion.setRightyytj(conclusion1.getRightjytj());
+                            conclusion.setRightyytj("");
                         }
                         if (null != conclusion1.getRightjytj() && !"".equals(conclusion1.getRightjytj())){
                             conclusion.setRightjytj(conclusion1.getRightjytj());
@@ -628,7 +632,7 @@ public class LogStatusController {
                         if (null != conclusion1.getLeftyytj() && !"".equals(conclusion1.getLeftyytj())){
                             conclusion.setLeftyytj(conclusion1.getLeftyytj());
                         } else {
-                            conclusion.setLeftyytj(conclusion1.getLeftjytj());
+                            conclusion.setLeftyytj("");
                         }
                         if (null != conclusion1.getLeftjytj() && !"".equals(conclusion1.getLeftjytj())){
                             conclusion.setLeftjytj(conclusion1.getLeftjytj());
@@ -784,6 +788,12 @@ public class LogStatusController {
         workRecoedDO.setType("发料");
         workRecoedDO.setDateTime(new Date());
         statusService.saveRecord(workRecoedDO);
+        InfoDO infoDO = new InfoDO();
+        infoDO.setSaleNumber(status.getSaleNumber());
+        infoDO.setTrainStatus("配镜发料");
+        infoDO.setTrainTime(new Date());
+        infoDO.setTrainName(ShiroUtils.getUser().getName());
+        infoService.save(infoDO);
         if(statusService.editFaliao(logStatusDO)>0){
             return R.ok();
         }

@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>盘盈盘亏新增</title>
+	<link rel="stylesheet" href="/css/css.css" type="text/css">
+</head>
+<body>
+<form class="form-horizontal m-t" id="signupForm">
+	<div class="new_h3">在途信息</div>
+
+	<!--检查条件-->
+	<div class="m40 tabS PHGL">
+		<h3>查询条件</h3>
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tbody>
+			<tr>
+				<td>配镜单号：</td>
+				<td>
+					<span th:text="${salesDO.saleNumber}"></span>
+				</td>
+				<td>配镜门店：</td>
+				<td>
+					<span th:text="${salesDO.mirorAddress}"></span>
+				</td>
+				<td>顾客姓名：</td>
+				<td><span th:text="${salesDO.memberName}"></span></td>
+			</tr>
+			<tr>
+				<td>顾客电话：</td>
+				<td><span th:text="${salesDO.memberTel}"></span></td>
+				<td>取镜门店：</td>
+				<td><span th:text="${salesDO.mirorAddress}"></span></td>
+				<td>取镜日期：</td>
+				<td><span th:text="${salesDO.mirrorDate}"></span></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!--商品信息-->
+	<div class="m40 tabS SPmsg">
+		<h3>查询信息</h3>
+		<table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
+			<tbody id="inventoryId">
+			<tr class="thead">
+				<td>完成状态</td>
+				<td>在途名称</td>
+				<td>操作时间</td>
+				<td>操作人员</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+</form>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/storeSales/train.js"></script>
+<script th:inline="javascript">
+	var html = "";
+    $().ready(function(){
+        var list = [[${infoDOList}]];
+        for (var i=0;i<list.length;i++){
+            html = "<tr><td><img src='/img/duigou.png'></td>";
+            html += "<td><span>'"+list[i].trainStatus+"'</span></td>"
+            html += "<td><span>'"+list[i].trainTime+"'</span></td>"
+            html += "<td><span>'"+list[i].trainName+"'</span></td></tr>"
+			$("#inventoryId").append(html);
+		}
+    });
+
+</script>
+</body>
+</html>

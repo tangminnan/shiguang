@@ -7,7 +7,9 @@ import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
+import com.shiguang.storeSales.domain.InfoDO;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.InfoService;
 import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
@@ -32,6 +34,8 @@ public class DistributionController {
     private SalesService salesService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private InfoService infoService;
 
     /**
      * 加工配送
@@ -109,6 +113,12 @@ public class DistributionController {
             workRecoedDO.setType("配送");
             workRecoedDO.setDateTime(new Date());
             statusService.saveRecord(workRecoedDO);
+            InfoDO infoDO = new InfoDO();
+            infoDO.setSaleNumber(status.getSaleNumber());
+            infoDO.setTrainStatus("加工配送");
+            infoDO.setTrainTime(new Date());
+            infoDO.setTrainName(ShiroUtils.getUser().getName());
+            infoService.save(infoDO);
             return R.ok();
         } else {
             return R.error("该工号不存在");
@@ -143,6 +153,12 @@ public class DistributionController {
                 status.setSaleNumber(salesDOs.getSaleNumber());
                 status.setLogisticStatus("配送");
                 statusService.update(status);
+                InfoDO infoDO = new InfoDO();
+                infoDO.setSaleNumber(status.getSaleNumber());
+                infoDO.setTrainStatus("加工配送");
+                infoDO.setTrainTime(new Date());
+                infoDO.setTrainName(ShiroUtils.getUser().getName());
+                infoService.save(infoDO);
             }
             WorkRecoedDO workRecoedDO = new WorkRecoedDO();
             workRecoedDO.setUserName(userName);

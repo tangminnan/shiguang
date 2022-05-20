@@ -41,6 +41,7 @@ import com.shiguang.stock.service.WeiwaishujuService;
 import com.shiguang.storeCard.domain.CardDO;
 import com.shiguang.storeCard.service.CardService;
 import com.shiguang.storeSales.domain.*;
+import com.shiguang.storeSales.service.InfoService;
 import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
@@ -140,6 +141,8 @@ public class StoreSalesController {
     private CardService cardService;
     @Autowired
     private IntegralService integralService;
+    @Autowired
+    private InfoService infoService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -166,6 +169,20 @@ public class StoreSalesController {
         int total = memberService.count(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);
         return pageUtils;
+    }
+
+    @GetMapping("/train/{saleNumber}")
+    @RequiresPermissions("information:store:train")
+    String train(@PathVariable("saleNumber") String saleNumber, Model model) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Map<String,Object> map = new HashMap<>();
+        map.put("saleNumber",saleNumber);
+        List<InfoDO> infoDOList = infoService.list(map);
+        model.addAttribute("infoDOList",infoDOList);
+        SalesDO salesDO = salesService.getSaleNumber(saleNumber);
+        salesDO.setMirrorDate(simpleDateFormat.format(salesDO.getMirrorTime()));
+        model.addAttribute("salesDO",salesDO);
+        return "storeSales/train";
     }
 
     @GetMapping("/add")

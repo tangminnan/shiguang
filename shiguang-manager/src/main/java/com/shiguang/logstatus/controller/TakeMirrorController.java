@@ -9,7 +9,9 @@ import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
+import com.shiguang.storeSales.domain.InfoDO;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.InfoService;
 import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ public class TakeMirrorController {
     private SalesService salesService;
     @Autowired
     private SettlementService settlementService;
+    @Autowired
+    private InfoService infoService;
 
     /**
      * 顾客取镜
@@ -99,6 +103,12 @@ public class TakeMirrorController {
         workRecoedDO.setType("顾客取镜");
         workRecoedDO.setDateTime(new Date());
         statusService.saveRecord(workRecoedDO);
+        InfoDO infoDO = new InfoDO();
+        infoDO.setSaleNumber(saleNumber);
+        infoDO.setTrainStatus("顾客取镜");
+        infoDO.setTrainTime(new Date());
+        infoDO.setTrainName(ShiroUtils.getUser().getName());
+        infoService.save(infoDO);
         if(statusService.editFaliao(logStatusDO)>0){
             return R.ok();
         }
@@ -122,6 +132,12 @@ public class TakeMirrorController {
             logStatusDO.setSaleNumber(salesDOs.getSaleNumber());
             logStatusDO.setLogisticStatus("顾客取镜");
             statusService.editFaliao(logStatusDO);
+            InfoDO infoDO = new InfoDO();
+            infoDO.setSaleNumber(salesDOs.getSaleNumber());
+            infoDO.setTrainStatus("顾客取镜");
+            infoDO.setTrainTime(new Date());
+            infoDO.setTrainName(ShiroUtils.getUser().getName());
+            infoService.save(infoDO);
         }
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
         workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());

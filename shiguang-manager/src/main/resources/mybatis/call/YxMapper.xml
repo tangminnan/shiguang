@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.call.dao.YxDao">
+
+	<select id="get" resultType="com.shiguang.call.domain.YxDO">
+		select `id`,`member_number`,`member_name`,`sex` from call_yx where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.call.domain.YxDO">
+		select `id`,`member_number`,`member_name`,`sex`,`type` from call_yx
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+		  		  <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+		  		  <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from call_yx
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+		  		  <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+		  		  <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.call.domain.YxDO" useGeneratedKeys="true" keyProperty="id">
+		insert into call_yx
+		(
+			`member_number`, 
+			`member_name`, 
+			`sex`,
+			`type`
+		)
+		values
+		(
+			#{memberNumber}, 
+			#{memberName}, 
+			#{sex},
+			#{type}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.call.domain.YxDO">
+		update call_yx 
+		<set>
+			<if test="memberNumber != null">`member_number` = #{memberNumber}, </if>
+			<if test="memberName != null">`member_name` = #{memberName}, </if>
+			<if test="sex != null">`sex` = #{sex}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from call_yx where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from call_yx where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="getYxLine" resultType="com.shiguang.call.domain.YxLineDO">
+		select `id`,`member_number`,`member_name`,`sex`,`phone`,`type`, from yx_line where id = #{value}
+	</select>
+
+	<select id="yxlinelist" resultType="com.shiguang.call.domain.YxLineDO">
+		select `id`,`member_number`,`member_name`,`sex`,`phone`,`create_time` from yx_line
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+			<if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+			<if test="sex != null and sex != ''"> and sex = #{sex} </if>
+			<if test="phone != null and phone != ''"> and phone = #{phone} </if>
+			<if test="createTime != null and createTime != ''"> and date_format(create_time ,'%Y-%m-%d') = #{createTime} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="yxlinecount" resultType="int">
+		select count(*) from yx_line
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+			<if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+			<if test="sex != null and sex != ''"> and sex = #{sex} </if>
+			<if test="phone != null and phone != ''"> and phone = #{phone} </if>
+		</where>
+	</select>
+
+	<insert id="yxlinesave" parameterType="com.shiguang.call.domain.YxLineDO" useGeneratedKeys="true" keyProperty="id">
+		insert into yx_line
+		(
+			`member_number`,
+			`member_name`,
+			`sex`,
+			`phone`,
+			`type`,
+			`create_time`
+		)
+		values
+		(
+			#{memberNumber},
+			#{memberName},
+			#{sex},
+			#{phone},
+			#{type},
+			#{createTime}
+		)
+	</insert>
+
+
+</mapper>

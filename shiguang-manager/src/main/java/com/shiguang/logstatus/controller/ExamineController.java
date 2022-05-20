@@ -6,7 +6,9 @@ import com.shiguang.logstatus.service.LensMeterService;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.storeSales.domain.Conclusion;
+import com.shiguang.storeSales.domain.InfoDO;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.InfoService;
 import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.aspectj.apache.bcel.generic.LineNumberGen;
@@ -33,6 +35,8 @@ public class ExamineController {
     private LensMeterService lensMeterService;
     //@Autowired
     private SerialPortUtils serialPort;
+    @Autowired
+    private InfoService infoService;
 
     /**
      * 加工师检验
@@ -194,6 +198,12 @@ public class ExamineController {
         workRecoedDO.setType("检验");
         workRecoedDO.setDateTime(new Date());
         statusService.saveRecord(workRecoedDO);
+        InfoDO infoDO = new InfoDO();
+        infoDO.setSaleNumber(status.getSaleNumber());
+        infoDO.setTrainStatus("加工检验");
+        infoDO.setTrainTime(new Date());
+        infoDO.setTrainName(ShiroUtils.getUser().getName());
+        infoService.save(infoDO);
         lensMeterService.remove(status.getLensMeterId());
         try {
             Method method = Chuank.class.getMethod("main",

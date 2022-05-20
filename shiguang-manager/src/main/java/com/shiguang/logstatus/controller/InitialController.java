@@ -4,7 +4,9 @@ import com.shiguang.common.utils.*;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
+import com.shiguang.storeSales.domain.InfoDO;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.InfoService;
 import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.unqualiffed.domain.UnqualiffedDO;
 import com.shiguang.unqualiffed.service.UnqualiffedService;
@@ -28,6 +30,8 @@ public class InitialController {
     private UnqualiffedService unqualiffedService;
     @Autowired
     private SalesService salesService;
+    @Autowired
+    private InfoService infoService;
 
     /**
      * 加工师初检
@@ -101,6 +105,12 @@ public class InitialController {
         } else {
             status.setLogisticStatus("加工初检");
             statusService.update(status);
+            InfoDO infoDO = new InfoDO();
+            infoDO.setSaleNumber(status.getSaleNumber());
+            infoDO.setTrainStatus("加工初检");
+            infoDO.setTrainTime(new Date());
+            infoDO.setTrainName(ShiroUtils.getUser().getName());
+            infoService.save(infoDO);
         }
 
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
@@ -139,6 +149,12 @@ public class InitialController {
                 logStatusDO.setSaleNumber(salesDOs.getSaleNumber());
                 logStatusDO.setLogisticStatus("加工初检");
                 statusService.update(logStatusDO);
+                InfoDO infoDO = new InfoDO();
+                infoDO.setSaleNumber(salesDOs.getSaleNumber());
+                infoDO.setTrainStatus("加工初检");
+                infoDO.setTrainTime(new Date());
+                infoDO.setTrainName(ShiroUtils.getUser().getName());
+                infoService.save(infoDO);
             }
         }
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
