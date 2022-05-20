@@ -5,6 +5,7 @@ import com.shiguang.common.config.BootdoConfig;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.product.domain.JpdzDO;
+import com.shiguang.product.domain.YxdzDO;
 import com.shiguang.storeSales.domain.SalesDO;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -72,6 +73,11 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 	}
 
 	@Override
+	public int removeSale(String saleNumber) {
+		return weiwaiDao.removeSale(saleNumber);
+	}
+
+	@Override
 	public int removes(WeiwaiDO weiwaiDO) {
 		return weiwaiDao.removes(weiwaiDO);
 	}
@@ -97,9 +103,15 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 	}
 
 	@Override
-	public JpdzDO getBrand(String num) {
-		return weiwaiDao.getBrand(num);
+	public JpdzDO getBrandJp(String num) {
+		return weiwaiDao.getBrandJp(num);
 	}
+
+	@Override
+	public YxdzDO getBrandYx(String num) {
+		return weiwaiDao.getBrandYx(num);
+	}
+
 	@Override
 	public List<WeiwaiDO> selectWeiwaiOrder(Map<String, Object> map) {
 		return weiwaiDao.selectWeiwaiOrder(map);
@@ -169,7 +181,6 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 			String saleNumber=weiwaiDO.getSaleNumber();
 			String companyName=weiwaiDO.getCompanyName();
 			String departname=weiwaiDO.getDepartname();
-
 			params.put("danjuNumber",danjuNumber);
 			params.put("danjuDay",danjuDay);
 			params.put("eyeStyle",eyeStyle);
@@ -214,8 +225,6 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 			allList.add(a,params);
 			a=a+1;
 		}
-
-
 		List<Map<String, Object>> arry = new ArrayList<>();
 		for (int i=0;i<allList.size();i++){
 			Map<String,Object> map=new HashMap<>();
@@ -225,6 +234,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 				if (allList.get(i).get("danjuNumber").equals(allList.get(j).get("danjuNumber"))
 						&& allList.get(i).get("saleNumber").equals(allList.get(j).get("saleNumber")) ){
 					if ("右".equals(allList.get(j).get("rl"))){
+						String saleNumberR= (String) allList.get(j).get("saleNumber");
 						String viewGoodNameR= (String) allList.get(j).get("viewGoodName");
 						String styleR= (String) allList.get(j).get("style");
 						String rlR= "R";
@@ -238,6 +248,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						String sljR=(String) allList.get(j).get("slj");
 						String jdR=(String) allList.get(j).get("jd");
 						String zjR=(String) allList.get(j).get("zj");
+						String qlR=(String) allList.get(j).get("qulv");
 						String countR=(String) allList.get(j).get("count");
 						count1=Integer.valueOf(countR);
 						String tiimeR=(String) allList.get(j).get("mirrorTime");
@@ -247,6 +258,7 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						String companyName= (String) allList.get(j).get("companyName");
 						String mfrsname= (String) allList.get(j).get("mfrsname");
 						String danjuDay= (String) allList.get(j).get("danjuDay");
+						map.put("saleNumberR",saleNumberR);
 						map.put("viewGoodNameR",viewGoodNameR);
 						map.put("styleR",styleR);
 						map.put("rlR",rlR);
@@ -260,17 +272,17 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						map.put("sljR",sljR);
 						map.put("jdR",jdR);
 						map.put("zjR",zjR);
+						map.put("qlR",qlR);
 						map.put("countR",countR);
 						map.put("tiimeR",tiimeR);
-						map.put("gkname",gkname);
 						map.put("departname",departname);
 						map.put("beizhuR",beizhuR);
 						map.put("gkname",gkname);
 						map.put("companyName",companyName);
 						map.put("mfrsname",mfrsname);
 						map.put("danjuDay",danjuDay);
-
 					}else {
+						String saleNumberL= (String) allList.get(j).get("saleNumber");
 						String viewGoodNameL= (String) allList.get(j).get("viewGoodName");
 						String styleL= (String) allList.get(j).get("style");
 						String rlL= "L";
@@ -284,11 +296,12 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						String sljL=(String) allList.get(j).get("slj");
 						String jdL=(String) allList.get(j).get("jd");
 						String zjL=(String) allList.get(j).get("zj");
+						String qlL=(String) allList.get(j).get("qulv");
 						String countL=(String) allList.get(j).get("count");
 						count2=Integer.valueOf(countL);
 						String tiimeL=(String) allList.get(j).get("mirrorTime");
 						String beizhuL=(String) allList.get(j).get("beizhu");
-
+						map.put("saleNumberL",saleNumberL);
 						map.put("viewGoodNameL",viewGoodNameL);
 						map.put("styleL",styleL);
 						map.put("rlL",rlL);
@@ -302,11 +315,11 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 						map.put("sljL",sljL);
 						map.put("jdL",jdL);
 						map.put("zjL",zjL);
+						map.put("qlL",qlL);
 						map.put("countL",countL);
 						map.put("tiimeL",tiimeL);
 						map.put("beizhuL",beizhuL);
 					}
-
 				}
 				Integer allcount= count1+count2;
 				map.put("allcount",allcount);
@@ -320,20 +333,20 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 		arry.addAll(h);
 		Map<String, Object> outList = new HashMap();
 		outList.put("arry",arry);
-
 		String companyIdNow=ShiroUtils.getUser().getCompanyId();
 		Map<String,Object> mapxinxi=new HashMap<>();
 		mapxinxi.put("companyid",companyIdNow);
 		mapxinxi.put("positionOrder", 2);
+		if(companyIdNow.equals(3)||companyIdNow.equals("3")){
+			mapxinxi.put("positionId", 7);
+		}
 		DepartmentDO departmentDO = phoneOrAddres(mapxinxi);
-
 		List<Map<String, Object>> xinxi = new ArrayList<>();
 		Map<String,Object> xinximap=new HashMap<>();
 		String zhidanPeople=ShiroUtils.getUser().getName();
 		String shouhuoAddress=departmentDO.getDepartAddress();
 		String shouhuoPhone=departmentDO.getDepartTel();
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
 		String day = sdf.format(date);
 		xinximap.put("day",day);
@@ -345,34 +358,22 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 		return outList;
 	}
 
-
-
-
 	public void createDoc(HttpServletResponse response, Map<String, Object>  dataMap, String fileName, String template) {
 		Configuration configuration = new Configuration();
 		configuration.setDefaultEncoding("utf-8");
 		configuration.setClassForTemplateLoading(WeiwaiServiceImpl.class, "/");
 		Template t = null;
-		//File outFile = new File(realPath + fileName);
-//		Writer out = null;
 		try {
-			//word.xml是要生成Word文件的模板文件
 			t = configuration.getTemplate(template,"utf-8");
-			//           out = new BufferedWriter(new OutputStreamWriter(
-			//                   new FileOutputStream(bootdoConfig.getPoiword()+new File(new String(fileName.getBytes(),"utf-8")))));                 //还有这里要设置编码
-			//         t.process(dataMap, out);
 			response.setContentType("multipart/form-data");
 			response.setHeader("Content-disposition", "attachment; filename=" + new String(fileName.getBytes(), "iso-8859-1")+".xlsx");
-
 			Cookie status = new Cookie("status","success");
 			status.setMaxAge(600);
 			response.addCookie(status);
-
 			Writer out = new BufferedWriter(new OutputStreamWriter(response.getOutputStream()));
 			t.process(dataMap, out);
 			out.flush();
 			out.close();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

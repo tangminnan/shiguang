@@ -233,17 +233,64 @@
             </td>
             <td>制造商：</td>
             <td>
-                <!--<input id="mfrsid" name="mfrsid" type="hidden" value=""/>-->
                 <input id="mfrsname" name="mfrsname" type="text" readonly/>
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
             </td>
             <td>商品品种：</td>
             <td>
-                <!--<input id="brandnum" name="brandnum" type="hidden" value=""/>-->
                 <input id="brandname" name="brandname" type="text" readonly style="background-color: #e4e4e4" />
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
             </td>
         </tr>
+
+
+            <tr>
+                <td>厂家型号:</td>
+                <td>
+                    <input id="factory" name="factory" type="text"/>
+                </td>
+                <td>厂家色号:</td>
+                <td>
+                    <input id="factoryColor" name="factoryColor" type="text"/>
+                </td>
+
+            </tr>
+            <tr>
+
+                 <td>球镜范围：</td>
+                 <td>
+                     <input id="sph" name="sph"type="text"  />
+                     ~
+                     <input id="sph2" name="sph2"type="text" />
+                 </td>
+                 <td>柱镜范围：</td>
+                 <td>
+                     <input id="cyl" name="cyl"type="text" />
+                     ~
+                     <input id="cyl2" name="cyl2"type="text" />
+                 </td>
+
+                 <td>镜片折射率：</td>
+                 <td>
+                     <select id="refractivityid" name="refractivityid" >
+                         <option value="">--请选择--</option>
+                         <option th:each="ls:${refractivityDOList}"
+                                 th:text="${ls.refractivityvalue}"
+                                 th:value="${ls.refractivityvalue}"
+                         ></option>
+                     </select>
+                 </td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
         <tr>
             <td>仓位名称：</td>
             <td>
@@ -268,6 +315,7 @@
                     <option value="">显示库存所有的商品信息</option>
                     <option value="0">显示库存=0的商品信息</option>
                     <option value="1">显示库存>0的商品信息</option>
+                    <option value="2">显示库存<0的商品信息</option>
                 </select>
             </td>
         </tr>
@@ -298,8 +346,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var xsstate=$("input[name='xsstate']:checked").val();
-        // var positionId = $('#positionId option:selected').val();
-        // var xsstate = 0;
         $(".cw").remove();
         $.ajax({
             url: '/kucun/stock/selectPosion',
@@ -338,8 +384,9 @@
                         singleSelect: false, // 设置为true将禁止多选
                         // contentType : "application/x-www-form-urlencoded",
                         // //发送到服务器的数据编码类型
-                        pageSize: 10, // 如果设置了分页，每页数据条数
+                        pageSize: 50, // 如果设置了分页，每页数据条数
                         pageNumber: 1, // 如果设置了分布，首页页码
+                        pageList:[50,100,500,1200,1500,2000],
                         //search : true, // 是否显示搜索框
                         showColumns: false, // 是否显示内容下拉框（选择显示的列）
                         sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -359,13 +406,21 @@
                                 retailPrice2 : $("#retailPrice2").val().trim(),
                                 xsstate: $("input[name='xsstate']:checked").val().trim(),
                                 classtype : $("#classtype").val().trim(),
-                                kccount : $("#kccount").val().trim()
+                                kccount : $("#kccount").val().trim(),
+
+
+                                factory:$('#factory').val().trim(),
+                                factoryColor:$('#factoryColor').val().trim(),
+
+
+                                sph:$('#sph').val().trim(),
+                                sph2:$('#sph2').val().trim(),
+                                cyl:$('#cyl').val().trim(),
+                                cyl2:$('#cyl2').val().trim(),
+                                refractivityid:$('#refractivityid').val().trim()
                             };
                         },
                         columns: [
-                            // {
-                            //     checkbox: true
-                            // },
                             								{
                             	field : 'goodsNum',
                             	title : '商品代码'
@@ -375,35 +430,10 @@
                                 title: '商品条码'
                             },
                             {
-                                title: '商品名称',
-                                align: 'center',
-                                formatter: function (value, row, index) {
-                                    if (row.goodsid ==1) {
-                                        return row.brandname+"-型号:"+row.factory+"-色号:"+row.jjColor+"-标价:"+row.retailPrice
-                                    }else  if (row.goodsid ==2) {
-                                        return row.brandname+"-型号:"+row.factory+"-标价:"+row.retailPrice
-                                    }else  if (row.goodsid ==3 && row.classtype==1) {
-                                        return row.brandname+"-球镜:"+row.jpcpSph+"-柱镜:"+row.jpcpCyl+"-标价:"+row.retailPrice
-                                    }else  if (row.goodsid ==3 && row.classtype==2) {
-                                        return row.brandname+"-球镜:"+row.jpcpSphUp+"/"+row.jpcpSphDown+"-柱镜:"+row.jpcpCylUp+"/"+row.jpcpCylDown+"-标价:"+row.retailPrice
-                                    }else  if (row.goodsid ==4 && row.classtype==1) {
-                                        return row.brandname+"-球镜:"+row.yxcpSph+"-柱镜:"+row.yxcpCyl+"-标价:"+row.retailPrice
-                                    }else  if (row.goodsid ==4 && row.classtype==2) {
-                                        return row.brandname+"-球镜:"+row.yxdzSphUp+"/"+row.yxdzSphDown+"-柱镜:"+row.yxdzCylUp+"/"+row.yxdzCylDown+"-标价:"+row.retailPrice
-                                    }else  if (row.goodsid ==5) {
-                                        return row.brandname+"-型号:"+row.factory+"-标价:"+row.retailPrice
-                                    }else  if (row.goodsid ==6) {
-                                        return row.brandname+"-型号:"+row.factory+"-颜色:"+row.tyjColor+"-标价:"+row.retailPrice
-                                    }else  if (row.goodsid ==7) {
-                                        return row.brandname+"-球镜:"+row.lhjSph+"-型号:"+row.factory+"-标价:"+row.retailPrice
-                                    }else  if (row.goodsid ==8) {
-                                        return row.brandname+"-型号:"+row.factory+"-标价:"+row.retailPrice
-                                    }else  if (row.goodsid ==9) {
-                                        return row.brandname+"-型号:"+row.factory+"-标价:"+row.retailPrice
-                                    }
-                                }
-
+                                field: 'goodsName',
+                                title: '商品名称'
                             },
+
                             {
                                 field: 'goodsCount',
                                 title: '数量'
@@ -424,11 +454,11 @@
                                 field: 'positionName',
                                 title: '仓位'
                             },
-                            {field:'newcount',title:'当前页数量',formatter: function(value,row,index){
+                            {field:'newcount',title:'当前页数量',visible: false,formatter: function(value,row,index){
                                     if(row.newcount !=""){
-                                        return "<span style='color: red;font-size: 15px;' readonly>"+row.newcount+"</span>";
+                                        return "<span style='color: red'>"+row.newcount+"</span>";
                                     }else{
-                                        return "<span style='color: red;font-size: 15px;' readonly>"+row.newcount+"</span>";
+                                        return "<span style='color: red'>"+row.newcount+"</span>";
                                     }
                                 }},
                         ]
@@ -441,7 +471,10 @@
 
 
 
-
+    document.onkeydown = function(e){
+        if((e||event).keyCode==13)
+            reLoad();
+    };
 
 
 
@@ -504,26 +537,37 @@
         var goodsType = $("#goodsType option:selected").val();
         if (goodsType == ""){
             jp.style = "display: none";
+            JJ.style = "display: none";
         }if (goodsType == 1){
             jp.style = "display: none";
+            JJ.style = "display: block";
+
         }else if (goodsType == 2){
             jp.style = "display: none";
+            JJ.style = "display: none";
         }else if (goodsType == 3){
             $("#classtype").val("") ;
             jp.style = "display: block";
+            JJ.style = "display: none";
         }else if (goodsType == 4){
             $("#classtype").val("") ;
             jp.style = "display: block";
+            JJ.style = "display: none";
         }else if (goodsType == 5){
             jp.style = "display: none";
+            JJ.style = "display: none";
         }else if (goodsType == 6){
             jp.style = "display: none";
+            JJ.style = "display: block";
         }else if (goodsType == 7){
             jp.style = "display: none";
+            JJ.style = "display: block";
         }else if (goodsType == 8){
             jp.style = "display: none";
+            JJ.style = "display: none";
         }else if (goodsType == 9){
             jp.style = "display: none";
+            JJ.style = "display: none";
         }
     }
     function reLoad() {
@@ -595,6 +639,14 @@
         var retailPrice2 = $("#retailPrice2").val();
         var xsstate=$("input[name='xsstate']:checked").val();
         var classtype = $("#classtype").val();
+        var factory = $("#factory").val();
+        var factoryColor = $("#factoryColor").val();
+        var sph = $("#sph").val();
+        var sph2 = $("#sph2").val();
+        var cyl = $("#cyl").val();
+        var cyl2 = $("#cyl2").val();
+        var refractivityid = $("#refractivityid").val();
+
         $.ajax({
             url: '/kucun/stock/countall',
             type: 'get',
@@ -611,7 +663,16 @@
                 'retailPrice': retailPrice,
                 'retailPrice2': retailPrice2,
                 'xsstate': xsstate,
-                'classtype': classtype
+                'classtype': classtype,
+
+
+                'factory': factory,
+                'factoryColor': factoryColor,
+                'sph': sph,
+                'sph2': sph2,
+                'cyl': cyl,
+                'cyl2': cyl2,
+                'refractivityid': refractivityid
 
             },
             success: function (xml) {

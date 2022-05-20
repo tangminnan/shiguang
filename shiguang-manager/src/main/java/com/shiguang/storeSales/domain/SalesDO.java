@@ -42,7 +42,9 @@ public class SalesDO implements Serializable {
 	private String phone1;
 	//销售人员
 	private String saleName;
-	//销售员工工号
+	//销售人员工号
+	private String userName;
+	//打折销售员工工号
 	private String saleAccount;
 	//用户名
 	private String saleNum;
@@ -124,8 +126,60 @@ public class SalesDO implements Serializable {
 	private String doctor;
 //	公司id
 	private String companyId;
+	private String yg;
+
+	public String getYg() {
+		return yg;
+	}
+
+	public void setYg(String yg) {
+		this.yg = yg;
+	}
+
 
 	private String role_id;
+
+	//单个商品打折的折扣
+	private String saleDiscount;
+	//打折扣后的商品金额
+	private String saleDiscountPrice;
+	//总商品折扣金额
+	private String totalDiscount;
+	//积分
+	private String jifen;
+
+	public String getSaleDiscount() {
+		return saleDiscount;
+	}
+
+	public void setSaleDiscount(String saleDiscount) {
+		this.saleDiscount = saleDiscount;
+	}
+
+	public String getSaleDiscountPrice() {
+		return saleDiscountPrice;
+	}
+
+	public void setSaleDiscountPrice(String saleDiscountPrice) {
+		this.saleDiscountPrice = saleDiscountPrice;
+	}
+
+	public String getTotalDiscount() {
+		return totalDiscount;
+	}
+
+	public void setTotalDiscount(String totalDiscount) {
+		this.totalDiscount = totalDiscount;
+	}
+
+	public String getJifen() {
+		return jifen;
+	}
+
+	public void setJifen(String jifen) {
+		this.jifen = jifen;
+	}
+
 	public void setRighttg(String righttg) {this.righttg = righttg;}
 
 	public String getRighttg() {return righttg;}
@@ -1724,6 +1778,23 @@ public class SalesDO implements Serializable {
 	 * 三棱镜OD
 	 */
 	public String getRightsanlingjingsg() {return rightsanlingjingsg;}
+
+	public String getRightaddsg() {
+		return rightaddsg;
+	}
+
+	public void setRightaddsg(String rightaddsg) {
+		this.rightaddsg = rightaddsg;
+	}
+
+	public String getLeftaddsg() {
+		return leftaddsg;
+	}
+
+	public void setLeftaddsg(String leftaddsg) {
+		this.leftaddsg = leftaddsg;
+	}
+
 	/**
 	 * 基地OD
 	 */
@@ -2269,7 +2340,7 @@ public class SalesDO implements Serializable {
 	private String leftqulv;//OS曲率
 	private String rightzj;//OD直径
 	private String leftzj;//OS直径
-	private String leftRight;
+	private String leftRight;//左右
 
 	public String getRightqulv() {
 		return rightqulv;
@@ -2861,4 +2932,11 @@ public class SalesDO implements Serializable {
 		this.leftVAcrt = leftVAcrt;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 }

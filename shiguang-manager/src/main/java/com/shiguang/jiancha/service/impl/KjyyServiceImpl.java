@@ -40,7 +40,6 @@ public class KjyyServiceImpl implements KjyyService {
     public int savekjyy(ResultDO result) {
         return kjyyDao.savekjyy(result);
     }
-    //    是否有保存这个验光号数据
 
     @Override
     public List<ResultDO> haveYanguangNum(Map<String, Object> map) {

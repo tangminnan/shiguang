@@ -243,24 +243,48 @@
                 <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
             </td>
         </tr>
-        <!--<tr>-->
-            <!--<td>仓位名称：</td>-->
-            <!--<td>-->
-                <!--<div class="col-sm-8">-->
-                    <!--<label class="radio-inline">-->
-                        <!--<input type="radio" name="xsstate" value="0" checked onchange="positionChange()"/> 启用仓-->
-                    <!--</label>-->
-                    <!--<label class="radio-inline">-->
-                        <!--<input type="radio" name="xsstate" value="1" onchange="positionChange()"/> 停用仓-->
-                    <!--</label>-->
-                <!--</div>-->
-                <!--<span>-->
-					<!--<select id="positionName" name="positionName">-->
-						<!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-					<!--</select>-->
-				<!--</span>-->
-            <!--</td>-->
-        <!--</tr>-->
+
+
+        <tr>
+            <td>厂家型号:</td>
+            <td>
+                <input id="factory" name="factory" type="text"/>
+            </td>
+            <td>厂家型色号:</td>
+            <td>
+                <input id="factoryColor" name="factoryColor" type="text"/>
+            </td>
+
+        </tr>
+        <tr>
+
+            <td>球镜范围：</td>
+            <td>
+                <input id="sph" name="sph"type="text"  />
+                ~
+                <input id="sph2" name="sph2"type="text" />
+            </td>
+            <td>柱镜范围：</td>
+            <td>
+                <input id="cyl" name="cyl"type="text" />
+                ~
+                <input id="cyl2" name="cyl2"type="text" />
+            </td>
+
+            <td>镜片折射率：</td>
+            <td>
+                <select id="refractivityid" name="refractivityid" >
+                    <option value="">--请选择--</option>
+                    <option th:each="ls:${refractivityDOList}"
+                            th:text="${ls.refractivityvalue}"
+                            th:value="${ls.refractivityvalue}"
+                    ></option>
+                </select>
+            </td>
+        </tr>
+
+
+
         <tr>
             <input id="kccount" type="kccount"  value="1" hidden/>
             <input id="outPosition" type="hidden" th:value="${outPosition}"/>
@@ -284,31 +308,6 @@
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/stock/pidiao/pidiao.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        var xsstate=$("input[name='xsstate']:checked").val();
-        var positionName = $('#positionName option:selected').text();
-        var positionNames = "";
-        if (positionName == "--请选择--") {
-            positionName = positionNames;
-        }
-        var outPosition = document.getElementById('outPosition').value;
-        $(".cw").remove();
-        $.ajax({
-            url: '/kucun/stock/selectPosion',
-            type: 'post',
-            dataType: "json",
-            data: {
-                'xsstate': xsstate
-
-            },
-            success: function (position) {
-                for (var i = 0; i < position.length; i++) {
-                    $("#positionName").append("" +
-                        "<option class='cw'>" + position[i].positionName + "</option>");
-                }
-            }
-        });
-    });
 
 
     $(function () {
@@ -333,8 +332,9 @@
                     singleSelect: false, // 设置为true将禁止多选
                     // contentType : "application/x-www-form-urlencoded",
                     // //发送到服务器的数据编码类型
-                    pageSize: 10, // 如果设置了分页，每页数据条数
+                    pageSize: 50, // 如果设置了分页，每页数据条数
                     pageNumber: 1, // 如果设置了分布，首页页码
+                    pageList: [50,100,200,300,500,1200],
                     //search : true, // 是否显示搜索框
                     showColumns: false, // 是否显示内容下拉框（选择显示的列）
                     sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -357,9 +357,22 @@
                             // positionId : $('#positionId option:selected').val(),
                             outPosition : $('#outPosition').val(),
                             classtype : $("#classtype").val(),
-                            kccount : $('#kccount').val()
+                            kccount : $('#kccount').val(),
                             // name:$('#searchName').val(),
                             // username:$('#searchName').val()
+
+
+                            factory:$('#factory').val().trim(),
+                            factoryColor:$('#factoryColor').val().trim(),
+
+
+                            sph:$('#sph').val().trim(),
+                            sph2:$('#sph2').val().trim(),
+                            cyl:$('#cyl').val().trim(),
+                            cyl2:$('#cyl2').val().trim(),
+                            refractivityid:$('#refractivityid').val().trim()
+
+
                         };
                     },
                     columns: [
@@ -419,57 +432,7 @@
                         {
                             field: 'useday ',
                             title: '效期'
-                        },
-
-
-
-                        // {
-                        //     field: 'priceSum ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'costPrice ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'costSum ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'wholePrice ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'wholeSum ',
-                        //     title: ''
-                        // },
-
-                        // {
-                        //     field: 'classtype ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'mfrsid ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'brandname ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'unit ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'goodsid ',
-                        //     title: ''
-                        // },
-                        // {
-                        //     field: 'goodsxinxiid ',
-                        //     title: ''
-                        // },
-
-
+                        }
                     ]
                 });
 

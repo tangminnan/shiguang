@@ -1,5 +1,6 @@
 package com.shiguang.mfrs.service.impl;
 
+import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.mfrs.dao.PositionDao;
 import com.shiguang.mfrs.domain.PositionDO;
 import com.shiguang.mfrs.service.PositionService;
@@ -67,9 +68,13 @@ public class PositionServiceImpl implements PositionService {
         return positionDao.getPositionNum(positionNum);
     }
 
-    //     <!--库存查询相对应的仓库-->
     @Override
     public List<PositionDO> positionList(Map<String, Object> map) {
         return positionDao.positionList(map);
+    }
+
+    @Override
+    public DepartmentDO getComponid(String departNumber) {
+        return positionDao.getComponid(departNumber);
     }
 }

@@ -46,6 +46,12 @@ public class DepartmentDO implements Serializable {
     private Long positionId;
     //仓位名称
     private String positionName;
+    //省
+    private String proviceName;
+    //市
+    private String cityName;
+    //县
+    private String areaName;
     /**
      * 设置：仓位id
      */
@@ -287,5 +293,29 @@ public class DepartmentDO implements Serializable {
      */
     public Long getState() {
         return state;
+    }
+
+    public String getProviceName() {
+        return proviceName;
+    }
+
+    public void setProviceName(String proviceName) {
+        this.proviceName = proviceName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
     }
 }

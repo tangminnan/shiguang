@@ -166,9 +166,16 @@ function load() {
                         field: 'saleNumber',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            var f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectSale(\''
-                                + value
-                                + '\')">详情</span> ';
+                            var f = '';
+                            if (row.saleType == '3'){
+                                f = '<span class="btn btn-primary btn-sm" href="#" title="退款"  mce_href="#" onclick="selectTkSale(\''
+                                    + value
+                                    + '\')">退款</span> ';
+                            } else {
+                                f = '<span class="btn btn-primary btn-sm" href="#" title="详情"  mce_href="#" onclick="selectSale(\''
+                                    + value
+                                    + '\')">详情</span> ';
+                            }
                             return f;
                         }
                     }
@@ -209,6 +216,19 @@ function selectSale(saleNumber) {
         shadeClose: false, // 点击遮罩关闭层
         area: ['800px', '520px'],
         content: prefix + '/editSale/' + saleNumber // iframe的url
+
+    });
+    layer.full(toIndex);
+}
+
+function selectTkSale(saleNumber) {
+    var toIndex = layer.open({
+        type: 2,
+        title: '退款',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '520px'],
+        content: prefix + '/editTkSale/' + saleNumber // iframe的url
 
     });
     layer.full(toIndex);

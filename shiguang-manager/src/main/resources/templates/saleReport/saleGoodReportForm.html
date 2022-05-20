@@ -56,6 +56,7 @@
 		<input type="hidden" id="date" th:value="${settleDateStart}">
 		<input type="hidden" id="settleDateEnd" th:value="${settleDateEnd}">
 		<input type="hidden" id="settleDateStart" th:value="${settleDateStart}">
+		<input type="hidden" id="departmentName" th:value="${departNumber}">
 		<table border="0" cellspacing="0" cellpadding="0">
 			<tbody id="goodId">
 			<tr class="thead">
@@ -362,8 +363,9 @@
         function reportJj(obj){
             var settleDateStart = $("#settleDateStart").val();
             var settleDateEnd = $("#settleDateEnd").val();
+            var departmentName = $("#departmentName").val();
             //var goodsType = $("#goodsType").val();
-            window.open("/information/saleGoods/salegoodsNameList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&goodsType="+obj);
+            window.open("/information/saleGoods/salegoodsNameList?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd+"&goodsType="+obj+"&departmentName="+departmentName);
 		}
 	</script>
 </body>

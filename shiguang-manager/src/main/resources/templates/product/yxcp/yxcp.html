@@ -315,16 +315,24 @@
                     ></option>
                 </select>
             </td>
-            <!--<td>隐形球镜范围</td>-->
-            <!--<td>-->
-                <!--<input id="sph" name="sph" type="text"/> ~ <input id="sph2" name="sph2" type="text"/>-->
-            <!--</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-            <!--<td>隐形柱镜范围</td>-->
-            <!--<td>-->
-                <!--<input id="cyl" name="cyl" type="text"/> ~ <input id="cyl2" name="cyl2" type="text"/>-->
-            <!--</td>-->
+        </tr>
+
+        <tr>
+
+            <td>球镜范围：</td>
+            <td>
+                <input id="sph" name="sph"type="text" onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>
+                ~
+                <input id="sph2" name="sph2"type="text"onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>
+            </td>
+            <td>柱镜范围：</td>
+            <td>
+                <input id="cyl" name="cyl"type="text"onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>
+                ~
+                <input id="cyl2" name="cyl2"type="text"onblur="zhengfu(this)" onkeydown="xiaoshu(this)"/>
+            </td>
+
+
             <td>启用状态：</td>
             <td>
                 <select id="xsstate" name="xsstate">

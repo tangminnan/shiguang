@@ -1,6 +1,7 @@
 package com.shiguang.storeSales.service;
 
 
+import com.shiguang.common.utils.R;
 import com.shiguang.storeSales.domain.*;
 import org.apache.tools.ant.taskdefs.Sleep;
 
@@ -57,5 +58,7 @@ public interface SalesService {
 	int salecount(Map<String, Object> map);
 
 	int removeSaleNum(String saleNumber);
+
+	R saleSave(SalesDO salesDO);
 
 }

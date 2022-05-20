@@ -10,20 +10,7 @@
                 <div class="ibox-content">
                     <form class="form-horizontal m-t" id="signupForm">
                         <input id="brandid" name="brandid" th:value="${brand.brandid}" type="hidden">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">品牌代码：</label>
-                            <div class="col-sm-8">
-                                <input id="brandnum" name="brandnum" th:value="${brand.brandnum}" readonly
-                                       type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">品牌名称：</label>
-                            <div class="col-sm-8">
-                                <input id="brandname" name="brandname" th:value="${brand.brandname}"
-                                       type="text" readonly>
-                            </div>
-                        </div>
+
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">制造商简称：</label>
@@ -45,6 +32,23 @@
                                        type="hidden">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">品牌代码：</label>
+                            <div class="col-sm-8">
+                                <input id="brandnum" name="brandnum" th:value="${brand.brandnum}" readonly
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">品牌名称：</label>
+                            <div class="col-sm-8">
+                                <input id="brandname" name="brandname" th:value="${brand.brandname}"
+                                       type="text" readonly>
+                            </div>
+                        </div>
+
+
 
                         <!--<div class="form-group" id="tab1" style="display: none">-->
                             <!--<label class="col-sm-3 control-label">镜架材质：</label>-->
@@ -166,13 +170,13 @@
                                        <!--type="hidden">-->
                             <!--</div>-->
                         <!--</div>-->
-                        <!--<div class="form-group" id="tab9" style="display: none">-->
-                            <!--<label class="col-sm-3 control-label">注册证号：</label>-->
-                            <!--<div class="col-sm-8">-->
-                                <!--<input id="registration" name="registration" th:value="${brand.registration}"-->
-                                       <!--type="text" readonly>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                        <div class="form-group" id="tab9" style="display: none">
+                            <label class="col-sm-3 control-label">注册证号：</label>
+                            <div class="col-sm-8">
+                                <input id="registration" name="registration" th:value="${brand.registration}"
+                                       type="text" readonly>
+                            </div>
+                        </div>
 
                         <!--<div class="form-group">-->
                             <!--<label class="col-sm-3 control-label">计量单位：</label>-->

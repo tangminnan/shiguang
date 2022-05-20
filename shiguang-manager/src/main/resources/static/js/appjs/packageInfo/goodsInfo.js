@@ -34,7 +34,9 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-                                goodsType:$('#goodsType').val()
+                                goodsType:$('#goodsType').val(),
+                                producName:$('#producName').val(),
+                                producNum:$('#producNum').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -82,7 +84,9 @@ function load() {
 						]
 					});
 }
-
+function reLoad() {
+    $('#exampleTable').bootstrapTable('refresh');
+}
 function batchSelect() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	return rows;

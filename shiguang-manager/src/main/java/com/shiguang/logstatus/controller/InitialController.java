@@ -4,7 +4,9 @@ import com.shiguang.common.utils.*;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
+import com.shiguang.storeSales.domain.InfoDO;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.InfoService;
 import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.unqualiffed.domain.UnqualiffedDO;
 import com.shiguang.unqualiffed.service.UnqualiffedService;
@@ -28,6 +30,8 @@ public class InitialController {
     private UnqualiffedService unqualiffedService;
     @Autowired
     private SalesService salesService;
+    @Autowired
+    private InfoService infoService;
 
     /**
      * 加工师初检
@@ -51,18 +55,18 @@ public class InitialController {
         }
         if (null != params.get("memberName") && !"".equals(params.get("memberName"))){
             query.put("memberName",String.valueOf(query.get("memberName")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("saleNumber") && !"".equals(params.get("saleNumber"))){
             query.put("saleNumber",String.valueOf(query.get("saleNumber")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("phone") && !"".equals(params.get("phone"))){
             query.put("phone",String.valueOf(query.get("phone")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -101,6 +105,12 @@ public class InitialController {
         } else {
             status.setLogisticStatus("加工初检");
             statusService.update(status);
+            InfoDO infoDO = new InfoDO();
+            infoDO.setSaleNumber(status.getSaleNumber());
+            infoDO.setTrainStatus("加工初检");
+            infoDO.setTrainTime(new Date());
+            infoDO.setTrainName(ShiroUtils.getUser().getName());
+            infoService.save(infoDO);
         }
 
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
@@ -139,6 +149,12 @@ public class InitialController {
                 logStatusDO.setSaleNumber(salesDOs.getSaleNumber());
                 logStatusDO.setLogisticStatus("加工初检");
                 statusService.update(logStatusDO);
+                InfoDO infoDO = new InfoDO();
+                infoDO.setSaleNumber(salesDOs.getSaleNumber());
+                infoDO.setTrainStatus("加工初检");
+                infoDO.setTrainTime(new Date());
+                infoDO.setTrainName(ShiroUtils.getUser().getName());
+                infoService.save(infoDO);
             }
         }
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();

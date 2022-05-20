@@ -25,8 +25,9 @@
         from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsnum left join c_brand b on y.brandnum=b.brandnum AND y.`mfrsid`=b.`mfrsid`
         left join c_unit u on y.unitid= u.unitid
         <where>
-			<if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
-			<if test="goodsCode != null and goodsCode != ''">and y.produc_code = #{goodsCode}</if>
+			<if test="producNum != null and producNum != ''">and y.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+			<if test="goodsCode != null and goodsCode != ''">and y.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
 			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
 			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
 			<if test="producName != null and producName != ''">and y.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -51,7 +52,7 @@
 				order by ${sort} ${order}
 			</when>
 			<otherwise>
-				  order by  y.id desc
+				order by m.mfrsid,b.brandid,y.id
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -64,8 +65,9 @@
         select count(*)  from aa_yxdz y left join c_mfrs m on y.mfrsid=m.mfrsnum left join c_brand b on y.brandnum=b.brandnum AND y.`mfrsid`=b.`mfrsid`
 		left join c_unit u on y.unitid= u.unitid
 		<where>
-			<if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
-			<if test="goodsCode != null and goodsCode != ''">and y.produc_code = #{goodsCode}</if>
+			<if test="producNum != null and producNum != ''">and y.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+			<if test="goodsCode != null and goodsCode != ''">and y.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
 			<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
 			<if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
 			<if test="producName != null and producName != ''">and y.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -244,7 +246,6 @@
 		delete from aa_yxdz where id = #{value}
 	</delete>
 
-	<!-- 根据商品代码查询商品信息 -->
 	<select id="getYxdzInfomation" resultType="com.shiguang.product.domain.YxdzDO">
 		select m.`mfrsname`,b.`brandname`,u.`unitname`,y.`retail_price`,
         y.`id`,y.`produc_num`,y.`produc_code`,y.`produc_name`,y.`mfrsid`,y.`brandid`,y.`brandnum`,y.`factory`,

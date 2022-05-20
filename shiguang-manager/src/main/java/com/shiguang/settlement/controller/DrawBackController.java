@@ -14,6 +14,8 @@ import com.shiguang.settlement.service.DrawbackService;
 import com.shiguang.settlement.service.SettlementService;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
+import com.shiguang.storeCard.domain.CardDO;
+import com.shiguang.storeCard.service.CardService;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -22,10 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/information/drawback")
@@ -44,6 +43,8 @@ public class DrawBackController {
     private StockService stockService;
     @Autowired
     private LogStatusService logStatusService;
+    @Autowired
+    private CardService cardService;
 
     @GetMapping()
     @RequiresPermissions("information:drawback:drawback")
@@ -75,6 +76,28 @@ public class DrawBackController {
     String detail(@PathVariable("cardNumber") String cardNumber,@PathVariable("saleNumber") String saleNumber,Model model){
         MemberDO memberDO = memberService.getCardNumber(cardNumber);
         model.addAttribute("memberDO",memberDO);
+        Map<String,Object> mapphone = new HashMap<>();
+        if (null != memberDO.getPhone1() && !"".equals(memberDO.getPhone1())){
+            mapphone.put("phone1",memberDO.getPhone1());
+        } else {
+            mapphone.put("phone1",memberDO.getPhone2());
+        }
+        List<MemberDO> memberList = memberService.list(mapphone);
+        List<CardDO> cardDOS = new ArrayList<>();
+        for (MemberDO memberDO1 : memberList){
+            CardDO cardDO = new CardDO();
+            cardDO = cardService.getMemberNum(memberDO1.getCardNumber());
+            if (null == cardDO){
+                cardDO = new CardDO();
+                cardDO.setCardNumber("");
+                cardDO.setCardMoney("");
+            } else {
+                cardDO.setCardNumMoney(cardDO.getCardNumber() + "(余额："+ cardDO.getCardMoney() + ")");
+                cardDOS.add(cardDO);
+            }
+
+        }
+        model.addAttribute("cardDOS",cardDOS);
 //		CostDO costDO = costService.get(costId);
         Map<String,Object> map = new HashMap<>();
         map.put("saleNumber",saleNumber);

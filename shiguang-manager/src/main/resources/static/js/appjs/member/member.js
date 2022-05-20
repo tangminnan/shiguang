@@ -124,7 +124,7 @@ function load() {
                                         var h = '<a class="btn btn-primary btn-xs" href="#" title="详情"  mce_href="#" onclick="detail(\''
                                             + row.id
                                             + '\')" style="text-decoration: none;">详情</a>';
-                                        var l = '<a class="btn btn-primary btn-xs" href="#" title="排队"  mce_href="#" onclick="line(\''
+                                        var l = '<a class="btn btn-primary btn-xs" href="#" title="排队"  mce_href="#" onclick="jinanline(\''
                                             + row.id
                                             + '\')" style="text-decoration: none;">排队</a>';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
@@ -257,6 +257,18 @@ function line(id) {
         });
     })
 }
+
+function jinanline(id) {
+    layer.open({
+        type : 2,
+        title : '排队',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '900px', '820px' ],
+        content : prefix + '/jinanline/' + id // iframe的url
+    });
+}
+
 
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {

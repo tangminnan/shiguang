@@ -31,8 +31,12 @@ import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
+import com.shiguang.storeCard.domain.CardDO;
+import com.shiguang.storeCard.service.CardService;
 import com.shiguang.storeSales.domain.Conclusion;
+import com.shiguang.storeSales.domain.InfoDO;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.InfoService;
 import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +100,10 @@ public class SettlementController {
 	private ProducaService producaService;
 	@Autowired
 	private IntegralService integralService;
+	@Autowired
+	private CardService cardService;
+	@Autowired
+	private InfoService infoService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:settlement:settlement")
@@ -112,24 +120,27 @@ public class SettlementController {
 //		List<SettlementDO> settlementList = settlementService.list(query);
 //		int total = settlementService.count(query);
 //		PageUtils pageUtils = new PageUtils(settlementList, total);
+		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
 		query.put("state",1);
+		query.put("isSale",'0');
+//		query.put("saleDate", sim.format(new Date()));
 		if (null != ShiroUtils.getUser().getCompanyId()){
 			query.put("companyid",ShiroUtils.getUser().getCompanyId());
 		}
 		if (null != params.get("cardNumber") && !"".equals(params.get("cardNumber"))){
 			query.put("cardNumber",String.valueOf(query.get("cardNumber")).trim());
-			query.put("offset",0);
-			query.put("limit",10);
+//			query.put("offset",0);
+//			query.put("limit",10);
 		}
 		if (null != params.get("name") && !"".equals(params.get("name"))){
 			query.put("name",String.valueOf(query.get("name")).trim());
-			query.put("offset",0);
-			query.put("limit",10);
+//			query.put("offset",0);
+//			query.put("limit",10);
 		}
 		if (null != params.get("phone1") && !"".equals(params.get("phone1"))){
 			query.put("phone1",String.valueOf(query.get("phone1")).trim());
-			query.put("offset",0);
-			query.put("limit",10);
+//			query.put("offset",0);
+//			query.put("limit",10);
 		}
 		List<JieKuanMoneyDO> memberDOList = memberService.payList(query);
 		if (null != memberDOList && memberDOList.size() > 0){
@@ -161,6 +172,29 @@ public class SettlementController {
 		model.addAttribute("memberDO",memberDO);
 		//List<CostDO> costDOList = costService.getMemberNum(cardNumber);
 		//CostDO costDO = costService.get(costId);
+		model.addAttribute("memberDO",memberDO);
+		Map<String,Object> mapphone = new HashMap<>();
+		if (null != memberDO.getPhone1() && !"".equals(memberDO.getPhone1())){
+			mapphone.put("phone1",memberDO.getPhone1());
+		} else {
+			mapphone.put("phone1",memberDO.getPhone2());
+		}
+		List<MemberDO> memberList = memberService.list(mapphone);
+		List<CardDO> cardDOS = new ArrayList<>();
+		for (MemberDO memberDO1 : memberList){
+			CardDO cardDO = new CardDO();
+			cardDO = cardService.getMemberNum(memberDO1.getCardNumber());
+			if (null == cardDO){
+				cardDO = new CardDO();
+				cardDO.setCardNumber("");
+				cardDO.setCardMoney("");
+			} else {
+				cardDO.setCardNumMoney(cardDO.getCardNumber() + "(余额："+ cardDO.getCardMoney() + ")");
+				cardDOS.add(cardDO);
+			}
+
+		}
+		model.addAttribute("cardDOS",cardDOS);
 		Map<String,Object> map = new HashMap<>();
 		map.put("saleNumber",saleNumber);
 		SalesDO salesDO = salesService.getSaleNumber(saleNumber);
@@ -226,7 +260,19 @@ public class SettlementController {
 	String editMoney(@PathVariable("cardNumber") String cardNumber,Model model){
 		MemberDO memberDO = memberService.getCardNumber(cardNumber);
 		model.addAttribute("memberDO",memberDO);
-
+		Map<String,Object> mapphone = new HashMap<>();
+		if (null != memberDO.getPhone1() && !"".equals(memberDO.getPhone1())){
+			mapphone.put("phone1",memberDO.getPhone1());
+		} else {
+			mapphone.put("phone1",memberDO.getPhone2());
+		}
+		List<MemberDO> memberList = memberService.list(mapphone);
+		List<CardDO> cardDOS = new ArrayList<>();
+		for (MemberDO memberDO1 : memberList){
+			CardDO cardDO = cardService.getMemberNum(memberDO1.getCardNumber());
+			cardDOS.add(cardDO);
+		}
+		model.addAttribute("cardDOS",cardDOS);
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Map<String,Object> map = new HashMap<>();
@@ -343,10 +389,10 @@ public class SettlementController {
 		//costDO.setId(settlement.getCostId());
 		SalesDO salesDO1 = salesService.getSaleNumber(settlement.getSaleNumber());
 		if (null != salesDO1){
-			Map<String,Object> map = new HashMap<>();
-			map.put("storeNum",salesDO1.getStoreNum());
-			map.put("companyId",ShiroUtils.getUser().getCompanyId());
-			IntegralDO integralDO = integralService.getPoints(map);
+//			Map<String,Object> map = new HashMap<>();
+//			map.put("storeNum",salesDO1.getStoreNum());
+//			map.put("companyId",ShiroUtils.getUser().getCompanyId());
+//			IntegralDO integralDO = integralService.getPoints(map);
 			if ("定金".equals(settlement.getPayWay())){
 				salesDO.setSaleType("2");
 				settlement.setFrontMoney(settlement.getPayMoney());
@@ -369,56 +415,6 @@ public class SettlementController {
 					logStatusService.save(logStatusDO);
 				}
 			}
-			//积分积累
-//			String[] describe = salesDO1.getStoreDescribe().split(",");
-//			String[] classType = salesDO1.getClasstype().split(",");
-//			String[] price = salesDO1.getStoreUnit().split(",");
-//			String[] count = salesDO1.getStoreCount().split(",");
-//			double jpcpPoint = 0;
-//			double jpdzPoint =0;
-//			double jjPoint=0;
-//			double yxcpPoint=0;
-//			double yxdzPoint=0;
-//			double pjPoint=0;
-//			double hlyPoint=0;
-//			double tyjPoint=0;
-//			double lhjPoint=0;
-//			double hcPoint=0;
-//			double sgPoint=0;
-//			if (null != integralDO){
-//				for (int i=0;i<describe.length;i++){
-//					if ("1".equals(classType[i])){
-//						if ("镜片".equals(describe[i]) && "镜片(成品片)".equals(integralDO.getGoodsType())){
-//							jpcpPoint=  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//						}
-//						if ("隐形".equals(describe[i]) && "隐形(成品片)".equals(integralDO.getGoodsType())){
-//							yxcpPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//						}
-//					} else if ("2".equals(classType[i])){
-//						if ("镜片".equals(describe[i]) && "镜片(订做片)".equals(integralDO.getGoodsType())){
-//							jpdzPoint=  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//						}
-//						if ("隐形".equals(describe[i]) && "隐形(订做片)".equals(integralDO.getGoodsType())){
-//							yxdzPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//						}
-//					}
-//					jjPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//					pjPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//					hlyPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//					tyjPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//					lhjPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//					hcPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//					sgPoint =  Integer.parseInt(price[i])*Integer.parseInt(count[i])/Integer.parseInt(integralDO.getRedeemPoints());
-//				}
-//			}
-//			BigDecimal sumPoint = BigDecimal.valueOf(jpcpPoint).add(BigDecimal.valueOf(jpdzPoint))
-//					.add(BigDecimal.valueOf(yxcpPoint)).add(BigDecimal.valueOf(yxdzPoint)).add(BigDecimal.valueOf(jjPoint))
-//					.add(BigDecimal.valueOf(pjPoint)).add(BigDecimal.valueOf(hlyPoint)).add(BigDecimal.valueOf(tyjPoint))
-//					.add(BigDecimal.valueOf(lhjPoint)).add(BigDecimal.valueOf(hcPoint)).add(BigDecimal.valueOf(sgPoint));
-//			MemberDO memberDO = new MemberDO();
-//			memberDO.setCardNumber(salesDO1.getMemberNumber());
-//			memberDO.setIntegral(sumPoint.intValue());
-//			memberService.updateInteger(memberDO);
 		} else {
 			Map<String,Object> map = new HashMap<>();
 			map.put("saleNumber",settlement.getSaleNumber());
@@ -439,7 +435,51 @@ public class SettlementController {
 		settlement.setSaleName(ShiroUtils.getUser().getName());
 		settlement.setSaleAcount(ShiroUtils.getUser().getUsername());
 		settlement.setSettleDate(new Date());
+		String[] paymodel = settlement.getPayModel().split(",");
+		String[] modelMoney = settlement.getModelMoney().split(",");
+		java.text.NumberFormat numberformat=java.text.NumberFormat.getInstance();
+		numberformat.setMaximumFractionDigits(1);
+		for (int i = 0;i<paymodel.length;i++){
+			if ("6".equals(paymodel[i])){
+				String cardNumber = settlement.getChuzhiNumber();
+				CardDO cardDO = cardService.getCardNum(cardNumber);
+				if (null != cardDO){
+					if (cardDO.getPassword().equals(settlement.getChuzhiPasd())){
+						if (Double.valueOf(cardDO.getCardMoney()) >= Double.valueOf(modelMoney[i])){
+							double money = Double.valueOf(cardDO.getCardMoney()) - Double.valueOf(modelMoney[i]);
+							cardDO.setCardMoney(money+"");
+							cardService.update(cardDO);
+							if(settlementService.save(settlement)>0){
+								return R.ok();
+							}
+						} else {
+							return R.error("余额不足");
+						}
 
+					} else {
+						return R.error("密码输入错误");
+					}
+				} else{
+					return R.error("该用户没有绑定储值卡");
+				}
+			}
+			else if ("9".equals(paymodel[i])){
+				double jifenMoney = Double.valueOf(modelMoney[i]) * 20;
+				int integral = (int) jifenMoney;
+				MemberDO memberDO = memberService.getCardNumber(settlement.getMemberNumber());
+				if (null != memberDO.getIntegral()){
+					Integer integralnew = Integer.parseInt(memberDO.getIntegral()) - integral;
+					memberDO.setIntegral(String.valueOf(integralnew));
+					memberService.updateInteger(memberDO);
+				}
+			}
+		}
+		InfoDO infoDO = new InfoDO();
+		infoDO.setSaleNumber(settlement.getSaleNumber());
+		infoDO.setTrainStatus("银台结款");
+		infoDO.setTrainTime(new Date());
+		infoDO.setTrainName(ShiroUtils.getUser().getName());
+		infoService.save(infoDO);
 		if(settlementService.save(settlement)>0){
 			return R.ok();
 		}
@@ -490,7 +530,7 @@ public class SettlementController {
 //		model.addAttribute("sumMoney",sumMoney);
 //		model.addAttribute("jianchaTime",simpleDateFormat.format(new Date()));
 		SalesDO settlementDO = salesService.getSaleNumber(saleNumber);
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		if (null != settlementDO.getPeijingTime()){
 			settlementDO.setPeijingDate(simpleDateFormat.format(settlementDO.getPeijingTime()));
 		}else {
@@ -580,6 +620,24 @@ public class SettlementController {
 				} else if ("4".equals(paymodel[i])){
 					model.addAttribute("paymodel","现金");
 					payModels.append("现金:"+moneyPay[i]+",");
+				} else if ("5".equals(paymodel[i])){
+					model.addAttribute("paymodel","银联卡");
+					payModels.append("银联卡:"+moneyPay[i]+",");
+				} else if ("6".equals(paymodel[i])){
+					model.addAttribute("paymodel","储值卡");
+					payModels.append("储值卡:"+moneyPay[i]+",");
+				} else if ("7".equals(paymodel[i])){
+					model.addAttribute("paymodel",".");
+					payModels.append("储值卡:"+moneyPay[i]+",");
+				} else if ("8".equals(paymodel[i])){
+					model.addAttribute("paymodel","..");
+					payModels.append("储值卡:"+moneyPay[i]+",");
+				} else if ("9".equals(paymodel[i])){
+					model.addAttribute("paymodel","积分");
+					payModels.append("积分:"+moneyPay[i]+",");
+				}else if ("10".equals(paymodel[i])){
+					model.addAttribute("paymodel","微信平台");
+					payModels.append("微信平台:"+moneyPay[i]+",");
 				}
 			}
 			model.addAttribute("payModels",payModels.deleteCharAt(payModels.length()-1));
@@ -861,71 +919,168 @@ public class SettlementController {
 
 		} else {
 			model.addAttribute("optometryName",settlementDO.getOptometryName());
+			String reciple = settlementDO.getRecipelType();
+			if ("近用".equals(reciple)){
+				reciple = "1";
+			} else if ("远用".equals(reciple)){
+				reciple = "2";
+			}else if ("渐进/双光".equals(reciple)){
+				reciple = "3";
+			} else if ("中用".equals(reciple)){
+				reciple = "4";
+			} else if ("隐形".equals(reciple)){
+				reciple = "5";
+			} else if ("角膜塑形镜".equals(reciple)){
+				reciple = "6";
+			} else if ("视觉训练".equals(reciple)){
+				reciple = "7";
+			} else if ("角膜塑形镜VST".equals(reciple)){
+				reciple = "8";
+			} else if ("角膜塑形镜CRT".equals(reciple)){
+				reciple = "9";
+			} else if ("RGP".equals(reciple)){
+				reciple = "10";
+			}
 			List<Conclusion> conclusionList = salesService.conclusionList(map2);
 			if (null != conclusionList && conclusionList.size() > 0){
-				conclusion.setRightsph(conclusionList.get(0).getRightsph());
-				conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
-				conclusion.setRightzx(conclusionList.get(0).getRightzx());
-				if (null != conclusionList.get(0).getRightva() && !"".equals(conclusionList.get(0).getRightva()) ){
-					conclusion.setRightva(conclusionList.get(0).getRightva());
-				}else {
-					if(null != conclusionList.get(0).getRightqgd() && !"".equals(conclusionList.get(0).getRightqgd())){
-						conclusion.setRightva(conclusionList.get(0).getRightqgd());
-					}else {
-						conclusion.setRightva("");
-					}
+				for (Conclusion conclusion1 : conclusionList) {
+					if (reciple.equals(conclusion1.getChufangType())){
+						conclusion.setRightsph(conclusion1.getRightsph());
+						conclusion.setRightcyl(conclusion1.getRightcyl());
+						conclusion.setRightzx(conclusion1.getRightzx());
+						if (null != conclusion1.getRightva() && !"".equals(conclusion1.getRightva()) ){
+							conclusion.setRightva(conclusion1.getRightva());
+						}else {
+							if(null != conclusion1.getRightqgd() && !"".equals(conclusion1.getRightqgd())){
+								conclusion.setRightva(conclusion1.getRightqgd());
+							}else {
+								conclusion.setRightva("");
+							}
 
-				}
-				if (null != conclusionList.get(0).getRightjyva() && !"".equals(conclusionList.get(0).getRightjyva())){
-					conclusion.setRightjyva(conclusionList.get(0).getRightjyva());
-				}else{
-					conclusion.setRightjyva("");
-				}
-				if (null != conclusionList.get(0).getRightyytj() && !"".equals(conclusionList.get(0).getRightyytj())){
-					conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
-				} else {
-					conclusion.setRightyytj("");
-				}
-				if (null != conclusionList.get(0).getRightjytj() && !"".equals(conclusionList.get(0).getRightjytj())){
-					conclusion.setRightjytj(conclusionList.get(0).getRightjytj());
-				}else {
-					conclusion.setRightjytj("");
-				}
-				conclusion.setRighttg(conclusionList.get(0).getRighttg());
-				conclusion.setRightAdd(conclusionList.get(0).getRightAdd());
-				conclusion.setRightprism(conclusionList.get(0).getRightprism());
-				conclusion.setRightjd(conclusionList.get(0).getRightjd());
-				conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
-				conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
-				conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
-				if (null != conclusionList.get(0).getLeftva() && !"".equals(conclusionList.get(0).getLeftva())){
-					conclusion.setLeftva(conclusionList.get(0).getLeftva());
-				}else {
-					if (null != conclusionList.get(0).getLeftqgd() && !"".equals(conclusionList.get(0).getLeftqgd())){
-						conclusion.setLeftva(conclusionList.get(0).getLeftqgd());
-					} else {
-						conclusion.setLeftva("");
+						}
+						if (null != conclusion1.getRightjyva() && !"".equals(conclusion1.getRightjyva())){
+							conclusion.setRightjyva(conclusion1.getRightjyva());
+						}else{
+							conclusion.setRightjyva("");
+						}
+						if (null != conclusion1.getRightyytj() && !"".equals(conclusion1.getRightyytj())){
+							conclusion.setRightyytj(conclusion1.getRightyytj());
+						} else {
+							conclusion.setRightyytj("");
+						}
+						if (null != conclusion1.getRightjytj() && !"".equals(conclusion1.getRightjytj())){
+							conclusion.setRightjytj(conclusion1.getRightjytj());
+						}else {
+							conclusion.setRightjytj("");
+						}
+						if (null != conclusion1.getRightAdd() && !"".equals(conclusion1.getRightAdd())){
+							conclusion.setRightAdd(conclusion1.getRightAdd());
+						} else {
+							conclusion.setRightAdd("");
+						}
+						conclusion.setRighttg(conclusion1.getRighttg());
+						conclusion.setRightprism(conclusion1.getRightprism());
+						conclusion.setRightjd(conclusion1.getRightjd());
+						conclusion.setLeftsph(conclusion1.getLeftsph());
+						conclusion.setLeftcyl(conclusion1.getLeftcyl());
+						conclusion.setLeftzx(conclusion1.getLeftzx());
+						if (null != conclusion1.getLeftva() && !"".equals(conclusion1.getLeftva())){
+							conclusion.setLeftva(conclusion1.getLeftva());
+						}else {
+							if (null != conclusion1.getLeftqgd() && !"".equals(conclusion1.getLeftqgd())){
+								conclusion.setLeftva(conclusion1.getLeftqgd());
+							} else {
+								conclusion.setLeftva("");
+							}
+						}
+						if (null != conclusion1.getLeftjyva() && !"".equals(conclusion1.getLeftjyva())){
+							conclusion.setLeftjyva(conclusion1.getLeftjyva());
+						}else {
+							conclusion.setLeftjyva("");
+						}
+						if (null != conclusion1.getLeftyytj() && !"".equals(conclusion1.getLeftyytj())){
+							conclusion.setLeftyytj(conclusion1.getLeftyytj());
+						} else {
+							conclusion.setLeftyytj("");
+						}
+						if (null != conclusion1.getLeftjytj() && !"".equals(conclusion1.getLeftjytj())){
+							conclusion.setLeftjytj(conclusion1.getLeftjytj());
+						}else {
+							conclusion.setLeftjytj("");
+						}
+						if (null != conclusion1.getLeftAdd() && !"".equals(conclusion1.getLeftAdd())){
+							conclusion.setLeftAdd(conclusion1.getLeftAdd());
+						} else {
+							conclusion.setLeftAdd("");
+						}
+						conclusion.setLefttg(conclusion1.getLefttg());
+						conclusion.setLeftprism(conclusion1.getLeftprism());
+						conclusion.setLeftjd(conclusion1.getLeftjd());
 					}
 				}
-				if (null != conclusionList.get(0).getLeftjyva() && !"".equals(conclusionList.get(0).getLeftjyva())){
-					conclusion.setLeftjyva(conclusionList.get(0).getLeftjyva());
-				}else {
-						conclusion.setLeftjyva("");
-				}
-				if (null != conclusionList.get(0).getLeftyytj() && !"".equals(conclusionList.get(0).getLeftyytj())){
-					conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
-				} else {
-					conclusion.setLeftyytj("");
-				}
-				if (null != conclusionList.get(0).getLeftjytj() && !"".equals(conclusionList.get(0).getLeftjytj())){
-					conclusion.setLeftjytj(conclusionList.get(0).getLeftjytj());
-				}else {
-					conclusion.setLeftjytj("");
-				}
-				conclusion.setLefttg(conclusionList.get(0).getLefttg());
-				conclusion.setLeftAdd(conclusionList.get(0).getLeftAdd());
-				conclusion.setLeftprism(conclusionList.get(0).getLeftprism());
-				conclusion.setLeftjd(conclusionList.get(0).getLeftjd());
+//				conclusion.setRightsph(conclusionList.get(0).getRightsph());
+//				conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
+//				conclusion.setRightzx(conclusionList.get(0).getRightzx());
+//				if (null != conclusionList.get(0).getRightva() && !"".equals(conclusionList.get(0).getRightva()) ){
+//					conclusion.setRightva(conclusionList.get(0).getRightva());
+//				}else {
+//					if(null != conclusionList.get(0).getRightqgd() && !"".equals(conclusionList.get(0).getRightqgd())){
+//						conclusion.setRightva(conclusionList.get(0).getRightqgd());
+//					}else {
+//						conclusion.setRightva("");
+//					}
+//
+//				}
+//				if (null != conclusionList.get(0).getRightjyva() && !"".equals(conclusionList.get(0).getRightjyva())){
+//					conclusion.setRightjyva(conclusionList.get(0).getRightjyva());
+//				}else{
+//					conclusion.setRightjyva("");
+//				}
+//				if (null != conclusionList.get(0).getRightyytj() && !"".equals(conclusionList.get(0).getRightyytj())){
+//					conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
+//				} else {
+//					conclusion.setRightyytj("");
+//				}
+//				if (null != conclusionList.get(0).getRightjytj() && !"".equals(conclusionList.get(0).getRightjytj())){
+//					conclusion.setRightjytj(conclusionList.get(0).getRightjytj());
+//				}else {
+//					conclusion.setRightjytj("");
+//				}
+//				conclusion.setRighttg(conclusionList.get(0).getRighttg());
+//				conclusion.setRightAdd(conclusionList.get(0).getRightAdd());
+//				conclusion.setRightprism(conclusionList.get(0).getRightprism());
+//				conclusion.setRightjd(conclusionList.get(0).getRightjd());
+//				conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
+//				conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
+//				conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
+//				if (null != conclusionList.get(0).getLeftva() && !"".equals(conclusionList.get(0).getLeftva())){
+//					conclusion.setLeftva(conclusionList.get(0).getLeftva());
+//				}else {
+//					if (null != conclusionList.get(0).getLeftqgd() && !"".equals(conclusionList.get(0).getLeftqgd())){
+//						conclusion.setLeftva(conclusionList.get(0).getLeftqgd());
+//					} else {
+//						conclusion.setLeftva("");
+//					}
+//				}
+//				if (null != conclusionList.get(0).getLeftjyva() && !"".equals(conclusionList.get(0).getLeftjyva())){
+//					conclusion.setLeftjyva(conclusionList.get(0).getLeftjyva());
+//				}else {
+//						conclusion.setLeftjyva("");
+//				}
+//				if (null != conclusionList.get(0).getLeftyytj() && !"".equals(conclusionList.get(0).getLeftyytj())){
+//					conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
+//				} else {
+//					conclusion.setLeftyytj("");
+//				}
+//				if (null != conclusionList.get(0).getLeftjytj() && !"".equals(conclusionList.get(0).getLeftjytj())){
+//					conclusion.setLeftjytj(conclusionList.get(0).getLeftjytj());
+//				}else {
+//					conclusion.setLeftjytj("");
+//				}
+//				conclusion.setLefttg(conclusionList.get(0).getLefttg());
+//				conclusion.setLeftAdd(conclusionList.get(0).getLeftAdd());
+//				conclusion.setLeftprism(conclusionList.get(0).getLeftprism());
+//				conclusion.setLeftjd(conclusionList.get(0).getLeftjd());
 			}
 
 		}
@@ -1078,6 +1233,24 @@ public class SettlementController {
 				} else if ("4".equals(paymodel[i])){
 					model.addAttribute("paymodel","现金");
 					payModels.append("现金:"+moneyPay[i]+",");
+				} else if ("5".equals(paymodel[i])){
+					model.addAttribute("paymodel","银联卡");
+					payModels.append("银联卡:"+moneyPay[i]+",");
+				} else if ("6".equals(paymodel[i])){
+					model.addAttribute("paymodel","储值卡");
+					payModels.append("储值卡:"+moneyPay[i]+",");
+				} else if ("7".equals(paymodel[i])){
+					model.addAttribute("paymodel",".");
+					payModels.append("储值卡:"+moneyPay[i]+",");
+				} else if ("8".equals(paymodel[i])){
+					model.addAttribute("paymodel","..");
+					payModels.append("储值卡:"+moneyPay[i]+",");
+				} else if ("9".equals(paymodel[i])){
+					model.addAttribute("paymodel","积分");
+					payModels.append("积分:"+moneyPay[i]+",");
+				}else if ("10".equals(paymodel[i])){
+					model.addAttribute("paymodel","微信平台");
+					payModels.append("微信平台:"+moneyPay[i]+",");
 				}
 			}
 			model.addAttribute("payModels",payModels.deleteCharAt(payModels.length()-1));
@@ -1356,69 +1529,156 @@ public class SettlementController {
 
 		} else {
 			model.addAttribute("optometryName",settlementDO.getOptometryName());
+			String reciple = settlementDO.getRecipelType();
+			if ("近用".equals(reciple)){
+				reciple = "1";
+			} else if ("远用".equals(reciple)){
+				reciple = "2";
+			}else if ("渐进/双光".equals(reciple)){
+				reciple = "3";
+			} else if ("中用".equals(reciple)){
+				reciple = "4";
+			} else if ("隐形".equals(reciple)){
+				reciple = "5";
+			} else if ("角膜塑形镜".equals(reciple)){
+				reciple = "6";
+			} else if ("视觉训练".equals(reciple)){
+				reciple = "7";
+			} else if ("角膜塑形镜VST".equals(reciple)){
+				reciple = "8";
+			} else if ("角膜塑形镜CRT".equals(reciple)){
+				reciple = "9";
+			} else if ("RGP".equals(reciple)){
+				reciple = "10";
+			}
 			List<Conclusion> conclusionList = salesService.conclusionList(map2);
 			if (null != conclusionList && conclusionList.size() > 0){
-				conclusion.setRightsph(conclusionList.get(0).getRightsph());
-				conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
-				conclusion.setRightzx(conclusionList.get(0).getRightzx());
-				if (null != conclusionList.get(0).getRightva() && !"".equals(conclusionList.get(0).getRightva()) ){
-					conclusion.setRightva(conclusionList.get(0).getRightva());
-				}else {
-					if(null != conclusionList.get(0).getRightqgd() && !"".equals(conclusionList.get(0).getRightqgd())){
-						conclusion.setRightva(conclusionList.get(0).getRightqgd());
-					}else {
-						conclusion.setRightva("");
-					}
+				for (Conclusion conclusion1 : conclusionList) {
+					if (reciple.equals(conclusion1.getChufangType())){
+						conclusion.setRightsph(conclusion1.getRightsph());
+						conclusion.setRightcyl(conclusion1.getRightcyl());
+						conclusion.setRightzx(conclusion1.getRightzx());
+						if (null != conclusion1.getRightva() && !"".equals(conclusion1.getRightva()) ){
+							conclusion.setRightva(conclusion1.getRightva());
+						}else {
+							if(null != conclusion1.getRightqgd() && !"".equals(conclusion1.getRightqgd())){
+								conclusion.setRightva(conclusion1.getRightqgd());
+							}else {
+								conclusion.setRightva("");
+							}
 
-				}
-				if (null != conclusionList.get(0).getRightjyva() && !"".equals(conclusionList.get(0).getRightjyva())){
-					conclusion.setRightjyva(conclusionList.get(0).getRightjyva());
-				}else{
-					conclusion.setRightjyva("");
-				}
-				if (null != conclusionList.get(0).getRightyytj() && !"".equals(conclusionList.get(0).getRightyytj())){
-					conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
-				} else {
-					conclusion.setRightyytj(conclusionList.get(0).getRightjytj());
-				}
-				if (null != conclusionList.get(0).getRightjytj() && !"".equals(conclusionList.get(0).getRightjytj())){
-					conclusion.setRightjytj(conclusionList.get(0).getRightjytj());
-				}else {
-					conclusion.setRightjytj("");
-				}
-				conclusion.setRighttg(conclusionList.get(0).getRighttg());
-				conclusion.setRightprism(conclusionList.get(0).getRightprism());
-				conclusion.setRightjd(conclusionList.get(0).getRightjd());
-				conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
-				conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
-				conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
-				if (null != conclusionList.get(0).getLeftva() && !"".equals(conclusionList.get(0).getLeftva())){
-					conclusion.setLeftva(conclusionList.get(0).getLeftva());
-				}else {
-					if (null != conclusionList.get(0).getLeftqgd() && !"".equals(conclusionList.get(0).getLeftqgd())){
-						conclusion.setLeftva(conclusionList.get(0).getLeftqgd());
-					} else {
-						conclusion.setLeftva("");
+						}
+						if (null != conclusion1.getRightjyva() && !"".equals(conclusion1.getRightjyva())){
+							conclusion.setRightjyva(conclusion1.getRightjyva());
+						}else{
+							conclusion.setRightjyva("");
+						}
+						if (null != conclusion1.getRightyytj() && !"".equals(conclusion1.getRightyytj())){
+							conclusion.setRightyytj(conclusion1.getRightyytj());
+						} else {
+							conclusion.setRightyytj("");
+						}
+						if (null != conclusion1.getRightjytj() && !"".equals(conclusion1.getRightjytj())){
+							conclusion.setRightjytj(conclusion1.getRightjytj());
+						}else {
+							conclusion.setRightjytj("");
+						}
+						conclusion.setRighttg(conclusion1.getRighttg());
+						conclusion.setRightprism(conclusion1.getRightprism());
+						conclusion.setRightjd(conclusion1.getRightjd());
+						conclusion.setLeftsph(conclusion1.getLeftsph());
+						conclusion.setLeftcyl(conclusion1.getLeftcyl());
+						conclusion.setLeftzx(conclusion1.getLeftzx());
+						if (null != conclusion1.getLeftva() && !"".equals(conclusion1.getLeftva())){
+							conclusion.setLeftva(conclusion1.getLeftva());
+						}else {
+							if (null != conclusion1.getLeftqgd() && !"".equals(conclusion1.getLeftqgd())){
+								conclusion.setLeftva(conclusion1.getLeftqgd());
+							} else {
+								conclusion.setLeftva("");
+							}
+						}
+						if (null != conclusion1.getLeftjyva() && !"".equals(conclusion1.getLeftjyva())){
+							conclusion.setLeftjyva(conclusion1.getLeftjyva());
+						}else {
+							conclusion.setLeftjyva("");
+						}
+						if (null != conclusion1.getLeftyytj() && !"".equals(conclusion1.getLeftyytj())){
+							conclusion.setLeftyytj(conclusion1.getLeftyytj());
+						} else {
+							conclusion.setLeftyytj("");
+						}
+						if (null != conclusion1.getLeftjytj() && !"".equals(conclusion1.getLeftjytj())){
+							conclusion.setLeftjytj(conclusion1.getLeftjytj());
+						}else {
+							conclusion.setLeftjytj("");
+						}
+						conclusion.setLefttg(conclusion1.getLefttg());
+						conclusion.setLeftprism(conclusion1.getLeftprism());
+						conclusion.setLeftjd(conclusion1.getLeftjd());
 					}
 				}
-				if (null != conclusionList.get(0).getLeftjyva() && !"".equals(conclusionList.get(0).getLeftjyva())){
-					conclusion.setLeftjyva(conclusionList.get(0).getLeftjyva());
-				}else {
-					conclusion.setLeftjyva("");
-				}
-				if (null != conclusionList.get(0).getLeftyytj() && !"".equals(conclusionList.get(0).getLeftyytj())){
-					conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
-				} else {
-					conclusion.setLeftyytj(conclusionList.get(0).getLeftjytj());
-				}
-				if (null != conclusionList.get(0).getLeftjytj() && !"".equals(conclusionList.get(0).getLeftjytj())){
-					conclusion.setLeftjytj(conclusionList.get(0).getLeftjytj());
-				}else {
-					conclusion.setLeftjytj("");
-				}
-				conclusion.setLefttg(conclusionList.get(0).getLefttg());
-				conclusion.setLeftprism(conclusionList.get(0).getLeftprism());
-				conclusion.setLeftjd(conclusionList.get(0).getLeftjd());
+//				conclusion.setRightsph(conclusionList.get(0).getRightsph());
+//				conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
+//				conclusion.setRightzx(conclusionList.get(0).getRightzx());
+//				if (null != conclusionList.get(0).getRightva() && !"".equals(conclusionList.get(0).getRightva()) ){
+//					conclusion.setRightva(conclusionList.get(0).getRightva());
+//				}else {
+//					if(null != conclusionList.get(0).getRightqgd() && !"".equals(conclusionList.get(0).getRightqgd())){
+//						conclusion.setRightva(conclusionList.get(0).getRightqgd());
+//					}else {
+//						conclusion.setRightva("");
+//					}
+//
+//				}
+//				if (null != conclusionList.get(0).getRightjyva() && !"".equals(conclusionList.get(0).getRightjyva())){
+//					conclusion.setRightjyva(conclusionList.get(0).getRightjyva());
+//				}else{
+//					conclusion.setRightjyva("");
+//				}
+//				if (null != conclusionList.get(0).getRightyytj() && !"".equals(conclusionList.get(0).getRightyytj())){
+//					conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
+//				} else {
+//					conclusion.setRightyytj(conclusionList.get(0).getRightjytj());
+//				}
+//				if (null != conclusionList.get(0).getRightjytj() && !"".equals(conclusionList.get(0).getRightjytj())){
+//					conclusion.setRightjytj(conclusionList.get(0).getRightjytj());
+//				}else {
+//					conclusion.setRightjytj("");
+//				}
+//				conclusion.setRighttg(conclusionList.get(0).getRighttg());
+//				conclusion.setRightprism(conclusionList.get(0).getRightprism());
+//				conclusion.setRightjd(conclusionList.get(0).getRightjd());
+//				conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
+//				conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
+//				conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
+//				if (null != conclusionList.get(0).getLeftva() && !"".equals(conclusionList.get(0).getLeftva())){
+//					conclusion.setLeftva(conclusionList.get(0).getLeftva());
+//				}else {
+//					if (null != conclusionList.get(0).getLeftqgd() && !"".equals(conclusionList.get(0).getLeftqgd())){
+//						conclusion.setLeftva(conclusionList.get(0).getLeftqgd());
+//					} else {
+//						conclusion.setLeftva("");
+//					}
+//				}
+//				if (null != conclusionList.get(0).getLeftjyva() && !"".equals(conclusionList.get(0).getLeftjyva())){
+//					conclusion.setLeftjyva(conclusionList.get(0).getLeftjyva());
+//				}else {
+//					conclusion.setLeftjyva("");
+//				}
+//				if (null != conclusionList.get(0).getLeftyytj() && !"".equals(conclusionList.get(0).getLeftyytj())){
+//					conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
+//				} else {
+//					conclusion.setLeftyytj(conclusionList.get(0).getLeftjytj());
+//				}
+//				if (null != conclusionList.get(0).getLeftjytj() && !"".equals(conclusionList.get(0).getLeftjytj())){
+//					conclusion.setLeftjytj(conclusionList.get(0).getLeftjytj());
+//				}else {
+//					conclusion.setLeftjytj("");
+//				}
+//				conclusion.setLefttg(conclusionList.get(0).getLefttg());
+//				conclusion.setLeftprism(conclusionList.get(0).getLeftprism());
+//				conclusion.setLeftjd(conclusionList.get(0).getLeftjd());
 			}
 
 		}
@@ -1765,32 +2025,119 @@ public class SettlementController {
 			}
 		} else {
 			model.addAttribute("optometryName",settlementDO.getOptometryName());
+			String reciple = settlementDO.getRecipelType();
+			if ("近用".equals(reciple)){
+				reciple = "1";
+			} else if ("远用".equals(reciple)){
+				reciple = "2";
+			}else if ("渐进/双光".equals(reciple)){
+				reciple = "3";
+			} else if ("中用".equals(reciple)){
+				reciple = "4";
+			} else if ("隐形".equals(reciple)){
+				reciple = "5";
+			} else if ("角膜塑形镜".equals(reciple)){
+				reciple = "6";
+			} else if ("视觉训练".equals(reciple)){
+				reciple = "7";
+			} else if ("角膜塑形镜VST".equals(reciple)){
+				reciple = "8";
+			} else if ("角膜塑形镜CRT".equals(reciple)){
+				reciple = "9";
+			} else if ("RGP".equals(reciple)){
+				reciple = "10";
+			}
 			List<Conclusion> conclusionList = salesService.conclusionList(map2);
 			if (null != conclusionList && conclusionList.size() > 0){
-				conclusion.setRightsph(conclusionList.get(0).getRightsph());
-				conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
-				conclusion.setRightzx(conclusionList.get(0).getRightzx());
-				if (null != conclusionList.get(0).getRightyytj()){
-					conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
-				} else {
-					conclusion.setRightyytj(conclusionList.get(0).getRightjytj());
+				for (Conclusion conclusion1 : conclusionList) {
+					if (reciple.equals(conclusion1.getChufangType())){
+						conclusion.setRightsph(conclusion1.getRightsph());
+						conclusion.setRightcyl(conclusion1.getRightcyl());
+						conclusion.setRightzx(conclusion1.getRightzx());
+						if (null != conclusion1.getRightva() && !"".equals(conclusion1.getRightva()) ){
+							conclusion.setRightva(conclusion1.getRightva());
+						}else {
+							if(null != conclusion1.getRightqgd() && !"".equals(conclusion1.getRightqgd())){
+								conclusion.setRightva(conclusion1.getRightqgd());
+							}else {
+								conclusion.setRightva("");
+							}
+
+						}
+						if (null != conclusion1.getRightjyva() && !"".equals(conclusion1.getRightjyva())){
+							conclusion.setRightjyva(conclusion1.getRightjyva());
+						}else{
+							conclusion.setRightjyva("");
+						}
+						if (null != conclusion1.getRightyytj() && !"".equals(conclusion1.getRightyytj())){
+							conclusion.setRightyytj(conclusion1.getRightyytj());
+						} else {
+							conclusion.setRightyytj("");
+						}
+						if (null != conclusion1.getRightjytj() && !"".equals(conclusion1.getRightjytj())){
+							conclusion.setRightjytj(conclusion1.getRightjytj());
+						}else {
+							conclusion.setRightjytj("");
+						}
+						conclusion.setRighttg(conclusion1.getRighttg());
+						conclusion.setRightprism(conclusion1.getRightprism());
+						conclusion.setRightjd(conclusion1.getRightjd());
+						conclusion.setLeftsph(conclusion1.getLeftsph());
+						conclusion.setLeftcyl(conclusion1.getLeftcyl());
+						conclusion.setLeftzx(conclusion1.getLeftzx());
+						if (null != conclusion1.getLeftva() && !"".equals(conclusion1.getLeftva())){
+							conclusion.setLeftva(conclusion1.getLeftva());
+						}else {
+							if (null != conclusion1.getLeftqgd() && !"".equals(conclusion1.getLeftqgd())){
+								conclusion.setLeftva(conclusion1.getLeftqgd());
+							} else {
+								conclusion.setLeftva("");
+							}
+						}
+						if (null != conclusion1.getLeftjyva() && !"".equals(conclusion1.getLeftjyva())){
+							conclusion.setLeftjyva(conclusion1.getLeftjyva());
+						}else {
+							conclusion.setLeftjyva("");
+						}
+						if (null != conclusion1.getLeftyytj() && !"".equals(conclusion1.getLeftyytj())){
+							conclusion.setLeftyytj(conclusion1.getLeftyytj());
+						} else {
+							conclusion.setLeftyytj("");
+						}
+						if (null != conclusion1.getLeftjytj() && !"".equals(conclusion1.getLeftjytj())){
+							conclusion.setLeftjytj(conclusion1.getLeftjytj());
+						}else {
+							conclusion.setLeftjytj("");
+						}
+						conclusion.setLefttg(conclusion1.getLefttg());
+						conclusion.setLeftprism(conclusion1.getLeftprism());
+						conclusion.setLeftjd(conclusion1.getLeftjd());
+					}
 				}
-				conclusion.setRighttg(conclusionList.get(0).getRighttg());
-				conclusion.setRightAdd(conclusionList.get(0).getRightAdd());
-				conclusion.setRightprism(conclusionList.get(0).getRightprism());
-				conclusion.setRightjd(conclusionList.get(0).getRightjd());
-				conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
-				conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
-				conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
-				if (null != conclusionList.get(0).getLeftyytj()){
-					conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
-				} else {
-					conclusion.setLeftyytj(conclusionList.get(0).getLeftjytj());
-				}
-				conclusion.setLefttg(conclusionList.get(0).getLefttg());
-				conclusion.setLeftAdd(conclusionList.get(0).getLeftAdd());
-				conclusion.setLeftprism(conclusionList.get(0).getLeftprism());
-				conclusion.setLeftjd(conclusionList.get(0).getLeftjd());
+//				conclusion.setRightsph(conclusionList.get(0).getRightsph());
+//				conclusion.setRightcyl(conclusionList.get(0).getRightcyl());
+//				conclusion.setRightzx(conclusionList.get(0).getRightzx());
+//				if (null != conclusionList.get(0).getRightyytj()){
+//					conclusion.setRightyytj(conclusionList.get(0).getRightyytj());
+//				} else {
+//					conclusion.setRightyytj(conclusionList.get(0).getRightjytj());
+//				}
+//				conclusion.setRighttg(conclusionList.get(0).getRighttg());
+//				conclusion.setRightAdd(conclusionList.get(0).getRightAdd());
+//				conclusion.setRightprism(conclusionList.get(0).getRightprism());
+//				conclusion.setRightjd(conclusionList.get(0).getRightjd());
+//				conclusion.setLeftsph(conclusionList.get(0).getLeftsph());
+//				conclusion.setLeftcyl(conclusionList.get(0).getLeftcyl());
+//				conclusion.setLeftzx(conclusionList.get(0).getLeftzx());
+//				if (null != conclusionList.get(0).getLeftyytj()){
+//					conclusion.setLeftyytj(conclusionList.get(0).getLeftyytj());
+//				} else {
+//					conclusion.setLeftyytj(conclusionList.get(0).getLeftjytj());
+//				}
+//				conclusion.setLefttg(conclusionList.get(0).getLefttg());
+//				conclusion.setLeftAdd(conclusionList.get(0).getLeftAdd());
+//				conclusion.setLeftprism(conclusionList.get(0).getLeftprism());
+//				conclusion.setLeftjd(conclusionList.get(0).getLeftjd());
 			}
 
 		}

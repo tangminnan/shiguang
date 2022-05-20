@@ -250,18 +250,57 @@
                 <input id="positionName" name="positionName" th:value="${positionName}" readonly type="text"/>
             </td>
         </tr>
+        <tr>
+            <td>厂家型号:</td>
+            <td>
+                <input id="factory" name="factory" type="text"/>
+            </td>
+
+            <td>标准零售价格：</td>
+            <td>
+                <input id="retailPrice" name="retailPrice" type="text"/> ~ <input id="retailPrice2" name="retailPrice2" type="text"/>
+            </td>
+        </tr>
         <!--<tr>-->
-            <!--<input id="outPosition" type="hidden" th:value="${outPosition}"/>-->
-            <!--<td>标准零售价格：</td>-->
+
+            <!--<td>球镜范围：</td>-->
             <!--<td>-->
-                <!--<input id="retailPrice" name="retailPrice" type="text"/>-->
-                <!--~ <input name="retailPrice2" type="text"/>-->
+                <!--<input id="sph" name="sph"type="text"  />-->
+                <!--~-->
+                <!--<input id="sph2" name="sph2"type="text" />-->
             <!--</td>-->
+            <!--<td>柱镜范围：</td>-->
+            <!--<td>-->
+                <!--<input id="cyl" name="cyl"type="text" />-->
+                <!--~-->
+                <!--<input id="cyl2" name="cyl2"type="text" />-->
+            <!--</td>-->
+
+            <!--<td>厂家色号:</td>-->
+            <!--<td>-->
+                <!--<input id="factoryColor" name="factoryColor" type="text"/>-->
+            <!--</td>-->
+            <!--<td>镜片折射率：</td>-->
+            <!--<td>-->
+                <!--<select id="refractivityid" name="refractivityid" style="width: 39%">-->
+                    <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
+                    <!--<option th:each="ls:${refractivityDOList}"-->
+                            <!--th:text="${ls.refractivityvalue}"-->
+                            <!--th:value="${ls.refractivityvalue}"-->
+                    <!--&gt;</option>-->
+                <!--</select>-->
+            <!--</td>-->
+
+           <!---->
         <!--</tr>-->
+
+
+
     </table>
     <!--保存/清空-->
     <div class="BQ-btn">
-        <input id="kccount" type="kccount"  value="1" hidden/>
+        <!--<input id="kccount" type="kccount"  value="1" hidden/>-->
+        <input id="kccount" type="kccount"  value="0" hidden/>
         <input type="button" value="查询" onclick="getall()"/>
     </div>
 </div>
@@ -358,8 +397,9 @@
                             singleSelect: false, // 设置为true将禁止多选
                             // contentType : "application/x-www-form-urlencoded",
                             // //发送到服务器的数据编码类型
-                            pageSize: 10, // 如果设置了分页，每页数据条数
+                            pageSize: 50, // 如果设置了分页，每页数据条数
                             pageNumber: 1, // 如果设置了分布，首页页码
+                            pageList:[50,100,500,1200,1500,2000],
                             //search : true, // 是否显示搜索框
                             showColumns: false, // 是否显示内容下拉框（选择显示的列）
                             sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -376,7 +416,19 @@
                                     goodsName : $("#goodsName").val(),
                                     brandname : $("#brandname").val(),
                                     classtype : $("#classtype").val(),
-                                    kccount : $('#kccount').val()
+                                    kccount : $('#kccount').val(),
+
+
+                                    retailPrice : $("#retailPrice").val(),
+                                    retailPrice2 : $("#retailPrice2").val(),
+                                    factory:$('#factory').val()
+                                    // factoryColor:$('#factoryColor').val(),
+                                    // sph:$('#sph').val(),
+                                    // sph2:$('#sph2').val(),
+                                    // cyl:$('#cyl').val(),
+                                    // cyl2:$('#cyl2').val(),
+                                    // refractivityid:$('#refractivityid').val()
+
                                 };
                             },
                             columns: [
@@ -417,18 +469,12 @@
                                     field: 'retailPrice',
                                     title: '标准零售价'
                                 },
-                                {
-                                    field: 'positionName',
-                                    title: '仓位'
-                                },
+
                                 {
                                     field: 'goodsCount',
                                     title: '库存数量'
                                 },
-                                {
-                                    field: 'goodsCode',
-                                    title: '商品条码'
-                                }
+
                             ]
                         });
         } else if (goodsType == 2) {
@@ -450,8 +496,9 @@
                         singleSelect: false, // 设置为true将禁止多选
                         // contentType : "application/x-www-form-urlencoded",
                         // //发送到服务器的数据编码类型
-                        pageSize: 10, // 如果设置了分页，每页数据条数
+                        pageSize: 50, // 如果设置了分页，每页数据条数
                         pageNumber: 1, // 如果设置了分布，首页页码
+                        pageList:[50,100,500,1200,1500,2000],
                         //search : true, // 是否显示搜索框
                         showColumns: false, // 是否显示内容下拉框（选择显示的列）
                         sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -468,7 +515,17 @@
                                 goodsName : $("#goodsName").val(),
                                 brandname : $("#brandname").val(),
                                 classtype : $("#classtype").val(),
-                                kccount : $('#kccount').val()
+                                kccount : $('#kccount').val(),
+
+                                retailPrice : $("#retailPrice").val(),
+                                retailPrice2 : $("#retailPrice2").val(),
+                                factory:$('#factory').val()
+                                // factoryColor:$('#factoryColor').val(),
+                                // sph:$('#sph').val(),
+                                // sph2:$('#sph2').val(),
+                                // cyl:$('#cyl').val(),
+                                // cyl2:$('#cyl2').val(),
+                                // refractivityid:$('#refractivityid').val()
 
                             };
                         },
@@ -500,18 +557,12 @@
                                 field: 'retailPrice',
                                 title: '标准零售价'
                             },
-                            {
-                                field: 'positionName',
-                                title: '仓位'
-                            },
+
                             {
                                 field: 'goodsCount',
                                 title: '库存数量'
                             },
-                            {
-                                field: 'goodsCode',
-                                title: '商品条码'
-                            }
+
                         ]
                     });
         } else if (goodsType == 3) {
@@ -535,8 +586,9 @@
                             singleSelect: false, // 设置为true将禁止多选
                             // contentType : "application/x-www-form-urlencoded",
                             // //发送到服务器的数据编码类型
-                            pageSize: 10, // 如果设置了分页，每页数据条数
+                            pageSize: 50, // 如果设置了分页，每页数据条数
                             pageNumber: 1, // 如果设置了分布，首页页码
+                            pageList:[50,100,500,1200,1500,2000],
                             //search : true, // 是否显示搜索框
                             showColumns: false, // 是否显示内容下拉框（选择显示的列）
                             sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -553,7 +605,17 @@
                                     goodsName: $("#goodsName").val(),
                                     brandname: $("#brandname").val(),
                                     classtype : $("#classtype").val(),
-                                    kccount : $('#kccount').val()
+                                    kccount : $('#kccount').val(),
+
+                                    retailPrice : $("#retailPrice").val(),
+                                    retailPrice2 : $("#retailPrice2").val(),
+                                    factory:$('#factory').val()
+                                    // factoryColor:$('#factoryColor').val(),
+                                    // sph:$('#sph').val(),
+                                    // sph2:$('#sph2').val(),
+                                    // cyl:$('#cyl').val(),
+                                    // cyl2:$('#cyl2').val(),
+                                    // refractivityid:$('#refractivityid').val()
 
 
                                 };
@@ -610,18 +672,12 @@
                                     field: 'retailPrice',
                                     title: '标准零售价'
                                 },
-                                {
-                                    field: 'positionName',
-                                    title: '仓位'
-                                },
+
                                 {
                                     field: 'goodsCount',
                                     title: '库存数量'
                                 },
-                                {
-                                    field: 'goodsCode',
-                                    title: '商品条码'
-                                }
+
                             ]
                         });
             } else if (classtype == 2) {
@@ -643,8 +699,9 @@
                             singleSelect: false, // 设置为true将禁止多选
                             // contentType : "application/x-www-form-urlencoded",
                             // //发送到服务器的数据编码类型
-                            pageSize: 10, // 如果设置了分页，每页数据条数
+                            pageSize: 50, // 如果设置了分页，每页数据条数
                             pageNumber: 1, // 如果设置了分布，首页页码
+                            pageList:[50,100,500,1200,1500,2000],
                             //search : true, // 是否显示搜索框
                             showColumns: false, // 是否显示内容下拉框（选择显示的列）
                             sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -661,7 +718,17 @@
                                     goodsName: $("#goodsName").val(),
                                     brandname: $("#brandname").val(),
                                     classtype : $("#classtype").val(),
-                                    kccount : $('#kccount').val()
+                                    kccount : $('#kccount').val(),
+
+                                    retailPrice : $("#retailPrice").val(),
+                                    retailPrice2 : $("#retailPrice2").val(),
+                                    factory:$('#factory').val()
+                                    // factoryColor:$('#factoryColor').val(),
+                                    // sph:$('#sph').val(),
+                                    // sph2:$('#sph2').val(),
+                                    // cyl:$('#cyl').val(),
+                                    // cyl2:$('#cyl2').val(),
+                                    // refractivityid:$('#refractivityid').val()
 
                                 };
                             },
@@ -717,18 +784,12 @@
                                     field: 'retailPrice',
                                     title: '标准零售价'
                                 },
-                                {
-                                    field: 'positionName',
-                                    title: '仓位'
-                                },
+
                                 {
                                     field: 'goodsCount',
                                     title: '库存数量'
                                 },
-                                {
-                                    field: 'goodsCode',
-                                    title: '商品条码'
-                                }
+
                             ]
                         });
             }
@@ -753,8 +814,9 @@
                                 singleSelect: false, // 设置为true将禁止多选
                                 // contentType : "application/x-www-form-urlencoded",
                                 // //发送到服务器的数据编码类型
-                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageSize: 50, // 如果设置了分页，每页数据条数
                                 pageNumber: 1, // 如果设置了分布，首页页码
+                                pageList:[50,100,500,1200,1500,2000],
                                 //search : true, // 是否显示搜索框
                                 showColumns: false, // 是否显示内容下拉框（选择显示的列）
                                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -771,7 +833,17 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
 
                                     };
                                 },
@@ -823,18 +895,12 @@
                                         field: 'retailPrice',
                                         title: '标准零售价'
                                     },
-                                    {
-                                        field: 'positionName',
-                                        title: '仓位'
-                                    },
+
                                     {
                                         field: 'goodsCount',
                                         title: '库存数量'
                                     },
-                                    {
-                                        field: 'goodsCode',
-                                        title: '商品条码'
-                                    }
+
                                 ]
                             });
                 } else if (classtype == 2) {
@@ -856,8 +922,9 @@
                                 singleSelect: false, // 设置为true将禁止多选
                                 // contentType : "application/x-www-form-urlencoded",
                                 // //发送到服务器的数据编码类型
-                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageSize: 50, // 如果设置了分页，每页数据条数
                                 pageNumber: 1, // 如果设置了分布，首页页码
+                                pageList:[50,100,500,1200,1500,2000],
                                 //search : true, // 是否显示搜索框
                                 showColumns: false, // 是否显示内容下拉框（选择显示的列）
                                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -874,7 +941,17 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
 
                                     };
                                 },
@@ -926,18 +1003,12 @@
                                         field: 'retailPrice',
                                         title: '标准零售价'
                                     },
-                                    {
-                                        field: 'positionName',
-                                        title: '仓位'
-                                    },
+
                                     {
                                         field: 'goodsCount',
                                         title: '库存数量'
                                     },
-                                    {
-                                        field: 'goodsCode',
-                                        title: '商品条码'
-                                    }
+
                                 ]
                             });
                 }
@@ -960,8 +1031,9 @@
                                 singleSelect: false, // 设置为true将禁止多选
                                 // contentType : "application/x-www-form-urlencoded",
                                 // //发送到服务器的数据编码类型
-                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageSize: 50, // 如果设置了分页，每页数据条数
                                 pageNumber: 1, // 如果设置了分布，首页页码
+                                pageList:[50,100,500,1200,1500,2000],
                                 //search : true, // 是否显示搜索框
                                 showColumns: false, // 是否显示内容下拉框（选择显示的列）
                                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -978,7 +1050,17 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
 
                                     };
                                 },
@@ -1014,18 +1096,12 @@
                                         field: 'retailPrice',
                                         title: '标准零售价'
                                     },
-                                    {
-                                        field: 'positionName',
-                                        title: '仓位'
-                                    },
+
                                     {
                                         field: 'goodsCount',
                                         title: '库存数量'
                                     },
-                                    {
-                                        field: 'goodsCode',
-                                        title: '商品条码'
-                                    }
+
                                 ]
                             });
         } else if (goodsType == 6) {
@@ -1047,8 +1123,9 @@
                                 singleSelect: false, // 设置为true将禁止多选
                                 // contentType : "application/x-www-form-urlencoded",
                                 // //发送到服务器的数据编码类型
-                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageSize: 50, // 如果设置了分页，每页数据条数
                                 pageNumber: 1, // 如果设置了分布，首页页码
+                                pageList:[50,100,500,1200,1500,2000],
                                 //search : true, // 是否显示搜索框
                                 showColumns: false, // 是否显示内容下拉框（选择显示的列）
                                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -1065,7 +1142,17 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
 
                                     };
                                 },
@@ -1101,18 +1188,12 @@
                                         field: 'retailPrice',
                                         title: '标准零售价'
                                     },
-                                    {
-                                        field: 'positionName',
-                                        title: '仓位'
-                                    },
+
                                     {
                                         field: 'goodsCount',
                                         title: '库存数量'
                                     },
-                                    {
-                                        field: 'goodsCode',
-                                        title: '商品条码'
-                                    }
+
                                 ]
                             });
         } else if (goodsType == 7) {
@@ -1134,8 +1215,9 @@
                                 singleSelect: false, // 设置为true将禁止多选
                                 // contentType : "application/x-www-form-urlencoded",
                                 // //发送到服务器的数据编码类型
-                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageSize: 50, // 如果设置了分页，每页数据条数
                                 pageNumber: 1, // 如果设置了分布，首页页码
+                                pageList:[50,100,500,1200,1500,2000],
                                 //search : true, // 是否显示搜索框
                                 showColumns: false, // 是否显示内容下拉框（选择显示的列）
                                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -1152,7 +1234,18 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
 
                                     };
                                 },
@@ -1193,18 +1286,12 @@
                                         field: 'retailPrice',
                                         title: '标准零售价'
                                     },
-                                    {
-                                        field: 'positionName',
-                                        title: '仓位'
-                                    },
+
                                     {
                                         field: 'goodsCount',
                                         title: '库存数量'
                                     },
-                                    {
-                                        field: 'goodsCode',
-                                        title: '商品条码'
-                                    }
+
                                 ]
                             });
         } else if (goodsType == 8) {
@@ -1226,8 +1313,9 @@
                                 singleSelect: false, // 设置为true将禁止多选
                                 // contentType : "application/x-www-form-urlencoded",
                                 // //发送到服务器的数据编码类型
-                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageSize: 50, // 如果设置了分页，每页数据条数
                                 pageNumber: 1, // 如果设置了分布，首页页码
+                                pageList:[50,100,500,1200,1500,2000],
                                 //search : true, // 是否显示搜索框
                                 showColumns: false, // 是否显示内容下拉框（选择显示的列）
                                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -1244,7 +1332,18 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
 
                                     };
                                 },
@@ -1272,18 +1371,12 @@
                                         field: 'retailPrice',
                                         title: '标准零售价'
                                     },
-                                    {
-                                        field: 'positionName',
-                                        title: '仓位'
-                                    },
+
                                     {
                                         field: 'goodsCount',
                                         title: '库存数量'
                                     },
-                                    {
-                                        field: 'goodsCode',
-                                        title: '商品条码'
-                                    }
+
                                 ]
                             });
          } else if (goodsType == 9) {
@@ -1306,8 +1399,9 @@
                                 singleSelect: false, // 设置为true将禁止多选
                                 // contentType : "application/x-www-form-urlencoded",
                                 // //发送到服务器的数据编码类型
-                                pageSize: 10, // 如果设置了分页，每页数据条数
+                                pageSize: 50, // 如果设置了分页，每页数据条数
                                 pageNumber: 1, // 如果设置了分布，首页页码
+                                pageList:[50,100,500,1200,1500,2000],
                                 //search : true, // 是否显示搜索框
                                 showColumns: false, // 是否显示内容下拉框（选择显示的列）
                                 sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -1324,7 +1418,19 @@
                                         goodsName: $("#goodsName").val(),
                                         brandname: $("#brandname").val(),
                                         classtype : $("#classtype").val(),
-                                        kccount : $('#kccount').val()
+                                        kccount : $('#kccount').val(),
+
+                                        retailPrice : $("#retailPrice").val(),
+                                        retailPrice2 : $("#retailPrice2").val(),
+                                        factory:$('#factory').val()
+                                        // factoryColor:$('#factoryColor').val(),
+                                        // sph:$('#sph').val(),
+                                        // sph2:$('#sph2').val(),
+                                        // cyl:$('#cyl').val(),
+                                        // cyl2:$('#cyl2').val(),
+                                        // refractivityid:$('#refractivityid').val()
+
+
 
                                     };
                                 },
@@ -1352,18 +1458,18 @@
                                         field: 'retailPrice',
                                         title: '标准零售价'
                                     },
-                                    {
-                                        field: 'positionName',
-                                        title: '仓位'
-                                    },
+                                    // {
+                                    //     field: 'positionName',
+                                    //     title: '仓位'
+                                    // },
                                     {
                                         field: 'goodsCount',
                                         title: '库存数量'
                                     },
-                                    {
-                                        field: 'goodsCode',
-                                        title: '商品条码'
-                                    }
+                                    // {
+                                    //     field: 'goodsCode',
+                                    //     title: '商品条码'
+                                    // }
                                 ]
                             });
                 }

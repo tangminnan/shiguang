@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		body{width:224px;margin: auto;}
+		img{max-width:100%;height:auto;display: block;}
+		.bigdiv{overflow: hidden;margin-bottom:20px;}
+		.fldiv{float: left;width:64px;text-align: center;}
+		.fldiv span{font-size:7px;word-wrap:break-word;word-break:normal;display: block;width: 48px !important;padding: 0px 7px;}
+		.bigdiv dl{float: right;font-size:7px;margin-top:10%;} 
+	</style>
+</head>
+<body>
+	<div id="devid" style="overflow:hidden;">
+	</div>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+	$().ready(function () {
+	    var html ="";
+	    var list = [[${orderDOS}]];
+		for (var i=0;i<1;i++){
+		    for (var a=0;a<1;a++){
+		    	html += "<div class=bigdiv>";
+		    	html += "<div class=fldiv>";
+		        html +="<img alt='' src='"+list[i].QRCode+"'>";
+		        html += "<span>"+list[i].goodsCode+"</span>";
+		         html += "</div>";
+		         html += "<dl>";
+		        html += "<dd>"+"品名："+list[i].viewGoodName+"</dd>";
+		        html += "<dd>"+"型号："+list[i].factory+"</dd>";
+		        html += "<dd>"+"色号："+list[i].producFactorycolor+"</dd>";
+		        html += "<dd>"+"售价："+list[i].retailPrice+"</dd>";
+				html += "</dl>";
+		        html += "</div>";
+            
+               
+			}
+		}
+		$("#devid").append(html);
+    })
+
+</script>
+</body>
+</html>

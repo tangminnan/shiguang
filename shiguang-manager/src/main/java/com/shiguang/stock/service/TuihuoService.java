@@ -55,10 +55,8 @@ public interface TuihuoService {
 	int selectSgcount(Map<String, Object> map);
 	List<TuihuoDO> orderList(Map<String, Object> map);
 	int orderCount(Map<String, Object> map);
-	//查订单
 	List<TuihuoDO> selectOrder(Map<String, Object> map);
 
-	//打印
 	TuihuoDO getDanju(String tuihuoNum);
 	List<TuihuoDO> getDanjuList(Map<String, Object> map);
 

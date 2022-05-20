@@ -23,8 +23,9 @@ function load() {
 						singleSelect : false, // 设置为true将禁止多选
 						// contentType : "application/x-www-form-urlencoded",
 						// //发送到服务器的数据编码类型
-						pageSize : 10, // 如果设置了分页，每页数据条数
-						pageNumber : 1, // 如果设置了分布，首页页码
+                        pageSize: 50, // 如果设置了分页，每页数据条数
+                        pageNumber: 1, // 如果设置了分布，首页页码
+                        pageList: [50,100,200,300,500,1200],
 						//search : true, // 是否显示搜索框
 						showColumns : false, // 是否显示内容下拉框（选择显示的列）
 						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -33,14 +34,15 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-                                danjuNumber:$('#danjuNumber').val().trim(),
                                 salenumbery:$('#salenumbery').val().trim(),
                                 gkname:$('#gkname').val().trim(),
-                                hyknum:$('#hyknum').val().trim(),
                                 phone:$('#phone').val().trim(),
                                 mfrsname:$('#mfrsname').val().trim(),
+                                departname:$('#departname').val().trim(),
+                                eyeStyle:$('#eyeStyle').val().trim(),
+
                                 day1:$('#day1').val().trim(),
-                                day2:$('#day2').val().trim()
+                                day2:$('#day2').val().trim(),
 					           // username:$('#searchName').val()
 							};
 						},
@@ -58,30 +60,30 @@ function load() {
 								// 	field : 'id',
 								// 	title : 'id'
 								// },
-								{
-									field : 'danjuNumber',
-									title : '单据编号'
-								},
+								// {
+								// 	field : 'danjuNumber',
+								// 	title : '单据编号'
+								// },
 								{
 									field : 'saleNumber',
-									title : '原配镜单'
+									title : '销售单号'
 								},
 								{
 									field : 'gkname',
 									title : '会员姓名'
 								},
-								{
-									field : 'hyknum',
-									title : '会员卡号'
-								},
+								// {
+								// 	field : 'hyknum',
+								// 	title : '会员卡号'
+								// },
 								{
 									field : 'phone',
 									title : '电话'
 								},
-							// {
-							// 		field : '',
-							// 		title : '销售门店'
-							// 	},
+							{
+									field : 'departname',
+									title : '销售门店'
+								},
 							{
 								field : 'eyeStyle',
 								title : '订做类型',

@@ -21,8 +21,10 @@
         from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsnum left join c_brand b on h.brandnum=b.brandnum AND h.`mfrsid`=b.`mfrsid`
         left join c_unit u on h.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and h.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and h.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and h.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and h.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -46,7 +48,8 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                 order by  h.id desc
+                order by m.mfrsid,b.brandid,h.id
+
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -57,8 +60,10 @@
         select count(*) from aa_hly h left join c_mfrs m on h.mfrsid=m.mfrsnum left join c_brand b on h.brandnum=b.brandnum AND h.`mfrsid`=b.`mfrsid`
         left join c_unit u on h.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and h.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and h.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and h.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and h.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -89,9 +94,14 @@
         left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsnum
         <where>
             <if test="id != null and id != ''">and h.id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
+
+
+            <if test="producNum  != null and producNum  != ''">and  h.produc_num  LIKE concat(concat('%',  #{producNum }),'%')</if>
+            <if test="producCode != null and producCode != ''">and  h.produc_code  LIKE concat(concat('%', #{producCode}),'%')</if>
+            <if test="producName != null and producName != ''">and  h.produc_name  LIKE concat(concat('%', #{producName}),'%')</if>
+
+
+
             <if test="mfrsid != null and mfrsid != ''">and h.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and h.brandid = #{brandid}</if>
             <if test="brandnum != null and brandnum != ''">and h.brandnum = #{brandnum}</if>
@@ -132,9 +142,12 @@
         left join c_mfrs mfrs on h.mfrsid=mfrs.mfrsnum
         <where>
             <if test="id != null and id != ''">and h.id = #{id}</if>
-            <if test="producNum != null and producNum != ''">and h.produc_num = #{producNum}</if>
-            <if test="producCode != null and producCode != ''">and h.produc_code = #{producCode}</if>
-            <if test="producName != null and producName != ''">and h.produc_name = #{producName}</if>
+
+            <if test="producNum  != null and producNum  != ''">and  h.produc_num  LIKE concat(concat('%',  #{producNum }),'%')</if>
+            <if test="producCode != null and producCode != ''">and  h.produc_code  LIKE concat(concat('%', #{producCode}),'%')</if>
+            <if test="producName != null and producName != ''">and  h.produc_name  LIKE concat(concat('%', #{producName}),'%')</if>
+
+
             <if test="mfrsid != null and mfrsid != ''">and h.mfrsid = #{mfrsid}</if>
             <if test="brandid != null and brandid != ''">and h.brandid = #{brandid}</if>
             <if test="brandnum != null and brandnum != ''">and h.brandnum = #{brandnum}</if>
@@ -261,7 +274,6 @@
         </foreach>
     </delete>
 
-    <!-- 根据商品代码查询商品信息 -->
     <select id="getHlyInfomation" resultType="com.shiguang.product.domain.HlyDO">
                 select m.`mfrsname`,b.`brandname`,u.`unitname`,
         h.`id`,h.`produc_num`,h.`produc_code`,h.`produc_name`,h.`mfrsid`,h.`brandid`,h.`brandnum`,h.`factory`,h.`proid`,h.`unitid`,h.`product_type`,h.`main_capacity`,
@@ -273,11 +285,9 @@
     </select>
 
 
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.HlyDO">
     update aa_hly set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.HlyDO">
         select produc_num from aa_hly where produc_num=#{producNum} order by id
 	</select>

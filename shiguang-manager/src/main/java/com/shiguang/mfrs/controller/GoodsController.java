@@ -68,7 +68,6 @@ public class GoodsController {
     @PostMapping("/save")
     @RequiresPermissions("mfrs:goods:add")
     public R save(GoodsDO goods) {
-        //判断是否已存在代码
         String goodsnum = goods.getGoodsnum();
         Map<String, Object> map = new HashMap<>();
         map.put("goodsnum", goodsnum);

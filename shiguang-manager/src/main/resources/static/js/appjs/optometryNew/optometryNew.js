@@ -88,12 +88,6 @@ function load() {
                             var e = '<span class="btn btn-success btn-sm " href="#" title="综合验光"  mce_href="#" onclick="edit(\''
                                 + value
                                 + '\')">综合验光</span> ';
-                            // var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                            // 		+ row.id
-                            // 		+ '\')"><i class="fa fa-remove"></i></a> ';
-                            // var f = '<span class="btn btn-primary btn-sm" href="#" title="验光数据"  mce_href="#" onclick="resetPwd(\''
-                            //     + value
-                            //     + '\')">验光数据</span> ';
                             var d =  "<a href='javascript:' class='detail-icon btn btn-warning btn-sm' >更多</a> ";
                             return e  + d;
                         }
@@ -131,7 +125,9 @@ function load() {
                                             var f = '<span class="btn btn-primary btn-sm" href="#" title="修改"  mce_href="#" onclick="updateTryshuju(\''
                                                 + value
                                                 + '\')">修改</span> ';
-
+                                            var h = '<span class="btn btn-danger btn-sm" href="#" title="删除"  mce_href="#" onclick="reomveTry(\''
+                                                + value
+                                                + '\')">删除</span> ';
                                         }else if (row.trystatus =="0") {
                                             // var f = '';
                                             if (row.haveid == "1"){ //是否结算
@@ -149,7 +145,9 @@ function load() {
                                                     var f = '<span class="btn btn-primary btn-sm" href="#" title="修改"  mce_href="#" onclick="updateTryshuju(\''
                                                         + value
                                                         + '\')">修改</span> ';
-                                                    var h = '';
+                                                    var h = '<span class="btn btn-danger btn-sm" href="#" title="删除"  mce_href="#" onclick="reomveTry(\''
+                                                        + value
+                                                        + '\')">删除</span> ';
 
                                                 }
                                             } else if (row.haveid == "0") { //是否结算
@@ -163,7 +161,7 @@ function load() {
                                             return f + h   ;
                                         }
 
-                                    return f  ;
+                                    return f + h ;
                                 }
                             }
 
@@ -287,12 +285,33 @@ function remove(id) {
         });
     })
 }
+
 function upremove(ptometryNumber) {
     layer.confirm('确定要删除选中的记录？', {
         btn: ['确定', '取消']
     }, function () {
         $.ajax({
             url: '/jiancha/result/upremove' ,
+            type: "post",
+            data: {
+                'ptometryNumber': ptometryNumber
+            },
+            success: function (r) {
+                if (r.code == 0) {
+                    layer.msg(r.msg);
+                    reLoad();
+                } else {
+                    layer.msg(r.msg);
+                }
+            }
+        });
+    })
+}function reomveTry(ptometryNumber) {
+    layer.confirm('确定要删除选中的记录？', {
+        btn: ['确定', '取消']
+    }, function () {
+        $.ajax({
+            url: '/jiancha/tryresults/reomveTry' ,
             type: "post",
             data: {
                 'ptometryNumber': ptometryNumber

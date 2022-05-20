@@ -43,7 +43,7 @@
             <if test="goodsids != null and goodsids != ''">and b.goodsid LIKE concat(concat('%', #{goodsids}),'%')</if>
             and  b.state= 1 and m.xsstate=0 and m.state=1
         </where>
-        group by b.brandid order by b.brandid desc
+        group by b.brandid order by m.mfrsid,b.brandid
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}
         </if>
@@ -86,7 +86,7 @@
              <if test="mfrsnames != null and mfrsnames != ''">and m.mfrsname  LIKE concat(concat('%', #{mfrsnames}),'%')</if>
              and  b.state= 1 and m.xsstate=0 and m.state=1
          </where>
-        group by b.brandid order by b.xsstate desc ,b.brandid desc
+        group by b.brandid order by b.xsstate desc ,m.mfrsid,b.brandid
          <if test="offset != null and limit != null">
              limit #{offset}, #{limit}
          </if>
@@ -119,7 +119,12 @@
         `type_id`,`type_name`,`registration`,`mfrsid`,`mfrsname`,`unitid`,`unitname`,`address`,`payid`,`batchid`,`factory`,`money`,`shorthandcode`,
         `productionkey`,`xsstate`,`state`,`payday`
         from c_brand
-        where brandnum = #{brandnum} and state='1'order by brandid
+
+        <where>
+            <if test="brandnum != null and brandnum != ''">and brandnum= #{brandnum}</if>
+            <if test="mfrsid != null and mfrsid != ''">and mfrsid= #{mfrsid}</if>
+            and state='1'
+        </where>
     </select>
 
 
@@ -252,13 +257,7 @@
             #{brandid}
         </foreach>
     </delete>
-    <!--菜单联动显示-->
-    <!--<select id="caidan" resultType="com.shiguang.mfrs.domain.GoodsDO">-->
-        <!--select g.goodsid,g.goodsname from c_goods g left join cc_mg mg on g.goodsid=mg.goodsid-->
-        <!--<where>-->
-            <!--<if test="mfrsid != null and mfrsid != ''">and mg.mfrsid = #{mfrsid}</if>-->
-        <!--</where>-->
-    <!--</select>-->
+
     <select id="caidan" resultType="com.shiguang.mfrs.domain.GoodsDO">
         select g.goodsid ,g.goodsname from c_mfrs m join c_goods g on
         FIND_IN_SET(g.goodsid,m.goodsid)
@@ -266,7 +265,6 @@
             <if test="mfrsid != null and mfrsid != ''">and m.mfrsid = #{mfrsid}</if>
         </where>
     </select>
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.mfrs.domain.BrandDO">
     update c_brand set `state` = #{state} where brandid = #{brandid}
     </update>

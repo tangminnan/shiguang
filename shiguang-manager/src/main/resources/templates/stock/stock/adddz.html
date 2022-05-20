@@ -354,10 +354,10 @@
                                 // barHtml += "<td  style='display: none'>" + rows[i].goodsxinxiid + "</td>";
                                 // barHtml += "<input name='goodsxinxiid' type='hidden' value='" + rows[i].goodsxinxiid + "'>";
                                 barHtml += "<td >" + "<input readonly  name='useday'  type='text' onclick='clickDate()' class='useday'/>" + "</td>";
-                                barHtml += "<td >" + "<input  name='batch' type='text'/>" + "</td>";
+                                barHtml += "<td >" + "<input  name='batch' type='text' onkeyup='tiaoma(this,this.value)'/>" + "</td>";
                                 barHtml += "<td >" + rows[i].medicinecode + "</td>";
                                 barHtml += "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>";
-                                barHtml += "<td >" + "<input readonly name='produceDay'  type='text' onblur='clickproduceDay()'  class='produceDay'/>" + "</td>";
+                                barHtml += "<td >" + "<input   name='produceDay'  type='text' onblur='clickproduceDay()'  class='produceDay'/>" + "</td>";
                                 barHtml += "<td  >" + "<input    name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'    onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "'/>" + "</td>";
                                 barHtml += "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>";
                                 barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
@@ -453,11 +453,11 @@
 
                                     // "<td >"+"<input readonly id='useday"+ a +"' name='useday' onClick=\"return Calendar('useday"+ a +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
                                 barHtml += "<td >" + "<input readonly   name='useday'  type=\"text\" onclick='clickDate()' class='useday'/>" + "</td>";
-                                barHtml += "<td >" + "<input  name='batch' type='text'/>" + "</td>";
+                                barHtml += "<td >" + "<input  name='batch' type='text' onkeyup='tiaoma(this,this.value)'/>" + "</td>";
                                 barHtml += "<td >" + rows[i].medicinecode + "</td>";
                                 barHtml += "<input name='zhuceNumber' type='hidden' value='" + rows[i].medicinecode + "'>";
                                     // "<td >"+"<input readonly id='produceDay"+ b +"'  name='produceDay' onClick=\"return Calendar('produceDay"+ b +"');\" class=\"text_time\" type=\"text\"/>"+ "</td>\n"+
-                                barHtml += "<td >" + "<input readonly   name='produceDay'  type=\"text\" onclick='clickproduceDay()' class='produceDay'/>" + "</td>";
+                                barHtml += "<td >" + "<input     name='produceDay'  type=\"text\" onclick='clickproduceDay()' class='produceDay'/>" + "</td>";
                                 barHtml += "<td  >" + "<input  id='goodsCount' name='goodsCount' oninput=\"value=value.replace(/[^\\d]/g,'')\" type='text'    onchange='hejiadd(this.value)' value='" + rows[i].goodsCount + "'/>" + "</td>";
                                 barHtml += "<td  style='display: none'>" + "<input  id='allcount' name='allcount' readonly type='text'/>" + "</td>";
                                 barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
@@ -580,44 +580,76 @@
 
 
 
-function clickDate(){
-    //日期
-    lay('.useday').each(function () {
-        laydate.render({
-            elem: this,
-            type: 'date',
-            trigger: 'click',	  // 事件类型
-            done: function (value, date, endDate) {
-                var data_val = $(this)[0].elem[0].parentElement.parentNode.children[14].innerText.slice(0, 18);
-                if (value == "") {
-                    // console.log(123);
-                    $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + "00000000";
-                    $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + "00000000";
-                    // console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
-                    // $('#goodsCode').val(data_val + "00000000")
-                } else {
-                    $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + value.replace("-", "").replace("-", "");
-                    $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + value.replace("-", "").replace("-", "");
-                    // console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
-                    // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+// function clickDate(){
+//     //日期
+//     lay('.useday').each(function () {
+//         laydate.render({
+//             elem: this,
+//             type: 'date',
+//             trigger: 'click',	  // 事件类型
+//             done: function (value, date, endDate) {
+//                 var data_val = $(this)[0].elem[0].parentElement.parentNode.children[14].innerText.slice(0, 18);
+//                 if (value == "") {
+//                     // console.log(123);
+//                     $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + "00000000";
+//                     $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + "00000000";
+//                     // console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+//                     // $('#goodsCode').val(data_val + "00000000")
+//                 } else {
+//                     $(this)[0].elem[0].parentElement.parentNode.children[14].innerText = data_val + value.replace("-", "").replace("-", "");
+//                     $(this)[0].elem[0].parentElement.parentNode.children[15].value = data_val + value.replace("-", "").replace("-", "");
+//                     // console.log($(this)[0].elem[0].parentElement.parentNode.children[15]);
+//                     // $('#goodsCode').val(data_val + value.replace("-", "").replace("-", ""))
+//                 }
+//                 $(this).focus();
+//
+//             }
+//         });
+//
+//     });
+// }
+        function tiaoma(obj,e) {
+            var tr=obj.parentNode.parentNode;//得到按钮[obj]的父元素[td]的父元素[tr]
+            var val1 =tr.children[14].innerText.slice(0, 18);
+            var batch1=e;
+            if(batch1!=""){
+                var phs= batch1.substring(batch1.length-8, batch1.length);
+                var ph="";
+                if (phs.length<8){
+                    var phscd=8-phs.length;
+                    for (var i=0;i<phscd;i++){
+                        ph+="0"
+                    }
                 }
-                $(this).focus();
-
+                var batchs=ph+phs;
+                tr.children[14].innerText = val1 + batchs;
+                tr.children[15].value = val1 + batchs;
+            }else {
+                tr.children[14].innerText = val1 + "00000000";
+                tr.children[15].value = val1 + "00000000";
             }
-        });
 
-    });
-}
-function clickproduceDay(){
-    lay('.produceDay').each(function () {
-        //日期
-        laydate.render({
-            elem: this,
-            type: 'date'
-        });
-    });
-
-}
+        }
+        // function clickDate() {
+        //     //日期
+        //     lay('.useday').each(function () {
+        //         //日期
+        //         laydate.render({
+        //             elem: this,
+        //             type: 'date'
+        //         });
+        //     });
+        // }
+// function clickproduceDay(){
+//     lay('.produceDay').each(function () {
+//         //日期
+//         laydate.render({
+//             elem: this,
+//             type: 'date'
+//         });
+//     });
+//
+// }
 
 
     </script>

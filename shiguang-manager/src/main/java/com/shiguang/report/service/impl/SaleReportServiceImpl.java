@@ -16,53 +16,54 @@ import java.util.Map;
 public class SaleReportServiceImpl implements SaleReportService {
     @Autowired
     private SaleReportDao saleReportDao;
+
     @Override
-    public List<SalesDO> findSaleReport(Map<String, Object> map){
+    public List<SalesDO> findSaleReport(Map<String, Object> map) {
         return saleReportDao.findSaleReport(map);
     }
 
     @Override
-    public int findSaleReportCount(Map<String, Object> map){
+    public int findSaleReportCount(Map<String, Object> map) {
         return saleReportDao.findSaleReportCount(map);
     }
 
     @Override
-    public SaleReportDO findCostList(Map<String,Object> map){
+    public SaleReportDO findCostList(Map<String, Object> map) {
         return saleReportDao.findCostList(map);
     }
 
     @Override
-    public List<SettlementDO> findSaleReportForms(Map<String, Object> map){
+    public List<SettlementDO> findSaleReportForms(Map<String, Object> map) {
         return saleReportDao.findSaleReportForms(map);
     }
 
     @Override
-    public List<SettlementDO> drawckMoney(Map<String, Object> map){
+    public List<SettlementDO> drawckMoney(Map<String, Object> map) {
         return saleReportDao.drawckMoney(map);
     }
 
     @Override
-    public int findSaleReportFormsCount(Map<String, Object> map){
+    public int findSaleReportFormsCount(Map<String, Object> map) {
         return saleReportDao.findSaleReportFormsCount(map);
     }
 
     @Override
-    public List<SalesDO> findGoodsList(Map<String, Object> map){
+    public List<SalesDO> findGoodsList(Map<String, Object> map) {
         return saleReportDao.findGoodsList(map);
     }
 
     @Override
-    public List<SalesDO> findSaleNameList(Map<String, Object> map){
+    public List<SalesDO> findSaleNameList(Map<String, Object> map) {
         return saleReportDao.findSaleNameList(map);
     }
 
     @Override
-    public List<SalesDO> findSaleReportDetailForms(Map<String, Object> map){
+    public List<SalesDO> findSaleReportDetailForms(Map<String, Object> map) {
         return saleReportDao.findSaleReportDetailForms(map);
     }
 
     @Override
-    public List<SettlementDO> findSaleNameSettleList(Map<String, Object> map){
+    public List<SettlementDO> findSaleNameSettleList(Map<String, Object> map) {
         return saleReportDao.findSaleNameSettleList(map);
     }
 
@@ -181,5 +182,18 @@ public class SaleReportServiceImpl implements SaleReportService {
     @Override
     public List<SalesDO> findDoctorGoods(Map<String, Object> map) {
         return saleReportDao.findDoctorGoods(map);
+    }
+
+
+
+    @Override
+    public List<SalesDO> Yg(Map<String, Object> map) {
+        return saleReportDao.Yg(map);
+    }
+
+
+    @Override
+    public List<SalesDO> YgUse(Map<String, Object> map) {
+        return saleReportDao.YgUse(map);
     }
 }

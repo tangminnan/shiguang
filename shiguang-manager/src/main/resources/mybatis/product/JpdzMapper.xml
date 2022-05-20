@@ -43,8 +43,9 @@
         left join c_unit u on u.unitid=j.unitid
         left join p_light lig on lig.light_id=j.light_id
         <where>
-            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and j.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -72,7 +73,9 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                 order by  j.id desc
+
+                order by m.mfrsid,b.brandid,j.id
+
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -92,8 +95,9 @@
         left join c_unit u on u.unitid=j.unitid
         left join p_light lig on lig.light_id=j.light_id
         <where>
-            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and j.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -371,11 +375,9 @@
         </foreach>
     </delete>
 
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.JpdzDO">
     update aa_jpdz set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.JpdzDO">
         select produc_num from aa_jpdz where produc_num=#{producNum}   order by id
 	</select>

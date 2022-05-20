@@ -235,7 +235,6 @@
         </set>
         where goods_num = #{goodsNum}
     </update>
-    <!--//修改库存数量-->
     <update id="updateGoodsCount" parameterType="com.shiguang.stock.domain.StockDO">
         update stock
         <set>
@@ -1105,6 +1104,9 @@
         select p.`position_id`,p.`position_num`,p.`depart_number`,p.`depart_name`,p.`position_name` from c_position p join department d on d.depart_number = p.depart_number and d.company_id = p.company_id
         <where>
             <if test="companyId != null and companyId != ''">and d.company_id = #{companyId}</if>
+            <if test="departNumber != null and departNumber != ''">and p.depart_number = #{departNumber}</if>
+            <if test="positionId != null and positionId != ''">and p.position_id = #{positionId}</if>
+            <if test="positionName != null and positionName != ''">and p.position_name = #{positionName}</if>
             and p.position_order = '1'
         </where>
     </select>
@@ -1114,6 +1116,9 @@
         select p.`position_id`,p.`position_num`,p.`depart_number`,p.`depart_name`,p.`position_name` from c_position p join department d on d.depart_number = p.depart_number and d.company_id = p.company_id
         <where>
             <if test="companyId != null and companyId != ''">and d.company_id = #{companyId}</if>
+            <if test="departNumber != null and departNumber != ''">and p.depart_number = #{departNumber}</if>
+            <if test="positionId != null and positionId != ''">and p.position_id = #{positionId}</if>
+            <if test="positionName != null and positionName != ''">and p.position_name = #{positionName}</if>
             and p.position_order = '2'
         </where>
     </select>
@@ -1122,6 +1127,9 @@
         select p.`position_id`,p.`position_num`,p.`depart_number`,p.`depart_name`,p.`position_name` from c_position p join department d on d.depart_number = p.depart_number and d.company_id = p.company_id
         <where>
             <if test="companyId != null and companyId != ''">and d.company_id = #{companyId}</if>
+            <if test="departNumber != null and departNumber != ''">and p.depart_number = #{departNumber}</if>
+            <if test="positionId != null and positionId != ''">and p.position_id = #{positionId}</if>
+            <if test="positionName != null and positionName != ''">and p.position_name = #{positionName}</if>
             and p.position_order = '3'
         </where>
     </select>
@@ -1139,7 +1147,6 @@
     <select id="getGoodsNum" resultType="com.shiguang.stock.domain.StockDO">
     select `id`,`goods_code`, goods_count as goodsCount  from stock where goods_code = #{value} group by goods_code
 </select>
-    <!--镜架【商】【品】【查】【询】-->
     <select id="selectJingjia" resultType="com.shiguang.product.domain.ProducaDO">
         select  p.produc_num,p.produc_name, b.brandnum,b.brandname,p.produc_factory,u.unitname,
         p.factory,p.retail_price,p.tax_price,p.produc_factorycolor,m.materialname,p.size,p.produc_code,
@@ -1152,7 +1159,6 @@
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
-            <!--<if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>-->
             <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
 
             <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
@@ -1181,14 +1187,13 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by p.id desc
+                order by mfrs.mfrsid,b.brandid,p.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}
         </if>
     </select>
-    <!--镜架【商】【品】【查】【询】【List】-->
     <select id="selectJingjiaCount" resultType="int">
         select count(*)  from aa_produca p left join c_unit u on p.unitid=u.unitid
         left join c_material m on p.materialid=m.materialid
@@ -1198,7 +1203,6 @@
         <where>
             <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
             <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
-            <!--<if test="producName != null and producName != ''">and p.produc_name = #{producName}</if>-->
             <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
 
             <if test="mfrsid != null and mfrsid != ''">and p.mfrsid = #{mfrsid}</if>
@@ -1220,9 +1224,8 @@
 
             and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by p.id desc
+        order by mfrs.mfrsid,b.brandid,p.id
     </select>
-    <!--配件【商】【品】【查】【询】-->
     <select id="selectPeijian" resultType="com.shiguang.product.domain.PartsDO">
         select  p.produc_num,p.produc_name, b.brandnum,b.brandname,p.produc_factory,u.unitname,
         p.factory,p.retail_price,p.tax_price,p.parts_style,p.produc_code,
@@ -1253,7 +1256,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by p.id desc
+                order by mfrs.mfrsid,b.brandid,p.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1282,9 +1285,8 @@
 
             and p.xsstate = 0 and  p.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by p.id desc
+        order by mfrs.mfrsid,b.brandid,p.id
     </select>
-    <!--镜片定做【商】【品】【查】【询】-->
     <select id="selectJpdz" resultType="com.shiguang.product.domain.JpdzDO">
         SELECT
         j.produc_num,
@@ -1352,7 +1354,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by j.id desc
+                order by mfrs.mfrsid,b.brandid,j.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1393,9 +1395,8 @@
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
             and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by j.id desc
+        order by mfrs.mfrsid,b.brandid,j.id
     </select>
-    <!--镜片成品【商】【品】【查】【询】-->
     <select id="selectJpcp" resultType="com.shiguang.product.domain.JpcpDO">
         SELECT
         j.produc_num,
@@ -1459,7 +1460,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by j.id desc
+                order by mfrs.mfrsid,b.brandid,j.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1499,9 +1500,8 @@
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             and j.xsstate = 0 and  j.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by j.id desc
+        order by mfrs.mfrsid,b.brandid,j.id
     </select>
-    <!--隐形订做【商】【品】【查】【询】-->
     <select id="selectYxdz" resultType="com.shiguang.product.domain.YxdzDO">
         select
         y.produc_num,y.produc_name, y.produc_code,u.unitname,y.factory,y.retail_price,y.tax_price,y.sph_up,y.sph_down,y.cyl_up,y.cyl_down,
@@ -1538,7 +1538,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by y.id desc
+                order by mfrs.mfrsid,b.brandid,y.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1572,9 +1572,8 @@
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
             and y.xsstate = 0 and  y.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by y.id desc
+        order by mfrs.mfrsid,b.brandid,y.id
     </select>
-    <!--隐形成品【商】【品】【查】【询】-->
     <select id="selectYxcp" resultType="com.shiguang.product.domain.YxcpDO">
         SELECT
         y.produc_num,
@@ -1630,7 +1629,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by y.id desc
+                order by mfrs.mfrsid,b.brandid,y.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1667,11 +1666,10 @@
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
             and y.xsstate = 0 and  y.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by y.id desc
+        order by mfrs.mfrsid,b.brandid,y.id
     </select>
 
 
-    <!--护理液【商】【品】【查】【询】-->
     <select id="selectHly" resultType="com.shiguang.product.domain.HlyDO">
         select
         h.produc_num,  h.produc_name,  b.brandnum, b.brandname,h.produc_factory,h.factory,u.unitname,h.retail_price,h.tax_price,h.main_capacity,h.second_capacity,h.produc_code,
@@ -1703,7 +1701,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by h.id desc
+                order by mfrs.mfrsid,b.brandid,h.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1733,9 +1731,8 @@
 
             and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by h.id desc
+        order by mfrs.mfrsid,b.brandid,h.id
     </select>
-    <!--太阳镜【商】【品】【查】【询】-->
     <select id="selectTyj" resultType="com.shiguang.product.domain.TyjDO">
         SELECT
         t.produc_num,
@@ -1788,7 +1785,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by t.id desc
+                order by mfrs.mfrsid,b.brandid,t.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1824,9 +1821,8 @@
 
             and t.xsstate = 0 and  t.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by t.id desc
+        order by mfrs.mfrsid,b.brandid,t.id
     </select>
-    <!--老花镜【商】【品】【查】【询】-->
     <select id="selectLhj" resultType="com.shiguang.product.domain.OldlensDO">
         SELECT
         o.produc_num,
@@ -1880,7 +1876,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by o.id desc
+                order by mfrs.mfrsid,b.brandid,o.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1916,9 +1912,8 @@
 
             and o.xsstate = 0 and  o.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by o.id desc
+        order by mfrs.mfrsid,b.brandid,o.id
     </select>
-    <!--耗材【商】【品】【查】【询】-->
     <select id="selectHc" resultType="com.shiguang.product.domain.HcDO">
         select  h.produc_num,h.produc_name, h.produc_code, b.brandnum,b.brandname,u.unitname,h.retail_price,h.tax_price,h.produc_factory,
         h.produc_factory as factoty,
@@ -1948,7 +1943,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by h.id desc
+                order by mfrs.mfrsid,b.brandid,h.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -1976,9 +1971,8 @@
 
             and h.xsstate = 0 and  h.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by h.id desc
+        order by mfrs.mfrsid,b.brandid,h.id
     </select>
-    <!--视光【商】【品】【查】【询】-->
     <select id="selectSg" resultType="com.shiguang.product.domain.ShiguangDO">
         select
         s.produc_num,s.produc_name, s.produc_code, b.brandnum,b.brandname,s.factory,s.produc_factory,u.unitname,s.retail_price,s.tax_price,
@@ -2009,7 +2003,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by s.id desc
+                order by mfrs.mfrsid,b.brandid,s.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -2039,9 +2033,8 @@
 
             and s.xsstate = 0 and  s.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
         </where>
-        order by s.id desc
+        order by mfrs.mfrsid,b.brandid,s.id
     </select>
-    <!--【是否已存在商品信息】-->
     <select id="haveNum" resultType="com.shiguang.stock.domain.StockDO">
         select  * from stock
          <where>
@@ -2055,50 +2048,144 @@
          </where>
         order by id
     </select>
-    <!--【库存查询】-->
+
+
+
     <select id="kccxList" resultType="com.shiguang.stock.domain.StockDO">
-        SELECT
-        s.danju_number,
-        s.goods_num,
-        s.goods_code,
-        s.goods_name,
-        s.goods_count,
-        g.goodsname AS 'gdname',
-        g.goodsid,
-        m.mfrsname,
-        s.brandname,
-        s.retail_price,
-        s.price_sum,
-        s.cost_price,
-        s.cost_sum,
-        s.whole_price,
-        s.whole_sum,
-        po.position_name,
-        s.batch,
-        s.zhuce_number,
-        s.produce_day,
-        s.useday,
-        s.factory,
-        s.mfrsid,
-        s.unit,
-        s.classtype,
-        s.returnzt,
-        jj.produc_factorycolor AS jjColor,
-        jpcp.sph_id AS jpcpSph,
-        jpcp.cyl_id AS jpcpCyl,
-        jpdz.sph_up AS jpcpSphUp,
-        jpdz.sph_down AS jpcpSphDown,
-        jpdz.cyl_up AS jpcpCylUp,
-        jpdz.cyl_down AS jpcpCylDown,
-        yxcp.sph_id AS yxcpSph,
-        yxcp.cyl_id AS yxcpCyl,
-        yxdz.sph_up AS yxdzSphUp,
-        yxdz.sph_down AS yxdzSphDown,
-        yxdz.cyl_up AS yxdzCylUp,
-        yxdz.cyl_down AS yxdzCylDown,
-        tyj.produc_factorycolor AS tyjColor,
-        lhj.old_id AS lhjSph
-        FROM
+    SELECT
+    s.danju_number,
+    s.goods_num,
+    s.goods_code,
+    s.goods_name,
+    s.goods_count,
+    g.goodsname AS 'gdname',
+    g.goodsid,
+    m.mfrsname,
+    s.brandname,
+    s.retail_price,
+    s.price_sum,
+    s.cost_price,
+    s.cost_sum,
+    s.whole_price,
+    s.whole_sum,
+    po.position_name,
+    s.batch,
+    s.zhuce_number,
+    s.produce_day,
+    s.useday,
+    s.factory,
+    s.mfrsid,
+    s.unit,
+    s.classtype,
+    s.returnzt,
+    jj.produc_factorycolor AS jjColor,
+    jpcp.sph_id AS jpcpSph,
+    jpcp.cyl_id AS jpcpCyl,
+    jpdz.sph_up AS jpcpSphUp,
+    jpdz.sph_down AS jpcpSphDown,
+    jpdz.cyl_up AS jpcpCylUp,
+    jpdz.cyl_down AS jpcpCylDown,
+    yxcp.sph_id AS yxcpSph,
+    yxcp.cyl_id AS yxcpCyl,
+    yxdz.sph_up AS yxdzSphUp,
+    yxdz.sph_down AS yxdzSphDown,
+    yxdz.cyl_up AS yxdzCylUp,
+    yxdz.cyl_down AS yxdzCylDown,
+    tyj.produc_factorycolor AS tyjColor,
+    lhj.old_id AS lhjSph
+    FROM
+    stock s
+    LEFT JOIN c_goods g ON s.goods_type = g.goodsid
+    LEFT JOIN c_mfrs m ON s.mfrsid = m.mfrsnum
+    LEFT JOIN c_position po ON s.position_id = po.position_id
+    LEFT JOIN c_brand b ON s.brandname = b.brandname AND s.`mfrsid` = b.`mfrsid`
+    LEFT JOIN department d ON po.depart_number = d.depart_number  and po.company_id=d.company_id
+    LEFT JOIN aa_produca jj ON jj.produc_num = s.goods_num
+    LEFT JOIN aa_parts pj ON pj.produc_num = s.goods_num
+
+    LEFT JOIN aa_jpcp jpcp ON jpcp.produc_num = s.goods_num
+    LEFT JOIN aa_jpdz jpdz ON jpdz.produc_num = s.goods_num
+    LEFT JOIN aa_yxcp yxcp ON yxcp.produc_num = s.goods_num
+    LEFT JOIN aa_yxdz yxdz ON yxdz.produc_num = s.goods_num
+    LEFT JOIN aa_tyj tyj ON tyj.produc_num = s.goods_num
+    LEFT JOIN aa_oldlens lhj ON lhj.produc_num = s.goods_num
+    <where>
+
+        <if test="goodsNum != null and goodsNum != ''">and  s.goods_num  LIKE concat(concat('%', #{goodsNum}),'%')</if>
+        <if test="goodsCode != null and goodsCode != ''">and  s.goods_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
+
+        <if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
+    <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
+
+    <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+    <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
+
+    <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
+    <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
+
+    <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
+    <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>
+    <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
+    <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
+    <if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>
+    <if test="classtype != null and classtype != ''">and s.classtype = #{classtype}</if>
+    <if test="status != null and status != ''">and s.status = #{status}</if>
+    <if test="outPosition != null and outPosition != ''">and  po.position_id  = #{outPosition}</if>
+
+
+        <if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
+        <if test="kccount1 != null and kccount1 != ''">and  s.goods_count > #{kccount1}</if>
+        <if test="kccount2 != null and kccount2 != ''">and  s.goods_count &lt; #{kccount2}</if>
+
+        <if test="factory != null and factory != ''">and s.factory LIKE concat(concat('%', #{factory}),'%')</if>
+        <if test="(factoryColor != null and factoryColor != '') ">
+           and (
+            jj.produc_factorycolor LIKE concat(concat('%', #{factoryColor}),'%')
+            or tyj.produc_factorycolor LIKE concat(concat('%', #{factoryColor}),'%')
+            or lhj.produc_factorycolor LIKE concat(concat('%', #{factoryColor}),'%')
+            )
+        </if>
+
+        <if test="(sph != null and sph != '') or (sph2 != null and sph2 != '')   ">
+          and  (
+            jpcp.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+            or yxcp.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+            )
+        </if>
+        <if test="(cyl != null and cyl != '') or (cyl2 != null and cyl2 != '')   ">
+            and  (
+            jpcp.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+            or    yxcp.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+            )
+        </if>
+
+
+        <if test="(refractivityid != null and refractivityid != '') ">
+            and (
+            pj.refractivityid LIKE concat(concat('%', #{refractivityid}),'%')
+            or jpcp.refractivityid LIKE concat(concat('%', #{refractivityid}),'%')
+            or jpdz.refractivityid LIKE concat(concat('%', #{refractivityid}),'%')
+            )
+        </if>
+
+
+
+    </where>
+    <choose>
+    <when test="sort != null and sort.trim() != ''">
+    order by ${sort} ${order}
+    </when>
+    <otherwise>
+        order by  po.state_id ,s.position_id,m.mfrsid,b.brandid
+    </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+    limit #{offset}, #{limit}
+    </if>
+    </select>
+    <select id="countall" resultType="int">
+        SELECT ifnull(sum(s.goods_count),0)  FROM
         stock s
         LEFT JOIN c_goods g ON s.goods_type = g.goodsid
         LEFT JOIN c_mfrs m ON s.mfrsid = m.mfrsnum
@@ -2106,6 +2193,8 @@
         LEFT JOIN c_brand b ON s.brandname = b.brandname AND s.`mfrsid` = b.`mfrsid`
         LEFT JOIN department d ON po.depart_number = d.depart_number  and po.company_id=d.company_id
         LEFT JOIN aa_produca jj ON jj.produc_num = s.goods_num
+        LEFT JOIN aa_parts pj ON pj.produc_num = s.goods_num
+
         LEFT JOIN aa_jpcp jpcp ON jpcp.produc_num = s.goods_num
         LEFT JOIN aa_jpdz jpdz ON jpdz.produc_num = s.goods_num
         LEFT JOIN aa_yxcp yxcp ON yxcp.produc_num = s.goods_num
@@ -2114,8 +2203,9 @@
         LEFT JOIN aa_oldlens lhj ON lhj.produc_num = s.goods_num
         <where>
 
-            <if test="goodsNum != null and goodsNum != ''">and  s.goods_num= #{goodsNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and  s.goods_code= #{goodsCode}</if>
+            <if test="goodsNum != null and goodsNum != ''">and  s.goods_num  LIKE concat(concat('%', #{goodsNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and  s.goods_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
 
             <if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
@@ -2136,106 +2226,55 @@
             <if test="outPosition != null and outPosition != ''">and  po.position_id  = #{outPosition}</if>
 
             <if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-            <if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
-
-        </where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
-            <otherwise>
-             group by s.id
-            </otherwise>
-        </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
-    </select>
-    <!--<select id="countall" resultType="int">-->
-        <!--select ifnull(sum(s.goods_count),0)  as countall FROM-->
-        <!--stock s-->
-        <!--LEFT JOIN c_goods g ON s.goods_type = g.goodsid-->
-        <!--LEFT JOIN c_mfrs m ON s.mfrsid = m.mfrsnum-->
-        <!--LEFT JOIN c_position po ON s.position_id = po.position_id-->
-        <!--LEFT JOIN c_brand b ON s.brandname = b.brandname AND s.`mfrsid` = b.`mfrsid`-->
-        <!--LEFT JOIN department d ON po.depart_number = d.depart_number  and po.company_id=d.company_id-->
-        <!--LEFT JOIN aa_produca jj ON jj.produc_num = s.goods_num-->
-        <!--LEFT JOIN aa_jpcp jpcp ON jpcp.produc_num = s.goods_num-->
-        <!--LEFT JOIN aa_jpdz jpdz ON jpdz.produc_num = s.goods_num-->
-        <!--LEFT JOIN aa_yxcp yxcp ON yxcp.produc_num = s.goods_num-->
-        <!--LEFT JOIN aa_yxdz yxdz ON yxdz.produc_num = s.goods_num-->
-        <!--LEFT JOIN aa_tyj tyj ON tyj.produc_num = s.goods_num-->
-        <!--LEFT JOIN aa_oldlens lhj ON lhj.produc_num = s.goods_num-->
-        <!--<where>-->
-
-            <!--<if test="goodsNum != null and goodsNum != ''">and  s.goods_num= #{goodsNum}</if>-->
-            <!--<if test="goodsCode != null and goodsCode != ''">and  s.goods_code= #{goodsCode}</if>-->
-
-            <!--<if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>-->
-            <!--<if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>-->
-
-            <!--<if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>-->
-            <!--<if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>-->
-
-            <!--<if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>-->
-            <!--<if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>-->
+            <if test="kccount1 != null and kccount1 != ''">and  s.goods_count > #{kccount1}</if>
+            <if test="kccount2 != null and kccount2 != ''">and  s.goods_count &lt; #{kccount2}</if>
 
 
-            <!--<if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>-->
-            <!--<if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>-->
-            <!--<if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>-->
-            <!--<if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>-->
-            <!--<if test="companyId != null and companyId != ''">and FIND_IN_SET(d.company_id,#{companyId})</if>-->
-            <!--<if test="classtype != null and classtype != ''">and s.classtype = #{classtype}</if>-->
-            <!--<if test="status != null and status != ''">and s.status = #{status}</if>-->
-            <!--<if test="outPosition != null and outPosition != ''">and  po.position_id  = #{outPosition}</if>-->
 
-            <!--<if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>-->
-            <!--<if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>-->
-
-        <!--</where>-->
-    <!--</select>-->
-    <select id="countall" resultType="int">
-        SELECT ifnull(sum(s.goods_count),0)  from stock s
-
-        join c_position p on s.position_id=p.position_id
-        join c_mfrs m on s.mfrsid=m.mfrsnum
-        <where>
-            <if test="companyId != null and companyId != ''">and FIND_IN_SET(p.company_id,#{companyId})</if>
-
-            <if test="goodsNum != null and goodsNum != ''">and  s.goods_num= #{goodsNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and  s.goods_code= #{goodsCode}</if>
-
-            <if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
-            <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
-
-            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
-            <if test="brandname != null and brandname != ''">and s.brandname = #{brandname}</if>
-
-            <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
-            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="factory != null and factory != ''">and s.factory LIKE concat(concat('%', #{factory}),'%')</if>
+            <if test="(factoryColor != null and factoryColor != '') ">
+              and  (
+                jj.produc_factorycolor LIKE concat(concat('%', #{factoryColor}),'%')
+                or tyj.produc_factorycolor LIKE concat(concat('%', #{factoryColor}),'%')
+                or lhj.produc_factorycolor LIKE concat(concat('%', #{factoryColor}),'%')
+                )
+            </if>
 
 
-            <if test="xsstate != null and xsstate != ''">and p.xsstate = #{xsstate}</if>
-            <if test="positionId != null and positionId != ''">and s.position_id = #{positionId}</if>
-            <if test="positionName != null and positionName != ''">and po.position_name = #{positionName}</if>
-            <if test="departNumber != null and departNumber != ''">and po.depart_number = #{departNumber}</if>
-            <if test="classtype != null and classtype != ''">and s.classtype = #{classtype}</if>
 
-            <if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-            <if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+            <if test="(sph != null and sph != '') or (sph2 != null and sph2 != '')   ">
+                and  (
+                jpcp.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+                or yxcp.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+                )
+            </if>
+            <if test="(cyl != null and cyl != '') or (cyl2 != null and cyl2 != '')   ">
+                and  (
+                jpcp.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+                or    yxcp.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+                )
+            </if>
 
+            <if test="(refractivityid != null and refractivityid != '') ">
+                and (
+                pj.refractivityid LIKE concat(concat('%', #{refractivityid}),'%')
+                or jpcp.refractivityid LIKE concat(concat('%', #{refractivityid}),'%')
+                or jpdz.refractivityid LIKE concat(concat('%', #{refractivityid}),'%')
+                )
+            </if>
         </where>
     </select>
     <select id="kccxListCount" resultType="int">
-        select count(*)   FROM
+        select count(*)  FROM
         stock s
         LEFT JOIN c_goods g ON s.goods_type = g.goodsid
         LEFT JOIN c_mfrs m ON s.mfrsid = m.mfrsnum
         LEFT JOIN c_position po ON s.position_id = po.position_id
-        LEFT JOIN c_brand b ON s.brandname = b.brandname AND s.`mfrsid` = b.`mfrsid` and s.goods_type=m.goodsid
+        LEFT JOIN c_brand b ON s.brandname = b.brandname AND s.`mfrsid` = b.`mfrsid`
         LEFT JOIN department d ON po.depart_number = d.depart_number  and po.company_id=d.company_id
         LEFT JOIN aa_produca jj ON jj.produc_num = s.goods_num
+        LEFT JOIN aa_parts pj ON pj.produc_num = s.goods_num
+
         LEFT JOIN aa_jpcp jpcp ON jpcp.produc_num = s.goods_num
         LEFT JOIN aa_jpdz jpdz ON jpdz.produc_num = s.goods_num
         LEFT JOIN aa_yxcp yxcp ON yxcp.produc_num = s.goods_num
@@ -2244,8 +2283,9 @@
         LEFT JOIN aa_oldlens lhj ON lhj.produc_num = s.goods_num
         <where>
 
-            <if test="goodsNum != null and goodsNum != ''">and  s.goods_num= #{goodsNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and  s.goods_code= #{goodsCode}</if>
+            <if test="goodsNum != null and goodsNum != ''">and  s.goods_num  LIKE concat(concat('%', #{goodsNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and  s.goods_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
 
             <if test="goodsName != null and goodsName != ''">and  s.goods_name LIKE concat(concat('%', #{goodsName}),'%')</if>
             <if test="goodsType != null and goodsType != ''">and s.goods_type = #{goodsType}</if>
@@ -2255,7 +2295,6 @@
 
             <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
             <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
-
 
             <if test="xsstate != null and xsstate != ''">and po.xsstate = #{xsstate}</if>
             <if test="positionId != null and positionId != ''">and po.position_id = #{positionId}</if>
@@ -2267,10 +2306,75 @@
             <if test="outPosition != null and outPosition != ''">and  po.position_id  = #{outPosition}</if>
 
             <if test="kccount0 != null and kccount0 != ''">and  s.goods_count = #{kccount0}</if>
-            <if test="kccount1 != null and kccount1 != ''">and  s.goods_count != #{kccount1}</if>
+            <if test="kccount1 != null and kccount1 != ''">and  s.goods_count > #{kccount1}</if>
+            <if test="kccount2 != null and kccount2 != ''">and  s.goods_count &lt; #{kccount2}</if>
 
+
+            <if test="factory != null and factory != ''">and s.factory LIKE concat(concat('%', #{factory}),'%')</if>
+            <if test="(factoryColor != null and factoryColor != '') ">
+                and (
+                jj.produc_factorycolor LIKE concat(concat('%', #{factoryColor}),'%')
+                or tyj.produc_factorycolor LIKE concat(concat('%', #{factoryColor}),'%')
+                or lhj.produc_factorycolor LIKE concat(concat('%', #{factoryColor}),'%')
+                )
+            </if>
+
+
+            <if test="(sph != null and sph != '') or (sph2 != null and sph2 != '')   ">
+                and  (
+                jpcp.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+                or yxcp.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+                )
+            </if>
+            <if test="(cyl != null and cyl != '') or (cyl2 != null and cyl2 != '')   ">
+                and  (
+                  jpcp.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+                or    yxcp.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+                )
+            </if>
+
+
+            <if test="(refractivityid != null and refractivityid != '') ">
+                and (
+                pj.refractivityid LIKE concat(concat('%', #{refractivityid}),'%')
+                or jpcp.refractivityid LIKE concat(concat('%', #{refractivityid}),'%')
+                or jpdz.refractivityid LIKE concat(concat('%', #{refractivityid}),'%')
+                )
+            </if>
         </where>
     </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <update id="updateStatus" parameterType="com.shiguang.stock.domain.StockDO">
         update stock
@@ -2297,33 +2401,7 @@
           where o.danju_number = #{value}
 		  group by o.danju_number
     </select>
-    <!--<select id="getOederList" resultType="com.shiguang.stock.domain.OrderDO">-->
-        <!--select-->
-        <!--g.goodsname as gdname,o.goods_name,o.factory,produca.produc_factorycolor,o.retail_price,-->
-        <!--o.goods_count,o.beizhu,o.unit,-->
-        <!--s.sph as jscpsph,c.cyl as jpcpcyl,-->
-        <!--sp.sph as yxcpsph,cy.cyl as yxcpcyl,-->
-        <!--tyj.produc_factorycolor as tyjproducfactorycolor,-->
-        <!--old.produc_factorycolor as oldproducfactorycolor-->
-        <!--from-->
-        <!--stock_order o-->
-        <!--left join c_goods g on o.goods_type=g.goodsid-->
-        <!--left join aa_produca produca on o.goodsxinxiid=produca.id-->
-        <!--left join aa_parts parts  on o.goodsxinxiid=parts.id-->
-        <!--left join aa_jpcp jpcp  on o.goodsxinxiid=jpcp.id-->
-        <!--left join a_sph s  on jpcp.sph_id=s.sph_id-->
-        <!--left join a_cyl c  on jpcp.cyl_id=c.cyl_id-->
-        <!--left join aa_yxcp yxcp  on o.goodsxinxiid=yxcp.id-->
-        <!--left join a_sph sp  on yxcp.sph_id=sp.sph_id-->
-        <!--left join a_cyl cy  on yxcp.cyl_id=cy.cyl_id-->
-        <!--left join aa_hly h on o.goodsxinxiid=h.id-->
-        <!--left join aa_tyj tyj on o.goodsxinxiid=tyj.id-->
-        <!--left join aa_oldlens old on o.goodsxinxiid=old.id-->
-        <!--<where>-->
-            <!--<if test="danjuNumber != null and danjuNumber != ''">and o.danju_number = #{danjuNumber}</if>-->
-            <!--<if test="goodsType != null and goodsType != ''">and o.goods_type = #{goodsType}</if>-->
-        <!--</where>-->
-    <!--</select>-->
+
     <select id="getOederList" resultType="com.shiguang.stock.domain.OrderDO">
         SELECT
         g.goodsname AS gdname,
@@ -2372,7 +2450,6 @@
             <if test="goodsType != null and goodsType != ''">and o.goods_type = #{goodsType}</if>
         </where>
     </select>
-<!--a.retail_price,a.tax_price as costPrice,a.trade_price as wholePrice,a.transfer_price,-->
     <select id="jingjias" resultType="com.shiguang.stock.domain.StockDO">
         SELECT
 	a.produc_num,

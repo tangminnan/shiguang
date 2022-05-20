@@ -104,6 +104,10 @@ function load() {
                                             e = '<a class="btn btn-primary btn-xs" href="#" title="打印定金单"  mce_href="#" ' +
                                                 'onclick="dayindj(\''+row.type+'\',\''+row.saleNumber+'\')" style="text-decoration: none;">打印定金单</a>';
 										}
+										if (row.isSale == 3){
+                                            e = '<a class="btn btn-primary btn-xs" href="#" title="打印退款单"  mce_href="#" ' +
+                                                'onclick="dayintk(\''+row.isSale+'\',\''+row.saleNumber+'\')" style="text-decoration: none;">打印退款单</a>';
+										}
 										return e ;
 									}
 								} ]
@@ -152,6 +156,12 @@ function dayin(type,saleNumber){
 }
 function dayindj(type,saleNumber){
     window.open("/information/settlement/dingjindan?saleNumber="+saleNumber);
+}
+
+function dayintk(type,saleNumber){
+    if (type == 3){
+        window.open("/information/settlement/tuikuandan?saleNumber="+saleNumber);
+    }
 }
 
 function remove(id) {

@@ -111,6 +111,18 @@
                         payWay = "一卡通";
                     } else if (paymodelStr[s] == "4"){
                         payWay = "现金";
+                    } else if (paymodelStr[s] == "5"){
+                        payWay = "银联卡";
+                    } else if (paymodelStr[s] == "6"){
+                        payWay = "储值卡";
+                    } else if (paymodelStr[s] == "7"){
+                        payWay = ".";
+                    } else if (paymodelStr[s] == "8"){
+                        payWay = ".";
+                    } else if (paymodelStr[s] == "9"){
+                        payWay = "积分";
+                    } else if (paymodelStr[s] == "10"){
+                        payWay = "微信平台";
                     }
                     html = "<div class='form-group'><label class='col-sm-3 control-label'>缴费方式：</label>";
                     html += "<div class='col-sm-8'><input  name='payModel' id='payModel' value='"+payWay+"' disabled='disabled'>";
@@ -134,6 +146,18 @@
                 payWay = "一卡通";
             } else if (payModels == "4"){
                 payWay = "现金";
+            } else if (paymodelStr[s] == "5"){
+                payWay = "银联卡";
+            } else if (paymodelStr[s] == "6"){
+                payWay = "储值卡";
+            } else if (paymodelStr[s] == "7"){
+                payWay = ".";
+            } else if (paymodelStr[s] == "8"){
+                payWay = ".";
+            } else if (paymodelStr[s] == "9"){
+                payWay = "积分";
+            } else if (paymodelStr[s] == "10"){
+                payWay = "微信平台";
             }
             html = "<div class='form-group'><label class='col-sm-3 control-label'>缴费方式：</label>";
             html += "<div class='col-sm-8'><input  name='payModel' id='payModel' value='"+payWay+"' disabled='disabled'>";

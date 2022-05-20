@@ -27,7 +27,6 @@ public interface KjyyDao {
     int save(KjyyDO kjyy);
 
     int savekjyy(ResultDO result);
-    //    是否有保存这个验光号数据
     List<ResultDO> haveYanguangNum(Map<String, Object> map);
     int update(ResultDO resultDO);
 

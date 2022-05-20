@@ -23,8 +23,9 @@ function load() {
 						singleSelect : false, // 设置为true将禁止多选
 						// contentType : "application/x-www-form-urlencoded",
 						// //发送到服务器的数据编码类型
-						pageSize : 10, // 如果设置了分页，每页数据条数
-						pageNumber : 1, // 如果设置了分布，首页页码
+                        pageSize: 15, // 如果设置了分页，每页数据条数
+                        pageNumber: 1, // 如果设置了分布，首页页码
+                        pageList: [15,50,100,200,300,500,1200],
 						//search : true, // 是否显示搜索框
 						showColumns : false, // 是否显示内容下拉框（选择显示的列）
 						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
@@ -160,8 +161,8 @@ function load() {
 									title : '方式' 
 								},
 																{
-									field : 'username', 
-									title : '收货人工号' 
+									field : 'shname',
+									title : '收货人'
 								},
 								// 								{
 								// 	title : '操作',

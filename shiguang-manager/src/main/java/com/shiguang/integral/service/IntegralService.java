@@ -29,5 +29,5 @@ public interface IntegralService {
 	
 	int batchRemove(Long[] ids);
 
-	IntegralDO getPoints(Map<String,Object> map);
+	List<IntegralDO> getPoints(Map<String,Object> map);
 }

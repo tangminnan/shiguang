@@ -70,7 +70,7 @@ public class SerialPortUtils implements SerialPortEventListener {
     @SuppressWarnings("unchecked")
     public void init(ParamConfig paramConfig) {
         a=1;
-        id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUsername();
+        id = ShiroUtils.getUser().getCompanyId()+ShiroUtils.getUser().getUserId();
         // 获取系统中所有的通讯端口
         portList = CommPortIdentifier.getPortIdentifiers();
         // 记录是否含有指定串口

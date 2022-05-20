@@ -10,6 +10,7 @@ public class JieKuanMoneyDO implements Serializable {
     private String isSale;
     private String saleNumber;
     private String peijingTime;
+    private String amountMoney;
     private String sex;
     private String departNumber;
     private String age;
@@ -120,5 +121,13 @@ public class JieKuanMoneyDO implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getAmountMoney() {
+        return amountMoney;
+    }
+
+    public void setAmountMoney(String amountMoney) {
+        this.amountMoney = amountMoney;
     }
 }

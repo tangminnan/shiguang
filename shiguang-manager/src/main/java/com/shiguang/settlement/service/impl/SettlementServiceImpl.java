@@ -119,36 +119,51 @@ public class SettlementServiceImpl implements SettlementService {
 			companyId = ShiroUtils.getUser().getCompanyId();
 			Map<String,Object> map = new HashMap<>();
 			map.put("companyId", companyId);
+			map.put("departNumber",ShiroUtils.getUser().getStoreNum());
 			positionDO = stockService.findPosition(map);
 		}
 		if (null != salesDO){
-			String[] saleDescribe = salesDO.getStoreDescribe().split(",");
-			String[] goodsCount = salesDO.getStoreCount().split(",");
-			String[] goodsStr = salesDO.getGoodsCode().split(",");
-			for (int i=0;i<saleDescribe.length;i++){
-				if (!"镜片".equals(saleDescribe[i]) && !"隐形".equals(saleDescribe[i])
-						&& !"自架".equals(saleDescribe[i])
-						&& !"自片".equals(saleDescribe[i]) && !"赠品".equals(saleDescribe[i])){
-					StockDO stockDOs = new StockDO();
-					if (null != positionDO){
-						stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
-					} else {
-						stockDOs.setPositionId("");
-					}
-					stockDOs.setGoodsCode(goodsStr[i]);
-					StockDO stockDO = stockService.getProduceCode(stockDOs);
-					if (null != stockDO){
-                        Long countGoods = Long.parseLong(stockDO.getGoodsCount());
-                        Long count = countGoods + Long.valueOf(goodsCount[i]);
-                        stockDO.setGoodsCount(String.valueOf(count));
-                        stockService.updateGoodsCount(stockDO);
-                    }
+			if (null != salesDO.getStoreDescribe()){
+				String[] saleDescribe = salesDO.getStoreDescribe().split(",");
+				String[] goodsCount = salesDO.getStoreCount().split(",");
+				String[] goodsStr = salesDO.getGoodsCode().split(",");
+				for (int i=0;i<saleDescribe.length;i++){
+					if (!"镜片".equals(saleDescribe[i]) && !"隐形".equals(saleDescribe[i])
+							&& !"自架".equals(saleDescribe[i])
+							&& !"自片".equals(saleDescribe[i]) && !"赠品".equals(saleDescribe[i])){
+						StockDO stockDOs = new StockDO();
+						if (null != positionDO){
+							stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
+						} else {
+							stockDOs.setPositionId("");
+						}
+						stockDOs.setGoodsCode(goodsStr[i]);
+						StockDO stockDO = stockService.getProduceCode(stockDOs);
+						if (null != stockDO){
+							Long countGoods = Long.parseLong(stockDO.getGoodsCount());
+							Long count = countGoods + Long.valueOf(goodsCount[i]);
+							stockDO.setGoodsCount(String.valueOf(count));
+							stockService.updateGoodsCount(stockDO);
+						}
 
+					}
 				}
 			}
+
 		}
 		salesService.removeSaleNum(id);
 		this.remove(id);
 		return R.ok();
 	}
+
+	@Override
+	public List<SettlementDO> findJcGlassesData(Map<String, Object> map){
+		return settlementDao.findJcGlassesData(map);
+	}
+
+	@Override
+	public int findJcGlassesDataCount(Map<String, Object> map){
+		return settlementDao.findJcGlassesDataCount(map);
+	}
+
 }

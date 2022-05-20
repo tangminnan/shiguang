@@ -6,7 +6,9 @@ import com.shiguang.logstatus.service.LensMeterService;
 import com.shiguang.logstatus.service.LogStatusService;
 import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.storeSales.domain.Conclusion;
+import com.shiguang.storeSales.domain.InfoDO;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.InfoService;
 import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.aspectj.apache.bcel.generic.LineNumberGen;
@@ -33,6 +35,8 @@ public class ExamineController {
     private LensMeterService lensMeterService;
     //@Autowired
     private SerialPortUtils serialPort;
+    @Autowired
+    private InfoService infoService;
 
     /**
      * 加工师检验
@@ -56,8 +60,8 @@ public class ExamineController {
         }
         if (null != params.get("memberName") && !"".equals(params.get("memberName"))){
             query.put("memberName",String.valueOf(query.get("memberName")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("saleNumber") && !"".equals(params.get("saleNumber"))){
             query.put("saleNumber",String.valueOf(query.get("saleNumber")).trim());
@@ -194,6 +198,12 @@ public class ExamineController {
         workRecoedDO.setType("检验");
         workRecoedDO.setDateTime(new Date());
         statusService.saveRecord(workRecoedDO);
+        InfoDO infoDO = new InfoDO();
+        infoDO.setSaleNumber(status.getSaleNumber());
+        infoDO.setTrainStatus("加工检验");
+        infoDO.setTrainTime(new Date());
+        infoDO.setTrainName(ShiroUtils.getUser().getName());
+        infoService.save(infoDO);
         lensMeterService.remove(status.getLensMeterId());
         try {
             Method method = Chuank.class.getMethod("main",
@@ -212,7 +222,7 @@ public class ExamineController {
         Map<String,Object> map = new HashMap<>();
         LensMeterDO lensMeterDO = new LensMeterDO();
         //serialPort.sendToData();
-        Long id = Long.valueOf(ShiroUtils.getUser().getCompanyId() + ShiroUtils.getUser().getUsername());
+        Long id = Long.valueOf(ShiroUtils.getUser().getCompanyId() + ShiroUtils.getUser().getUserId());
         //List<JDJInfoDO> jdjInfoDOS = lensMeterService.jdjList(map);
         JdjInfomationDO jdjInfomationDO = lensMeterService.getJdjInfomation(id);
         if (null != jdjInfomationDO){

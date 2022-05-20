@@ -16,15 +16,11 @@ public class StockDO implements Serializable {
 
     //主键
     private Long id;
-    //收货状态
     private String status;
-    //收货状态
     private Integer newcount;
     //工号
     private String  username;
-    //商品信息id
     private String goodsxinxiid;
-    //库存对应单据号
     private String stockorder;
 
     public String getStockorder() {
@@ -1131,7 +1127,6 @@ public class StockDO implements Serializable {
     }
 
 
-//、、、、、、、、采购入库、、、、、、、、、、、、、、
     private String producNum;
     //商品条码
     private String producCode;
@@ -1141,7 +1136,7 @@ public class StockDO implements Serializable {
 //    private String mfrsid;
     //制造商
 //    private String mfrsname;
-    //商品品种（品牌id
+    //商品品种
     private Integer brandid;
     //品牌
 //    private String brandname;

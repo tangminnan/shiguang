@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.storeSales.dao.InfoDao">
+
+	<select id="get" resultType="com.shiguang.storeSales.domain.InfoDO">
+		select `id`,`sale_number`,`train_status`,`train_time`,`train_name`,`update` from train_info where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.shiguang.storeSales.domain.InfoDO">
+		select `id`,`sale_number`,`train_status`,`train_time`,`train_name`,`update` from train_info
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+		  		  <if test="trainStatus != null and trainStatus != ''"> and train_status = #{trainStatus} </if>
+		  		  <if test="trainTime != null and trainTime != ''"> and train_time = #{trainTime} </if>
+		  		  <if test="trainName != null and trainName != ''"> and train_name = #{trainName} </if>
+		  		  <if test="update != null and update != ''"> and update = #{update} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from train_info
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="saleNumber != null and saleNumber != ''"> and sale_number = #{saleNumber} </if>
+		  		  <if test="trainStatus != null and trainStatus != ''"> and train_status = #{trainStatus} </if>
+		  		  <if test="trainTime != null and trainTime != ''"> and train_time = #{trainTime} </if>
+		  		  <if test="trainName != null and trainName != ''"> and train_name = #{trainName} </if>
+		  		  <if test="update != null and update != ''"> and update = #{update} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.shiguang.storeSales.domain.InfoDO" useGeneratedKeys="true" keyProperty="id">
+		insert into train_info
+		(
+			`sale_number`, 
+			`train_status`, 
+			`train_time`, 
+			`train_name`, 
+			`update`
+		)
+		values
+		(
+			#{saleNumber}, 
+			#{trainStatus}, 
+			#{trainTime}, 
+			#{trainName}, 
+			#{update}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.shiguang.storeSales.domain.InfoDO">
+		update train_info 
+		<set>
+			<if test="saleNumber != null">`sale_number` = #{saleNumber}, </if>
+			<if test="trainStatus != null">`train_status` = #{trainStatus}, </if>
+			<if test="trainTime != null">`train_time` = #{trainTime}, </if>
+			<if test="trainName != null">`train_name` = #{trainName}, </if>
+			<if test="update != null">`update` = #{update}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from train_info where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from train_info where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

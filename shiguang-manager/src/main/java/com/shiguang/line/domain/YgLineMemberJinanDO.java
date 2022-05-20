@@ -9,6 +9,8 @@ public class YgLineMemberJinanDO implements Serializable {
     //
     private Long id;
 
+    private String memberNumber;
+
     private String memberName;
 
     private Long sex;
@@ -30,6 +32,14 @@ public class YgLineMemberJinanDO implements Serializable {
      */
     public Long getId() {
         return id;
+    }
+
+    public String getMemberNumber() {
+        return memberNumber;
+    }
+
+    public void setMemberNumber(String memberNumber) {
+        this.memberNumber = memberNumber;
     }
 
     public void setMemberName(String memberName){this.memberName = memberName;}

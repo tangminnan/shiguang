@@ -42,30 +42,14 @@ public class SaleYanguangController {
     String saleYanguang(Model model) {
         Map<String, Object> map = new HashMap<>();
         List<CompanyDO> companyList = companyService.list(map);
-//        String[] companyName = new String[companyList.size()];
-//        String companyName = "";
-//        String companyIds = "";
-//        int i = 0;
-//        for (CompanyDO gs1 : companyList) {
-//            String gsname=gs1.getName();
-//            Integer gsid=gs1.getId();
-////            companyDO.setName(gsname);
-////            companyName[i++]=String.valueOf(gsname);
-//            companyName =String.valueOf(companyName)+","+String.valueOf(gsname);
-//            companyIds =String.valueOf(companyIds)+","+String.valueOf(gsid);
-//        }
         model.addAttribute("companyList", companyList);
-//        model.addAttribute("companyName", companyName);
-//        model.addAttribute("companyIds", companyIds);
         List<GoodsDO> goodsDOList = goodsService.list(map);
         model.addAttribute("goodsDOList", goodsDOList);
-        //———获取当前登录用户的公司id————
         String companyId = ShiroUtils.getUser().getCompanyId();
         model.addAttribute("companyId", companyId);
         return "saleReport/saleYanguang";
     }
 
-    //跳转制造商
     @GetMapping("/findcompany/{companyId}")
 //    @RequiresPermissions("information:saleYanguang:findcompany")
     String findcompany(@PathVariable("companyId") Integer companyId, Model model) {
@@ -93,7 +77,6 @@ public class SaleYanguangController {
         String[] department = departments.split(",");
         for (int d = 0; d < department.length; d++) {
             map.put("department", department[d]);
-//            验光师
             List<SalesDO> yanguangPeoples = saleReportService.findYanguangPeople(map);
             model.addAttribute("yanguangPeoples", yanguangPeoples);
             List<Map<String, Object>> listMoney = new ArrayList<>();
@@ -102,13 +85,9 @@ public class SaleYanguangController {
                 String username = yanguangPeople.getUsername();
                 map.put("username", username);
 
-//                数量
                 int ygcount = saleReportService.findYanguangCount(map);
-//                成交数量
                 int usecount = saleReportService.findUseCount(map);
-//                 验光成交金额
                 int amountMoney = saleReportService.findamountMoney(map);
-//                销售金额
                 double primeMoney;
                 List<SalesDO> Goods = saleReportService.findGoods(map);
                 double jjMoney = 0.00;
@@ -281,6 +260,7 @@ public class SaleYanguangController {
         model.addAttribute("settleDateEnd", settleDateEnd);
         model.addAttribute("departments", departments);
         model.addAttribute("newOld", newOld);
+
         return "saleReport/saleYanguangForm";
     }
 
@@ -492,7 +472,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
             }
         }
     }
-    // 利用set不允许元素重复的性质去掉相同的元素
     List<Map<String, Object>> listBrandMoney = new ArrayList<>();
     Set<String> checkDuplicates = new HashSet<String>();
     double jjMoney = 0.00;
@@ -500,8 +479,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
     String jjbrand  ;
     String jjbrandname ;
     for (int a = 0; a < listBrand.size(); a++) {
-
-
         Map<String, Object> newlistmap = new HashMap<>();
         String items =   listBrand.get(a).get("goodsBrandNum").toString();
         String goodsBrandName = listBrand.get(a).get("goodsBrandName").toString();
@@ -509,7 +486,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
         int count = Integer.valueOf(listBrand.get(a).get("count").toString());
         money=money*count;
         if (!checkDuplicates.add(items+goodsBrandName)) {
-            // 重复的元素
             String cfmoney = null;
             String cfcount = null;
             for (int b = 0; b < listBrandMoney.size(); b++) {
@@ -518,7 +494,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
                 if (String.valueOf(brandNum + brandName).equals(items + goodsBrandName)) {
                     cfmoney=listBrandMoney.get(b).get("jjMoney").toString();
                     cfcount=listBrandMoney.get(b).get("jjCount").toString();
-
                 }
             }
             jjMoney =  Double.valueOf(cfmoney) + money;
@@ -614,9 +589,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
                 for (int i = 0; i < storeDescribes.length; i++) {
 
                     String goodstype = storeDescribes[i];
-
-
-
                     String classtype = classtypes[i];
                     String saleNumber = saleNumbers[0];//配镜单号
                     String goodNum = goodsNums[i];//商品代码
@@ -836,7 +808,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
 
 
 
-        // 利用set不允许元素重复的性质去掉相同的元素
         List<Map<String, Object>> GoodsList = new ArrayList<>();
         Set<String> checkDuplicates = new HashSet<String>();
         double goodsMoney = 0.00;
@@ -852,7 +823,6 @@ public String Brand(String settleDateStart, String settleDateEnd,
             money=money*count;
 
             if (!checkDuplicates.add(saleNumber+goodNum)) {
-                // 重复的元素
                 String cfmoney = null;
                 String cfcount = null;
                 for (int b = 0; b < GoodsList.size(); b++) {
@@ -999,4 +969,5 @@ public String Brand(String settleDateStart, String settleDateEnd,
         model.addAttribute("createTime", createTime);
         return "saleReport/ygDoctor";
     }
+
 }

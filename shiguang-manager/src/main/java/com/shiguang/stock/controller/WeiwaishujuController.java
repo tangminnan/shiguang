@@ -244,6 +244,7 @@ public class WeiwaishujuController {
 				weiwaishujuService.save(weiwaishujuDO);
 			}
 		}else if ("隐形订做".equals(jpStyle)){
+			String[] saleNumbers =weiwaishuju.getSaleNumber().split(",");
 			String[] numyxs =weiwaishuju.getNumyx().split(",");
 			String[] codeyxs =weiwaishuju.getCodeyx().split(",");
 			String[] nameyxs =weiwaishuju.getNameyx().split(",");
@@ -255,6 +256,129 @@ public class WeiwaishujuController {
 			String[] zxyxs =weiwaishuju.getZxyx().split(",");
 			String[] qulvs =weiwaishuju.getQulv().split(",");
 			String[] zjs =weiwaishuju.getZj().split(",");
+			String[] jds =weiwaishuju.getJdyx().split(",");
+
+			String[] gknames =weiwaishuju.getGkname().split(",");
+			String[] hyknums =weiwaishuju.getHyknum().split(",");
+			String[] phones =weiwaishuju.getPhone().split(",");
+			String[] departnames =weiwaishuju.getDepartname().split(",");
+
+			for(int a=0;a<numyxs.length;a++){
+				WeiwaishujuDO weiwaishujuDO=new WeiwaishujuDO();
+				weiwaishujuDO.setNumber(number);
+				weiwaishujuDO.setDanjuDay(danjuDay);
+				weiwaishujuDO.setZhidanPeople(zhidanPeople);
+				weiwaishujuDO.setJcStyle(jpStyle);
+				weiwaishujuDO.setTimetime(timetime);
+				weiwaishujuDO.setDanjuStyle(danjuStyle);
+				try {
+					String saleNumber = saleNumbers[a];
+					weiwaishujuDO.setSaleNumber(saleNumber);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setSaleNumber("");
+				}
+				weiwaishujuDO.setWeiwaiStyle(weiwaiStyle);
+				weiwaishujuDO.setBeizhu(beizhu);
+				try {
+					String sph = sphyxs[a];
+					weiwaishujuDO.setSphyx(sph);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setSphyx("");
+				}
+				try {
+					String cyl = cylyxs[a];
+					weiwaishujuDO.setCylyx(cyl);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setCylyx("");
+				}
+				try {
+					String zx = zxyxs[a];
+					weiwaishujuDO.setZxyx(zx);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setZxyx("");
+				}try {
+					String ql = qulvs[a];
+					weiwaishujuDO.setQulv(ql);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setQulv("");
+				}try {
+					String zj = zjs[a];
+					weiwaishujuDO.setZj(zj);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setZj("");
+				}
+
+				try {
+					String jd = jds[a];
+					weiwaishujuDO.setJdyx(jd);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setJdyx("");
+				}
+
+				try {
+					String num = numyxs[a];
+					weiwaishujuDO.setNumyx(num);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setNumyx("");
+				}
+				try {
+					String code = codeyxs[a];
+					weiwaishujuDO.setCodeyx(code+"00000000");
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setCodeyx("");
+				}
+				try {
+					String name = nameyxs[a];
+					weiwaishujuDO.setNameyx(name);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setNameyx("");
+				}
+				try {
+					String leftRight = leftRightyxs[a];
+					weiwaishujuDO.setLeftRightYx(leftRight);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setLeftRightYx("");
+				}
+				try {
+					String count = countyxs[a];
+					weiwaishujuDO.setCountyx(count);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setCountyx("");
+				}
+				try {
+					String yaoqiu = yaoqiuyxs[a];
+					weiwaishujuDO.setYaoqiuyx(yaoqiu);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setYaoqiuyx("");
+				}
+				try {
+					String gkname = gknames[a];
+					weiwaishujuDO.setGkname(gkname);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setGkname("");
+				}
+				try {
+					String hyknum = hyknums[a];
+					weiwaishujuDO.setHyknum(hyknum);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setHyknum("");
+				}
+				try {
+					String phone = phones[a];
+					weiwaishujuDO.setPhone(phone);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setPhone("");
+				}
+				try {
+					String departname = departnames[a];
+					weiwaishujuDO.setDepartname(departname);
+				}catch (ArrayIndexOutOfBoundsException e){
+					weiwaishujuDO.setDepartname("");
+				}
+				weiwaishujuService.save(weiwaishujuDO);
+			}
+
+
 		}
 
 		return R.ok();
@@ -294,7 +418,6 @@ public class WeiwaishujuController {
 		return R.ok();
 	}
 
-//	//得到委外数据
 	@ResponseBody
 	@RequestMapping(value = "/getWeiwaiShuju")
 	public List<WeiwaishujuDO> getWeiwaiShuju(String number, Model model) {

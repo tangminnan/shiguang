@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shiguang.product.dao.ProducaDao">
-    <!--//修改时显示制造商和商品品种名称-->
     <select id="get" resultType="com.shiguang.product.domain.ProducaDO">
         select
         p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`produc_factorycolor`,
@@ -13,13 +12,11 @@
         join c_unit u on p.unitid= u.unitid
         where p.id = #{value}
 	</select>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.ProducaDO">
         select produc_num from aa_produca where produc_num=#{producNum}   order by id
 	</select>
 
 
-    <!--//修改时显示制造商和商品品种名称-->
     <select id="list" resultType="com.shiguang.product.domain.ProducaDO">
         select
         p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`produc_factorycolor`,p.`produc_color`,
@@ -29,8 +26,10 @@
         from aa_produca p left join c_mfrs m on p.mfrsid=m.mfrsnum left join c_brand b on p.brandnum=b.brandnum AND p.`mfrsid`=b.`mfrsid`
         left join c_unit u on p.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and p.produc_code = #{goodsCode}</if>
+           <if test="producNum != null and producNum != ''">and p.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+              <if test="goodsCode != null and goodsCode != ''">and p.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -60,7 +59,8 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                  order by  p.id desc
+
+             order by m.mfrsid,b.brandid,p.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -71,8 +71,9 @@
         select count(*)   from aa_produca p left join c_mfrs m on p.mfrsid=m.mfrsnum left join c_brand b on p.brandnum=b.brandnum AND p.`mfrsid`=b.`mfrsid`
         left join c_unit u on p.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and p.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and p.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and p.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and p.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -256,7 +257,6 @@
         where pr.produc_num = #{value}
     </select>
 
-    <!-- 根据商品代码查询商品信息 -->
     <select id="getJJInfomation" resultType="com.shiguang.product.domain.ProducaDO">
       select
         p.`id`,p.`produc_num`,p.`produc_code`,p.`produc_name`,p.`mfrsid`,p.`brandid`,p.`brandnum`,p.`factory`,p.`produc_factory`,p.`produc_factorycolor`,p.`produc_color`,
@@ -268,7 +268,6 @@
         where p.produc_num = #{value}
     </select>
 
-    <!--菜单联动显示-->
     <select id="choice" resultType="com.shiguang.mfrs.domain.BrandDO">
 		select  brandid,brandnum ,brandname  from c_brand
 		<where>
@@ -278,10 +277,8 @@
         </where>
 		 group by brandid
 	</select>
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.ProducaDO">
     update aa_produca set `state` = #{state} where id = #{id}
     </update>
-    <!--根据制造商查询商品品种-->
 
 </mapper>

@@ -36,4 +36,11 @@ public interface DrawbackService {
 	int memberCount(Map<String,Object> map);
 
 	R saveMoney(DrawbackDO drawbackDO);
+
+	List<MemberDO> memberJcList(Map<String,Object> map);
+
+	int memberJcCount(Map<String,Object> map);
+
+	R saveJcMoney(DrawbackDO drawbackDO);
+
 }

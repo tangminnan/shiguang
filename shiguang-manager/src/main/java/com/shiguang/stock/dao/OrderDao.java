@@ -36,9 +36,13 @@ public interface OrderDao {
 	int updateStatus(OrderDO order);
 
 	List<OrderDO> selectOrder(Map<String, Object> map);
-	//根据采购订单号查询库存有没有
 	List<OrderDO> orderdingdan(Map<String,Object>map);
 
-	//是否有这个单号
 	List<OrderDO> haveOrderNum(Map<String, Object> map);
+
+
+	List<OrderDO> orderDanList(Map<String, Object> map);
+	int orderDanListcount(Map<String, Object> map);
+
+
 }

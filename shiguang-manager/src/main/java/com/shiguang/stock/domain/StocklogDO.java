@@ -56,6 +56,7 @@ public class StocklogDO implements Serializable {
 	private String way;
 	//收货人工号
 	private String username;
+	private String shname;
 
 	/**
 	 * 设置：库存logid
@@ -306,5 +307,13 @@ public class StocklogDO implements Serializable {
 	 */
 	public String getUsername() {
 		return username;
+	}
+
+	public String getShname() {
+		return shname;
+	}
+
+	public void setShname(String shname) {
+		this.shname = shname;
 	}
 }

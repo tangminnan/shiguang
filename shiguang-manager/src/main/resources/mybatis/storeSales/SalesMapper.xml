@@ -79,9 +79,9 @@
 		select ss.`id`,ss.`member_number`,ss.`sale_name`,ss.`sale_number`,ss.`goods_num`,ss.`goods_code`,ss.`eye_type`,ss.`amount_money`,ss.`ptometry_number`,
 		ss.`prime_money`,ss.`mirror_way`,ss.`mirror_time`,ss.`miror_address`,ss.`store_num`,ss.`urgent_status`,ss.`goods_rebate`,
 		ss.`fixed_price`,ss.`moling_money`,ss.`additional_cost`,ss.`process_ask`,ss.`store_name`,ss.`store_describe`,ls.`logistic_status` as logStatus,
-		ss.`store_unit`,ss.`store_count`,ss.`remark`,ss.`give_name`,ss.`peijing_time`,ss.`batch`,ss.`recipelwl_type`,ss.`recipel_type`,
+		ss.`store_unit`,ss.`store_count`,ss.`remark`,ss.`give_name`,ss.`peijing_time`,ss.`batch`,ss.`recipelwl_type`,ss.`recipel_type`,ss.`sale_type`,
 		sl.`settle_date` as settleDate
-		from store_sales ss join settlement sl on sl.sale_number = ss.sale_number
+		from store_sales ss left join settlement sl on sl.sale_number = ss.sale_number
 		join member m on m.card_number = ss.member_number
 		left join log_status ls on ls.sale_number = ss.sale_number
 		<where>
@@ -127,6 +127,7 @@
 		    `ptometry_number`,
 			`member_number`, 
 			`sale_name`,
+			`user_name`,
 			`sale_account`,
 			`sale_number`,
 			`goods_num`,
@@ -173,8 +174,13 @@
 			`sale_type`,
 			`jp_goods_code`,
 			`righttg`,
-			`lefttg`
-
+			`lefttg`,
+			`rightaddsg`,
+			`leftaddsg`,
+			`sale_discount`,
+			`sale_discount_price`,
+			`total_discount`,
+			`jifen`
 		)
 		values
 		(
@@ -182,6 +188,7 @@
 		    #{ptometryNumber},
 			#{memberNumber}, 
 			#{saleName},
+			#{userName},
 			#{saleAccount},
 			#{saleNumber},
 			#{goodsNum},
@@ -228,7 +235,13 @@
 			#{saleType},
 			#{jpGoodsCode},
 			#{righttg},
-			#{lefttg}
+			#{lefttg},
+			#{rightaddsg},
+			#{leftaddsg},
+			#{saleDiscount},
+			#{saleDiscountPrice},
+			#{totalDiscount},
+			#{jifen}
 		)
 	</insert>
 
@@ -298,6 +311,7 @@
 			<if test="phone !=null and phone != ''">and m.`phone_1` like concat('%', #{phone},'%')</if>
 			<if test="eyeType != null and eyeType != ''"> and s.eye_type = #{eyeType} </if>
 			<if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
+			<if test="companyId !=null and companyId != ''">and m.company_id=#{companyId}</if>
 			<if test="amountMoney != null and amountMoney != ''"> and s.amount_money = #{amountMoney} </if>
 			<if test="mirrorWay != null and mirrorWay != ''"> and s.mirror_way = #{mirrorWay} </if>
 			<if test="mirrorTime != null and mirrorTime != ''"> and s.mirror_time = #{mirrorTime} </if>
@@ -342,6 +356,7 @@
 			<if test="phone !=null and phone != ''">and m.`phone_1` like concat('%', #{phone},'%')</if>
 			<if test="eyeType != null and eyeType != ''"> and s.eye_type = #{eyeType} </if>
 			<if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
+			<if test="companyId !=null and companyId != ''">and m.company_id=#{companyId}</if>
 			<if test="amountMoney != null and amountMoney != ''"> and s.amount_money = #{amountMoney} </if>
 			<if test="mirrorWay != null and mirrorWay != ''"> and s.mirror_way = #{mirrorWay} </if>
 			<if test="mirrorTime != null and mirrorTime != ''"> and s.mirror_time = #{mirrorTime} </if>
@@ -905,7 +920,7 @@
 	</select>
 	<select id="getSaleNumber" resultType="com.shiguang.storeSales.domain.SalesDO">
 		select s.`id`,s.`ptometry_number`,s.`member_number`,m.`name` as memberName,m.`sex`,m.`age`,m.`phone_1` as phone1,s.`sale_name`,s.`sale_number`,s.`goods_num`,s.`goods_code`,s.`eye_type`,s.`amount_money`,s.`prime_money`,s.`mirror_way`,s.`mirror_time`,
-		s.`miror_address`,s.`store_num`,s.`urgent_status`,s.`goods_rebate`,s.`fixed_price`,s.`moling_money`,s.`additional_cost`,s.`process_ask`,
+		s.`miror_address`,s.`store_num`,s.`urgent_status`,s.`goods_rebate`,s.`fixed_price`,s.`moling_money`,s.`additional_cost`,s.`process_ask`,s.`sale_discount`,s.`sale_discount_price`,s.`total_discount`,
 		s.`store_name`,s.`store_describe`,s.`store_unit`,s.`store_count`,s.`remark`,s.`saleremark`,s.`give_name`,s.`peijing_time`,s.`optometry_name`,s.`out_recipel`,s.jj_goods_name,
 		s.`recipel_type`,s.`optometrywl_name`,s.`recipelwl_type`,s.`taocan_name`,s.`classtype`,s.`additional_price`,s.`additional_count`,s.`unit`,s.`batch`,s.`left_right`,s.`righttg`,s.`lefttg`
 		from store_sales s

@@ -66,6 +66,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public List<UserDO> getRoleNumList(Map<String, Object> map) {
+		List<UserDO> user = userMapper.getRoleNumList(map);
+		return user;
+	}
+
+	@Override
 	public List<UserDO> list(Map<String, Object> map) {
 		return userMapper.list(map);
 	}

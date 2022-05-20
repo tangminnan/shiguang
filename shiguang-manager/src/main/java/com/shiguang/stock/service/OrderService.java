@@ -19,7 +19,7 @@ public interface OrderService {
 	OrderDO get(Long id);
 	
 	List<OrderDO> list(Map<String, Object> map);
-	
+
 	int count(Map<String, Object> map);
 	int countall(Map<String, Object> map);
 
@@ -33,11 +33,14 @@ public interface OrderService {
 	List<OrderDO> getCode(Map<String, Object> map);
 	List<OrderDO> gettyjCode(Map<String, Object> map);
 	int updateStatus(OrderDO order);
-	//采购详情列表
 	List<OrderDO> selectOrder(Map<String, Object> map);
-	//根据采购订单号查询库存有没有
 	List<OrderDO> orderdingdan(Map<String,Object>map);
 
-	//是否有这个单号
 	List<OrderDO> haveOrderNum(Map<String, Object> map);
+
+
+
+	List<OrderDO> orderDanList(Map<String, Object> map);
+	int orderDanListcount(Map<String, Object> map);
+
 }

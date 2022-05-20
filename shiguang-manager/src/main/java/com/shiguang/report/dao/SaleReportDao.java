@@ -59,4 +59,12 @@ public interface SaleReportDao {
     int findCfamountMoney(Map<String,Object> map);
     List<SalesDO> findDoctorGoods(Map<String,Object> map);
 
+
+
+    List<SalesDO> Yg(Map<String,Object> map);
+    List<SalesDO> YgUse(Map<String,Object> map);
+
+
+
+
 }

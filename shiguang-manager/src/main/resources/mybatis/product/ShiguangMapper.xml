@@ -21,8 +21,9 @@
         from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid`
         left join c_unit u on s.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and s.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and s.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and s.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -44,7 +45,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                 order by s.id desc
+                order by m.mfrsid,b.brandid,s.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -56,8 +57,9 @@
         select count(*)  from aa_shiguang s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid`
         left join c_unit u on s.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and s.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and s.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and s.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -111,7 +113,8 @@
         LEFT JOIN c_unit u ON s.unitid = u.unitid
 
         <where>
-            <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
+
+            <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             and  s.xsstate= 0
             AND s.state = 1
             AND m.xsstate = 0
@@ -141,8 +144,7 @@
         LEFT JOIN c_unit u ON s.unitid = u.unitid
 
         <where>
-            <if test="producName != null and producName != ''">and s.produc_name = #{producName}</if>
-            <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
+            <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
             and  s.xsstate= 0
             AND s.state = 1
             AND m.xsstate = 0
@@ -152,7 +154,6 @@
         </where>
 
     </select>
-    <!-- 根据商品代码查询商品信息 -->
     <select id="getShiguangInfomation" resultType="com.shiguang.product.domain.ShiguangDO">
         select m.mfrsname,b.brandname,u.unitname,
         s.`id`,s.`produc_num`,s.`produc_code`,s.`produc_name`,s.`mfrsid`,s.`brandid`,s.`brandnum`,s.`factory`,s.`produc_factory`,
@@ -258,11 +259,9 @@
         </foreach>
     </delete>
 
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.ShiguangDO">
     update aa_shiguang set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.ShiguangDO">
         select produc_num from aa_shiguang where produc_num=#{producNum}  order by id
 	</select>

@@ -358,6 +358,9 @@
                     //$("#jdjSphLeft2").val("+"+leftsph2);
                 } else {
                     var leftsph2 = Number(data.leftSph) + Number(data.leftCyl);
+                    if(!isNaN(parseFloat(leftsph2))) {
+                        leftsph2 = leftsph2.toFixed(2);
+                    }
                         if (leftsph2 > 0){
                             $("#jdjSphLeft2").val("+"+leftsph2);
                     	} else {

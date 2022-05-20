@@ -25,8 +25,9 @@
         left join c_unit u on y.unitid= u.unitid left join a_cyl l on l.cyl_id=y.cyl_id left join a_sph s on
         s.sph_id=y.sph_id
         <where>
-            <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and y.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and y.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and y.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and y.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -43,11 +44,13 @@
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and y.view_good_name = #{viewGoodName}</if>
 
-            <if test="sph != null and sph != ''">
-                and s.sph between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+
+
+            <if test="(sph2 != null and sph2 != '') or (sph != null and sph != '')   ">
+                and y.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
             </if>
-            <if test="cyl != null and cyl != ''">
-                and l.cyl between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+            <if test="(cyl2 != null and cyl2 != '') or (cyl != null and cyl != '')   ">
+                and y.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
             </if>
 
             <if test="num != null and num != ''">and y.produc_num LIKE concat(concat('%', #{num}),'%')</if>
@@ -60,7 +63,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                  order by  y.id desc
+                order by m.mfrsid,b.brandid,y.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -73,8 +76,9 @@
         left join c_unit u on y.unitid= u.unitid left join a_cyl l on l.cyl_id=y.cyl_id left join a_sph s on
         s.sph_id=y.sph_id
         <where>
-            <if test="producNum != null and producNum != ''">and y.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and y.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and y.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and y.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and y.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -91,12 +95,14 @@
             <if test="classtype != null and classtype != ''">and y.classtype = #{classtype}</if>
             <if test="viewGoodName != null and viewGoodName != ''">and y.view_good_name = #{viewGoodName}</if>
 
-            <if test="sph != null and sph != ''">
-                and s.sph between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+            <if test="(sph2 != null and sph2 != '') or (sph != null and sph != '')   ">
+                and y.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
             </if>
-            <if test="cyl != null and cyl != ''">
-                and l.cyl between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+            <if test="(cyl2 != null and cyl2 != '') or (cyl != null and cyl != '')   ">
+                and y.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
             </if>
+
+
             and y.state=1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
         </where>
 
@@ -223,11 +229,9 @@
         </foreach>
     </delete>
 
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.YxcpDO">
     update aa_yxcp set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.YxcpDO">
         select produc_num from aa_yxcp where produc_num=#{producNum}  order by id
 	</select>

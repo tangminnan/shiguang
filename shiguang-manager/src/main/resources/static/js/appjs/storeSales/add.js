@@ -7,6 +7,7 @@ $.validator.setDefaults({
 		save();
 	}
 });
+var flag = '1';
 function save() {
 	var amountMoney = $("#amountMoney").val();
 	var saleName = $("#saleName").val();
@@ -16,37 +17,41 @@ function save() {
         btn : [ '确定', '取消' ]
         // 按钮
     }, function() {
-    	if (chufangid == '2' && newOld == ""){
-    		return layer.alert("请选择院区")
-		}
-    	if (amountMoney == "" || amountMoney == 0){
-    		return layer.alert("请先下单")
-		}
+    	// if (chufangid == '2' && newOld == ""){
+    	// 	return layer.alert("请选择院区")
+		// }
+    	// if (amountMoney == "" || amountMoney == 0){
+    	// 	return layer.alert("请先下单")
+		// }
 		if (saleName == ''){
     		return layer.alert("请选择销售人员")
 		}
-	$.ajax({
-		cache : true,
-		type : "POST",
-		url : "/information/store/save",
-		data : $('#signupForm').serialize(),// 你的formid
-		async : false,
-		error : function(request) {
-			parent.layer.alert("Connection error");
-		},
-		success : function(data) {
-			if (data.code == 0) {
-                parent.layer.msg("操作成功");
-                parent.reLoad();
-                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                parent.layer.close(index);
+		if(flag == '1'){
+            $.ajax({
+                cache : true,
+                type : "POST",
+                url : "/information/store/save",
+                data : $('#signupForm').serialize(),// 你的formid
+                async : false,
+                error : function(request) {
+                    parent.layer.alert("Connection error");
+                },
+                success : function(data) {
+                    if (data.code == 0) {
+                    	flag = '2';
+                        parent.layer.msg("操作成功");
+                        parent.reLoad();
+                        var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                        parent.layer.close(index);
 
-			} else {
-				parent.layer.alert(data.msg)
-			}
+                    } else {
+                        parent.layer.alert(data.msg)
+                    }
 
+                }
+            });
 		}
-	});
+
     }, function() {
 
     });

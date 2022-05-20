@@ -4,11 +4,13 @@
 <mapper namespace="com.shiguang.member.dao.MemberDao">
 
     <select id="get" resultType="com.shiguang.member.domain.MemberDO">
-		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`company_id`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status`,`state` from member where id = #{value}
+		select m.`id`,m.`name`,m.`member_option`,m.`card_number`,m.`sex`,m.`depart_number`,m.`company_id`,m.`birthday_year`,m.`birthday_month`,m.`birthday_day`,m.`age`,m.`phone_1`,m.`phone_2`,m.`phone_3`,m.`province_code`,m.`province_name`,m.`city_code`,m.`city_name`,m.`area_code`,m.`area_name`,m.`card_type`,m.`master_card`,m.`minor_name`,m.`crowd_type`,
+		m.`exclusive_customer`,m.`exclusive_customer_id`,m.`identity_type`,m.`identity_id`,m.`vocation`,m.`school`,m.`qq_number`,m.`email`,m.`address`,m.`postal_code`,
+		m.`interest`,m.`source`,m.`integral_pasd`,m.`integral`,m.`remark`,m.`register_time`,m.`status`,m.`state`,sc.`card_number` as storeCardNum, sc.`card_money` from member m left join stored_card sc on sc.member_number = m.card_number  where m.id = #{value}
 	</select>
 
     <select id="getCardNumber" resultType="com.shiguang.member.domain.MemberDO">
-		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`company_id`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`status`,`state` from member where card_number = #{value}
+		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`company_id`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`integral`,`status`,`state` from member where card_number = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.member.domain.MemberDO">
@@ -24,12 +26,15 @@
             <if test="memberOption != null and memberOption != ''"> and m.member_option = #{memberOption} </if>
             <if test="companyId != null and companyId != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
             <if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+            <if test="cardsNumber != null and cardsNumber != ''"> and m.card_number = #{cardsNumber} </if>
+            <if test="(memberNumber != null and memberNumber != '') or (identityIds != null and identityIds != '') or (tel != null and tel != '')">
+                and (m.card_number = #{memberNumber} or m.identity_id = #{identityIds} or m.phone_1 = #{tel} or m.phone_2 = #{tel} or m.phone_3 = #{tel})</if>
             <if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
             <if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
             <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
             <if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
             <if test="age != null and age != ''"> and m.age = #{age} </if>
-            <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+            <if test="phone1 != null and phone1 != ''"> and (m.phone_1 = #{phone1} or m.phone_2 = #{phone1} or m.phone_3 = #{phone1} ) </if>
             <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
             <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
             <if test="provinceCode != null and provinceCode != ''"> and m.province_code = #{provinceCode} </if>
@@ -61,7 +66,6 @@
             <if test="state != null and state != ''"> and m.state = #{state} </if>
             <if test="agestart != null and agestart !=''"> and m.age >= #{agestart} </if>
             <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
-            and m.status = 0
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -77,7 +81,7 @@
     </select>
 
     <select id="payList" resultType="com.shiguang.settlement.domain.JieKuanMoneyDO">
-        SELECT name,companyId,cardNumber,isSale,saleNumber,peijingTime,sex,departNumber,age,phone1,saleForm,state,status from(
+        SELECT name,companyId,cardNumber,isSale,saleNumber,peijingTime,amountMoney,sex,departNumber,age,phone1,saleForm,state,status from(
         SELECT
         m.`name` as name,
         m.company_id as companyId,
@@ -85,10 +89,13 @@
         s.`sale_type` AS isSale,
         s.`sale_number` as saleNumber,
         s.peijing_time as peijingTime,
+        s.amount_money as amountMoney,
         m.`sex` as sex,
         m.`depart_number` as departNumber,
         m.`age` as age,
         m.`phone_1` as phone1,
+        m.`phone_2` as phone2,
+        m.`phone_3` as phone3,
         '配镜单' as saleForm,
         m.state as state,
         m.`status` as `status`
@@ -103,10 +110,13 @@
         c.is_sale AS isSale,
         c.`sale_number` as saleNumber,
         c.create_time as peijingTime,
+        '' as amountMoney,
         m.`sex` as sex,
         m.`depart_number` as departNumber,
         m.`age` as age,
         m.`phone_1` as phone1,
+        m.`phone_2` as phone2,
+        m.`phone_3` as phone3,
         '检查单' as saleForm,
         m.state as state,
         m.`status` as `status`
@@ -120,7 +130,9 @@
         <if test="cardNumber != null and cardNumber != ''"> and cardNumber like concat('%', #{cardNumber},'%') </if>
         <if test="sex != null and sex != ''"> and sex = #{sex} </if>
         <if test="age != null and age != ''"> and age = #{age} </if>
-        <if test="phone1 != null and phone1 != ''"> and phone1 = #{phone1} </if>
+        <if test="phone1 != null and phone1 != ''"> and (phone1 = #{phone1} or phone2 = #{phone1} or phone3 = #{phone1} ) </if>
+        <if test="saleDate != null and saleDate !=''"> and date_format(peijingTime ,'%Y-%m-%d') = #{saleDate}</if>
+        <if test="isSale != null and isSale != ''"> and isSale = #{isSale} </if>
         and `status` = 0
         and state = 1
 <!--        <if test="isSale != null and isSale != ''"> and c.is_sale = #{isSale} </if>-->
@@ -142,7 +154,7 @@
 </select>
 
     <select id="payCountList" resultType="com.shiguang.settlement.domain.JieKuanMoneyDO">
-        SELECT name,companyId,cardNumber,isSale,saleNumber,peijingTime,sex,departNumber,age,phone1,saleForm,state,status from(
+        SELECT name,companyId,cardNumber,isSale,saleNumber,peijingTime,amountMoney,sex,departNumber,age,phone1,saleForm,state,status from(
         SELECT
         m.`name` as name,
         m.company_id as companyId,
@@ -150,10 +162,13 @@
         s.`sale_type` AS isSale,
         s.`sale_number` as saleNumber,
         s.peijing_time as peijingTime,
+        s.amount_money as amountMoney,
         m.`sex` as sex,
         m.`depart_number` as departNumber,
         m.`age` as age,
         m.`phone_1` as phone1,
+        m.`phone_2` as phone2,
+        m.`phone_3` as phone3,
         '配镜单' as saleForm,
         m.state as state,
         m.`status` as `status`
@@ -168,10 +183,13 @@
         c.is_sale AS isSale,
         c.`sale_number` as saleNumber,
         c.create_time as peijingTime,
+        '' as amountMoney,
         m.`sex` as sex,
         m.`depart_number` as departNumber,
         m.`age` as age,
         m.`phone_1` as phone1,
+        m.`phone_2` as phone2,
+        m.`phone_3` as phone3,
         '检查单' as saleForm,
         m.state as state,
         m.`status` as `status`
@@ -185,7 +203,9 @@
             <if test="cardNumber != null and cardNumber != ''"> and cardNumber like concat('%', #{cardNumber},'%') </if>
             <if test="sex != null and sex != ''"> and sex = #{sex} </if>
             <if test="age != null and age != ''"> and age = #{age} </if>
-            <if test="phone1 != null and phone1 != ''"> and phone1 = #{phone1} </if>
+            <if test="phone1 != null and phone1 != ''"> and (phone1 = #{phone1} or phone2 = #{phone1} or phone3 = #{phone1} ) </if>
+            <if test="saleDate != null and saleDate !=''">and date_format(peijingTime ,'%Y-%m-%d') = #{saleDate}</if>
+            <if test="isSale != null and isSale != ''"> and isSale = #{isSale} </if>
             and `status` = 0
             and state = 1
             <!--        <if test="isSale != null and isSale != ''"> and c.is_sale = #{isSale} </if>-->
@@ -219,7 +239,7 @@
             <if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
             <if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
             <if test="age != null and age != ''"> and m.age = #{age} </if>
-            <if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+            <if test="phone1 != null and phone1 != ''"> (m.phone_1 = #{phone1} or m.phone_2 = #{phone1} or m.phone_3 = #{phone1} ) </if>
             <if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
             <if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
             <if test="state != null and state != ''"> and m.state = #{state} </if>
@@ -273,7 +293,6 @@
             <if test="state != null and state != ''"> and m.state = #{state} </if>
             <if test="agestart != null and agestart !=''"> and m.age >= #{agestart} </if>
             <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
-            and m.status = 0
         </where>
     </select>
 
@@ -539,7 +558,7 @@
         <set>
             <if test="integral != null and integral != ''">`integral` = #{integral}</if>
         </set>
-        where cardNumber = #{cardNumber}
+        where card_number = #{cardNumber}
     </update>
 
     <delete id="remove">

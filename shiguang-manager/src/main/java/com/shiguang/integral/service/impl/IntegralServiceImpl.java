@@ -53,7 +53,7 @@ public class IntegralServiceImpl implements IntegralService {
 	}
 
 	@Override
-	public IntegralDO getPoints(Map<String,Object> map){
+	public List<IntegralDO> getPoints(Map<String,Object> map){
 		return integralDao.getPoints(map);
 	}
 	

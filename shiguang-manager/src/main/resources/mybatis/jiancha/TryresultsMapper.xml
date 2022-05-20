@@ -943,7 +943,7 @@
 
 
     <delete id="remove">
-		delete from jc_tryresults where id = #{value}
+		delete from jc_tryresults where ptometry_number = #{ptometryNumber}
 	</delete>
 
     <delete id="batchRemove">
@@ -952,7 +952,6 @@
             #{id}
         </foreach>
     </delete>
-    <!--//根据人查相对应的验光号医生时间等信息-->
     <select id="listUser" resultType="com.shiguang.jiancha.domain.TryresultsDO">
     select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,`chief_complaint`,
     `sphere_righttry`,`sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,`axial_lefttry`,`dva_righttry`,
@@ -967,13 +966,16 @@
 
 </select>
     <select id="listDoctor" resultType="com.shiguang.jiancha.domain.TryresultsDO">
-        select u.name from sys_user u
+        select u.name,u.username from sys_user u
         left join sys_user_role ur on u.user_id=ur.user_id
         left join  sys_role r on r.role_id=ur.role_id
-        where r.role_name= #{roleName}
+        <where>
+            <if test="roleName != null and roleName != ''"> and r.role_name = #{roleName} </if>
+            <if test="companyId != null and companyId != ''"> and u.company_id = #{companyId} </if>
+        </where>
     </select>
 <select id="listYanguang" resultType="com.shiguang.jiancha.domain.TryresultsDO">
-    select u.name from sys_user u
+    select u.name,u.username from sys_user u
     left join sys_user_role ur on u.user_id=ur.user_id
     left join  sys_role r on r.role_id=ur.role_id
     <where>

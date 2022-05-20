@@ -92,37 +92,26 @@ public interface StockService {
 
     StockDO getGoodsNum(String goodsNum);
 
-    //<!--镜架【商】【品】【查】【询】-->
     List<ProducaDO> selectJingjia(Map<String, Object> map);
     int selectJingjiaCount(Map<String, Object> map);
-    //<!--配件【商】【品】【查】【询】-->
     List<PartsDO> selectPeijian(Map<String, Object> map);
     int selectPeijianCount(Map<String, Object> map);
-    //<!--镜片定做【商】【品】【查】【询】-->
     List<JpdzDO> selectJpdz(Map<String, Object> map);
     int selectJpdzCount(Map<String, Object> map);
-    //<!--镜片成品【商】【品】【查】【询】-->
     List<JpcpDO> selectJpcp(Map<String, Object> map);
     int selectJpcpCount(Map<String, Object> map);
-    //<!--隐形定做【商】【品】【查】【询】-->
     List<YxdzDO> selectYxdz(Map<String, Object> map);
     int selectYxdzCount(Map<String, Object> map);
-    //<!--隐形成品【商】【品】【查】【询】-->
     List<YxcpDO> selectYxcp(Map<String, Object> map);
     int selectYxcpCount(Map<String, Object> map);
-    //<!--护理液【商】【品】【查】【询】-->
     List<HlyDO> selectHly(Map<String, Object> map);
     int selectHlyCount(Map<String, Object> map);
-    //<!--太阳镜【商】【品】【查】【询】-->
     List<TyjDO> selectTyj(Map<String, Object> map);
     int selectTyjCount(Map<String, Object> map);
-    //<!--老花镜【商】【品】【查】【询】-->
     List<OldlensDO> selectLhj(Map<String, Object> map);
     int selectLhjCount(Map<String, Object> map);
-    //<!--耗材【商】【品】【查】【询】-->
     List<HcDO> selectHc(Map<String, Object> map);
     int selectHcCount(Map<String, Object> map);
-    //<!--视光【商】【品】【查】【询】-->
     List<ShiguangDO> selectSg(Map<String, Object> map);
     int selectSgCount(Map<String, Object> map);
     //查询该条码的库存数量
@@ -134,17 +123,12 @@ public interface StockService {
     //修改库存数量
     int updateGoodsCount(StockDO stockDO);
 
-    //判断是否存在制造商代码[该商品]
     StockDO haveNum(StockDO stockDO);
 
-    //【库存查询】
     List<StockDO> kccxList(Map<String, Object> map);
-    //数量
     int countall(Map<String, Object> map);
     int kccxListCount(Map<String, Object> map);
-    //确认收货
     int updateStatus(StockDO stock);
-    //发出仓位库存减数量
     int outPosionJ(StockDO stockDO);
 
     OrderDO getOeder(String danjuNumber);
@@ -153,20 +137,17 @@ public interface StockService {
     OrderDO getShouhuo(String danjuNumber);
     List<OrderDO> getShouhuoList(Map<String, Object> map);
 
-    //采购批量导入
-    R importStock(Integer goodsType,String positionId, String checkType, String dzlx, MultipartFile file);
+    R importStock(Integer goodsType,String positionId, String beizhu, String checkType, String dzlx, MultipartFile file);
 
 
 
 
 
 
-    //    查询相关信息
     StockDO jingjias(StockDO stockDO);
     StockDO peijians(StockDO stockDO);
     StockDO jingpians(StockDO stockDO);
     StockDO yinxings(StockDO stockDO);
-//订做
     StockDO jingpiandzs(StockDO stockDO);
     StockDO yinxingdzs(StockDO stockDO);
     StockDO huliyes(StockDO stockDO);

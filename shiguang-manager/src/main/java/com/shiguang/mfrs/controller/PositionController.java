@@ -34,7 +34,6 @@ import java.util.Map;
 public class PositionController {
     @Autowired
     private PositionService positionService;
-    //部门维护
     @Autowired
     private DepartmentService departmentService;
 
@@ -42,7 +41,6 @@ public class PositionController {
     @GetMapping()
     @RequiresPermissions("mfrs:position:position")
     String Position(Model model) {
-        //部门
         Map<String, Object> map = new HashMap<>();
         List<DepartmentDO> departmentDOList = departmentService.list(map);
         model.addAttribute("departmentDOList", departmentDOList);
@@ -56,9 +54,12 @@ public class PositionController {
     public PageUtils list(@RequestParam Map<String, Object> params,Model model) {
         //查询列表数据
         Query query = new Query(params);
-        //———获取当前登录用户的公司id————
         if (null != ShiroUtils.getUser().getCompanyId()){
-            query.put("companyId",ShiroUtils.getUser().getCompanyId());
+            if(ShiroUtils.getUser().getCompanyId().equals("3")){
+                query.put("companyId","");
+            }else {
+                query.put("companyId",ShiroUtils.getUser().getCompanyId());
+            }
         }
         query.put("state",1);
         List<PositionDO> positionList = positionService.list(query);
@@ -70,9 +71,7 @@ public class PositionController {
     @GetMapping("/add")
     @RequiresPermissions("mfrs:position:add")
     String add(Model model) {
-        //部门
         Map<String, Object> map = new HashMap<>();
-        //———获取当前登录用户的公司id————
         if (null != ShiroUtils.getUser().getCompanyId()){
             map.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
@@ -100,7 +99,6 @@ public class PositionController {
     @PostMapping("/save")
     @RequiresPermissions("mfrs:position:add")
     public R save(PositionDO position) {
-        //判断是否已存在
         String positionNum = position.getPositionNum();
         String companyId = position.getCompanyId();
         Map<String, Object> map = new HashMap<>();
@@ -123,22 +121,14 @@ public class PositionController {
     @RequestMapping("/update")
     @RequiresPermissions("mfrs:position:edit")
     public R update(PositionDO position) {
+        String departNumber=position.getDepartNumber();
+        DepartmentDO departmentDO=positionService.getComponid(departNumber);
+        Integer companyId=departmentDO.getCompanyId();
+        position.setCompanyId(companyId.toString());
         positionService.update(position);
         return R.ok();
     }
-//
-//    /**
-//     * 删除
-//     */
-//    @PostMapping("/remove")
-//    @ResponseBody
-//    @RequiresPermissions("mfrs:position:remove")
-//    public R remove(Long positionId) {
-//        if (positionService.remove(positionId) > 0) {
-//            return R.ok();
-//        }
-//        return R.error();
-//    }
+
 
     /**
      * 批量删除
@@ -151,9 +141,6 @@ public class PositionController {
         return R.ok();
     }
 
-    /**
-     * 启用修改状态
-     */
     @ResponseBody
     @RequestMapping(value = "/updateEnable")
     public R updateEnable(Long positionId, Long enable) {
@@ -164,9 +151,6 @@ public class PositionController {
         return R.ok();
     }
 
-    /**
-     * 删除修改状态
-     */
     @ResponseBody
     @RequestMapping("/remove")
     @RequiresPermissions("mfrs:position:remove")
@@ -179,7 +163,6 @@ public class PositionController {
         }
         return R.error();
     }
-//公司
     @ResponseBody
     @RequestMapping(value = "/getCompony")
     public List<DepartmentDO> getCompony(String departNumber,String departName, Model model) {

@@ -12,7 +12,6 @@
         c_unit u on j.unitid= u.unitid
         where j.id = #{value}
     </select>
-    <!--//修改时显示制造商和商品品种名称-->
     <select id="list" resultType="com.shiguang.product.domain.JpcpDO">
         select
         j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
@@ -27,8 +26,9 @@
         left join p_gradual g on g.gradual_id = j.gradual_id
         left join p_function f on f.function_id = j.function_id
         <where>
-            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and j.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -42,12 +42,14 @@
             <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
             <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
 
-            <if test="sph != null and sph != ''">
-            and s.sph between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
-        </if>
-            <if test="cyl != null and cyl != ''">
-                and l.cyl between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+
+            <if test="(sph2 != null and sph2 != '') or (sph != null and sph != '')   ">
+                and j.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
             </if>
+            <if test="(cyl2 != null and cyl2 != '') or (cyl != null and cyl != '')   ">
+                and j.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+            </if>
+
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
@@ -63,7 +65,8 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                  order by  j.id desc
+                order by m.mfrsid,b.brandid,j.id
+
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -81,8 +84,9 @@
         left join c_refractivity r on r.refractivityid = j.refractivityid
         left join p_function f on f.function_id = j.function_id
         <where>
-            <if test="producNum != null and producNum != ''">and j.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and j.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and j.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and j.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and j.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -97,12 +101,15 @@
             <if test="refractivityid != null and refractivityid != ''">and j.refractivityid = #{refractivityid}</if>
             <if test="lightId != null and lightId != ''">and j.light_id = #{lightId}</if>
 
-            <if test="sph != null and sph != ''">
-                and s.sph between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
+
+            <if test="(sph2 != null and sph2 != '') or (sph != null and sph != '')   ">
+                and j.sph_id between #{sph,jdbcType=VARCHAR} and (#{sph2,jdbcType=VARCHAR})
             </if>
-            <if test="cyl != null and cyl != ''">
-                and l.cyl between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
+            <if test="(cyl2 != null and cyl2 != '') or (cyl != null and cyl != '')   ">
+                and j.cyl_id between #{cyl,jdbcType=VARCHAR} and #{cyl2,jdbcType=VARCHAR}
             </if>
+
+
             <if test="xsstate != null and xsstate != ''">and j.xsstate = #{xsstate}</if>
             <if test="classtype != null and classtype != ''">and j.classtype = #{classtype}</if>
             <if test="producFactory != null and producFactory != ''">and j.produc_factory = #{producFactory}</if>
@@ -176,7 +183,6 @@
 			#{viewGoodName}
 		)
 	</insert>
-    <!--//修改停用启用-->
     <update id="update" parameterType="com.shiguang.product.domain.JpcpDO">
         update aa_jpcp
         <set>
@@ -225,7 +231,6 @@
         </foreach>
     </delete>
 
-    <!-- 通过商品代码查询商品信息 -->
     <select id="getJpcpInfomation" resultType="com.shiguang.product.domain.JpcpDO">
          select
         j.`id`,j.`produc_num`,j.`produc_code`,j.`produc_name`,j.`mfrsid`,j.`brandid`,j.`brandnum`,j.`proid`,j.`unitid`,j.`sph_id`,j.`cyl_id`,
@@ -238,11 +243,9 @@
     </select>
 
 
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.JpcpDO">
     update aa_jpcp set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.JpcpDO">
         select produc_num from aa_jpcp where produc_num=#{producNum}   order by id
 	</select>

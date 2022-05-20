@@ -17,16 +17,60 @@
 								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button>
 						</div>
+
+
 						<div class="columns pull-right">
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">
-							<input id="pidiaoNumber" type="text" class="form-control"
-								placeholder="批调单号">
+
+							<input id="day1" type="text" class="form-control"
+								   placeholder="开始日期">
 						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="day2" type="text" class="form-control"
+								   placeholder="结束日期">
+						</div>
+
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="pidiaoNumber" type="text" class="form-control"
+								   placeholder="批调单号">
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<select name="inPositionid" id="inPositionid" class="form-control" data-actions-box="false"
+									data-size="5">
+								<option value="">--请选择接收仓位--</option>
+								<option th:each="ls:${positionList}"
+										th:text="${ls.positionName}"
+										th:value="${ls.positionId}"></option>
+							</select>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<select name="outPositionid" id="outPositionid" class="form-control" data-actions-box="false"
+									data-size="5">
+								<option value="">--请选择发出仓位--</option>
+								<option th:each="ls:${positionList}"
+										th:text="${ls.positionName}"
+										th:value="${ls.positionId}"></option>
+							</select>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<select name="status" id="status" class="form-control" data-actions-box="false"
+									data-size="5">
+								<option value="">--请选择收货状态--</option>
+								<option value="0">收货</option>
+								<option value="1">未收货</option>
+								<option value="2">已退回</option>
+
+							</select>
+						</div>
+
+
+
 					</div>
-					<table id="exampleTable" data-mobile-responsive="true">
-					</table>
+
+
+					<table id="exampleTable" data-mobile-responsive="true"></table>
 				</div>
 			</div>
 		</div>
@@ -58,5 +102,17 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/stock/pidiao/pidiao.js"></script>
+	<script type="text/javascript">
+        laydate.render({
+            elem: '#day1',
+            format: 'yyyy-MM-dd',
+            type: 'date'
+        });
+        laydate.render({
+            elem: '#day2',
+            format: 'yyyy-MM-dd',
+            type: 'date'
+        });
+	</script>
 </body>
 </html>

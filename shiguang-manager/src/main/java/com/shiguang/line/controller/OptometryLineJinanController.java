@@ -95,6 +95,7 @@ public class OptometryLineJinanController {
             optometryLineService.updateJinan(lineDO);
             YgLineMemberJinanDO lineMemberDO = new YgLineMemberJinanDO();
             lineMemberDO.setConsultRoom(consultRoom);
+            lineMemberDO.setMemberNumber(lineDO.getMemberNumber());
             lineMemberDO.setMemberName(lineDOs.getMemberName());
             lineMemberDO.setSex(lineDOs.getSex());
             lineMemberDO.setLineTime(lineDOs.getLineTime());
@@ -123,6 +124,7 @@ public class OptometryLineJinanController {
         YgLineMemberJinanDO lineMemberDO = new YgLineMemberJinanDO();
         if (null != lineMemberDOS && lineMemberDOS.size() > 0){
             lineMemberDO.setMemberName(lineMemberDOS.get(0).getMemberName());
+            lineMemberDO.setMemberNumber(lineMemberDOS.get(0).getMemberNumber());
             lineMemberDO.setSex(lineMemberDOS.get(0).getSex());
             lineMemberDO.setConsultRoom(lineMemberDOS.get(0).getConsultRoom());
             lineMemberDO.setId(lineMemberDOS.get(0).getId());
@@ -153,7 +155,11 @@ public class OptometryLineJinanController {
 //				lineDO.setMemberNumber(lineMemberDO.getMemberNumber());
 //				lineDO.setLineDate(simpleDateFormat.format(new Date()));
 //				lineService.removeMember(lineDO);
-            optometryLineService.removeMemberjinan(lineMemberDOS.get(0).getId());
+            Map<String,Object> jinanMap = new HashMap<>();
+            jinanMap.put("memberNumber",lineMemberDO.getMemberNumber());
+            jinanMap.put("lineTime",simpleDateFormat.format(new Date()));
+            YgLineMemberJinanDO memberJinanDO = optometryLineService.getMemberNumber(jinanMap);
+            optometryLineService.removeMemberjinan(memberJinanDO.getMemberNumber());
         }
         return resultMap;
     }

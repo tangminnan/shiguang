@@ -51,7 +51,6 @@ public class RetailpriceDO implements Serializable {
 	private String oldPrice;
 	//调整价格
 	private String newPrice;
-	//0品种调价，1商品调价
 	private String flag;
 
 	/**
@@ -270,15 +269,11 @@ public class RetailpriceDO implements Serializable {
 	public String getNewPrice() {
 		return newPrice;
 	}
-	/**
-	 * 设置：0品种调价，1商品调价
-	 */
+
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
-	/**
-	 * 获取：0品种调价，1商品调价
-	 */
+
 	public String getFlag() {
 		return flag;
 	}

@@ -20,8 +20,9 @@
         from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsnum left join c_brand b on t.brandnum=b.brandnum AND t.`mfrsid`=b.`mfrsid`
         left join c_unit u on t.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and t.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and t.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and t.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and t.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -48,7 +49,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                  order by t.id desc
+                order by m.mfrsid,b.brandid,t.id
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -60,8 +61,9 @@
         select count(*)   from aa_tyj t left join c_mfrs m on t.mfrsid=m.mfrsnum left join c_brand b on t.brandnum=b.brandnum AND t.`mfrsid`=b.`mfrsid`
         left join c_unit u on t.unitid= u.unitid
         <where>
-            <if test="producNum != null and producNum != ''">and t.produc_num = #{producNum}</if>
-            <if test="goodsCode != null and goodsCode != ''">and t.produc_code = #{goodsCode}</if>
+            <if test="producNum != null and producNum != ''">and t.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and t.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and t.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
@@ -185,7 +187,6 @@
 		delete from aa_tyj where id = #{value}
 	</delete>
 
-    <!-- 根据商品代码查询商品信息 -->
     <select id="getTyjInfomation" resultType="com.shiguang.product.domain.TyjDO">
                 select
         t.`id`,t.`produc_num`,t.`produc_code`,t.`produc_name`,t.`mfrsid`,t.`brandid`,t.`brandnum`,t.`factory`,t.`produc_factory`,t.`unitid`,t.`produc_factorycolor`,
@@ -202,12 +203,9 @@
             #{id}
         </foreach>
     </delete>
-
-    <!--删除状态修改-->
     <update id="updateState" parameterType="com.shiguang.product.domain.TyjDO">
     update aa_tyj set `state` = #{state} where id = #{id}
     </update>
-    <!--是否存在商品代码-->
     <select id="haveNum" resultType="com.shiguang.product.domain.TyjDO">
         select produc_num from aa_tyj where produc_num=#{producNum}   order by id
 	</select>

@@ -1,5 +1,6 @@
 package com.shiguang.report.controller;
 
+import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.report.service.SaleReportService;
 import com.shiguang.storeSales.domain.SalesDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -43,6 +44,8 @@ public class SaleNameController {
         }
         if (!"".equals(departNumber)){
             query.put("departNumber",departNumber);
+        }else {
+            query.put("departNumber", ShiroUtils.getUser().getStoreNum());
         }
         List<SalesDO> salesDOList = saleReportService.findGoodsList(query);
         List<SalesDO> saleNameList = saleReportService.findSaleNameList(query);

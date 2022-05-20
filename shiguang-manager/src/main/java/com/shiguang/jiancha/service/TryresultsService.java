@@ -22,21 +22,18 @@ public interface TryresultsService {
 
     List<TryresultsDO> list(Map<String, Object> map);
 
-    //根据人查相对应的验光号医生时间等信息
     List<TryresultsDO> listUser(Map<String, Object> map);
 
     int count(Map<String, Object> map);
 
     int save(TryresultsDO tryresults);
-    //    <!--//判断是否存在验光号-->
     List<TryresultsDO> haveYanguangNum(Map<String, Object> map);
     int update(TryresultsDO tryresults);
 
 
-    int remove(Long id);
+    int remove(String ptometryNumber);
 
     int batchRemove(Long[] ids);
-    //查询医生
     List<TryresultsDO> listDoctor(Map<String, Object> map);
     List<TryresultsDO> listYanguang(Map<String, Object> map);
 
