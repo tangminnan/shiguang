@@ -68,8 +68,8 @@
                 </td>
             </tr>
             <tr>
-                <td>型号：</td>
-                <td>
+                <td style="display: none">型号：</td>
+                <td style="display: none">
                     <input id="producFactory" name="producFactory" th:value="${jpdz.producFactory}" style="background-color: #e4e4e4" readonly
                            onkeyup="liandong2(this)" onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" type="text"
                            oninput="if(value.length>8)value=value.slice(0,8)" >

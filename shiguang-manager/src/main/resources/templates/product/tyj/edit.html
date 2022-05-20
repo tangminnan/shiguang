@@ -67,8 +67,8 @@
                 </td>
             </tr>
             <tr>
-                <td>型号：</td>
-                <td>
+                <td style="display: none">型号：</td>
+                <td style="display: none">
                     <input th:value="${tyj.producFactory}" style="background-color: #e4e4e4"
                            oninput="if(value.length>9)value=value.slice(0,9)"
                            type="text" readonly>
@@ -84,8 +84,8 @@
                            onchange="value=value.replace(/[^\w\/]/ig,'').toUpperCase()" readonly style="background-color: #e4e4e4">
                     <em>*</em>
                 </td>
-                <td>色号：</td>
-                <td>
+                <td style="display: none">色号：</td>
+                <td style="display: none">
                     <input th:value="${tyj.producColor}" style="background-color: #e4e4e4"
                            oninput="if(value.length>4)value=value.slice(0,4)"
                            type="text" readonly>
