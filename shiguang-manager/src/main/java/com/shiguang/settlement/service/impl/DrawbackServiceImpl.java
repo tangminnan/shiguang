@@ -364,6 +364,28 @@ public class DrawbackServiceImpl implements DrawbackService {
 				}
 
 			}
+		} else {
+			String storeNum = salesDO.getStoreNum();
+			String[] count = salesDO.getStoreCount().split(",");
+			String[] goodsCode = salesDO.getGoodsCode().split(",");
+			String[] storeDescribe = salesDO.getStoreDescribe().split(",");
+			Map<String,Object> map = new HashMap<>();
+			map.put("companyId",ShiroUtils.getUser().getCompanyId());
+			map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+			PositionDO positionDO = stockService.findPosition(map);
+			for (int i=0;i<goodsCode.length;i++) {
+				if ("镜架".equals(storeDescribe[i])){
+					StockDO stockDO = new StockDO();
+					stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+					stockDO.setGoodsCode(goodsCode[i]);
+					StockDO stockDO1 = stockService.getProduceCode(stockDO);
+					if (null != stockDO1) {
+					int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
+					stockDO.setGoodsCount(godsCount + "");
+					stockService.updateGoodsCount(stockDO);
+				    }
+				}
+			}
 		}
 		String saleNumber = drawbackDO.getSaleNumber();
 		weiwaishujuService.removes(saleNumber);

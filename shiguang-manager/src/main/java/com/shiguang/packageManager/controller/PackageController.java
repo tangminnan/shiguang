@@ -465,6 +465,25 @@ public class PackageController {
 //		}
         return R.error();
     }
+
+    /**
+     * 制造商
+     */
+    @GetMapping("/mfrs")
+    @RequiresPermissions("information:package:mfrs")
+    String mfrs(Model model) {
+        return "packageInfo/mfrs";
+    }
+
+    /**
+     * 品牌
+     */
+    @GetMapping("/brand")
+    @RequiresPermissions("information:package:brand")
+    String brand(Model model) {
+        return "packageInfo/brand";
+    }
+
     /**
      * 修改
      */
