@@ -6,7 +6,9 @@ import com.shiguang.line.service.LineService;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
+import com.shiguang.storeSales.domain.InfoDO;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.InfoService;
 import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.unqualiffed.domain.UnqualiffedDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -29,6 +31,8 @@ public class ReceiveController {
     private SalesService salesService;
     @Autowired
     private LineService lineService;
+    @Autowired
+    private InfoService infoService;
 
     /**
      * 取镜处收货
@@ -52,18 +56,18 @@ public class ReceiveController {
         }
         if (null != params.get("memberName") && !"".equals(params.get("memberName"))){
             query.put("memberName",String.valueOf(query.get("memberName")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("saleNumber") && !"".equals(params.get("saleNumber"))){
             query.put("saleNumber",String.valueOf(query.get("saleNumber")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         if (null != params.get("phone") && !"".equals(params.get("phone"))){
             query.put("phone",String.valueOf(query.get("phone")).trim());
-            query.put("offset",0);
-            query.put("limit",10);
+//            query.put("offset",0);
+//            query.put("limit",10);
         }
         List<SalesDO> salesDOList = statusService.findSaleAll(query);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -100,6 +104,12 @@ public class ReceiveController {
             map.put("type","取镜");
             map.put("memberName",memberName);
             lineService.callList(map);
+            InfoDO infoDO = new InfoDO();
+            infoDO.setSaleNumber(saleNumber);
+            infoDO.setTrainStatus("取镜处收货");
+            infoDO.setTrainTime(new Date());
+            infoDO.setTrainName(ShiroUtils.getUser().getName());
+            infoService.save(infoDO);
             return R.ok();
         }
         return R.error();
@@ -118,6 +128,12 @@ public class ReceiveController {
             logStatusDO.setSaleNumber(salesDOs.getSaleNumber());
             logStatusDO.setLogisticStatus("收货");
             statusService.editFaliao(logStatusDO);
+            InfoDO infoDO = new InfoDO();
+            infoDO.setSaleNumber(salesDOs.getSaleNumber());
+            infoDO.setTrainStatus("取镜处收货");
+            infoDO.setTrainTime(new Date());
+            infoDO.setTrainName(ShiroUtils.getUser().getName());
+            infoService.save(infoDO);
         }
         WorkRecoedDO workRecoedDO = new WorkRecoedDO();
         workRecoedDO.setUserName(ShiroUtils.getUser().getUsername());

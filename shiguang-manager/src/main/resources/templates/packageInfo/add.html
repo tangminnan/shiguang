@@ -461,7 +461,7 @@
 		html += "<td><input type=\"checkbox\" id=\"allChecks\" name='allChecks' class='cb'/></td>";
 		html +="<td>";
 		if ($("#packageType").val() == "辅料销售"){
-            html += "<select name='goodsType' id='goodType"+a+"' onchange='selectChange(this)'> <option value=''>--请选择--</option><option value='配件'>配件</option>" +
+            html += "<select name='goodsType' id='goodType"+a+"' onchange='seletcChange(this)'> <option value=''>--请选择--</option><option value='配件'>配件</option>" +
                 "<option value='太阳镜'>太阳镜</option><option value='老花镜'>老花镜</option><option value='耗材'>耗材</option><option value='视光'>视光</option><option value='隐形护理液'>隐形护理液</option></select>";
 		} else if ($("#packageType").val() == "隐形销售"){
             html += "<select name='goodsType' id='goodType"+a+"' onchange='selectChange(this)'> <option value=''>--请选择--</option><option value='隐形成品片'>隐形成品片</option><option value='隐形订做片'>隐形订做片</option><option value='配件'>配件</option>" +

@@ -41,6 +41,8 @@ public interface WeiwaiService {
 	int remove(Long id);
 	int removes(WeiwaiDO weiwaiDO);
 
+	int removeSale(String saleNumber);
+
 	int batchRemove(Long[] ids);
 
 	DepartmentDO phoneOrAddres(Map<String,Object> map);

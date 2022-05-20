@@ -8,7 +8,7 @@ html {
 input,textarea{resize: none;outline: none;}
 select{outline: none;border:1px solid #dad9d9;border-radius:5px;height:32px;text-indent:10px;width: 80px;}
 input[type="text"]{border:1px solid #dad9d9;padding:0 10px;line-height: 28px;text-align: center;height: 30px;}
-textarea{width: 100%;resize: none;font-family:"微软雅黑";border:1px solid #dad9d9;padding:5px;}
+textarea{width: 100%;resize: none;font-family:"楷体";border:1px solid #dad9d9;padding:5px;}
 /* 图片自适应 */
 img {
     max-width: 100%;

@@ -22,9 +22,11 @@ function load() {
 						singleSelect : false, // 设置为true将禁止多选
 						// contentType : "application/x-www-form-urlencoded",
 						// //发送到服务器的数据编码类型
-						pageSize : 10, // 如果设置了分页，每页数据条数
+						pageSize : 50, // 如果设置了分页，每页数据条数
 						pageNumber : 1, // 如果设置了分布，首页页码
 						//search : true, // 是否显示搜索框
+                        pageList:[50,150,500,1200],
+                        smartDisplay:false,
 						showColumns : false, // 是否显示内容下拉框（选择显示的列）
 						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
 						queryParams : function(params) {
@@ -128,8 +130,10 @@ function sure(){
 var array = new Array();
 function batchSelect() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-    array.push(rows);
-    window.localStorage.setItem("shiguang",JSON.stringify(array))
+	return rows;
+    ///array.push(rows);
+   // alert(array)
+   //  window.localStorage.setItem("shiguang",JSON.stringify(rows))
    // window.opener.goodsInfo(rows);
 	// if (rows.length == 0) {
 	// 	layer.msg("请选择要购买的镜架");

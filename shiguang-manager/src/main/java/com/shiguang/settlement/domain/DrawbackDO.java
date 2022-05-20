@@ -33,6 +33,10 @@ public class DrawbackDO implements Serializable {
 	private Date createTime;
 	//退款方式
 	private String drackbackWay;
+	//储值卡号
+	private String chuzhiNumber;
+	//退款金额
+	private String drawbacktkMoney;
 
 	/**
 	 * 设置：主键
@@ -115,4 +119,20 @@ public class DrawbackDO implements Serializable {
 	public void setDrackbackWay(String drackbackWay){this.drackbackWay = drackbackWay;}
 
 	public String getDrackbackWay(){return drackbackWay;}
+
+	public String getChuzhiNumber() {
+		return chuzhiNumber;
+	}
+
+	public void setChuzhiNumber(String chuzhiNumber) {
+		this.chuzhiNumber = chuzhiNumber;
+	}
+
+	public String getDrawbacktkMoney() {
+		return drawbacktkMoney;
+	}
+
+	public void setDrawbacktkMoney(String drawbacktkMoney) {
+		this.drawbacktkMoney = drawbacktkMoney;
+	}
 }

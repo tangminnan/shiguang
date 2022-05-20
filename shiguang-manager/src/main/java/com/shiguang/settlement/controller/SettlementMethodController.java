@@ -14,6 +14,8 @@ import com.shiguang.member.service.MemberService;
 import com.shiguang.settlement.domain.JieKuanMoneyDO;
 import com.shiguang.settlement.domain.SettlementDO;
 import com.shiguang.settlement.service.SettlementService;
+import com.shiguang.storeCard.domain.CardDO;
+import com.shiguang.storeCard.service.CardService;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +46,8 @@ public class SettlementMethodController {
     private DepartmentService departmentService;
     @Autowired
     private MailInfoService mailInfoService;
+    @Autowired
+    private CardService cardService;
 
     @GetMapping()
     @RequiresPermissions("information:method:method")
@@ -74,6 +79,28 @@ public class SettlementMethodController {
     String detail(@PathVariable("cardNumber") String cardNumber,@PathVariable("saleNumber") String saleNumber,Model model){
         MemberDO memberDO = memberService.getCardNumber(cardNumber);
         model.addAttribute("memberDO",memberDO);
+        Map<String,Object> mapphone = new HashMap<>();
+        if (null != memberDO.getPhone1() && !"".equals(memberDO.getPhone1())){
+            mapphone.put("phone1",memberDO.getPhone1());
+        } else {
+            mapphone.put("phone1",memberDO.getPhone2());
+        }
+        List<MemberDO> memberList = memberService.list(mapphone);
+        List<CardDO> cardDOS = new ArrayList<>();
+        for (MemberDO memberDO1 : memberList){
+            CardDO cardDO = new CardDO();
+            cardDO = cardService.getMemberNum(memberDO1.getCardNumber());
+            if (null == cardDO){
+                cardDO = new CardDO();
+                cardDO.setCardNumber("");
+                cardDO.setCardMoney("");
+            } else {
+                cardDO.setCardNumMoney(cardDO.getCardNumber() + "(余额："+ cardDO.getCardMoney() + ")");
+                cardDOS.add(cardDO);
+            }
+
+        }
+        model.addAttribute("cardDOS",cardDOS);
 //		CostDO costDO = costService.get(costId);
         Map<String,Object> map = new HashMap<>();
         map.put("saleNumber",saleNumber);
@@ -108,7 +135,7 @@ public class SettlementMethodController {
         SalesDO salesDO = salesService.getSaleNumber(saleNumber);
         model.addAttribute("settlement", settlement);
         model.addAttribute("salesDO",salesDO);
-        return "method/edit";
+        return "method/editMethod";
     }
 
     /**
@@ -120,6 +147,48 @@ public class SettlementMethodController {
     public R update(SettlementDO settlement){
         //SettlementDO settlementDO = settlementService.get(settlement.getId());
         //settlement.setPayMoney(settlement.getPayMoney() + settlement.getFrontMoney());
+        settlement.setSaleName(ShiroUtils.getUser().getName());
+        settlement.setSaleAcount(ShiroUtils.getUser().getUsername());
+        if (null != settlement.getPayGgModel() && !"".equals(settlement.getPayGgModel())){
+            settlement.setPayModel(settlement.getPayGgModel());
+            settlement.setModelMoney(settlement.getModelGgMoney());
+        }
+        String[] paymodel = settlement.getPayModel().split(",");
+        String[] modelMoney = settlement.getModelMoney().split(",");
+        java.text.NumberFormat numberformat=java.text.NumberFormat.getInstance();
+        numberformat.setMaximumFractionDigits(1);
+        for (int i = 0;i<paymodel.length;i++){
+            if ("6".equals(paymodel[i])){
+                String cardNumber = settlement.getChuzhiNumber();
+                CardDO cardDO = cardService.getCardNum(cardNumber);
+                if (null != cardDO){
+//                    if (cardDO.getPassword().equals(settlement.getChuzhiPasd())){
+                        if (Double.valueOf(cardDO.getCardMoney()) >= Double.valueOf(modelMoney[i])){
+                            double money = Double.valueOf(cardDO.getCardMoney()) - Double.valueOf(modelMoney[i]);
+                            cardDO.setCardMoney(money+"");
+                            cardService.update(cardDO);
+                        } else {
+                            return R.error("余额不足");
+                        }
+
+//                    } else {
+//                        return R.error("密码输入错误");
+//                    }
+                } else{
+                    return R.error("该用户没有绑定储值卡");
+                }
+            }
+            else if ("9".equals(paymodel[i])){
+                double jifenMoney = Double.valueOf(modelMoney[i]) * 20;
+                int integral = (int) jifenMoney;
+                MemberDO memberDO = memberService.getCardNumber(settlement.getMemberNumber());
+                if (null != memberDO.getIntegral()){
+                    Integer integralnew = Integer.parseInt(memberDO.getIntegral()) - integral;
+                    memberDO.setIntegral(String.valueOf(integralnew));
+                    memberService.updateInteger(memberDO);
+                }
+            }
+        }
         settlementService.updateMethod(settlement);
         return R.ok();
     }

@@ -370,6 +370,9 @@
         </where>
 	</delete>
 
+    <delete id="removeSale">
+        delete from stock_weiwai where sale_number = #{value}
+    </delete>
 
     <select id="phoneOrAddres" resultType="com.shiguang.baseinfomation.domain.DepartmentDO">
         SELECT d.depart_number,d.depart_tel,d.depart_address,p.position_id,p.position_name

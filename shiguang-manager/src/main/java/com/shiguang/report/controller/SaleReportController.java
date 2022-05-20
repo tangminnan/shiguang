@@ -44,6 +44,10 @@ public class SaleReportController {
         Map<String, Object> map = new HashMap<>();
         map.put("departType","销售门店");
         map.put("state",1);
+        if (null != ShiroUtils.getUser().getStoreNum()){
+            map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+        }
+        map.put("companyId",ShiroUtils.getUser().getCompanyId());
         List<DepartmentDO> departmentDOList = departmentService.list(map);
         model.addAttribute("departmentDOList",departmentDOList);
         return "saleReport/saleReport";
@@ -224,15 +228,15 @@ public class SaleReportController {
             maps.put("departNumber",departNumber);
         } else {
             query.put("departType","销售门店");
+            query.put("departNumber",ShiroUtils.getUser().getStoreNum());
+            maps.put("departNumber",ShiroUtils.getUser().getStoreNum());
         }
 //        if (!"".equals(saleNum)){
 //            query.put("saleNum",saleNum);
 //        }
         //query.put("settleDate","2021-08-25");
         if (null != ShiroUtils.getUser().getCompanyId()){
-            if(!"3".equals(ShiroUtils.getUser().getCompanyId())){
-                query.put("companyid",ShiroUtils.getUser().getCompanyId());
-            }
+            query.put("companyid",ShiroUtils.getUser().getCompanyId());
         }
         List<SettlementDO> list = saleReportService.findSaleReportForms(query);
         List<SettlementDO> drawList = saleReportService.drawckMoney(query);
@@ -252,7 +256,13 @@ public class SaleReportController {
                 double xianjinMoney = 0;
                 double yikatongoney = 0;
                 double yyshoufeichuMoney = 0;
+                double yinliankamoney = 0;
+                double chuzhikamoney = 0;
+                double dianmoney = 0;
+                double diandianmoney = 0;
+                double jifenmoney = 0;
                 double qtsubTotal = 0;
+                double weixinpt = 0;
                 //double tkMoney = 0;
                 double shihsouTotal = 0;
                 for (SettlementDO settlementDO : list){
@@ -270,35 +280,66 @@ public class SaleReportController {
                                 yyshoufeichuMoney = yyshoufeichuMoney + Double.valueOf(modelMoney[i]);
                             } else if ("3".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
                                 yikatongoney = yikatongoney + Double.valueOf(modelMoney[i]);
+                            } else if ("5".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                yinliankamoney = yinliankamoney + Double.valueOf(modelMoney[i]);
+                            } else if ("6".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                chuzhikamoney = chuzhikamoney + Double.valueOf(modelMoney[i]);
+                            } else if ("7".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                dianmoney = dianmoney + Double.valueOf(modelMoney[i]);
+                            } else if ("8".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                diandianmoney = diandianmoney + Double.valueOf(modelMoney[i]);
+                            } else if ("9".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                jifenmoney = jifenmoney + Double.valueOf(modelMoney[i]);
+                            } else if ("10".equals(settlementDO.getDrawBackWay())){
+                                weixinpt = weixinpt - Double.valueOf(settlementDO.getDrawBackMoney());
                             }
                         }
                         if (null != settlementDO.getChangeMoney()){
                             xianjinMoney = xianjinMoney - settlementDO.getChangeMoney();
                         }
-
+                        if (null != settlementDO.getJifen() && !"".equals(settlementDO.getJifen())){
+                            jifenmoney = jifenmoney + Double.valueOf(settlementDO.getJifen());
+                        }
                     }
 
                 }
                 if (null != drawList && drawList.size() > 0){
                     for (SettlementDO settlementDO : drawList){
-                        if ("0".equals(settlementDO.getDrawBackWay())){
-                            weixinMoney = weixinMoney-Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("1".equals(settlementDO.getDrawBackWay())){
-                            zfbMoney = zfbMoney - Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("2".equals(settlementDO.getDrawBackWay())){
-                            yyshoufeichuMoney = yyshoufeichuMoney - Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("3".equals(settlementDO.getDrawBackWay())){
-                            yikatongoney = yikatongoney - Double.valueOf(settlementDO.getDrawBackMoney());
-                        } else if ("4".equals(settlementDO.getDrawBackWay())){
-                            xianjinMoney = xianjinMoney - Double.valueOf(settlementDO.getDrawBackMoney());
+                        String[] drackbackWay = settlementDO.getDrawBackWay().split(",");
+                        String[] drackMoney = settlementDO.getDrawBackMoney().split(",");
+                        for (int a=0;a<drackbackWay.length;a++){
+                            if ("0".equals(drackbackWay[a])){
+                                weixinMoney = weixinMoney-Double.valueOf(drackMoney[a]);
+                            } else if ("1".equals(drackbackWay[a])){
+                                zfbMoney = zfbMoney - Double.valueOf(drackMoney[a]);
+                            } else if ("2".equals(drackbackWay[a])){
+                                yyshoufeichuMoney = yyshoufeichuMoney - Double.valueOf(drackMoney[a]);
+                            } else if ("3".equals(drackbackWay[a])){
+                                yikatongoney = yikatongoney - Double.valueOf(drackMoney[a]);
+                            } else if ("4".equals(drackbackWay[a])){
+                                xianjinMoney = xianjinMoney - Double.valueOf(drackMoney[a]);
+                            } else if ("5".equals(drackbackWay[a])){
+                                yinliankamoney = yinliankamoney - Double.valueOf(drackMoney[a]);
+                            } else if ("6".equals(drackbackWay[a])){
+                                chuzhikamoney = chuzhikamoney - Double.valueOf(drackMoney[a]);
+                            } else if ("7".equals(drackbackWay[a])){
+                                dianmoney = dianmoney - Double.valueOf(drackMoney[a]);
+                            } else if ("8".equals(drackbackWay[a])){
+                                diandianmoney = diandianmoney - Double.valueOf(drackMoney[a]);
+                            } else if ("9".equals(drackbackWay[a])){
+                                jifenmoney = jifenmoney - Double.valueOf(drackMoney[a]);
+                            } else if ("10".equals(drackbackWay[a])){
+                                weixinpt = weixinpt - Double.valueOf(drackMoney[a]);
+                            }
                         }
+
                     }
                 }
                 qtsubTotal = weixinMoney + zfbMoney;
                 if (xianjinMoney < 0){
-                    shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney;
+                    shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney + yinliankamoney + diandianmoney + dianmoney + weixinpt;
                 } else {
-                    shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney;
+                    shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney + yinliankamoney + diandianmoney + dianmoney + weixinpt;
                 }
                 Map<String,Object> resultMap = new HashMap<>();
                 resultMap.put("weixinMoney",new BigDecimal(weixinMoney).setScale(2,RoundingMode.HALF_UP));
@@ -306,9 +347,16 @@ public class SaleReportController {
                 resultMap.put("xianjinMoney",new BigDecimal(xianjinMoney).setScale(2,RoundingMode.HALF_UP));
                 resultMap.put("yyshoufeichuMoney",new BigDecimal(yyshoufeichuMoney).setScale(2,RoundingMode.HALF_UP));
                 resultMap.put("yikatongoney",new BigDecimal(yikatongoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("yinliankamoney",new BigDecimal(yinliankamoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("chuzhikamoney",new BigDecimal(chuzhikamoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("diandianmoney",new BigDecimal(diandianmoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("dianmoney",new BigDecimal(dianmoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("jifenmoney",new BigDecimal(jifenmoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("weixinptmoney",new BigDecimal(weixinpt).setScale(2,RoundingMode.HALF_UP));
                 resultMap.put("qtsubTotal",new BigDecimal(qtsubTotal).setScale(2,RoundingMode.HALF_UP));
                 resultMap.put("shihsouTotal",new BigDecimal(shihsouTotal).setScale(2,RoundingMode.HALF_UP));
                 resultMap.put("departmentName",departmentDO.getDepartName());
+                resultMap.put("departmentNum",departmentDO.getDepartNumber());
                 resultList.add(resultMap);
 //                model.addAttribute("yyshoufeichuMoney",new BigDecimal(yyshoufeichuMoney).setScale(2,RoundingMode.HALF_UP));
 //                model.addAttribute("yikatongoney",new BigDecimal(yikatongoney).setScale(2,RoundingMode.HALF_UP));
@@ -330,26 +378,31 @@ public class SaleReportController {
      * @return
      */
     @GetMapping("/reportDetailList")
-    public String reportDetailList(String settleDateStart,String settleDateEnd,Model model) {
+    public String reportDetailList(String settleDateStart,String settleDateEnd,String departmentNum,Model model) {
         Map<String,Object> query = new HashMap<>();
         query.put("state",1);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         if (!"".equals(settleDateStart)){
             query.put("settleDateStart",settleDateStart);
+            model.addAttribute("settleDateStart",settleDateStart);
         } else {
             query.put("settleDateStart",simpleDateFormat.format(date));
+            model.addAttribute("settleDateStart",simpleDateFormat.format(date));
         }
         if (!"".equals(settleDateEnd)){
             query.put("settleDateEnd",settleDateEnd);
+            model.addAttribute("settleDateEnd",settleDateEnd);
         } else {
             query.put("settleDateEnd",simpleDateFormat.format(date));
+            model.addAttribute("settleDateEnd",simpleDateFormat.format(date));
         }
         if (null != ShiroUtils.getUser().getCompanyId()){
-            if(!"3".equals(ShiroUtils.getUser().getCompanyId())){
+            if(!"".equals(ShiroUtils.getUser().getCompanyId()) && null != ShiroUtils.getUser().getCompanyId()){
                 query.put("companyid",ShiroUtils.getUser().getCompanyId());
             }
         }
+        query.put("departNumber",departmentNum);
         List<SalesDO> salesDOList = saleReportService.findSaleReportDetailForms(query);
         List<SettlementDO> saleNameList = saleReportService.findSaleNameSettleList(query);
         List<Map<String,Object>> list = new ArrayList<>();
@@ -528,6 +581,180 @@ public class SaleReportController {
         model.addAttribute("list",list);
         model.addAttribute("date",simpleDateFormat.format(new Date()));
         return "saleReport/saleReportDetailForm";
+    }
+
+    /**
+     * 收银员个人明细报表打印
+     * @param
+     * @param model
+     * @return
+     */
+    @GetMapping("/reportNameDetailList")
+    public String reportNameDetailList(String settleDateStart,String settleDateEnd,String saleAccount,Model model) {
+//		List<SettlementDO> settlementList = settlementService.list(query);
+//		int total = settlementService.count(query);
+//		PageUtils pageUtils = new PageUtils(settlementList, total);
+        Map<String,Object> query = new HashMap<>();
+        Map<String,Object> maps = new HashMap<>();
+        query.put("state",1);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        if (!"".equals(settleDateStart)){
+            query.put("settleDateStart",settleDateStart);
+            model.addAttribute("settleDateStart",settleDateStart);
+        } else {
+            query.put("settleDateStart",simpleDateFormat.format(date));
+            model.addAttribute("settleDateStart",simpleDateFormat.format(date));
+        }
+        if (!"".equals(settleDateEnd)){
+            query.put("settleDateEnd",settleDateEnd);
+            model.addAttribute("settleDateEnd",settleDateEnd);
+        } else {
+            query.put("settleDateEnd",simpleDateFormat.format(date));
+            model.addAttribute("settleDateEnd",simpleDateFormat.format(date));
+        }
+//        if (!"".equals(saleNum)){
+//            query.put("saleNum",saleNum);
+//        }
+        //query.put("settleDate","2021-08-25");
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyid",ShiroUtils.getUser().getCompanyId());
+        }
+        query.put("saleAccount",saleAccount);
+        List<SettlementDO> list = saleReportService.findSaleReportForms(query);
+        List<SettlementDO> drawList = saleReportService.drawckMoney(query);
+
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            maps.put("companyid",ShiroUtils.getUser().getCompanyId());
+        }
+//        maps.put("departType","销售门店");
+        maps.put("state",1);
+//        List<DepartmentDO> departmentDOList = departmentService.list(maps);
+
+        List<Map<String,Object>> resultList = new ArrayList<>();
+        if (null != list && list.size() > 0){
+//            for (DepartmentDO departmentDO : departmentDOList){
+                double weixinMoney = 0;
+                double zfbMoney = 0;
+                double xianjinMoney = 0;
+                double yikatongoney = 0;
+                double yyshoufeichuMoney = 0;
+                double yinliankamoney = 0;
+                double chuzhikamoney = 0;
+                double dianmoney = 0;
+                double diandianmoney = 0;
+                double jifenmoney = 0;
+                double qtsubTotal = 0;
+                double weixinpt = 0;
+                //double tkMoney = 0;
+                double shihsouTotal = 0;
+                String salesAccount = "";
+                String saleName = "";
+                for (SettlementDO settlementDO : list){
+                    salesAccount = settlementDO.getSaleAcount();
+                    saleName = settlementDO.getSaleName();
+//                    if (departmentDO.getDepartName().equals(settlementDO.getDepartmentName())){
+                        String[] payModel = settlementDO.getPayModel().split(",");
+                        String[] modelMoney = settlementDO.getModelMoney().split(",");
+                        for (int i=0;i<payModel.length;i++){
+                            if ("0".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                weixinMoney = weixinMoney + Double.valueOf(modelMoney[i]);
+                            } else if ("1".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                zfbMoney = zfbMoney + Double.valueOf(modelMoney[i]);
+                            } else if ("4".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                xianjinMoney = xianjinMoney + Double.valueOf(modelMoney[i]);
+                            } else if ("2".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                yyshoufeichuMoney = yyshoufeichuMoney + Double.valueOf(modelMoney[i]);
+                            } else if ("3".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                yikatongoney = yikatongoney + Double.valueOf(modelMoney[i]);
+                            } else if ("5".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                yinliankamoney = yinliankamoney + Double.valueOf(modelMoney[i]);
+                            } else if ("6".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                chuzhikamoney = chuzhikamoney + Double.valueOf(modelMoney[i]);
+                            } else if ("7".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                dianmoney = dianmoney + Double.valueOf(modelMoney[i]);
+                            } else if ("8".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                diandianmoney = diandianmoney + Double.valueOf(modelMoney[i]);
+                            } else if ("9".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                jifenmoney = jifenmoney + Double.valueOf(modelMoney[i]);
+                            } else if ("10".equals(settlementDO.getDrawBackWay())){
+                                weixinpt = weixinpt - Double.valueOf(settlementDO.getDrawBackMoney());
+                            }
+                        }
+                        if (null != settlementDO.getChangeMoney()){
+                            xianjinMoney = xianjinMoney - settlementDO.getChangeMoney();
+                        }
+
+//                    }
+
+                }
+            if (null != drawList && drawList.size() > 0){
+                for (SettlementDO settlementDO : drawList){
+                    String[] drackbackWay = settlementDO.getDrawBackWay().split(",");
+                    String[] drackMoney = settlementDO.getDrawBackMoney().split(",");
+                    for (int a=0;a<drackbackWay.length;a++){
+                        if ("0".equals(drackbackWay[a])){
+                            weixinMoney = weixinMoney-Double.valueOf(drackMoney[a]);
+                        } else if ("1".equals(drackbackWay[a])){
+                            zfbMoney = zfbMoney - Double.valueOf(drackMoney[a]);
+                        } else if ("2".equals(drackbackWay[a])){
+                            yyshoufeichuMoney = yyshoufeichuMoney - Double.valueOf(drackMoney[a]);
+                        } else if ("3".equals(drackbackWay[a])){
+                            yikatongoney = yikatongoney - Double.valueOf(drackMoney[a]);
+                        } else if ("4".equals(drackbackWay[a])){
+                            xianjinMoney = xianjinMoney - Double.valueOf(drackMoney[a]);
+                        } else if ("5".equals(drackbackWay[a])){
+                            yinliankamoney = yinliankamoney - Double.valueOf(drackMoney[a]);
+                        } else if ("6".equals(drackbackWay[a])){
+                            chuzhikamoney = chuzhikamoney - Double.valueOf(drackMoney[a]);
+                        } else if ("7".equals(drackbackWay[a])){
+                            dianmoney = dianmoney - Double.valueOf(drackMoney[a]);
+                        } else if ("8".equals(drackbackWay[a])){
+                            diandianmoney = diandianmoney - Double.valueOf(drackMoney[a]);
+                        } else if ("9".equals(drackbackWay[a])){
+                            jifenmoney = jifenmoney - Double.valueOf(drackMoney[a]);
+                        } else if ("10".equals(drackbackWay[a])){
+                            weixinpt = weixinpt - Double.valueOf(drackMoney[a]);
+                        }
+                    }
+
+                }
+            }
+                qtsubTotal = weixinMoney + zfbMoney;
+                if (xianjinMoney < 0){
+                    shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney + yinliankamoney + diandianmoney + dianmoney + weixinpt;
+                } else {
+                    shihsouTotal = weixinMoney + zfbMoney +xianjinMoney + yyshoufeichuMoney + yikatongoney + yinliankamoney + diandianmoney + dianmoney + weixinpt;
+                }
+                Map<String,Object> resultMap = new HashMap<>();
+                resultMap.put("saleAccount",salesAccount);
+                resultMap.put("saleName",saleName);
+                resultMap.put("weixinMoney",new BigDecimal(weixinMoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("zfbMoney",new BigDecimal(zfbMoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("xianjinMoney",new BigDecimal(xianjinMoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("yyshoufeichuMoney",new BigDecimal(yyshoufeichuMoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("yikatongoney",new BigDecimal(yikatongoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("yinliankamoney",new BigDecimal(yinliankamoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("chuzhikamoney",new BigDecimal(chuzhikamoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("diandianmoney",new BigDecimal(diandianmoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("dianmoney",new BigDecimal(dianmoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("jifenmoney",new BigDecimal(jifenmoney).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("weixinptmoney",new BigDecimal(weixinpt).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("qtsubTotal",new BigDecimal(qtsubTotal).setScale(2,RoundingMode.HALF_UP));
+                resultMap.put("shihsouTotal",new BigDecimal(shihsouTotal).setScale(2,RoundingMode.HALF_UP));
+                //resultMap.put("departmentName",departmentDO.getDepartName());
+                resultList.add(resultMap);
+//                model.addAttribute("yyshoufeichuMoney",new BigDecimal(yyshoufeichuMoney).setScale(2,RoundingMode.HALF_UP));
+//                model.addAttribute("yikatongoney",new BigDecimal(yikatongoney).setScale(2,RoundingMode.HALF_UP));
+//                model.addAttribute("qtsubTotal",new BigDecimal(qtsubTotal).setScale(2,RoundingMode.HALF_UP));
+//                model.addAttribute("shihsouTotal",new BigDecimal(shihsouTotal).setScale(2,RoundingMode.HALF_UP));
+//                model.addAttribute("date", simpleDateFormat.format(new Date()));
+//            }
+
+        }
+        model.addAttribute("resultList",resultList);
+        model.addAttribute("date",simpleDateFormat.format(new Date()));
+        return "saleReport/saleNameDetailReport";
     }
 
 

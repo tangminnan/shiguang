@@ -23,13 +23,28 @@
 	</select>
 
 	<select id="getRoleList" resultType="com.shiguang.system.domain.UserDO">
-		select u.name,u.user_id,r.role_name from sys_user u left join sys_user_role ur on ur.user_id = u.user_id left join sys_role r on r.role_id = ur.role_id
+		select u.`username`,u.name,u.user_id,r.role_name from sys_user u left join sys_user_role ur on ur.user_id = u.user_id left join sys_role r on r.role_id = ur.role_id
 		<where>
-			<if test="roleType != null and roleType != ''"> and r.role_type = #{roleType} </if>
+			<!--<if test="roleType != null and roleType != ''"> and r.role_type = #{roleType} </if>-->
 			<if test="companyId != null and companyId != ''"> and u.company_id = #{companyId} </if>
+			<if test="(roleType1 != null and roleType1 != '') or (roleType2 != null and roleType2 != '') or (roleType3 != null and roleType3 != '') ">
+				and (r.role_type = #{roleType1} or r.role_type = #{roleType2} or r.role_type = #{roleType3}) </if>
 			<if test="userId != null and userId != ''"> and u.user_id = #{userId} </if>
 		</where>
+		group by u.user_id
 	</select>
+
+	<select id="getRoleNumList" resultType="com.shiguang.system.domain.UserDO">
+		select u.`username`,u.name,u.user_id,r.role_name from sys_user u left join sys_user_role ur on ur.user_id = u.user_id left join sys_role r on r.role_id = ur.role_id
+		<where>
+			<if test="companyId != null and companyId != ''"> and u.company_id = #{companyId} </if>
+			<if test="roleTypes2 != null and roleTypes2 != '' ">
+				 and r.role_type != #{roleTypes2}  </if>
+			<if test="userId != null and userId != ''"> and u.user_id = #{userId} </if>
+		</where>
+		group by u.user_id
+	</select>
+
 
 	<select id="list" resultType="com.shiguang.system.domain.UserDO">
 		select `user_id`,`username`,`name`,`password`,`discount`,`store_num`,`store`,`company_id`,`company`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,zhongxin_name ,zhongxin_address ,zhongxin_phone,zhongxin_img,

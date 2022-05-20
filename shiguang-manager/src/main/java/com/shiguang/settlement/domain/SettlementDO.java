@@ -33,6 +33,10 @@ public class SettlementDO implements Serializable {
 	private Double changeMoney;
 	//支付方式
 	private String payModel;
+	//更改付款方式
+	private String payGgModel;
+	//缴费金额
+	private String modelGgMoney;
 	//缴费金额(根据支付方式)
 	private String modelMoney;
 	//缴费金额
@@ -64,7 +68,22 @@ public class SettlementDO implements Serializable {
 	private String drawBackWay;
 	//部门名称
 	private String departmentName;
+	//储值卡
+	private String chuzhiNumber;
+	//储值卡密码
+	private String chuzhiPasd;
+	//付款状态
+	private String isSale;
+	//销售积分
+	private String jifen;
 
+	public String getIsSale() {
+		return isSale;
+	}
+
+	public void setIsSale(String isSale) {
+		this.isSale = isSale;
+	}
 
 	/**
 	 * 设置：主键
@@ -237,5 +256,45 @@ public class SettlementDO implements Serializable {
 
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
+	}
+
+	public String getChuzhiNumber() {
+		return chuzhiNumber;
+	}
+
+	public void setChuzhiNumber(String chuzhiNumber) {
+		this.chuzhiNumber = chuzhiNumber;
+	}
+
+	public String getChuzhiPasd() {
+		return chuzhiPasd;
+	}
+
+	public void setChuzhiPasd(String chuzhiPasd) {
+		this.chuzhiPasd = chuzhiPasd;
+	}
+
+	public String getPayGgModel() {
+		return payGgModel;
+	}
+
+	public void setPayGgModel(String payGgModel) {
+		this.payGgModel = payGgModel;
+	}
+
+	public String getModelGgMoney() {
+		return modelGgMoney;
+	}
+
+	public void setModelGgMoney(String modelGgMoney) {
+		this.modelGgMoney = modelGgMoney;
+	}
+
+	public String getJifen() {
+		return jifen;
+	}
+
+	public void setJifen(String jifen) {
+		this.jifen = jifen;
 	}
 }

@@ -46,6 +46,7 @@
 								</tr>
 								</tbody>
 							</table>
+
 														<div class="form-group">
 								<label class="col-sm-3 control-label">实缴金额：</label>
 								<div class="col-sm-8">
@@ -68,10 +69,38 @@
 										<option value="2">医院收费处</option>
 										<option value="3">一卡通</option>
 										<option value="4">现金</option>
+										<option value="5">银联卡</option>
+										<option value="6">储值卡</option>
+										<option value="7">.</option>
+										<option value="8">..</option>
+										<option value="9">积分</option>
+										<option value="10">微信平台</option>
 									</select>
 									<input id="payModelss" name="payModelss" th:value="${settlement.payModel}"  type="hidden">
-									&nbsp;&nbsp;&nbsp;&nbsp;<input id="payMoney" name="payMoney" th:value="${settlement.payMoney}" style="width: 20%" type="text" disabled>
+									&nbsp;&nbsp;&nbsp;&nbsp;<input id="payMoney" name="payMoney" th:value="${settlement.payMoney}" style="width: 20%" type="text" >
 								</div>
+								<img src="/img/add.png" width="20" height="20" onclick="addMoney(this)">
+							</div>
+							<div class="form-group" style="display: none" id="jffs">
+								<label class="col-sm-3 control-label">缴费方式：</label>
+								<div class="col-sm-8">
+									<select  name="payModel" id="payModelstr" style="width: 30%">
+										<option value="">请选择</option>
+										<option value="0">微信</option>
+										<option value="1">支付宝</option>
+										<option value="2">医院收费处</option>
+										<option value="3">一卡通</option>
+										<option value="4">现金</option>
+										<option value="5">银联卡</option>
+										<option value="6">储值卡</option>
+										<option value="7">.</option>
+										<option value="8">..</option>
+										<option value="9">积分</option>
+										<option value="10">微信平台</option>
+									</select>
+									&nbsp;&nbsp;&nbsp;&nbsp;<input  name="modelMoney" th:value="${settlement.payMoney}" style="width: 20%" type="text"
+								</div>
+								<img src="/img/dec.jpg" width="20" height="20" onclick="desc(this)">
 							</div>
 														<!--<div class="form-group">-->
 								<!--<label class="col-sm-3 control-label">找零金额：</label>-->
@@ -120,15 +149,19 @@
     //     $("#ee").text(sumMoney)
     // });
     var html="";
+    var a=0;
     $().ready(function(){
         var payModels = $("#payModels").val();
         if (payModels.length >2){
             model.style="display:block";
             div1.style="display:none";
             var paymodelStr = payModels.split(",");
+            alert(paymodelStr);
             var moneyPay = $("#modelMoneys").val().split(",");
+            alert(moneyPay);
             var paymodelArray = [];
             for (var s=0;s<paymodelStr.length;s++){
+                a=a+1;
                 if(''!= paymodelStr[s]){
                     // var payWay = "";
                     // if (paymodelStr[s] == "0"){
@@ -143,24 +176,34 @@
                     //     payWay = "现金";
                     // }
                     html = "<div class='form-group'><label class='col-sm-3 control-label'>缴费方式：</label>";
-                    html += "<div class='col-sm-8'><select  name='payModeloa' id='payModeloa' style='width: 30%'>";
-                    html += "<option value=\"\">请选择</option>";
-                    html += "<option value=\"0\">微信</option>";
-                    html += "<option value=\"1\">支付宝</option>";
-                    html += "<option value=\"2\">医院收费处</option>";
-                    html += "<option value=\"3\">一卡通</option>";
-                    html += "<option value=\"4\">现金</option>";
+                    html += "<div class='col-sm-8'><select  name='payModeloa' id='payModeloa"+a+"' style='width: 30%' >";
+                    html += "<option value=''>请选择</option>";
+                    html += "<option value='0'>微信</option>";
+                    html += "<option value='1'>支付宝</option>";
+                    html += "<option value='2'>医院收费处</option>";
+                    html += "<option value='3'>一卡通</option>";
+                    html += "<option value='4'>现金</option>";
+                    html += "<option value='5'>银联卡</option>";
+                    html += "<option value='6'>储值卡</option>";
+                    html += "<option value='7'>.</option>";
+                    html += "<option value='8'>..</option>";
+                    html += "<option value='9'>积分</option>";
+                    html += "<option value='10'>微信平台</option>";
+
                     html += "</select>"
                      html += "<input  name='payModel' id='payMode' type='hidden'>";
-                    html += "&nbsp;&nbsp;&nbsp;&nbsp;<input  name='payMoney' value='"+moneyPay[s]+"' type='text' disabled>";
+                    html += "&nbsp;&nbsp;&nbsp;&nbsp;<input  name='modelMoney' value='"+moneyPay[s]+"' type='text' >";
                     html += "</div>";
+                    html += "<img src='/img/add.png' width='20' height='20' onclick='addMoney(this)'>";
+                    if (s==paymodelStr.length -1){
+                        html += "<img src='/img/dec.png' width='20' height='20' onclick='desc(this)'>";
+					}
                     html += "</div>";
                     var payMode = paymodelStr[s];
                     paymodelArray.push(payMode);
-                    $("#payModeloa").find("[value="+payMode+"]").attr("selected",true);
+                    $("#payModeloa"+a+"").find("[value='"+paymodelStr[s]+"']").attr("selected",true);
                     $("#model").append(html);
                 }
-
             }
             $("#payMode").val(paymodelArray);
             var saleNumber = $("#saleNumber").val()
@@ -210,7 +253,17 @@
             // $("#model").append(html);
         }
     });
-
+    function addMoney(obj){
+        let dom = $("#jffs").clone();
+        $(dom).show();
+        $(obj).parents(".form-group").after(dom);
+    }
+    /**
+     *  删除行
+     */
+    function desc(obj) {
+        $(obj).parents(".form-group").remove();
+    }
 
 </script>
 </body>

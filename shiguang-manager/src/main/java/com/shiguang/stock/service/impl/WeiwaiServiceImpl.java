@@ -73,6 +73,11 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 	}
 
 	@Override
+	public int removeSale(String saleNumber) {
+		return weiwaiDao.removeSale(saleNumber);
+	}
+
+	@Override
 	public int removes(WeiwaiDO weiwaiDO) {
 		return weiwaiDao.removes(weiwaiDO);
 	}

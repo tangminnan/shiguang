@@ -1104,6 +1104,9 @@
         select p.`position_id`,p.`position_num`,p.`depart_number`,p.`depart_name`,p.`position_name` from c_position p join department d on d.depart_number = p.depart_number and d.company_id = p.company_id
         <where>
             <if test="companyId != null and companyId != ''">and d.company_id = #{companyId}</if>
+            <if test="departNumber != null and departNumber != ''">and p.depart_number = #{departNumber}</if>
+            <if test="positionId != null and positionId != ''">and p.position_id = #{positionId}</if>
+            <if test="positionName != null and positionName != ''">and p.position_name = #{positionName}</if>
             and p.position_order = '1'
         </where>
     </select>
@@ -1113,6 +1116,9 @@
         select p.`position_id`,p.`position_num`,p.`depart_number`,p.`depart_name`,p.`position_name` from c_position p join department d on d.depart_number = p.depart_number and d.company_id = p.company_id
         <where>
             <if test="companyId != null and companyId != ''">and d.company_id = #{companyId}</if>
+            <if test="departNumber != null and departNumber != ''">and p.depart_number = #{departNumber}</if>
+            <if test="positionId != null and positionId != ''">and p.position_id = #{positionId}</if>
+            <if test="positionName != null and positionName != ''">and p.position_name = #{positionName}</if>
             and p.position_order = '2'
         </where>
     </select>
@@ -1121,6 +1127,9 @@
         select p.`position_id`,p.`position_num`,p.`depart_number`,p.`depart_name`,p.`position_name` from c_position p join department d on d.depart_number = p.depart_number and d.company_id = p.company_id
         <where>
             <if test="companyId != null and companyId != ''">and d.company_id = #{companyId}</if>
+            <if test="departNumber != null and departNumber != ''">and p.depart_number = #{departNumber}</if>
+            <if test="positionId != null and positionId != ''">and p.position_id = #{positionId}</if>
+            <if test="positionName != null and positionName != ''">and p.position_name = #{positionName}</if>
             and p.position_order = '3'
         </where>
     </select>

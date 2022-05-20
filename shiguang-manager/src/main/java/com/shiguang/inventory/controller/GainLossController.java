@@ -175,6 +175,7 @@ public class GainLossController {
 //				}
 				StockDO stockDO = new StockDO();
 				stockDO.setGoodsNum(goodsNum[i]);
+				stockDO.setPositionId(gainLoss.getPositionId()+"");
 				StockDO producaDO = stockService.getProduceNum(stockDO);
 				producaDO.setInventoryCount(goodsCount[i]);
 					goodsList.add(producaDO);
@@ -292,20 +293,20 @@ public class GainLossController {
 		model.addAttribute("goodsType",goodsType);
 		if ("镜架".equals(goodsType)){
 			//List<ProducaDO> jingjialist = producaService.list(map);
-			return "inventory/gainLoss/jingjia";
+			return "inventory/gainloss/jingjia";
 		} else if ("配件".equals(goodsType)) {
 			//List<ProducaDO> jingjialist = producaService.list(map);
-			return "inventory/gainLoss/peijian";
+			return "inventory/gainloss/peijian";
 		} else if ("镜片".equals(goodsType)){
-			return "inventory/gainLoss/jingpian";
+			return "inventory/gainloss/jingpian";
 		} else if ("太阳镜".equals(goodsType)){
-			return "inventory/gainLoss/taiyangjing";
+			return "inventory/gainloss/taiyangjing";
 		} else if ("老花镜".equals(goodsType)){
-			return "inventory/gainLoss/laohuajing";
+			return "inventory/gainloss/laohuajing";
 		} else if ("耗材".equals(goodsType)){
-			return "inventory/gainLoss/haocai";
+			return "inventory/gainloss/haocai";
 		} else if ("视光".equals(goodsType)){
-			return "inventory/gainLoss/shiguang";
+			return "inventory/gainloss/shiguang";
 		}
 		return "inventory/gainloss/goods";
 	}

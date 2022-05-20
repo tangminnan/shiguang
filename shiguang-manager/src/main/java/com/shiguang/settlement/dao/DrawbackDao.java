@@ -34,4 +34,8 @@ public interface DrawbackDao {
 	List<MemberDO> memberList(Map<String,Object> map);
 
 	int memberCount(Map<String,Object> map);
+
+	List<MemberDO> memberJcList(Map<String,Object> map);
+
+	int memberJcCount(Map<String,Object> map);
 }

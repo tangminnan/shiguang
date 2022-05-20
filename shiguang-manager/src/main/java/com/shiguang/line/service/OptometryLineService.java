@@ -34,6 +34,8 @@ public interface OptometryLineService {
 
     List<YgLineJinanDO> listJinan(Map<String, Object> map);
 
+    int saveYgLineJinan(YgLineJinanDO ygLineJinanDO);
+
     int countJinan(Map<String, Object> map);
 
     int updateJinan(YgLineJinanDO line);
@@ -50,7 +52,9 @@ public interface OptometryLineService {
 
     int saveLineMemberJinan(YgLineMemberJinanDO ygLineMemberDO);
 
-    int removeMemberjinan(Long id);
+    YgLineMemberJinanDO getMemberNumber(Map<String,Object> map);
+
+    int removeMemberjinan(String id);
 
     int removejinan(Long id);
 

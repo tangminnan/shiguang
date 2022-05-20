@@ -50,4 +50,8 @@ public interface SettlementService {
 
 	R deleteSale(String saleNumber);
 
+	List<SettlementDO> findJcGlassesData(Map<String,Object> map);
+
+	int findJcGlassesDataCount(Map<String,Object> map);
+
 }

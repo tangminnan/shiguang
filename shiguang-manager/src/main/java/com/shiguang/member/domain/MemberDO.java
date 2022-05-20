@@ -18,7 +18,9 @@ public class MemberDO implements Serializable {
     private Long costId;
     //是否缴费
     private Long isSale;
-    //顾客性别(1:男2:女)
+    //检查费
+    private Long isjcSale;
+    //顾客性别(0:男1:女)
     private Long sex;
     private String sexx;
     //部门编码
@@ -104,8 +106,11 @@ public class MemberDO implements Serializable {
     //公众号
     private String openId;
     //积分
-    private Integer integral;
-
+    private String integral;
+    //储值卡号
+    private String storeCardNum;
+    //储值余额
+    private String cardMoney;
     //验光师
     private String optometryName;
 
@@ -174,6 +179,22 @@ public class MemberDO implements Serializable {
      */
     public Long getIsSale() {
         return isSale;
+    }
+
+    /**
+     * 设置： 检查费
+     * @return
+     */
+    public Long getIsjcSale() {
+        return isjcSale;
+    }
+
+    /**
+     * 获取：检查费
+     * @param isjcSale
+     */
+    public void setIsjcSale(Long isjcSale) {
+        this.isjcSale = isjcSale;
     }
 
     /**
@@ -670,11 +691,27 @@ public class MemberDO implements Serializable {
         this.optometryName = optometryName;
     }
 
-    public Integer getIntegral() {
+    public String getIntegral() {
         return integral;
     }
 
-    public void setIntegral(Integer integral) {
+    public void setIntegral(String integral) {
         this.integral = integral;
+    }
+
+    public String getStoreCardNum() {
+        return storeCardNum;
+    }
+
+    public void setStoreCardNum(String storeCardNum) {
+        this.storeCardNum = storeCardNum;
+    }
+
+    public String getCardMoney() {
+        return cardMoney;
+    }
+
+    public void setCardMoney(String cardMoney) {
+        this.cardMoney = cardMoney;
     }
 }

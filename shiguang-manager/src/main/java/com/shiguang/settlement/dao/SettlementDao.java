@@ -50,4 +50,8 @@ public interface SettlementDao {
 	int findGlassesDataCount(Map<String,Object> map);
 
 	int updateMethod(SettlementDO settlementDO);
+
+	List<SettlementDO> findJcGlassesData(Map<String,Object> map);
+
+	int findJcGlassesDataCount(Map<String,Object> map);
 }

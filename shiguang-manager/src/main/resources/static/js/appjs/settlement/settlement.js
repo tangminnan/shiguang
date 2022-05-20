@@ -76,8 +76,18 @@ function load() {
 									align : 'center'
 								},
                             {
+                                field : 'amountMoney',
+                                title : '金额',
+                                align : 'center'
+                            },
+                            {
                                 field : 'saleForm',
                                 title : '类型',
+                                align : 'center'
+                            },
+                            {
+                                field : 'peijingTime',
+                                title : '时间',
                                 align : 'center'
                             },
 																{

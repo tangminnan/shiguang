@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4d7c9858148cc5d86423008732f5d2f0021e27f6
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="shiguang-manager:war exploded">
     <output-path>$PROJECT_DIR$/shiguang-manager/target/shiguang-manager-1.6.9</output-path>

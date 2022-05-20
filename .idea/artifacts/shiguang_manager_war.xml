@@ -5,4 +5,8 @@
       <element id="artifact" artifact-name="shiguang-manager:war exploded" />
     </root>
   </artifact>
+<<<<<<< HEAD
 </component>
+=======
+</component>
+>>>>>>> 4d7c9858148cc5d86423008732f5d2f0021e27f6

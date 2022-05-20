@@ -139,17 +139,19 @@
 
 	<!-- 查询中心店的营业员的报表 -->
 	<select id="findSaleReportForms" resultType="com.shiguang.settlement.domain.SettlementDO">
-		select s.`id`,s.`cost_id`,s.`sale_number`,s.`member_number`,s.`sale_name`,s.`actual_money`,s.`payment_money`,s.`change_money`,s.`pay_model`,
-		s.`model_money`,s.`pay_money`,s.`pay_way`,s.`front_money`,s.`settle_date`,s.`front_time`,dt.`depart_name` as departmentName
+		select s.`id`,s.`cost_id`,s.`sale_number`,s.`member_number`,s.`sale_name`,s.`sale_acount`,s.`actual_money`,s.`payment_money`,s.`change_money`,s.`pay_model`,
+		s.`model_money`,s.`pay_money`,s.`pay_way`,s.`front_money`,s.`settle_date`,s.`front_time`,ss.jifen,su.store as departmentName
 		from settlement s join member m on m.card_number = s.member_number join department dt on dt.company_id = m.company_id
+		join sys_user su on su.username = s.sale_acount
+		left join store_sales ss on ss.sale_number = s.sale_number
 		<where>
 			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
 			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
 			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(s.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="state !=null and state != ''">and m.state = #{state}</if>
-			<if test="departNumber !=null and departNumber != ''">and dt.depart_number = #{departNumber}</if>
+			<if test="departNumber !=null and departNumber != ''">and su.store_num = #{departNumber}</if>
 			<if test="departType !=null and departType != ''">and dt.depart_type = #{departType}</if>
-
+			<if test="saleAccount != null and saleAccount != ''">and s.`sale_acount` = #{saleAccount}</if>
 		</where>
 		GROUP BY s.sale_number
 		order by dt.depart_number
@@ -162,6 +164,7 @@
 		s.`sale_number`,
 		s.`member_number`,
 		s.`sale_name`,
+		s.`sale_acount`,
 		s.`actual_money`,
 		s.`payment_money`,
 		s.`change_money`,
@@ -174,19 +177,21 @@
 		s.`front_time`,
 		d.`drawback_money` AS drawBackMoney,
 		d.`drackback_way` AS drawBackWay,
-		dt.`depart_name` AS departmentName
+		su.store AS departmentName
 		FROM
 		settlement s
 		JOIN member m ON m.card_number = s.member_number
 		JOIN department dt ON dt.company_id = m.company_id
+		join sys_user su on su.username = s.sale_acount
 		LEFT JOIN drawback d ON d.sale_number = s.sale_number
 		<where>
 			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
 			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(d.create_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
 			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(d.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="state !=null and state != ''">and m.state = #{state}</if>
-			<if test="departNumber !=null and departNumber != ''">and dt.depart_number = #{departNumber}</if>
+			<if test="departNumber !=null and departNumber != ''">and su.store_num = #{departNumber}</if>
 			<if test="departType !=null and departType != ''">and dt.depart_type = #{departType}</if>
+			<if test="saleAccount != null and saleAccount != ''">and s.`sale_acount` = #{saleAccount}</if>
 		</where>
 		GROUP BY s.sale_number
 		order by dt.depart_number

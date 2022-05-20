@@ -219,10 +219,25 @@ function sure(){
 function batchSelect() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     var jingpianType = $("#jingpianType").val();
+    var jp = "";
+    var rowsRight = window.localStorage.getItem("rowsRight");
+    var rowsLeft = window.localStorage.getItem("rowsLeft");
     if ('0' == jingpianType){
         window.localStorage.setItem("rowsRight",JSON.stringify(rows))
+        if (null == rowsLeft){
+            rightflag = 1;
+            jp = 1;
+            $("#jingpianType").find("[value="+jp+"]").attr("selected",true);
+            reLoad();
+        }
     } else if ('1' == jingpianType){
         window.localStorage.setItem("rowsLeft",JSON.stringify(rows))
+        if (null == rowsRight){
+            rightflag = 1;
+            jp = 0;
+            $("#jingpianType").find("[value="+jp+"]").attr("selected",true);
+            reLoad();
+        }
     }
 	// if (rows.length == 0) {
 	// 	layer.msg("请选择要删除的数据");

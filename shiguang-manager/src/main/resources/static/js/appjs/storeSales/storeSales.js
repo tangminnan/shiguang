@@ -75,6 +75,11 @@ function load() {
 									title : '年龄',
 									align : 'center'
 								},
+                            {
+                                field : 'phone1',
+                                title : '联系方式',
+                                align : 'center'
+                            },
 																{
 									title : '操作',
 									field : 'cardNumber',

@@ -1,7 +1,7 @@
 
 var prefix = "/information/store"
 $(function() {
-    load();
+    //load();
 });
 function load() {
 	$('#exampleTable')
@@ -105,6 +105,7 @@ function load() {
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
+    load();
 }
 document.onkeydown = function(e){
     if((e||event).keyCode==13)
@@ -142,6 +143,8 @@ function batchSelect() {
     	// });
     // alert(rows.length)
     // sessionStorage.setItem("row",rows);
+    // var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+    // parent.layer.close(index);
 	return rows;
    // window.opener.goodsInfo(rows);
 	// if (rows.length == 0) {

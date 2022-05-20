@@ -85,7 +85,7 @@
 		select count(m.id) from member m
 		JOIN settlement st ON st.member_number = m.card_number
 		join store_sales ss on ss.sale_number = st.sale_number and ss.sale_type = 1
-		join log_status ls on ls.sale_number = st.sale_number
+		left join log_status ls on ls.sale_number = st.sale_number and (ls.logistic_status = '销售完成' or ls.logistic_status = '顾客取镜')
 		<where>
 			<if test="id != null and id != ''"> and m.id = #{id} </if>
 			<if test="name != null and name != ''"> and m.name = #{name} </if>
@@ -101,10 +101,74 @@
 			<if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
 			<if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
 			<if test="state != null and state != ''"> and m.state = #{state} </if>
-			and (ls.logistic_status = '销售完成' or ls.logistic_status = '顾客取镜')
 		</where>
 		group by ss.`sale_number`) u
 	</select>
+
+
+	<select id="memberJcList" resultType="com.shiguang.member.domain.MemberDO">
+		select m.`id`,m.`name`,m.`card_number`,c.is_sale as isSale,c.`sale_number`,m.`sex`,m.`depart_number`,m.`birthday_year`,m.`birthday_month`,m.`birthday_day`,m.`age`,m.`phone_1`,m.`phone_2`,m.`phone_3`,m.`province_code`,m.`province_name`,m.`city_code`,m.`city_name`,m.`area_code`,m.`area_name`,m.`card_type`,m.`master_card`,m.`minor_name`,m.`crowd_type`,m.`exclusive_customer`,m.`exclusive_customer_id`,m.`identity_type`,m.`identity_id`,m.`vocation`,m.`school`,m.`qq_number`,m.`email`,m.`address`,m.`postal_code`,m.`interest`,m.`source`,m.`integral_pasd`,m.`remark`,m.`register_time`,m.`status` from member m
+		JOIN settlement st ON st.member_number = m.card_number
+		JOIN cost c on c.sale_number = st.sale_number and c.is_sale = 1
+		left join log_status ls on ls.sale_number = st.sale_number and (ls.logistic_status = '销售完成' or ls.logistic_status = '顾客取镜')
+		<where>
+			<if test="id != null and id != ''"> and m.id = #{id} </if>
+			<if test="name != null and name != ''"> and m.name = #{name} </if>
+			<if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
+			<if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
+			<if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+			<if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
+			<if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
+			<if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
+			<if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
+			<if test="age != null and age != ''"> and m.age = #{age} </if>
+			<if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+			<if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
+			<if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
+			<if test="state != null and state != ''"> and m.state = #{state} </if>
+
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				group by c.`sale_number`
+				order by c.create_time desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+
+	</select>
+
+	<select id="memberJcCount" resultType="int">
+		select
+		count(*) from (
+		select count(m.id) from member m
+		JOIN settlement st ON st.member_number = m.card_number
+		JOIN cost c on c.member_number = m.card_number and c.is_sale = 1
+		left join log_status ls on ls.sale_number = st.sale_number and (ls.logistic_status = '销售完成' or ls.logistic_status = '顾客取镜')
+		<where>
+			<if test="id != null and id != ''"> and m.id = #{id} </if>
+			<if test="name != null and name != ''"> and m.name = #{name} </if>
+			<if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
+			<if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
+			<if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
+			<if test="sex != null and sex != ''"> and m.sex = #{sex} </if>
+			<if test="birthdayYear != null and birthdayYear != ''"> and m.birthday_year = #{birthdayYear} </if>
+			<if test="birthdayMonth != null and birthdayMonth != ''"> and m.birthday_month = #{birthdayMonth} </if>
+			<if test="birthdayDay != null and birthdayDay != ''"> and m.birthday_day = #{birthdayDay} </if>
+			<if test="age != null and age != ''"> and m.age = #{age} </if>
+			<if test="phone1 != null and phone1 != ''"> and m.phone_1 = #{phone1} </if>
+			<if test="phone2 != null and phone2 != ''"> and m.phone_2 = #{phone2} </if>
+			<if test="phone3 != null and phone3 != ''"> and m.phone_3 = #{phone3} </if>
+			<if test="state != null and state != ''"> and m.state = #{state} </if>
+		</where>
+		group by c.`sale_number`) u
+	</select>
+
 
 	<insert id="save" parameterType="com.shiguang.settlement.domain.DrawbackDO" useGeneratedKeys="true" keyProperty="id">
 		insert into drawback

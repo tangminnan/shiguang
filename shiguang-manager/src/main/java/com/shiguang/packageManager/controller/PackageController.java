@@ -17,8 +17,11 @@ import com.shiguang.packageManager.service.PackageInfoService;
 import com.shiguang.packageManager.service.PackageService;
 import com.shiguang.product.domain.*;
 import com.shiguang.product.service.*;
+import com.shiguang.stock.domain.StockDO;
+import com.shiguang.stock.service.StockService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,6 +70,8 @@ public class PackageController {
     private HlyService hlyService;
     @Autowired
     private TypeService typeService;
+    @Autowired
+    private StockService stockService;
 
     @GetMapping()
     @RequiresPermissions("information:package:package")
@@ -80,6 +85,9 @@ public class PackageController {
     public PageUtils list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
+        if(null != ShiroUtils.getUser().getStoreNum()){
+            query.put("storeNum",ShiroUtils.getUser().getStoreNum());
+        }
         List<PackageDO> packageList = packageService.list(query);
         int total = packageService.count(query);
         PageUtils pageUtils = new PageUtils(packageList, total);
@@ -138,10 +146,10 @@ public class PackageController {
     public PageUtils storelist(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
-        if (null != ShiroUtils.getUser().getStoreNum()){
-            String storeNum = ShiroUtils.getUser().getStoreNum();
-            query.put("departNumber",storeNum);
-        }
+//        if (null != ShiroUtils.getUser().getStoreNum()){
+//            String storeNum = ShiroUtils.getUser().getStoreNum();
+//            query.put("departNumber",storeNum);
+//        }
         query.put("departType","销售门店");
         query.put("state",1);
         List<DepartmentDO> departmentDOList = departmentService.list(query);
@@ -180,6 +188,7 @@ public class PackageController {
         List<HlyDO> hlyDOList = new ArrayList<>();
         PageUtils pageUtils = null;
         if ("镜架".equals(query.get("goodsType"))){
+            query.put("goodsType","1");
             producaDOList = producaService.list(query);
 //			if(null != producaDOList && producaDOList.size() > 0){
 //				for (ProducaDO producaDO : producaDOList){
@@ -189,14 +198,19 @@ public class PackageController {
             int total = producaService.count(query);
             pageUtils = new PageUtils(producaDOList, total);
         } else if ("配件".equals(query.get("goodsType"))){
+            //query.put("goodsType","2");
+//            partsDOList = partsService.list(query);
             partsDOList = partsService.list(query);
             int total = partsService.count(query);
             pageUtils = new PageUtils(partsDOList, total);
         } else if ("成品片".equals(query.get("goodsType"))){
+            //query.put("goodsType","3");
+//            jpcpDOList = jpcpService.list(query);
             jpcpDOList = jpcpService.list(query);
             int total = jpcpService.count(query);
             pageUtils = new PageUtils(jpcpDOList, total);
         } else if ("订做片".equals(query.get("goodsType"))){
+            //query.put("goodsType","3");
             jpdzDOList = jpdzService.listDz(query);
             int total = jpdzService.countDz(query);
             pageUtils = new PageUtils(jpdzDOList, total);
