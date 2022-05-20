@@ -160,7 +160,7 @@
         <h3>价格项</h3>
         <table border="0" cellspacing="0" cellpadding="0">
             <tbody>
-            <tr>
+            <tr style="display: none">
                 <td>税率（%）：</td>
                 <td>
                     <input id="tax" name="tax" th:value="${hly.tax}" type="text"
@@ -182,16 +182,16 @@
                 </td>
             </tr>
             <tr>
-                <td>调货成本：</td>
-                <td>
+                <td style="display:none">调货成本：</td>
+                <td style="display: none">
                     <input id="transferPrice" name="transferPrice" th:value="${hly.transferPrice}" type="text"
                            oninput="getmoney(this,10)" onchange="shuzi(this)" readonly autofocus/>
                     <!--<em>*</em>-->
                 </td>
-                <td>标准零售价格：</td>
+                <td style="width: 10%;">标准零售价格：</td>
                 <td colspan="3">
                     <input id="retailPrice" name="retailPrice" th:value="${hly.retailPrice}" type="text"
-                           style="width: 29%"
+                           style="width: 15%"
                            oninput="getmoney(this,10)" onchange="shuzi(this)" readonly autofocus/>
                     <em>*</em>
                 </td>
