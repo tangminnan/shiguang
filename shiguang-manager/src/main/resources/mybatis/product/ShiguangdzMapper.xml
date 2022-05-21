@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.product.dao.ShiguangdzDao">
+
+    <select id="get" resultType="com.shiguang.product.domain.ShiguangdzDO">
+		select m.mfrsname,b.brandname,u.unitname,
+		 s.`id`,s.`produc_num`,s.`produc_code`,s.`produc_name`,s.`mfrsid`,s.`brandid`,s.`brandnum`,s.`factory`,s.`produc_factory`,
+		s.`proid`,s.`unitid`,s.`batchid`,s.`leixing`,s.`tax`,s.`tax_price`,s.`trade_price`,s.`transfer_price`,s.`retail_price`,
+		s.`xsstate`,s.`state`,s.`classtype`,s.`view_good_name`
+		from aa_shiguangdz  s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum  and s.mfrsid=b.mfrsid  left join
+        c_unit u on s.unitid= u.unitid
+		where s.id = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.product.domain.ShiguangdzDO">
+        select m.mfrsname,b.brandname,u.unitname,
+        s.`id`,s.`produc_num`,s.`produc_code`,s.`produc_name`,s.`mfrsid`,s.`brandid`,s.`brandnum`,s.`factory`,s.`produc_factory`,
+        s.`proid`,s.`unitid`,s.`batchid`,s.`leixing`,s.`tax`,s.`tax_price`,s.`trade_price`,s.`transfer_price`,s.`retail_price`,
+        s.`xsstate`,s.`state`,s.`classtype`,s.`view_good_name`
+        from aa_shiguangdz s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid`
+        left join c_unit u on s.unitid= u.unitid
+        <where>
+            <if test="producNum != null and producNum != ''">and s.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and s.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(s.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(s.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
+            <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
+            <if test="viewGoodName != null and viewGoodName != ''">and s.view_good_name = #{viewGoodName}</if>
+
+            <if test="num != null and num != ''">and s.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and s.retail_price = #{oldMoney}</if>
+            and  s.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by m.mfrsid,b.brandid,s.id
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+
+    </select>
+    <select id="count" resultType="int">
+        select count(*)  from aa_shiguangdz s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid`
+        left join c_unit u on s.unitid= u.unitid
+        <where>
+            <if test="producNum != null and producNum != ''">and s.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and s.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
+
+            <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(s.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(s.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
+            <if test="xsstate != null and xsstate != ''">and s.xsstate = #{xsstate}</if>
+            <if test="viewGoodName != null and viewGoodName != ''">and s.view_good_name = #{viewGoodName}</if>
+
+            <if test="num != null and num != ''">and s.produc_num LIKE concat(concat('%', #{num}),'%')</if>
+            <if test="oldMoney != null and oldMoney != ''">and s.retail_price = #{oldMoney}</if>
+            and  s.state= 1 and m.xsstate=0 and m.state=1 and b.xsstate=0 and b.state=1
+        </where>
+    </select>
+    <select id="getshiguang" resultType="com.shiguang.product.domain.ShiguangdzDO">
+        SELECT
+        m.mfrsname,
+        b.brandname,
+        u.unitname,
+        s.`id`,
+        s.`produc_num`,
+        s.`produc_code`,
+        s.`produc_name`,
+        s.`mfrsid`,
+        s.`brandid`,
+        s.`brandnum`,
+        s.`factory`,
+        s.`produc_factory`,
+        s.`proid`,
+        s.`unitid`,
+        s.`batchid`,
+        s.`leixing`,
+        s.`tax`,
+        s.`tax_price`,
+        s.`trade_price`,
+        s.`transfer_price`,
+        s.`retail_price`,
+        s.`xsstate`,
+        s.`state`,
+        s.`classtype`,
+        s.`view_good_name`
+        FROM
+        aa_shiguangdz s
+        LEFT JOIN c_mfrs m ON s.mfrsid = m.mfrsnum
+        LEFT JOIN c_brand b ON s.brandnum = b.brandnum
+        AND s.`mfrsid` = b.`mfrsid`
+        LEFT JOIN c_unit u ON s.unitid = u.unitid
+
+        <where>
+
+            <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            and  s.xsstate= 0
+            AND s.state = 1
+            AND m.xsstate = 0
+            AND m.state = 1
+            AND b.xsstate = 0
+            AND b.state =1
+        </where>
+
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                  order by  s.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+    <select id="getshiguangcount" resultType="int">
+        select count(*)    FROM
+        aa_shiguangdz s
+        LEFT JOIN c_mfrs m ON s.mfrsid = m.mfrsnum
+        LEFT JOIN c_brand b ON s.brandnum = b.brandnum
+        AND s.`mfrsid` = b.`mfrsid`
+        LEFT JOIN c_unit u ON s.unitid = u.unitid
+
+        <where>
+            <if test="producName != null and producName != ''">and s.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            and  s.xsstate= 0
+            AND s.state = 1
+            AND m.xsstate = 0
+            AND m.state = 1
+            AND b.xsstate = 0
+            AND b.state =1
+        </where>
+
+    </select>
+    <select id="getShiguangInfomation" resultType="com.shiguang.product.domain.ShiguangdzDO">
+        select m.mfrsname,b.brandname,u.unitname,
+        s.`id`,s.`produc_num`,s.`produc_code`,s.`produc_name`,s.`mfrsid`,s.`brandid`,s.`brandnum`,s.`factory`,s.`produc_factory`,
+        s.`proid`,s.`unitid`,s.`batchid`,s.`leixing`,s.`tax`,s.`tax_price`,s.`trade_price`,s.`transfer_price`,s.`retail_price`,
+        s.`xsstate`,s.`state`,s.`classtype`,s.`view_good_name`
+        from aa_shiguangdz s left join c_mfrs m on s.mfrsid=m.mfrsnum left join c_brand b on s.brandnum=b.brandnum AND s.`mfrsid`=b.`mfrsid`
+        left join c_unit u on s.unitid= u.unitid
+        where s.`produc_num` = #{value}
+    </select>
+
+
+
+    <insert id="save" parameterType="com.shiguang.product.domain.ShiguangdzDO" useGeneratedKeys="true" keyProperty="id">
+		insert into aa_shiguangdz
+		(
+			`produc_num`, 
+			`produc_code`, 
+			`produc_name`, 
+			`mfrsid`, 
+			`brandid`, 
+			`brandnum`,
+			`factory`,
+			`produc_factory`, 
+			`proid`, 
+			`unitid`, 
+			`batchid`, 
+			`leixing`, 
+			`tax`, 
+			`tax_price`, 
+			`trade_price`, 
+			`transfer_price`, 
+			`retail_price`,
+			`xsstate`,
+			`state`,
+			`classtype`,
+			`view_good_name`
+		)
+		values
+		(
+			#{producNum}, 
+			#{producCode}, 
+			#{producName}, 
+			#{mfrsid}, 
+			#{brandid}, 
+			#{brandnum},
+			#{factory},
+			#{producFactory}, 
+			#{proid}, 
+			#{unitid}, 
+			#{batchid}, 
+			#{leixing}, 
+			#{tax}, 
+			#{taxPrice}, 
+			#{tradePrice}, 
+			#{transferPrice}, 
+			#{retailPrice},
+			#{xsstate},
+			#{state},
+			#{classtype},
+			#{viewGoodName}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.product.domain.ShiguangdzDO">
+        update aa_shiguangdz
+        <set>
+            <if test="producNum != null">`produc_num` = #{producNum},</if>
+            <if test="producCode != null">`produc_code` = #{producCode},</if>
+            <if test="producName != null">`produc_name` = #{producName},</if>
+            <if test="mfrsid != null">`mfrsid` = #{mfrsid},</if>
+            <if test="brandid != null">`brandid` = #{brandid},</if>
+            <if test="brandnum != null">`brandnum` = #{brandnum},</if>
+            <if test="factory != null">`factory` = #{factory},</if>
+            <if test="producFactory != null">`produc_factory` = #{producFactory},</if>
+            <if test="proid != null">`proid` = #{proid},</if>
+            <if test="unitid != null">`unitid` = #{unitid},</if>
+            <if test="batchid != null">`batchid` = #{batchid},</if>
+            <if test="leixing != null">`leixing` = #{leixing},</if>
+            <if test="tax != null">`tax` = #{tax},</if>
+            <if test="taxPrice != null">`tax_price` = #{taxPrice},</if>
+            <if test="tradePrice != null">`trade_price` = #{tradePrice},</if>
+            <if test="transferPrice != null">`transfer_price` = #{transferPrice},</if>
+            <if test="retailPrice != null">`retail_price` = #{retailPrice},</if>
+            <if test="xsstate != null">`xsstate` = #{xsstate},</if>
+            <if test="state != null">`state` = #{state},</if>
+            <if test="classtype != null">`classtype` = #{classtype},</if>
+            <if test="viewGoodName != null">`view_good_name` = #{viewGoodName}</if>
+        </set>
+        <where>
+            <if test="id != null and id != ''">and id = #{id}</if>
+            <if test="producNum != null and id != ''">and produc_num = #{producNum}</if>
+        </where>
+    </update>
+
+    <delete id="remove">
+		delete from aa_shiguangdz where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from aa_shiguangdz where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateState" parameterType="com.shiguang.product.domain.ShiguangdzDO">
+    update aa_shiguangdz set `state` = #{state} where id = #{id}
+    </update>
+    <select id="haveNum" resultType="com.shiguang.product.domain.ShiguangdzDO">
+        select produc_num from aa_shiguangdz where produc_num=#{producNum}  order by id
+	</select>
+</mapper>

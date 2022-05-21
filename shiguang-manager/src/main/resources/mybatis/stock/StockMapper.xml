@@ -817,7 +817,67 @@
     </select>
 
     <select id="countShiguang" resultType="int">
-        select count(*) from stock st left join aa_hc pr on pr.produc_num = st.goods_num
+        select count(*) from stock st left join aa_shiguang pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
+            and st.goods_count > 0
+        </where>
+    </select>
+
+    <!-- 视光订做查询 -->
+    <select id="listShiguangdz" resultType="com.shiguang.stock.domain.StockDO">
+        select
+        st.`id`,st.`goods_num`,st.`goods_code`,st.`goods_name`,st.`goods_count`,st.`goods_type`,st.`mfrsid`,st.`brandname`,st.`retail_price`,st.`price_sum`,st.`cost_price`,st.`cost_sum`,st.`whole_price`,
+        st.`whole_sum`,st.`position_name`,st.`unit`,st.`batch`,pr.`produc_factory`
+        from stock st left join aa_shiguangdz pr on pr.produc_num = st.goods_num
+        <where>
+            <if test="id != null and id != ''">and st.id = #{id}</if>
+            <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
+            <if test="goodsCode != null and goodsCode != ''">and st.goods_code = #{goodsCode}</if>
+            <if test="goodsName != null and goodsName != ''">and st.goods_name like concat('%', #{goodsName},'%')</if>
+            <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
+            <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
+            <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
+            <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
+            <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
+            <if test="costPrice != null and costPrice != ''">and st.cost_price = #{costPrice}</if>
+            <if test="costSum != null and costSum != ''">and st.cost_sum = #{costSum}</if>
+            <if test="wholePrice != null and wholePrice != ''">and st.whole_price = #{wholePrice}</if>
+            <if test="wholeSum != null and wholeSum != ''">and st.whole_sum = #{wholeSum}</if>
+            <if test="positionId != null and positionId != ''">and st.position_id = #{positionId}</if>
+            and st.goods_count > 0
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                GROUP BY st.goods_name
+                order by st.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="countShiguangdz" resultType="int">
+        select count(*) from stock st left join aa_shiguangdz pr on pr.produc_num = st.goods_num
         <where>
             <if test="id != null and id != ''">and st.id = #{id}</if>
             <if test="goodsNum != null and goodsNum != ''">and st.goods_num like concat('%', #{goodsNum},'%')</if>
@@ -2035,6 +2095,70 @@
         </where>
         order by mfrs.mfrsid,b.brandid,s.id
     </select>
+
+    <select id="selectSgdz" resultType="com.shiguang.product.domain.ShiguangdzDO">
+        select
+        s.produc_num,s.produc_name, s.produc_code, b.brandnum,b.brandname,s.factory,s.produc_factory,u.unitname,s.retail_price,s.tax_price,
+        s.trade_price,s.transfer_price,mfrs.medicinecode,s.classtype,s.view_good_name,b.goodsid,b.mfrsid,mfrs.mfrsname
+        from aa_shiguangdz s left join c_unit u on s.unitid=u.unitid
+        left join c_brand b on s.brandnum=b.brandnum  AND s.`mfrsid`=b.`mfrsid`
+        left join c_mfrs mfrs on s.mfrsid=mfrs.mfrsnum
+        <where>
+            <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and s.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
+            <if test="mfrsname != null and mfrsname != ''">and mfrs.mfrsname = #{mfrsname}</if>
+            <if test="brandid != null and brandid != ''">and s.brandid = #{brandid}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="producFactory != null and producFactory != ''">and s.produc_factory = #{producFactory}</if>
+            <if test="factory != null and factory != ''">and s.factory = #{factory}</if>
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(s.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(s.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
+            and s.xsstate = 0 and  s.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by mfrs.mfrsid,b.brandid,s.id
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+    <select id="selectSgdzCount" resultType="int">
+        select count(*)   from aa_shiguangdz s left join c_unit u on s.unitid=u.unitid
+        left join c_brand b on s.brandnum=b.brandnum  AND s.`mfrsid`=b.`mfrsid`
+        left join c_mfrs mfrs on s.mfrsid=mfrs.mfrsnum
+        <where>
+            <if test="producNum != null and producNum != ''">and s.produc_num = #{producNum}</if>
+            <if test="producCode != null and producCode != ''">and s.produc_code = #{producCode}</if>
+            <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
+            <if test="mfrsid != null and mfrsid != ''">and s.mfrsid = #{mfrsid}</if>
+            <if test="mfrsname != null and mfrsname != ''">and mfrs.mfrsname = #{mfrsname}</if>
+            <if test="brandid != null and brandid != ''">and s.brandid = #{brandid}</if>
+            <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
+            <if test="producFactory != null and producFactory != ''">and s.produc_factory = #{producFactory}</if>
+            <if test="factory != null and factory != ''">and s.factory = #{factory}</if>
+
+
+            <if test="retailPrice != null and retailPrice != ''">and ABS(s.retail_price) >= ABS(#{retailPrice})</if>
+            <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(s.retail_price) &lt;= ABS(#{retailPrice2})</if>
+            <if test="taxPrice != null and taxPrice != ''">and ABS(s.tax_price) >= ABS(#{taxPrice})</if>
+            <if test="taxPrice2 != null and taxPrice2 != ''">and ABS(s.tax_price) &lt;= ABS(#{taxPrice2})</if>
+
+            and s.xsstate = 0 and  s.state=1 and mfrs.xsstate=0 and mfrs.state=1 and b.xsstate=0 and b.state=1
+        </where>
+        order by mfrs.mfrsid,b.brandid,s.id
+    </select>
+
     <select id="haveNum" resultType="com.shiguang.stock.domain.StockDO">
         select  * from stock
          <where>

@@ -1178,6 +1178,55 @@ public class StoreSalesController {
     }
 
     /**
+     * 视光订做
+     */
+    @GetMapping("/shiguangdz")
+    @RequiresPermissions("information:store:shiguangdz")
+    String shiguangdz(Model model) {
+        return "storeSales/shiguangdz";
+    }
+
+    /**
+     * 查询视光
+     *
+     * @param params
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/shiguangdzlist")
+    @RequiresPermissions("information:store:shiguangdz")
+    public PageUtils shiguangdzlist(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        String departNumber = ShiroUtils.getUser().getStoreNum();
+        Map<String, Object> map = new HashMap<>();
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
+        Long positionId = null;
+        if (null != departNumber){
+            map.put("departNumber", departNumber);
+            PositionDO positionDO = stockService.findPosition(map);
+            if (null != positionDO) {
+                positionId = positionDO.getPositionId();
+            }
+        }
+        query.put("positionId", positionId);
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        Integer goodsId=null;
+        for (GoodsDO goodsDO : goodsDOList){
+            if ("视光订做".equals(goodsDO.getGoodsname())){
+                goodsId = goodsDO.getGoodsid();
+            }
+        }
+        query.put("goodsType",goodsId);
+        List<StockDO> shiguangdzDOList = stockService.listShiguangdz(query);
+        int total = stockService.countShiguangdz(query);
+        PageUtils pageUtils = new PageUtils(shiguangdzDOList, total);
+        return pageUtils;
+    }
+
+    /**
      * 护理液
      */
     @GetMapping("/huliye")

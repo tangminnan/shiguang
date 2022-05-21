@@ -761,7 +761,9 @@ public class LogStatusController {
             if (!"镜架".equals(storeDescribe[a]) && !"自架".equals(storeDescribe[a]) && !"自片".equals(storeDescribe[a]) ){
                 if (!"镜片".equals(storeDescribe[a]) && !"隐形".equals(storeDescribe[a])){
                     maps.put("companyId", companyId);
-                    maps.put("departNumber",ShiroUtils.getUser().getStoreNum());
+                    if ("3".equals(companyId)){
+                        maps.put("departNumber",ShiroUtils.getUser().getStoreNum());
+                    }
                     positionDO = stockService.findPosition(maps);
                 } else {
                     maps.put("companyId", companyId);

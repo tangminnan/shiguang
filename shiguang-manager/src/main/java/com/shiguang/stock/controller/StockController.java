@@ -1749,6 +1749,34 @@ public class StockController {
         return pageUtils;
     }
 
+    @GetMapping("/sgdz/{mfrsid}/{mfrsname}")
+    @RequiresPermissions("stock:stock:sg")
+    String sgdz(@PathVariable("mfrsid") String mfrsid, @PathVariable("mfrsname") String mfrsname, Model model) {
+        model.addAttribute("mfrsid", mfrsid);
+        model.addAttribute("mfrsname", mfrsname);
+        return "/stock/stock/sgdz";
+    }
+
+    @ResponseBody
+    @RequestMapping("/selectSgdz")
+    public PageUtils selectSgdz(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+//        // 钱转换
+//        if (StringUtils.isNotBlank(params.get("retailPrice").toString()))
+//            retailPrice = Double.parseDouble(params.get("retailPrice").toString());
+//        if (StringUtils.isNotBlank(params.get("retailPrice2").toString()))
+//            retailPrice2 = Double.parseDouble(params.get("retailPrice2").toString());
+//
+//        query.put("retailPrice", retailPrice);
+//        query.put("retailPrice2", retailPrice2);
+
+        List<ShiguangdzDO> shiguangdzDOS = stockService.selectSgdz(query);
+        int total = stockService.selectSgdzCount(query);
+        PageUtils pageUtils = new PageUtils(shiguangdzDOS, total);
+        return pageUtils;
+    }
+
 
     @GetMapping("/codeJingjia")
     @RequiresPermissions("stock:stock:code")

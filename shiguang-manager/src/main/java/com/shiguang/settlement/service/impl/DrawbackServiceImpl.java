@@ -166,7 +166,9 @@ public class DrawbackServiceImpl implements DrawbackService {
 			String[] storeDescribe = salesDO.getStoreDescribe().split(",");
 			Map<String,Object> map = new HashMap<>();
 			map.put("companyId",ShiroUtils.getUser().getCompanyId());
-			map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+			if("3".equals(ShiroUtils.getUser().getCompanyId())){
+				map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+			}
 			PositionDO positionDO = stockService.findPosition(map);
 			for (int i=0;i<goodsCode.length;i++){
 				StockDO stockDO = new StockDO();
@@ -371,7 +373,9 @@ public class DrawbackServiceImpl implements DrawbackService {
 			String[] storeDescribe = salesDO.getStoreDescribe().split(",");
 			Map<String,Object> map = new HashMap<>();
 			map.put("companyId",ShiroUtils.getUser().getCompanyId());
-			map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+			if ("3".equals(ShiroUtils.getUser().getCompanyId())){
+				map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+			}
 			PositionDO positionDO = stockService.findPosition(map);
 			for (int i=0;i<goodsCode.length;i++) {
 				if ("镜架".equals(storeDescribe[i])){
