@@ -1,9 +1,7 @@
-// 品种选择
 function showCol() {
     var check = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     var objArray = [];
     $.each(check, function(i, row) {
-        // alert(JSON.stringify(row));
         if (null != row['goodsid']) {
             var obj = {};
             if (null == row['goodsid']) {

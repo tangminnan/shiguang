@@ -4,8 +4,6 @@ $(function () {
 });
 
 function load() {
-    // alert($("#danjuNumber").val())
-    // alert("采购订单列表")
     $('#exampleTable')
         .bootstrapTable(
             {
@@ -115,7 +113,6 @@ function load() {
                         field: 'danjuNumber',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            // alert(row.danjuNumber)
                             if (row.status == "1") {
                                 var b = '<span class="btn btn-info btn-sm '+s_edit_h+'" href="#" title="修改"  mce_href="#" onclick="edit(\''
                                     + row.id + '\')">修改</span> ';
@@ -184,7 +181,6 @@ function remove(id) {
 
 
 
-//打印条码
 function code(goodsType,danjuNumber){
     if (goodsType==1 || goodsType==6){
         window.open("/stock/stock/codeJingjia?danjuNumber="+danjuNumber + "&goodsType=" + goodsType);
@@ -209,7 +205,6 @@ function userNum(danjuNumber) {
 
     }
 }
-//修改启用状态
 function updateEnable() {
     var danjuNumber = document.getElementById('danjuNumber').value;
     var username = document.getElementById('username').value;
@@ -241,16 +236,12 @@ function updateEnable() {
         });
     } else {
         layer.alert("请输入工号！");
-        // return this;
     }
 
 
 }
 
 
-/**
- * 模板导入商品
- */
 function importtemplate(){
     var checkType='PU_TONG';
     var toIndex = layer.open({

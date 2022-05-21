@@ -96,7 +96,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-             group by s.danju_number,s.sale_number   order by s.status desc ,s.id desc
+             group by s.danju_number,s.sale_number   order by  s.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -178,7 +178,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                group by s.danju_number,s.sale_number   order by s.status desc ,s.id desc
+                group by s.danju_number,s.sale_number   order by  s.id desc
             </otherwise>
         </choose>
         ) aia
@@ -344,10 +344,13 @@
             <if test="departname != null">`departname` = #{departname},</if>
             <if test="fartj != null">`fartj` = #{fartj},</if>
             <if test="neartj != null">`neartj` = #{neartj},</if>
-            <if test="tg != null">`tg` = #{tg}</if>
-
+            <if test="tg != null">`tg` = #{tg},</if>
+            <if test="useday != null">`useday` = #{useday},</if>
+            <if test="batch != null">`batch` = #{batch},</if>
+            <if test="zhuceNumber != null">`zhuce_number` = #{zhuceNumber},</if>
+            <if test="produceDay != null">`produce_day` = #{produceDay}</if>
         </set>
-        where id = #{id}
+        where num = #{num} and rl=#{rl}
     </update>
 
     <delete id="remove">
@@ -445,7 +448,7 @@
         sa.sale_type,
         sa.store_num,
         sa.left_right,
-        sa.process_ask,
+        sa.saleremark  as  process_ask,
         sa.goods_num,
         sa.store_name,
         sa.goods_code,
@@ -499,7 +502,7 @@
         sa.sale_type,
         sa.store_num,
         sa.left_right,
-        sa.process_ask,
+        sa.saleremark  as  process_ask,
         sa.goods_num,
         sa.store_name,
         sa.goods_code,
@@ -553,7 +556,7 @@
         sa.sale_type,
         sa.store_num,
         sa.left_right,
-        sa.process_ask,
+        sa.saleremark  as  process_ask,
         sa.goods_num,
         sa.store_name,
         sa.goods_code,
@@ -607,7 +610,7 @@
         sa.sale_type,
         sa.store_num,
         sa.left_right,
-        sa.process_ask,
+        sa.saleremark  as  process_ask,
         sa.goods_num,
         sa.store_name,
         sa.goods_code,
@@ -661,7 +664,7 @@
         sa.sale_type,
         sa.store_num,
         sa.left_right,
-        sa.process_ask,
+        sa.saleremark  as  process_ask,
         sa.goods_num,
         sa.store_name,
         sa.goods_code,
@@ -715,7 +718,7 @@
         sa.sale_type,
         sa.store_num,
         sa.left_right,
-        sa.process_ask,
+        sa.saleremark  as  process_ask,
         sa.goods_num,
         sa.store_name,
         sa.goods_code,
@@ -769,7 +772,7 @@
         sa.sale_type,
         sa.store_num,
         sa.left_right,
-        sa.process_ask,
+        sa.saleremark  as  process_ask,
         sa.goods_num,
         sa.store_name,
         sa.goods_code,
@@ -823,7 +826,7 @@
         sa.sale_type,
         sa.store_num,
         sa.left_right,
-        sa.process_ask,
+        sa.saleremark  as  process_ask,
         sa.goods_num,
         sa.store_name,
         sa.goods_code,
@@ -877,7 +880,7 @@
         sa.sale_type,
         sa.store_num,
         sa.left_right,
-        sa.process_ask,
+        sa.saleremark  as  process_ask,
         sa.goods_num,
         sa.store_name,
         sa.goods_code,

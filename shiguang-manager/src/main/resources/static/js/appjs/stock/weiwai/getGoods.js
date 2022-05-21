@@ -1,15 +1,8 @@
-
-// 选择配镜单
 function batchSelect() {
-    // var check = $("input[name='one']:checked");//选中的复选框
-    // var objArray = [];
-    // check.each(function () {
     var check = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     var objArray = [];
     $.each(check, function(i, row) {
         var obj = {};
-        // var rowstr = $(this).parent("td").parent("tr");
-        //注意html()和val()
         if(null == row['saleNumber']){
             var saleNumber  ="";
         }else {
@@ -208,20 +201,16 @@ function batchSelect() {
 
         obj.goodsNum = goodsNum;
 
-        // obj.jpGoodsName = jpGoodsName;
-        // obj.jpGoodsNum = jpGoodsNum;
         obj.storeName = storeName;
         obj.goodsCode = goodsCode;
         obj.leftRight = leftRight;
         obj.mirorAddress = mirorAddress;
-        //加工要求
         if(null == row['processAsk']){
             var processAsk  ="";
         }else {
             var processAsk =  row['processAsk'];
         }
         obj.processAsk = processAsk;
-        //瞳高
         if(null == row['righttg']){
             var righttg  ="";
         }else {
@@ -235,74 +224,48 @@ function batchSelect() {
             var lefttg =  row['lefttg'];
         }
         obj.lefttg = lefttg;
-
-
-
-
-        //描述
         if (null == row['storeDescribe']){
             var storeDescribe = "";
         }else {
             var storeDescribe= row['storeDescribe'];
         }
         obj.storeDescribe=storeDescribe;
-        //数量
         if (null == row['storeCount']){
             var storeCount = "";
         }else {
             var storeCount= row['storeCount'];
         }
         obj.storeCount=storeCount;
-        //classtype类型定做成品
         if (null == row['classtype']){
             var classtype = "";
         }else {
             var classtype= row['classtype'];
         }
         obj.classtype=classtype;
-
-
-
-
-// alert(row['rightqulv'])
-        //rightqulv
         if (null == row['rightqulv']){
             var rightqulv = "";
         }else {
             var rightqulv= row['rightqulv'];
         }
         obj.rightqulv=rightqulv;
-
-
-        //leftqulv
         if (null == row['leftqulv']){
             var leftqulv = "";
         }else {
             var leftqulv= row['leftqulv'];
         }
         obj.leftqulv=leftqulv;
-
-
-        //rightzj
         if (null == row['rightzj']){
             var rightzj = "";
         }else {
             var rightzj= row['rightzj'];
         }
         obj.rightzj=rightzj;
-        //leftzj
         if (null == row['leftzj']){
             var leftzj = "";
         }else {
             var leftzj= row['leftzj'];
         }
         obj.leftzj=leftzj;
-
-
-
-
-
-
         objArray.push(obj);
     });
 

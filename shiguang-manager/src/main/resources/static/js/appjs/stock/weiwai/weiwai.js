@@ -43,6 +43,8 @@ function load() {
 
                                 day1:$('#day1').val().trim(),
                                 day2:$('#day2').val().trim(),
+                                status:$('#status').val().trim(),
+                                shstatus:$('#shstatus').val().trim(),
 					           // username:$('#searchName').val()
 							};
 						},
@@ -267,8 +269,7 @@ function batchRemove() {
 function userNum(saleNumber,danjuNumber) {
 	var status="0";
 	if (status == "0"){
-		// alert("输入工号")
-		layer.open({
+        var toIndex = layer.open({
 			type : 2,
 			title : '输入工号',
 			maxmin : true,
@@ -276,6 +277,7 @@ function userNum(saleNumber,danjuNumber) {
 			area : [ '800px', '520px' ],
 			content :"/stock/weiwai/userNum/"+saleNumber+"/"+ danjuNumber
 		});
+        layer.full(toIndex);
 
 	}
 }

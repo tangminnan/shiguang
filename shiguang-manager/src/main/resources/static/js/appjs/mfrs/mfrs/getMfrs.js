@@ -175,7 +175,6 @@ function remove(id) {
     })
 }
 
-//详情
 function resetPwd(id) {
     // alert(id);
     layer.open({
@@ -188,7 +187,6 @@ function resetPwd(id) {
     });
 }
 
-//保存
 function save() {
     $.ajax({
         cache: true,
@@ -215,14 +213,12 @@ function save() {
 
 }
 
-//选择制造商
 function batchSelect() {
     var rows = $("#exampleTable").bootstrapTable("getSelections");
     // alert(JSON.stringify(rows))
     return rows;
 };
 
-//修改启用状态
 function updateEnable(mfrsid, enable) {
     // alert(mfrsid);
     var isEnable = 1;

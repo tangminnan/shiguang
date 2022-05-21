@@ -1,4 +1,3 @@
-
 var prefix = "/stock/weiwaishuju"
 $(function() {
 	load();

@@ -2045,6 +2045,7 @@
              <!--<if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>-->
              <!--<if test="brandname != null and brandname != ''">and brandname = #{brandname}</if>-->
              <if test="useday != null and useday != ''">and useday = #{useday}</if>
+             <if test="batch != null and batch != ''">and batch = #{batch}</if>
          </where>
         order by id
     </select>

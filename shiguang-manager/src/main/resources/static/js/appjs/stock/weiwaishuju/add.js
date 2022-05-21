@@ -13,14 +13,11 @@ function save() {
     var number =$('#number').val();
     var mfrsid =$('#mfrsid').val();
     var mfrsname =$('#mfrsname').val();
-
     var gkname =$('#gkname').val();
     var hyknum =$('#hyknum').val();
     var phone =$('#phone').val();
-
     var saleNumber =$('#saleNumber').val();
-
-    if (eyeStyle==3){//镜片
+    if (eyeStyle==3){
     	var rightNum =$("#rightNum").val();
     	var leftNum =$("#leftNum").val();
     	var timetime =$("#timetime").val();
@@ -42,18 +39,15 @@ function save() {
 
                     if (data.code == 0) {
                         parent.layer.msg("操作成功");
-                        window.localStorage.setItem("number",number);//销售单号
-                        window.localStorage.setItem("eyeStyle",eyeStyle);//类型
-                        window.localStorage.setItem("mfrsid",mfrsid);//制造商num
-                        window.localStorage.setItem("mfrsname",mfrsname);//制造商名称
-
+                        window.localStorage.setItem("number",number);
+                        window.localStorage.setItem("eyeStyle",eyeStyle);
+                        window.localStorage.setItem("mfrsid",mfrsid);
+                        window.localStorage.setItem("mfrsname",mfrsname);
                         window.localStorage.setItem("gkname",gkname);
                         window.localStorage.setItem("hyknum",hyknum);
                         window.localStorage.setItem("phone",phone);
-
                         window.localStorage.setItem("saleNumber",saleNumber);
-                        var index1 = window.parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                        // 获取窗口索引
+                        var index1 = window.parent.layer.getFrameIndex(window.name);
                         window.parent.layer.close(index1);
                         window.parent.location.reload();
                     } else {
@@ -64,7 +58,7 @@ function save() {
 
             });
 		}
-        }else if (eyeStyle==4){//隐形
+        }else if (eyeStyle==4){
         var rightNumyx =$("#rightNumyx").val();
         var leftNumyx =$("#leftNumyx").val();
         var timetime =$("#timetime").val();
@@ -85,18 +79,17 @@ function save() {
                 success: function (data) {
                     if (data.code == 0) {
                         parent.layer.msg("操作成功");
-                        window.localStorage.setItem("number",number);//销售单号
-                        window.localStorage.setItem("eyeStyle",eyeStyle);//类型
-                        window.localStorage.setItem("mfrsid",mfrsid);//制造商num
-                        window.localStorage.setItem("mfrsname",mfrsname);//制造商名称
+                        window.localStorage.setItem("number",number);
+                        window.localStorage.setItem("eyeStyle",eyeStyle);
+                        window.localStorage.setItem("mfrsid",mfrsid);
+                        window.localStorage.setItem("mfrsname",mfrsname);
 
                         window.localStorage.setItem("gkname",gkname);
                         window.localStorage.setItem("hyknum",hyknum);
                         window.localStorage.setItem("phone",phone);
 
                         window.localStorage.setItem("saleNumber",saleNumber);
-                        var index1 = window.parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                        // 获取窗口索引
+                        var index1 = window.parent.layer.getFrameIndex(window.name);
                         window.parent.layer.close(index1);
 
 

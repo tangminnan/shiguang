@@ -281,7 +281,6 @@ function batchRemove() {
 }
 
 
-//修改启用状态
 function updateEnable(id, enable) {
     var isEnable = 1;
     if ($(enable).prop("checked")) {
