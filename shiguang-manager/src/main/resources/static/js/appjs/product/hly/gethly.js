@@ -256,7 +256,6 @@ function batchRemove() {
     });
 }
 
-//护理液
 function batchSelect() {
     var rows = $("#exampleTable").bootstrapTable("getSelections");
     return rows;

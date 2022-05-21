@@ -15,7 +15,9 @@ import com.shiguang.product.domain.JpdzDO;
 import com.shiguang.product.domain.YxdzDO;
 import com.shiguang.stock.domain.*;
 import com.shiguang.stock.service.*;
+import com.shiguang.storeSales.domain.InfoDO;
 import com.shiguang.storeSales.domain.SalesDO;
+import com.shiguang.storeSales.service.InfoService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
 import org.apache.ibatis.annotations.Param;
@@ -65,6 +67,8 @@ public class WeiwaiController {
     private StocklogService stocklogService;
     @Autowired
     private MfrsService mfrsService;
+    @Autowired
+    private InfoService infoService;
 
     @GetMapping()
     @RequiresPermissions("stock:weiwai:weiwai")
@@ -90,6 +94,11 @@ public class WeiwaiController {
                 query.put("companyId",ShiroUtils.getUser().getCompanyId());
             }
         }
+        String sh=params.get("shstatus").toString();
+        if (sh.equals("1")){
+            query.put("shstatus", "  ");
+        }
+
         List<WeiwaiDO> weiwaiList = weiwaiService.list(query);
         int total = weiwaiService.count(query);
         PageUtils pageUtils = new PageUtils(weiwaiList, total);
@@ -720,21 +729,95 @@ public class WeiwaiController {
     @GetMapping("/userNum/{saleNumber}/{danjuNumber}")
     @RequiresPermissions("stock:weiwai:userNum")
     String userNum(@PathVariable("saleNumber") String saleNumber, @PathVariable("danjuNumber") String danjuNumber, Model model) {
+        String username = ShiroUtils.getUser().getUsername();
+        model.addAttribute("username", username);
         model.addAttribute("saleNumber", saleNumber);
         model.addAttribute("danjuNumber", danjuNumber);
-        return "/stock/weiwai/userNum";
+        WeiwaiDO weiwaiDO = new WeiwaiDO();
+        weiwaiDO.setDanjuNumber(danjuNumber);
+        weiwaiDO.setSaleNumber(saleNumber);
+        WeiwaiDO weiwai = weiwaiService.weiwaiOrder(weiwaiDO);
+        model.addAttribute("weiwai", weiwai);
+
+
+
+        String eyeStyle = weiwai.getEyeStyle();
+        if (eyeStyle.equals("3")) {
+            model.addAttribute("eyeStyle", "框镜订做");
+        } else if (eyeStyle.equals("4")) {
+            model.addAttribute("eyeStyle", "隐形订做");
+        }
+
+        return "/stock/weiwai/shouhuo";
     }
+
+
+
+
+
+    /**
+     * 收货状态
+     */
     @ResponseBody
     @RequestMapping(value = "/updateStatus")
-    public R updateEnable(String danjuNumber, String saleNumber, String status, String username) {
-        Map<String, Object> map = new HashMap<>();
-        String conpanyId = ShiroUtils.getUser().getCompanyId();
-        map.put("conpanyId", conpanyId);
-        map.put("userName", username);
-        UserDO userDO = userService.getUserName(map);
-        if (null == userDO) {
-            return R.error("该工号不存在");
-        } else {
+    public R updateEnable(String danjuNumber, String saleNumber, String status, String username,String eyeStyle,
+                          String nums,String codes,String rl,String useday, String batch, String zhuceNumber, String produceDay) {
+        InfoDO infoDO = new InfoDO();
+        infoDO.setSaleNumber(saleNumber);
+        infoDO.setTrainStatus("委外收货");
+        infoDO.setTrainTime(new Date());
+        infoDO.setTrainName(ShiroUtils.getUser().getName());
+        infoService.save(infoDO);
+        if (eyeStyle.equals("隐形订做")){
+            String [] numss=nums.split(",");
+            String [] codess=codes.split(",");
+            String [] usedayss=useday.split(",");
+            String [] batchss=batch.split(",");
+            String [] zhuceNumberss=zhuceNumber.split(",");
+            String [] produceDayss=produceDay.split(",");
+            String [] rlss=rl.split(",");
+            for (int i=0;i<numss.length;i++){
+                String numsNew=numss[i];
+                String codesNew=codess[i];
+                String usedayNew=usedayss[i];
+                String batchNew=batchss[i];
+                String zhuceNumberNew=zhuceNumberss[i];
+                String produceDayNew=produceDayss[i];
+                String rlNew=rlss[i];
+                WeiwaiDO weiwai = new WeiwaiDO();
+                weiwai.setNum(numsNew);
+                String codeNews=codesNew.substring(0,18);
+                if(batchNew!=""){
+                    String phs=null;
+                    if (batchNew.length()>8){
+                          phs= batchNew.substring(batchNew.length()-8, batchNew.length());
+                    }else {
+                          phs=batchNew;
+                    }
+
+                    String ph="";
+                    if (phs.length()<8){
+                        Integer phscd=8-phs.length();
+                        for (Integer a=0;a<phscd;a++){
+                            ph+="0";
+                        }
+                    }
+                    String batchs=ph+phs;
+                    codeNews = codeNews + batchs;
+                }else {
+                    codeNews = codeNews + "00000000";
+                }
+                weiwai.setCode(codeNews);
+                weiwai.setUseday(usedayNew);
+                weiwai.setBatch(batchNew);
+                weiwai.setZhuceNumber(zhuceNumberNew);
+                weiwai.setProduceDay(produceDayNew);
+                weiwai.setRl(rlNew);
+                weiwaiService.update(weiwai);
+            }
+        }
+
+
             Map<String, Object> weiwaimap = new HashMap<>();
             weiwaimap.put("danjuNumber", danjuNumber);
             weiwaimap.put("saleNumber", saleNumber);
@@ -748,10 +831,16 @@ public class WeiwaiController {
                 String count = weiwai.getCount();
                 String mfrsid = weiwai.getMfrsid();
                 String brandname = weiwai.getBrandname();
+                String batch1 = weiwai.getBatch();
+                String useday1 = weiwai.getUseday();
+                String zhuceNumber1 = weiwai.getZhuceNumber();
+                String produceDay1 = weiwai.getProduceDay();
+
                 StockDO stockDO = new StockDO();
                 stockDO.setGoodsNum(num);
                 stockDO.setGoodsCode(code);
                 stockDO.setPositionId(positionId.toString());
+                stockDO.setBatch(batch1);
                 StockDO goodsNumList = stockService.haveNum(stockDO);
                 if (null != goodsNumList) {
                     StockDO stockOld = new StockDO();
@@ -763,23 +852,28 @@ public class WeiwaiController {
                     stockOld.setGoodsCode(code);
                     stockOld.setPositionId(positionId.toString());
                     stockService.updateGoodsCount(stockOld);
+
                     WeiwaiDO weiwaiDO = new WeiwaiDO();
                     weiwaiDO.setDanjuNumber(danjuNumber);
                     weiwaiDO.setSaleNumber(saleNumber);
                     weiwaiDO.setStatus(status);
                     weiwaiDO.setUsername(username);
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    //———获取当前系统时间—————
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
                     Date dates = new Date();
                     String shTime = sdf.format(dates);
                     weiwaiDO.setShTime(shTime);
                     String danjuNumbers = weiwai.getDanjuNumber();
                     weiwaiDO.setStockorder(danjuNumbers);
                     weiwaiService.updateStatus(weiwaiDO);
+
+
                     StockDO stockDOs = new StockDO();
                     stockDOs.setDanjuNumber(danjuNumber);
                     stockDOs.setStatus(status);
                     stockDOs.setUsername(username);
                     stockService.updateStatus(stockDOs);
+
                     StocklogDO stocklogDO = new StocklogDO();
                     stocklogDO.setDanjunum(danjuNumber);
                     stocklogDO.setNum(goodsNumList.getGoodsNum());
@@ -797,9 +891,11 @@ public class WeiwaiController {
                     stocklogDO.setZhidanPeople(goodsNumList.getZhidanPeople());
                     stocklogDO.setDay(shTime);
                     stocklogDO.setWay("委外入库");
+                    //———获取当前登录用户的工号————
                     stocklogDO.setUsername(ShiroUtils.getUser().getUsername());
                     stocklogService.save(stocklogDO);
-                } else { if ("3".equals(goodsType)) {
+                } else {
+                    if ("3".equals(goodsType)) {
                         StockDO stockDO2 = new StockDO();
                         stockDO2.setGoodsNum(num);
                         StockDO jingpians = stockService.jingpiandzs(stockDO2);
@@ -815,6 +911,7 @@ public class WeiwaiController {
                         stockDO.setPositionId(positionId.toString());
                         String classtypes = jingpians.getClasstype();
                         String factorys = jingpians.getProducFactory();
+
                         stockDO.setGoodsNum(goodsNums);
                         stockDO.setGoodsCode(goodsCodes);
                         stockDO.setGoodsName(goodsNames);
@@ -827,7 +924,7 @@ public class WeiwaiController {
                         stockDO.setClasstype(classtypes);
                         stockDO.setFactory(factorys);
                         String danjuNumbers = weiwai.getDanjuNumber();
-                        SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
                         Date date = new Date();
                         String createTimes = createTimenew.format(date);
                         stockDO.setCreateTime(createTimes);
@@ -849,6 +946,90 @@ public class WeiwaiController {
                         stocklogDO.setMoney(retailPrices);
                         stocklogDO.setUseday("");
                         stocklogDO.setBacth("");
+                        stocklogDO.setCounts(counts);
+                        stocklogDO.setInpositionId(positionId);
+                        stocklogDO.setOutpositionId(null);
+                        stocklogDO.setZhidanPeople(zhidanPeoples);
+                        stocklogDO.setDay(createTimes);
+                        stocklogDO.setWay("委外入库");
+                        stocklogDO.setUsername(ShiroUtils.getUser().getUsername());
+                        stocklogService.save(stocklogDO);
+
+                        if (stockService.save(stockDO) > 0) {
+                            WeiwaiDO weiwaiDO = new WeiwaiDO();
+                            weiwaiDO.setDanjuNumber(danjuNumber);
+                            weiwaiDO.setSaleNumber(saleNumber);
+                            weiwaiDO.setStatus(status);
+                            weiwaiDO.setUsername(username);
+                            //———获取当前系统时间—————
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                            Date dates = new Date();
+                            String shTime = sdf.format(dates);
+                            weiwaiDO.setShTime(shTime);
+                            weiwaiDO.setStockorder(danjuNumbers);
+                            weiwaiService.updateStatus(weiwaiDO);
+                            StockDO stockDOs = new StockDO();
+                            stockDOs.setDanjuNumber(danjuNumber);
+                            stockDOs.setStatus(status);
+                            stockDOs.setUsername(username);
+                            stockService.updateStatus(stockDOs);
+
+                        }
+                    }else   if ("4".equals(goodsType)) {
+                        StockDO stockDO2 = new StockDO();
+                        stockDO2.setGoodsNum(num);
+                        StockDO yinxingdzs = stockService.yinxingdzs(stockDO2);
+                        String goodsNums = num;
+                        String goodsCodes = code;
+                        String goodsNames = name;
+                        String counts = count;
+                        String goodsTypes = goodsType;
+                        String mfrsids = mfrsid;
+                        String brandnames = brandname;
+                        String unitnames = yinxingdzs.getUnitname();
+                        String retailPrices = yinxingdzs.getRetailPrice();
+                        stockDO.setPositionId(positionId.toString());
+                        String classtypes = yinxingdzs.getClasstype();
+                        String factorys = yinxingdzs.getProducFactory();
+
+                        stockDO.setGoodsNum(goodsNums);
+                        stockDO.setGoodsCode(goodsCodes);
+                        stockDO.setGoodsName(goodsNames);
+                        stockDO.setGoodsCount(counts);
+                        stockDO.setGoodsType(Integer.valueOf(goodsTypes));
+                        stockDO.setMfrsid(mfrsids);
+                        stockDO.setBrandname(brandnames);
+                        stockDO.setUnit(unitnames);
+                        stockDO.setRetailPrice(retailPrices);
+                        stockDO.setClasstype(classtypes);
+                        stockDO.setFactory(factorys);
+                        stockDO.setBatch(batch1);
+                        stockDO.setUseday(useday1);
+                        stockDO.setZhuceNumber(zhuceNumber1);
+                        stockDO.setProduceDay(produceDay1);
+                        String danjuNumbers = weiwai.getDanjuNumber();
+                        SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//yyyy-MM-dd HH:mm:ss
+                        Date date = new Date();
+                        String createTimes = createTimenew.format(date);
+                        stockDO.setCreateTime(createTimes);
+                        stockDO.setDanjuNumber(danjuNumbers);
+                        String zhidanPeoples = ShiroUtils.getUser().getName();
+                        stockDO.setZhidanPeople(zhidanPeoples);
+                        stockDO.setDanjuDay(createTimes);
+                        stockDO.setStatus("1");
+                        stockDO.setUsername("未收货");
+                        stockDO.setReturnzt("1");
+                        StocklogDO stocklogDO = new StocklogDO();
+                        stocklogDO.setDanjunum(danjuNumber);
+                        stocklogDO.setNum(goodsNums);
+                        stocklogDO.setCode(goodsCodes);
+                        stocklogDO.setName(goodsNames);
+                        stocklogDO.setGoodsid(Integer.valueOf(goodsTypes));
+                        stocklogDO.setMfrsnum(mfrsids);
+                        stocklogDO.setBrandname(brandnames);
+                        stocklogDO.setMoney(retailPrices);
+                        stocklogDO.setUseday(useday1);
+                        stocklogDO.setBacth(batch1);
                         stocklogDO.setCounts(counts);
                         stocklogDO.setInpositionId(positionId);
                         stocklogDO.setOutpositionId(null);
@@ -875,88 +1056,12 @@ public class WeiwaiController {
                             stockDOs.setUsername(username);
                             stockService.updateStatus(stockDOs);
                         }
-                    } else if ("4".equals(goodsType)) {
-                        StockDO stockDO2 = new StockDO();
-                        stockDO2.setGoodsNum(num);
-                        StockDO yinxingdzs = stockService.yinxingdzs(stockDO2);
-                        String goodsNums = num;
-                        String goodsCodes = code;
-                        String goodsNames = name;
-                        String counts = count;
-                        String goodsTypes = goodsType;
-                        String mfrsids = mfrsid;
-                        String brandnames = brandname;
-                        String unitnames = yinxingdzs.getUnitname();
-                        String retailPrices = yinxingdzs.getRetailPrice();
-                        stockDO.setPositionId(positionId.toString());
-                        String classtypes = yinxingdzs.getClasstype();
-                        String factorys = yinxingdzs.getProducFactory();
-                        stockDO.setGoodsNum(goodsNums);
-                        stockDO.setGoodsCode(goodsCodes);
-                        stockDO.setGoodsName(goodsNames);
-                        stockDO.setGoodsCount(counts);
-                        stockDO.setGoodsType(Integer.valueOf(goodsTypes));
-                        stockDO.setMfrsid(mfrsids);
-                        stockDO.setBrandname(brandnames);
-                        stockDO.setUnit(unitnames);
-                        stockDO.setRetailPrice(retailPrices);
-                        stockDO.setClasstype(classtypes);
-                        stockDO.setFactory(factorys);
-                        String danjuNumbers = weiwai.getDanjuNumber();
-                        SimpleDateFormat createTimenew = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        Date date = new Date();
-                        String createTimes = createTimenew.format(date);
-                        stockDO.setCreateTime(createTimes);
-                        stockDO.setDanjuNumber(danjuNumbers);
-                        String zhidanPeoples = ShiroUtils.getUser().getName();
-                        stockDO.setZhidanPeople(zhidanPeoples);
-                        stockDO.setDanjuDay(createTimes);
-                        stockDO.setStatus("1");
-                        stockDO.setUsername("未收货");
-                        stockDO.setReturnzt("1");
-                        StocklogDO stocklogDO = new StocklogDO();
-                        stocklogDO.setDanjunum(danjuNumber);
-                        stocklogDO.setNum(goodsNums);
-                        stocklogDO.setCode(goodsCodes);
-                        stocklogDO.setName(goodsNames);
-                        stocklogDO.setGoodsid(Integer.valueOf(goodsTypes));
-                        stocklogDO.setMfrsnum(mfrsids);
-                        stocklogDO.setBrandname(brandnames);
-                        stocklogDO.setMoney(retailPrices);
-                        stocklogDO.setUseday("");
-                        stocklogDO.setBacth("");
-                        stocklogDO.setCounts(counts);
-                        stocklogDO.setInpositionId(positionId);
-                        stocklogDO.setOutpositionId(null);
-                        stocklogDO.setZhidanPeople(zhidanPeoples);
-                        stocklogDO.setDay(createTimes);
-                        stocklogDO.setWay("委外入库");
-                        stocklogDO.setUsername(ShiroUtils.getUser().getUsername());
-                        stocklogService.save(stocklogDO);
-                        if (stockService.save(stockDO) > 0) {
-                            WeiwaiDO weiwaiDO = new WeiwaiDO();
-                            weiwaiDO.setDanjuNumber(danjuNumber);
-                            weiwaiDO.setSaleNumber(saleNumber);
-                            weiwaiDO.setStatus(status);
-                            weiwaiDO.setUsername(username);
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            Date dates = new Date();
-                            String shTime = sdf.format(dates);
-                            weiwaiDO.setShTime(shTime);
-                            weiwaiDO.setStockorder(danjuNumbers);
-                            weiwaiService.updateStatus(weiwaiDO);
-                            StockDO stockDOs = new StockDO();
-                            stockDOs.setDanjuNumber(danjuNumber);
-                            stockDOs.setStatus(status);
-                            stockDOs.setUsername(username);
-                            stockService.updateStatus(stockDOs);
-                        }
                     }
                 }
             }
-        }
         return R.ok();
     }
+
 
     @RequiresPermissions("stock:weiwai:psNum")
     @GetMapping("/psNum/{saleNumber}/{danjuNumber}")

@@ -70,22 +70,7 @@ function load() {
                         title: '所属部门'
                     },
 
-                    // {
-                    //     field: 'positionOrder',
-                    //     title: '仓位类型'
-                    // },
-                    // {
-                    //     field: 'stateId',
-                    //     title: '状态id'
-                    // },
-                    // {
-                    //     field: 'xsstate',
-                    //     title: '状态（1停用：2启用）'
-                    // },
-                    // {
-                    //     field: 'state',
-                    //     title: '状态(0:删除1:未删除)'
-                    // },
+
                     {
                         field: 'xsstate',
                         title: '启用状态',
@@ -218,7 +203,6 @@ function batchRemove() {
     });
 }
 
-//修改启用状态
 function updateEnable(positionId, enable) {
     var isEnable = 1;
     if ($(enable).prop("checked")) {

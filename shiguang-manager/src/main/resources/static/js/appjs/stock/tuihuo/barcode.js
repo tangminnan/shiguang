@@ -63,7 +63,6 @@ function findGoods(){
                         datajson[key].retailPrice = "";
                     }
 
-                    // alert(datajson[key].zhuceNumber);
                     barHtml += "<tr class='val'> ";
                     barHtml += "<td name='goodsNum'>" + datajson[key].goodsNum + "</td>";
                     barHtml += "<input name='goodsNum' type='hidden' value='" + datajson[key].goodsNum + "'>";
@@ -86,18 +85,15 @@ function findGoods(){
                     barHtml += "<input name='retailPrice' type='hidden' value='" + datajson[key].retailPrice + "'>";
                     barHtml += "<td><em  onclick='delertTr(this)'></em></td>";
                     barHtml += "</tr>";
-                    // parent.$("#inventoryId").append(barHtml);
                     if (window.parent.$("input[name=goodsCode]").length == 0) {
                         parent.$("#inventoryId").append(barHtml);
                         window.parent.$("input[name=newcount]").val(1);
                     } else if (window.parent.$("input[name=goodsCode]").length != 0) {
-                        // alert("长度不是0");
                         var arr = new Array();
                         var countarr = new Array();
                         for (var i = 0; i < window.parent.$("input[name=goodsCode]").length; i++) {
                             var goodsCode = window.parent.$("input[name=goodsCode]").eq(i).val();
                             var useCount = window.parent.$("input[name=count]").eq(i).val();
-                            // alert(goodsCode + "和数量" + useCount);
                             arr[i] = goodsCode;
                             countarr[i] = useCount;
                         }
@@ -105,28 +101,19 @@ function findGoods(){
                         for (var index = 0; index < arr.length; index++) {
 
                             if (arr[index] == datajson[key].goodsCode) {
-                                // alert("扫码和原来的一样数量加1");
                                 flag = "1";
                                 flags = "修改";
                                 var count = countarr[index];
-                                // alert(count + "数量");
                                 window.parent.$("input[name=count]").eq(index).val(parseInt(count) + parseInt(1));
                                 var shuliang = window.parent.$("input[name=newcount]").val();
                                 window.parent.$("input[name=newcount]").val(parseInt(shuliang) + parseInt(1));
                                 return;
                             } else if (arr[index] != datajson[key].goodsCode) {
-                                // alert(flag+"flag");
-                                //
-                                //     if (flag==1){
-                                //         alert("条码没有过新增");
-                                //         parent.$("#inventoryId").append(barHtml);
-                                //     }
                                 flag = "0";
                                 flags = "新增";
                             }
 
 
-                            // }
                         }
                     }
                 });
@@ -134,7 +121,6 @@ function findGoods(){
         });
 
         if (flags == "新增" && flag == "0") {
-            // alert("条码没有过新增");
             parent.$("#inventoryId").append(barHtml);
             var shuliang = window.parent.$("input[name=newcount]").val();
             window.parent.$("input[name=newcount]").val(parseInt(shuliang) + parseInt(1));

@@ -15,6 +15,8 @@
     <div class="m40 tabS msgBox">
         <h3>单据信息</h3>
         <input id="saleNumber" name="saleNumber" th:value="${weiwai.saleNumber}" type="hidden" readonly>
+        <input id="username" name="username" th:value="${username}" type="hidden" readonly>
+        <input id="status" name="status" value="0" type="hidden" readonly>
         <table border="0" cellspacing="0" cellpadding="0">
             <tr>
                 <td>单据编号：</td>
@@ -72,7 +74,9 @@
 
         </table>
 
-
+        <div class="BQ-btn">
+            <input type="button" class="H_bc" value="收货" onclick="upshTime()"/>
+        </div>
     </div>
     <div class="m40 tabS msgBoxDD">
         <table border="0" cellspacing="0" cellpadding="0" class="buyBtns">
@@ -82,9 +86,7 @@
                     <table id="jp">
                         <tr class="thead">
                             <td>配镜单号</td>
-                            <td>取镜时间</td>
                             <td>商品名称</td>
-                            <td>委外方式</td>
                             <td>镜片类型</td>
                             <td>数量</td>
                             <td>球镜</td>
@@ -93,8 +95,6 @@
                             <td>下加</td>
                             <td>棱镜</td>
                             <td>直径</td>
-                            <td>加工要求</td>
-                            <td>操作</td>
                         </tr>
                     </table>
                 </td>
@@ -104,9 +104,7 @@
                     <table id="yx">
                         <tr class="thead">
                             <td>配镜单号</td>
-                            <td>取镜时间</td>
                             <td>商品名称</td>
-                            <td>委外方式</td>
                             <td>镜片类型</td>
                             <td>数量</td>
                             <td>球镜</td>
@@ -115,10 +113,12 @@
                             <td>基底</td>
                             <td>曲率</td>
                             <td>直径</td>
-                            <td>加工要求</td>
-                            <td>操作</td>
+                            <td>效期</td>
+                            <td>批号</td>
+                            <td>注册证号</td>
+                            <td>生产日期</td>
                         </tr>
-                       
+
 
                     </table>
                 </td>
@@ -152,19 +152,13 @@
                 'saleNumber': saleNumber
             },
             success: function (xml) {
-                // alert(JSON.stringify(xml));
-                // alert(xml.length);
                 for (var i = 0; i < xml.length; i++) {
                     if (eyeStyle == '框镜订做') {
                         html += "<tr>";
                         html += "<td>"+xml[i].saleNumber+"</td>";
-                        html += "<input id='saleNumber' name='saleNumber'   value='" + xml[i].saleNumber + "'  type='hidden' readonly/>";
-                        html += "<td>"+xml[i].mirrorTime+"</td>";
-                        html += "<input id='mirrorTime' name='mirrorTime'   value='" + xml[i].mirrorTime+ "'  type='hidden' readonly/>";
+                        html += "<input    value='" + xml[i].saleNumber + "'  type='hidden' readonly/>";
                         html += "<td>"+xml[i].name+"</td>";
                         html += "<input id='goodsName' name='goodsName'   value='" + xml[i].name + "'  type='hidden' readonly/>";
-                        html += "<td>"+xml[i].style+"</td>";
-                        html += "<input id='style' name='style'   value='" + xml[i].style + "'  type='hidden' readonly/>";
                         html += "<td>"+xml[i].rl+"</td>";
                         html += "<input id='rl' name='rl'   value='" + xml[i].rl + "'  type='hidden' readonly/>";
                         html += "<td>"+xml[i].count+"</td>";
@@ -185,19 +179,15 @@
                         html += "<input id='yaoqiu' name='yaoqiu'   value='" + xml[i].yaoqiu  + "'  type='hidden' readonly/>";
                         html += "<td style='display: none'>"+xml[i].num+"</td>";
                         html += "<input id='num' name='num'   value='" + xml[i].num  + "'  type='hidden' readonly/>";
-                        html+="<td><input id='"+xml[i].code+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>";
+
                         html += "</tr>";
                     }
                     else if (eyeStyle == '隐形订做') {
                         htmlYx += "<tr>";
                         htmlYx += "<td>"+xml[i].saleNumber+"</td>";
-                        htmlYx += "<input id='saleNumber' name='saleNumber'   value='" + xml[i].saleNumber + "'  type='hidden' readonly/>";
-                        htmlYx += "<td>"+xml[i].mirrorTime+"</td>";
-                        htmlYx += "<input id='mirrorTime' name='mirrorTime'   value='" + xml[i].mirrorTime+ "'  type='hidden' readonly/>";
+                        htmlYx += "<input    value='" + xml[i].saleNumber + "'  type='hidden' readonly/>";
                         htmlYx += "<td>"+xml[i].name+"</td>";
                         htmlYx += "<input id='goodsName' name='goodsName'   value='" + xml[i].name + "'  type='hidden' readonly/>";
-                        htmlYx += "<td>"+xml[i].style+"</td>";
-                        htmlYx += "<input id='style' name='style'   value='" + xml[i].style + "'  type='hidden' readonly/>";
                         htmlYx += "<td>"+xml[i].rl+"</td>";
                         htmlYx += "<input id='rl' name='rl'   value='" + xml[i].rl + "'  type='hidden' readonly/>";
                         htmlYx += "<td>"+xml[i].count+"</td>";
@@ -214,14 +204,21 @@
                         htmlYx += "<input id='qulv' name='qulv'   value='" + xml[i].qulv + "'  type='hidden' readonly/>";
                         htmlYx += "<td>"+xml[i].zj+"</td>";
                         htmlYx += "<input id='diameter' name='diameter'   value='" + xml[i].zj + "'  type='hidden' readonly/>";
-                        htmlYx += "<td>"+xml[i].yaoqiu+"</td>";
-                        htmlYx += "<input id='yaoqiu' name='yaoqiu'   value='" + xml[i].yaoqiu  + "'  type='hidden' readonly/>";
                         htmlYx += "<td style='display: none'>"+xml[i].num+"</td>";
-                        htmlYx += "<input id='num' name='num'   value='" + xml[i].num  + "'  type='hidden' readonly/>";
-                        htmlYx+="<td><input id='"+xml[i].code+"' type='button' value='条码' onclick='codeDayin(this.id)'/></td>";
+                        htmlYx += "<input id='nums' name='nums'   value='" + xml[i].num  + "'  type='hidden' readonly/>";
+                        htmlYx += "<input id='codes' name='codes'   value='" + xml[i].code  + "'  type='hidden' readonly/>";
+
+                        htmlYx += "<td >" + "<input  name='useday'      type='text'  />" + "</td>";
+                        htmlYx += "<td >" + "<input  name='batch'       type='text'  />" + "</td>";
+                        htmlYx += "<td >" + "<input  name='zhuceNumber' type='text'  />" + "</td>";
+                        htmlYx += "<td >" + "<input  name='produceDay'  type='text'  />" + "</td>";
+
+
+
                         htmlYx += "</tr>";
                     }
                 }
+
                 $('#jp').append(html);
                 $('#yx').append(htmlYx);
             }
@@ -229,6 +226,41 @@
     });
 
 
+    function upshTime() {
+        // var danjuNumber = document.getElementById('danjuNumber').value;
+        // var saleNumber = document.getElementById('saleNumber').value;
+        // var username = document.getElementById('username').value;
+        // var useday = document.getElementsByName('useday').value;
+        // var batch = document.getElementsByName('batch').value;
+        // var zhuceNumber = document.getElementsByName('zhuceNumber').value;
+        // var produceDay = document.getElementsByName('produceDay').value;
+        // alert(useday);
+        // var status = "0";
+        if (username !=""){
+
+            $.ajax({
+                url: "/stock/weiwai/updateStatus",
+                type: "post",
+                data : $('#signupForm').serialize(),// 你的formid
+                dataType: 'JSON',
+                async: false,
+                success: function (data) {
+                    if (data.code == 0) {
+                        parent.layer.msg("操作成功");
+                        parent.reLoad();
+                        var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                        parent.layer.close(index);
+
+                    } else {
+                        parent.layer.alert(data.msg)
+                    }
+
+                }
+            });
+        } else {
+            layer.alert("请输入工号！");
+        }
+    }
 </script>
 </body>
 </html>

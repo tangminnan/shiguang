@@ -57,6 +57,7 @@ public class WeiwaiDO implements Serializable {
 	private String code;
 	//商品名称
 	private String name;
+	private String medicinecode;
 	//委外方式
 	private String style;
 	//镜片类型r/l
@@ -371,6 +372,16 @@ public class WeiwaiDO implements Serializable {
 	public String getName() {
 		return name;
 	}
+
+
+	public String getMedicinecode() {
+		return medicinecode;
+	}
+
+	public void setMedicinecode(String medicinecode) {
+		this.medicinecode = medicinecode;
+	}
+
 	/**
 	 * 设置：委外方式
 	 */
@@ -702,5 +713,41 @@ public class WeiwaiDO implements Serializable {
 
 	public void setViewGoodName(String viewGoodName) {
 		this.viewGoodName = viewGoodName;
+	}
+	private String useday;
+	private String batch;
+	private String zhuceNumber;
+	private String produceDay;
+
+	public String getUseday() {
+		return useday;
+	}
+
+	public void setUseday(String useday) {
+		this.useday = useday;
+	}
+
+	public String getBatch() {
+		return batch;
+	}
+
+	public void setBatch(String batch) {
+		this.batch = batch;
+	}
+
+	public String getZhuceNumber() {
+		return zhuceNumber;
+	}
+
+	public void setZhuceNumber(String zhuceNumber) {
+		this.zhuceNumber = zhuceNumber;
+	}
+
+	public String getProduceDay() {
+		return produceDay;
+	}
+
+	public void setProduceDay(String produceDay) {
+		this.produceDay = produceDay;
 	}
 }

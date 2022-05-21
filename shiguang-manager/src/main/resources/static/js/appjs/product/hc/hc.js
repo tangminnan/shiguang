@@ -158,7 +158,6 @@ function load() {
                             str += ' <div class="switch onoffswitch col-sm-1"> ';
                             str += ' <div class="onoffswitch"> ';
                             str += ' <input name="allowComment" ';
-                            //启用状态 0：启用；1：禁用
                             if (row.xsstate == 0)
                                 str += ' checked="" ';
 
@@ -225,7 +224,6 @@ function edit(id) {
 
 }
 
-//详情
 function resetPwd(id) {
     layer.open({
         type: 2,
@@ -295,7 +293,6 @@ function batchRemove() {
     });
 }
 
-//修改启用状态
 function updateEnable(id, enable) {
     var isEnable = 1;
     if ($(enable).prop("checked")) {

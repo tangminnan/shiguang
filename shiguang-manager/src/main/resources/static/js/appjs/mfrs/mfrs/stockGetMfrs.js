@@ -76,48 +76,6 @@ function load() {
                         field: 'mfrsaddress',
                         title: '制造商地址'
                     },
-                    // {
-                    //     field: 'xsstate',
-                    //     title: '启用状态',
-                    //     align: 'center',
-                    //     formatter: function (value, row, index) {
-                    //         var str = '';
-                    //         str += ' <div class="switch onoffswitch col-sm-1"> ';
-                    //         str += ' <div class="onoffswitch"> ';
-                    //         str += ' <input name="allowComment" ';
-                    //         //启用状态 0：启用；1：禁用
-                    //         if (row.xsstate == 0)
-                    //             str += ' checked="" ';
-                    //
-                    //         str += ' type="checkbox" onchange="updateEnable(' + row.mfrsid + ',this)" value="' + row.mfrsid + '" class="onoffswitch-checkbox" id="example1' + row.mfrsid + '">  ';
-                    //         str += ' <label class="onoffswitch-label" for="example1' + row.mfrsid + '">  ';
-                    //         str += ' <span class="onoffswitch-inner" ></span> ';
-                    //         str += ' <span class="onoffswitch-switch" ></span> ';
-                    //         str += ' </label> ';
-                    //         str += ' </div>';
-                    //         str += ' </div>';
-                    //         return str;
-                    //     }
-                    // },
-
-                    // {
-                    //     title: '操作',
-                    //     field: 'id',
-                    //     align: 'center',
-                    //     formatter: function (value, row, index) {
-                    //         var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                    //             + row.mfrsid
-                    //             + '\')"><i class="fa fa-edit"></i></a> ';
-                    //         var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                    //             + row.mfrsid
-                    //             + '\')"><i class="fa fa-remove"></i></a> ';
-                    //
-                    //         var f = '<a class="btn btn-success btn-sm" href="#" title="详情"  mce_href="#" onclick="resetPwd(\''
-                    //             + row.mfrsid
-                    //             + '\')">详情</a> ';
-                    //         return e + d + f;
-                    //     }
-                    // }
                 ]
             });
 }
@@ -176,7 +134,6 @@ function remove(id) {
     })
 }
 
-//详情
 function resetPwd(id) {
     // alert(id);
     layer.open({
@@ -189,7 +146,6 @@ function resetPwd(id) {
     });
 }
 
-//保存
 function save() {
     $.ajax({
         cache: true,

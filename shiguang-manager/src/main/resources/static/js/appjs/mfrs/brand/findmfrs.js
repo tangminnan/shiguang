@@ -31,15 +31,12 @@ function getMfrs() {
         cancel: function (index, layero) {
             var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
             for (var i = 0; i < rows.length; i++) {
-                // alert(rows[i].mfrsid + "-----制造商id");
-                // alert(rows[i].mfrsname + "------制造商名称");
                 $("#mfrsName").val(rows[i].mfrsname);
                 $("#mfrsid").val(rows[i].mfrsnum);
                 $("#mfrsnum").val(rows[i].mfrsnum);
                 a1.value = a1.value.substring(0, 2) + rows[i].mfrsnum + a1.value.substring(4, 22)
                 a1_val = a1.value.substring(0, 7) + a1_val.substring(7, 22)
                 a2.value = a1.value.replace(".", "").replace(".", "").replace(".", "").replace(".", "");
-                // alert(rows[i].mfrsnum)
                 choice(rows[i].mfrsnum);
             }
         }
