@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32453ab6-38b3-4d6a-be34-bef7668c2538" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/1weiwaiOut.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/stock/service/impl/WeiwaiServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/stock/service/impl/WeiwaiServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shiguang-manager/src/main/resources/weiwaiOut.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/shiguang-manager/src/main/resources/weiwaiOut.ftl" afterDir="false" />
-    </list>
+    <list default="true" id="32453ab6-38b3-4d6a-be34-bef7668c2538" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/shiguang-manager/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +31,7 @@
           <entry key="rnc" value="1" />
           <entry key="ts" value="1" />
           <entry key="xml" value="16" />
-          <entry key="yml" value="2" />
+          <entry key="yml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -49,7 +44,7 @@
           <entry key="RNG Compact" value="1" />
           <entry key="TypeScript" value="1" />
           <entry key="XML" value="16" />
-          <entry key="YAML" value="2" />
+          <entry key="YAML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -106,17 +101,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/stock/service/impl/WeiwaiServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="143" column="51" lean-forward="true" selection-start-line="143" selection-start-column="51" selection-end-line="143" selection-end-column="51" />
+            <state relative-caret-position="-5693">
+              <caret line="143" column="51" selection-start-line="143" selection-start-column="51" selection-end-line="143" selection-end-column="51" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/application-dev.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="69" column="17" lean-forward="true" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/1weiwaiOut.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="465" column="72" lean-forward="true" selection-start-line="465" selection-start-column="72" selection-end-line="465" selection-end-column="72" />
+            <state relative-caret-position="23">
+              <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -134,7 +138,7 @@
         <entry file="file://E:/tx项目/shiguang/shiguang-manager/src/main/resources/weiwaiOut.ftl">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="107">
-              <caret line="722" column="12" lean-forward="true" selection-start-line="709" selection-start-column="6" selection-end-line="722" selection-end-column="12" />
+              <caret line="722" column="12" selection-start-line="709" selection-start-column="6" selection-end-line="722" selection-end-column="12" />
               <folding>
                 <element signature="n#Row#7;n#Table#0;n#Worksheet#0;n#Workbook#0;n#!!top" />
               </folding>
@@ -239,8 +243,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="404" />
-    <option name="y" value="379" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1502" />
     <option name="height" value="697" />
   </component>
@@ -272,40 +276,6 @@
               <item name="shiguang-manager" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shiguang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shiguang-manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shiguang" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shiguang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shiguang-manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shiguang" type="462c0819:PsiDirectoryNode" />
-              <item name="stock" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shiguang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shiguang-manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shiguang" type="462c0819:PsiDirectoryNode" />
-              <item name="stock" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shiguang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shiguang-manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -326,7 +296,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1653377017325" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1653377745831" />
     <property name="last_opened_file_path" value="E:/tx项目/shiguang" />
   </component>
   <component name="RecentsManager">
@@ -380,18 +350,18 @@
       <workItem from="1653095363716" duration="23725000" />
       <workItem from="1653267643720" duration="5905000" />
       <workItem from="1653284127638" duration="11570000" />
-      <workItem from="1653354119637" duration="6661000" />
+      <workItem from="1653354119637" duration="7629000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56660000" />
+    <option name="totallyTimeSpent" value="57628000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17430703" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17430703" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -402,7 +372,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.44793928" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.44793928" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -462,11 +432,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/retailprice/retailprice/retailprice.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5249" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/static/js/appjs/saleGoods/saleGoods.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1104" />
@@ -742,7 +707,7 @@
     <entry file="file://E:/tx项目/shiguang/shiguang-manager/src/main/resources/weiwaiOut.ftl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="107">
-          <caret line="722" column="12" lean-forward="true" selection-start-line="709" selection-start-column="6" selection-end-line="722" selection-end-column="12" />
+          <caret line="722" column="12" selection-start-line="709" selection-start-column="6" selection-end-line="722" selection-end-column="12" />
           <folding>
             <element signature="n#Row#7;n#Table#0;n#Worksheet#0;n#Workbook#0;n#!!top" />
           </folding>
@@ -756,17 +721,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/stock/service/impl/WeiwaiServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/1weiwaiOut.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="143" column="51" lean-forward="true" selection-start-line="143" selection-start-column="51" selection-end-line="143" selection-end-column="51" />
+        <state relative-caret-position="23">
+          <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/1weiwaiOut.ftl">
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/java/com/shiguang/stock/service/impl/WeiwaiServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="465" column="72" lean-forward="true" selection-start-line="465" selection-start-column="72" selection-end-line="465" selection-end-column="72" />
+        <state relative-caret-position="-5693">
+          <caret line="143" column="51" selection-start-line="143" selection-start-column="51" selection-end-line="143" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shiguang-manager/src/main/resources/application-dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="69" column="17" lean-forward="true" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
         </state>
       </provider>
     </entry>
