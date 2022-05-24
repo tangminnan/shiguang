@@ -331,8 +331,32 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 		HashSet h = new HashSet(arry);
 		arry.clear();
 		arry.addAll(h);
+		List<Map<String, Object>> arryOne = new ArrayList<>();
+		List<Map<String, Object>> countOne = new ArrayList<>();
+		Integer countNew=0;
+		for (int i=0;i<arry.size();i++){
+			if (i==0){
+				String companyName= (String) arry.get(i).get("companyName");
+				String mfrsname= (String) arry.get(i).get("mfrsname");
+				Integer countNews = (Integer) arry.get(i).get("allcount");
+				countNew=countNew+countNews;
+				Map<String,Object> map=new HashMap<>();
+				map.put("companyName",companyName);
+				map.put("mfrsname",mfrsname);
+				arryOne.add(i,map);
+			}else {
+				Integer countNews = (Integer) arry.get(i).get("allcount");
+				countNew=countNew+countNews;
+			}
+		}
+		Map<String,Object> mapNew=new HashMap<>();
+		mapNew.put("countNew",countNew);
+		countOne.add(mapNew);
+
 		Map<String, Object> outList = new HashMap();
 		outList.put("arry",arry);
+		outList.put("arryOne",arryOne);
+		outList.put("countOne",countOne);
 		String companyIdNow=ShiroUtils.getUser().getCompanyId();
 		Map<String,Object> mapxinxi=new HashMap<>();
 		mapxinxi.put("companyid",companyIdNow);
@@ -357,7 +381,6 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 		outList.put("xinxi",xinxi);
 		return outList;
 	}
-
 	public void createDoc(HttpServletResponse response, Map<String, Object>  dataMap, String fileName, String template) {
 		Configuration configuration = new Configuration();
 		configuration.setDefaultEncoding("utf-8");
