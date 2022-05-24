@@ -5,7 +5,7 @@ function getGoodsInfo(obj){
     var goodsType = $("#goodType"+targetStr+"").val();
     // var fenlei = $("#fenlei").val();
     // var caizhi = $("#caizhi").val();
-    layer.open({
+    var toIndex = layer.open({
         type : 2,
         title : '商品信息',
         maxmin : true,
@@ -24,7 +24,7 @@ function getGoodsInfo(obj){
             //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
         }
     });
-     //layer.full(toIndex);
+     layer.full(toIndex);
 }
 var pricestart=0;
 var priceEnd=0;

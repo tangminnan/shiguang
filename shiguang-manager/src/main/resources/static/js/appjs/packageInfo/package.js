@@ -90,7 +90,7 @@ function reLoad() {
 function add() {
 	var toIndex = layer.open({
 		type : 2,
-		title : '',
+		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],

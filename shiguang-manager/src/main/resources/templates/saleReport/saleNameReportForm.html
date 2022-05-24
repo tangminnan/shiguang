@@ -42,12 +42,15 @@
 			  <td colspan="2">护理液</td>
 			  <td colspan="2">老花镜</td>
 				<td colspan="2">视光</td>
+				<td colspan="2">视光订做</td>
 				<td colspan="2">耗材</td>
 			  <td rowspan="2">附加费</td>
 			  <td rowspan="2">应收合计</td>
 			  <td rowspan="2">实收金额</td>
 			</tr>
 			<tr class="thead">
+				<td>数量</td>
+				<td>金额</td>
 				<td>数量</td>
 				<td>金额</td>
 				<td>数量</td>
@@ -102,6 +105,8 @@
 				<td><span th:text="${totallhjMoney}"></span></td>
 				<td><span th:text="${totalsgcount}"></span></td>
 				<td><span th:text="${totalsgMoney}"></span></td>
+				<td><span th:text="${totalsgdzcount}"></span></td>
+				<td><span th:text="${totalsgdzMoney}"></span></td>
 				<td><span th:text="${totalhccount}"></span></td>
 				<td><span th:text="${totalhcMoney}"></span></td>
 				<td><span th:text="${totaladdMoney}"></span></td>
@@ -149,6 +154,8 @@
                 html += "<td>"+list[i].lhjMoney+"</td>";
                 html += "<td>"+list[i].sgcount+"</td>";
                 html += "<td>"+list[i].sgMoney+"</td>";
+                html += "<td>"+list[i].sgdzcount+"</td>";
+                html += "<td>"+list[i].sgdzMoney+"</td>";
                 html += "<td>"+list[i].hccount+"</td>";
                 html += "<td>"+list[i].hcMoney+"</td>";
                 html += "<td>"+list[i].addMoney+"</td>";

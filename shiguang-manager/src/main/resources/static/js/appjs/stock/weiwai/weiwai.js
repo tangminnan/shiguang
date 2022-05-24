@@ -95,8 +95,9 @@ function load() {
 										return '<span class="label">框镜订做</span>';
 									}else if(value == 4){
 										return '<span class="label">隐形订做</span>';
-
-									}
+									}else if(value == 5){
+                                        return '<span class="label">视光订做</span>';
+                                    }
 								}
 							},
 								{
@@ -497,6 +498,46 @@ function out(){
 
     });
     window.location.href="/stock/weiwai/out?arrys="+arrys;
+}
+
+function outShiguangdz(){
+    var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+    if (rows.length == 0) {
+        layer.msg("选择要导出的数据");
+        return;
+    }
+
+
+    var ids = new Array();
+    var mfrsid = new Array();
+    var danjuNumbers = new Array();
+    // 遍历所有选择的行数据，取每条数据对应的ID
+    $.each(rows, function(i, row) {
+        ids[i] = row['id'];
+        danjuNumbers[i] = row['danjuNumber'];
+        mfrsid[i]=row['mfrsid'];
+        mfrsids=mfrsid[0];
+        mfrsnames=row['mfrsname'];
+    });
+    for (var i=0;i<mfrsid.length;i++){
+        // alert(mfrsids);
+        // alert(mfrsid[i]);
+        if (mfrsids!=mfrsid[i]){
+            return layer.alert("请选择同一个制造商！");
+        }
+    }
+
+
+    // var danjuNumbers=[];
+    // var saleNumbers=[];
+    var arrys=[];
+    $.each(rows, function(i, row) {
+        // danjuNumbers[i] = row['danjuNumber'];
+        // saleNumbers[i] = row['saleNumber'];
+        arrys[i]=row['danjuNumber']+row['saleNumber'];
+
+    });
+    window.location.href="/stock/weiwai/outdz?arrys="+arrys;
 }
 
 

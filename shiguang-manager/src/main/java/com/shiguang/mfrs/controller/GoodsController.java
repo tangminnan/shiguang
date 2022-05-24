@@ -77,7 +77,7 @@ public class GoodsController {
         }
         String goodsNane = goods.getGoodsname();
         Map<String, Object> map1 = new HashMap<>();
-        map1.put("goodsNane", goodsNane);
+        map1.put("goodsname", goodsNane);
         List<GoodsDO> list1 = goodsService.list(map1);
         if (list1.size() > 0) {
             return R.error("商品类别已存在");

@@ -16,8 +16,10 @@ import com.shiguang.optometry.service.OptometryService;
 import com.shiguang.optometry.service.ResultDiopterService;
 import com.shiguang.product.domain.HlyDO;
 import com.shiguang.product.domain.ShiguangDO;
+import com.shiguang.product.domain.ShiguangdzDO;
 import com.shiguang.product.service.HlyService;
 import com.shiguang.product.service.ShiguangService;
+import com.shiguang.product.service.ShiguangdzService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -50,6 +52,8 @@ public class OptometryNewController {
     private HlyService hlyService;
     @Autowired
     private ShiguangService shiguangService;
+    @Autowired
+    private ShiguangdzService shiguangdzService;
 
     @Autowired
     UserService userService;
@@ -600,6 +604,24 @@ public class OptometryNewController {
         Query query = new Query(params);
         List<ShiguangDO> shiguanglist = shiguangService.getshiguang(query);
         int total = shiguangService.getshiguangcount(query);
+        PageUtils pageUtils = new PageUtils(shiguanglist, total);
+        return pageUtils;
+    }
+
+    @GetMapping("/shiguangdz")
+    @RequiresPermissions("information:optometryNew:shiguangdz")
+    String shiguangdz() {
+        return "product/shiguangdz/getshiguang";
+    }
+
+    @ResponseBody
+    @GetMapping("/shiguangdzlist")
+    @RequiresPermissions("information:optometryNew:shiguangdz")
+    public PageUtils shiguangdzlist(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<ShiguangdzDO> shiguanglist = shiguangdzService.getshiguang(query);
+        int total = shiguangdzService.getshiguangcount(query);
         PageUtils pageUtils = new PageUtils(shiguanglist, total);
         return pageUtils;
     }

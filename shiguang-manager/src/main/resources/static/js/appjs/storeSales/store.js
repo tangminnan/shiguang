@@ -439,6 +439,102 @@ function getShiguang(){
     layer.full(toIndex)
 }
 
+function getShiguangdz(){
+    var toIndex = layer.open({
+        type : 2,
+        title : '视光订做',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : "/information/store/shiguangdz/",// iframe的url
+        cancel: function(index, layero){
+            var rows = $(layero).find("iframe")[0].contentWindow.sure();
+            // var rows = sessionStorage.getItem("row");
+            // alert(rows.length)
+            // if (rows.length > 0){
+            //     a=a+1;
+            // }
+            // var dataArray = new Array();
+            // var rows = '';
+            // var shiguang = window.localStorage.getItem("shiguang");
+            // if (null != shiguang){
+            //     dataArray.push(JSON.parse(shiguang));
+            // }
+            // rows = dataArray;
+            // localStorage.clear();
+            // alert(JSON.stringify(rows));
+            for (var i=0;i<rows.length;i++){
+                a=a+1;
+                var goodsNumStr = rows[i].goodsNum;
+                var retailPrice = rows[i].retailPrice;
+                var desc = "视光订做";
+                html = "<tr><td><input name=\"cho\" type=\"checkbox\" onclick='getGoodsInfoSelect(\""+goodsNumStr+"\",\""+retailPrice+"\")'/></td>";
+                html += "<td>"+rows[i].goodsName+"</td>";
+                html += "<td></td>";
+                html += "<td id='danjiaMoneysgdz"+a+"'>"+rows[i].retailPrice+"</td>";
+                html += "<td>"+rows[i].goodsCount+"</td>";
+                html += "<td><input id='storeCount"+a+"' name='storeCount' value='1' style='width:15px;' onchange='getSummoney(this,\""+desc+"\")'/></td>";
+                html += "<td>"+rows[i].retailPrice+"</td>";
+                html += "<td><input id='zhekoulvsgdz"+a+"' name='saleDiscount' value='0.00' oninput='getZhekoulv(this,\""+desc+"\")'/></td>";
+                html += "<td id='zhekousgdz"+a+"'>0.00</td>";
+                html += "<td id='zhekouMoneysgdz"+a+"'>0.00</td>";
+                html += "<td id='youhuiMoneysgdz"+a+"'>0.00</td>";
+                html += "<td id='molingMoneysgdz"+a+"'>0.00</td>";
+                html += "<td id='yingshouMoneysgdz"+a+"'>0.00</td>";
+                html += "<td>视光</td>";
+                html += "<td><em onclick='del(this,\"" + rows[i].retailPrice + "\",\""+rows[i].goodsName+"\")'></em></td>";
+                html += "<input id='unit' name='unit' type='hidden' value='"+rows[i].unit+"'/>"
+                html += "<input id='storeName'name='storeName' type='hidden' value='"+rows[i].goodsName+"'/>"
+                html += "<input id='goodsNum'name='goodsNum' type='hidden' value='"+rows[i].goodsNum+"'/>"
+                html += "<input id='storeUnit'name='storeUnit' type='hidden' value='"+rows[i].retailPrice+"'/>"
+                //html += "<input id='storeCount'name='storeCount' type='hidden' />"
+                html += "<input id='classtype' name='classtype' type='hidden' value='2'/>"
+                html += "<input id='brandName' name='brandName' type='hidden' value='"+rows[i].brandname+"'/>"
+                html += "<input id='leftRight' name='leftRight' type='hidden' value='空'/>"
+                html += "<input id='goodsCode' name='goodsCode' type='hidden' value='"+rows[i].goodsCode+"'/>"
+                html += "<input id='batch' name='batch' value='"+rows[i].batch+"' type='hidden' />"
+                html += "<input id='yingshousg"+a+"' value='"+rows[i].retailPrice+"' type='hidden' />"
+                html += "<input id='storeDescribe'name='storeDescribe' value='视光订做' type='hidden' />"
+                html += "</tr>";
+                $("#goods").append(html);
+                $("#yingshouMoneysg"+a+"").text(rows[i].retailPrice)
+                // var amountMoney = $("#amountMoney").val();
+                // if (amountMoney != ''){
+                //     price = amountMoney;
+                // }
+                price = (parseFloat(price)+ parseFloat(rows[i].retailPrice)).toFixed(1);
+                //array.push({"producName":rows[i].producName,"retailPrice":rows[i].retailPrice,"storeCount":1});
+                //arraystore.push(rows[i].goodsName);
+                //arrayunit.push(rows[i].retailPrice);
+                //unitarray.push(rows[i].unit);
+                //goodsNumArray.push(rows[i].goodsNum);
+                //arraycount.push(1);
+                //classArray.push(1);
+            }
+            //$("#storeName").val(arraystore);
+            //$("#storeUnit").val(arrayunit);
+            //$("#storeCount").val(arraycount);
+            //$("#classtype").val(classArray);
+            //$("#unit").val(unitarray);
+            //$("#goodsNum").val(goodsNumArray);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
+            //son_msg就是子页面中的msg数据
+            //var son_msg = $(layero).find("iframe")[0].contentWindow.batchSelect();
+        }
+    });
+    layer.full(toIndex)
+}
+
 function getHuliye(){
     var toIndex = layer.open({
         type : 2,

@@ -1,7 +1,7 @@
 
 var prefix = "/information/package"
 $(function() {
-	load();
+	//load();
 });
 
 function load() {
@@ -36,7 +36,11 @@ function load() {
 								offset:params.offset,
                                 goodsType:$('#goodsType').val(),
                                 producName:$('#producName').val(),
-                                producNum:$('#producNum').val()
+                                producNum:$('#producNum').val(),
+                                retailPrice:$("#retailPrice").val(),
+                                retailPrice2:$("#retailPrice2").val(),
+                                brandname:$("#brandname").val(),
+                                mfrsname:$("#mfrsname").val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -86,6 +90,7 @@ function load() {
 }
 function reLoad() {
     $('#exampleTable').bootstrapTable('refresh');
+    load();
 }
 function batchSelect() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组

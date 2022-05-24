@@ -17,24 +17,33 @@
 								<!--<i class="fa fa-trash" aria-hidden="true"></i>删除-->
 							<!--</button>-->
 						<!--</div>-->
-						<div class="columns pull-right">
-							<button class="btn btn-success" onclick="reLoad()">查询</button>
-						</div>
-						<div class="columns pull-right col-md-2 nopadding">
-							<input id="saleNumber" type="text" class="form-control"
+						<!--<div class="columns pull-right">-->
+							<!--<button class="btn btn-success" onclick="findSaleNumber()">查询</button>-->
+						<!--</div>-->
+						<div class="columns pull-left  nopadding">
+							配镜单号：
+							<input id="saleNumber" type="text"
 								placeholder="配镜单号">
+							<button onclick="findSaleNumber()">查询</button>
 						</div>
-						<div class="columns pull-right nopadding">
-							<input id="name" type="text" class="form-control"
-								   placeholder="会员姓名">
+						<div class="columns pull-left  nopadding">
+							原在途状态：
+							<input id="saleStatus" type="text" disabled >
 						</div>
-						<div class="columns pull-right nopadding">
-							<input id="phone1" type="text" class="form-control"
-								   placeholder="联系电话">
+						<div class="columns pull-left  nopadding">
+							在途状态修改为：
+							<select id="logstatus" style="width: 200px" name="logstatus" >
+								<option value="">请选择</option>
+								<option value="顾客取镜">顾客取镜</option>
+							</select>
 						</div>
+						<div class="columns pull-left  nopadding">
+							<button onclick="saveStatus()">保存</button>
+						</div>
+
 					</div>
-					<table id="exampleTable" data-mobile-responsive="true">
-					</table>
+					<!--<table id="exampleTable" data-mobile-responsive="true">-->
+					<!--</table>-->
 				</div>
 			</div>
 		</div>
@@ -65,5 +74,44 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/logstatus/transit.js"></script>
+<script type="text/javascript">
+	function findSaleNumber(){
+	    var saleNumber = $("#saleNumber").val();
+        $.ajax({
+            url: "/information/transit/findSale",
+            type: "post",
+            data: {
+                'saleNumber': saleNumber
+            },
+            dataType: 'JSON',
+            async: false,
+            success: function (datajson) {
+                $("#saleStatus").val(datajson.logisticStatus)
+            }
+        });
+	}
+	function saveStatus(){
+        var saleNumber = $("#saleNumber").val();
+        var logstatus = $("#logstatus").val();
+        alert(logstatus);
+        $.ajax({
+            url: "/information/transit/updateStatus",
+            type: "post",
+            data: {
+                'saleNumber': saleNumber,
+				'logstatus': logstatus
+            },
+            dataType: 'JSON',
+            async: false,
+            success: function (datajson) {
+                if (datajson.code == '200'){
+                    layer.alert(datajson.message);
+                    location.reload();
+				}
+            }
+        });
+	}
+
+</script>
 </body>
 </html>

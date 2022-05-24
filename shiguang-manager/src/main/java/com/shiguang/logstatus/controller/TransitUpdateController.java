@@ -7,6 +7,7 @@ import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.logstatus.domain.LogStatusDO;
 import com.shiguang.logstatus.domain.WorkRecoedDO;
 import com.shiguang.logstatus.service.LogStatusService;
+import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +60,28 @@ public class TransitUpdateController {
         int total = statusService.findSalePeijingCount(query);
         PageUtils pageUtils = new PageUtils(salesDOList, total);
         return pageUtils;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/findSale")
+    LogStatusDO findSale(String saleNumber, Model model) {
+        LogStatusDO logStatusDO = statusService.getLogStatusBySaleNum(saleNumber);
+        model.addAttribute("logStatusDO", logStatusDO);
+        return logStatusDO;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/updateStatus")
+    Map<String,Object> updateStatus(String saleNumber,String logstatus, Model model) {
+        Map<String,Object> map = new HashMap<>();
+        LogStatusDO logStatusDO = new LogStatusDO();
+        logStatusDO.setSaleNumber(saleNumber);
+        logStatusDO.setLogisticStatus(logstatus);
+        if (statusService.update(logStatusDO) > 0){
+            map.put("code","200");
+            map.put("message","修改成功");
+        }
+        return map;
     }
 
     @GetMapping("/edit/{saleNumber}")

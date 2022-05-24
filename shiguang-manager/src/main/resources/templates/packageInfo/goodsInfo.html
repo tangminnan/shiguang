@@ -8,7 +8,7 @@
 			<div class="ibox">
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
-						<div class="columns pull-left">
+						<div class="columns pull-right">
 							<!--<button shiro:hasPermission="information:package:add" type="button" class="btn  btn-primary" onclick="add()">-->
 								<!--<i class="fa fa-plus" aria-hidden="true"></i>添加-->
 							<!--</button>-->
@@ -17,17 +17,39 @@
 								<i class="fa fa-plus" aria-hidden="true"></i>删除
 							</button>
 						</div>
-						<div class="columns pull-right">
+						<div class="columns pull-left">
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
 						</div>
-						<div class="columns pull-right col-md-2 nopadding">
+						<div class="columns pull-right  nopadding">
 							<input id="producName" type="text" class="form-control"
 								placeholder="商品名称">
+                        </div>
+                        <div class="columns pull-right  nopadding">
 							<input id="producNum" type="text" class="form-control"
 								   placeholder="商品代码">
+                        </div>
+                        <div class="columns pull-right  nopadding">
 							<input id="goodsType" th:value="${goodsType}" type="hidden" class="form-control"
 								   placeholder="商品类型">
+                        </div>
+                        <div class="columns pull-right nopadding">
+								<input id="retailPrice" type="text"
+									   placeholder="商品价格">～
+								<input id="retailPrice2" type="text"
+									   placeholder="商品价格">
+                        </div>
+						<div class="columns pull-right nopadding">
+							<input id="brandname" type="text"
+								   placeholder="请选择品种">
+							<input type="button" onclick="getBrandName()" value="按品种查询" style="background-color: #1c84c6;color: white"></input>
 						</div>
+							<div class="columns pull-right nopadding">
+								<input id="mfrsname" type="text"
+									   placeholder="请选择制造商">
+								<input type="button" onclick="getMfrsName()" value="按制造商查询" style="background-color: #1c84c6;color: white"></input>
+							</div>
+
+
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
 					</table>
@@ -61,5 +83,49 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/packageInfo/goodsInfo.js"></script>
+<script type="text/javascript">
+    function getMfrsName () {
+        var toIndex = layer.open({
+            type : 2,
+            title : '制造商',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/package/mfrs/",// iframe的url
+            cancel: function(index, layero){
+                var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                //alert(JSON.stringify(rows));
+                if (''!= rows){
+                    $("#mfrsname").val(rows[0].mfrsname);
+                }
+
+            }
+        });
+        layer.full(toIndex)
+    }
+    function getBrandName () {
+        var mfrsName = $("#mfrsname").val();
+        if (mfrsName == ''){
+            return layer.alert("请先选择制造商")
+		}
+        var toIndex = layer.open({
+            type : 2,
+            title : '品种',
+            maxmin : true,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '800px', '520px' ],
+            content : "/information/package/brand/",// iframe的url
+            cancel: function(index, layero){
+                var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                //alert(JSON.stringify(rows));
+                if (''!= rows){
+                    $("#brandname").val(rows[0].brandname);
+                }
+
+            }
+        });
+        layer.full(toIndex)
+    }
+</script>
 </body>
 </html>

@@ -157,6 +157,16 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
+    public List<StockDO> listShiguangdz(Map<String, Object> map) {
+        return stockDao.listShiguangdz(map);
+    }
+
+    @Override
+    public int countShiguangdz(Map<String, Object> map) {
+        return stockDao.countShiguangdz(map);
+    }
+
+    @Override
     public List<StockDO> listHuly(Map<String, Object> map) {
         return stockDao.listHuly(map);
     }
@@ -317,6 +327,16 @@ public class StockServiceImpl implements StockService {
     @Override
     public int selectSgCount(Map<String, Object> map) {
         return stockDao.selectSgCount(map);
+    }
+
+    @Override
+    public List<ShiguangdzDO> selectSgdz(Map<String, Object> map) {
+        return stockDao.selectSgdz(map);
+    }
+
+    @Override
+    public int selectSgdzCount(Map<String, Object> map) {
+        return stockDao.selectSgdzCount(map);
     }
 
     @Override

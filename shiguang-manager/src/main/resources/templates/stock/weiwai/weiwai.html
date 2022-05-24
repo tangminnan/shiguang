@@ -16,7 +16,10 @@
 								 <!--批量打印-->
 							<!--</button>-->
 							<button shiro:hasPermission="stock:weiwai:out" type="button" class="btn  btn-default" onclick="out()">
-								信息导出
+								框镜订单导出
+							</button>
+							<button shiro:hasPermission="stock:weiwai:outdz" type="button" class="btn  btn-default" onclick="outShiguangdz()">
+								视光订单导出
 							</button>
 							<button shiro:hasPermission="stock:weiwai:batchRemove" type="button" class="btn  btn-danger"
 								onclick="batchRemove()">
@@ -75,6 +78,7 @@
 									<option value="">请选择订做类型</option>
 									<option value="3">框镜订做</option>
 									<option value="4">隐形订做</option>
+								    <option value="5">视光订做</option>
 							</select>
 						</div>
 						<div class="columns pull-right col-md-1.5 nopadding">

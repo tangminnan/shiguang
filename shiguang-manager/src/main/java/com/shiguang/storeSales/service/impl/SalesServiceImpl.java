@@ -24,6 +24,7 @@ import com.shiguang.optometry.service.ResultDiopterService;
 import com.shiguang.packageManager.service.PackageInfoService;
 import com.shiguang.packageManager.service.PackageService;
 import com.shiguang.product.domain.JpdzDO;
+import com.shiguang.product.domain.ShiguangdzDO;
 import com.shiguang.product.service.*;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.domain.WeiwaiDO;
@@ -135,6 +136,8 @@ public class SalesServiceImpl implements SalesService {
 	private DepartmentService departmentService;
 	@Autowired
 	private InfoService infoService;
+	@Autowired
+	private ShiguangdzService shiguangdzService;
 	
 	@Override
 	public SalesDO get(Long id){
@@ -976,7 +979,9 @@ public class SalesServiceImpl implements SalesService {
 				companyId = ShiroUtils.getUser().getCompanyId();
 				Map<String,Object> map = new HashMap<>();
 				map.put("companyId", companyId);
-				map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+				if ("3".equals(companyId)){
+					map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+				}
 				positionDO = stockService.findPosition(map);
 			}
 			for (int e=0;e<goodsDescribe.length;e++){
@@ -1104,7 +1109,7 @@ public class SalesServiceImpl implements SalesService {
 						weiwaishujuDO.setDanjuStyle("1");
 						weiwaishujuDO.setSaleNumber(salesDO.getSaleNumber());
 						weiwaishujuDO.setWeiwaiStyle("委外订单");
-						weiwaishujuDO.setBeizhu("");
+						weiwaishujuDO.setBeizhu(salesDO.getSaleremark());
 						weiwaishujuDO.setGkname(salesDO.getMemberName());
 						weiwaishujuDO.setHyknum(salesDO.getMemberNumber());
 						weiwaishujuDO.setPhone(salesDO.getMemberTel());
@@ -1607,7 +1612,7 @@ public class SalesServiceImpl implements SalesService {
 											weiwaishujuDO.setSph(zyDO.getZySphod());
 										}
 										if (null == zyDO.getZyCylod()){
-											weiwaishujuDO.setCyl(zyDO.getZyCylod());
+											weiwaishujuDO.setCyl("");
 										}else {
 											weiwaishujuDO.setCyl(zyDO.getZyCylod());
 										}
@@ -1671,6 +1676,7 @@ public class SalesServiceImpl implements SalesService {
 						weiwaiDO.setMfrsname(jpdzDO.getMfrsname());
 						weiwaiDO.setBrandnum(jpdzDO.getBrandnum());
 						weiwaiDO.setBrandname(jpdzDO.getBrandname());
+						weiwaiDO.setBeizhu(weiwaishujuDO.getBeizhu());
 						Map<String, Object> posMap = new HashMap<>();
 						posMap.put("companyId", ShiroUtils.getUser().getCompanyId());
 						if ("3".equals(ShiroUtils.getUser().getCompanyId())) {
@@ -1741,8 +1747,108 @@ public class SalesServiceImpl implements SalesService {
 						weiwaiDO.setShouhuoPhone(departmentDO.getDepartTel());
 						weiwaiDO.setShouhuoAddress(departmentDO.getDepartAddress());
 						weiwaiService.save(weiwaiDO);
+//						InfoDO infoDOs = new InfoDO();
+//						infoDOs.setSaleNumber(salesDO.getSaleNumber());
+//						infoDOs.setTrainStatus("委外订单");
+//						infoDOs.setTrainTime(new Date());
+//						infoDOs.setTrainName(ShiroUtils.getUser().getName());
+//						infoService.save(infoDOs);
+					} else if ("视光订做".equals(goodsDescribe[s]) && "2".equals(classType[s])){
+						WeiwaishujuDO weiwaishujuDO = new WeiwaishujuDO();
+						weiwaishujuDO.setNumber(weiwaiNumber);
+						weiwaishujuDO.setDanjuDay(sim.format(new Date()));
+						weiwaishujuDO.setDepartname(ShiroUtils.getUser().getStore());
+						weiwaishujuDO.setZhidanPeople(salesDO.getSaleName());
+						weiwaishujuDO.setTimetime(sim.format(salesDO.getMirrorTime()));
+						weiwaishujuDO.setDanjuStyle("1");
+						weiwaishujuDO.setSaleNumber(salesDO.getSaleNumber());
+						weiwaishujuDO.setWeiwaiStyle("委外订单");
+						weiwaishujuDO.setBeizhu(salesDO.getSaleremark());
+						weiwaishujuDO.setGkname(salesDO.getMemberName());
+						weiwaishujuDO.setHyknum(salesDO.getMemberNumber());
+						weiwaishujuDO.setPhone(salesDO.getMemberTel());
+						weiwaishujuDO.setJcStyle("视光订做");
+						weiwaishujuDO.setSph("");
+						weiwaishujuDO.setCyl("");
+						weiwaishujuDO.setZx("");
+						weiwaishujuDO.setSlj("");
+						weiwaishujuDO.setJd("");
+						weiwaishujuDO.setNeartj("");
+						weiwaishujuDO.setFartj("");
+						weiwaishujuDO.setTg(salesDO.getRighttg());
+						weiwaishujuDO.setNum(goodNumstr[s]);
+						weiwaishujuDO.setCode(goodsStr[s]);
+						weiwaishujuDO.setName(goodsName[s]);
+						weiwaishujuDO.setLeftRight(leftRight[s]);
+						weiwaishujuDO.setCount(goodsCount[s]);
+						weiwaishujuDO.setYaoqiu(salesDO.getProcessAsk());
+						weiwaishujuService.save(weiwaishujuDO);
+						WeiwaiDO weiwaiDO = new WeiwaiDO();
+						weiwaiDO.setSaleNumber(salesDO.getSaleNumber());
+						weiwaiDO.setDanjuNumber(danjuNumber);
+						weiwaiDO.setDanjuDay(sim.format(new Date()));
+						weiwaiDO.setEyeStyle("5");
+						weiwaiDO.setZhidanPeople(salesDO.getSaleName());
+						ShiguangdzDO shiguangdzDO = shiguangdzService.getShiguangInfomation(goodNumstr[s]);
+						weiwaiDO.setMfrsid(shiguangdzDO.getMfrsid());
+						weiwaiDO.setMfrsname(shiguangdzDO.getMfrsname());
+						weiwaiDO.setBrandnum(shiguangdzDO.getBrandnum());
+						weiwaiDO.setBrandname(shiguangdzDO.getBrandname());
+						weiwaiDO.setBeizhu(weiwaishujuDO.getBeizhu());
+						Map<String, Object> posMap = new HashMap<>();
+						posMap.put("companyId", ShiroUtils.getUser().getCompanyId());
+						if ("3".equals(ShiroUtils.getUser().getCompanyId())) {
+							posMap.put("positionId", "7");
+						}
+						PositionDO positionDO = stockService.findHegePosition(posMap);
+
+						weiwaiDO.setPositionId(positionDO.getPositionId());
+						weiwaiDO.setPositionName(positionDO.getPositionName());
+						weiwaiDO.setWeiwaisaleNumber(weiwaishujuDO.getNumber());
+						weiwaiDO.setMirrorTime(sim.format(salesDO.getMirrorTime()));
+						weiwaiDO.setNum(goodNumstr[s]);
+						weiwaiDO.setCode(goodsStr[s]);
+						weiwaiDO.setName(goodsName[s]);
+						weiwaiDO.setStyle("委外订单");
+						weiwaiDO.setRl("");
+						weiwaiDO.setCount(goodsCount[s]);
+						weiwaiDO.setSph("");
+						weiwaiDO.setCyl("");
+						weiwaiDO.setZx("");
+						weiwaiDO.setFartj("");
+						weiwaiDO.setNeartj("");
+						weiwaiDO.setTg("");
+						weiwaiDO.setAdd("");
+						weiwaiDO.setSlj("");
+						weiwaiDO.setZj("");
+						weiwaiDO.setYaoqiu("");
+						weiwaiDO.setJd("");
+						weiwaiDO.setQulv("");
+						weiwaiDO.setGkname(weiwaishujuDO.getGkname());
+						weiwaiDO.setHyknum(weiwaishujuDO.getHyknum());
+						weiwaiDO.setPhone(weiwaishujuDO.getPhone());
+						weiwaiDO.setUsername("");
+						weiwaiDO.setStatus("1");
+						weiwaiDO.setShTime("");
+						weiwaiDO.setShstatus("");
+						weiwaiDO.setPsname("");
+						weiwaiDO.setPstime("");
+						weiwaiDO.setCompanyName(ShiroUtils.getUser().getCompany());
+						weiwaiDO.setDepartname(ShiroUtils.getUser().getStore());
+						weiwaiDO.setViewGoodName(shiguangdzDO.getViewGoodName());
+						DepartmentDO departmentDO = departmentService.getDepartName(positionDO.getDepartNumber());
+						weiwaiDO.setShouhuoPeople(departmentDO.getPersonCharge());
+						weiwaiDO.setShouhuoPhone(departmentDO.getDepartTel());
+						weiwaiDO.setShouhuoAddress(departmentDO.getDepartAddress());
+						weiwaiService.save(weiwaiDO);
 					}
 				}
+				InfoDO infoDOs = new InfoDO();
+				infoDOs.setSaleNumber(salesDO.getSaleNumber());
+				infoDOs.setTrainStatus("委外订单");
+				infoDOs.setTrainTime(new Date());
+				infoDOs.setTrainName(ShiroUtils.getUser().getName());
+				infoService.save(infoDOs);
 			}
 			return R.ok();
 		}

@@ -68,6 +68,10 @@ public interface StockService {
 
     int countShiguang(Map<String, Object> map);
 
+    List<StockDO> listShiguangdz(Map<String,Object> map);
+
+    int countShiguangdz(Map<String,Object> map);
+
     List<StockDO> listHuly(Map<String, Object> map);
 
     int countHuly(Map<String, Object> map);
@@ -114,6 +118,8 @@ public interface StockService {
     int selectHcCount(Map<String, Object> map);
     List<ShiguangDO> selectSg(Map<String, Object> map);
     int selectSgCount(Map<String, Object> map);
+    List<ShiguangdzDO> selectSgdz(Map<String, Object> map);
+    int selectSgdzCount(Map<String, Object> map);
     //查询该条码的库存数量
     StockDO getProduceCode(StockDO stockDO);
 

@@ -64,10 +64,10 @@
     $().ready(function(){
         var list = [[${infoDOList}]];
         for (var i=0;i<list.length;i++){
-            html = "<tr><td><img src='/img/duigou.png'></td>";
-            html += "<td><span>'"+list[i].trainStatus+"'</span></td>"
-            html += "<td><span>'"+list[i].trainTime+"'</span></td>"
-            html += "<td><span>'"+list[i].trainName+"'</span></td></tr>"
+            html = "<tr><td><img style='width: 20px;height: 20px;' src='/img/duigou.png'></td>";
+            html += "<td><span>"+list[i].trainStatus+"</span></td>"
+            html += "<td><span>"+list[i].trainDate+"</span></td>"
+            html += "<td><span>"+list[i].trainName+"</span></td></tr>"
 			$("#inventoryId").append(html);
 		}
     });

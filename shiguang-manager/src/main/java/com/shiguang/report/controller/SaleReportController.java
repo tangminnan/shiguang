@@ -42,10 +42,16 @@ public class SaleReportController {
     @RequiresPermissions("information:saleReport:saleReport")
     String SaleReport(Model model){
         Map<String, Object> map = new HashMap<>();
-        map.put("departType","销售门店");
+
         map.put("state",1);
         if (null != ShiroUtils.getUser().getStoreNum()){
             map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+//            if ("3".equals(ShiroUtils.getUser().getCompanyId())){
+//                map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+//            } else {
+//                map.put("departType","销售门店");
+//            }
+
         }
         map.put("companyId",ShiroUtils.getUser().getCompanyId());
         List<DepartmentDO> departmentDOList = departmentService.list(map);

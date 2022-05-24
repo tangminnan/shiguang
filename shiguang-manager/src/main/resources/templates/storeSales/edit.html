@@ -1083,6 +1083,7 @@
 				<li><span onclick="getHaocai()">耗材</span></li>
 				<li><span onclick="getLaohuajing()">老花镜</span></li>
 				<li><span onclick="getShiguang()">视光</span></li>
+				<li><span onclick="getShiguangdz()">视光订做</span></li>
 			</ul>
 			<ul class="ulFu">
 				<li><span onclick="getZengpin()">赠品</span></li>
@@ -1952,6 +1953,24 @@
             $("#ula").append(lis)
             $("#amountMoney").val(price)
             $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
+		} else if ("视光订做" == obj){
+            var sdf = $("#storeCount"+targetStr+"").val()
+            var ss = $("#yingshouMoneysgdz"+targetStr+"").text();
+            var danjia = $("#danjiaMoneysgdz"+targetStr+"").text();
+            var dd = (parseFloat(danjia)*parseFloat(sdf)).toFixed(1)
+            price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
+            $("#yingshouMoneysgdz"+targetStr+"").text(dd);
+            $("#ula").empty();
+            var lis="";
+            lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
+            lis += "<li>折扣金额：0.00</li>";
+            lis += "<li>优惠金额：0.00</li>";
+            lis += "<li>抹零金额："+molingPrice+"</li>";
+            lis += "<li>应收金额："+price+"</li>";
+            lis += "<li>实收金额："+price+"</li>";
+            $("#ula").append(lis)
+            $("#amountMoney").val(price)
+            $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
 		} else if ("视光" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneysg"+targetStr+"").text();
@@ -1970,7 +1989,7 @@
             $("#ula").append(lis)
             $("#amountMoney").val(price)
             $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
-		} else if ("配件" == obj){
+        } else if ("配件" == obj){
             var sdf = $("#storeCount"+targetStr+"").val()
             var ss = $("#yingshouMoneypj"+targetStr+"").text();
             var danjia = $("#danjiaMoneypj"+targetStr+"").text();
@@ -2249,6 +2268,37 @@
             //price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
             price = parseFloat(price) - parseFloat(ssold) + parseFloat(dd);
             $("#zhekouMoneysg"+targetStr+"").val(zhekouPrice);
+            // $("#ula").empty();
+            // var lis="";
+            // lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";
+            // lis += "<li>折扣金额：0.00</li>";
+            // lis += "<li>优惠金额：0.00</li>";
+            // lis += "<li>抹零金额："+molingPrice+"</li>";
+            // lis += "<li>应收金额："+price+"</li>";
+            // lis += "<li>实收金额："+price+"</li>";
+            // $("#ula").append(lis)
+            // $("#amountMoney").val(price)
+            // $("#primeMoney").val((parseFloat(price)+parseFloat(molingPrice)).toFixed(1))
+        } else if ("视光订做" == obj){
+            var zhekoulv = $("#zhekoulvsgdz"+targetStr+"").val();
+            var sdf = $("#storeCount"+targetStr+"").val()
+            var ssold = $("#yingshouMoneysgdz"+targetStr+"").text();
+            var danjia = $("#danjiaMoneysgdz"+targetStr+"").text();
+            var yingshou = (parseFloat(danjia)*parseFloat(sdf)).toFixed(1);
+            //alert(yingshou);
+            var dd = (parseFloat(danjia)*parseFloat(sdf)* parseFloat(zhekoulv)).toFixed(1);
+            yingshousg = dd;
+            //alert(dd);
+            $("#yingshouMoneysgdz"+targetStr+"").text(dd);
+            var ss = $("#yingshouMoneysgdz"+targetStr+"").text();
+            //alert(ss);
+            var zhekouPrice = (parseFloat(yingshou) - parseFloat(dd)).toFixed(1);
+            yuanjiaPrice = (parseFloat(yuanjiaPrice) +parseFloat(zhekouPrice)).toFixed(1);
+            //alert(zhekouPrice);
+            //alert(parseFloat(price));
+            //price = parseFloat(price) - parseFloat(ss) + parseFloat(dd);
+            price = parseFloat(price) - parseFloat(ssold) + parseFloat(dd);
+            $("#zhekouMoneysgdz"+targetStr+"").val(zhekouPrice);
             // $("#ula").empty();
             // var lis="";
             // lis =  "<li>原价金额："+(parseFloat(price)+parseFloat(molingPrice)).toFixed(1)+"</li>";

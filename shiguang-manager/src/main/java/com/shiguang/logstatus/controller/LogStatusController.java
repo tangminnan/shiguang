@@ -150,6 +150,47 @@ public class LogStatusController {
         return pageUtils;
     }
 
+    @ResponseBody
+    @GetMapping("/yifaliaolist")
+    @RequiresPermissions("information:logstatus:faliao")
+    public PageUtils yifaliaolist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        if (null != ShiroUtils.getUser().getCompanyId()){
+            query.put("companyid",ShiroUtils.getUser().getCompanyId());
+        }
+        query.put("logisticStatusss","1");
+        //query.put("storeDescribe","镜片");
+        if (null != params.get("memberName") && !"".equals(params.get("memberName"))){
+            query.put("memberName",String.valueOf(query.get("memberName")).trim());
+//            query.put("offset",0);
+//            query.put("limit",10);
+        }
+        if (null != params.get("saleNumber") && !"".equals(params.get("saleNumber"))){
+            query.put("saleNumber",String.valueOf(query.get("saleNumber")).trim());
+//            query.put("offset",0);
+//            query.put("limit",10);
+        }
+        if (null != params.get("phone") && !"".equals(params.get("phone"))){
+            query.put("phone",String.valueOf(query.get("phone")).trim());
+//            query.put("offset",0);
+//            query.put("limit",10);
+        }
+        List<SalesDO> salesDOList = statusService.findSaleAll(query);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for (SalesDO salesDO : salesDOList){
+            salesDO.setMirrorDate(simpleDateFormat.format(salesDO.getMirrorTime()));
+            salesDO.setPeijingDate(simpleDateFormat.format(salesDO.getPeijingTime()));
+            salesDO.setClassTypeFL("2");
+//            if ("委外完成".equals(salesDO.getLogStatus())){
+//                salesDO.setClassTypeFL("2");
+//            }
+        }
+        int total = statusService.findSaleCount(query);
+        PageUtils pageUtils = new PageUtils(salesDOList, total);
+        return pageUtils;
+    }
+
     @GetMapping("/add")
     @RequiresPermissions("information:logstatus:add")
     String add(){
@@ -173,11 +214,14 @@ public class LogStatusController {
 //		model.addAttribute("jianchaTime",simpleDateFormat.format(new Date()));
         SalesDO settlementDO = salesService.getSaleNumber(saleNumber);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        model.addAttribute("faliaoName",ShiroUtils.getUser().getName());
+        model.addAttribute("faliaoDate",simpleDateFormat.format(new Date()));
         if (null != settlementDO.getPeijingTime()){
             settlementDO.setPeijingDate(simpleDateFormat.format(settlementDO.getPeijingTime()));
         }else {
             settlementDO.setPeijingDate("");
         }
+        settlementDO.setMirrorDate(simpleDateFormat.format(settlementDO.getMirrorTime()));
         if (settlementDO.getSex() == 0){
             settlementDO.setSexx("男");
         } else if (settlementDO.getSex() == 1){
@@ -201,9 +245,14 @@ public class LogStatusController {
             StringBuilder sb = new StringBuilder();
             if (null != color && color.length>0){
                 for (String n:color){
-                    sb.append(n.replace("'", "\\'")).append(",");
+                    if (null != n){
+                        sb.append(n.replace("'", "\\'")).append(",");
+                    }
+
                 }
-                sb.deleteCharAt(sb.length() - 1);
+                if (sb.length()>0) {
+                    sb.deleteCharAt(sb.length() - 1);
+                }
             }
             settlementDO.setColorSize(sb.toString());
         }
@@ -712,7 +761,8 @@ public class LogStatusController {
         } else {
             model.addAttribute("countSum","");
         }
-        return "logstatus/peijingdan";
+//        return "logstatus/peijingdan";
+        return "logstatus/faliaostatus";
     }
 
     /**
@@ -761,7 +811,9 @@ public class LogStatusController {
             if (!"镜架".equals(storeDescribe[a]) && !"自架".equals(storeDescribe[a]) && !"自片".equals(storeDescribe[a]) ){
                 if (!"镜片".equals(storeDescribe[a]) && !"隐形".equals(storeDescribe[a])){
                     maps.put("companyId", companyId);
-                    maps.put("departNumber",ShiroUtils.getUser().getStoreNum());
+                    if ("3".equals(companyId)){
+                        maps.put("departNumber",ShiroUtils.getUser().getStoreNum());
+                    }
                     positionDO = stockService.findPosition(maps);
                 } else {
                     maps.put("companyId", companyId);
