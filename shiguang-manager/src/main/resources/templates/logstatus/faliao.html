@@ -40,8 +40,26 @@
 								   placeholder="联系方式">
 						</div>
 					</div>
-					<table id="exampleTable" data-mobile-responsive="true">
-					</table>
+					<div style="padding-top: 60px;">
+						<ul class="nav nav-tabs" id="myTab">
+							<li class="active"><a class="btn btn-primary btn-xs" href="#weifaliao" mce_href="#" style="text-decoration: none;">未发料</a></li>
+							<li><a class="btn btn-primary btn-xs" href="#yifaliao" mce_href="#" style="text-decoration: none;">已发料</a></li>
+
+							<!-- <li><a class="btn btn-primary btn-xs" href="#yanguangdetail" mce_href="#" style="text-decoration: none;">验光详情</a></li> -->
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active " id="weifaliao" >
+								<table id="exampleTable1" data-mobile-responsive="true">
+								</table>
+							</div>
+							<div class="tab-pane" id="yifaliao" >
+								<table id="exampleTable2" data-mobile-responsive="true">
+								</table>
+							</div>
+						</div>
+					</div>
+					<!--<table id="exampleTable" data-mobile-responsive="true">-->
+					<!--</table>-->
 				</div>
 			</div>
 		</div>
@@ -72,5 +90,15 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/logstatus/faliao.js"></script>
+<script type="text/javascript">
+    $('#myTab a').click(function (e) {
+        //e.preventDefault();
+        $(this).tab('show');
+    });
+    function reLoad() {
+        $('#exampleTable1').bootstrapTable('refresh');
+        $('#exampleTable2').bootstrapTable('refresh');
+    }
+</script>
 </body>
 </html>

@@ -23,6 +23,7 @@ public class InfoDO implements Serializable {
 	private String trainStatus;
 	//操作时间
 	private Date trainTime;
+	private String trainDate;
 	//操作人员
 	private String trainName;
 	//更新时间
@@ -99,5 +100,13 @@ public class InfoDO implements Serializable {
 	 */
 	public Date getUpdate() {
 		return update;
+	}
+
+	public String getTrainDate() {
+		return trainDate;
+	}
+
+	public void setTrainDate(String trainDate) {
+		this.trainDate = trainDate;
 	}
 }

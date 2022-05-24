@@ -112,7 +112,9 @@ function load() {
                                 formatter : function(value, row, index) {
                                     var t = '<a class="btn btn-primary btn-xs" href="#" title="打印"  mce_href="#" ' +
                                             'onclick="peijingdan(\''+value+'\',\''+row.saleType+'\')" style="text-decoration: none;">打印</a>';
-                                    return t;
+                                    var f = '<a class="btn btn-primary btn-xs" href="#" title="在途信息"  mce_href="#" ' +
+                                        'onclick="trainInfo(\''+value+'\')" style="text-decoration: none;">在途信息</a>';
+                                    return t + f;
                                 }
 							}
 						]
@@ -129,6 +131,18 @@ function peijingdan(saleNumber,saleType){
         window.open("/information/settlement/tuikuandan?saleNumber="+saleNumber);
 	}
 
+}
+
+function trainInfo(saleNumber){
+    var toIndex = layer.open({
+        type : 2,
+        title : '在途信息',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : '/information/store/train/'+saleNumber // iframe的url
+    });
+    layer.full(toIndex);
 }
 
 function outtemplate(){

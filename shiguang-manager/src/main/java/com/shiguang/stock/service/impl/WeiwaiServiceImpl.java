@@ -398,5 +398,136 @@ public class WeiwaiServiceImpl implements WeiwaiService {
 		}
 	}
 
+	public Map<String, Object>  weiwaiOutdzList(@Param("arrys") String[] arrys, HttpServletRequest request, HttpServletResponse response) {
+		List<WeiwaiDO> weiwaiDOList = weiwaiOrderOut(arrys);
+		List<Map<String, Object>> arry = new ArrayList<>();
+		int a=0;
+		for (WeiwaiDO weiwaiDO:weiwaiDOList){
+			Map<String, Object> params = new HashMap();
+			String danjuNumber=weiwaiDO.getDanjuNumber();
+			String danjuDay=weiwaiDO.getDanjuDay();
+			String eyeStyle=weiwaiDO.getEyeStyle();
+			String zhidanPeople=weiwaiDO.getZhidanPeople();
+			String mfrsid=weiwaiDO.getMfrsid();
+			String mfrsname=weiwaiDO.getMfrsname();
+			String brandnum=weiwaiDO.getBrandnum();
+			String viewGoodName=weiwaiDO.getViewGoodName();
+			Long positionId=weiwaiDO.getPositionId();
+			String positionName=weiwaiDO.getPositionName();
+			String shouhuoPeople=weiwaiDO.getShouhuoPeople();
+			String shouhuoPhone=weiwaiDO.getShouhuoPhone();
+			String shouhuoAddress=weiwaiDO.getShouhuoAddress();
+			String changjiaNumber=weiwaiDO.getChangjiaNumber();
+			String beizhu=weiwaiDO.getBeizhu();
+			String weiwaisaleNumber=weiwaiDO.getWeiwaisaleNumber();
+			String mirrorTime=weiwaiDO.getMirrorTime();
+			String num=weiwaiDO.getNum();
+			String code=weiwaiDO.getCode();
+			String name=weiwaiDO.getName();
+			String style=weiwaiDO.getStyle();
+			String count=weiwaiDO.getCount();
+			String gkname=weiwaiDO.getGkname();
+			String hyknum=weiwaiDO.getHyknum();
+			String phone=weiwaiDO.getPhone();
+			String saleNumber=weiwaiDO.getSaleNumber();
+			String companyName=weiwaiDO.getCompanyName();
+			String departname=weiwaiDO.getDepartname();
+			params.put("danjuNumber",danjuNumber);
+			params.put("danjuDay",danjuDay);
+			params.put("eyeStyle",eyeStyle);
+			params.put("zhidanPeople",zhidanPeople);
+			params.put("mfrsid",mfrsid);
+			params.put("mfrsname",mfrsname);
+			params.put("brandnum",brandnum);
+			params.put("viewGoodName",viewGoodName);
+			params.put("positionId",positionId);
+			params.put("positionName",positionName);
+			params.put("shouhuoPeople",shouhuoPeople);
+			params.put("shouhuoPhone",shouhuoPhone);
+			params.put("shouhuoAddress",shouhuoAddress);
+			params.put("changjiaNumber",changjiaNumber);
+			params.put("beizhu",beizhu);
+			params.put("weiwaisaleNumber",weiwaisaleNumber);
+			params.put("mirrorTime",mirrorTime);
+			params.put("num",num);
+			params.put("code",code);
+			params.put("name",name);
+			params.put("style",style);
+			params.put("rl","");
+			params.put("count",count);
+			params.put("sph","");
+			params.put("cyl","");
+			params.put("zx","");
+			params.put("add","");
+			params.put("slj","");
+			params.put("zj","");
+			params.put("fartj","");
+			params.put("neartj","");
+			params.put("tg","");
+			params.put("yaoqiu","");
+			params.put("jd","");
+			params.put("qulv","");
+			params.put("gkname",gkname);
+			params.put("hyknum",hyknum);
+			params.put("phone",phone);
+			params.put("saleNumber",saleNumber);
+			params.put("companyName",companyName);
+			params.put("departname",departname);
+			a=a+Integer.parseInt(count);
+			arry.add(params);
+		}
+
+		HashSet h = new HashSet(arry);
+		arry.clear();
+		arry.addAll(h);
+		Map<String, Object> outList = new HashMap();
+		outList.put("arry",arry);
+		String companyIdNow=ShiroUtils.getUser().getCompanyId();
+		Map<String,Object> mapxinxi=new HashMap<>();
+		mapxinxi.put("companyid",companyIdNow);
+		mapxinxi.put("positionOrder", 2);
+		if(companyIdNow.equals(3)||companyIdNow.equals("3")){
+			mapxinxi.put("positionId", 7);
+		}
+		DepartmentDO departmentDO = phoneOrAddres(mapxinxi);
+		List<Map<String, Object>> xinxi = new ArrayList<>();
+		Map<String,Object> xinximap=new HashMap<>();
+		String zhidanPeople=ShiroUtils.getUser().getName();
+		String shouhuoAddress=departmentDO.getDepartAddress();
+		String shouhuoPhone=departmentDO.getDepartTel();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String day = sdf.format(date);
+		xinximap.put("day",day);
+		xinximap.put("zhidanPeople",zhidanPeople);
+		xinximap.put("shouhuoPhone",shouhuoPhone);
+		xinximap.put("shouhuoAddress",shouhuoAddress);
+		xinxi.add(0,xinximap);
+		outList.put("xinxi",xinxi);
+		outList.put("companyName",ShiroUtils.getUser().getCompany());
+		outList.put("danjuDay",weiwaiDOList.get(0).getDanjuDay());
+		outList.put("danjuNumber",weiwaiDOList.get(0).getDanjuNumber());
+		outList.put("mfrsname",weiwaiDOList.get(0).getMfrsname());
+		outList.put("hejisum",a);
+		return outList;
+	}
+
+	@Override
+	public void weiwaiOutdz(@Param("arrys") String[] arrys, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			Map<String, Object>  outList = weiwaiOutdzList(arrys,request, response);
+			createDoc(response,outList, "视光委外订单"+new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()), "shiguangdz.ftl");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			File file=new File(bootdoConfig.getPoiword());
+			if(file.exists()) {
+				File[] files = file.listFiles();
+				for(File f :files)
+					f.delete();
+			}
+
+		}
+	}
 
 }

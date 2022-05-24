@@ -695,19 +695,19 @@
                     <Data ss:Type="String">订单编号：</Data>
                 </Cell>
                 <Cell ss:StyleID="s88" ss:MergeAcross="3">
-                    <Data ss:Type="String">{weiwai.danjuNumber!''}</Data>
+                    <Data ss:Type="String">${danjuNumber!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s89" ss:MergeAcross="1">
                     <Data ss:Type="String">订单日期:</Data>
                 </Cell>
                 <Cell ss:StyleID="s90" ss:MergeAcross="3">
-                    <Data ss:Type="String">${weiwai.danjuDay!''}</Data>
+                    <Data ss:Type="String">${danjuDay!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s72"/>
                 <Cell ss:Index="14" ss:StyleID="s72"/>
                 <Cell ss:StyleID="s72"/>
                 <Cell ss:Index="17" ss:StyleID="s91" ss:MergeAcross="2">
-                    <Data ss:Type="String">${weiwai.mfrsname!''}</Data>
+                    <Data ss:Type="String">${mfrsname!''}</Data>
                 </Cell>
                 <Cell ss:Index="22" ss:StyleID="s53"/>
             </Row>
@@ -779,26 +779,26 @@
             </Row>
             <Row ss:Height="18.8">
                 <Cell ss:StyleID="s128" ss:MergeAcross="1" ss:MergeDown="1">
-                    <Data ss:Type="String">X1020120220521124842</Data>
+                    <Data ss:Type="String">${list.saleNumber!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s129" ss:MergeAcross="2" ss:MergeDown="1">
-                    <Data ss:Type="String">依视路星趣控1.591依视路宇宙片钻晶A+定制片</Data>
+                    <Data ss:Type="String">${list.viewGoodName!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s111" ss:MergeDown="1">
-                    <Data ss:Type="String">委外订单</Data>
+                    <Data ss:Type="String">${list.style!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s112" ss:MergeDown="1">
-                    <Data ss:Type="String">R</Data>
+                    <Data ss:Type="String"></Data>
                 </Cell>
                 <Cell ss:StyleID="s113" ss:MergeDown="1">
-                    <Data ss:Type="String">-2.75</Data>
+                    <Data ss:Type="String"></Data>
                 </Cell>
                 <Cell ss:StyleID="s114" ss:MergeDown="1">
-                    <Data ss:Type="String">0.00</Data>
+                    <Data ss:Type="String"></Data>
                 </Cell>
                 <Cell ss:StyleID="s115" ss:MergeDown="1"/>
                 <Cell ss:StyleID="s116" ss:MergeDown="1">
-                    <Data ss:Type="String">25.0</Data>
+                    <Data ss:Type="String"></Data>
                 </Cell>
                 <Cell ss:StyleID="s117" ss:MergeDown="1"/>
                 <Cell ss:StyleID="s118" ss:MergeDown="1"/>
@@ -807,23 +807,23 @@
                 <Cell ss:StyleID="s121" ss:MergeDown="1"/>
                 <Cell ss:StyleID="s122" ss:MergeDown="1"/>
                 <Cell ss:StyleID="s123" ss:MergeDown="1">
-                    <Data ss:Type="Number">1</Data>
+                    <Data ss:Type="Number">${list.count!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s124" ss:MergeDown="1">
-                    <Data ss:Type="String">2022-06-04</Data>
+                    <Data ss:Type="String">${list.mirrorTime!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s125" ss:MergeDown="1">
-                    <Data ss:Type="String">薛舒允</Data>
+                    <Data ss:Type="String">${list.gkname!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s126" ss:MergeDown="1">
-                    <Data ss:Type="String">济南中心店</Data>
+                    <Data ss:Type="String">${list.departname!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s127" ss:MergeDown="1"/>
             </Row>
             <Row ss:Height="18.8"/>
             <Row ss:Height="18.05">
                 <Cell ss:StyleID="s95" ss:MergeAcross="21">
-                    <Data ss:Type="String">X1020120220521124842 销售备注：充值5000，88折</Data>
+                    <Data ss:Type="String">${list.saleNumber!''} 销售备注：${list.beizhu!''}</Data>
                 </Cell>
             </Row>
             </#list>
@@ -835,7 +835,7 @@
                     <Data ss:Type="String">合  计：</Data>
                 </Cell>
                 <Cell ss:StyleID="s56">
-                    <Data ss:Type="Number">2</Data>
+                    <Data ss:Type="Number">${hejisum!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s98" ss:MergeAcross="3"/>
             </Row>
@@ -846,12 +846,14 @@
                 <Cell ss:StyleID="s99" ss:MergeAcross="17"/>
                 <Cell ss:Index="22" ss:StyleID="s53"/>
             </Row>
+
+            <#list xinxi as xinxis>
             <Row ss:Height="15.05">
                 <Cell ss:StyleID="s52">
                     <Data ss:Type="String">收货地址：</Data>
                 </Cell>
                 <Cell ss:StyleID="s100" ss:MergeAcross="13">
-                    <Data ss:Type="String">山东省济南市市中区英雄山路48号</Data>
+                    <Data ss:Type="String">${xinxis.shouhuoAddress!''}</Data>
                 </Cell>
                 <Cell ss:Index="17" ss:StyleID="s69"/>
                 <Cell ss:StyleID="s69"/>
@@ -863,19 +865,19 @@
                     <Data ss:Type="String">联系电话：</Data>
                 </Cell>
                 <Cell ss:StyleID="s101" ss:MergeAcross="2">
-                    <Data ss:Type="String">0531-58859689</Data>
+                    <Data ss:Type="String">${xinxis.shouhuoPhone!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s52">
                     <Data ss:Type="String">传真：</Data>
                 </Cell>
                 <Cell ss:StyleID="s102" ss:MergeAcross="2">
-                    <Data ss:Type="String">0531-58859689</Data>
+                    <Data ss:Type="String"></Data>
                 </Cell>
                 <Cell ss:StyleID="s103" ss:MergeAcross="1">
                     <Data ss:Type="String">联系人：</Data>
                 </Cell>
                 <Cell ss:Index="14" ss:StyleID="s104" ss:MergeAcross="1">
-                    <Data ss:Type="String">韩京娟</Data>
+                    <Data ss:Type="String">${xinxis.zhidanPeople!''}</Data>
                 </Cell>
                 <Cell ss:Index="17" ss:StyleID="s53"/>
                 <Cell ss:StyleID="s53"/>
@@ -887,20 +889,20 @@
                     <Data ss:Type="String">制单人：</Data>
                 </Cell>
                 <Cell ss:StyleID="s105" ss:MergeAcross="2">
-                    <Data ss:Type="String">韩京娟</Data>
+                    <Data ss:Type="String">${xinxis.zhidanPeople!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s70">
                     <Data ss:Type="String">审核人：</Data>
                 </Cell>
                 <Cell ss:StyleID="s106" ss:MergeAcross="1">
-                    <Data ss:Type="String">韩京娟</Data>
+                    <Data ss:Type="String">${xinxis.zhidanPeople!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s53"/>
                 <Cell ss:StyleID="s107" ss:MergeAcross="1">
                     <Data ss:Type="String">审核日期：</Data>
                 </Cell>
                 <Cell ss:Index="14" ss:StyleID="s108" ss:MergeAcross="1">
-                    <Data ss:Type="String">2022-05-21</Data>
+                    <Data ss:Type="String">${xinxis.day!''}</Data>
                 </Cell>
                 <Cell ss:Index="17" ss:StyleID="s53"/>
                 <Cell ss:StyleID="s53"/>
@@ -912,7 +914,7 @@
                     <Data ss:Type="String">打印日期：</Data>
                 </Cell>
                 <Cell ss:StyleID="s109" ss:MergeAcross="2">
-                    <Data ss:Type="Number">44702</Data>
+                    <Data ss:Type="String">${xinxis.day!''}</Data>
                 </Cell>
                 <Cell ss:StyleID="s53"/>
                 <Cell ss:StyleID="s53"/>
@@ -927,6 +929,7 @@
             <Row ss:Index="20" ss:Height="14.3">
                 <Cell ss:Index="5" ss:StyleID="s72"/>
             </Row>
+            </#list>
         </Table>
         <WorksheetOptions
                 xmlns="urn:schemas-microsoft-com:office:excel">

@@ -61,6 +61,8 @@ public interface WeiwaiService {
 
 	void weiwaiOut(@Param("arrys") String[] arrys,HttpServletRequest request, HttpServletResponse response);
 
+	void weiwaiOutdz(@Param("arrys") String[] arrys,HttpServletRequest request, HttpServletResponse response);
+
 
 
 

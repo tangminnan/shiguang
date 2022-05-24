@@ -80,6 +80,8 @@ public class SaleNameController {
                 double hlyMoney=0.00;
                 int sgcount=0;
                 double sgMoney=0.00;
+                int sgdzcount=0;
+                double sgdzMoney=0.00;
                 double primMoney=0.00;
                 double amountMoney=0.00;
                 for (SalesDO salesDOs : salesDOList){
@@ -258,6 +260,24 @@ public class SaleNameController {
                                         }
 
                                     }
+                                } else if ("视光订做".equals(storeDescribe[i])){
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        if (null != storeCount[i] && !"".equals(storeCount[i])) {
+                                            sgdzcount = sgdzcount + Integer.parseInt(storeCount[i]);
+                                        }
+                                    }
+                                    if (null != storeUnit && !"".equals(storeUnit)){
+                                        if (null != storeCount && !"".equals(storeCount)){
+                                            if (null != storeUnit[i] && !"".equals(storeUnit[i])) {
+                                                sgdzMoney = sgdzMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                            }
+                                        } else {
+                                            if (null != storeUnit[i] && !"".equals(storeUnit[i])) {
+                                                sgdzMoney = sgdzMoney + Double.valueOf(storeUnit[i]);
+                                            }
+                                        }
+
+                                    }
                                 } else if ("自架".equals(storeDescribe[i])){
                                     if (null != storeCount && !"".equals(storeCount)){
                                         if (null != storeCount[i] && !"".equals(storeCount[i])) {
@@ -368,7 +388,7 @@ public class SaleNameController {
                 }
                 Map<String,Object> map = new HashMap<>();
                 map.put("saleName",salesDO.getSaleName());
-                map.put("saleAccount",salesDO.getSaleAccount());
+                map.put("saleAccount",salesDO.getUsername());
                 map.put("jjcount",jjcount);
                 map.put("jjMoney",new BigDecimal(jjMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("jpcpcount",jpcpcount);
@@ -385,6 +405,8 @@ public class SaleNameController {
                 map.put("hlyMoney",new BigDecimal(hlyMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("sgcount",sgcount);
                 map.put("sgMoney",new BigDecimal(sgMoney).setScale(2,RoundingMode.HALF_UP));
+                map.put("sgdzcount",sgdzcount);
+                map.put("sgdzMoney",new BigDecimal(sgdzMoney).setScale(2,RoundingMode.HALF_UP));
                 map.put("zjcount",zjcount);
                 map.put("zjMoney",zjMoney);
                 map.put("zpcount",zpcount);
@@ -430,6 +452,8 @@ public class SaleNameController {
         double totalhlyMoney=0.00;
         int totalsgcount=0;
         double totalsgMoney=0.00;
+        int totalsgdzcount=0;
+        double totalsgdzMoney=0.00;
         double totalprimMoney=0.00;
         double totalamountMoney=0.00;
         for (Map<String,Object> maps : list){
@@ -459,6 +483,8 @@ public class SaleNameController {
             totalhlyMoney = totalhlyMoney + Double.valueOf(maps.get("hlyMoney").toString());
             totalsgcount = totalsgcount + Integer.parseInt(maps.get("sgcount").toString());
             totalsgMoney = totalsgMoney + Double.valueOf(maps.get("sgMoney").toString());
+            totalsgdzcount = totalsgdzcount + Integer.parseInt(maps.get("sgdzcount").toString());
+            totalsgdzMoney = totalsgdzMoney + Double.valueOf(maps.get("sgdzMoney").toString());
             totaladdMoney = totaladdMoney + Double.valueOf(maps.get("addMoney").toString());
             totalprimMoney = totalprimMoney + Double.valueOf(maps.get("primMoney").toString());
             totalamountMoney = totalamountMoney + Double.valueOf(maps.get("amountMoney").toString());
@@ -487,6 +513,8 @@ public class SaleNameController {
         model.addAttribute("totallhjMoney",new BigDecimal(totallhjMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("totalsgcount",totalsgcount);
         model.addAttribute("totalsgMoney",new BigDecimal(totalsgMoney).setScale(2,RoundingMode.HALF_UP));
+        model.addAttribute("totalsgdzcount",totalsgdzcount);
+        model.addAttribute("totalsgdzMoney",new BigDecimal(totalsgdzMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("totalhccount",totalhccount);
         model.addAttribute("totalhcMoney",new BigDecimal(totalhcMoney).setScale(2,RoundingMode.HALF_UP));
         model.addAttribute("totaladdMoney",new BigDecimal(totaladdMoney).setScale(2,RoundingMode.HALF_UP));

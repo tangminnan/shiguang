@@ -1109,7 +1109,7 @@ public class SalesServiceImpl implements SalesService {
 						weiwaishujuDO.setDanjuStyle("1");
 						weiwaishujuDO.setSaleNumber(salesDO.getSaleNumber());
 						weiwaishujuDO.setWeiwaiStyle("委外订单");
-						weiwaishujuDO.setBeizhu("");
+						weiwaishujuDO.setBeizhu(salesDO.getSaleremark());
 						weiwaishujuDO.setGkname(salesDO.getMemberName());
 						weiwaishujuDO.setHyknum(salesDO.getMemberNumber());
 						weiwaishujuDO.setPhone(salesDO.getMemberTel());
@@ -1676,6 +1676,7 @@ public class SalesServiceImpl implements SalesService {
 						weiwaiDO.setMfrsname(jpdzDO.getMfrsname());
 						weiwaiDO.setBrandnum(jpdzDO.getBrandnum());
 						weiwaiDO.setBrandname(jpdzDO.getBrandname());
+						weiwaiDO.setBeizhu(weiwaishujuDO.getBeizhu());
 						Map<String, Object> posMap = new HashMap<>();
 						posMap.put("companyId", ShiroUtils.getUser().getCompanyId());
 						if ("3".equals(ShiroUtils.getUser().getCompanyId())) {
@@ -1746,12 +1747,12 @@ public class SalesServiceImpl implements SalesService {
 						weiwaiDO.setShouhuoPhone(departmentDO.getDepartTel());
 						weiwaiDO.setShouhuoAddress(departmentDO.getDepartAddress());
 						weiwaiService.save(weiwaiDO);
-						InfoDO infoDOs = new InfoDO();
-						infoDOs.setSaleNumber(salesDO.getSaleNumber());
-						infoDOs.setTrainStatus("委外订单");
-						infoDOs.setTrainTime(new Date());
-						infoDOs.setTrainName(ShiroUtils.getUser().getName());
-						infoService.save(infoDOs);
+//						InfoDO infoDOs = new InfoDO();
+//						infoDOs.setSaleNumber(salesDO.getSaleNumber());
+//						infoDOs.setTrainStatus("委外订单");
+//						infoDOs.setTrainTime(new Date());
+//						infoDOs.setTrainName(ShiroUtils.getUser().getName());
+//						infoService.save(infoDOs);
 					} else if ("视光订做".equals(goodsDescribe[s]) && "2".equals(classType[s])){
 						WeiwaishujuDO weiwaishujuDO = new WeiwaishujuDO();
 						weiwaishujuDO.setNumber(weiwaiNumber);
@@ -1762,7 +1763,7 @@ public class SalesServiceImpl implements SalesService {
 						weiwaishujuDO.setDanjuStyle("1");
 						weiwaishujuDO.setSaleNumber(salesDO.getSaleNumber());
 						weiwaishujuDO.setWeiwaiStyle("委外订单");
-						weiwaishujuDO.setBeizhu("");
+						weiwaishujuDO.setBeizhu(salesDO.getSaleremark());
 						weiwaishujuDO.setGkname(salesDO.getMemberName());
 						weiwaishujuDO.setHyknum(salesDO.getMemberNumber());
 						weiwaishujuDO.setPhone(salesDO.getMemberTel());
@@ -1774,7 +1775,7 @@ public class SalesServiceImpl implements SalesService {
 						weiwaishujuDO.setJd("");
 						weiwaishujuDO.setNeartj("");
 						weiwaishujuDO.setFartj("");
-				        weiwaishujuDO.setTg(salesDO.getRighttg());
+						weiwaishujuDO.setTg(salesDO.getRighttg());
 						weiwaishujuDO.setNum(goodNumstr[s]);
 						weiwaishujuDO.setCode(goodsStr[s]);
 						weiwaishujuDO.setName(goodsName[s]);
@@ -1786,13 +1787,14 @@ public class SalesServiceImpl implements SalesService {
 						weiwaiDO.setSaleNumber(salesDO.getSaleNumber());
 						weiwaiDO.setDanjuNumber(danjuNumber);
 						weiwaiDO.setDanjuDay(sim.format(new Date()));
-						weiwaiDO.setEyeStyle("3");
+						weiwaiDO.setEyeStyle("5");
 						weiwaiDO.setZhidanPeople(salesDO.getSaleName());
 						ShiguangdzDO shiguangdzDO = shiguangdzService.getShiguangInfomation(goodNumstr[s]);
 						weiwaiDO.setMfrsid(shiguangdzDO.getMfrsid());
 						weiwaiDO.setMfrsname(shiguangdzDO.getMfrsname());
 						weiwaiDO.setBrandnum(shiguangdzDO.getBrandnum());
 						weiwaiDO.setBrandname(shiguangdzDO.getBrandname());
+						weiwaiDO.setBeizhu(weiwaishujuDO.getBeizhu());
 						Map<String, Object> posMap = new HashMap<>();
 						posMap.put("companyId", ShiroUtils.getUser().getCompanyId());
 						if ("3".equals(ShiroUtils.getUser().getCompanyId())) {
@@ -1839,14 +1841,14 @@ public class SalesServiceImpl implements SalesService {
 						weiwaiDO.setShouhuoPhone(departmentDO.getDepartTel());
 						weiwaiDO.setShouhuoAddress(departmentDO.getDepartAddress());
 						weiwaiService.save(weiwaiDO);
-						InfoDO infoDOs = new InfoDO();
-						infoDOs.setSaleNumber(salesDO.getSaleNumber());
-						infoDOs.setTrainStatus("委外订单");
-						infoDOs.setTrainTime(new Date());
-						infoDOs.setTrainName(ShiroUtils.getUser().getName());
-						infoService.save(infoDOs);
 					}
 				}
+				InfoDO infoDOs = new InfoDO();
+				infoDOs.setSaleNumber(salesDO.getSaleNumber());
+				infoDOs.setTrainStatus("委外订单");
+				infoDOs.setTrainTime(new Date());
+				infoDOs.setTrainName(ShiroUtils.getUser().getName());
+				infoService.save(infoDOs);
 			}
 			return R.ok();
 		}

@@ -98,6 +98,7 @@
         <where>
             <if test="logisticStatus != null and logisticStatus != ''"> and ls.logistic_status = #{logisticStatus} </if>
             <if test="logisticStatuss != null and logisticStatuss != ''"> and (ls.logistic_status = '委外完成' or ls.logistic_status = '销售完成') </if>
+            <if test="logisticStatusss != null and logisticStatusss != ''"> and (ls.logistic_status != '委外完成' and ls.logistic_status != '销售完成') </if>
             <if test="saleNumber !=null and saleNumber != ''">and sa.sale_number like concat('%', #{saleNumber},'%')</if>
             <if test="departNumber !=null and departNumber != ''">and m.depart_number = #{departNumber}</if>
             <if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>

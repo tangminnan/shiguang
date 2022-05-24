@@ -178,6 +178,9 @@ public class StoreSalesController {
         Map<String,Object> map = new HashMap<>();
         map.put("saleNumber",saleNumber);
         List<InfoDO> infoDOList = infoService.list(map);
+        for (InfoDO infoDO : infoDOList){
+            infoDO.setTrainDate(simpleDateFormat.format(infoDO.getTrainTime()));
+        }
         model.addAttribute("infoDOList",infoDOList);
         SalesDO salesDO = salesService.getSaleNumber(saleNumber);
         salesDO.setMirrorDate(simpleDateFormat.format(salesDO.getMirrorTime()));

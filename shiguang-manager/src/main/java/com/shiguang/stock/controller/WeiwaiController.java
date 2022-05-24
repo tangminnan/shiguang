@@ -1279,5 +1279,18 @@ public class WeiwaiController {
         weiwaiService.weiwaiOut(arrys,request, response);
     }
 
+    /**
+     * 视光订做导出
+     * @param arrys
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    @GetMapping("/outdz")
+    @RequiresPermissions("stock:weiwai:outdz")
+    public void outdz(String[] arrys, HttpServletRequest request, HttpServletResponse response) throws IOException{
+        weiwaiService.weiwaiOutdz(arrys,request, response);
+    }
+
 
 }
