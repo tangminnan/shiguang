@@ -9,37 +9,12 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-<<<<<<< HEAD
-    url: jdbc:mysql://119.3.238.84:3306/shigungzhongxincln?useUnicode=true&characterEncoding=utf8
-=======
     #url: jdbc:mysql://119.3.238.84:3306/shigungzhongxincln?useUnicode=true&characterEncoding=utf8
     url: jdbc:mysql://121.36.12.219:3306/shiguangzhongxin?useUnicode=true&characterEncoding=utf8
     #url: jdbc:mysql://192.168.0.2:3306/shiguangzhongxin?useUnicode=true&characterEncoding=utf8
     username: root
     #password: Dm202003
     password: Dm202112
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-
-#    url: jdbc:mysql://119.3.238.84:3306/shigungzhongxincln?useUnicode=true&characterEncoding=utf8
-    url: jdbc:mysql://121.36.12.219:3306/shiguangzhongxin?useUnicode=true&characterEncoding=utf8
->>>>>>> e7f264c76f8189fe0fcf726ef4c9decd4a4a48cf
-#    url: jdbc:mysql://192.168.0.2:3306/shiguangzhongxin?useUnicode=true&characterEncoding=utf8
-#    url: jdbc:mysql://121.36.12.219:3306/shiguangzhongxin?useUnicode=true&characterEncoding=utf8
-
-    username: root
-    password: Dm202003
-#    password: Dm202112
-<<<<<<< HEAD
-=======
->>>>>>> bc14bf00b93887da8303164776ed4bc97365477e
->>>>>>> 4d7c9858148cc5d86423008732f5d2f0021e27f6
->>>>>>> 63350f570dabbe7c97d214c0a4931d59cc5580c3
->>>>>>> e7f264c76f8189fe0fcf726ef4c9decd4a4a48cf
->>>>>>> f6a35e17c89570d1e02450aaa0d61171ae358da3
     initialSize: 1
     minIdle: 3
     maxActive: 20
