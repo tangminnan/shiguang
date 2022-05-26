@@ -274,6 +274,22 @@
 		GROUP BY s.sale_number
 	</select>
 
+	<select id="findSaleList" resultType="com.shiguang.storeSales.domain.SalesDO">
+		select s.`id`,s.`ptometry_number`,s.`member_number`,m.`name` as memberName,m.`sex`,m.`age`,m.`phone_1` as phone1,s.`sale_account`,s.`sale_number`,s.`goods_num`,s.`goods_code`,s.`eye_type`,s.`amount_money`,s.`prime_money`,s.`mirror_way`,s.`mirror_time`,
+		s.`miror_address`,s.`store_num`,s.`urgent_status`,s.`goods_rebate`,s.`fixed_price`,s.`moling_money`,s.`additional_cost`,s.`process_ask`,
+		s.`store_name`,s.`store_describe`,s.`store_unit`,s.`store_count`,s.`remark`,s.`saleremark`,s.`give_name`,s.`peijing_time`,s.`optometry_name`,s.`out_recipel`,s.jj_goods_name,st.`sale_name`,st.`sale_acount` as saleAccount,
+		s.`recipel_type`,s.`optometrywl_name`,s.`recipelwl_type`,s.`taocan_name`,s.`classtype`,s.`additional_price`,s.`additional_count`,s.`unit`,s.`batch`,s.`left_right`,s.`righttg`,s.`lefttg`,
+		st.`change_money`,st.`model_money`,s.sale_type
+		from store_sales s join settlement st on st.sale_number = s.sale_number join member m on m.card_number = s.member_number
+		<where>
+			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(s.peijing_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
+			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(s.peijing_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
+			<if test="saleAccount != null and saleAccount != ''"> and s.user_name = #{saleAccount} </if>
+			and (s.sale_type = '1')
+		</where>
+		GROUP BY s.sale_number
+</select>
+
 	<select id="findYanguangPeople" resultType="com.shiguang.storeSales.domain.SalesDO">
 		select  u.store,u.username,u.name
 		from  sys_user u

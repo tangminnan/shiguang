@@ -176,7 +176,10 @@ function load() {
                                     + value
                                     + '\')">详情</span> ';
                             }
-                            return f;
+                            var s = '<span class="btn btn-primary btn-sm" href="#" title="在途信息"  mce_href="#" onclick="trainInfo(\''
+                                + value
+                                + '\')">在途信息</span> ';
+                            return f + s;
                         }
                     }
                 ]
@@ -217,6 +220,18 @@ function selectSale(saleNumber) {
         area: ['800px', '520px'],
         content: prefix + '/editSale/' + saleNumber // iframe的url
 
+    });
+    layer.full(toIndex);
+}
+
+function trainInfo(saleNumber){
+    var toIndex = layer.open({
+        type : 2,
+        title : '在途信息',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : '/information/store/train/'+saleNumber // iframe的url
     });
     layer.full(toIndex);
 }

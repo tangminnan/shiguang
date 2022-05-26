@@ -271,6 +271,18 @@ public class SaleGoodsController {
                                             }
                                         }
                                     }
+                                    if ("隐形成品".equals(storeDescribe[i])){
+                                        if (null != storeCount && !"".equals(storeCount)){
+                                            if (null != storeCount[i] && !"".equals(storeCount[i])) {
+                                                yxcount = yxcount + Integer.parseInt(storeCount[i]);
+                                            }
+                                        }
+                                        if (null != storeMoney && !"".equals(storeMoney)){
+                                            if(null != storeMoney[i] && !"".equals(storeMoney[i])) {
+                                                yxMoney = yxMoney + Double.valueOf(Double.valueOf(storeMoney[i])*Integer.parseInt(storeCount[i]));
+                                            }
+                                        }
+                                    }
                                 } else if ("护理液".equals(goodsType)){
                                     if ("护理液".equals(storeDescribe[i])){
                                         if (null != storeCount && !"".equals(storeCount)){
@@ -368,6 +380,18 @@ public class SaleGoodsController {
                                     }
                                 }
                                 if ("隐形".equals(storeDescribe[i])){
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        if (null != storeCount[i] && !"".equals(storeCount[i])) {
+                                            yxcount = yxcount + Integer.parseInt(storeCount[i]);
+                                        }
+                                    }
+                                    if (null != storeMoney && !"".equals(storeMoney)){
+                                        if(null != storeMoney[i] && !"".equals(storeMoney[i])) {
+                                            yxMoney = yxMoney + Double.valueOf(Double.valueOf(storeMoney[i])*Integer.parseInt(storeCount[i]));
+                                        }
+                                    }
+                                }
+                                if ("隐形成品".equals(storeDescribe[i])){
                                     if (null != storeCount && !"".equals(storeCount)){
                                         if (null != storeCount[i] && !"".equals(storeCount[i])) {
                                             yxcount = yxcount + Integer.parseInt(storeCount[i]);
@@ -825,6 +849,52 @@ public class SaleGoodsController {
                                     }
                                     list.add(map);
                                 }
+                                if ("隐形成品".equals(storeDescribe[i])){
+                                    //yxcount = yxcount + Integer.parseInt(storeCount[i]);
+                                    //yxMoney = yxMoney + Double.valueOf(storeMoney[i]);
+                                    if (null != storeMoney && !"".equals(storeMoney)){
+                                        if (null != storeMoney[i] && !"".equals(storeMoney[i])){
+                                            sumMoney = sumMoney + Double.valueOf(Double.valueOf(storeMoney[i])*Integer.parseInt(storeCount[i]));
+                                        }
+                                    }
+                                    if (null != goodsNum && !"".equals(goodsNum)){
+                                        if (null != goodsNum[i] && !"".equals(goodsNum[i])){
+                                            map.put("goodsNum",goodsNum[i]);
+                                        } else {
+                                            map.put("goodsNum","");
+                                        }
+                                    } else {
+                                        map.put("goodsNum","");
+                                    }
+                                    if (null != storeName && !"".equals(storeName)){
+                                        if (null != storeName[i] && !"".equals(storeName[i])){
+                                            map.put("name",storeName[i]);
+                                        } else {
+                                            map.put("name","");
+                                        }
+                                    } else {
+                                        map.put("name","");
+                                    }
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        if (null != storeCount[i] && !"".equals(storeCount[i])){
+                                            map.put("count",storeCount[i]);
+                                        } else {
+                                            map.put("count",0);
+                                        }
+                                    } else {
+                                        map.put("count",0);
+                                    }
+                                    if (null != storeMoney && !"".equals(storeMoney)){
+                                        if (null != storeMoney[i] && !"".equals(storeMoney[i])){
+                                            map.put("money",storeMoney[i]);
+                                        } else {
+                                            map.put("money",0.00);
+                                        }
+                                    } else {
+                                        map.put("money",0.00);
+                                    }
+                                    list.add(map);
+                                }
                             } else if ("护理液".equals(goodsType)){
                                 if ("护理液".equals(storeDescribe[i])){
                                     //hlycount = hlycount + Integer.parseInt(storeCount[i]);
@@ -1227,6 +1297,52 @@ public class SaleGoodsController {
                                             }
                                         } else if ("隐形".equals(goodsType)){
                                             if ("隐形".equals(storeDescribe[i])){
+                                                //yxcount = yxcount + Integer.parseInt(storeCount[i]);
+                                                //yxMoney = yxMoney + Double.valueOf(storeMoney[i]);
+                                                if (null != storeMoney && !"".equals(storeMoney)){
+                                                    if (null != storeMoney[i] && !"".equals(storeMoney[i])){
+                                                        sumMoney = sumMoney + Double.valueOf(Double.valueOf(storeMoney[i])*Integer.parseInt(storeCount[i]));
+                                                    }
+                                                }
+                                                if (null != goodsNum && !"".equals(goodsNum)){
+                                                    if (null != goodsNum[i] && !"".equals(goodsNum[i])){
+                                                        map.put("goodsNum",goodsNum[i]);
+                                                    } else {
+                                                        map.put("goodsNum","");
+                                                    }
+                                                } else {
+                                                    map.put("goodsNum","");
+                                                }
+                                                if (null != storeName && !"".equals(storeName)){
+                                                    if (null != storeName[i] && !"".equals(storeName[i])){
+                                                        map.put("name",storeName[i]);
+                                                    } else {
+                                                        map.put("name","");
+                                                    }
+                                                } else {
+                                                    map.put("name","");
+                                                }
+                                                if (null != storeCount && !"".equals(storeCount)){
+                                                    if (null != storeCount[i] && !"".equals(storeCount[i])){
+                                                        map.put("count",storeCount[i]);
+                                                    } else {
+                                                        map.put("count",0);
+                                                    }
+                                                } else {
+                                                    map.put("count",0);
+                                                }
+                                                if (null != storeMoney && !"".equals(storeMoney)){
+                                                    if (null != storeMoney[i] && !"".equals(storeMoney[i])){
+                                                        map.put("money",storeMoney[i]);
+                                                    } else {
+                                                        map.put("money",0.00);
+                                                    }
+                                                } else {
+                                                    map.put("money",0.00);
+                                                }
+                                                list.add(map);
+                                            }
+                                            if ("隐形成品".equals(storeDescribe[i])){
                                                 //yxcount = yxcount + Integer.parseInt(storeCount[i]);
                                                 //yxMoney = yxMoney + Double.valueOf(storeMoney[i]);
                                                 if (null != storeMoney && !"".equals(storeMoney)){

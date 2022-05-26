@@ -1843,12 +1843,30 @@ public class SalesServiceImpl implements SalesService {
 						weiwaiService.save(weiwaiDO);
 					}
 				}
-				InfoDO infoDOs = new InfoDO();
-				infoDOs.setSaleNumber(salesDO.getSaleNumber());
-				infoDOs.setTrainStatus("委外订单");
-				infoDOs.setTrainTime(new Date());
-				infoDOs.setTrainName(ShiroUtils.getUser().getName());
-				infoService.save(infoDOs);
+				String[] storeDescribe = salesDO.getStoreDescribe().split(",");
+				String[] classTypes = salesDO.getClasstype().split(",");
+				boolean jingpian = false;
+				boolean yinxing = false;
+				boolean clssType = false;
+				jingpian = Arrays.asList(storeDescribe).contains("镜片");
+				yinxing = Arrays.asList(storeDescribe).contains("隐形");
+				clssType = Arrays.asList(classTypes).contains("2");
+				if (jingpian == true && clssType == true){
+					InfoDO infoDOs = new InfoDO();
+					infoDOs.setSaleNumber(salesDO.getSaleNumber());
+					infoDOs.setTrainStatus("委外订单");
+					infoDOs.setTrainTime(new Date());
+					infoDOs.setTrainName(ShiroUtils.getUser().getName());
+					infoService.save(infoDOs);
+				} else if (yinxing == true && clssType == true){
+					InfoDO infoDOs = new InfoDO();
+					infoDOs.setSaleNumber(salesDO.getSaleNumber());
+					infoDOs.setTrainStatus("委外订单");
+					infoDOs.setTrainTime(new Date());
+					infoDOs.setTrainName(ShiroUtils.getUser().getName());
+					infoService.save(infoDOs);
+				}
+
 			}
 			return R.ok();
 		}

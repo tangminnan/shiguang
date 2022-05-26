@@ -46,6 +46,9 @@ import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
 import io.swagger.models.auth.In;
+import org.apache.commons.beanutils.BeanComparator;
+import org.apache.commons.collections.ComparatorUtils;
+import org.apache.commons.collections.comparators.ComparableComparator;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.xmlgraphics.xmp.schemas.DublinCoreAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -171,6 +174,12 @@ public class StoreSalesController {
         return pageUtils;
     }
 
+    /**
+     * 在途信息
+     * @param saleNumber
+     * @param model
+     * @return
+     */
     @GetMapping("/train/{saleNumber}")
     @RequiresPermissions("information:store:train")
     String train(@PathVariable("saleNumber") String saleNumber, Model model) {
@@ -185,6 +194,61 @@ public class StoreSalesController {
         SalesDO salesDO = salesService.getSaleNumber(saleNumber);
         salesDO.setMirrorDate(simpleDateFormat.format(salesDO.getMirrorTime()));
         model.addAttribute("salesDO",salesDO);
+
+        List<Map<String,String>> list = new ArrayList<Map<String,String>>();
+        Map<String,String> map1 = new HashMap<String, String>();
+        Map<String,String> map2 = new HashMap<String, String>();
+        Map<String,String> map3 = new HashMap<String, String>();
+        Map<String,String> map4 = new HashMap<String, String>();
+        Map<String,String> map5 = new HashMap<String, String>();
+        Map<String,String> map6 = new HashMap<String, String>();
+        Map<String,String> map7 = new HashMap<String, String>();
+        Map<String,String> map8 = new HashMap<String, String>();
+        Map<String,String> map9 = new HashMap<String, String>();
+        Map<String,String> map10 = new HashMap<String, String>();
+        Map<String,String> map11 = new HashMap<String, String>();
+        map1.put("id","1");
+        map1.put("name","销售完成");
+        map3.put("id","3");
+        map3.put("name","银台结款");
+        for (InfoDO infoDO : infoDOList){
+            if (infoDO.getTrainStatus().equals("委外订单")){
+                map11.put("id","4");
+                map11.put("name","委外收货");
+                list.add(map11);
+                map2.put("id","2");
+                map2.put("name","委外订单");
+                list.add(map2);
+            }
+        }
+
+        map4.put("id","5");
+        map4.put("name","配镜发料");
+        map5.put("id","6");
+        map5.put("name","加工初检");
+        map6.put("id","7");
+        map6.put("name","加工师加工");
+        map7.put("id","8");
+        map7.put("name","加工检验");
+        map8.put("id","9");
+        map8.put("name","加工配送");
+        map9.put("id","10");
+        map9.put("name","取镜处收货");
+        map10.put("id","11");
+        map10.put("name","顾客取镜");
+        list.add(map1);list.add(map3);list.add(map4);list.add(map5);
+        list.add(map10);list.add(map9);list.add(map8);list.add(map7);list.add(map6);
+        Collections.sort(list,new Comparator<Map<String,String>>() {
+            @Override
+            public int compare(Map<String, String> o1, Map<String, String> o2) {
+                // TODO Auto-generated method stub
+                Integer name1 = Integer.valueOf(o1.get("id")) ;//name1是从你list里面拿出来的一个
+                Integer name2 = Integer.valueOf(o2.get("id")) ; //name1是从你list里面拿出来的第二个name
+                return name1.compareTo(name2);
+            }
+        });
+
+        model.addAttribute("list",list);
         return "storeSales/train";
     }
 

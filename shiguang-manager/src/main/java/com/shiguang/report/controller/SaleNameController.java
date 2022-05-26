@@ -34,13 +34,17 @@ public class SaleNameController {
         Date date = new Date();
         if (!"".equals(settleDateStart)){
             query.put("settleDateStart",settleDateStart);
+            model.addAttribute("settleDateStart",settleDateStart);
         } else {
             query.put("settleDateStart",simpleDateFormat.format(date));
+            model.addAttribute("settleDateStart",simpleDateFormat.format(date));
         }
         if (!"".equals(settleDateEnd)){
             query.put("settleDateEnd",settleDateEnd);
+            model.addAttribute("settleDateEnd",settleDateEnd);
         } else {
             query.put("settleDateEnd",simpleDateFormat.format(date));
+            model.addAttribute("settleDateEnd",simpleDateFormat.format(date));
         }
         if (!"".equals(departNumber)){
             query.put("departNumber",departNumber);
@@ -205,6 +209,24 @@ public class SaleNameController {
 
                                     }
                                 } else if ("隐形".equals(storeDescribe[i])){
+                                    if (null != storeCount && !"".equals(storeCount)){
+                                        if (null != storeCount[i] && !"".equals(storeCount[i])) {
+                                            yxcount = yxcount + Integer.parseInt(storeCount[i]);
+                                        }
+                                    }
+                                    if (null != storeUnit && !"".equals(storeUnit)){
+                                        if (null != storeCount && !"".equals(storeCount)){
+                                            if (null != storeUnit[i] && !"".equals(storeUnit[i])) {
+                                                yxMoney = yxMoney + Double.valueOf(Double.valueOf(storeUnit[i]) * Integer.parseInt(storeCount[i]));
+                                            }
+                                        } else {
+                                            if (null != storeUnit[i] && !"".equals(storeUnit[i])) {
+                                                yxMoney = yxMoney + Double.valueOf(storeUnit[i]);
+                                            }
+                                        }
+
+                                    }
+                                } else if ("隐形成品".equals(storeDescribe[i])){
                                     if (null != storeCount && !"".equals(storeCount)){
                                         if (null != storeCount[i] && !"".equals(storeCount[i])) {
                                             yxcount = yxcount + Integer.parseInt(storeCount[i]);
@@ -522,4 +544,105 @@ public class SaleNameController {
         model.addAttribute("totalamountMoney",new BigDecimal(totalamountMoney).setScale(2,RoundingMode.HALF_UP));
         return "saleReport/saleNameReportForm";
     }
+
+    @GetMapping("/reportSaleDetail")
+    public String reportSaleDetail(String settleDateStart,String settleDateEnd,String saleAccount,Model model) {
+        Map<String,Object> query = new HashMap<>();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        if (!"".equals(settleDateStart)){
+            query.put("settleDateStart",settleDateStart);
+            model.addAttribute("settleDateStart",settleDateStart);
+        } else {
+            query.put("settleDateStart",simpleDateFormat.format(date));
+            model.addAttribute("settleDateStart",simpleDateFormat.format(date));
+        }
+        if (!"".equals(settleDateEnd)){
+            query.put("settleDateEnd",settleDateEnd);
+            model.addAttribute("settleDateEnd",settleDateEnd);
+        } else {
+            query.put("settleDateEnd",simpleDateFormat.format(date));
+            model.addAttribute("settleDateEnd",simpleDateFormat.format(date));
+        }
+
+        List<SalesDO> salesDOList = saleReportService.findSaleList(query);
+        List<Map<String,Object>> list = new ArrayList<>();
+        double zongji=0.0;
+        int zongjiNum = 0;
+        double yuanjiaPrice = 0.0;
+        for (SalesDO salesDO : salesDOList){
+            Map<String,Object> map = new HashMap<>();
+            map.put("saleNumber",salesDO.getSaleNumber());
+            map.put("memberName",salesDO.getMemberName());
+            map.put("saleMoney",salesDO.getAmountMoney());
+            zongji = zongji + Double.valueOf(salesDO.getAmountMoney());
+            List<Map<String,Object>> goodsList = new ArrayList<>();
+            String[] goodsNum = null;
+            String[] storeName = null;
+            String[] storeCount = null;
+            String[] storePrice = null;
+            String[] addcost = null;
+            String[] addPrice = null;
+            if (null != salesDO.getGoodsNum() && !"".equals(salesDO.getGoodsNum())){
+                goodsNum = salesDO.getGoodsNum().split(",");
+            }
+            if (null != salesDO.getStoreName() && !"".equals(salesDO.getStoreName())){
+                storeName = salesDO.getStoreName().split(",");
+            }
+            if (null != salesDO.getStoreCount() && !"".equals(salesDO.getStoreCount())){
+                storeCount = salesDO.getStoreCount().split(",");
+            }
+            if (null != salesDO.getStoreUnit() && !"".equals(salesDO.getStoreUnit())){
+                storePrice = salesDO.getStoreUnit().split(",");
+            }
+            if (null != salesDO.getAdditionalCost()){
+                addcost = salesDO.getAdditionalCost().split(",");
+            }
+            if (null != salesDO.getAdditionalPrice()){
+                addPrice = salesDO.getAdditionalPrice().split(",");
+            }
+//            if (null != salesDO.getSaleDiscountPrice()){
+//
+//            }
+//            String[] discountPrice = salesDO.getSaleDiscountPrice().split(",");
+            if (null != goodsNum){
+                for (int i=0;i<goodsNum.length;i++){
+                    Map<String,Object> goodMap = new HashMap<>();
+                    goodMap.put("goodNum",goodsNum[i]);
+                    if (null != storeName){
+                        goodMap.put("storeName",storeName[i]);
+                    }
+                    if (null != storeCount){
+                        goodMap.put("storeCount",storeCount[i]);
+                        zongjiNum = zongjiNum + Integer.parseInt(storeCount[i]);
+                    }
+                    if (null != storePrice){
+                        goodMap.put("storePrice",storePrice[i]);
+                        yuanjiaPrice = yuanjiaPrice + Double.valueOf(storePrice[i]) * Integer.parseInt(storeCount[i]);
+                    }
+                    //goodMap.put("discountPrice",discountPrice[i]);
+                    goodMap.put("discountPrice","0.00");
+                    goodMap.put("youhuiPrice","0.00");
+                    goodMap.put("molingPrice","0.00");
+                    if (null != storePrice){
+                        goodMap.put("storePrice",storePrice[i]);
+                    }
+                    goodsList.add(goodMap);
+                }
+            }
+
+            if (null != addcost){
+                for (int j=0;j<addcost.length;j++){
+                    map.put("adddcost",addcost[j]);
+                    map.put("addprice",addPrice[j]);
+                }
+            }
+
+            map.put("goodsList",goodsList);
+
+        }
+
+        return "";
+    }
+
 }

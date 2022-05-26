@@ -38,6 +38,11 @@ public class SaleReportServiceImpl implements SaleReportService {
     }
 
     @Override
+    public List<SalesDO> findSaleList(Map<String, Object> map) {
+        return saleReportDao.findSaleList(map);
+    }
+
+    @Override
     public List<SettlementDO> drawckMoney(Map<String, Object> map) {
         return saleReportDao.drawckMoney(map);
     }

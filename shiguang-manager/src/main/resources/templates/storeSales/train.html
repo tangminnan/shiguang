@@ -62,12 +62,29 @@
 <script th:inline="javascript">
 	var html = "";
     $().ready(function(){
+        var listdetail = [[${list}]];
         var list = [[${infoDOList}]];
-        for (var i=0;i<list.length;i++){
-            html = "<tr><td><img style='width: 20px;height: 20px;' src='/img/duigou.png'></td>";
-            html += "<td><span>"+list[i].trainStatus+"</span></td>"
-            html += "<td><span>"+list[i].trainDate+"</span></td>"
-            html += "<td><span>"+list[i].trainName+"</span></td></tr>"
+        for (var i=0;i<listdetail.length;i++){
+            html = "<tr>";
+			if (list[i] != undefined){
+                if (listdetail[i].name == list[i].trainStatus){
+                    html += "<td><img style='width: 20px;height: 20px;' src='/img/duigou.png'></td>";
+                    html += "<td><span>"+list[i].trainStatus+"</span></td>"
+                    html += "<td><span>"+list[i].trainDate+"</span></td>"
+                    html += "<td><span>"+list[i].trainName+"</span></td>"
+                } else {
+                    html += "<td></td>";
+                    html += "<td><span>"+listdetail[i].name+"</span></td>"
+                    html += "<td></td>"
+                    html += "<td></td>"
+                }
+			} else {
+                html += "<td></td>";
+                html += "<td><span>"+listdetail[i].name+"</span></td>"
+                html += "<td></td>"
+                html += "<td></td>"
+			}
+            html += "</tr>"
 			$("#inventoryId").append(html);
 		}
     });

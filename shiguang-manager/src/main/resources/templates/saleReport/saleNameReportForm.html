@@ -26,6 +26,8 @@
 	<div class="container">
 		<h3>营业员工作量统计</h3>
 		<table border="0" cellspacing="0" cellpadding="0">
+			<input type="hidden" id="settleDateStart" th:value="${settleDateStart}">
+			<input type="hidden" id="settleDateEnd" th:value="${settleDateEnd}">
 			<tbody id="saleNameId">
 			<tr class="thead">
 			  <td rowspan="2">工号</td>
@@ -128,7 +130,8 @@
             var list = [[${list}]];
             var html =0;
             for (var i=0;i<list.length;i++){
-                html = "<tr><td>"+list[i].saleAccount+"</td>";
+                var account = list[i].saleAccount;
+                html = "<tr><td><a href='#' onclick='reportSaleDetail(\""+account+"\")'>"+list[i].saleAccount+"</a></td>";
                 html += "<td>"+list[i].saleName+"</td>";
                 html += "<td>"+list[i].jpcpcount+"</td>";
                 html += "<td>"+list[i].jpcpMoney+"</td>";
@@ -164,6 +167,12 @@
                 $("#saleNameId").append(html);
 			}
 		});
+        function reportSaleDetail(obj){
+            var settleDateStart =  $("#settleDateStart").val();
+            var settleDateEnd = $("#settleDateEnd").val();
+            alert("系统开发中")
+            //window.open("/information/saleName/reportSaleDetail?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd + "&saleAccount="+obj);
+		}
 	</script>
 </body>
 </html>

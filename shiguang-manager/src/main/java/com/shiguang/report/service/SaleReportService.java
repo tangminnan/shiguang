@@ -30,6 +30,8 @@ public interface SaleReportService {
 
     List<SettlementDO> findSaleNameSettleList(Map<String,Object> map);
 
+    List<SalesDO> findSaleList(Map<String,Object> map);
+
     List<SalesDO> findYanguangPeople(Map<String,Object> map);
     int findYanguangCount(Map<String,Object> map);
     int findUseCount(Map<String,Object> map);
