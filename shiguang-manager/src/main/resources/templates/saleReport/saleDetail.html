@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>营业员工作量统计</title>
+	<link rel="stylesheet" href="/css/csss.css" type="text/css">
+</head>
+<body>
+<div class="main tabX">
+	<h3>营业员工作量统计</h3>
+	<input type="hidden" id="zongji" th:value="${zongji}">
+	<input type="hidden" id="zongjiNum" th:value="${zongjiNum}">
+	<input type="hidden" id="yuanjiaPrice" th:value="${yuanjiaPrice}">
+	<input type="hidden" id="zhekouPrice" th:value="${zhekouPrice}">
+	<input type="hidden" id="youhuiPrice" th:value="${youhuiPrice}">
+	<input type="hidden" id="molingPrice" th:value="${molingPrice}">
+	<input type="hidden" id="addsumPrice" th:value="${addsumPrice}">
+	<div>
+		<table>
+			<thead>
+			<tr class="thead">
+				<td width="120">配镜单号</td>
+				<td width="80">顾客名称</td>
+				<td>销售金额</td>
+				<td width="170">商品代码</td>
+				<td width="220">商品名称</td>
+				<td>销售数量</td>
+				<td>原价金额</td>
+				<td>折扣金额</td>
+				<td>优惠金额</td>
+				<td>抹零金额</td>
+				<td>应收金额</td>
+				<td>附加费</td>
+				<td>附加费金额</td>
+			</tr>
+			</thead>
+			<tbody id="saleId">
+			<!--<tr>-->
+				<!--<td rowspan="3">k1123366555</td>-->
+				<!--<td rowspan="3">王菲</td>-->
+				<!--<td class="jinE" rowspan="3"><input type="text" value="635.00" /></td>-->
+				<!--<td rowspan="3"><input type="text" value="30%" /></td>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td rowspan="5">k11233665365</td>-->
+				<!--<td rowspan="5">杜飞</td>-->
+				<!--<td class="jinE" rowspan="5"><input type="text" value="688.00" /></td>-->
+				<!--<td rowspan="5"><input type="text" value="32%" /></td>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td rowspan="6">k1123366987</td>-->
+				<!--<td rowspan="6">李双</td>-->
+				<!--<td class="jinE" rowspan="6"><input type="text" value="688.00" /></td>-->
+				<!--<td rowspan="6"><input type="text" value="32%" /></td>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td rowspan="3">k1123366548</td>-->
+				<!--<td rowspan="3">张三</td>-->
+				<!--<td class="jinE" rowspan="3"><input type="text" value="635.00" /></td>-->
+				<!--<td rowspan="3"><input type="text" value="30%" /></td>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td><input type="text" value="3.003.93254444455" /></td>-->
+				<!--<td><textarea rows="3">豪雅NULUL非球面1.60薄型兰御防蓝光膜现片一球镜：-3.25-柱镜：-1.75-标价：540.00" </textarea></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="123" /></td>-->
+				<!--<td><input type="text" value="1" /></td>-->
+				<!--<td><input type="text" value="2" /></td>-->
+				<!--<td><input type="text" value="126" /></td>-->
+				<!--<td><input type="text" value="125" /></td>-->
+			<!--</tr>-->
+			</tbody>
+			<tr class="Xred">
+			<td colspan="2">总价：</td>
+			<td><span th:text="${zongji}"></span></td>
+			<td></td>
+			<td></td>
+			<td><span th:text="${zongjiNum}"></span></td>
+			<td><span th:text="${yuanjiaPrice}"></span></td>
+			<td><span th:text="${zhekouPrice}"></span></td>
+			<td><span th:text="${youhuiPrice}"></span></td>
+			<td><span th:text="${molingPrice}"></span></td>
+			<td><span th:text="${yuanjiaPrice}"></span></td>
+				<td></td>
+				<td><span th:text="${addsumPrice}"></span></td>
+			</tr>
+		</table>
+	</div>
+
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/saleReport/saleReportdy.js"></script>
+<script th:inline="javascript">
+	var html = "";
+    $().ready(function() {
+        var zongji = $("#zongji").val();
+        var zongjiNum = $("#zongjiNum").val();
+        var yuanjiaPrice = $("#yuanjiaPrice").val();
+        var zhekouPrice = $("#zhekouPrice").val();
+        var youhuiPrice = $("#youhuiPrice").val();
+        var molingPrice = $("#molingPrice").val();
+        var addsumPrice = $("#addsumPrice").val();
+        var list = [[${list}]];
+        for (var i=0;i<list.length;i++){
+            var goodsList = list[i].goodsList;
+            var num =goodsList.length;
+            html = "<tr><td rowspan='"+num+"'>"+list[i].saleNumber+"</td>"
+            html += "<td rowspan='"+num+"'>"+list[i].memberName+"</td>"
+            html += "<td  rowspan='"+num+"'>"+list[i].saleMoney+"</td>"
+			html += "<td>"+goodsList[0].goodNum+"</td>"
+            html += "<td>"+goodsList[0].storeName+"</td>"
+            html += "<td>"+goodsList[0].storeCount+"</td>"
+            html += "<td>"+goodsList[0].storePrice+"</td>"
+            html += "<td>"+goodsList[0].discountPrice+"</td>"
+            html += "<td>"+goodsList[0].youhuiPrice+"</td>"
+            html += "<td>"+goodsList[0].molingPrice+"</td>"
+            html += "<td>"+goodsList[0].storePrice+"</td>"
+            html += "<td rowspan='"+num+"'>"+list[i].adddcost+"</td>"
+            html += "<td rowspan='"+num+"'>"+list[i].addprice+"</td></tr>"
+			for (var a = 1; a<goodsList.length;a++){
+                html += "<tr><td>"+goodsList[a].goodNum+"</td>"
+                html += "<td>"+goodsList[a].storeName+"</td>"
+                html += "<td>"+goodsList[a].storeCount+"</td>"
+                html += "<td>"+goodsList[a].storePrice+"</td>"
+                html += "<td>"+goodsList[a].discountPrice+"</td>"
+                html += "<td>"+goodsList[a].youhuiPrice+"</td>"
+                html += "<td>"+goodsList[a].molingPrice+"</td>"
+                html += "<td>"+goodsList[a].storePrice+"</td></tr>"
+            }
+
+            $("#saleId").append(html);
+		}
+        // html += "<tr class='Xred'>"
+        // html += "<td colspan='2'>总价：</td>"
+        // html += "<td>"+zongji+"</td>"
+        // html += "<td></td>"
+        // html += "<td></td>"
+        // html += "<td>"+zongjiNum+"</td>"
+        // html += "<td>"+yuanjiaPrice+"</td>"
+        // html += "<td>"+zhekouPrice+"</td>"
+        // html += "<td>"+youhuiPrice+"</td>"
+        // html += "<td>"+molingPrice+"</td>"
+        // html += "<td>"+yuanjiaPrice+"</td>"
+        // html += "<td></td>"
+        // html += "<td>"+addsumPrice+"</td></tr>"
+        // $("#saleId").append(html);
+    });
+</script>
+</body>
+</html>

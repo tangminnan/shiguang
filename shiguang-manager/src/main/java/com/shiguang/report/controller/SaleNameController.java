@@ -48,8 +48,10 @@ public class SaleNameController {
         }
         if (!"".equals(departNumber)){
             query.put("departNumber",departNumber);
+            model.addAttribute("departNumber",departNumber);
         }else {
             query.put("departNumber", ShiroUtils.getUser().getStoreNum());
+            model.addAttribute("departNumber",ShiroUtils.getUser().getStoreNum());
         }
         List<SalesDO> salesDOList = saleReportService.findGoodsList(query);
         List<SalesDO> saleNameList = saleReportService.findSaleNameList(query);
@@ -546,7 +548,7 @@ public class SaleNameController {
     }
 
     @GetMapping("/reportSaleDetail")
-    public String reportSaleDetail(String settleDateStart,String settleDateEnd,String saleAccount,Model model) {
+    public String reportSaleDetail(String settleDateStart,String settleDateEnd,String saleAccount,String departNumber,Model model) {
         Map<String,Object> query = new HashMap<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -564,12 +566,16 @@ public class SaleNameController {
             query.put("settleDateEnd",simpleDateFormat.format(date));
             model.addAttribute("settleDateEnd",simpleDateFormat.format(date));
         }
-
+        query.put("departNumber",departNumber);
         List<SalesDO> salesDOList = saleReportService.findSaleList(query);
         List<Map<String,Object>> list = new ArrayList<>();
         double zongji=0.0;
         int zongjiNum = 0;
         double yuanjiaPrice = 0.0;
+        double zhekouPrice = 0.0;
+        double youhuiPrice = 0.0;
+        double molingPrice = 0.0;
+        double addsumPrice = 0.0;
         for (SalesDO salesDO : salesDOList){
             Map<String,Object> map = new HashMap<>();
             map.put("saleNumber",salesDO.getSaleNumber());
@@ -633,16 +639,27 @@ public class SaleNameController {
 
             if (null != addcost){
                 for (int j=0;j<addcost.length;j++){
+                    addsumPrice = addsumPrice + Double.valueOf(addPrice[j]);
                     map.put("adddcost",addcost[j]);
                     map.put("addprice",addPrice[j]);
                 }
+            } else {
+                map.put("adddcost","");
+                map.put("addprice","");
             }
 
             map.put("goodsList",goodsList);
-
+            list.add(map);
         }
-
-        return "";
+        model.addAttribute("list",list);
+        model.addAttribute("zongji",zongji);
+        model.addAttribute("zongjiNum",zongjiNum);
+        model.addAttribute("yuanjiaPrice",yuanjiaPrice);
+        model.addAttribute("zhekouPrice",zhekouPrice);
+        model.addAttribute("youhuiPrice",youhuiPrice);
+        model.addAttribute("molingPrice",molingPrice);
+        model.addAttribute("addsumPrice",addsumPrice);
+        return "saleReport/saleDetail";
     }
 
 }

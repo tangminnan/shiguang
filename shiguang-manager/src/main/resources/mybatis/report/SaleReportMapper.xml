@@ -285,6 +285,7 @@
 			<if test="settleDateStart !=null and settleDateStart != ''"> and date_format(s.peijing_time ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
 			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(s.peijing_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="saleAccount != null and saleAccount != ''"> and s.user_name = #{saleAccount} </if>
+			<if test="departNumber != null and departNumber != ''"> and s.`store_num` = #{departNumber} </if>
 			and (s.sale_type = '1')
 		</where>
 		GROUP BY s.sale_number
