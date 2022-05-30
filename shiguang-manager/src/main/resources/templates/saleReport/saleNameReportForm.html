@@ -28,6 +28,7 @@
 		<table border="0" cellspacing="0" cellpadding="0">
 			<input type="hidden" id="settleDateStart" th:value="${settleDateStart}">
 			<input type="hidden" id="settleDateEnd" th:value="${settleDateEnd}">
+			<input type="hidden" id="departNumber" th:value="${departNumber}">
 			<tbody id="saleNameId">
 			<tr class="thead">
 			  <td rowspan="2">工号</td>
@@ -170,8 +171,8 @@
         function reportSaleDetail(obj){
             var settleDateStart =  $("#settleDateStart").val();
             var settleDateEnd = $("#settleDateEnd").val();
-            alert("系统开发中")
-            //window.open("/information/saleName/reportSaleDetail?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd + "&saleAccount="+obj);
+            var departNumber = $("#departNumber").val();
+            window.open("/information/saleName/reportSaleDetail?settleDateStart="+settleDateStart+"&settleDateEnd="+settleDateEnd + "&saleAccount="+obj+"&departNumber="+departNumber);
 		}
 	</script>
 </body>
