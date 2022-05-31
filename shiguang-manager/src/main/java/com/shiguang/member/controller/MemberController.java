@@ -88,6 +88,8 @@ public class MemberController {
     private DistributeLineService distributeLineService;
     @Autowired
     private OptometryLineService optometryLineService;
+    @Autowired
+    private AdditionalService additionalService;
 
     @GetMapping()
     @RequiresPermissions("information:member:member")
@@ -917,17 +919,36 @@ public class MemberController {
         }
 
         List<String> additionalCostList = new ArrayList<>();
+        List<String> additionalRemarkList = new ArrayList<>();
         String additionalCost = settlementDO.getAdditionalCost();
         if (null != additionalCost){
             String[] addCostStr = additionalCost.split(",");
             for (int l=0;l<addCostStr.length;l++){
                 additionalCostList.add(addCostStr[l]);
+                Map<String,Object> mapadd = new HashMap<>();
+                mapadd.put("additionName",addCostStr[l]);
+                List<AdditionalDO> additionalDO = additionalService.list(mapadd);
+                if (null != additionalDO.get(l).getRemark() && !"".equals(additionalDO.get(l).getRemark())){
+                    additionalRemarkList.add(additionalDO.get(l).getRemark());
+                }
             }
             model.addAttribute("additionalCostList",additionalCostList);
+            model.addAttribute("additionalRemarkList",additionalRemarkList);
         } else {
             model.addAttribute("additionalCostList","");
+            model.addAttribute("additionalRemarkList","");
         }
 
+//        String additionalRemark = settlementDO.getRemark();
+//        if (null != additionalRemark){
+//            String[] addCostStr = additionalRemark.split(",");
+//            for (int l=0;l<addCostStr.length;l++){
+//                additionalRemarkList.add(addCostStr[l]);
+//            }
+//            model.addAttribute("additionalRemarkList",additionalRemarkList);
+//        } else {
+//            model.addAttribute("additionalRemarkList","");
+//        }
 
         String addPrice = settlementDO.getAdditionalPrice();
         Double priceSum = 0.00;
@@ -1540,17 +1561,37 @@ public class MemberController {
         }
 
         List<String> additionalCostList = new ArrayList<>();
+        List<String> additionalRemarkList = new ArrayList<>();
         String additionalCost = settlementDO.getAdditionalCost();
         if (null != additionalCost){
             String[] addCostStr = additionalCost.split(",");
             for (int l=0;l<addCostStr.length;l++){
                 additionalCostList.add(addCostStr[l]);
+                Map<String,Object> mapadd = new HashMap<>();
+                mapadd.put("additionName",addCostStr[l]);
+                List<AdditionalDO> additionalDO = additionalService.list(mapadd);
+                if (null != additionalDO.get(l).getRemark() && !"".equals(additionalDO.get(l).getRemark())){
+                    additionalRemarkList.add(additionalDO.get(l).getRemark());
+                }
             }
             model.addAttribute("additionalCostList",additionalCostList);
+            model.addAttribute("additionalRemarkList",additionalRemarkList);
         } else {
             model.addAttribute("additionalCostList","");
+            model.addAttribute("additionalRemarkList","");
         }
 
+//        List<String> additionalRemarkList = new ArrayList<>();
+////        String additionalRemark = settlementDO.getRemark();
+////        if (null != additionalRemark){
+////            String[] addCostStr = additionalRemark.split(",");
+////            for (int l=0;l<addCostStr.length;l++){
+////                additionalRemarkList.add(addCostStr[l]);
+////            }
+////            model.addAttribute("additionalRemarkList",additionalRemarkList);
+////        } else {
+////            model.addAttribute("additionalRemarkList","");
+////        }
 
         String addPrice = settlementDO.getAdditionalPrice();
         Double priceSum = 0.00;

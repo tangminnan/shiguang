@@ -4,11 +4,11 @@
 <mapper namespace="com.shiguang.baseinfomation.dao.AdditionalDao">
 
     <select id="get" resultType="com.shiguang.baseinfomation.domain.AdditionalDO">
-		select `id`,`addition_num`,`addition_name`,`price` from additional where id = #{value}
+		select `id`,`addition_num`,`addition_name`,`price`,`remark` from additional where id = #{value}
 	</select>
 
     <select id="list" resultType="com.shiguang.baseinfomation.domain.AdditionalDO">
-        select `id`,`addition_num`,`addition_name`,`price` from additional
+        select `id`,`addition_num`,`addition_name`,`price`,`remark` from additional
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="additionNum != null and additionNum != ''"> and addition_num = #{additionNum} </if>
@@ -43,13 +43,15 @@
 		(
 			`addition_num`,
 			`addition_name`,
-			`price`
+			`price`,
+			`remark`
 		)
 		values
 		(
 			#{additionNum},
 			#{additionName},
-			#{price}
+			#{price},
+			#{remark}
 		)
 	</insert>
 

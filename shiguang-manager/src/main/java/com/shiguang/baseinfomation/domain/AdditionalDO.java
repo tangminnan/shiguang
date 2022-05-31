@@ -23,6 +23,8 @@ public class AdditionalDO implements Serializable {
 	private String additionName;
 	//价格
 	private Double price;
+	//销售备注
+	private String remark;
 
 	/**
 	 * 设置：主键
@@ -71,5 +73,13 @@ public class AdditionalDO implements Serializable {
 	 */
 	public Double getPrice() {
 		return price;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 }

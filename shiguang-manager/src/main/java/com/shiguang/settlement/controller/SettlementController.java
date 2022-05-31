@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import com.shiguang.baseinfomation.domain.AdditionalDO;
 import com.shiguang.baseinfomation.domain.DepartmentDO;
+import com.shiguang.baseinfomation.service.AdditionalService;
 import com.shiguang.baseinfomation.service.DepartmentService;
 import com.shiguang.checkout.domain.CostDO;
 import com.shiguang.checkout.service.CostService;
@@ -104,6 +106,8 @@ public class SettlementController {
 	private CardService cardService;
 	@Autowired
 	private InfoService infoService;
+	@Autowired
+	private AdditionalService additionalService;
 	
 	@GetMapping()
 	@RequiresPermissions("information:settlement:settlement")
@@ -1112,17 +1116,37 @@ public class SettlementController {
 		}
 
 		List<String> additionalCostList = new ArrayList<>();
+		List<String> additionalRemarkList = new ArrayList<>();
 		String additionalCost = settlementDO.getAdditionalCost();
 		if (null != additionalCost){
 			String[] addCostStr = additionalCost.split(",");
 			for (int l=0;l<addCostStr.length;l++){
 				additionalCostList.add(addCostStr[l]);
+				Map<String,Object> mapadd = new HashMap<>();
+				mapadd.put("additionName",addCostStr[l]);
+				List<AdditionalDO> additionalDO = additionalService.list(mapadd);
+				if (null != additionalDO.get(l).getRemark() && !"".equals(additionalDO.get(l).getRemark())){
+					additionalRemarkList.add(additionalDO.get(l).getRemark());
+				}
+
 			}
 			model.addAttribute("additionalCostList",additionalCostList);
+			model.addAttribute("additionalRemarkList",additionalRemarkList);
 		} else {
 			model.addAttribute("additionalCostList","");
+			model.addAttribute("additionalRemarkList","");
 		}
 
+//		String additionalRemark = settlementDO.getRemark();
+//		if (null != additionalRemark){
+//			String[] addCostStr = additionalRemark.split(",");
+//			for (int l=0;l<addCostStr.length;l++){
+//				additionalRemarkList.add(addCostStr[l]);
+//			}
+//			model.addAttribute("additionalRemarkList",additionalRemarkList);
+//		} else {
+//			model.addAttribute("additionalRemarkList","");
+//		}
 
 		String addPrice = settlementDO.getAdditionalPrice();
 		Double priceSum = 0.00;
