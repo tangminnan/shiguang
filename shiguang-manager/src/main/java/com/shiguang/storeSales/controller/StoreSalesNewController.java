@@ -4,6 +4,7 @@ import com.shiguang.baseinfomation.domain.AdditionalDO;
 import com.shiguang.baseinfomation.service.AdditionalService;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
+import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.giveaway.domain.GiveawayDO;
 import com.shiguang.giveaway.service.GiveawayService;
@@ -16,6 +17,7 @@ import com.shiguang.optometry.domain.ProcessAskDO;
 import com.shiguang.optometry.service.OptometryService;
 import com.shiguang.storeSales.domain.Conclusion;
 import com.shiguang.storeSales.domain.EyesWay;
+import com.shiguang.storeSales.domain.SalesDO;
 import com.shiguang.storeSales.service.SalesService;
 import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
@@ -176,9 +178,17 @@ public class StoreSalesNewController {
                 }
             }
         }
-        return "storeSales/edits";
+        return "storeSales/editnew";
     }
-
+    /**
+     * 保存
+     */
+    @ResponseBody
+    @RequestMapping(value = "/save")
+    @RequiresPermissions("information:storenew:add")
+    public Map<String,Object> save(SalesDO salesDO) {
+        return salesService.saleSavenew(salesDO);
+    }
 
 
 }

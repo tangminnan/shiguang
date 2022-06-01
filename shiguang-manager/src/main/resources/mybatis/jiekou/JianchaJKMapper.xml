@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiekou.dao.JianchaJKDao">
+    <select id="yanguangListShuju" resultType="com.shiguang.jiekou.domain.TryresultJKDO">
+		select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,`chief_complaint`,`sphere_righttry`,
+			   `sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,`axial_lefttry`,`dva_righttry`,`dva_lefttry`,`nva_righttry`,`nva_lefttry`,
+			   `prism_righttry`,`prism_lefttry`,`jdr_try`,`jdl_try`,`height_righttry`,`height_lefttry`,`add_righttry`,`add_lefttry`,`yuan_rrty`,`yuan_lrty`,
+			   `near_righttry`,`near_lefttry`,`remarks`,`far_lyou`,`far_lyod`,`far_lyos`,`near_lyou`,`near_lyod`,`near_lyos`,`far_yjou`,`far_yjod`,`far_yjos`,
+			   `near_yjou`,`near_yjod`,`near_yjos`,`far_xkou`,`far_xkod`,`far_xkos`,`near_xkou`,`near_xkod`,`near_xkos`,`dominant_eye`,`axis`,`axis_left`,
+			   `corneal_first_K1_right`,`corneal_last_K1_right`,`corneal_first_K1_left`,`corneal_last_K1_left`,`corneal_first_K2_right`,`corneal_last_K2_right`,
+			   `corneal_first_K2_left`,`corneal_last_K2_left`,`pkod`,`pkos`,`pk1od`,`pk1os`,`dkod`,`dkos`,`dk1os`,`dk1od`,`pjk_od`,`pjk_os`,`pjk_od2`,`pjk_os2`,
+			   `intraocular_od`,`intraocular_os`,`mydriasis`,`pharmacy_id`,`pharmacy`,`sphere_right`,
+			   `sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`corneal_astigmatism_od`,`corneal_astigmatism_os`,`sph_jyod`,`sph_jyos`,
+			   `cyl_jyod`,`cyl_jyos`,`axial_jyod`,`axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,
+			   `axial_cpos`,`dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,`distance_os`,
+			   `sphere_rightz`,`sphere_leftz`,`cylinder_rightz`,`cylinder_leftz`,`axial_rightz`,`axial_leftz`,`dva_rightz`,`dva_leftz`,`nva_rightz`,
+			   `nva_leftz`,`prism_rightz`,`prism_leftz`,`jdr_z`,`jdl_z`,`add_rightz`,`add_leftz`,`yuan_rz`,`yuan_lz`,`near_rightz`,`near_leftz`,`sgn_sf`,`sgn_reason`,
+			   `sgn_ciss`,`sgn_fardot`,`sgn_neardot`,`sgn_farsp1`,`sgn_farsp2`,`sgn_farcz1`,`sgn_farcz2`,`sgn_nearsp1`,`sgn_nearsp2`,`sgn_nearcz1`,`sgn_nearcz2`,
+			   `sgn_vgfarsp1`,`sgn_vgfarsp2`,`sgn_vgnearsp1`,`sgn_vgnearsp2`,`sgn_vgfarcz1`,`sgn_vgfarcz2`,`sgn_vgnearcz1`,`sgn_vgnearcz2`,`sgn_allygytj1`,
+			   `sgn_allygytj2`,`sgn_ac`,`sgn_acway`,`sgn_tjfy`,`sgn_tjfyou`,`sgn_tjfyod`,`sgn_tjfyos`,`sgn_pra`,`sgn_nra`,`sgn_zfsf`,`sphere_right2`,`sphere_left2`,
+			   `cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`,`tjod`,`tjos`,`status`,`litishi`
+		from jc_tryresults
+		<where>
+			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+		</where>
+	</select>
+	<select id="KjyyListShuju" resultType="com.shiguang.jiekou.domain.KjyyJKDO">
+		select
+		`kjyy_id`,`card_number`,`sale_number`,`kjyy_prescription_type`,`kjyy_doctor`,`kjyy_optometry_name`,`kjyy_sphod`,`kjyy_sphos`,`kjyy_cylod`,`kjyy_cylos`,`kjyy_axialod`,`kjyy_axialos`,`kjyy_prismod`,`kjyy_prismos`,`kjyy_jdod`,`kjyy_jdos`,`kjyy_yytjod`,`kjyy_yytjos`,`kjyy_tgod`,`kjyy_tgos`,`kjyy_vaod`,`kjyy_vaos`,`kjyy_jpcz`,`kjyy_clfs`,`kjyy_jykj`,`kjyy_kjlx`,`kjyy_text`,`kjyy_beizhu`
+		from jc_kjyy
+		<where>
+			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+		</where>
+	</select>
+	<select id="KjjyListShuju" resultType="com.shiguang.jiekou.domain.KjjyJKDO">
+		select
+		`kjjy_id`,`card_number`,`sale_number`,`kjjy_prescription_type`,`kjjy_doctor`,`kjjy_optometry_name`,`kjjy_sphod`,`kjjy_sphos`,`kjjy_cylod`,`kjjy_cylos`,`kjjy_axialod`,`kjjy_axialos`,`kjjy_prismod`,`kjjy_prismos`,`kjjy_jdod`,`kjjy_jdos`,`kjjy_yytjod`,`kjjy_yytjos`,`kjjy_tgod`,`kjjy_tgos`,`kjjy_vaod`,`kjjy_vaos`,`kjjy_jpcz`,`kjjy_clfs`,`kjjy_jykj`,`kjjy_kjlx`,`kjjy_text`,`kjjy_beizhu`
+		from jc_kjjy
+		<where>
+			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+		</where>
+	</select>
+	<select id="SgjjListShuju" resultType="com.shiguang.jiekou.domain.SgjjJKDO">
+		select
+		`sgjj_id`,`card_number`,`sale_number`,`sgjj_prescription_type`,`sgjj_doctor`,`sgjj_optometry_name`,`sgjj_sphod`,`sgjj_sphos`,`sgjj_cylod`,`sgjj_cylos`,`sgjj_axialod`,`sgjj_axialos`,`sgjj_addod`,`sgjj_addos`,`sgjj_yytjod`,`sgjj_yytjos`,`sgjj_jytjod`,`sgjj_jytjos`,`sgjj_tgod`,`sgjj_tgos`,`sgjj_yyvaod`,`sgjj_yyvaos`,`sgjj_jyvaod`,`sgjj_jyvaos`,`sgjj_jpcz`,`sgjj_clfs`,`sgjj_jykj`,`sgjj_kjlx`,`sgjj_text`,`sgjj_beizhu`
+		from jc_sgjj
+		<where>
+			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+		</where>
+	</select>
+	<select id="RxjmjcjListShuju" resultType="com.shiguang.jiekou.domain.RxjmjcjJKDO">
+		select
+		`rx_id`,`card_number`,`sale_number`,`rx_prescription_type`,`rx_doctor`,`rx_optometry_name`,`rx_bcod`,`rx_bcos`,`rx_sphod`,`rx_sphos`,`rx_cylod`,`rx_cylos`,`rx_axialod`,`rx_axialos`,`rx_zjod`,`rx_zjos`,`rx_vaod`,`rx_vaos`,`rx_syjpod`,`rx_syjpos`,`rx_unitod`,`rx_unitos`,`rx_clfs`,`rx_hlypz`,`rx_beizhu`
+		from jc_rxjmjcj
+		<where>
+			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+		</where>
+	</select>
+	<select id="ZyListShuju" resultType="com.shiguang.jiekou.domain.ZyJKDO">
+		select `zy_id`,`card_number`,`sale_number`,`zy_prescription_type`,`zy_doctor`,`zy_optometry_name`,`zy_sphod`,`zy_sphos`,`zy_cylod`,`zy_cylos`,`zy_axialod`,`zy_axialos`,`zy_prismod`,`zy_prismos`,`zy_jdod`,`zy_jdos`,`zy_zytjod`,`zy_zytjos`,`zy_tgod`,`zy_tgos`,`zy_vaod`,`zy_vaos`,`zy_jpcz`,`zy_clfs`,`zy_jyjk`,`zy_jklx`,`zy_text`,`zy_beizhu` from jc_zy
+		<where>
+			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+		</where>
+	</select>
+	<select id="SjxlListShuju" resultType="com.shiguang.jiekou.domain.SjxlJKDO">
+		select
+		`sjxl_id`,`card_number`,`sale_number`,`sjxl_prescription_type`,`sjxl_doctor`,`sjxl_optometry_name`,`sjxl_sphod`,`sjxl_sphos`,`sjxl_cylod`,`sjxl_cylos`,`sjxl_axialod`,`sjxl_axialos`,`sjxl_sljod`,`sjxl_sljos`,`sjxl_jdod`,`sjxl_jdos`,`sjxl_yytjod`,`sjxl_yytjos`,`sjxl_jytjod`,`sjxl_jytjos`,`sjxl_tgod`,`sjxl_tgos`,`sjxl_yyvaod`,`sjxl_yyvaos`,`sjxl_jyvaod`,`sjxl_jyvaos`,`sjxl_jtxl`,`sjxl_xlsxl`,`sjxl_beizhu`
+		from jc_sjxl
+		<where>
+			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+		</where>
+	</select>
+	<select id="VstListShuju" resultType="com.shiguang.jiekou.domain.VstJKDO">
+		select `vst_id`,`card_number`,`vst_prescription_type`,`vst_doctor`,`vst_optometry_name`,`vst_sdbhod`,`vst_sdbhos`,`vst_fkod`,`vst_fkos`,`vst_qlbjod`,`vst_qlbjos`,`vst_acod`,`vst_acos`,`vst_jfod`,`vst_jfos`,`vst_diaod`,`vst_diaos`,`vst_bcod`,`vst_bcos`,`vst_cpclyod`,`vst_cpclyos`,`vst_eod`,`vst_eos`,`vst_vaod`,`vst_vaos`,`vst_jpysod`,`vst_jpysos`,`vst_syjpod`,`vst_syjpos`,`vst_beizhu`,`ptometry_number`,`status`,`vst_sphod`,`vst_sphos`,`vst_cylod`,`vst_cylos`,`vst_axialod`,`vst_axialos` from jc_vst
+		<where>
+			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+		</where>
+	</select>
+	<select id="CrtListShuju" resultType="com.shiguang.jiekou.domain.CrtJKDO">
+		select `crt_id`,`card_number`,`crt_prescription_type`,`crt_doctor`,`crt_optometry_name`,`crt_sdbhod`,`crt_sdbhos`,`ctr_bcod`,`crt_bcos`,`crt_rzdod`,`crt_rzdos`,`crt_lzaod`,`crt_lzaos`,`crt_rzd2od`,`crt_rzd2os`,`crt_lza2od`,`crt_lza2os`,`crt_jfod`,`crt_jfos`,`crt_diaod`,`crt_diaos`,`crt_vaod`,`crt_vaos`,`crt_jpysod`,`crt_jpysos`,`crt_syjpod`,`crt_syjpos`,`crt_beizhu`,`ptometry_number`,`status`,`crt_sphod`,`crt_sphos`,`crt_cylod`,`crt_cylos`,`crt_axialod`,`crt_axialos` from jc_crt
+		<where>
+			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+		</where>
+	</select>
+	<select id="RgpListShuju" resultType="com.shiguang.jiekou.domain.RgpJKDO">
+		select `rgp_id`,`card_number`,`rgp_prescription_type`,`rgp_doctor`,`rgp_optometry_name`,`rgp_qgdod`,`rgp_qgdos`,`rgp_bcod`,`rgp_bcos`,`rgp_diaod`,`rgp_diaos`,`rgp_sgod`,`rgp_sgos`,`rgp_jpysod`,`rgp_jpysos`,`rgp_tssjod`,`rgp_tssjos`,`rgp_syjpod`,`rgp_syjpos`,`rgp_beizhu`,`ptometry_number`,`status`,`rgp_sphod`,`rgp_sphos`,`rgp_cylod`,`rgp_cylos`,`rgp_axialod`,`rgp_axialos` from jc_rgp
+		<where>
+			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+		</where>
+	</select>
+
+	<insert id="lineJKSave" parameterType="com.shiguang.jiekou.domain.YgLineJKDO" useGeneratedKeys="true" keyProperty="id">
+		insert into member
+		(
+			`member_number`,
+			`call_status`,
+			`member_name`,
+			`sex`,
+			`line_time`
+		)
+		values
+		(
+			#{memberNumber},
+			#{callStatus},
+			#{memberName},
+			#{sex},
+			#{lineTime}
+		)
+	</insert>
+
+	<select id="getYanguangLast" resultType="com.shiguang.jiekou.domain.lastResultJKDO">
+		select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,`chief_complaint`,`sphere_righttry`,
+		`sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,`axial_lefttry`,`dva_righttry`,`dva_lefttry`,`nva_righttry`,`nva_lefttry`,
+		`prism_righttry`,`prism_lefttry`,`jdr_try`,`jdl_try`,`height_righttry`,`height_lefttry`,`add_righttry`,`add_lefttry`,`yuan_rrty`,`yuan_lrty`,
+		`near_righttry`,`near_lefttry`,`remarks`,`far_lyou`,`far_lyod`,`far_lyos`,`near_lyou`,`near_lyod`,`near_lyos`,`far_yjou`,`far_yjod`,`far_yjos`,
+		`near_yjou`,`near_yjod`,`near_yjos`,`far_xkou`,`far_xkod`,`far_xkos`,`near_xkou`,`near_xkod`,`near_xkos`,`dominant_eye`,`axis`,`axis_left`,
+		`corneal_first_K1_right`,`corneal_last_K1_right`,`corneal_first_K1_left`,`corneal_last_K1_left`,`corneal_first_K2_right`,`corneal_last_K2_right`,
+		`corneal_first_K2_left`,`corneal_last_K2_left`,`pkod`,`pkos`,`pk1od`,`pk1os`,`dkod`,`dkos`,`dk1os`,`dk1od`,`pjk_od`,`pjk_os`,`pjk_od2`,`pjk_os2`,
+		`intraocular_od`,`intraocular_os`,`mydriasis`,`pharmacy_id`,`pharmacy`,`sphere_right`,
+		`sphere_left`,`cylinder_right`,`cylinder_left`,`axial_right`,`axial_left`,`corneal_astigmatism_od`,`corneal_astigmatism_os`,`sph_jyod`,`sph_jyos`,
+		`cyl_jyod`,`cyl_jyos`,`axial_jyod`,`axial_jyos`,`va_jyod`,`va_jyos`,`pd_jyod`,`pd_jyos`,`sph_cpod`,`sph_cpos`,`cyl_cpod`,`cyl_cpos`,`axial_cpod`,
+		`axial_cpos`,`dva_cpod`,`dva_cpos`,`nva_cpod`,`nva_cpos`,`add_cpod`,`add_cpos`,`distance_od`,`distance_os`,
+		`sphere_rightz`,`sphere_leftz`,`cylinder_rightz`,`cylinder_leftz`,`axial_rightz`,`axial_leftz`,`dva_rightz`,`dva_leftz`,`nva_rightz`,
+		`nva_leftz`,`prism_rightz`,`prism_leftz`,`jdr_z`,`jdl_z`,`add_rightz`,`add_leftz`,`yuan_rz`,`yuan_lz`,`near_rightz`,`near_leftz`,`sgn_sf`,`sgn_reason`,
+		`sgn_ciss`,`sgn_fardot`,`sgn_neardot`,`sgn_farsp1`,`sgn_farsp2`,`sgn_farcz1`,`sgn_farcz2`,`sgn_nearsp1`,`sgn_nearsp2`,`sgn_nearcz1`,`sgn_nearcz2`,
+		`sgn_vgfarsp1`,`sgn_vgfarsp2`,`sgn_vgnearsp1`,`sgn_vgnearsp2`,`sgn_vgfarcz1`,`sgn_vgfarcz2`,`sgn_vgnearcz1`,`sgn_vgnearcz2`,`sgn_allygytj1`,
+		`sgn_allygytj2`,`sgn_ac`,`sgn_acway`,`sgn_tjfy`,`sgn_tjfyou`,`sgn_tjfyod`,`sgn_tjfyos`,`sgn_pra`,`sgn_nra`,`sgn_zfsf`,`sphere_right2`,`sphere_left2`,
+		`cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`,`tjod`,`tjos`,`status`,`litishi`
+		from jc_tryresults
+		where card_number = #{cardNumber}
+		order by create_time desc
+		limit 1
+	</select>
+</mapper>

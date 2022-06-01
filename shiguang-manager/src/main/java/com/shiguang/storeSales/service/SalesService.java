@@ -61,4 +61,6 @@ public interface SalesService {
 
 	R saleSave(SalesDO salesDO);
 
+	Map<String,Object> saleSavenew(SalesDO salesDO);
+
 }

@@ -1203,6 +1203,14 @@
         where position_id = #{positionId} and goods_code = #{goodsCode}
     </update>
 
+    <!--更新库存  -->
+    <update id="updateStockCountNum" parameterType="com.shiguang.stock.domain.StockDO">
+        update stock
+        <set>
+            <if test="goodsCount != null">`goods_count` = #{goodsCount}, </if>
+        </set>
+        where position_id = #{positionId} and goods_num = #{goodsNum}
+    </update>
 
     <select id="getGoodsNum" resultType="com.shiguang.stock.domain.StockDO">
     select `id`,`goods_code`, goods_count as goodsCount  from stock where goods_code = #{value} group by goods_code

@@ -135,6 +135,7 @@ public class GainLossController {
 			for (int i=0;i<goodsId.length;i++){
 				StockDO stockDO = new StockDO();
 				stockDO.setGoodsCode(goodsId[i]);
+				stockDO.setPositionId(String.valueOf(gainLoss.getPositionId()));
 				StockDO producaDO = stockService.getProduceCode(stockDO);
 				producaDO.setInventoryCount(goodsCount[i]);
 				goodsList.add(producaDO);
@@ -151,6 +152,7 @@ public class GainLossController {
 //				goodsList.add(partsDO);
 				StockDO stockDO = new StockDO();
 				stockDO.setGoodsNum(goodsNum[i]);
+				stockDO.setPositionId(String.valueOf(gainLoss.getPositionId()));
 				StockDO producaDO = stockService.getProduceNum(stockDO);
 				producaDO.setInventoryCount(goodsCount[i]);
 				goodsList.add(producaDO);
@@ -182,7 +184,7 @@ public class GainLossController {
 			}
 			model.addAttribute("goodsList",goodsList);
 		} else if ("隐形".equals(gainLoss.getInventoryType())){
-			String[] goodsNum = gainLoss.getGoodsNum().split(",");
+			String[] goodsNum = gainLoss.getProducCode().split(",");
 			String[] goodsCount = gainLoss.getInventoryCount().split(",");
 			List<StockDO> goodsList = new ArrayList<>();
 			for (int i=0;i<goodsNum.length;i++){
@@ -198,14 +200,15 @@ public class GainLossController {
 //					}
 //				}
 				StockDO stockDO = new StockDO();
-				stockDO.setGoodsNum(goodsNum[i]);
-				StockDO producaDO = stockService.getProduceNum(stockDO);
+				stockDO.setGoodsCode(goodsNum[i]);
+				stockDO.setPositionId(String.valueOf(gainLoss.getPositionId()));
+				StockDO producaDO = stockService.getProduceCode(stockDO);
 				producaDO.setInventoryCount(goodsCount[i]);
 				goodsList.add(producaDO);
 			}
 			model.addAttribute("goodsList",goodsList);
 		} else if ("护理液".equals(gainLoss.getInventoryType())){
-			String[] goodsNum = gainLoss.getGoodsNum().split(",");
+			String[] goodsNum = gainLoss.getProducCode().split(",");
 			String[] goodsCount = gainLoss.getInventoryCount().split(",");
 			List<StockDO> goodsList = new ArrayList<>();
 			for (int i=0;i<goodsNum.length;i++){
@@ -213,8 +216,9 @@ public class GainLossController {
 //				hlyDO.setInventoryCount(goodsCount[i]);
 //				goodsList.add(hlyDO);
 				StockDO stockDO = new StockDO();
-				stockDO.setGoodsNum(goodsNum[i]);
-				StockDO producaDO = stockService.getProduceNum(stockDO);
+				stockDO.setGoodsCode(goodsNum[i]);
+				stockDO.setPositionId(String.valueOf(gainLoss.getPositionId()));
+				StockDO producaDO = stockService.getProduceCode(stockDO);
 				producaDO.setInventoryCount(goodsCount[i]);
 				goodsList.add(producaDO);
 			}
@@ -229,6 +233,7 @@ public class GainLossController {
 //				goodsList.add(tyjDO);
 				StockDO stockDO = new StockDO();
 				stockDO.setGoodsNum(goodsNum[i]);
+				stockDO.setPositionId(String.valueOf(gainLoss.getPositionId()));
 				StockDO producaDO = stockService.getProduceNum(stockDO);
 				producaDO.setInventoryCount(goodsCount[i]);
 				goodsList.add(producaDO);
@@ -245,6 +250,7 @@ public class GainLossController {
 //				goodsList.add(oldlensDO);
 				StockDO stockDO = new StockDO();
 				stockDO.setGoodsNum(goodsNum[i]);
+				stockDO.setPositionId(String.valueOf(gainLoss.getPositionId()));
 				StockDO producaDO = stockService.getProduceNum(stockDO);
 				producaDO.setInventoryCount(goodsCount[i]);
 				goodsList.add(producaDO);
@@ -261,6 +267,7 @@ public class GainLossController {
 //				goodsList.add(hcDO);
 				StockDO stockDO = new StockDO();
 				stockDO.setGoodsNum(goodsNum[i]);
+				stockDO.setPositionId(String.valueOf(gainLoss.getPositionId()));
 				StockDO producaDO = stockService.getProduceNum(stockDO);
 				producaDO.setInventoryCount(goodsCount[i]);
 				goodsList.add(producaDO);
@@ -277,6 +284,7 @@ public class GainLossController {
 //				goodsList.add(shiguangDO);
 				StockDO stockDO = new StockDO();
 				stockDO.setGoodsNum(goodsNum[i]);
+				stockDO.setPositionId(String.valueOf(gainLoss.getPositionId()));
 				StockDO producaDO = stockService.getProduceNum(stockDO);
 				producaDO.setInventoryCount(goodsCount[i]);
 				goodsList.add(producaDO);

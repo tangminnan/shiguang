@@ -11,7 +11,6 @@ function save() {
 	var positionId = $("#positionId").val();
 	var documentType = $("#documentType").val();
 	var inventoryCount = $("#inventoryCount").val();
-	alert(inventoryCount)
 	if (positionId == ''){
 		return alert("请选择盘点仓位")
 	}

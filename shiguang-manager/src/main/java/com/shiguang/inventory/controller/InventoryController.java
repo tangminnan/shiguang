@@ -211,12 +211,20 @@ public class InventoryController {
 		//对库存进行操作
 		if (null != gainLossDO.getProducCode()){
 			String[] goodsCode = gainLossDO.getProducCode().split(",");
+			String[] goodsNum = gainLossDO.getGoodsNum().split(",");
 			String[] goodsCount = gainLossDO.getInventoryCount().split(",");
 			for (int i=0;i<goodsCode.length;i++){
 				StockDO stockDO = new StockDO();
 				stockDO.setPositionId(String.valueOf(gainLossDO.getPositionId()));
-				stockDO.setGoodsCode(goodsCode[i]);
-				StockDO stockDO1 = stockService.getProduceCode(stockDO);
+				StockDO stockDO1 = new StockDO();
+				stockDO.setPositionId(String.valueOf(gainLossDO.getPositionId()));
+				if ("护理液".equals(gainLossDO.getInventoryType()) || "隐形".equals(gainLossDO.getInventoryType())){
+					stockDO.setGoodsCode(goodsCode[i]);
+					stockDO1 = stockService.getProduceCode(stockDO);
+				} else {
+					stockDO.setGoodsNum(goodsNum[i]);
+					stockDO1 = stockService.getProduceNum(stockDO);
+				}
 				StockDO stockDO2 = new StockDO();
 				if (null != stockDO1){
 					if ("盘盈".equals(gainLossDO.getDocumentType())){
@@ -231,9 +239,15 @@ public class InventoryController {
 						}
 
 					}
-					stockDO2.setGoodsCode(goodsCode[i]);
-					stockDO2.setPositionId(String.valueOf(gainLossDO.getPositionId()));
-					stockService.updateStockCCount(stockDO2);
+					if ("护理液".equals(gainLossDO.getInventoryType()) || "隐形".equals(gainLossDO.getInventoryType())){
+						stockDO2.setGoodsCode(goodsCode[i]);
+						stockDO2.setPositionId(String.valueOf(gainLossDO.getPositionId()));
+						stockService.updateStockCCount(stockDO2);
+					} else {
+						stockDO2.setGoodsNum(goodsNum[i]);
+						stockDO2.setPositionId(String.valueOf(gainLossDO.getPositionId()));
+						stockService.updateStockCountNum(stockDO2);
+					}
 				}
 
 			}

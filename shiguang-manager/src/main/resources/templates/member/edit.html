@@ -10,6 +10,7 @@
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
 						<input id="id" name="id" th:value="${member.id}"  type="hidden">
+							<input id="companyId" name="companyId" th:value="${member.companyId}"  type="hidden">
 							<input id="memberOption" name="memberOption" th:value="${member.memberOption}"  type="hidden">
 							<div class="form-group">	
 								<label class="col-sm-3 control-label">顾客姓名：</label>
@@ -327,6 +328,28 @@
                 //年龄 age
             }
         })
+
+        laydate.render({
+            elem: '#birthdayYear',
+            format: 'yyyy',
+            type: 'year',
+            done:function(value,data){
+                getAge(value)
+            }
+        });
+
+        function getAge(obj){
+            // alert(data);
+            // var birthyear = $("#birthdayYear").val()
+            // alert(birthyear);
+            if(obj==null)return   "请输入出生日期";
+            var date = new Date();
+            var year = date.getFullYear();
+            var userage= year - obj;
+            $("#age").val(userage)
+            return false;
+        }
+
         function changeInterest() {
             var interester =[];
             var obj = document.getElementById("interests");

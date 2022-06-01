@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiekou.dao.MemberJKDao">
+
+    <select id="getCardNumber" resultType="com.shiguang.jiekou.domain.MemberJKDO">
+		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`company_id`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`integral`,`status`,`state` from member where card_number = #{value}
+	</select>
+
+    <select id="list" resultType="com.shiguang.jiekou.domain.MemberJKDO">
+        select m.`id`,m.`name`,m.`member_option`,m.`card_number`,m.`sex`,m.`depart_number`,m.`company_id`,m.`birthday_year`,m.`birthday_month`,
+        m.`birthday_day`,m.`age`,m.`phone_1`,m.`phone_2`,m.`phone_3`,m.`province_code`,m.`province_name`,m.`city_code`,m.`city_name`,
+        m.`area_code`,m.`area_name`,m.`card_type`,m.`master_card`,m.`minor_name`,m.`crowd_type`,m.`exclusive_customer`,
+        m.`exclusive_customer_id`,m.`identity_type`,m.`identity_id`,m.`vocation`,m.`school`,m.`qq_number`,m.`email`,
+        m.`address`,m.`postal_code`,m.`interest`,m.`source`,m.`integral_pasd`,m.`remark`,m.`register_time`,m.`status`,m.`state`
+        from member m
+        <where>
+            <if test="name != null and name != ''"> and m.`name` like concat('%', #{name},'%') </if>
+            <if test="cardNumber != null and cardNumber != ''"> and m.card_number = #{cardNumber} </if>
+            <if test="phone1 != null and phone1 != ''"> and (m.phone_1 = #{phone1} or m.phone_2 = #{phone1} or m.phone_3 = #{phone1} ) </if>
+            <if test="startTime != null and startTime !=''"> and DATE_FORMAT(m.register_time,'%Y-%m-%d') >= #{startTime} </if>
+            <if test="endTime != null and endTime != ''"> and DATE_FORMAT(m.register_time,'%Y-%m-%d') &lt;= #{endTime} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <insert id="save" parameterType="com.shiguang.jiekou.domain.MemberJKDO" useGeneratedKeys="true" keyProperty="id">
+		insert into member
+		(
+			`name`,
+			`member_option`,
+			`card_number`,
+			`sex`,
+			`depart_number`,
+			`company_id`,
+			`birthday_year`,
+			`birthday_month`,
+			`birthday_day`,
+			`age`,
+			`phone_1`,
+			`phone_2`,
+			`phone_3`,
+			`province_code`,
+			`province_name`,
+			`city_code`,
+			`city_name`,
+			`area_code`,
+			`area_name`,
+			`card_type`,
+			`master_card`,
+			`minor_name`,
+			`crowd_type`,
+			`exclusive_customer`,
+			`exclusive_customer_id`,
+			`identity_type`,
+			`identity_id`,
+			`vocation`,
+			`school`,
+			`qq_number`,
+			`email`,
+			`address`,
+			`postal_code`,
+			`interest`,
+			`source`,
+			`integral_pasd`,
+			`remark`,
+			`register_time`,
+			`status`,
+			`state`,
+			`open_id`
+		)
+		values
+		(
+			#{name},
+			#{memberOption},
+			#{cardNumber},
+			#{sex},
+			#{departNumber},
+			#{companyId},
+			#{birthdayYear},
+			#{birthdayMonth},
+			#{birthdayDay},
+			#{age},
+			#{phone1},
+			#{phone2},
+			#{phone3},
+			#{provinceCode},
+			#{provinceName},
+			#{cityCode},
+			#{cityName},
+			#{areaCode},
+			#{areaName},
+			#{cardType},
+			#{masterCard},
+			#{minorName},
+			#{crowdType},
+			#{exclusiveCustomer},
+			#{exclusiveCustomerId},
+			#{identityType},
+			#{identityId},
+			#{vocation},
+			#{school},
+			#{qqNumber},
+			#{email},
+			#{address},
+			#{postalCode},
+			#{interest},
+			#{source},
+			#{integralPasd},
+			#{remark},
+			#{registerTime},
+			#{status},
+			#{state},
+			#{openId}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.shiguang.jiekou.domain.MemberJKDO">
+        update member
+        <set>
+            <if test="name != null">`name` = #{name}, </if>
+            <if test="memberOption != null">`member_option` = #{memberOption}, </if>
+            <if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
+            <if test="sex != null">`sex` = #{sex}, </if>
+            <if test="departNumber != null">`depart_number` = #{departNumber}</if>
+            <if test="birthdayYear != null">`birthday_year` = #{birthdayYear}, </if>
+            <if test="birthdayMonth != null">`birthday_month` = #{birthdayMonth}, </if>
+            <if test="birthdayDay != null">`birthday_day` = #{birthdayDay}, </if>
+            <if test="age != null">`age` = #{age}, </if>
+            <if test="phone1 != null">`phone_1` = #{phone1}, </if>
+            <if test="phone2 != null">`phone_2` = #{phone2}, </if>
+            <if test="phone3 != null">`phone_3` = #{phone3}, </if>
+            <if test="provinceCode != null">`province_code` = #{provinceCode}, </if>
+            <if test="provinceName != null">`province_name` = #{provinceName}, </if>
+            <if test="cityCode != null">`city_code` = #{cityCode}, </if>
+            <if test="cityName != null">`city_name` = #{cityName}, </if>
+            <if test="areaCode != null">`area_code` = #{areaCode}, </if>
+            <if test="areaName != null">`area_name` = #{areaName}, </if>
+            <if test="cardType != null">`card_type` = #{cardType}, </if>
+            <if test="masterCard != null">`master_card` = #{masterCard}, </if>
+            <if test="minorName != null">`minor_name` = #{minorName}, </if>
+            <if test="crowdType != null">`crowd_type` = #{crowdType}, </if>
+            <if test="exclusiveCustomer != null">`exclusive_customer` = #{exclusiveCustomer}, </if>
+            <if test="exclusiveCustomerId != null">`exclusive_customer_id` = #{exclusiveCustomerId}, </if>
+            <if test="identityType != null">`identity_type` = #{identityType}, </if>
+            <if test="identityId != null">`identity_id` = #{identityId}, </if>
+            <if test="vocation != null">`vocation` = #{vocation}, </if>
+            <if test="school != null">`school` = #{school}, </if>
+            <if test="qqNumber != null">`qq_number` = #{qqNumber}, </if>
+            <if test="email != null">`email` = #{email}, </if>
+            <if test="address != null">`address` = #{address}, </if>
+            <if test="postalCode != null">`postal_code` = #{postalCode}, </if>
+            <if test="interest != null">`interest` = #{interest}, </if>
+            <if test="source != null">`source` = #{source}, </if>
+            <if test="integralPasd != null">`integral_pasd` = #{integralPasd}, </if>
+            <if test="remark != null">`remark` = #{remark}, </if>
+            <if test="registerTime != null">`register_time` = #{registerTime},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="state != null">`state` = #{state},</if>
+            <if test="integral != null and integral != ''">`integral` = #{integral}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

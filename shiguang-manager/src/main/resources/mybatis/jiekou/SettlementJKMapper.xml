@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shiguang.jiekou.dao.SettlementJKDao">
+
+	<select id="list" resultType="com.shiguang.jiekou.domain.SettlementJKDO">
+		SELECT se.member_number,se.sale_name,`actual_money`,`change_money`,`pay_model`,`model_money`,`pay_money`,se.sale_number,se.settle_date,store_name FROM settlement se
+		INNER JOIN store_sales sto ON se.sale_number=sto.sale_number
+        <where>
+			<if test="cardNumber != null and cardNumber != ''"> and se.member_number = #{cardNumber} </if>
+			<if test="saleNumber != null and saleNumber != ''"> and se.sale_number = #{saleNumber} </if>
+			<if test="startTime != null and startTime !=''"> and DATE_FORMAT(se.settle_date,'%Y-%m-%d') >= #{startTime} </if>
+			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(se.settle_date,'%Y-%m-%d') &lt;= #{endTime} </if>
+		</where>
+	</select>
+
+</mapper>

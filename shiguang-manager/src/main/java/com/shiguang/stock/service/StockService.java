@@ -36,6 +36,8 @@ public interface StockService {
 
     int updateStockCCount(StockDO stockDO);
 
+    int updateStockCountNum(StockDO stockDO);
+
     List<StockDO> listJiajia(Map<String, Object> map);
 
     int countJiajia(Map<String, Object> map);

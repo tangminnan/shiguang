@@ -72,6 +72,11 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
+    public int updateStockCountNum(StockDO stockDO) {
+        return stockDao.updateStockCountNum(stockDO);
+    }
+
+    @Override
     public int batchRemove(Long[] ids) {
         return stockDao.batchRemove(ids);
     }

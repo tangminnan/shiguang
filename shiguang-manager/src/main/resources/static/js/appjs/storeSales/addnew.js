@@ -31,13 +31,14 @@ function save() {
 		},
 		success : function(data) {
             var cardNumber = $("#memberInumber").val();
+            var saleNumber = data.saleNumber;
             layer.open({
                 type : 2,
                 title : '结款',
                 maxmin : true,
                 shadeClose : false, // 点击遮罩关闭层
                 area : [ '1500px', '520px' ],
-                content : '/information/settlement/editMoney/'+cardNumber // iframe的url
+                content : '/information/settlement/editnew/'+cardNumber+'/'+saleNumber // iframe的url
             });
 			// if (data.code == 0) {
             //     parent.layer.msg("操作成功");
