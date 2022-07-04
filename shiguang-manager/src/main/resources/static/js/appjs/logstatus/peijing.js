@@ -129,6 +129,10 @@ function peijingdan(saleNumber,saleType){
         window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
 	} else if (saleType == '已退款'){
         window.open("/information/settlement/tuikuandan?saleNumber="+saleNumber);
+	} else if (saleType == '已付定金'){
+        window.open("/information/settlement/dingjindan?saleNumber="+saleNumber);
+	} else if (saleType == '未缴费'){
+        window.open("/information/settlement/peijingdan?saleNumber="+saleNumber);
 	}
 
 }

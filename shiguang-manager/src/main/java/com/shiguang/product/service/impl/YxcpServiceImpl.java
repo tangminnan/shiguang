@@ -64,4 +64,9 @@ public class YxcpServiceImpl implements YxcpService {
     public List<YxcpDO> haveNum(Map<String, Object> map) {
         return yxcpDao.haveNum(map);
     }
+
+    @Override
+    public YxcpDO getYxcpInfomation(String goodsNum) {
+        return yxcpDao.getYxcpInfomation(goodsNum);
+    }
 }

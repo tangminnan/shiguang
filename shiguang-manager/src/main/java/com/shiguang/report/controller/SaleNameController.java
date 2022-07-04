@@ -547,6 +547,7 @@ public class SaleNameController {
         return "saleReport/saleNameReportForm";
     }
 
+
     @GetMapping("/reportSaleDetail")
     public String reportSaleDetail(String settleDateStart,String settleDateEnd,String saleAccount,String departNumber,Model model) {
         Map<String,Object> query = new HashMap<>();
@@ -567,6 +568,7 @@ public class SaleNameController {
             model.addAttribute("settleDateEnd",simpleDateFormat.format(date));
         }
         query.put("departNumber",departNumber);
+        query.put("saleAccount",saleAccount);
         List<SalesDO> salesDOList = saleReportService.findSaleList(query);
         List<Map<String,Object>> list = new ArrayList<>();
         double zongji=0.0;
@@ -640,8 +642,8 @@ public class SaleNameController {
             if (null != addcost){
                 for (int j=0;j<addcost.length;j++){
                     addsumPrice = addsumPrice + Double.valueOf(addPrice[j]);
-                    map.put("adddcost",addcost[j]);
-                    map.put("addprice",addPrice[j]);
+                    map.put("adddcost",addcost);
+                    map.put("addprice",addPrice);
                 }
             } else {
                 map.put("adddcost","");

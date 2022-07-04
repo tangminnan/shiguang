@@ -138,6 +138,27 @@
 								</div>
 								<img src="/img/dec.jpg" width="20" height="20" onclick="desc(this)">
 							</div>
+							<div class="form-group" style="display: none" id="jffss">
+								<label class="col-sm-3 control-label">缴费方式：</label>
+								<div class="col-sm-8">
+									<select  name="payModel" id="payModel2" style="width: 30%" onclick="chuzhika2()">
+										<option value="">请选择</option>
+										<option value="0">微信</option>
+										<option value="1">支付宝</option>
+										<option value="2">医院收费处</option>
+										<option value="3">一卡通</option>
+										<option value="4">现金</option>
+										<option value="5">银联卡</option>
+										<option value="6">储值卡</option>
+										<option value="7">.</option>
+										<option value="8">..</option>
+										<option value="9">积分</option>
+										<option value="10">微信平台</option>
+									</select>
+									&nbsp;&nbsp;&nbsp;&nbsp;<input id="modelMoneyss" name="modelMoney" onchange="cop()" style="width: 20%" type="text">
+								</div>
+								<img src="/img/dec.jpg" width="20" height="20" onclick="desc(this)">
+							</div>
 
 																					<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
@@ -172,10 +193,11 @@
     function cop(){
         var str=document.getElementById("modelMoney").value;
         var strs = document.getElementById("modelMoneys").value;
+        var strss = document.getElementById("modelMoneyss").value;
         var jifen = document.getElementById("chuzhi").value;
         var jifen1 = document.getElementById("payModel").value;
+        var jifen2 = document.getElementById("payModel2").value;
         var actualMoney = $("#actualMoney").val();
-        var payWay = $("#payWay").val();
 		if (jifen == '9' && jifen1 == ''){
             str = parseFloat(str) / 20
 			$("#modelMoney").val(str);
@@ -186,10 +208,18 @@
 			$("#modelMoneys").val(strs);
              flag = 1;
 		}
+        if (jifen2 == '9' && jifen != '9' && jifen1 != '9'){
+            strss = parseFloat(strss) / 20
+            $("#modelMoneyss").val(strss);
+            flag = 1;
+        }
 		if (strs == ''){
             strs = 0;
 		}
-		var js = parseFloat(str) + parseFloat(strs);
+        if (strss == ''){
+            strss = 0;
+        }
+		var js = parseFloat(str) + parseFloat(strs) + parseFloat(strss);
         var change = js - actualMoney;
         var dd = change.toFixed(2);
         var payWay = $("#payWay").val();
@@ -253,13 +283,31 @@
             $("#chuzhiPasd").val('');
         }
 	}
+    function chuzhika2(){
+        var chuzhika = $("#payModel2").val();
+        if(chuzhika == '6'){
+            czk.style = "display:block;"
+        } else {
+            czk.style = "display:none;"
+            $("#chuzhiNumber").val('');
+            $("#chuzhiPasd").val('');
+        }
+    }
 	
-	
+	var d=0;
 	function addMoney(obj){
-        let dom = $("#jffs").clone();
-        $(dom).show();
-        $(obj).parents(".form-group").after(dom);
-	}
+	    if (d ==0){
+            let dom = $("#jffs").clone();
+            $(dom).show();
+            $(obj).parents(".form-group").after(dom);
+            d= d +1;
+		} else if (d==1){
+            let doms = $("#jffss").clone();
+            $(doms).show();
+            $(obj).parents(".form-group").after(doms);
+		}
+
+    }
     /**
      *  删除行
      */

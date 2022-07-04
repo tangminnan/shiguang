@@ -223,7 +223,7 @@
 			<if test="settleDateEnd !=null and settleDateEnd != ''">and date_format(st.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="state !=null and state != ''">and m.state = #{state}</if>
 			<if test="companyid !=null and companyid != ''">and m.company_id in (#{companyid})</if>
-			<if test="departNumber !=null and departNumber != ''">and su.store_num = #{departNumber}</if>
+			<if test="departNumber !=null and departNumber != ''">and s.store_num = #{departNumber}</if>
 			and s.sale_type = '1'
 		</where>
 		GROUP BY s.sale_number

@@ -81,6 +81,10 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/information/refraction/**", "anon");
         filterChainDefinitionMap.put("/information/optometryline/**", "anon");
         filterChainDefinitionMap.put("/information/optometryJinanline/**", "anon");
+        filterChainDefinitionMap.put("/informationJK/member/**", "anon");
+        filterChainDefinitionMap.put("/informationJK/optometryNew/**", "anon");
+        filterChainDefinitionMap.put("/informationJK/optometryline/**", "anon");
+        filterChainDefinitionMap.put("/informationJK/settlement/**", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/blog", "anon");

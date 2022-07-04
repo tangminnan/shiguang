@@ -25,6 +25,9 @@
 <div th:include="include::footer"></div>
 <script type="text/javascript" src="/js/appjs/inventory/gainloss/barcode.js"></script>
 <script type="text/javascript">
+    $().ready(function () {
+        document.getElementById("goodsCode").focus();
+    });
     //var listMap = new Array();
 </script>
 </body>

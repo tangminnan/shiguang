@@ -378,16 +378,15 @@ public class DrawbackServiceImpl implements DrawbackService {
 			}
 			PositionDO positionDO = stockService.findPosition(map);
 			for (int i=0;i<goodsCode.length;i++) {
-				if ("镜架".equals(storeDescribe[i])){
-					StockDO stockDO = new StockDO();
-					stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
-					stockDO.setGoodsCode(goodsCode[i]);
-					StockDO stockDO1 = stockService.getProduceCode(stockDO);
-					if (null != stockDO1) {
-					int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
-					stockDO.setGoodsCount(godsCount + "");
-					stockService.updateGoodsCount(stockDO);
-				    }
+				StockDO stockDO = new StockDO();
+				stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+				stockDO.setGoodsCode(goodsCode[i]);
+				StockDO stockDO1 = stockService.getProduceCode(stockDO);
+				if (null != stockDO1) {
+				int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
+				stockDO.setGoodsCount(godsCount + "");
+				stockService.updateGoodsCount(stockDO);
+
 				}
 			}
 		}

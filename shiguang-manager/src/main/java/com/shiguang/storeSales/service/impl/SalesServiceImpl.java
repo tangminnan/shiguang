@@ -1082,6 +1082,12 @@ public class SalesServiceImpl implements SalesService {
 		userMap.put("companyId",ShiroUtils.getUser().getCompanyId());
 		UserDO userDO =userService.getUserName(userMap);
 		salesDO.setSaleName(userDO.getName());
+		if("1".equals(ShiroUtils.getUser().getCompanyId())){
+			if (null==salesDO.getMirorAddress() || "".equals(salesDO.getMirorAddress())){
+				salesDO.setMirorAddress("哈尔滨中心店");
+				salesDO.setStoreNum("01");
+			}
+		}
 		if (salesService.save(salesDO) > 0) {
 			//this.editsetle(salesDO,model);
 			if (null != salesDO.getGoodsNum()) {
@@ -2712,6 +2718,12 @@ public class SalesServiceImpl implements SalesService {
 		userMap.put("companyId",ShiroUtils.getUser().getCompanyId());
 		UserDO userDO =userService.getUserName(userMap);
 		salesDO.setSaleName(userDO.getName());
+		if("1".equals(ShiroUtils.getUser().getCompanyId())){
+			if (null==salesDO.getMirorAddress()||"".equals(salesDO.getMirorAddress())){
+				salesDO.setMirorAddress("哈尔滨中心店");
+				salesDO.setStoreNum("01");
+			}
+		}
 		if (salesService.save(salesDO) > 0) {
 			//this.editsetle(salesDO,model);
 			if (null != salesDO.getGoodsNum()) {

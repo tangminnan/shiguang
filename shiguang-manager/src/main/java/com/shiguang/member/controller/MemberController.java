@@ -928,8 +928,8 @@ public class MemberController {
                 Map<String,Object> mapadd = new HashMap<>();
                 mapadd.put("additionName",addCostStr[l]);
                 List<AdditionalDO> additionalDO = additionalService.list(mapadd);
-                if (null != additionalDO.get(l).getRemark() && !"".equals(additionalDO.get(l).getRemark())){
-                    additionalRemarkList.add(additionalDO.get(l).getRemark());
+                if (null != additionalDO.get(0).getRemark() && !"".equals(additionalDO.get(0).getRemark())){
+                    additionalRemarkList.add(additionalDO.get(0).getRemark());
                 }
             }
             model.addAttribute("additionalCostList",additionalCostList);
@@ -1570,8 +1570,8 @@ public class MemberController {
                 Map<String,Object> mapadd = new HashMap<>();
                 mapadd.put("additionName",addCostStr[l]);
                 List<AdditionalDO> additionalDO = additionalService.list(mapadd);
-                if (null != additionalDO.get(l).getRemark() && !"".equals(additionalDO.get(l).getRemark())){
-                    additionalRemarkList.add(additionalDO.get(l).getRemark());
+                if (null != additionalDO.get(0).getRemark() && !"".equals(additionalDO.get(0).getRemark())){
+                    additionalRemarkList.add(additionalDO.get(0).getRemark());
                 }
             }
             model.addAttribute("additionalCostList",additionalCostList);

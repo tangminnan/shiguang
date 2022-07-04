@@ -10,6 +10,9 @@ import com.shiguang.inventory.domain.BillDO;
 import com.shiguang.inventory.domain.GainLossDO;
 import com.shiguang.inventory.domain.InventoryDO;
 import com.shiguang.inventory.service.InventoryService;
+import com.shiguang.product.dao.*;
+import com.shiguang.product.domain.*;
+import com.shiguang.product.service.ProducaService;
 import com.shiguang.settlement.domain.DrawbackDO;
 import com.shiguang.stock.dao.StockDao;
 import com.shiguang.stock.domain.StockDO;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -35,6 +39,24 @@ public class InventoryServiceImpl implements InventoryService {
 	private BillDao billDao;
 	@Autowired
 	private GainLossDao gainLossDao;
+	@Autowired
+	private ProducaDao producaDao;
+	@Autowired
+	private JpcpDao jpcpDao;
+	@Autowired
+	private PartsDao partsDao;
+	@Autowired
+	private YxcpDao yxcpDao;
+	@Autowired
+	private HlyDao hlyDao;
+	@Autowired
+	private OldlensDao oldlensDao;
+	@Autowired
+	private TyjDao tyjDao;
+	@Autowired
+	private HcDao hcDao;
+	@Autowired
+	private ShiguangDao shiguangDao;
 	
 	@Override
 	public InventoryDO get(Long id){
@@ -77,9 +99,10 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	@ResponseBody
-	@Transactional(propagation = Propagation.REQUIRED)
+	@Transactional
 	public R importInventory(String documentNo, String inventoryName, String inventoryPosition, String inventoryType, List<MultipartFile> multipartFiles){
 		System.out.println("==============file================" + multipartFiles);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Map<String,Object> maps = new HashMap<>();
 		if ("镜架".equals(inventoryType)){
 			maps.put("goodsType",1);
@@ -100,9 +123,11 @@ public class InventoryServiceImpl implements InventoryService {
 		}
 		maps.put("positionId",inventoryPosition);
 		List<StockDO> stockDOList = stockDao.list(maps);
+		List<BillDO> billDOList = new ArrayList<>();
 		Long inventoryId = GuuidUtil.getUUID();
 		String gain = "";
 		String loss="";
+		String procode = "";
 		for (MultipartFile file: multipartFiles){
 			if (file.isEmpty()){
 				return R.error("盘点文件为空");
@@ -141,9 +166,42 @@ public class InventoryServiceImpl implements InventoryService {
 						}
 					}
 				} else if (stockDOList.size() < list.size()){
+					int num =0;
 					for (int i=0;i<list.size();i++){
 						if(!listGode.contains(list.get(i))){
-							stockDOS.add(stockDOList.get(i));
+							if (num ==0){
+								procode=list.get(i);
+							} else if(num == 100000){
+								num =0;
+								num =num +1;
+								procode=list.get(i);
+							}
+							Map<String,Object> mapInfo = new HashMap<>();
+							StockDO stockDOfg = new StockDO();
+							stockDOfg.setGoodsCode(list.get(i));
+							stockDOfg.setPositionId(inventoryPosition);
+							StockDO stockDO = stockDao.getProduceCode(stockDOfg);
+							if (null != stockDO){
+								stockDO.setGoodsCount(String.valueOf(Integer.parseInt(stockDO.getGoodsCount())+1));
+								stockDao.updateStockCCount(stockDO);
+							} else {
+								if (i==list.size()-1){
+									num = num+1;
+									mapInfo.put("producCode",procode.substring(0,18));
+									stockDO = stockSave(mapInfo,num,inventoryType,procode,inventoryPosition);
+									num = 100000;
+									stockDOS.add(stockDO);
+								}
+								if (procode.equals(list.get(i))){
+									num = num +1;
+								} else {
+									mapInfo.put("producCode",procode.substring(0,18));
+									stockDO = stockSave(mapInfo,num,inventoryType,procode,inventoryPosition);
+									num = 100000;
+									stockDOS.add(stockDO);
+								}
+
+							}
 						}
 					}
 				}
@@ -196,6 +254,7 @@ public class InventoryServiceImpl implements InventoryService {
 									}
 								}
 								billDao.save(billDO);
+								billDOList.add(billDO);
 								count = 1;
 							}
 							goodsCode = list.get(i);
@@ -242,9 +301,10 @@ public class InventoryServiceImpl implements InventoryService {
 									}
 								}
 								billDao.save(billDO);
+								billDOList.add(billDO);
 							}
 						} else {
-
+							goodsCode = list.get(i);
 						}
 					}
 					for (StockDO stockDO : stockDOS){
@@ -265,14 +325,16 @@ public class InventoryServiceImpl implements InventoryService {
 						}
 						billDO.setUnitname(stockDO.getUnit());
 						billDO.setFactory(stockDO.getFactory());
-						billDO.setBookNum(stockDO.getGoodsCount());
-						billDO.setActualNum("0");
+						billDO.setBookNum("0");
+						billDO.setActualNum(stockDO.getGoodsCount());
 						billDO.setInventoryId(inventoryId);
 						//surplus = Integer.parseInt(stockDO.getGoodsCount()) - count;
-						billDO.setSurplus("-"+stockDO.getGoodsCount());
-						billDO.setInventoryType("1");
+						billDO.setSurplus(stockDO.getGoodsCount());
+						billDO.setInventoryType("0");
 						loss = "0";
 						billDao.save(billDO);
+						stockDao.save(stockDO);
+						billDOList.add(billDO);
 					}
 
 			} catch (Exception e) {
@@ -303,8 +365,8 @@ public class InventoryServiceImpl implements InventoryService {
 		inventoryDO.setInventoryType(inventoryType);
 		inventoryDO.setInventoryUser(ShiroUtils.getUser().getName());
 		inventoryDO.setInventoryId(inventoryId);
-		List<BillDO> billDO = billDao.getInventoryId(inventoryId);
-		for (BillDO billDO1 : billDO){
+		//List<BillDO> billDO = billDao.getInventoryId(inventoryId);
+		for (BillDO billDO1 : billDOList){
 			if ("1".equals(billDO1.getInventoryType())){
 				inventoryDO.setLoss("0");
 			} else if ("0".equals(billDO1.getInventoryType())){
@@ -346,4 +408,229 @@ public class InventoryServiceImpl implements InventoryService {
 //		}
 		return R.error();
 	}
+
+	public StockDO stockSave(Map<String,Object> mapInfo,int num,String inventoryType,String goodsCode,String inventoryPosition){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		StockDO stockDO = new StockDO();
+		if ("镜架".equals(inventoryType)){
+			List<ProducaDO> producaDO2 = producaDao.list(mapInfo);
+			for (ProducaDO producaDO1 : producaDO2){
+				ProducaDO producaDO = producaDao.getJJInfomation(producaDO1.getProducNum());
+				stockDO.setGoodsNum(producaDO.getProducNum());
+				stockDO.setGoodsCode(goodsCode);
+				stockDO.setGoodsCount(num+"");
+				stockDO.setGoodsName(producaDO.getProducName());
+				stockDO.setGoodsType(1);
+				stockDO.setMfrsid(producaDO.getMfrsid());
+				stockDO.setBrandname(producaDO.getBrandname());
+				stockDO.setUnit(producaDO.getUnitname());
+				stockDO.setRetailPrice(producaDO.getRetailPrice());
+				stockDO.setPositionId(inventoryPosition);
+				stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+				stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+				if (null != producaDO.getProducFactory() && !"".equals(producaDO.getProducFactory())){
+					stockDO.setFactory(producaDO.getProducFactory());
+				}
+				stockDO.setClasstype("1");
+				stockDO.setUsername(ShiroUtils.getUser().getUsername());
+				stockDO.setStatus("0");
+				stockDao.save(stockDO);
+			}
+
+		} else if ("配件".equals(inventoryType)){
+			List<PartsDO> partsDOS = partsDao.list(mapInfo);
+			for (PartsDO partsDO : partsDOS){
+				PartsDO partsDO1 = partsDao.getPartInfomation(partsDO.getProducNum());
+				stockDO.setGoodsNum(partsDO1.getProducNum());
+				stockDO.setGoodsCode(goodsCode);
+				stockDO.setGoodsCount(num+"");
+				stockDO.setGoodsName(partsDO1.getProducName());
+				stockDO.setGoodsType(2);
+				stockDO.setMfrsid(partsDO1.getMfrsid());
+				stockDO.setBrandname(partsDO1.getBrandname());
+				stockDO.setUnit(partsDO1.getUnitname());
+				stockDO.setRetailPrice(partsDO1.getRetailPrice());
+				stockDO.setPositionId(inventoryPosition);
+				stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+				stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+				if (null != partsDO1.getProducFactory() && !"".equals(partsDO1.getProducFactory())){
+					stockDO.setFactory(partsDO1.getProducFactory());
+				}
+				stockDO.setClasstype("1");
+				stockDO.setUsername(ShiroUtils.getUser().getUsername());
+				stockDO.setStatus("0");
+				stockDao.save(stockDO);
+			}
+		} else if ("镜片".equals(inventoryType)){
+			List<JpcpDO> jpcpDOS = jpcpDao.list(mapInfo);
+			for (JpcpDO jpcpDO : jpcpDOS){
+				JpcpDO jpcpDO1 = jpcpDao.getJpcpInfomation(jpcpDO.getProducNum());
+				stockDO.setGoodsNum(jpcpDO1.getProducNum());
+				stockDO.setGoodsCode(goodsCode);
+				stockDO.setGoodsCount(num+"");
+				stockDO.setGoodsName(jpcpDO1.getProducName());
+				stockDO.setGoodsType(3);
+				stockDO.setMfrsid(jpcpDO1.getMfrsid());
+				stockDO.setBrandname(jpcpDO1.getBrandname());
+				stockDO.setUnit(jpcpDO1.getUnitname());
+				stockDO.setRetailPrice(jpcpDO1.getRetailPrice());
+				stockDO.setPositionId(inventoryPosition);
+				stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+				stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+				if (null != jpcpDO1.getProducFactory() && !"".equals(jpcpDO1.getProducFactory())){
+					stockDO.setFactory(jpcpDO1.getProducFactory());
+				}
+				stockDO.setClasstype("1");
+				stockDO.setUsername(ShiroUtils.getUser().getUsername());
+				stockDO.setStatus("0");
+				stockDao.save(stockDO);
+			}
+		}  else if ("隐形".equals(inventoryType)){
+			List<YxcpDO> yxcpDOList = yxcpDao.list(mapInfo);
+			for (YxcpDO yxcpDO : yxcpDOList){
+				YxcpDO yxcpDO1 = yxcpDao.getYxcpInfomation(yxcpDO.getProducNum());
+				stockDO.setGoodsNum(yxcpDO1.getProducNum());
+				stockDO.setGoodsCode(goodsCode);
+				stockDO.setGoodsCount(num+"");
+				stockDO.setGoodsName(yxcpDO1.getProducName());
+				stockDO.setGoodsType(4);
+				stockDO.setMfrsid(yxcpDO1.getMfrsid());
+				stockDO.setBrandname(yxcpDO1.getBrandname());
+				stockDO.setUnit(yxcpDO1.getUnitname());
+				stockDO.setRetailPrice(yxcpDO1.getRetailPrice());
+				stockDO.setPositionId(inventoryPosition);
+				stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+				stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+				if (null != yxcpDO1.getFactory() && !"".equals(yxcpDO1.getFactory())){
+					stockDO.setFactory(yxcpDO1.getFactory());
+				}
+				stockDO.setClasstype("1");
+				stockDO.setUsername(ShiroUtils.getUser().getUsername());
+				stockDO.setStatus("0");
+				stockDao.save(stockDO);
+			}
+		} else if ("护理液".equals(inventoryType)){
+			List<HlyDO> hlyDOList = hlyDao.list(mapInfo);
+			for (HlyDO hlyDO : hlyDOList){
+				HlyDO hlyDO1 = hlyDao.getHlyInfomation(hlyDO.getProducNum());
+				stockDO.setGoodsNum(hlyDO1.getProducNum());
+				stockDO.setGoodsCode(goodsCode);
+				stockDO.setGoodsCount(num+"");
+				stockDO.setGoodsName(hlyDO1.getProducName());
+				stockDO.setGoodsType(5);
+				stockDO.setMfrsid(hlyDO1.getMfrsid());
+				stockDO.setBrandname(hlyDO1.getBrandname());
+				stockDO.setUnit(hlyDO1.getUnitname());
+				stockDO.setRetailPrice(hlyDO1.getRetailPrice());
+				stockDO.setPositionId(inventoryPosition);
+				stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+				stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+				if (null != hlyDO1.getProducFactory() && !"".equals(hlyDO1.getProducFactory())){
+					stockDO.setFactory(hlyDO1.getProducFactory());
+				}
+				stockDO.setClasstype("1");
+				stockDO.setUsername(ShiroUtils.getUser().getUsername());
+				stockDO.setStatus("0");
+				stockDao.save(stockDO);
+			}
+		} else if ("太阳镜".equals(inventoryType)){
+			List<TyjDO> tyjDOList = tyjDao.list(mapInfo);
+			for (TyjDO tyjDO : tyjDOList){
+				TyjDO tyjDO1 = tyjDao.getTyjInfomation(tyjDO.getProducNum());
+				stockDO.setGoodsNum(tyjDO1.getProducNum());
+				stockDO.setGoodsCode(goodsCode);
+				stockDO.setGoodsCount(num+"");
+				stockDO.setGoodsName(tyjDO1.getProducName());
+				stockDO.setGoodsType(6);
+				stockDO.setMfrsid(tyjDO1.getMfrsid());
+				stockDO.setBrandname(tyjDO1.getBrandname());
+				stockDO.setUnit(tyjDO1.getUnitname());
+				stockDO.setRetailPrice(tyjDO1.getRetailPrice());
+				stockDO.setPositionId(inventoryPosition);
+				stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+				stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+				if (null != tyjDO1.getProducFactory() && !"".equals(tyjDO1.getProducFactory())){
+					stockDO.setFactory(tyjDO1.getProducFactory());
+				}
+				stockDO.setClasstype("1");
+				stockDO.setUsername(ShiroUtils.getUser().getUsername());
+				stockDO.setStatus("0");
+				stockDao.save(stockDO);
+			}
+		} else if ("老花镜".equals(inventoryType)){
+			List<OldlensDO> oldlensDOList = oldlensDao.list(mapInfo);
+			for (OldlensDO oldlensDO : oldlensDOList){
+				OldlensDO oldlensDO1 = oldlensDao.getOldlenInfomation(oldlensDO.getProducNum());
+				stockDO.setGoodsNum(oldlensDO1.getProducNum());
+				stockDO.setGoodsCode(goodsCode);
+				stockDO.setGoodsCount(num+"");
+				stockDO.setGoodsName(oldlensDO1.getProducName());
+				stockDO.setGoodsType(7);
+				stockDO.setMfrsid(oldlensDO1.getMfrsid());
+				stockDO.setBrandname(oldlensDO1.getBrandname());
+				stockDO.setUnit(oldlensDO1.getUnitname());
+				stockDO.setRetailPrice(oldlensDO1.getRetailPrice());
+				stockDO.setPositionId(inventoryPosition);
+				stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+				stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+				if (null != oldlensDO1.getProducFactory() && !"".equals(oldlensDO1.getProducFactory())){
+					stockDO.setFactory(oldlensDO1.getProducFactory());
+				}
+				stockDO.setClasstype("1");
+				stockDO.setUsername(ShiroUtils.getUser().getUsername());
+				stockDO.setStatus("0");
+				stockDao.save(stockDO);
+			}
+		} else if ("耗材".equals(inventoryType)){
+			List<HcDO> hcDOList = hcDao.list(mapInfo);
+			for (HcDO hcDO : hcDOList){
+				HcDO hcDO1 = hcDao.getHcInfomation(hcDO.getProducNum());
+				stockDO.setGoodsNum(hcDO1.getProducNum());
+				stockDO.setGoodsCode(goodsCode);
+				stockDO.setGoodsCount(num+"");
+				stockDO.setGoodsName(hcDO1.getProducName());
+				stockDO.setGoodsType(8);
+				stockDO.setMfrsid(hcDO1.getMfrsid());
+				stockDO.setBrandname(hcDO1.getBrandname());
+				stockDO.setUnit(hcDO1.getUnitname());
+				stockDO.setRetailPrice(hcDO1.getRetailPrice());
+				stockDO.setPositionId(inventoryPosition);
+				stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+				stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+				if (null != hcDO1.getProducFactory() && !"".equals(hcDO1.getProducFactory())){
+					stockDO.setFactory(hcDO1.getProducFactory());
+				}
+				stockDO.setClasstype("1");
+				stockDO.setUsername(ShiroUtils.getUser().getUsername());
+				stockDO.setStatus("0");
+				//stockDao.save(stockDO);
+			}
+		} else if ("视光".equals(inventoryType)){
+			List<ShiguangDO> shiguangDOList = shiguangDao.list(mapInfo);
+			for (ShiguangDO shiguangDO : shiguangDOList){
+				ShiguangDO shiguangDO1 = shiguangDao.getShiguangInfomation(shiguangDO.getProducNum());
+				stockDO.setGoodsNum(shiguangDO1.getProducNum());
+				stockDO.setGoodsCode(goodsCode);
+				stockDO.setGoodsCount(num+"");
+				stockDO.setGoodsName(shiguangDO1.getProducName());
+				stockDO.setGoodsType(9);
+				stockDO.setMfrsid(shiguangDO1.getMfrsid());
+				stockDO.setBrandname(shiguangDO1.getBrandname());
+				stockDO.setUnit(shiguangDO1.getUnitname());
+				stockDO.setPositionId(inventoryPosition);
+				stockDO.setRetailPrice(shiguangDO1.getRetailPrice());
+				stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+				stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+				if (null != shiguangDO1.getProducFactory() && !"".equals(shiguangDO1.getProducFactory())){
+					stockDO.setFactory(shiguangDO1.getProducFactory());
+				}
+				stockDO.setClasstype("1");
+				stockDO.setUsername(ShiroUtils.getUser().getUsername());
+				stockDO.setStatus("0");
+				//stockDao.save(stockDO);
+			}
+		}
+		return stockDO;
+	}
+
 }

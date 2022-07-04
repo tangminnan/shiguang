@@ -35,7 +35,7 @@ function save() {
                 // parent.layer.close(index);
                 // adds();
                 //$('div input').val('');
-                window.location.reload();
+                //window.location.reload();
             } else {
                 parent.layer.alert(data.msg)
             }

@@ -218,7 +218,7 @@ public class InventoryController {
 				stockDO.setPositionId(String.valueOf(gainLossDO.getPositionId()));
 				StockDO stockDO1 = new StockDO();
 				stockDO.setPositionId(String.valueOf(gainLossDO.getPositionId()));
-				if ("护理液".equals(gainLossDO.getInventoryType()) || "隐形".equals(gainLossDO.getInventoryType())){
+				if ("护理液".equals(gainLossDO.getInventoryType()) || "隐形".equals(gainLossDO.getInventoryType()) || "视光".equals(gainLossDO.getInventoryType())){
 					stockDO.setGoodsCode(goodsCode[i]);
 					stockDO1 = stockService.getProduceCode(stockDO);
 				} else {
@@ -239,7 +239,7 @@ public class InventoryController {
 						}
 
 					}
-					if ("护理液".equals(gainLossDO.getInventoryType()) || "隐形".equals(gainLossDO.getInventoryType())){
+					if ("护理液".equals(gainLossDO.getInventoryType()) || "隐形".equals(gainLossDO.getInventoryType()) || "视光".equals(gainLossDO.getInventoryType())){
 						stockDO2.setGoodsCode(goodsCode[i]);
 						stockDO2.setPositionId(String.valueOf(gainLossDO.getPositionId()));
 						stockService.updateStockCCount(stockDO2);

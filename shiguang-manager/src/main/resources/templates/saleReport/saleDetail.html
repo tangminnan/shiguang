@@ -259,29 +259,56 @@
         for (var i=0;i<list.length;i++){
             var goodsList = list[i].goodsList;
             var num =goodsList.length;
-            html = "<tr><td rowspan='"+num+"'>"+list[i].saleNumber+"</td>"
-            html += "<td rowspan='"+num+"'>"+list[i].memberName+"</td>"
-            html += "<td  rowspan='"+num+"'>"+list[i].saleMoney+"</td>"
-			html += "<td>"+goodsList[0].goodNum+"</td>"
-            html += "<td>"+goodsList[0].storeName+"</td>"
-            html += "<td>"+goodsList[0].storeCount+"</td>"
-            html += "<td>"+goodsList[0].storePrice+"</td>"
-            html += "<td>"+goodsList[0].discountPrice+"</td>"
-            html += "<td>"+goodsList[0].youhuiPrice+"</td>"
-            html += "<td>"+goodsList[0].molingPrice+"</td>"
-            html += "<td>"+goodsList[0].storePrice+"</td>"
-            html += "<td rowspan='"+num+"'>"+list[i].adddcost+"</td>"
-            html += "<td rowspan='"+num+"'>"+list[i].addprice+"</td></tr>"
-			for (var a = 1; a<goodsList.length;a++){
-                html += "<tr><td>"+goodsList[a].goodNum+"</td>"
-                html += "<td>"+goodsList[a].storeName+"</td>"
-                html += "<td>"+goodsList[a].storeCount+"</td>"
-                html += "<td>"+goodsList[a].storePrice+"</td>"
-                html += "<td>"+goodsList[a].discountPrice+"</td>"
-                html += "<td>"+goodsList[a].youhuiPrice+"</td>"
-                html += "<td>"+goodsList[a].molingPrice+"</td>"
-                html += "<td>"+goodsList[a].storePrice+"</td></tr>"
-            }
+            if (num ==0){
+                html = "<tr><td rowspan='1'>"+list[i].saleNumber+"</td>"
+                html += "<td rowspan='1'>"+list[i].memberName+"</td>"
+                html += "<td  rowspan='1'>"+list[i].saleMoney+"</td>"
+                html += "<td></td>"
+                html += "<td></td>"
+                html += "<td></td>"
+                html += "<td></td>"
+                html += "<td></td>"
+                html += "<td></td>"
+                html += "<td></td>"
+                html += "<td></td>"
+                html += "<td rowspan='1'>"+list[i].adddcost+"</td>"
+                html += "<td rowspan='1'>"+list[i].addprice+"</td></tr>"
+                for (var a = 1; a<goodsList.length;a++){
+                    html += "<tr><td>"+goodsList[a].goodNum+"</td>"
+                    html += "<td>"+goodsList[a].storeName+"</td>"
+                    html += "<td>"+goodsList[a].storeCount+"</td>"
+                    html += "<td>"+goodsList[a].storePrice+"</td>"
+                    html += "<td>"+goodsList[a].discountPrice+"</td>"
+                    html += "<td>"+goodsList[a].youhuiPrice+"</td>"
+                    html += "<td>"+goodsList[a].molingPrice+"</td>"
+                    html += "<td>"+goodsList[a].storePrice+"</td></tr>"
+                }
+			} else {
+                html = "<tr><td rowspan='"+num+"'>"+list[i].saleNumber+"</td>"
+                html += "<td rowspan='"+num+"'>"+list[i].memberName+"</td>"
+                html += "<td  rowspan='"+num+"'>"+list[i].saleMoney+"</td>"
+                html += "<td>"+goodsList[0].goodNum+"</td>"
+                html += "<td>"+goodsList[0].storeName+"</td>"
+                html += "<td>"+goodsList[0].storeCount+"</td>"
+                html += "<td>"+goodsList[0].storePrice+"</td>"
+                html += "<td>"+goodsList[0].discountPrice+"</td>"
+                html += "<td>"+goodsList[0].youhuiPrice+"</td>"
+                html += "<td>"+goodsList[0].molingPrice+"</td>"
+                html += "<td>"+goodsList[0].storePrice+"</td>"
+                html += "<td rowspan='"+num+"'>"+list[i].adddcost+"</td>"
+                html += "<td rowspan='"+num+"'>"+list[i].addprice+"</td></tr>"
+                for (var a = 1; a<goodsList.length;a++){
+                    html += "<tr><td>"+goodsList[a].goodNum+"</td>"
+                    html += "<td>"+goodsList[a].storeName+"</td>"
+                    html += "<td>"+goodsList[a].storeCount+"</td>"
+                    html += "<td>"+goodsList[a].storePrice+"</td>"
+                    html += "<td>"+goodsList[a].discountPrice+"</td>"
+                    html += "<td>"+goodsList[a].youhuiPrice+"</td>"
+                    html += "<td>"+goodsList[a].molingPrice+"</td>"
+                    html += "<td>"+goodsList[a].storePrice+"</td></tr>"
+                }
+			}
+
 
             $("#saleId").append(html);
 		}

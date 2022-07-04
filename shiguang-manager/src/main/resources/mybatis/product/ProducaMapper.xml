@@ -29,7 +29,7 @@
            <if test="producNum != null and producNum != ''">and p.produc_num  LIKE concat(concat('%', #{producNum}),'%')</if>
               <if test="goodsCode != null and goodsCode != ''">and p.produc_code  LIKE concat(concat('%', #{goodsCode}),'%')</if>
 
-
+            <if test="producCode != null and producCode != ''">and p.produc_code = #{producCode}</if>
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and p.produc_name LIKE concat(concat('%', #{producName}),'%')</if>

@@ -495,7 +495,7 @@ public class GainLossController {
 			String[] inventoryCount = gainLoss.getInventoryCount().split(",");
 			String[] goodsNum = gainLoss.getGoodsNum().split(",");
 			String[] goodsName = gainLoss.getGoodsName().split(",");
-			String[] classType = gainLoss.getClassType().split(",");
+			//String[] classType = gainLoss.getClassType().split(",");
 			for (int i=0;i<produceCode.length;i++){
 				//更新库存
 				StockDO stockDOs = new StockDO();
@@ -534,7 +534,7 @@ public class GainLossController {
 						stockDO1.setMfrsid(gainLoss.getMfrsid());
 						stockDO1.setBrandname(gainLoss.getBrandname());
 						stockDO1.setReturnzt(gainLoss.getRetailPrice());
-						stockDO1.setClasstype(classType[i]);
+						//stockDO1.setClasstype(classType[i]);
 						stockDO1.setPositionId(String.valueOf(gainLoss.getPositionId()));
 						stockService.save(stockDO1);
 					}

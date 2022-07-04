@@ -40,4 +40,6 @@ public interface YxcpDao {
 
     //判断是否存在商品代码
     List<YxcpDO> haveNum(Map<String, Object> map);
+
+    YxcpDO getYxcpInfomation(String goodsNum);
 }

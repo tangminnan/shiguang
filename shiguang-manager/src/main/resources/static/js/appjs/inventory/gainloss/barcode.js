@@ -72,6 +72,8 @@ function findGoods(){
                 barHtml += "<td>"+list[key][0].factory+"</td>";
                 barHtml += "<td><input id='inventoryCount' name='inventoryCount' value='"+list[key][0].goodsCount+"'/></td></tr>";
                 barHtml += "<input id='goodsId' name='goodsId' type='hidden' value='"+list[key][0].id+"'>";
+                barHtml += "<input id='goodsNum' name='goodsNum' type='hidden' value='"+list[key][0].goodsNum+"'>";
+                barHtml += "<input id='goodsName' name='goodsName' type='hidden' value='"+list[key][0].goodsName+"'>";
                 parent.$("#inventoryId").append(barHtml);
             }
             // $(parent.listMap).each(function (key) {  //循环读取后台传来的Json数据

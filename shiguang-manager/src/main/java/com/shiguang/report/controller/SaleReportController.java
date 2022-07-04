@@ -296,8 +296,8 @@ public class SaleReportController {
                                 diandianmoney = diandianmoney + Double.valueOf(modelMoney[i]);
                             } else if ("9".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
                                 jifenmoney = jifenmoney + Double.valueOf(modelMoney[i]);
-                            } else if ("10".equals(settlementDO.getDrawBackWay())){
-                                weixinpt = weixinpt - Double.valueOf(settlementDO.getDrawBackMoney());
+                            } else if ("10".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                weixinpt = weixinpt + Double.valueOf(modelMoney[i]);
                             }
                         }
                         if (null != settlementDO.getChangeMoney()){
@@ -683,8 +683,8 @@ public class SaleReportController {
                                 diandianmoney = diandianmoney + Double.valueOf(modelMoney[i]);
                             } else if ("9".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
                                 jifenmoney = jifenmoney + Double.valueOf(modelMoney[i]);
-                            } else if ("10".equals(settlementDO.getDrawBackWay())){
-                                weixinpt = weixinpt - Double.valueOf(settlementDO.getDrawBackMoney());
+                            } else if ("10".equals(payModel[i]) && null == settlementDO.getDrawBackMoney()){
+                                weixinpt = weixinpt + Double.valueOf(modelMoney[i]);
                             }
                         }
                         if (null != settlementDO.getChangeMoney()){

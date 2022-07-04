@@ -26,7 +26,7 @@
             <if test="mfrsname != null and mfrsname != ''">and m.mfrsname = #{mfrsname}</if>
             <if test="brandname != null and brandname != ''">and b.brandname = #{brandname}</if>
             <if test="producName != null and producName != ''">and o.produc_name LIKE concat(concat('%', #{producName}),'%')</if>
-
+            <if test="producCode != null and producCode != ''">and o.produc_code = #{producCode}</if>
 
             <if test="retailPrice != null and retailPrice != ''">and ABS(o.retail_price) >= ABS(#{retailPrice})</if>
             <if test="retailPrice2 != null and retailPrice2 != ''">and ABS(o.retail_price) &lt;= ABS(#{retailPrice2})</if>

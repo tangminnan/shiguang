@@ -696,6 +696,14 @@ public class StoreSalesController {
             if (null != positionDO) {
                 positionId = positionDO.getPositionId();
             }
+        }else {
+            if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+                map.put("departNumber", "01");
+                PositionDO positionDO = stockService.findPosition(map);
+                if (null != positionDO) {
+                    positionId = positionDO.getPositionId();
+                }
+            }
         }
         query.put("positionId", positionId);
 //        query.put("goodsType","1");
@@ -1031,6 +1039,14 @@ public class StoreSalesController {
             if (null != positionDO) {
                 positionId = positionDO.getPositionId();
             }
+        }else {
+            if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+                map.put("departNumber", "01");
+                PositionDO positionDO = stockService.findPosition(map);
+                if (null != positionDO) {
+                    positionId = positionDO.getPositionId();
+                }
+            }
         }
         query.put("positionId", positionId);
         List<GoodsDO> goodsDOList = goodsService.list(map);
@@ -1080,6 +1096,14 @@ public class StoreSalesController {
             if (null != positionDO) {
                 positionId = positionDO.getPositionId();
             }
+        }else {
+            if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+                map.put("departNumber", "01");
+                PositionDO positionDO = stockService.findPosition(map);
+                if (null != positionDO) {
+                    positionId = positionDO.getPositionId();
+                }
+            }
         }
         query.put("positionId", positionId);
         List<GoodsDO> goodsDOList = goodsService.list(map);
@@ -1128,6 +1152,14 @@ public class StoreSalesController {
             PositionDO positionDO = stockService.findPosition(map);
             if (null != positionDO) {
                 positionId = positionDO.getPositionId();
+            }
+        }else {
+            if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+                map.put("departNumber", "01");
+                PositionDO positionDO = stockService.findPosition(map);
+                if (null != positionDO) {
+                    positionId = positionDO.getPositionId();
+                }
             }
         }
         query.put("positionId", positionId);
@@ -1179,6 +1211,14 @@ public class StoreSalesController {
             if (null != positionDO) {
                 positionId = positionDO.getPositionId();
             }
+        }else {
+            if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+                map.put("departNumber", "01");
+                PositionDO positionDO = stockService.findPosition(map);
+                if (null != positionDO) {
+                    positionId = positionDO.getPositionId();
+                }
+            }
         }
         query.put("positionId", positionId);
         List<GoodsDO> goodsDOList = goodsService.list(map);
@@ -1227,6 +1267,14 @@ public class StoreSalesController {
             PositionDO positionDO = stockService.findPosition(map);
             if (null != positionDO) {
                 positionId = positionDO.getPositionId();
+            }
+        }else {
+            if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+                map.put("departNumber", "01");
+                PositionDO positionDO = stockService.findPosition(map);
+                if (null != positionDO) {
+                    positionId = positionDO.getPositionId();
+                }
             }
         }
         query.put("positionId", positionId);
@@ -1277,6 +1325,14 @@ public class StoreSalesController {
             if (null != positionDO) {
                 positionId = positionDO.getPositionId();
             }
+        }else {
+            if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+                map.put("departNumber", "01");
+                PositionDO positionDO = stockService.findPosition(map);
+                if (null != positionDO) {
+                    positionId = positionDO.getPositionId();
+                }
+            }
         }
         query.put("positionId", positionId);
         List<GoodsDO> goodsDOList = goodsService.list(map);
@@ -1325,6 +1381,14 @@ public class StoreSalesController {
             PositionDO positionDO = stockService.findPosition(map);
             if (null != positionDO) {
                 positionId = positionDO.getPositionId();
+            }
+        }else {
+            if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+                map.put("departNumber", "01");
+                PositionDO positionDO = stockService.findPosition(map);
+                if (null != positionDO) {
+                    positionId = positionDO.getPositionId();
+                }
             }
         }
         query.put("positionId", positionId);
@@ -1743,6 +1807,14 @@ public class StoreSalesController {
             PositionDO positionDO = stockService.findPosition(map);
             if (null != positionDO) {
                 positionId = positionDO.getPositionId();
+            }
+        }else {
+            if ("1".equals(ShiroUtils.getUser().getCompanyId())){
+                map.put("departNumber", "01");
+                PositionDO positionDO = stockService.findPosition(map);
+                if (null != positionDO) {
+                    positionId = positionDO.getPositionId();
+                }
             }
         }
         query.put("positionId", positionId);

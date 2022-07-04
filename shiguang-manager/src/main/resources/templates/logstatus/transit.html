@@ -75,6 +75,12 @@
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/logstatus/transit.js"></script>
 <script type="text/javascript">
+
+    document.onkeydown = function(e){
+        if((e||event).keyCode==13)
+            findSaleNumber();
+    };
+
 	function findSaleNumber(){
 	    var saleNumber = $("#saleNumber").val();
         $.ajax({

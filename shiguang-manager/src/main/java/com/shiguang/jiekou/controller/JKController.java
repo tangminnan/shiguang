@@ -1,6 +1,7 @@
 package com.shiguang.jiekou.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.shiguang.common.utils.GuuidUtil;
 import com.shiguang.jiekou.domain.*;
 import com.shiguang.jiekou.service.JianchaJKService;
 import com.shiguang.jiekou.service.MemberJKService;
@@ -41,7 +42,11 @@ public class JKController {
         MemberJKDO member = new MemberJKDO();
         Map<String,Object> map=new HashMap<>();
         member.setName(obj.getString("name"));
-        member.setCardNumber(obj.getString("cardNumber"));
+        if(obj.getString("cardNumber").equals("")){
+            member.setCardNumber("H"+ GuuidUtil.getUUID());
+        }else{
+            member.setCardNumber(obj.getString("cardNumber"));
+        }
         member.setSex(obj.getLong("sex"));
         member.setCompanyId(obj.getString("companyId"));
         member.setAge(obj.getLong("age"));
@@ -93,7 +98,7 @@ public class JKController {
 
 
         Map<String, Object> map1 = new HashMap<>();
-        map1.put("cardsNumber",obj.getString("cardNumber"));
+        map1.put("cardsNumber",member.getCardNumber());
         List<MemberJKDO> list = memberJkService.list(map1);
         if (list.size() > 0){
             map.put("msg","会员卡号已存在");

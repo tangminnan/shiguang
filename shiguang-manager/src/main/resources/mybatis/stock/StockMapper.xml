@@ -867,7 +867,6 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                GROUP BY st.goods_name
                 order by st.id desc
             </otherwise>
         </choose>
@@ -927,7 +926,6 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                GROUP BY st.goods_name
                 order by st.id desc
             </otherwise>
         </choose>
