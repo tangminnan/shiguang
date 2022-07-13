@@ -11,7 +11,13 @@
 <body>
 	<!--保存-->
 <form class="form-horizontal m-t" id="signupForm" style="margin-top: 20px;text-align: center;">
-	诊室:<input type="text" id="consultRoom" name="consultRoom" >
+	诊室:
+	<!--<input type="text" id="consultRoom" name="consultRoom" >-->
+	<select name="consultRoom" id="consultRoom" class="form-control" data-actions-box="false" style="width: 110px;" >
+		<option th:each="ls:${opticianDOList}"
+				th:text="${ls.room}"
+				th:value="${ls.room}"></option>
+	</select>
 </form>
 <div th:include="include::footer"></div>
 <script type="text/javascript">

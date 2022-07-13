@@ -121,7 +121,7 @@ public class StoreSalesNewController {
         UserDO userDO = ShiroUtils.getUser();
         String storeName = userDO.getStore();
         model.addAttribute("storeName", storeName);
-        String saleName = ShiroUtils.getUser().getName();
+        String saleName = ShiroUtils.getUser().getUsername();
         model.addAttribute("saleName", saleName);
         String storeNum = userDO.getStoreNum();
         model.addAttribute("storeNum",storeNum);
@@ -141,14 +141,17 @@ public class StoreSalesNewController {
         map2.put("cardNumber", cardNumber);
         List<Conclusion> conclusionList = salesService.conclusionList(map2);
         model.addAttribute("conclusionList", conclusionList);
-        SimpleDateFormat sdfs = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdfs = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdd = new SimpleDateFormat("yyyy-MM-dd");
         if (null != conclusionList) {
             for (Conclusion c : conclusionList) {
                 //String ygtime = sdfs.format(c.getCreateTime());
                 if (null != c.getCreateTime()){
                     c.setYanguangTime(sdfs.format(c.getCreateTime()));
+                    c.setYanguangDate(sdd.format(c.getCreateTime()));
                 } else {
                     c.setYanguangTime(sdfs.format(new Date()));
+                    c.setYanguangDate(sdd.format(new Date()));
                 }
                 if (null == c.getYangsName() || "".equals(c.getYangsName())){
                     c.setYangsName(c.getYanguangName());

@@ -1,7 +1,7 @@
 
 var prefix = "/information/optometryline"
 $(function() {
-	load();
+	//load();
 });
 
 function load() {
@@ -53,6 +53,10 @@ function load() {
 									field : 'sexx',
 									title : '性别' 
 								},
+                            {
+                                field : 'consultRoom',
+                                title : '验光室'
+                            },
 																{
 									title : '操作',
 									field : 'id',
@@ -79,6 +83,7 @@ function load() {
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
+
 function add() {
 	var consultRoom =window.localStorage.getItem("consultRoom");
     var counter = 10;

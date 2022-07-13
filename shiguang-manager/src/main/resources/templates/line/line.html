@@ -73,6 +73,7 @@
                 $("#consultRoom").val(rows);
                 window.localStorage.setItem("consultRoom",rows)
                 layer.close(index);//需要手动关闭窗口
+				load();
             }
         });
     });

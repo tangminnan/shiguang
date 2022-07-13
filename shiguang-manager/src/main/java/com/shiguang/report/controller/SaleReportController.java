@@ -272,7 +272,7 @@ public class SaleReportController {
                 //double tkMoney = 0;
                 double shihsouTotal = 0;
                 for (SettlementDO settlementDO : list){
-                    if (departmentDO.getDepartName().equals(settlementDO.getDepartmentName())){
+//                    if (departmentDO.getDepartName().equals(settlementDO.getDepartmentName())){
                         String[] payModel = settlementDO.getPayModel().split(",");
                         String[] modelMoney = settlementDO.getModelMoney().split(",");
                         for (int i=0;i<payModel.length;i++){
@@ -306,7 +306,7 @@ public class SaleReportController {
                         if (null != settlementDO.getJifen() && !"".equals(settlementDO.getJifen())){
                             jifenmoney = jifenmoney + Double.valueOf(settlementDO.getJifen());
                         }
-                    }
+//                    }
 
                 }
                 if (null != drawList && drawList.size() > 0){

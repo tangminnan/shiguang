@@ -12,6 +12,8 @@ public class Conclusion implements Serializable {
     private Date createTime;
     //验光时间
     private String yanguangTime;
+    //验光时间判断
+    private String yanguangDate;
     //验光时间
     private String ygTime;
     //处方类型
@@ -110,6 +112,14 @@ public class Conclusion implements Serializable {
     public void setYanguangTime(String yanguangTime) {this.yanguangTime = yanguangTime;}
 
     public String getYanguangTime() {return yanguangTime;}
+
+    public String getYanguangDate() {
+        return yanguangDate;
+    }
+
+    public void setYanguangDate(String yanguangDate) {
+        this.yanguangDate = yanguangDate;
+    }
 
     public String getYgTime() {
         return ygTime;

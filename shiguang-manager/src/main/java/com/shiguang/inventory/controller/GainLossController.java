@@ -495,33 +495,38 @@ public class GainLossController {
 			String[] inventoryCount = gainLoss.getInventoryCount().split(",");
 			String[] goodsNum = gainLoss.getGoodsNum().split(",");
 			String[] goodsName = gainLoss.getGoodsName().split(",");
+			String[] brandname = gainLoss.getBrandname().split(",");
+			String[] unitname = gainLoss.getUnitname().split(",");
+			String[] mfrsid = gainLoss.getMfrsid().split(",");
+			String[] retailPrice = gainLoss.getRetailPrice().split(",");
 			//String[] classType = gainLoss.getClassType().split(",");
-			for (int i=0;i<produceCode.length;i++){
+			for (int i=0;i<goodsNum.length;i++){
 				//更新库存
 				StockDO stockDOs = new StockDO();
-				stockDOs.setGoodsCode(produceCode[i]);
+				stockDOs.setGoodsNum(goodsNum[i]);
 				stockDOs.setPositionId(String.valueOf(gainLoss.getPositionId()));
 				String stockCount = "";
-				StockDO stockDO = stockService.getProduceCode(stockDOs);
+				StockDO stockDO = stockService.getProduceNum(stockDOs);
 				if (null != stockDO){
 					stockCount = stockDO.getGoodsCount();
 					if ("盘盈".equals(gainLoss.getDocumentType())){
 						int goodsCount = Integer.parseInt(stockCount) + Integer.parseInt(inventoryCount[i]);
 						StockDO stockDO1 = new StockDO();
 						stockDO1.setGoodsCount(goodsCount+"");
-						stockDO1.setGoodsCode(produceCode[i]);
+						stockDO1.setGoodsNum(goodsNum[i]);
 						stockDO1.setPositionId(String.valueOf(gainLoss.getPositionId()));
 						stockService.updateGoodsCount(stockDO1);
 					}else if ("盘亏".equals(gainLoss.getDocumentType())){
 						int goodsCount = Integer.parseInt(stockCount) - Integer.parseInt(inventoryCount[i]);
 						StockDO stockDO1 = new StockDO();
 						stockDO1.setGoodsCount(goodsCount+"");
-						stockDO1.setGoodsCode(produceCode[i]);
+						stockDO1.setGoodsNum(goodsNum[i]);
 						stockDO1.setPositionId(String.valueOf(gainLoss.getPositionId()));
 						stockService.updateGoodsCount(stockDO1);
 					}
 				} else {
 					if ("盘盈".equals(gainLoss.getDocumentType())){
+
 						StockDO stockDO1 = new StockDO();
 						stockDO1.setGoodsCode(produceCode[i]);
 						stockDO1.setUsername(ShiroUtils.getUser().getUsername());
@@ -530,10 +535,11 @@ public class GainLossController {
 						stockDO1.setGoodsName(goodsName[i]);
 						stockDO1.setGoodsCount(inventoryCount[i]);
 						stockDO1.setGoodsType(goodsType);
-						stockDO1.setUnit(gainLoss.getUnitname());
-						stockDO1.setMfrsid(gainLoss.getMfrsid());
-						stockDO1.setBrandname(gainLoss.getBrandname());
-						stockDO1.setReturnzt(gainLoss.getRetailPrice());
+						stockDO1.setRetailPrice(retailPrice[i]);
+						stockDO1.setUnit(unitname[i]);
+						stockDO1.setMfrsid(mfrsid[i]);
+						stockDO1.setBrandname(brandname[i]);
+						stockDO1.setReturnzt("1");
 						//stockDO1.setClasstype(classType[i]);
 						stockDO1.setPositionId(String.valueOf(gainLoss.getPositionId()));
 						stockService.save(stockDO1);

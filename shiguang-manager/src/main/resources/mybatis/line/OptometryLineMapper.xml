@@ -19,7 +19,8 @@
             <!--and call_status in ('1','2','3') or call_status = '0'-->
             <choose>
                 <when test="consultRoom != null and consultRoom != ''">
-                    and (consult_room = #{consultRoom} and call_status in ('1','2','3') or call_status = '0')
+                    and consult_room = #{consultRoom}
+                    and (call_status in ('1','2','3') or call_status = '0')
                 </when>
                 <otherwise>
                     and (call_status in ('1','2','3') or call_status = '0')
@@ -27,17 +28,38 @@
             </choose>
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
         </where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
-            <otherwise>
-                order by line_time ASC
-            </otherwise>
-        </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
+        union ALL
+        select `id`,`sex`,`company_id`,`member_name`,`call_status`,`consult_room`,`line_time` from ygline
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="companyId != null and companyId != ''"> and company_id = #{companyId} </if>
+            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
+            <!--and call_status in ('1','2','3') or call_status = '0'-->
+            <choose>
+                <when test="consultRoom != null and consultRoom != ''">
+                    and consult_room != #{consultRoom}
+                    and  call_status = '0'
+                </when>
+                <otherwise>
+                    and (call_status in ('1','2','3') or call_status = '0')
+                </otherwise>
+            </choose>
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+        </where>
+        <!--<choose>-->
+            <!--<when test="sort != null and sort.trim() != ''">-->
+                <!--order by ${sort} ${order}-->
+            <!--</when>-->
+            <!--<otherwise>-->
+                <!--order by line_time ASC-->
+            <!--</otherwise>-->
+        <!--</choose>-->
+        <!--<if test="offset != null and limit != null">-->
+            <!--limit #{offset}, #{limit}-->
+        <!--</if>-->
     </select>
 
     <select id="count" resultType="int">

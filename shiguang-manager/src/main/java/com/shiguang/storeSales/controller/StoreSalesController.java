@@ -357,10 +357,10 @@ public class StoreSalesController {
                 //String ygtime = sdfs.format(c.getCreateTime());
                 if (null != c.getCreateTime()){
                     c.setYanguangTime(sdfs.format(c.getCreateTime()));
-                    c.setYgTime(sdfss.format(c.getCreateTime()));
+                    c.setYanguangDate(sdfss.format(c.getCreateTime()));
                 } else {
                     c.setYanguangTime(sdfs.format(new Date()));
-                    c.setYgTime(sdfss.format(new Date()));
+                    c.setYanguangDate(sdfss.format(new Date()));
                 }
                 if (null == c.getYangsName() || "".equals(c.getYangsName())){
                     c.setYangsName(c.getYanguangName());

@@ -5,6 +5,7 @@ import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.ShiroUtils;
 import com.shiguang.line.domain.*;
+import com.shiguang.line.service.OpticianService;
 import com.shiguang.line.service.OptometryLineService;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.system.domain.UserDO;
@@ -12,6 +13,7 @@ import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -27,6 +29,8 @@ public class OptometryLineController {
     private OptometryLineService optometryLineService;
     @Autowired
     UserService userService;
+    @Autowired
+    OpticianService opticianService;
     @GetMapping()
     @RequiresPermissions("information:optometryline:optometryline")
     String Line(){
@@ -71,7 +75,12 @@ public class OptometryLineController {
      */
     @GetMapping("/consultRoom")
     @RequiresPermissions("information:optometryline:consultRoom")
-    String consultRoom(){
+    String consultRoom(Model model){
+        Map<String,Object> map = new HashMap<>();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        map.put("createTime",simpleDateFormat.format(new Date()));
+        List<OpticianDO> opticianDOList = opticianService.list(map);
+        model.addAttribute("opticianDOList",opticianDOList);
         return "line/consultRoom";
     }
 

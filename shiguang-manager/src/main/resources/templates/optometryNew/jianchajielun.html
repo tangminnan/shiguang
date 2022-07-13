@@ -272,7 +272,7 @@
                 <td>OD</td>
                 <input id="sphod" th:value="${tryresultsDO.sphereRighttry}"  hidden/>
                 <input id="addod" th:value="${tryresultsDO.addRighttry}" hidden />
-                <td><input  id="kjyySphod" name="kjyySphod" type="text" onblur="zhengfu(this)"
+                <td><input  id="kjyySphod" name="kjyySphod" th:value="${tryresultsDO.sphereRighttry}" type="text" onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderRighttry}" name="kjyyCylod" type="text" onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
@@ -299,7 +299,7 @@
                 <td>OS</td>
                 <input id="sphos" th:value="${tryresultsDO.sphereLefttry}" hidden />
                 <input id="addos" th:value="${tryresultsDO.addLefttry}" hidden />
-                <td><input id="kjyySphos" name="kjyySphos" type="text"onblur="zhengfu(this)"
+                <td><input id="kjyySphos" name="kjyySphos" th:value="${tryresultsDO.sphereLefttry}" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
                 <td><input th:value="${tryresultsDO.cylinderLefttry}" name="kjyyCylos" type="text"onblur="zhengfu(this)"
                            oninput="getmoney(this,10)" autofocus/></td>
@@ -1370,8 +1370,8 @@
             sphaddos="+"+sphaddos
         }
 
-        $('#kjyySphod').val(sphaddod);
-        $('#kjyySphos').val(sphaddos);
+        $('#kjjySphod').val(sphaddod);
+        $('#kjjySphos').val(sphaddos);
 
 
 

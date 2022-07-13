@@ -13,6 +13,7 @@
 								<i class="fa fa-plus" aria-hidden="true"></i>叫号
 								<input id="consultRoom" type="hidden" />
 							</button>
+							<button type="button" onclick="closes()">关闭叫号</button>
 							<!--<button shiro:hasPermission="information:line:batchRemove" type="button" class="btn  btn-danger"-->
 								<!--onclick="batchRemove()">-->
 								<!--<i class="fa fa-trash" aria-hidden="true"></i>删除-->
@@ -59,6 +60,7 @@
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript" src="/js/appjs/line/optometryline.js"></script>
 <script type="text/javascript">
+	var timer;
     $().ready(function(){
         layer.open({
             type : 2,
@@ -73,10 +75,16 @@
                 $("#consultRoom").val(rows);
                 window.localStorage.setItem("consultRoom",rows)
                 layer.close(index);//需要手动关闭窗口
+				load();
+                timer = setInterval(function () {
+                    $('#exampleTable').bootstrapTable('refresh');
+                }, 60000);
             }
         });
     });
-
+    function closes(){
+        clearInterval(timer);
+	}
 </script>
 </body>
 </html>
