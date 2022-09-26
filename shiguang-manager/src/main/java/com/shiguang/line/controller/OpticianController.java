@@ -80,6 +80,7 @@ public class OpticianController {
 	public R save(OpticianDO line){
 		line.setCreateTime(new Date());
 		if(opticianService.save(line)>0){
+			opticianService.removeQueue();
 			return R.ok();
 		}
 		return R.error();

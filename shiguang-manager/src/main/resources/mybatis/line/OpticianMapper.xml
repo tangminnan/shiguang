@@ -74,4 +74,8 @@
         </foreach>
     </delete>
 
+    <delete id="removeQueue">
+        delete from line_queue
+    </delete>
+
 </mapper>

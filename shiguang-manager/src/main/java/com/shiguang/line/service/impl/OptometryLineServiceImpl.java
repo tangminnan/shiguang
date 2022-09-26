@@ -188,4 +188,50 @@ public class OptometryLineServiceImpl implements OptometryLineService {
     public int saveLineMemberold(YgLineMemberoldDO ygLineMemberoldDO) {
         return optometryLineDao.saveLineMemberold(ygLineMemberoldDO);
     }
+
+    @Override
+    public List<YgLinenewDO> listnew(Map<String, Object> map) {
+        return optometryLineDao.listnew(map);
+    }
+
+    @Override
+    public int countnew(Map<String, Object> map) {
+        return optometryLineDao.countnew(map);
+    }
+
+    @Override
+    public int updatenew(YgLinenewDO line) {
+        return optometryLineDao.updatenew(line);
+    }
+
+    @Override
+    public YgLinenewDO getnew(Long id) {
+        return optometryLineDao.getnew(id);
+    }
+
+    @Override
+    public List<YgLinenewDO> linesListnew(Map<String, Object> map) {
+        return optometryLineDao.linesListnew(map);
+    }
+
+    @Override
+    public List<YgLineMembernewDO> listMembernew(Map<String, Object> map) {
+        return optometryLineDao.listMembernew(map);
+    }
+
+    @Override
+    public List<YgLinenewDO> lineListnew(Map<String, Object> map) {
+        return optometryLineDao.lineListnew(map);
+    }
+
+    @Override
+    public int removenew(Long id) {
+        return optometryLineDao.removenew(id);
+    }
+
+
+    @Override
+    public int saveLineMembernew(YgLineMembernewDO ygLineMembernewDO) {
+        return optometryLineDao.saveLineMembernew(ygLineMembernewDO);
+    }
 }

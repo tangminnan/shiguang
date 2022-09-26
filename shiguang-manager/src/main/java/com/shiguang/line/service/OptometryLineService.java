@@ -79,5 +79,24 @@ public interface OptometryLineService {
 
     int saveLineMemberold(YgLineMemberoldDO ygLineMemberoldDO);
 
+    List<YgLinenewDO> listnew(Map<String, Object> map);
+
+    int countnew(Map<String, Object> map);
+
+
+    int updatenew(YgLinenewDO line);
+
+
+    YgLinenewDO getnew(Long id);
+
+    List<YgLinenewDO> linesListnew(Map<String,Object> map);
+
+    List<YgLineMembernewDO> listMembernew(Map<String,Object> map);
+
+    List<YgLinenewDO> lineListnew(Map<String,Object> map);
+
+    int removenew(Long id);
+    int saveLineMembernew(YgLineMembernewDO ygLineMembernewDO);
+
 
 }

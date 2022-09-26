@@ -275,6 +275,7 @@ public class GainLossController {
 			model.addAttribute("goodsList",goodsList);
 		} else if ("视光".equals(gainLoss.getInventoryType())){
 			String[] goodsNum = gainLoss.getGoodsNum().split(",");
+			String[] gooddsCode = gainLoss.getProducCode().split(",");
 			String[] goodsCount = gainLoss.getInventoryCount().split(",");
 			//List<ShiguangDO> goodsList = new ArrayList<>();
 			List<StockDO> goodsList = new ArrayList<>();
@@ -283,9 +284,9 @@ public class GainLossController {
 //				shiguangDO.setInventoryCount(goodsCount[i]);
 //				goodsList.add(shiguangDO);
 				StockDO stockDO = new StockDO();
-				stockDO.setGoodsNum(goodsNum[i]);
+				stockDO.setGoodsCode(gooddsCode[i]);
 				stockDO.setPositionId(String.valueOf(gainLoss.getPositionId()));
-				StockDO producaDO = stockService.getProduceNum(stockDO);
+				StockDO producaDO = stockService.getProduceCode(stockDO);
 				producaDO.setInventoryCount(goodsCount[i]);
 				goodsList.add(producaDO);
 			}
@@ -495,18 +496,36 @@ public class GainLossController {
 			String[] inventoryCount = gainLoss.getInventoryCount().split(",");
 			String[] goodsNum = gainLoss.getGoodsNum().split(",");
 			String[] goodsName = gainLoss.getGoodsName().split(",");
-			String[] brandname = gainLoss.getBrandname().split(",");
-			String[] unitname = gainLoss.getUnitname().split(",");
-			String[] mfrsid = gainLoss.getMfrsid().split(",");
-			String[] retailPrice = gainLoss.getRetailPrice().split(",");
-			//String[] classType = gainLoss.getClassType().split(",");
+			String[] brandname = null;
+			if (null != gainLoss.getBrandname()){
+				brandname = gainLoss.getBrandname().split(",");
+			}
+			String[] unitname = null;
+			if (null != gainLoss.getUnitname()){
+				unitname = gainLoss.getUnitname().split(",");
+			}
+			String[] mfrsid = null;
+			if (null != gainLoss.getMfrsid()){
+				mfrsid = gainLoss.getMfrsid().split(",");
+			}
+			String[] retailPrice =null;
+			if (null != gainLoss.getRetailPrice()){
+				retailPrice = gainLoss.getRetailPrice().split(",");
+			}
 			for (int i=0;i<goodsNum.length;i++){
 				//更新库存
 				StockDO stockDOs = new StockDO();
-				stockDOs.setGoodsNum(goodsNum[i]);
-				stockDOs.setPositionId(String.valueOf(gainLoss.getPositionId()));
+				StockDO stockDO = null;
 				String stockCount = "";
-				StockDO stockDO = stockService.getProduceNum(stockDOs);
+				if (goodsType==5 || goodsType==9 || goodsType==9){
+					stockDOs.setGoodsCode(produceCode[i]);
+					stockDOs.setPositionId(String.valueOf(gainLoss.getPositionId()));
+					stockDO = stockService.getProduceCode(stockDOs);
+				} else {
+					stockDOs.setGoodsNum(goodsNum[i]);
+					stockDOs.setPositionId(String.valueOf(gainLoss.getPositionId()));
+					stockDO = stockService.getProduceNum(stockDOs);
+				}
 				if (null != stockDO){
 					stockCount = stockDO.getGoodsCount();
 					if ("盘盈".equals(gainLoss.getDocumentType())){
@@ -526,7 +545,6 @@ public class GainLossController {
 					}
 				} else {
 					if ("盘盈".equals(gainLoss.getDocumentType())){
-
 						StockDO stockDO1 = new StockDO();
 						stockDO1.setGoodsCode(produceCode[i]);
 						stockDO1.setUsername(ShiroUtils.getUser().getUsername());
@@ -535,12 +553,19 @@ public class GainLossController {
 						stockDO1.setGoodsName(goodsName[i]);
 						stockDO1.setGoodsCount(inventoryCount[i]);
 						stockDO1.setGoodsType(goodsType);
-						stockDO1.setRetailPrice(retailPrice[i]);
-						stockDO1.setUnit(unitname[i]);
-						stockDO1.setMfrsid(mfrsid[i]);
-						stockDO1.setBrandname(brandname[i]);
+						if (null != retailPrice){
+							stockDO1.setRetailPrice(retailPrice[i]);
+						}
+						if (null != unitname){
+							stockDO1.setUnit(unitname[i]);
+						}
+						if (null != mfrsid){
+							stockDO1.setMfrsid(mfrsid[i]);
+						}
+						if (null != brandname){
+							stockDO1.setBrandname(brandname[i]);
+						}
 						stockDO1.setReturnzt("1");
-						//stockDO1.setClasstype(classType[i]);
 						stockDO1.setPositionId(String.valueOf(gainLoss.getPositionId()));
 						stockService.save(stockDO1);
 					}

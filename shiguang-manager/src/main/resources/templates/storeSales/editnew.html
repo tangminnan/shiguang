@@ -23,7 +23,7 @@
 	<h3>顾客资料 <span class="sure_red">可直接输入会员卡号并按【回车键】确认</span></h3>
 	<div class="gukeMSG1">
 		<span class="s1"><input type="button" value="查询" onclick="getSelect()"/></span>
-		<span class="s2">卡号：<input type="text" value="" id="cardMember" th:value="${memberDO.cardNumber}"/></span>
+		<span class="s2">卡号：<input type="text" value="" id="cardMember" th:value="${memberDO.cardNumber}" style="width: 12%;"/></span>
 		<span class="s3">
 			<input type="button" value="会员新增" onclick="getMemberAdd()"/>
 			<input type="button" value="会员修改" onclick="getMemberEdit()"/>

@@ -1812,11 +1812,11 @@ public class SalesDO implements Serializable {
 	 */
 	public String getRightyuanyongtjsg() {return rightyuanyongtjsg;}
 
-	public void setRightjinyongtjsg(String rightjinyongtjsg){this.rightjinyongtjsg = this.rightjinyongtjsg;}
+	public void setRightjinyongtjsg(String rightjinyongtjsg){this.rightjinyongtjsg = rightjinyongtjsg;}
 
 	public String getRightjinyongtjsg(){return rightjinyongtjsg;}
 
-	public void setRightjinyongVAsg(String rightjinyongVAsg){this.rightjinyongVAsg = this.rightjinyongVAsg;}
+	public void setRightjinyongVAsg(String rightjinyongVAsg){this.rightjinyongVAsg = rightjinyongVAsg;}
 
 	public String getRightjinyongVAsg(){return rightjinyongVAsg;}
 

@@ -158,219 +158,217 @@ public class DrawbackServiceImpl implements DrawbackService {
 //		costDO.setIsSale(2L);
 //		costService.update(costDO);
 		SalesDO salesDO = salesService.getSaleNumber(drawbackDO.getSaleNumber());
-		LogStatusDO logStatusDO = logStatusService.getLogStatusBySaleNum(drawbackDO.getSaleNumber());
-		if(null != logStatusDO){
-			String storeNum = salesDO.getStoreNum();
+//		LogStatusDO logStatusDO = logStatusService.getLogStatusBySaleNum(drawbackDO.getSaleNumber());
+//		if(null != logStatusDO){
+//			String storeNum = salesDO.getStoreNum();
+//			String[] count = salesDO.getStoreCount().split(",");
+//			String[] goodsCode = salesDO.getGoodsCode().split(",");
+//			String[] storeDescribe = salesDO.getStoreDescribe().split(",");
+//			Map<String,Object> map = new HashMap<>();
+//			map.put("companyId",ShiroUtils.getUser().getCompanyId());
+//			if("3".equals(ShiroUtils.getUser().getCompanyId())){
+//				map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+//			}
+//			PositionDO positionDO = stockService.findPosition(map);
+//			for (int i=0;i<goodsCode.length;i++){
+//				StockDO stockDO = new StockDO();
+//				stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+//				stockDO.setGoodsCode(goodsCode[i]);
+//				StockDO stockDO1 = stockService.getProduceCode(stockDO);
+//				if (null != logStatusDO){
+//					if ("销售完成".equals(logStatusDO.getLogisticStatus())){
+//						if (null != stockDO1){
+//							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
+//							stockDO.setGoodsCount(godsCount + "");
+//							stockService.updateGoodsCount(stockDO);
+//						} else {
+//							String[] goodsNum = salesDO.getGoodsNum().split(",");
+//							String[] goodsName = salesDO.getStoreName().split(",");
+//							stockDO.setGoodsNum(goodsNum[i]);
+//							stockDO.setGoodsName(goodsName[i]);
+//							stockDO.setGoodsCount(Integer.parseInt(count[i]) +"");
+//							if ("镜架".equals(storeDescribe[i])){
+//								ProducaDO producaD = producaService.getJJInfomation(goodsNum[i]);
+//								if (null != producaD){
+//									stockDO.setUnit(producaD.getUnitname());
+//									stockDO.setMfrsid(producaD.getMfrsid());
+//									stockDO.setGoodsType(1);
+//									stockDO.setBrandname(producaD.getBrandname());
+//									stockDO.setRetailPrice(producaD.getRetailPrice());
+//									stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+//									stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+//									stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+//									stockDO.setFactory(producaD.getFactory());
+//									stockDO.setUsername(ShiroUtils.getUser().getUsername());
+//									stockDO.setClasstype("0");
+//									stockDO.setStatus("0");
+//									stockDO.setReturnzt("1");
+//									stockService.save(stockDO);
+//								}
+//							}
+//						}
+//
+//					} else if ("顾客取镜".equals(logStatusDO.getLogisticStatus())){
+//						if (null != stockDO1){
+//							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
+//							stockDO.setGoodsCount(godsCount + "");
+//							stockService.updateGoodsCount(stockDO);
+//						} else {
+//							String[] goodsNum = salesDO.getGoodsNum().split(",");
+//							String[] goodsName = salesDO.getStoreName().split(",");
+//							stockDO.setGoodsNum(goodsNum[i]);
+//							stockDO.setGoodsName(goodsName[i]);
+//							stockDO.setGoodsCount(Integer.parseInt(count[i]) +"");
+//							if ("镜架".equals(storeDescribe[i])){
+//								ProducaDO producaD = producaService.getJJInfomation(goodsNum[i]);
+//								if (null != producaD){
+//									stockDO.setUnit(producaD.getUnitname());
+//									stockDO.setMfrsid(producaD.getMfrsid());
+//									stockDO.setGoodsType(1);
+//									stockDO.setBrandname(producaD.getBrandname());
+//									stockDO.setRetailPrice(producaD.getRetailPrice());
+//									stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+//									stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+//									stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+//									if (null != producaD.getFactory() && !"".equals(producaD.getFactory())){
+//										stockDO.setFactory(producaD.getFactory());
+//									}
+//									stockDO.setUsername(ShiroUtils.getUser().getUsername());
+//									stockDO.setClasstype("0");
+//									stockDO.setStatus("0");
+//									stockDO.setReturnzt("1");
+//									stockService.save(stockDO);
+//								}
+//							} else if ("镜片".equals(storeDescribe[i])){
+//								String[] classType = salesDO.getClasstype().split(",");
+//								if ("2".equals(classType[i])){
+//									JpdzDO jpdzDOS = jpdzService.getJpdzInfomation(goodsNum[i]);
+//									if (null != jpdzDOS){
+//										stockDO.setUnit(jpdzDOS.getUnitname());
+//										stockDO.setMfrsid(jpdzDOS.getMfrsid());
+//										stockDO.setGoodsType(3);
+//										stockDO.setBrandname(jpdzDOS.getBrandname());
+//										stockDO.setRetailPrice(jpdzDOS.getRetailPrice());
+//										stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+//										stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+//										if (null != jpdzDOS.getFactory() && !"".equals(jpdzDOS.getFactory())){
+//											stockDO.setFactory(jpdzDOS.getFactory());
+//										}
+//										stockDO.setClasstype("2");
+//										stockDO.setUsername(ShiroUtils.getUser().getUsername());
+//										stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+//										stockDO.setStatus("0");
+//										stockDO.setReturnzt("1");
+//										stockService.save(stockDO);
+//									}
+//								} else if ("1".equals(classType[i])){
+//									JpcpDO jpcpDOS = jpcpService.getJpcpInfomation(goodsNum[i]);
+//									if (null != jpcpDOS){
+//										stockDO.setUnit(jpcpDOS.getUnitname());
+//										stockDO.setMfrsid(jpcpDOS.getMfrsid());
+//										stockDO.setGoodsType(3);
+//										stockDO.setBrandname(jpcpDOS.getBrandname());
+//										stockDO.setRetailPrice(jpcpDOS.getRetailPrice());
+//										stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+//										stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+//										if (null != jpcpDOS.getProducFactory() && !"".equals(jpcpDOS.getProducFactory())){
+//											stockDO.setFactory(jpcpDOS.getProducFactory());
+//										}
+//										stockDO.setClasstype("1");
+//										stockDO.setUsername(ShiroUtils.getUser().getUsername());
+//										stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+//										stockDO.setStatus("0");
+//										stockDO.setReturnzt("1");
+//										stockService.save(stockDO);
+//									}
+//								}
+//							}
+//						}
+//					}
+//				} else {
+//					if (!"镜架".equals(storeDescribe[i]) && !"自架".equals(storeDescribe[i]) && !"镜片".equals(storeDescribe[i])
+//							&& !"隐形".equals(storeDescribe[i]) && !"自片".equals(storeDescribe[i])){
+//						positionDO = stockService.findPosition(map);
+//						StockDO stockDOs = new StockDO();
+//						stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
+//						stockDOs.setGoodsCode(goodsCode[i]);
+//						StockDO stockDO2 = stockService.getProduceCode(stockDOs);
+//						int godsCount = Integer.parseInt(stockDO2.getGoodsCount()) + Integer.parseInt(count[i]);
+//						stockDOs.setGoodsCount(godsCount + "");
+//						stockService.updateGoodsCount(stockDOs);
+//					} else if ("镜架".equals(storeDescribe[i])){
+//						if (null != stockDO1){
+//							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
+//							stockDO.setGoodsCount(godsCount + "");
+//							stockService.updateGoodsCount(stockDO);
+//						} else {
+//							String[] goodsNum = salesDO.getGoodsNum().split(",");
+//							String[] goodsName = salesDO.getStoreName().split(",");
+//							stockDO.setGoodsNum(goodsNum[i]);
+//							stockDO.setGoodsName(goodsName[i]);
+//							stockDO.setGoodsCount(Integer.parseInt(count[i]) + "");
+//							ProducaDO producaD = producaService.getJJInfomation(goodsNum[i]);
+//							if (null != producaD){
+//								stockDO.setUnit(producaD.getUnitname());
+//								stockDO.setMfrsid(producaD.getMfrsid());
+//								stockDO.setGoodsType(1);
+//								stockDO.setBrandname(producaD.getBrandname());
+//								stockDO.setRetailPrice(producaD.getRetailPrice());
+//								stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+//								stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+//								stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+//								if (null != producaD.getFactory() && !"".equals(producaD.getFactory())){
+//									stockDO.setFactory(producaD.getFactory());
+//								}
+//								stockDO.setUsername(ShiroUtils.getUser().getUsername());
+//								stockDO.setClasstype("0");
+//								stockDO.setStatus("0");
+//								stockDO.setReturnzt("1");
+//								stockService.save(stockDO);
+//							}
+//						}
+//					} else if ("镜片".equals(storeDescribe[i])){
+//						if (null != stockDO1){
+//							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
+//							stockDO.setGoodsCount(godsCount + "");
+//							stockService.updateGoodsCount(stockDO);
+//						} else {
+//							String[] goodsNum = salesDO.getGoodsNum().split(",");
+//							String[] goodsName = salesDO.getStoreName().split(",");
+//							stockDO.setGoodsNum(goodsNum[i]);
+//							stockDO.setGoodsName(goodsName[i]);
+//							stockDO.setGoodsCount(Integer.parseInt(count[i]) + "");
+//							String[] classType = salesDO.getClasstype().split(",");
+//							if ("1".equals(classType[i])){
+//								JpcpDO jpcpDOS = jpcpService.getJpcpInfomation(goodsNum[i]);
+//								if (null != jpcpDOS){
+//									stockDO.setUnit(jpcpDOS.getUnitname());
+//									stockDO.setMfrsid(jpcpDOS.getMfrsid());
+//									stockDO.setGoodsType(3);
+//									stockDO.setBrandname(jpcpDOS.getBrandname());
+//									stockDO.setRetailPrice(jpcpDOS.getRetailPrice());
+//									stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
+//									stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
+//									if (null != jpcpDOS.getProducFactory() && !"".equals(jpcpDOS.getProducFactory())){
+//										stockDO.setFactory(jpcpDOS.getProducFactory());
+//									}
+//									stockDO.setClasstype("1");
+//									stockDO.setUsername(ShiroUtils.getUser().getUsername());
+//									stockDO.setCreateTime(simpleDateFormat.format(new Date()));
+//									stockDO.setStatus("0");
+//									stockDO.setReturnzt("1");
+//									stockService.save(stockDO);
+//								}
+//							}
+//						}
+//					}
+//
+//				}
+//
+//			}
+//		} else {
 			String[] count = salesDO.getStoreCount().split(",");
 			String[] goodsCode = salesDO.getGoodsCode().split(",");
-			String[] storeDescribe = salesDO.getStoreDescribe().split(",");
-			Map<String,Object> map = new HashMap<>();
-			map.put("companyId",ShiroUtils.getUser().getCompanyId());
-			if("3".equals(ShiroUtils.getUser().getCompanyId())){
-				map.put("departNumber",ShiroUtils.getUser().getStoreNum());
-			}
-			PositionDO positionDO = stockService.findPosition(map);
-			for (int i=0;i<goodsCode.length;i++){
-				StockDO stockDO = new StockDO();
-				stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
-				stockDO.setGoodsCode(goodsCode[i]);
-				StockDO stockDO1 = stockService.getProduceCode(stockDO);
-				if (null != logStatusDO){
-					if ("销售完成".equals(logStatusDO.getLogisticStatus())){
-						if (null != stockDO1){
-							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
-							stockDO.setGoodsCount(godsCount + "");
-							stockService.updateGoodsCount(stockDO);
-						} else {
-							String[] goodsNum = salesDO.getGoodsNum().split(",");
-							String[] goodsName = salesDO.getStoreName().split(",");
-							stockDO.setGoodsNum(goodsNum[i]);
-							stockDO.setGoodsName(goodsName[i]);
-							stockDO.setGoodsCount(Integer.parseInt(count[i]) +"");
-							if ("镜架".equals(storeDescribe[i])){
-								ProducaDO producaD = producaService.getJJInfomation(goodsNum[i]);
-								if (null != producaD){
-									stockDO.setUnit(producaD.getUnitname());
-									stockDO.setMfrsid(producaD.getMfrsid());
-									stockDO.setGoodsType(1);
-									stockDO.setBrandname(producaD.getBrandname());
-									stockDO.setRetailPrice(producaD.getRetailPrice());
-									stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
-									stockDO.setCreateTime(simpleDateFormat.format(new Date()));
-									stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
-									stockDO.setFactory(producaD.getFactory());
-									stockDO.setUsername(ShiroUtils.getUser().getUsername());
-									stockDO.setClasstype("0");
-									stockDO.setStatus("0");
-									stockDO.setReturnzt("1");
-									stockService.save(stockDO);
-								}
-							}
-						}
-
-					} else if ("顾客取镜".equals(logStatusDO.getLogisticStatus())){
-						if (null != stockDO1){
-							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
-							stockDO.setGoodsCount(godsCount + "");
-							stockService.updateGoodsCount(stockDO);
-						} else {
-							String[] goodsNum = salesDO.getGoodsNum().split(",");
-							String[] goodsName = salesDO.getStoreName().split(",");
-							stockDO.setGoodsNum(goodsNum[i]);
-							stockDO.setGoodsName(goodsName[i]);
-							stockDO.setGoodsCount(Integer.parseInt(count[i]) +"");
-							if ("镜架".equals(storeDescribe[i])){
-								ProducaDO producaD = producaService.getJJInfomation(goodsNum[i]);
-								if (null != producaD){
-									stockDO.setUnit(producaD.getUnitname());
-									stockDO.setMfrsid(producaD.getMfrsid());
-									stockDO.setGoodsType(1);
-									stockDO.setBrandname(producaD.getBrandname());
-									stockDO.setRetailPrice(producaD.getRetailPrice());
-									stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
-									stockDO.setCreateTime(simpleDateFormat.format(new Date()));
-									stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
-									if (null != producaD.getFactory() && !"".equals(producaD.getFactory())){
-										stockDO.setFactory(producaD.getFactory());
-									}
-									stockDO.setUsername(ShiroUtils.getUser().getUsername());
-									stockDO.setClasstype("0");
-									stockDO.setStatus("0");
-									stockDO.setReturnzt("1");
-									stockService.save(stockDO);
-								}
-							} else if ("镜片".equals(storeDescribe[i])){
-								String[] classType = salesDO.getClasstype().split(",");
-								if ("2".equals(classType[i])){
-									JpdzDO jpdzDOS = jpdzService.getJpdzInfomation(goodsNum[i]);
-									if (null != jpdzDOS){
-										stockDO.setUnit(jpdzDOS.getUnitname());
-										stockDO.setMfrsid(jpdzDOS.getMfrsid());
-										stockDO.setGoodsType(3);
-										stockDO.setBrandname(jpdzDOS.getBrandname());
-										stockDO.setRetailPrice(jpdzDOS.getRetailPrice());
-										stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
-										stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
-										if (null != jpdzDOS.getFactory() && !"".equals(jpdzDOS.getFactory())){
-											stockDO.setFactory(jpdzDOS.getFactory());
-										}
-										stockDO.setClasstype("2");
-										stockDO.setUsername(ShiroUtils.getUser().getUsername());
-										stockDO.setCreateTime(simpleDateFormat.format(new Date()));
-										stockDO.setStatus("0");
-										stockDO.setReturnzt("1");
-										stockService.save(stockDO);
-									}
-								} else if ("1".equals(classType[i])){
-									JpcpDO jpcpDOS = jpcpService.getJpcpInfomation(goodsNum[i]);
-									if (null != jpcpDOS){
-										stockDO.setUnit(jpcpDOS.getUnitname());
-										stockDO.setMfrsid(jpcpDOS.getMfrsid());
-										stockDO.setGoodsType(3);
-										stockDO.setBrandname(jpcpDOS.getBrandname());
-										stockDO.setRetailPrice(jpcpDOS.getRetailPrice());
-										stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
-										stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
-										if (null != jpcpDOS.getProducFactory() && !"".equals(jpcpDOS.getProducFactory())){
-											stockDO.setFactory(jpcpDOS.getProducFactory());
-										}
-										stockDO.setClasstype("1");
-										stockDO.setUsername(ShiroUtils.getUser().getUsername());
-										stockDO.setCreateTime(simpleDateFormat.format(new Date()));
-										stockDO.setStatus("0");
-										stockDO.setReturnzt("1");
-										stockService.save(stockDO);
-									}
-								}
-							}
-						}
-					}
-				} else {
-					if (!"镜架".equals(storeDescribe[i]) && !"自架".equals(storeDescribe[i]) && !"镜片".equals(storeDescribe[i])
-							&& !"隐形".equals(storeDescribe[i]) && !"自片".equals(storeDescribe[i])){
-						positionDO = stockService.findPosition(map);
-						StockDO stockDOs = new StockDO();
-						stockDOs.setPositionId(String.valueOf(positionDO.getPositionId()));
-						stockDOs.setGoodsCode(goodsCode[i]);
-						StockDO stockDO2 = stockService.getProduceCode(stockDOs);
-						int godsCount = Integer.parseInt(stockDO2.getGoodsCount()) + Integer.parseInt(count[i]);
-						stockDOs.setGoodsCount(godsCount + "");
-						stockService.updateGoodsCount(stockDOs);
-					} else if ("镜架".equals(storeDescribe[i])){
-						if (null != stockDO1){
-							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
-							stockDO.setGoodsCount(godsCount + "");
-							stockService.updateGoodsCount(stockDO);
-						} else {
-							String[] goodsNum = salesDO.getGoodsNum().split(",");
-							String[] goodsName = salesDO.getStoreName().split(",");
-							stockDO.setGoodsNum(goodsNum[i]);
-							stockDO.setGoodsName(goodsName[i]);
-							stockDO.setGoodsCount(Integer.parseInt(count[i]) + "");
-							ProducaDO producaD = producaService.getJJInfomation(goodsNum[i]);
-							if (null != producaD){
-								stockDO.setUnit(producaD.getUnitname());
-								stockDO.setMfrsid(producaD.getMfrsid());
-								stockDO.setGoodsType(1);
-								stockDO.setBrandname(producaD.getBrandname());
-								stockDO.setRetailPrice(producaD.getRetailPrice());
-								stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
-								stockDO.setCreateTime(simpleDateFormat.format(new Date()));
-								stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
-								if (null != producaD.getFactory() && !"".equals(producaD.getFactory())){
-									stockDO.setFactory(producaD.getFactory());
-								}
-								stockDO.setUsername(ShiroUtils.getUser().getUsername());
-								stockDO.setClasstype("0");
-								stockDO.setStatus("0");
-								stockDO.setReturnzt("1");
-								stockService.save(stockDO);
-							}
-						}
-					} else if ("镜片".equals(storeDescribe[i])){
-						if (null != stockDO1){
-							int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
-							stockDO.setGoodsCount(godsCount + "");
-							stockService.updateGoodsCount(stockDO);
-						} else {
-							String[] goodsNum = salesDO.getGoodsNum().split(",");
-							String[] goodsName = salesDO.getStoreName().split(",");
-							stockDO.setGoodsNum(goodsNum[i]);
-							stockDO.setGoodsName(goodsName[i]);
-							stockDO.setGoodsCount(Integer.parseInt(count[i]) + "");
-							String[] classType = salesDO.getClasstype().split(",");
-							if ("1".equals(classType[i])){
-								JpcpDO jpcpDOS = jpcpService.getJpcpInfomation(goodsNum[i]);
-								if (null != jpcpDOS){
-									stockDO.setUnit(jpcpDOS.getUnitname());
-									stockDO.setMfrsid(jpcpDOS.getMfrsid());
-									stockDO.setGoodsType(3);
-									stockDO.setBrandname(jpcpDOS.getBrandname());
-									stockDO.setRetailPrice(jpcpDOS.getRetailPrice());
-									stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
-									stockDO.setZhidanPeople(ShiroUtils.getUser().getName());
-									if (null != jpcpDOS.getProducFactory() && !"".equals(jpcpDOS.getProducFactory())){
-										stockDO.setFactory(jpcpDOS.getProducFactory());
-									}
-									stockDO.setClasstype("1");
-									stockDO.setUsername(ShiroUtils.getUser().getUsername());
-									stockDO.setCreateTime(simpleDateFormat.format(new Date()));
-									stockDO.setStatus("0");
-									stockDO.setReturnzt("1");
-									stockService.save(stockDO);
-								}
-							}
-						}
-					}
-
-				}
-
-			}
-		} else {
-			String storeNum = salesDO.getStoreNum();
-			String[] count = salesDO.getStoreCount().split(",");
-			String[] goodsCode = salesDO.getGoodsCode().split(",");
-			String[] storeDescribe = salesDO.getStoreDescribe().split(",");
 			Map<String,Object> map = new HashMap<>();
 			map.put("companyId",ShiroUtils.getUser().getCompanyId());
 			if ("3".equals(ShiroUtils.getUser().getCompanyId())){
@@ -389,7 +387,7 @@ public class DrawbackServiceImpl implements DrawbackService {
 
 				}
 			}
-		}
+//		}
 		String saleNumber = drawbackDO.getSaleNumber();
 		weiwaishujuService.removes(saleNumber);
 		weiwaiService.removeSale(saleNumber);

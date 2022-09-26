@@ -270,7 +270,7 @@
      <where>
          goods_code = #{goodsCode}
          <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
-         and `status` = '0'
+         and `status` = '0' and goods_count > 0
      </where>
 </select>
 
@@ -283,7 +283,7 @@
         <where>
             goods_num = #{goodsNum}
             <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
-            and `status` = '0'
+            and `status` = '0' and goods_count > 0
         </where>
     </select>
 
@@ -460,6 +460,7 @@
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
             <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(j.retail_price) >= ABS(#{retailPriceStart})</if>
             <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(j.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
+            and j.`state` = 1
             <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &lt;= #{rightYuanYongQJ}</if>-->
             <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &gt;= #{rightYuanYongQJ}</if>-->
             <!--<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(j.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>-->
@@ -513,6 +514,7 @@
             <if test="mfrsid != null and mfrsid != ''">and j.mfrsid = #{mfrsid}</if>
             <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(j.retail_price) >= ABS(#{retailPriceStart})</if>
             <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(j.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
+            and j.`state` = 1
             <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_up &lt;= #{rightYuanYongQJ}</if>-->
             <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and j.sph_down &gt;= #{rightYuanYongQJ}</if>-->
             <!--<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(j.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>-->
@@ -807,7 +809,6 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                GROUP BY st.goods_name
                 order by st.id desc
             </otherwise>
         </choose>
@@ -1109,6 +1110,7 @@
             <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
             <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(y.retail_price) >= ABS(#{retailPriceStart})</if>
             <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(y.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
+            and y.`state` = 1
             <!--<if test="rightYuanYongQJF != null and rightYuanYongQJF != ''">and y.sph_up &lt;= #{fuhao}#{rightYuanYongQJF}</if>-->
             <!--<if test="rightYuanYongQJF != null and rightYuanYongQJF != ''">and y.sph_down >= #{fuhao}#{rightYuanYongQJF}</if>-->
             <!--<if test="rightYuanYongQJZ != null and rightYuanYongQJZ != ''">and y.sph_up &lt;= #{fuhao}#{rightYuanYongQJZ}</if>-->
@@ -1146,6 +1148,7 @@
             <if test="mfrsid != null and mfrsid != ''">and y.mfrsid = #{mfrsid}</if>
             <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(y.retail_price) >= ABS(#{retailPriceStart})</if>
             <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(y.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
+            and y.`state` = 1
             <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_up &lt;= #{rightYuanYongQJ}</if>-->
             <!--<if test="rightYuanYongQJ != null and rightYuanYongQJ != ''">and y.sph_down &gt;= #{rightYuanYongQJ}</if>-->
             <!--<if test="rightYuanYongZJ != null and rightYuanYongZJ != ''">and ABS(y.cyl_up) &gt;= ABS(#{rightYuanYongZJ})</if>-->

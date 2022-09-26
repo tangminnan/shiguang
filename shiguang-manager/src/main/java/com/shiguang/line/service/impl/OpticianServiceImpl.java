@@ -49,4 +49,9 @@ public class OpticianServiceImpl implements OpticianService {
     public int batchRemove(Long[] ids){
         return opticianDao.batchRemove(ids);
     }
+
+    @Override
+    public int removeQueue(){
+        return opticianDao.removeQueue();
+    }
 }

@@ -1299,6 +1299,36 @@ public class SettlementController {
 		} else if (settlementDO.getSex() == 1){
 			settlementDO.setSexx("女");
 		}
+		if (null != settlementDO.getJjGoodsName()){
+			String[] storeDescribe = settlementDO.getStoreDescribe().split(",");
+			String[] goodsNum = settlementDO.getGoodsNum().split(",");
+			String[] jjgoodsName = settlementDO.getJjGoodsName().split(",");
+			String[] color= new String[jjgoodsName.length];
+			int a=0;
+			for (int i=0;i<storeDescribe.length;i++){
+				if ("镜架".equals(storeDescribe[i])){
+					ProducaDO producaDO = producaService.getJjBygoodNums(goodsNum[i]);
+					if (null != producaDO){
+						color[a] = producaDO.getProducColor();
+						a= a+1;
+					}
+				}
+			}
+			StringBuilder sb = new StringBuilder();
+			if (null != color && color.length>0){
+				for (String n:color){
+					if (null != n){
+						sb.append(n.replace("'", "\\'")).append(",");
+					}
+
+				}
+				if (sb.length()>0){
+					sb.deleteCharAt(sb.length() - 1);
+				}
+
+			}
+			settlementDO.setColorSize(sb.toString());
+		}
 		model.addAttribute("settlementDO",settlementDO);
 		model.addAttribute("companyName",ShiroUtils.getUser().getCompany());
 		DepartmentDO departmentDO = departmentService.getDepartName(settlementDO.getStoreNum());
@@ -1378,6 +1408,7 @@ public class SettlementController {
 		Conclusion conclusion = new Conclusion();
 		map2.put("cardNumber",settlementDO.getMemberNumber());
 		map2.put("saleNumber",settlementDO.getSaleNumber());
+		map2.put("ptometryNumber",settlementDO.getPtometryNumber());
 
 		if (!"".equals(settlementDO.getOptometrywlName()) && null != settlementDO.getOptometrywlName()){
 			model.addAttribute("optometryName",settlementDO.getOptometrywlName());

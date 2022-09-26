@@ -1,5 +1,5 @@
 
-var prefix = "/information/optician"
+var prefix = "/information/optometrylinenew"
 $(function() {
 	load();
 });
@@ -45,33 +45,32 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-																{
-									field : 'room',
-									title : '验光室'
-								},
                             {
-                                field : 'ygName',
-                                title : '验光师'
+                                field : 'memberName',
+                                title : '姓名'
                             },
 																{
-									field : 'createTime',
-									title : '时间'
+									field : 'sexx',
+									title : '性别' 
 								},
 																{
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.id
-												+ '\')"><i class="fa fa-edit"></i></a> ';
+										// var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
+										// 		+ row.id
+										// 		+ '\')"><i class="fa fa-edit"></i></a> ';
+                                        var e = '<a class="btn btn-primary btn-xs" href="#" title="随机叫号"  mce_href="#" onclick="randomCall(\''
+                                            + row.id
+                                            + '\')" style="text-decoration: none;">随机叫号</a>';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.id
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
 												+ row.id
 												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d;
+										return d;
 									}
 								}
 								]
@@ -81,31 +80,79 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	layer.open({
-		type : 2,
-		title : '增加',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
-	});
+	var consultRoom =window.localStorage.getItem("consultRoom");
+    var counter = 10;
+    setInterval(function() {
+        counter--;
+        if (counter >= 0) {
+           var call = document.getElementById("call");
+            call.innerHTML = counter+"秒";
+            document.getElementById("call").disabled=true;
+        }
+        if (counter == 0) {
+            var call = document.getElementById("call");
+            call.innerHTML = "叫号"
+            document.getElementById("call").disabled=false;
+            clearInterval(counter);
+        }
+    }, 1000);
+    $.ajax({
+        url : prefix+"/addCallnew",
+        type : "post",
+        data : {
+            'consultRoom' : consultRoom
+        },
+        success : function(r) {
+            if (r.code==0) {
+                layer.msg(r.msg);
+                reLoad();
+            }else{
+                layer.msg(r.msg);
+            }
+        }
+    });
+	// layer.open({
+	// 	type : 2,
+	// 	title : '增加',
+	// 	maxmin : true,
+	// 	shadeClose : false, // 点击遮罩关闭层
+	// 	area : [ '800px', '520px' ],
+	// 	content : prefix + '/add' // iframe的url
+	// });
 }
-function edit(id) {
-	layer.open({
-		type : 2,
-		title : '编辑',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
-	});
+function randomCall(id) {
+    var consultRoom = $("#consultRoom").val();
+    $.ajax({
+        url : prefix+"/randomCallnew",
+        type : "post",
+        data : {
+        	'id':id,
+			'consultRoom':consultRoom
+		},
+        success : function(r) {
+            if (r.code==0) {
+                layer.msg(r.msg);
+                reLoad();
+            }else{
+                layer.msg(r.msg);
+            }
+        }
+    });
+	// layer.open({
+	// 	type : 2,
+	// 	title : '编辑',
+	// 	maxmin : true,
+	// 	shadeClose : false, // 点击遮罩关闭层
+	// 	area : [ '800px', '520px' ],
+	// 	content : prefix + '/edit/' + id // iframe的url
+	// });
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : prefix+"/remove",
+			url : prefix+"/removenew",
 			type : "post",
 			data : {
 				'id' : id
@@ -144,7 +191,7 @@ function batchRemove() {
 			data : {
 				"ids" : ids
 			},
-			url : prefix + '/batchRemove',
+			url : prefix + '/batchRemovenew',
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);

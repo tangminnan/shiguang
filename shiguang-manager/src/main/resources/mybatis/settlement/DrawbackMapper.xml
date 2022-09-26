@@ -49,7 +49,7 @@
 		left join log_status ls on ls.sale_number = st.sale_number and (ls.logistic_status = '销售完成' or ls.logistic_status = '顾客取镜')
 		<where>
 			<if test="id != null and id != ''"> and m.id = #{id} </if>
-			<if test="name != null and name != ''"> and m.name = #{name} </if>
+			<if test="name != null and name != ''"> and m.name like concat('%', #{name},'%') </if>
 			<if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
 			<if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
 			<if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>
@@ -88,7 +88,7 @@
 		left join log_status ls on ls.sale_number = st.sale_number and (ls.logistic_status = '销售完成' or ls.logistic_status = '顾客取镜')
 		<where>
 			<if test="id != null and id != ''"> and m.id = #{id} </if>
-			<if test="name != null and name != ''"> and m.name = #{name} </if>
+			<if test="name != null and name != ''"> and m.name like concat('%', #{name},'%') </if>
 			<if test="departNumber != null and departNumber != ''"> and m.depart_number = #{departNumber} </if>
 			<if test="companyid !=null and companyid != ''">and FIND_IN_SET(m.company_id,#{companyid})</if>
 			<if test="cardNumber != null and cardNumber != ''"> and m.card_number like concat('%', #{cardNumber},'%') </if>

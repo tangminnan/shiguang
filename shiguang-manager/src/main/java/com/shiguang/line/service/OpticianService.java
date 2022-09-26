@@ -20,4 +20,6 @@ public interface OpticianService {
     int remove(Long id);
 
     int batchRemove(Long[] ids);
+
+    int removeQueue();
 }
