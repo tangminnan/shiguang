@@ -355,6 +355,11 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
+    public StockDO getProduceCodeCount(StockDO stockDO) {
+        return stockDao.getProduceCodeCount(stockDO);
+    }
+
+    @Override
     public StockDO getProduceNum(StockDO stockDO) {
         return stockDao.getProduceNum(stockDO);
     }

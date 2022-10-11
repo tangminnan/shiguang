@@ -1184,7 +1184,6 @@ public class WeiwaiController {
         map.put("saleNumber", saleNumber);
         map.put("danjuNumber", danjuNumber);
         List<WeiwaiDO> weiwaiDOS = weiwaiService.selectWeiwaiOrder(map);
-        model.addAttribute("weiwaiDOS", weiwaiDOS);
         for (WeiwaiDO weiwaiDO : weiwaiDOS) {
             String code = QRCodeUtil.creatRrCode(weiwaiDO.getCode(), 200, 200);
             code = "data:image/png;base64," + code;
@@ -1194,6 +1193,7 @@ public class WeiwaiController {
         if (companyId==null){
             companyId="";
         }
+        model.addAttribute("weiwaiDOS", weiwaiDOS);
         if (companyId.equals(3)||companyId.equals("3")){
             return "/stock/weiwai/codeJN";
         }else {
@@ -1207,7 +1207,6 @@ public class WeiwaiController {
         map.put("danjuNumber", danjuNumber);
         map.put("codeOne", codeOne);
         List<WeiwaiDO> weiwaiDOS = weiwaiService.selectWeiwaiOrder(map);
-        model.addAttribute("weiwaiDOS", weiwaiDOS);
         for (WeiwaiDO weiwaiDO : weiwaiDOS) {
             String code = QRCodeUtil.creatRrCode(weiwaiDO.getCode(), 200, 200);
             code = "data:image/png;base64," + code;
@@ -1217,6 +1216,7 @@ public class WeiwaiController {
         if (companyId==null){
             companyId="";
         }
+        model.addAttribute("weiwaiDOS", weiwaiDOS);
         if (companyId.equals(3)||companyId.equals("3")){
             return "/stock/weiwai/codeOneJN";
         }else {

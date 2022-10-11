@@ -1789,7 +1789,6 @@ public class StockController {
         }else if (goodsType==6){
             orderDOS = orderService.gettyjCode(map);
         }
-        model.addAttribute("orderDOS", orderDOS);
         for (OrderDO orderDO1 : orderDOS){
             String code = QRCodeUtil.creatRrCode(orderDO1.getGoodsCode(), 200,200);
             code = "data:image/png;base64," + code;
@@ -1800,6 +1799,7 @@ public class StockController {
         if (companyId==null){
             companyId="";
         }
+        model.addAttribute("orderDOS", orderDOS);
         if (companyId.equals(3)||companyId.equals("3")){
             return "/stock/stock/codeJingjiaJN";
         }else {
@@ -1815,7 +1815,6 @@ public class StockController {
         Map<String, Object> map = new HashMap<>();
         map.put("danjuNumber",danjuNumber);
         List<OrderDO> orderDOS = orderService.getCode(map);
-        model.addAttribute("orderDOS", orderDOS);
         for (OrderDO orderDO1 : orderDOS){
             String code = QRCodeUtil.creatRrCode(orderDO1.getGoodsCode(), 200,200);
             code = "data:image/png;base64," + code;
@@ -1826,6 +1825,7 @@ public class StockController {
         if (companyId==null){
             companyId="";
         }
+        model.addAttribute("orderDOS", orderDOS);
         if (companyId.equals(3)||companyId.equals("3")){
             return "/stock/stock/codeJN";
         }else {
@@ -1847,7 +1847,6 @@ public class StockController {
         }else if (goodsType==6){
             orderDOS = orderService.gettyjCode(map);
         }
-        model.addAttribute("orderDOS", orderDOS);
         for (OrderDO orderDO1 : orderDOS){
             String code = QRCodeUtil.creatRrCode(orderDO1.getGoodsCode(), 200,200);
             code = "data:image/png;base64," + code;
@@ -1858,6 +1857,7 @@ public class StockController {
         if (companyId==null){
             companyId="";
         }
+        model.addAttribute("orderDOS", orderDOS);
         if (companyId.equals(3)||companyId.equals("3")){
             return "/stock/stock/codeJingjiaOneJN";
         }else {
@@ -1872,7 +1872,6 @@ public class StockController {
         map.put("danjuNumber",danjuNumber);
         map.put("codeOne",codeOne);
         List<OrderDO> orderDOS = orderService.getCode(map);
-        model.addAttribute("orderDOS", orderDOS);
         for (OrderDO orderDO1 : orderDOS){
             String code = QRCodeUtil.creatRrCode(orderDO1.getGoodsCode(), 200,200);
             code = "data:image/png;base64," + code;
@@ -1883,6 +1882,7 @@ public class StockController {
         if (companyId==null){
             companyId="";
         }
+        model.addAttribute("orderDOS", orderDOS);
         if (companyId.equals(3)||companyId.equals("3")){
             return "/stock/stock/codeOneJN";
         }else {

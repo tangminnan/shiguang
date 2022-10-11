@@ -128,6 +128,8 @@ public interface StockDao {
     //查询该条码的库存数量
     StockDO getProduceCode(StockDO stockDO);
 
+    StockDO getProduceCodeCount(StockDO stockDO);
+
     //查询该代码的库存数量
     StockDO getProduceNum(StockDO stockDO);
 

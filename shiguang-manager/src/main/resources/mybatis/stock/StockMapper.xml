@@ -261,7 +261,7 @@
         </foreach>
     </delete>
 
-    <!-- 查询该条码的库存数量 -->
+    <!-- 查询该条码的库存数量 盘点用 -->
     <select id="getProduceCode" resultType="com.shiguang.stock.domain.StockDO">
     select `id`,`goodsxinxiid`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`brandname`,`retail_price`,
     `price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_id`,`position_name`,`create_time`,`danju_number`,
@@ -273,6 +273,19 @@
          and `status` = '0' and goods_count > 0
      </where>
 </select>
+
+    <!-- 退款或者删除订单用 -->
+    <select id="getProduceCodeCount" resultType="com.shiguang.stock.domain.StockDO">
+        select `id`,`goodsxinxiid`,`goods_num`,`goods_code`,`goods_name`,`goods_count`,`goods_type`,`mfrsid`,`brandname`,`retail_price`,
+        `price_sum`,`cost_price`,`cost_sum`,`whole_price`,`whole_sum`,`position_id`,`position_name`,`create_time`,`danju_number`,
+        `order_number`,`yundan_number`,`zhidan_people`,`danju_day`,`tuihuo_number`,`factory_number`,`beizhu`,`unit`,
+        `batch`,`zhuce_number`,`produce_day`,`useday`,`classtype`,`factory` ,`status`,`username`,`returnzt` from stock
+        <where>
+            goods_code = #{goodsCode}
+            <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
+            and `status` = '0'
+        </where>
+    </select>
 
     <!-- 查询该代码的库存数量 -->
     <select id="getProduceNum" resultType="com.shiguang.stock.domain.StockDO">

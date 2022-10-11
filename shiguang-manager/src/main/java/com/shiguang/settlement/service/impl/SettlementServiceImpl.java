@@ -119,7 +119,9 @@ public class SettlementServiceImpl implements SettlementService {
 			companyId = ShiroUtils.getUser().getCompanyId();
 			Map<String,Object> map = new HashMap<>();
 			map.put("companyId", companyId);
-			map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+			if ("3".equals(ShiroUtils.getUser().getCompanyId())){
+				map.put("departNumber",ShiroUtils.getUser().getStoreNum());
+			}
 			positionDO = stockService.findPosition(map);
 		}
 		if (null != salesDO){
@@ -138,7 +140,7 @@ public class SettlementServiceImpl implements SettlementService {
 							stockDOs.setPositionId("");
 						}
 						stockDOs.setGoodsCode(goodsStr[i]);
-						StockDO stockDO = stockService.getProduceCode(stockDOs);
+						StockDO stockDO = stockService.getProduceCodeCount(stockDOs);
 						if (null != stockDO){
 							Long countGoods = Long.parseLong(stockDO.getGoodsCount());
 							Long count = countGoods + Long.valueOf(goodsCount[i]);

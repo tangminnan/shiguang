@@ -379,7 +379,7 @@ public class DrawbackServiceImpl implements DrawbackService {
 				StockDO stockDO = new StockDO();
 				stockDO.setPositionId(String.valueOf(positionDO.getPositionId()));
 				stockDO.setGoodsCode(goodsCode[i]);
-				StockDO stockDO1 = stockService.getProduceCode(stockDO);
+				StockDO stockDO1 = stockService.getProduceCodeCount(stockDO);
 				if (null != stockDO1) {
 				int godsCount = Integer.parseInt(stockDO1.getGoodsCount()) + Integer.parseInt(count[i]);
 				stockDO.setGoodsCount(godsCount + "");
