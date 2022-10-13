@@ -17,6 +17,17 @@ public class CrtDO implements Serializable {
     private Long crtId;
     //卡号
     private String cardNumber;
+    //销售单号
+    private String saleNumber;
+
+    public String getSaleNumber() {
+        return saleNumber;
+    }
+
+    public void setSaleNumber(String saleNumber) {
+        this.saleNumber = saleNumber;
+    }
+
     //处方类型
     private String crtPrescriptionType;
     //医生

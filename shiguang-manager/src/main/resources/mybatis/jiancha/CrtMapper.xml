@@ -315,6 +315,7 @@
 	<update id="updatecrt" parameterType="com.shiguang.jiancha.domain.ResultDO">
 		update jc_crt
 		<set>
+			<if test="saleNumber != null">`sale_number` = #{saleNumber},</if>
 			<if test="crtSdbhod != null">`crt_sdbhod` = #{crtSdbhod}, </if>
 			<if test="crtSdbhos != null">`crt_sdbhos` = #{crtSdbhos}, </if>
 			<if test="ctrBcod != null">`ctr_bcod` = #{ctrBcod}, </if>

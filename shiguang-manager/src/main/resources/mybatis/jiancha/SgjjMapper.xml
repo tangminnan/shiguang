@@ -256,6 +256,7 @@
         update jc_sgjj
         <set>
             <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
+			<if test="saleNumber != null">`sale_number` = #{saleNumber},</if>
             <if test="sgjjPrescriptionType != null">`sgjj_prescription_type` = #{sgjjPrescriptionType},</if>
             <if test="sgjjDoctor != null">`sgjj_doctor` = #{sgjjDoctor},</if>
             <if test="sgjjOptometryName != null">`sgjj_optometry_name` = #{sgjjOptometryName},</if>
@@ -292,6 +293,7 @@
 	<update id="updatesgjj" parameterType="com.shiguang.jiancha.domain.SgjjDO">
 		update jc_sgjj
 		<set>
+			<if test="saleNumber != null">`sale_number` = #{saleNumber},</if>
 			<if test="sgjjAddod != null">`sgjj_addod` = #{sgjjAddod},</if>
 			<if test="sgjjAddos != null">`sgjj_addos` = #{sgjjAddos},</if>
 			<if test="sgjjYytjod != null">`sgjj_yytjod` = #{sgjjYytjod},</if>

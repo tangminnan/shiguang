@@ -266,6 +266,7 @@
 	<update id="updatezy" parameterType="com.shiguang.jiancha.domain.ZyDO">
 		update jc_zy
 		<set>
+			<if test="saleNumber != null">`sale_number` = #{saleNumber},</if>
 			<if test="zyPrismod != null">`zy_prismod` = #{zyPrismod}, </if>
 			<if test="zyPrismos != null">`zy_prismos` = #{zyPrismos}, </if>
 			<if test="zyJdod != null">`zy_jdod` = #{zyJdod}, </if>

@@ -288,6 +288,7 @@
 	<update id="update" parameterType="com.shiguang.jiancha.domain.ResultDO">
 		update jc_vst
 		<set>
+			<if test="saleNumber != null">`sale_number` = #{saleNumber},</if>
 			<if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
 			<if test="vstPrescriptionType != null">`vst_prescription_type` = #{vstPrescriptionType}, </if>
 			<if test="vstDoctor != null">`vst_doctor` = #{vstDoctor}, </if>
@@ -332,6 +333,7 @@
 	<update id="updatevst" parameterType="com.shiguang.jiancha.domain.VstDO">
 		update jc_vst
 		<set>
+			<if test="saleNumber != null">`sale_number` = #{saleNumber},</if>
 			<if test="vstSdbhod != null">`vst_sdbhod` = #{vstSdbhod}, </if>
 			<if test="vstSdbhos != null">`vst_sdbhos` = #{vstSdbhos}, </if>
 			<if test="vstFkod != null">`vst_fkod` = #{vstFkod}, </if>

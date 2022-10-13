@@ -833,6 +833,7 @@ public class SalesServiceImpl implements SalesService {
 				kjjyDO.setKjjyTgos(salesDO.getLefttonggaojy());
 				kjjyDO.setKjjyVaod(salesDO.getRightyuanyongVAjy());
 				kjjyDO.setKjjyVaos(salesDO.getLeftyuanyongVAjy());
+				kjjyDO.setSaleNumber(salesDO.getSaleNumber());
 				kjjyService.updatekjjy(kjjyDO);
 			} else if ("远用".equals(salesDO.getRecipelType())) {
 				KjyyDO kjyyDO = new KjyyDO();
@@ -847,6 +848,7 @@ public class SalesServiceImpl implements SalesService {
 				kjyyDO.setKjyyTgos(salesDO.getLefttonggaoyy());
 				kjyyDO.setKjyyVaod(salesDO.getRightyuanyongVAyy());
 				kjyyDO.setKjyyVaos(salesDO.getLeftyuanyongVAyy());
+				kjyyDO.setSaleNumber(salesDO.getSaleNumber());
 				kjyyService.updatekjyy(kjyyDO);
 			} else if ("渐进/双光".equals(salesDO.getRecipelType())) {
 				SgjjDO sgjjDO = new SgjjDO();
@@ -861,6 +863,7 @@ public class SalesServiceImpl implements SalesService {
 				sgjjDO.setSgjjYyvaos(salesDO.getLeftyuanyongVAsg());
 				sgjjDO.setSgjjJyvaod(salesDO.getRightjinyongVAsg());
 				sgjjDO.setSgjjJyvaos(salesDO.getLeftjinyongVAsg());
+				sgjjDO.setSaleNumber(salesDO.getSaleNumber());
 				sgjjService.updatesgjj(sgjjDO);
 			} else if ("中用".equals(salesDO.getRecipelType())) {
 				ZyDO zyDO = new ZyDO();
@@ -875,6 +878,7 @@ public class SalesServiceImpl implements SalesService {
 				zyDO.setZyTgos(salesDO.getLefttonggaozy());
 				zyDO.setZyVaod(salesDO.getRightyuanyongVAzy());
 				zyDO.setZyVaos(salesDO.getLeftyuanyongVAzy());
+				zyDO.setSaleNumber(salesDO.getSaleNumber());
 				zyService.updatezy(zyDO);
 			} else if ("隐形".equals(salesDO.getRecipelType())) {
 				RxjmjcjDO rxjmjcjDO = new RxjmjcjDO();
@@ -883,6 +887,7 @@ public class SalesServiceImpl implements SalesService {
 				rxjmjcjDO.setRxZjos(salesDO.getLeftzhijingyx());
 				rxjmjcjDO.setRxVaod(salesDO.getRightYingXingVAyx());
 				rxjmjcjDO.setRxVaos(salesDO.getLeftYingXingVAyx());
+				rxjmjcjDO.setSaleNumber(salesDO.getSaleNumber());
 				rxjmjcjService.updaterxjmjcj(rxjmjcjDO);
 			}else if ("角膜塑形镜VST".equals(salesDO.getRecipelType())){
 				VstDO vstDO = new VstDO();
@@ -907,6 +912,7 @@ public class SalesServiceImpl implements SalesService {
 				vstDO.setVstEos(salesDO.getLeftVstE());
 				vstDO.setVstVaod(salesDO.getRightVstVA());
 				vstDO.setVstVaos(salesDO.getLeftVstVA());
+				vstDO.setSaleNumber(salesDO.getSaleNumber());
 				vstService.updatevst(vstDO);
 			} else if ("角膜塑形镜CRT".equals(salesDO.getRecipelType())){
 				CrtDO crtDO = new CrtDO();
@@ -929,6 +935,7 @@ public class SalesServiceImpl implements SalesService {
 				crtDO.setCrtDiaos(salesDO.getLeftDIAcrt());
 				crtDO.setCrtVaod(salesDO.getRightVAcrt());
 				crtDO.setCrtVaos(salesDO.getLeftVAcrt());
+				crtDO.setSaleNumber(salesDO.getSaleNumber());
 				crtService.updatecrt(crtDO);
 			}
 		}

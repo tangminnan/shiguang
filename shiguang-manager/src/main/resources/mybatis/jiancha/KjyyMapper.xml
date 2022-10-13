@@ -246,6 +246,7 @@
         update jc_kjyy
         <set>
             <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
+
             <if test="kjyyPrescriptionType != null">`kjyy_prescription_type` = #{kjyyPrescriptionType},</if>
             <if test="kjyyDoctor != null">`kjyy_doctor` = #{kjyyDoctor},</if>
             <if test="kjyyOptometryName != null">`kjyy_optometry_name` = #{kjyyOptometryName},</if>
@@ -280,6 +281,7 @@
     <update id="updatekjyy" parameterType="com.shiguang.jiancha.domain.KjyyDO">
         update jc_kjyy
         <set>
+            <if test="saleNumber != null">`sale_number` = #{saleNumber},</if>
             <if test="kjyyPrismod != null">`kjyy_prismod` = #{kjyyPrismod},</if>
             <if test="kjyyPrismos != null">`kjyy_prismos` = #{kjyyPrismos},</if>
             <if test="kjyyJdod != null">`kjyy_jdod` = #{kjyyJdod},</if>

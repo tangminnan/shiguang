@@ -222,6 +222,7 @@
         update jc_rxjmjcj
         <set>
             <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
+
             <if test="rxPrescriptionType != null">`rx_prescription_type` = #{rxPrescriptionType},</if>
             <if test="rxDoctor != null">`rx_doctor` = #{rxDoctor},</if>
             <if test="rxOptometryName != null">`rx_optometry_name` = #{rxOptometryName},</if>
@@ -254,6 +255,7 @@
         update jc_rxjmjcj
         <set>
             <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
+            <if test="saleNumber != null">`sale_number` = #{saleNumber},</if>
             <if test="rxPrescriptionType != null">`rx_prescription_type` = #{rxPrescriptionType},</if>
             <if test="rxDoctor != null">`rx_doctor` = #{rxDoctor},</if>
             <if test="rxOptometryName != null">`rx_optometry_name` = #{rxOptometryName},</if>

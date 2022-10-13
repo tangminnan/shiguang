@@ -226,6 +226,7 @@
         update jc_rgp
         <set>
             <if test="cardNumber != null">`card_number` = #{cardNumber}, </if>
+			<if test="saleNumber != null">`sale_number` = #{saleNumber},</if>
             <if test="rgpPrescriptionType != null">`rgp_prescription_type` = #{rgpPrescriptionType}, </if>
             <if test="rgpDoctor != null">`rgp_doctor` = #{rgpDoctor}, </if>
             <if test="rgpOptometryName != null">`rgp_optometry_name` = #{rgpOptometryName}, </if>

@@ -65,7 +65,21 @@ public class JKController {
         member.setCrowdType(obj.getString("crowdType"));
         member.setExclusiveCustomer(obj.getString("exclusiveCustomer"));
         member.setExclusiveCustomerId(obj.getLong("exclusiveCustomerId"));
-        member.setIdentityType(obj.getString("identityType"));
+        if(obj.getString("identityType").equals("1")){
+            member.setIdentityType("居民身份证");
+        }else if(obj.getString("identityType").equals("2")){
+            member.setIdentityType("机动车驾驶证");
+        }else if(obj.getString("identityType").equals("3")){
+            member.setIdentityType("台湾居民来往大陆通行证");
+        }else if(obj.getString("identityType").equals("4")){
+            member.setIdentityType("中国人民解放军军人证");
+        }else if(obj.getString("identityType").equals("5")){
+            member.setIdentityType("中国人民武装警察身份证");
+        }else if(obj.getString("identityType").equals("6")){
+            member.setIdentityType("护照");
+        }else if(obj.getString("identityType").equals("7")){
+            member.setIdentityType("户口本");
+        }
         member.setIdentityId(obj.getString("identityId"));
         member.setVocation(obj.getString("vocation"));
         member.setSchool(obj.getString("school"));

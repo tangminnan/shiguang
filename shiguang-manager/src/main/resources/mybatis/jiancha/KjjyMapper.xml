@@ -291,7 +291,8 @@
             <if test="kjjyJykj != null">`kjjy_jykj` = #{kjjyJykj},</if>
             <if test="kjjyKjlx != null">`kjjy_kjlx` = #{kjjyKjlx},</if>
             <if test="kjjyText != null">`kjjy_text` = #{kjjyText},</if>
-            <if test="kjjyBeizhu != null">`kjjy_beizhu` = #{kjjyBeizhu}</if>
+            <if test="kjjyBeizhu != null">`kjjy_beizhu` = #{kjjyBeizhu},</if>
+            <if test="saleNumber != null">`sale_number` = #{saleNumber}</if>
         </set>
         where ptometry_number=#{ptometryNumber}
     </update>

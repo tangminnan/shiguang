@@ -258,6 +258,7 @@
         update jc_sjxl
         <set>
             <if test="cardNumber != null">`card_number` = #{cardNumber},</if>
+            <if test="saleNumber != null">`sale_number` = #{saleNumber},</if>
             <if test="sjxlPrescriptionType != null">`sjxl_prescription_type` = #{sjxlPrescriptionType},</if>
             <if test="sjxlDoctor != null">`sjxl_doctor` = #{sjxlDoctor},</if>
             <if test="sjxlOptometryName != null">`sjxl_optometry_name` = #{sjxlOptometryName},</if>
