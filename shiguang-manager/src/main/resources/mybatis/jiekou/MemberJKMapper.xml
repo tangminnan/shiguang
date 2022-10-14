@@ -20,6 +20,7 @@
 			<if test="phone1 != null and phone1 != ''"> and (m.phone_1 = #{phone1} or m.phone_2 = #{phone1} or m.phone_3 = #{phone1} ) </if>
 			<if test="startTime != null and startTime !=''"> and DATE_FORMAT(m.register_time,'%Y-%m-%d') >= #{startTime} </if>
 			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(m.register_time,'%Y-%m-%d') &lt;= #{endTime} </if>
+			and company_id=1
 		</where>
 	</select>
 

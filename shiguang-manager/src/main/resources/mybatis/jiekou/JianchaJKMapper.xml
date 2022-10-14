@@ -19,84 +19,182 @@
 			   `sgn_ciss`,`sgn_fardot`,`sgn_neardot`,`sgn_farsp1`,`sgn_farsp2`,`sgn_farcz1`,`sgn_farcz2`,`sgn_nearsp1`,`sgn_nearsp2`,`sgn_nearcz1`,`sgn_nearcz2`,
 			   `sgn_vgfarsp1`,`sgn_vgfarsp2`,`sgn_vgnearsp1`,`sgn_vgnearsp2`,`sgn_vgfarcz1`,`sgn_vgfarcz2`,`sgn_vgnearcz1`,`sgn_vgnearcz2`,`sgn_allygytj1`,
 			   `sgn_allygytj2`,`sgn_ac`,`sgn_acway`,`sgn_tjfy`,`sgn_tjfyou`,`sgn_tjfyod`,`sgn_tjfyos`,`sgn_pra`,`sgn_nra`,`sgn_zfsf`,`sphere_right2`,`sphere_left2`,
-			   `cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`,`tjod`,`tjos`,`status`,`litishi`
-		from jc_tryresults
+			   `cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`,`tjod`,`tjos`,jc.`status`,`litishi`
+		from jc_tryresults jc
+		inner join sys_user su on jc.optometry_name=su.name
 		<where>
-			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="cardNumber != null and cardNumber != ''"> and jc.card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and jc.ptometry_number = #{ptometryNumber} </if>
+			<if test="startTime != null and startTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") >= #{startTime} </if>
+			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") &lt;=  #{endTime} </if>
+			and su.company_id=1
 		</where>
 	</select>
 	<select id="KjyyListShuju" resultType="com.shiguang.jiekou.domain.KjyyJKDO">
 		select
-		`kjyy_id`,`card_number`,`sale_number`,`kjyy_prescription_type`,`kjyy_doctor`,`kjyy_optometry_name`,`kjyy_sphod`,`kjyy_sphos`,`kjyy_cylod`,`kjyy_cylos`,`kjyy_axialod`,`kjyy_axialos`,`kjyy_prismod`,`kjyy_prismos`,`kjyy_jdod`,`kjyy_jdos`,`kjyy_yytjod`,`kjyy_yytjos`,`kjyy_tgod`,`kjyy_tgos`,`kjyy_vaod`,`kjyy_vaos`,`kjyy_jpcz`,`kjyy_clfs`,`kjyy_jykj`,`kjyy_kjlx`,`kjyy_text`,`kjyy_beizhu`
-		from jc_kjyy
+		jc.kjyy_id `kjyy_id`,jc.card_number `card_number`,ss.sale_number `sale_number`,jc.kjyy_prescription_type `kjyy_prescription_type`,
+		jc.kjyy_doctor `kjyy_doctor`,jc.kjyy_optometry_name `kjyy_optometry_name`,jc.kjyy_sphod `kjyy_sphod`,jc.kjyy_sphos `kjyy_sphos`,
+		jc.kjyy_cylod `kjyy_cylod`,jc.kjyy_cylos `kjyy_cylos`,jc.kjyy_axialod `kjyy_axialod`,jc.kjyy_axialos `kjyy_axialos`,jc.kjyy_prismod `kjyy_prismod`,
+		jc.kjyy_prismos `kjyy_prismos`,jc.kjyy_jdod `kjyy_jdod`,jc.kjyy_jdos `kjyy_jdos`,jc.kjyy_yytjod `kjyy_yytjod`,jc.kjyy_yytjos `kjyy_yytjos`,
+		jc.kjyy_tgod `kjyy_tgod`,jc.kjyy_tgos `kjyy_tgos`,jc.kjyy_vaod `kjyy_vaod`,jc.kjyy_vaos `kjyy_vaos`,jc.kjyy_jpcz `kjyy_jpcz`,
+		jc.kjyy_clfs `kjyy_clfs`,jc.kjyy_jykj `kjyy_jykj`,jc.kjyy_kjlx `kjyy_kjlx`,jc.kjyy_text `kjyy_text`,jc.kjyy_beizhu `kjyy_beizhu`
+		from jc_kjyy jc
+		inner join store_sales ss on ss.ptometry_number=jc.ptometry_number
+		inner join sys_user su on jc.kjyy_optometry_name=su.name
 		<where>
-			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="cardNumber != null and cardNumber != ''"> and jc.card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and jc.ptometry_number = #{ptometryNumber} </if>
+			<if test="startTime != null and startTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") >= #{startTime} </if>
+			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") &lt;=  #{endTime} </if>
+			and su.company_id=1
 		</where>
 	</select>
 	<select id="KjjyListShuju" resultType="com.shiguang.jiekou.domain.KjjyJKDO">
 		select
-		`kjjy_id`,`card_number`,`sale_number`,`kjjy_prescription_type`,`kjjy_doctor`,`kjjy_optometry_name`,`kjjy_sphod`,`kjjy_sphos`,`kjjy_cylod`,`kjjy_cylos`,`kjjy_axialod`,`kjjy_axialos`,`kjjy_prismod`,`kjjy_prismos`,`kjjy_jdod`,`kjjy_jdos`,`kjjy_yytjod`,`kjjy_yytjos`,`kjjy_tgod`,`kjjy_tgos`,`kjjy_vaod`,`kjjy_vaos`,`kjjy_jpcz`,`kjjy_clfs`,`kjjy_jykj`,`kjjy_kjlx`,`kjjy_text`,`kjjy_beizhu`
-		from jc_kjjy
+		jc.kjjy_id `kjjy_id`,jc.card_number `card_number`,ss.sale_number `sale_number`,jc.kjjy_prescription_type `kjjy_prescription_type`,
+		jc.kjjy_doctor `kjjy_doctor`,jc.kjjy_optometry_name `kjjy_optometry_name`,jc.kjjy_sphod `kjjy_sphod`,jc.kjjy_sphos `kjjy_sphos`,
+		jc.kjjy_cylod `kjjy_cylod`,jc.kjjy_cylos `kjjy_cylos`,jc.kjjy_axialod `kjjy_axialod`,jc.kjjy_axialos `kjjy_axialos`,jc.kjjy_prismod `kjjy_prismod`,
+		jc.kjjy_prismos `kjjy_prismos`,jc.kjjy_jdod `kjjy_jdod`,jc.kjjy_jdos `kjjy_jdos`,jc.kjjy_yytjod `kjjy_yytjod`,jc.kjjy_yytjos `kjjy_yytjos`,
+		jc.kjjy_tgod `kjjy_tgod`,jc.kjjy_tgos `kjjy_tgos`,jc.kjjy_vaod `kjjy_vaod`,jc.kjjy_vaos `kjjy_vaos`,jc.kjjy_jpcz `kjjy_jpcz`,
+		jc.kjjy_clfs `kjjy_clfs`,jc.kjjy_jykj `kjjy_jykj`,jc.kjjy_kjlx `kjjy_kjlx`,jc.kjjy_text `kjjy_text`,jc.kjjy_beizhu `kjjy_beizhu`
+		from jc_kjjy jc
+		inner join store_sales ss on ss.ptometry_number=jc.ptometry_number
+		inner join sys_user su on jc.kjjy_optometry_name=su.name
 		<where>
-			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="cardNumber != null and cardNumber != ''"> and jc.card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and jc.ptometry_number = #{ptometryNumber} </if>
+			<if test="startTime != null and startTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") >= #{startTime} </if>
+			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") &lt;=  #{endTime} </if>
+			and su.company_id=1
 		</where>
 	</select>
 	<select id="SgjjListShuju" resultType="com.shiguang.jiekou.domain.SgjjJKDO">
 		select
-		`sgjj_id`,`card_number`,`sale_number`,`sgjj_prescription_type`,`sgjj_doctor`,`sgjj_optometry_name`,`sgjj_sphod`,`sgjj_sphos`,`sgjj_cylod`,`sgjj_cylos`,`sgjj_axialod`,`sgjj_axialos`,`sgjj_addod`,`sgjj_addos`,`sgjj_yytjod`,`sgjj_yytjos`,`sgjj_jytjod`,`sgjj_jytjos`,`sgjj_tgod`,`sgjj_tgos`,`sgjj_yyvaod`,`sgjj_yyvaos`,`sgjj_jyvaod`,`sgjj_jyvaos`,`sgjj_jpcz`,`sgjj_clfs`,`sgjj_jykj`,`sgjj_kjlx`,`sgjj_text`,`sgjj_beizhu`
-		from jc_sgjj
+		jc.sgjj_id `sgjj_id`,jc.card_number `card_number`,ss.sale_number `sale_number`,jc.sgjj_prescription_type `sgjj_prescription_type`,
+		jc.sgjj_doctor `sgjj_doctor`,jc.sgjj_optometry_name `sgjj_optometry_name`,jc.sgjj_sphod `sgjj_sphod`,jc.sgjj_sphos `sgjj_sphos`,
+		jc.sgjj_cylod `sgjj_cylod`,jc.sgjj_cylos `sgjj_cylos`,jc.sgjj_axialod `sgjj_axialod`,jc.sgjj_axialos `sgjj_axialos`,
+		jc.sgjj_addod `sgjj_addod`,jc.sgjj_addos `sgjj_addos`,jc.sgjj_yytjod `sgjj_yytjod`,jc.sgjj_yytjos `sgjj_yytjos`,jc.sgjj_jytjod `sgjj_jytjod`,
+		jc.sgjj_jytjos `sgjj_jytjos`,jc.sgjj_tgod `sgjj_tgod`,jc.sgjj_tgos `sgjj_tgos`,jc.sgjj_yyvaod `sgjj_yyvaod`,jc.sgjj_yyvaos `sgjj_yyvaos`,
+		jc.sgjj_jyvaod `sgjj_jyvaod`,jc.sgjj_jyvaos `sgjj_jyvaos`,jc.sgjj_jpcz `sgjj_jpcz`,jc.sgjj_clfs `sgjj_clfs`,jc.sgjj_jykj `sgjj_jykj`,
+		jc.sgjj_kjlx `sgjj_kjlx`,jc.sgjj_text `sgjj_text`,jc.sgjj_beizhu `sgjj_beizhu`
+		from jc_sgjj jc
+		inner join store_sales ss on ss.ptometry_number=jc.ptometry_number
+		inner join sys_user su on jc.sgjj_optometry_name=su.name
 		<where>
-			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="cardNumber != null and cardNumber != ''"> and jc.card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and jc.ptometry_number = #{ptometryNumber} </if>
+			<if test="startTime != null and startTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") >= #{startTime} </if>
+			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") &lt;=  #{endTime} </if>
+			and su.company_id=1
 		</where>
 	</select>
 	<select id="RxjmjcjListShuju" resultType="com.shiguang.jiekou.domain.RxjmjcjJKDO">
 		select
-		`rx_id`,`card_number`,`sale_number`,`rx_prescription_type`,`rx_doctor`,`rx_optometry_name`,`rx_bcod`,`rx_bcos`,`rx_sphod`,`rx_sphos`,`rx_cylod`,`rx_cylos`,`rx_axialod`,`rx_axialos`,`rx_zjod`,`rx_zjos`,`rx_vaod`,`rx_vaos`,`rx_syjpod`,`rx_syjpos`,`rx_unitod`,`rx_unitos`,`rx_clfs`,`rx_hlypz`,`rx_beizhu`
-		from jc_rxjmjcj
+		jc.rx_id `rx_id`,jc.card_number `card_number`,ss.sale_number `sale_number`,jc.rx_prescription_type `rx_prescription_type`,
+		jc.rx_doctor `rx_doctor`,jc.rx_optometry_name `rx_optometry_name`,jc.rx_bcod `rx_bcod`,jc.rx_bcos `rx_bcos`,jc.rx_sphod `rx_sphod`,
+		jc.rx_sphos `rx_sphos`,jc.rx_cylod `rx_cylod`,jc.rx_cylos `rx_cylos`,jc.rx_axialod `rx_axialod`,jc.rx_axialos `rx_axialos`,
+		jc.rx_zjod `rx_zjod`,jc.rx_zjos `rx_zjos`,jc.rx_vaod `rx_vaod`,jc.rx_vaos `rx_vaos`,jc.rx_syjpod `rx_syjpod`,jc.rx_syjpos `rx_syjpos`,
+		jc.rx_unitod `rx_unitod`,jc.rx_unitos `rx_unitos`,jc.rx_clfs `rx_clfs`,jc.rx_hlypz `rx_hlypz`,jc.rx_beizhu `rx_beizhu`
+		from jc_rxjmjcj jc
+		inner join store_sales ss on ss.ptometry_number=jc.ptometry_number
+		inner join sys_user su on jc.rx_optometry_name=su.name
 		<where>
-			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="cardNumber != null and cardNumber != ''"> and jc.card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and jc.ptometry_number = #{ptometryNumber} </if>
+			<if test="startTime != null and startTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") >= #{startTime} </if>
+			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") &lt;=  #{endTime} </if>
+			and su.company_id=1
 		</where>
 	</select>
 	<select id="ZyListShuju" resultType="com.shiguang.jiekou.domain.ZyJKDO">
-		select `zy_id`,`card_number`,`sale_number`,`zy_prescription_type`,`zy_doctor`,`zy_optometry_name`,`zy_sphod`,`zy_sphos`,`zy_cylod`,`zy_cylos`,`zy_axialod`,`zy_axialos`,`zy_prismod`,`zy_prismos`,`zy_jdod`,`zy_jdos`,`zy_zytjod`,`zy_zytjos`,`zy_tgod`,`zy_tgos`,`zy_vaod`,`zy_vaos`,`zy_jpcz`,`zy_clfs`,`zy_jyjk`,`zy_jklx`,`zy_text`,`zy_beizhu` from jc_zy
+		select jc.zy_id `zy_id`,jc.card_number `card_number`,ss.sale_number `sale_number`,jc.zy_prescription_type `zy_prescription_type`,
+		jc.zy_doctor `zy_doctor`,jc.zy_optometry_name `zy_optometry_name`,jc.zy_sphod `zy_sphod`,jc.zy_sphos `zy_sphos`,jc.zy_cylod `zy_cylod`,
+		jc.zy_cylos `zy_cylos`,jc.zy_axialod `zy_axialod`,jc.zy_axialos `zy_axialos`,jc.zy_prismod `zy_prismod`,jc.zy_prismos `zy_prismos`,
+		jc.zy_jdod `zy_jdod`,jc.zy_jdos `zy_jdos`,jc.zy_zytjod `zy_zytjod`,jc.zy_zytjos `zy_zytjos`,jc.zy_tgod `zy_tgod`,jc.zy_tgos `zy_tgos`,
+		jc.zy_vaod `zy_vaod`,jc.zy_vaos `zy_vaos`,jc.zy_jpcz `zy_jpcz`,jc.zy_clfs `zy_clfs`,jc.zy_jyjk `zy_jyjk`,jc.zy_jklx `zy_jklx`,jc.zy_text `zy_text`,jc.zy_beizhu `zy_beizhu`
+		from jc_zy  jc
+		inner join store_sales ss on ss.ptometry_number=jc.ptometry_number
+		inner join sys_user su on jc.zy_optometry_name=su.name
 		<where>
-			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="cardNumber != null and cardNumber != ''"> and jc.card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and jc.ptometry_number = #{ptometryNumber} </if>
+			<if test="startTime != null and startTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") >= #{startTime} </if>
+			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") &lt;=  #{endTime} </if>
+			and su.company_id=1
 		</where>
 	</select>
 	<select id="SjxlListShuju" resultType="com.shiguang.jiekou.domain.SjxlJKDO">
 		select
-		`sjxl_id`,`card_number`,`sale_number`,`sjxl_prescription_type`,`sjxl_doctor`,`sjxl_optometry_name`,`sjxl_sphod`,`sjxl_sphos`,`sjxl_cylod`,`sjxl_cylos`,`sjxl_axialod`,`sjxl_axialos`,`sjxl_sljod`,`sjxl_sljos`,`sjxl_jdod`,`sjxl_jdos`,`sjxl_yytjod`,`sjxl_yytjos`,`sjxl_jytjod`,`sjxl_jytjos`,`sjxl_tgod`,`sjxl_tgos`,`sjxl_yyvaod`,`sjxl_yyvaos`,`sjxl_jyvaod`,`sjxl_jyvaos`,`sjxl_jtxl`,`sjxl_xlsxl`,`sjxl_beizhu`
-		from jc_sjxl
+		jc.sjxl_id `sjxl_id`,jc.card_number `card_number`,ss.sale_number `sale_number`,jc.sjxl_prescription_type `sjxl_prescription_type`,
+		jc.sjxl_doctor `sjxl_doctor`,jc.sjxl_optometry_name `sjxl_optometry_name`,jc.sjxl_sphod `sjxl_sphod`,jc.sjxl_sphos `sjxl_sphos`,
+		jc.sjxl_cylod `sjxl_cylod`,jc.sjxl_cylos `sjxl_cylos`,jc.sjxl_axialod `sjxl_axialod`,jc.sjxl_axialos `sjxl_axialos`,jc.sjxl_sljod `sjxl_sljod`,
+		jc.sjxl_sljos `sjxl_sljos`,jc.sjxl_jdod `sjxl_jdod`,jc.sjxl_jdos `sjxl_jdos`,jc.sjxl_yytjod `sjxl_yytjod`,jc.sjxl_yytjos `sjxl_yytjos`,jc.sjxl_jytjod `sjxl_jytjod`,
+		jc.sjxl_jytjos `sjxl_jytjos`,jc.sjxl_tgod `sjxl_tgod`,jc.sjxl_tgos `sjxl_tgos`,jc.sjxl_yyvaod `sjxl_yyvaod`,jc.sjxl_yyvaos `sjxl_yyvaos`,
+		jc.sjxl_jyvaod `sjxl_jyvaod`,jc.sjxl_jyvaos `sjxl_jyvaos`,jc.sjxl_jtxl `sjxl_jtxl`,jc.sjxl_xlsxl `sjxl_xlsxl`,jc.sjxl_beizhu `sjxl_beizhu`
+		from jc_sjxl jc
+		inner join store_sales ss on ss.ptometry_number=jc.ptometry_number
+		inner join sys_user su on jc.sjxl_optometry_name=su.name
 		<where>
-			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="cardNumber != null and cardNumber != ''"> and jc.card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and jc.ptometry_number = #{ptometryNumber} </if>
+			<if test="startTime != null and startTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") >= #{startTime} </if>
+			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") &lt;=  #{endTime} </if>
+			and su.company_id=1
 		</where>
 	</select>
 	<select id="VstListShuju" resultType="com.shiguang.jiekou.domain.VstJKDO">
-		select `vst_id`,`card_number`,`vst_prescription_type`,`vst_doctor`,`vst_optometry_name`,`vst_sdbhod`,`vst_sdbhos`,`vst_fkod`,`vst_fkos`,`vst_qlbjod`,`vst_qlbjos`,`vst_acod`,`vst_acos`,`vst_jfod`,`vst_jfos`,`vst_diaod`,`vst_diaos`,`vst_bcod`,`vst_bcos`,`vst_cpclyod`,`vst_cpclyos`,`vst_eod`,`vst_eos`,`vst_vaod`,`vst_vaos`,`vst_jpysod`,`vst_jpysos`,`vst_syjpod`,`vst_syjpos`,`vst_beizhu`,`ptometry_number`,`status`,`vst_sphod`,`vst_sphos`,`vst_cylod`,`vst_cylos`,`vst_axialod`,`vst_axialos` from jc_vst
+		select jc.vst_id `vst_id`,jc.card_number `card_number`,jc.vst_prescription_type `vst_prescription_type`,jc.vst_doctor `vst_doctor`,
+		jc.vst_optometry_name `vst_optometry_name`,jc.vst_sdbhod `vst_sdbhod`,jc.vst_sdbhos `vst_sdbhos`,jc.vst_fkod `vst_fkod`,jc.vst_fkos `vst_fkos`,
+		jc.vst_qlbjod `vst_qlbjod`,jc.vst_qlbjos `vst_qlbjos`,jc.vst_acod `vst_acod`,jc.vst_acos `vst_acos`,jc.vst_jfod `vst_jfod`,jc.vst_jfos `vst_jfos`,
+		jc.vst_diaod `vst_diaod`,jc.vst_diaos `vst_diaos`,jc.vst_bcod `vst_bcod`,jc.vst_bcos `vst_bcos`,jc.vst_cpclyod `vst_cpclyod`,jc.vst_cpclyos `vst_cpclyos`,
+		jc.vst_eod `vst_eod`,jc.vst_eos `vst_eos`,jc.vst_vaod `vst_vaod`,jc.vst_vaos `vst_vaos`,jc.vst_jpysod `vst_jpysod`,jc.vst_jpysos `vst_jpysos`,
+		jc.vst_syjpod `vst_syjpod`,jc.vst_syjpos `vst_syjpos`,jc.vst_beizhu `vst_beizhu`,jc.ptometry_number `ptometry_number`,jc.status `status`,jc.vst_sphod `vst_sphod`,
+		jc.vst_sphos `vst_sphos`,jc.vst_cylod `vst_cylod`,jc.vst_cylos `vst_cylos`,jc.vst_axialod `vst_axialod`,jc.vst_axialos `vst_axialos`
+		from jc_vst jc
+		inner join store_sales ss on ss.ptometry_number=jc.ptometry_number
+		inner join sys_user su on jc.vst_optometry_name=su.name
 		<where>
-			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="cardNumber != null and cardNumber != ''"> and jc.card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and jc.ptometry_number = #{ptometryNumber} </if>
+			<if test="startTime != null and startTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") >= #{startTime} </if>
+			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") &lt;=  #{endTime} </if>
+			and su.company_id=1
 		</where>
 	</select>
 	<select id="CrtListShuju" resultType="com.shiguang.jiekou.domain.CrtJKDO">
-		select `crt_id`,`card_number`,`crt_prescription_type`,`crt_doctor`,`crt_optometry_name`,`crt_sdbhod`,`crt_sdbhos`,`ctr_bcod`,`crt_bcos`,`crt_rzdod`,`crt_rzdos`,`crt_lzaod`,`crt_lzaos`,`crt_rzd2od`,`crt_rzd2os`,`crt_lza2od`,`crt_lza2os`,`crt_jfod`,`crt_jfos`,`crt_diaod`,`crt_diaos`,`crt_vaod`,`crt_vaos`,`crt_jpysod`,`crt_jpysos`,`crt_syjpod`,`crt_syjpos`,`crt_beizhu`,`ptometry_number`,`status`,`crt_sphod`,`crt_sphos`,`crt_cylod`,`crt_cylos`,`crt_axialod`,`crt_axialos` from jc_crt
+		select jc. `crt_id`,jc.card_number `card_number`,jc.crt_prescription_type `crt_prescription_type`,jc.crt_doctor `crt_doctor`,ss.sale_number `sale_number`,
+		jc.crt_optometry_name `crt_optometry_name`,jc.crt_sdbhod `crt_sdbhod`,jc.crt_sdbhos `crt_sdbhos`,jc.ctr_bcod `ctr_bcod`,jc.crt_bcos `crt_bcos`,
+		jc.crt_rzdod `crt_rzdod`,jc.crt_rzdos `crt_rzdos`,jc.crt_lzaod `crt_lzaod`,jc.crt_lzaos `crt_lzaos`,jc.crt_rzd2od `crt_rzd2od`,
+		jc.crt_rzd2os `crt_rzd2os`,jc.crt_lza2od `crt_lza2od`,jc.crt_lza2os `crt_lza2os`,jc.crt_jfod `crt_jfod`,jc.crt_jfos `crt_jfos`,
+		jc.crt_diaod `crt_diaod`,jc.crt_diaos `crt_diaos`,jc.crt_vaod `crt_vaod`,jc.crt_vaos `crt_vaos`,jc.crt_jpysod `crt_jpysod`,jc.crt_jpysos `crt_jpysos`,
+		jc.crt_syjpod `crt_syjpod`,jc.crt_syjpos `crt_syjpos`,jc.crt_beizhu `crt_beizhu`,jc.ptometry_number `ptometry_number`,jc.status `status`,jc.crt_sphod `crt_sphod`,
+		jc.crt_sphos `crt_sphos`,jc.crt_cylod `crt_cylod`,jc.crt_cylos `crt_cylos`,jc.crt_axialod `crt_axialod`,jc.crt_axialos `crt_axialos`
+		from jc_crt jc
+		inner join store_sales ss on ss.ptometry_number=jc.ptometry_number
+		inner join sys_user su on jc.crt_optometry_name=su.name
 		<where>
-			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="cardNumber != null and cardNumber != ''"> and jc.card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and jc.ptometry_number = #{ptometryNumber} </if>
+			<if test="startTime != null and startTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") >= #{startTime} </if>
+			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") &lt;=  #{endTime} </if>
+			and su.company_id=1
 		</where>
 	</select>
 	<select id="RgpListShuju" resultType="com.shiguang.jiekou.domain.RgpJKDO">
-		select `rgp_id`,`card_number`,`rgp_prescription_type`,`rgp_doctor`,`rgp_optometry_name`,`rgp_qgdod`,`rgp_qgdos`,`rgp_bcod`,`rgp_bcos`,`rgp_diaod`,`rgp_diaos`,`rgp_sgod`,`rgp_sgos`,`rgp_jpysod`,`rgp_jpysos`,`rgp_tssjod`,`rgp_tssjos`,`rgp_syjpod`,`rgp_syjpos`,`rgp_beizhu`,`ptometry_number`,`status`,`rgp_sphod`,`rgp_sphos`,`rgp_cylod`,`rgp_cylos`,`rgp_axialod`,`rgp_axialos` from jc_rgp
+		select jc.rgp_id `rgp_id`,jc.card_number `card_number`,jc.rgp_prescription_type `rgp_prescription_type`,jc.rgp_doctor `rgp_doctor`,ss.sale_number `sale_number`,
+		jc.rgp_optometry_name `rgp_optometry_name`,jc.rgp_qgdod `rgp_qgdod`,jc.rgp_qgdos `rgp_qgdos`,jc.rgp_bcod `rgp_bcod`,jc.rgp_bcos `rgp_bcos`,
+		jc.rgp_diaod `rgp_diaod`,jc.rgp_diaos `rgp_diaos`,jc.rgp_sgod `rgp_sgod`,jc.rgp_sgos `rgp_sgos`,jc.rgp_jpysod `rgp_jpysod`,jc.rgp_jpysos `rgp_jpysos`,
+		jc.rgp_tssjod `rgp_tssjod`,jc.rgp_tssjos `rgp_tssjos`,jc.rgp_syjpod `rgp_syjpod`,jc.rgp_syjpos `rgp_syjpos`,jc.rgp_beizhu `rgp_beizhu`,
+		jc.ptometry_number `ptometry_number`,jc.status `status`,jc.rgp_sphod `rgp_sphod`,jc.rgp_sphos `rgp_sphos`,jc.rgp_cylod `rgp_cylod`,jc.rgp_cylos `rgp_cylos`,
+		jc.rgp_axialod `rgp_axialod`,jc.rgp_axialos `rgp_axialos` from jc_rgp jc
+		inner join store_sales ss on ss.ptometry_number=jc.ptometry_number
+		inner join sys_user su on jc.rgp_optometry_name=su.name
 		<where>
-			<if test="cardNumber != null and cardNumber != ''"> and card_number = #{cardNumber} </if>
-			<if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
+			<if test="cardNumber != null and cardNumber != ''"> and jc.card_number = #{cardNumber} </if>
+			<if test="ptometryNumber != null and ptometryNumber != ''"> and jc.ptometry_number = #{ptometryNumber} </if>
+			<if test="startTime != null and startTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") >= #{startTime} </if>
+			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(jc.create_time, "%Y-%m-%d") &lt;=  #{endTime} </if>
+			and su.company_id=1
 		</where>
 	</select>
 

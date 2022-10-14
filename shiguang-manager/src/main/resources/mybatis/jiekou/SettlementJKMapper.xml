@@ -11,6 +11,7 @@
 			<if test="saleNumber != null and saleNumber != ''"> and se.sale_number = #{saleNumber} </if>
 			<if test="startTime != null and startTime !=''"> and DATE_FORMAT(se.settle_date,'%Y-%m-%d') >= #{startTime} </if>
 			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(se.settle_date,'%Y-%m-%d') &lt;= #{endTime} </if>
+			and sto.company_id=1
 		</where>
 	</select>
 

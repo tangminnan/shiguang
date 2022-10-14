@@ -180,18 +180,23 @@ public class JKController {
     public Map<String,Object> detailMemberHis(@RequestBody JSONObject obj){
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         Map<String,Object> map=new HashMap<>();
-        MemberJKDO MemberJKDO = memberJkService.getCardNumber(obj.getString("cardNumber"));
-
-        String birthdayDayString=MemberJKDO.getBirthdayYear()+"-"+MemberJKDO.getBirthdayMonth()+"-"+MemberJKDO.getBirthdayDay();
-        Date birthdayDay = new Date();
-        try {
-            birthdayDay=sdf.parse(birthdayDayString);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        String cardNumber=obj.getString("cardNumber");
+        if(cardNumber.equals("")){
+            map.put("error_code",1);
+            map.put("date","卡号不能为空");
+        }else{
+            MemberJKDO MemberJKDO = memberJkService.getCardNumber(cardNumber);
+            String birthdayDayString=MemberJKDO.getBirthdayYear()+"-"+MemberJKDO.getBirthdayMonth()+"-"+MemberJKDO.getBirthdayDay();
+            Date birthdayDay = new Date();
+            try {
+                birthdayDay=sdf.parse(birthdayDayString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            MemberJKDO.setBirthday(birthdayDay);
+            map.put("error_code",0);
+            map.put("date",MemberJKDO);
         }
-        MemberJKDO.setBirthday(birthdayDay);
-        map.put("error_code",0);
-        map.put("date",MemberJKDO);
         return map;
     }
 
@@ -202,8 +207,12 @@ public class JKController {
         Map<String,Object> map1=new HashMap<>();
         String cardNumber=obj.getString("cardNumber");
         String ptometryNumber=obj.getString("ptometryNumber");
+        String startTime=obj.getString("startTime");
+        String endTime=obj.getString("endTime");
         map1.put("cardNumber",cardNumber);
         map1.put("ptometryNumber",ptometryNumber);
+        map1.put("startTime",startTime);
+        map1.put("endTime",endTime);
         List<TryresultJKDO> tryresultsDOList = jianchaJKService.yanguangListShuju(map1);
         map.put("error_code",0);
         map.put("date",tryresultsDOList);
@@ -217,8 +226,12 @@ public class JKController {
         Map<String,Object> map1=new HashMap<>();
         String cardNumber=obj.getString("cardNumber");
         String ptometryNumber=obj.getString("ptometryNumber");
+        String startTime=obj.getString("startTime");
+        String endTime=obj.getString("endTime");
         map1.put("cardNumber",cardNumber);
         map1.put("ptometryNumber",ptometryNumber);
+        map1.put("startTime",startTime);
+        map1.put("endTime",endTime);
         List<KjyyJKDO> KjyyJKDOList = jianchaJKService.KjyyListShuju(map1);
         List<KjjyJKDO> KjjyJKDOList = jianchaJKService.KjjyListShuju(map1);
         List<SgjjJKDO> SgjjJKDOList = jianchaJKService.SgjjListShuju(map1);
