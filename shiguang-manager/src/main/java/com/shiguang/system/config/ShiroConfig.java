@@ -85,6 +85,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/informationJK/optometryNew/**", "anon");
         filterChainDefinitionMap.put("/informationJK/optometryline/**", "anon");
         filterChainDefinitionMap.put("/informationJK/settlement/**", "anon");
+        filterChainDefinitionMap.put("/informationJK/shaicha/**", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/blog", "anon");

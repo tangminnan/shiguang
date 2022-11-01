@@ -1,5 +1,6 @@
 package com.shiguang.jiekou.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.shiguang.common.utils.GuuidUtil;
 import com.shiguang.jiekou.domain.*;
@@ -7,11 +8,16 @@ import com.shiguang.jiekou.service.JianchaJKService;
 import com.shiguang.jiekou.service.MemberJKService;
 import com.shiguang.jiekou.service.SettlementJKService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,7 +40,8 @@ public class JKController {
     private JianchaJKService jianchaJKService;
     @Autowired
     private SettlementJKService settlementJKService;
-
+    @Autowired
+    private RestTemplate restTemplate;
 
     @ResponseBody
     @PostMapping("/member/savehis")
@@ -308,5 +315,25 @@ public class JKController {
         return map;
     }
 
+    @ResponseBody
+    @PostMapping("/shaicha/getshaicha")
+    public Map<String,Object> getshaicha(@RequestBody JSONObject obj){
+        HttpHeaders httpHeadersR = new HttpHeaders();
+        Map<String,Object> map=new HashMap<>();
+        Map<String,Object> data=new HashMap<>();
+        String startTime=obj.getString("startTime");
+        String endTime=obj.getString("endTime");
+        data.put("startTime",startTime);
+        data.put("endTime",endTime);
+
+        httpHeadersR.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        HttpEntity<Map<String, Object>> entityR = new HttpEntity<>(data, httpHeadersR);
+        ResponseEntity<String> responseEntityR = restTemplate.postForEntity("http://http://124.71.227.53:8081/jiekou/getshaicha", entityR, String.class);
+        String responseR = responseEntityR.getBody();
+        List<Map<String,Object>> AllData = JSON.parseObject(responseR, List.class);
+        map.put("data",AllData);
+        map.put("error_code",0);
+        return map;
+    }
 
 }
