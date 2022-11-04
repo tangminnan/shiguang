@@ -268,18 +268,29 @@ public class JKController {
     public Map<String,Object> lineHis(@RequestBody JSONObject obj){
         Map<String,Object> map=new HashMap<>();
         YgLineJKDO ygLineJKDO=new YgLineJKDO();
-        ygLineJKDO.setMemberName(obj.getString("memberName"));
-        ygLineJKDO.setMemberNumber(obj.getString("cardNumber"));
-        ygLineJKDO.setSex(obj.getLong("sex"));
-        ygLineJKDO.setCallStatus("0");
-        ygLineJKDO.setLineTime(new Date());
-        int lineJKSave=jianchaJKService.lineJKSave(ygLineJKDO);
-        if (lineJKSave>0){
-            map.put("msg","排队成功");
-            map.put("code",0);
-        }else{
+        String memberName=obj.getString("memberName");
+        String cardNumber=obj.getString("cardNumber");
+        Long sex=obj.getLong("sex");
+        String consultRoom=obj.getString("consultRoom");
+        if(memberName.equals("")||cardNumber.equals("")||consultRoom.equals("")||sex==null){
             map.put("msg","排队失败");
             map.put("code",1);
+        }else{
+            ygLineJKDO.setMemberName(memberName);
+            ygLineJKDO.setMemberNumber(cardNumber);
+            ygLineJKDO.setSex(sex);
+            ygLineJKDO.setConsultRoom(consultRoom);
+            ygLineJKDO.setCallStatus("0");
+            ygLineJKDO.setCompanyId("1");
+            ygLineJKDO.setLineTime(new Date());
+            int lineJKSave=jianchaJKService.lineJKSave(ygLineJKDO);
+            if (lineJKSave>0){
+                map.put("msg","排队成功");
+                map.put("code",0);
+            }else{
+                map.put("msg","排队失败");
+                map.put("code",1);
+            }
         }
         return map;
     }
@@ -328,7 +339,7 @@ public class JKController {
 
         httpHeadersR.setContentType(MediaType.APPLICATION_JSON_UTF8);
         HttpEntity<Map<String, Object>> entityR = new HttpEntity<>(data, httpHeadersR);
-        ResponseEntity<String> responseEntityR = restTemplate.postForEntity("http://http://124.71.227.53:8081/jiekou/getshaicha", entityR, String.class);
+        ResponseEntity<String> responseEntityR = restTemplate.postForEntity("http://124.71.227.53:8081/jiekou/getshaicha", entityR, String.class);
         String responseR = responseEntityR.getBody();
         List<Map<String,Object>> AllData = JSON.parseObject(responseR, List.class);
         map.put("data",AllData);
