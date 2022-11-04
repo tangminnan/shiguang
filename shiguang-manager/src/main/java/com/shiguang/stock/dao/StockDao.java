@@ -137,6 +137,7 @@ public interface StockDao {
     int updateGoodsCount(StockDO stockDO);
 
     StockDO haveNum(StockDO stockDO);
+    StockDO haveCountNum(StockDO stockDO);
     List<StockDO> kccxList(Map<String, Object> map);
     int countall(Map<String, Object> map);
     int kccxListCount(Map<String, Object> map);

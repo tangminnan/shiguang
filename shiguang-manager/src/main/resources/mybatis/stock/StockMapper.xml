@@ -380,6 +380,7 @@
             <if test="goodsCount != null and goodsCount != ''">and st.goods_count = #{goodsCount}</if>
             <if test="goodsType != null and goodsType != ''">and st.goods_type = #{goodsType}</if>
             <if test="mfrsid != null and mfrsid != ''">and st.mfrsid = #{mfrsid}</if>
+            <if test="brandName != null and brandName != ''">and st.brandname = #{brandName}</if>
             <if test="retailPriceStart != null and retailPriceStart != ''">and ABS(st.retail_price) >= ABS(#{retailPriceStart})</if>
             <if test="retailPriceEnd != null and retailPriceEnd != ''">and ABS(st.retail_price) &lt;= ABS(#{retailPriceEnd})</if>
             <if test="priceSum != null and priceSum != ''">and st.price_sum = #{priceSum}</if>
@@ -2196,7 +2197,21 @@
         order by id
     </select>
 
-
+    <select id="haveCountNum" resultType="com.shiguang.stock.domain.StockDO">
+        select  * from stock
+        <where>
+            <if test="goodsNum != null and goodsNum != ''">and goods_num = #{goodsNum}</if>
+            <if test="goodsCode != null and goodsCode != ''">and goods_code = #{goodsCode}</if>
+            <if test="positionName != null and positionName != ''">and position_name = #{positionName}</if>
+            <if test="positionId != null and positionId != ''">and position_id = #{positionId}</if>
+            <!--<if test="mfrsid != null and mfrsid != ''">and mfrsid = #{mfrsid}</if>-->
+            <!--<if test="brandname != null and brandname != ''">and brandname = #{brandname}</if>-->
+            <if test="useday != null and useday != ''">and useday = #{useday}</if>
+            <if test="batch != null and batch != ''">and batch = #{batch}</if>
+            and goods_count > 0
+        </where>
+        order by id
+    </select>
 
     <select id="kccxList" resultType="com.shiguang.stock.domain.StockDO">
     SELECT

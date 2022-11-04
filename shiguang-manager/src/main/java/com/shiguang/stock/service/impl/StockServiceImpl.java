@@ -370,6 +370,11 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
+    public StockDO haveCountNum(StockDO stockDO) {
+        return stockDao.haveCountNum(stockDO);
+    }
+
+    @Override
     public List<StockDO> kccxList(Map<String, Object> map) {
         return stockDao.kccxList(map);
     }

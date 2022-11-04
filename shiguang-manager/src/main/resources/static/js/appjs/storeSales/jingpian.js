@@ -46,6 +46,7 @@ function load() {
                                 goodsName:$('#goodsName').val(),
                                 goodsCode:$("#goodsCode").val(),
                                 goodsNum:$('#goodsNum').val(),
+                                brandName:$("#brandName").val(),
                                 jingpianType:$("#jingpianType").val(),
                                 rightYuanYongQJ:$("#rightYuanYongQJ").val(),
                                 rightYuanYongZJ:$("#rightYuanYongZJ").val(),
@@ -262,6 +263,7 @@ function batchSelect() {
     var jp = "";
     var rowsRight = window.localStorage.getItem("rowsRight");
     var rowsLeft = window.localStorage.getItem("rowsLeft");
+    alert(JSON.stringify(rows));
     if ('0' == jingpianType){
         window.localStorage.setItem("rowsRight",JSON.stringify(rows))
         if ('1' == dzType) {
@@ -271,6 +273,7 @@ function batchSelect() {
             rightflag = 1;
             jp = 1;
             $("#jingpianType").find("[value="+jp+"]").attr("selected",true);
+            $("#brandName").val(rows[0].brandname);
             reLoad();
         }
     } else if ('1' == jingpianType){
@@ -279,6 +282,7 @@ function batchSelect() {
             leftflag = 1;
             jp = 0;
             $("#jingpianType").find("[value="+jp+"]").attr("selected",true);
+            $("#brandName").val(rows[0].brandname);
             reLoad();
         }
 

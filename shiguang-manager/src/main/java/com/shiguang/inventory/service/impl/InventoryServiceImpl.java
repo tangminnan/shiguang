@@ -159,13 +159,15 @@ public class InventoryServiceImpl implements InventoryService {
 				for (StockDO s:stockDOList){
 					listGode.add(s.getGoodsCode());
 				}
-				if (stockDOList.size() >= list.size()){
-					for (int i=0;i<stockDOList.size();i++){
-						if(!listGode.contains(list.get(i))){
-							stockDOS.add(stockDOList.get(i));
-						}
-					}
-				} else if (stockDOList.size() < list.size()){
+//				if (stockDOList.size() >= list.size()){
+//					for (int i=0;i<stockDOList.size();i++){
+//						if (i < list.size()){
+//							if(!listGode.contains(list.get(i))){
+//								stockDOS.add(list.get(i));
+//							}
+//						}
+//					}
+//				} else if (stockDOList.size() < list.size()){
 					int num =0;
 					for (int i=0;i<list.size();i++){
 						if(!listGode.contains(list.get(i))){
@@ -174,7 +176,7 @@ public class InventoryServiceImpl implements InventoryService {
 							} else if(num == 100000){
 								num =0;
 								num =num +1;
-								procode=list.get(i);
+								//procode=list.get(i);
 							}
 							Map<String,Object> mapInfo = new HashMap<>();
 							StockDO stockDOfg = new StockDO();
@@ -186,25 +188,34 @@ public class InventoryServiceImpl implements InventoryService {
 								stockDao.updateStockCCount(stockDO);
 							} else {
 								if (i==list.size()-1){
-									num = num+1;
+									num = 1;
 									mapInfo.put("producCode",procode.substring(0,18));
 									stockDO = stockSave(mapInfo,num,inventoryType,procode,inventoryPosition);
-									num = 100000;
 									stockDOS.add(stockDO);
+									if (!procode.equals(list.get(i))){
+										mapInfo.put("producCode",list.get(i).substring(0,18));
+										stockDO = stockSave(mapInfo,num,inventoryType,list.get(i),inventoryPosition);
+										stockDOS.add(stockDO);
+									}
+									break;
 								}
 								if (procode.equals(list.get(i))){
 									num = num +1;
 								} else {
 									mapInfo.put("producCode",procode.substring(0,18));
 									stockDO = stockSave(mapInfo,num,inventoryType,procode,inventoryPosition);
-									num = 100000;
 									stockDOS.add(stockDO);
+									procode = list.get(i);
+									//mapInfo.put("producCode",list.get(i).substring(0,18));
+									//stockDO = stockSave(mapInfo,num,inventoryType,procode,inventoryPosition);
+									//stockDOS.add(stockDO);
+									num = 100000;
 								}
 
 							}
 						}
 					}
-				}
+//				}
 				goodsCode = list.get(0);
 					for (int i=0;i<list.size();i++){
 						Map<String,Object> map = new HashMap<>();
@@ -236,6 +247,9 @@ public class InventoryServiceImpl implements InventoryService {
 								billDO.setBookNum(stockDO.getGoodsCount());
 								billDO.setActualNum(String.valueOf(count));
 								billDO.setInventoryId(inventoryId);
+								if (count == 0){
+									count=1;
+								}
 								if (count == Integer.parseInt(stockDO.getGoodsCount())){
 									billDO.setSurplus("0");
 									gain = "无盘盈";
@@ -307,35 +321,35 @@ public class InventoryServiceImpl implements InventoryService {
 							goodsCode = list.get(i);
 						}
 					}
-					for (StockDO stockDO : stockDOS){
-						BillDO billDO = new BillDO();
-						billDO.setGoodsNum(stockDO.getGoodsNum());
-						billDO.setGoodsCode(stockDO.getGoodsCode());
-						billDO.setGoodsId(String.valueOf(stockDO.getGoodsxinxiid()));
-						billDO.setGoodsName(stockDO.getGoodsName());
-						if (null != stockDO.getUseday()){
-							billDO.setGoodsTime(stockDO.getUseday());
-						} else {
-							billDO.setGoodsTime("");
-						}
-						if (null != stockDO.getBatch()){
-							billDO.setGoodsBatch(stockDO.getBatch());
-						} else {
-							billDO.setGoodsBatch("");
-						}
-						billDO.setUnitname(stockDO.getUnit());
-						billDO.setFactory(stockDO.getFactory());
-						billDO.setBookNum("0");
-						billDO.setActualNum(stockDO.getGoodsCount());
-						billDO.setInventoryId(inventoryId);
-						//surplus = Integer.parseInt(stockDO.getGoodsCount()) - count;
-						billDO.setSurplus(stockDO.getGoodsCount());
-						billDO.setInventoryType("0");
-						loss = "0";
-						billDao.save(billDO);
-						stockDao.save(stockDO);
-						billDOList.add(billDO);
-					}
+//					for (StockDO stockDO : stockDOS){
+//						BillDO billDO = new BillDO();
+//						billDO.setGoodsNum(stockDO.getGoodsNum());
+//						billDO.setGoodsCode(stockDO.getGoodsCode());
+//						billDO.setGoodsId(String.valueOf(stockDO.getGoodsxinxiid()));
+//						billDO.setGoodsName(stockDO.getGoodsName());
+//						if (null != stockDO.getUseday()){
+//							billDO.setGoodsTime(stockDO.getUseday());
+//						} else {
+//							billDO.setGoodsTime("");
+//						}
+//						if (null != stockDO.getBatch()){
+//							billDO.setGoodsBatch(stockDO.getBatch());
+//						} else {
+//							billDO.setGoodsBatch("");
+//						}
+//						billDO.setUnitname(stockDO.getUnit());
+//						billDO.setFactory(stockDO.getFactory());
+//						billDO.setBookNum("0");
+//						billDO.setActualNum(stockDO.getGoodsCount());
+//						billDO.setInventoryId(inventoryId);
+//						//surplus = Integer.parseInt(stockDO.getGoodsCount()) - count;
+//						billDO.setSurplus(stockDO.getGoodsCount());
+//						billDO.setInventoryType("0");
+//						loss = "0";
+//						billDao.save(billDO);
+//						stockDao.save(stockDO);
+//						billDOList.add(billDO);
+//					}
 
 			} catch (Exception e) {
 				System.out.println("文件读取错误!");

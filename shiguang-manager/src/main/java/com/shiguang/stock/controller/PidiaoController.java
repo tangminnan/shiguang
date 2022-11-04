@@ -20,6 +20,7 @@ import com.shiguang.stock.service.StockService;
 import com.shiguang.stock.service.StocklogService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -302,6 +303,7 @@ public class PidiaoController {
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("stock:pidiao:add")
+    @Transactional
     public R save(PidiaoDO pidiao, StockDO stockDO, Model model) {
         String[] usecounts = pidiao.getUseCount().split(",");
         String[] num = pidiao.getGoodsNum().split(",");
@@ -477,7 +479,7 @@ public class PidiaoController {
             stockDOjiankucun.setGoodsCode(goodsCode);
             stockDOjiankucun.setMfrsid(mfrsid);
             stockDOjiankucun.setBrandname(brandname);
-            StockDO jianJJGoodsList = stockService.haveNum(stockDOjiankucun);
+            StockDO jianJJGoodsList = stockService.haveCountNum(stockDOjiankucun);
             if (null != jianJJGoodsList) {
                 String gdcount = jianJJGoodsList.getGoodsCount();
                 Integer goodsCountNew = Integer.valueOf(useCount);
@@ -630,6 +632,7 @@ public class PidiaoController {
 
     @ResponseBody
     @RequestMapping(value = "/updateStatus")
+    @Transactional
     public R updateEnable(String pidiaoNumber, String status, String username, StockDO stockDO) {
         Map<String, Object> map = new HashMap<>();
         map.put("pidiaoNumber", pidiaoNumber);

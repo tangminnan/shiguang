@@ -750,6 +750,9 @@ public class StoreSalesController {
         if (null != params.get("goodsName") && !"".equals(params.get("goodsName"))){
             maps.put("goodsName",params.get("goodsName"));
         }
+        if (null != params.get("brandName") && !"".equals(params.get("brandName"))){
+            maps.put("brandName",params.get("brandName"));
+        }
         if (null != params.get("goodsNum") && !"".equals(params.get("goodsNum"))){
             maps.put("goodsNum",params.get("goodsNum"));
         }
