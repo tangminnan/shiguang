@@ -199,13 +199,13 @@
 	</select>
 
 	<insert id="lineJKSave" parameterType="com.shiguang.jiekou.domain.YgLineJKDO" useGeneratedKeys="true" keyProperty="id">
-		insert into member
+		insert into ygline
 		(
 			`member_number`,
 			`call_status`,
 			`member_name`,
 			`sex`,
-			`line_time`
+			`line_time`,`company_id`,`consult_room`
 		)
 		values
 		(
@@ -213,7 +213,7 @@
 			#{callStatus},
 			#{memberName},
 			#{sex},
-			#{lineTime}
+			#{lineTime},#{companyId},#{consultRoom}
 		)
 	</insert>
 
