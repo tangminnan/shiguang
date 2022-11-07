@@ -438,6 +438,16 @@
 		</where>
 	</select>
 
+	<select id="gettyjCode" resultType="com.shiguang.stock.domain.PidiaoDO">
+		select pd.goods_name,pd.goods_code,pd.goods_count,pd.factory,pd.money as retail_price,p.produc_factorycolor,p.view_good_name
+		from stock_pidiao pd
+		left join  aa_tyj p on o.goods_num=p.produc_num
+		<where>
+			<if test="danjuNumber != null and danjuNumber != ''">and pd.danju_number = #{danjuNumber}</if>
+			<if test="codeOne != null and codeOne != ''">and pd.goods_code = #{codeOne}</if>
+		</where>
+	</select>
+
 	<select id="haveOrderNum" resultType="com.shiguang.stock.domain.PidiaoDO">
 		select * FROM stock_pidiao
 		<where>

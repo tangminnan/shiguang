@@ -181,12 +181,15 @@ function load() {
                                         // alert(row.status+"status");
                                         // alert(row.returnzt+"returnzt");
                                         // alert(row.flags+"flags");
+                                        console.log(row);
                                         if(row.status =="0" || row.returnzt=="0" ){
                                             var e = '<span class="btn btn-primary btn-sm '+'" href="#" mce_href="#" title="详情" onclick="detials(\''
                                                 + row.id
                                                 + '\')">详情</span> ';
                                             var a='';
                                             var d ='';
+                                            var n = '<span class="btn btn-warning btn-sm"  href="#" title="条码"  mce_href="#" onclick="code(\''
+                                                + row.goods+" ','"+ row.pidiaoNumber + '\')">条码</span> ';
                                             // var s ='';
                                             // alert("详情")
                                         }else if (row.status == "1" || row.returnzt=="1") {
@@ -217,7 +220,7 @@ function load() {
                                             // alert("空")
                                         }
 
-										return e + a + d;
+										return e + a + d +n;
 									}
 								} ]
 					});
@@ -251,6 +254,14 @@ function edit(id) {
 		content : prefix + '/edit/' + id // iframe的url
 	});
     layer.full(toIndex);
+}
+function code(goodsType,danjuNumber){
+    if (goodsType==1 || goodsType==6){
+        window.open("/stock/pidiao/codeJingjia?danjuNumber="+danjuNumber + "&goodsType=" + goodsType);
+    } else {
+        window.open("/stock/pidiao/code?danjuNumber="+danjuNumber);
+    }
+
 }
 function detials(id) {
     // alert("详情")

@@ -839,6 +839,60 @@ public class PidiaoController {
         }
     }
 
+    @GetMapping("/code")
+    public String code(String danjuNumber, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("pidiaoNumber",danjuNumber);
+        List<PidiaoDO> pidiaoDOS = pidiaoService.getCode(map);
+        for (PidiaoDO pidiaoDO : pidiaoDOS){
+            String code = QRCodeUtil.creatRrCode(pidiaoDO.getGoodsCode(), 200,200);
+            code = "data:image/png;base64," + code;
+            pidiaoDO.setQRCode(code);
+        }
+        //———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if (companyId==null){
+            companyId="";
+        }
+        model.addAttribute("pidiaoDOS", pidiaoDOS);
+        if (companyId.equals(3)||companyId.equals("3")){
+            return "/stock/pidiao/codeJN";
+        }else {
+            return "/stock/pidiao/code";
+
+        }
+
+    }
+
+    @GetMapping("/codeJingjia")
+    public String codeJingjia(String danjuNumber,Integer goodsType, Model model) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("pidiaoNumber",danjuNumber);
+        List<PidiaoDO> pidiaoDOS=null;
+        if (goodsType==1){
+            pidiaoDOS = pidiaoService.getCode(map);
+        }else if (goodsType==6){
+            pidiaoDOS = pidiaoService.gettyjCode(map);
+        }
+        for (PidiaoDO pidiaoDO : pidiaoDOS){
+            String code = QRCodeUtil.creatRrCode(pidiaoDO.getGoodsCode(), 200,200);
+            code = "data:image/png;base64," + code;
+            pidiaoDO.setQRCode(code);
+        }
+//———获取当前登录用户的公司id————
+        String companyId=ShiroUtils.getUser().getCompanyId();
+        if (companyId==null){
+            companyId="";
+        }
+        model.addAttribute("pidiaoDOS", pidiaoDOS);
+        if (companyId.equals(3)||companyId.equals("3")){
+            return "/stock/pidiao/codeJingjiaJN";
+        }else {
+            return "/stock/pidiao/codeJingjia";
+
+        }
+
+    }
 
     @GetMapping("/barcode/{outPosition}")
     String barcode(@PathVariable("outPosition") String outPosition,

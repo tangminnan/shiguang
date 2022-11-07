@@ -119,6 +119,11 @@ public class PidiaoServiceImpl implements PidiaoService {
 	}
 
 	@Override
+	public List<PidiaoDO> gettyjCode(Map<String, Object> map) {
+		return pidiaoDao.gettyjCode(map);
+	}
+
+	@Override
 	public List<PidiaoDO> haveOrderNum(Map<String, Object> map) {
 		return pidiaoDao.haveOrderNum(map);
 	}

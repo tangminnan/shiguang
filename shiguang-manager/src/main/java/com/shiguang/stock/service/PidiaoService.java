@@ -54,6 +54,8 @@ public interface PidiaoService {
 
 	List<PidiaoDO> getCode(Map<String, Object> map);
 
+	List<PidiaoDO> gettyjCode(Map<String, Object> map);
+
 	List<PidiaoDO> haveOrderNum(Map<String, Object> map);
 
 
