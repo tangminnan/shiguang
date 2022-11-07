@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface MemberJKService {
-    MemberJKDO getCardNumber(String cardNumber);
+    List<MemberJKDO> getCardNumber(Map<String,Object> map1);
 
     List<MemberJKDO> list(Map<String, Object> map);
 

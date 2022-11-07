@@ -16,8 +16,8 @@ public class MemberJKServiceImpl implements MemberJKService {
     private MemberJKDao memberJKDao;
 
     @Override
-    public MemberJKDO getCardNumber(String cardNumber){
-        return memberJKDao.getCardNumber(cardNumber);
+    public List<MemberJKDO> getCardNumber(Map<String,Object> map1){
+        return memberJKDao.getCardNumber(map1);
     }
 
     @Override

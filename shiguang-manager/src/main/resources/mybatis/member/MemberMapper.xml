@@ -66,6 +66,8 @@
             <if test="state != null and state != ''"> and m.state = #{state} </if>
             <if test="agestart != null and agestart !=''"> and m.age >= #{agestart} </if>
             <if test="ageend != null and ageend != ''"> and m.age &lt;= #{ageend} </if>
+            <if test="startTime != null and startTime != ''"> and date_format(m.register_time ,'%Y-%m-%d') >= #{startTime} </if>
+            <if test="endTime != null and endTime != ''"> and date_format(m.register_time ,'%Y-%m-%d') &lt;= #{endTime} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

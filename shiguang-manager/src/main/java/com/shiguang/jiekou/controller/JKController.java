@@ -145,16 +145,16 @@ public class JKController {
         map1.put("phone1",obj.getString("phone1"));
         map1.put("startTime",obj.getString("startTime"));
         map1.put("endTime",obj.getString("endTime"));
-        if(obj.getLong("offset")==null){
-            map1.put("offset",0);
-        }else {
-            map1.put("offset",obj.getLong("offset"));
-        }
-        if(obj.getLong("limit")==null){
-            map1.put("limit",10);
-        }else {
-            map1.put("limit",obj.getLong("limit"));
-        }
+//        if(obj.getLong("offset")==null){
+//            map1.put("offset",0);
+//        }else {
+//            map1.put("offset",obj.getLong("offset"));
+//        }
+//        if(obj.getLong("limit")==null){
+//            map1.put("limit",1000);
+//        }else {
+//            map1.put("limit",obj.getLong("limit"));
+//        }
 
         List<MemberJKDO> MemberJKDOS = memberJkService.list(map1);
         List<Map> list= new ArrayList<>();
@@ -167,9 +167,11 @@ public class JKController {
             map2.put("companyId",mem.getCompanyId());
             map2.put("age",mem.getAge());
             map2.put("phone1",mem.getPhone1());
+            map2.put("registerTime",mem.getRegisterTime());
             String birthdayDayString=mem.getBirthdayYear()+"-"+mem.getBirthdayMonth()+"-"+mem.getBirthdayDay();
             Date birthday = new Date();
             try {
+                if(mem.getBirthdayYear()!=null&&mem.getBirthdayMonth()!=null&&mem.getBirthdayDay()!=null)
                 birthday=sdf.parse(birthdayDayString);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -187,23 +189,28 @@ public class JKController {
     public Map<String,Object> detailMemberHis(@RequestBody JSONObject obj){
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         Map<String,Object> map=new HashMap<>();
-        String cardNumber=obj.getString("cardNumber");
-        if(cardNumber.equals("")){
-            map.put("error_code",1);
-            map.put("date","卡号不能为空");
-        }else{
-            MemberJKDO MemberJKDO = memberJkService.getCardNumber(cardNumber);
-            String birthdayDayString=MemberJKDO.getBirthdayYear()+"-"+MemberJKDO.getBirthdayMonth()+"-"+MemberJKDO.getBirthdayDay();
+        Map<String,Object> map1=new HashMap<>();
+        map1.put("cardNumber",obj.getString("cardNumber"));
+        map1.put("name",obj.getString("name"));
+        map1.put("phone1",obj.getString("phone1"));
+        map1.put("startTime",obj.getString("startTime"));
+        map1.put("endTime",obj.getString("endTime"));
+
+        List<MemberJKDO> MemberJKDOs = memberJkService.getCardNumber(map1);
+        for(MemberJKDO memberJKDO:MemberJKDOs){
+            String birthdayDayString=memberJKDO.getBirthdayYear()+"-"+memberJKDO.getBirthdayMonth()+"-"+memberJKDO.getBirthdayDay();
             Date birthdayDay = new Date();
             try {
+                if(memberJKDO.getBirthdayYear()!=null&&memberJKDO.getBirthdayMonth()!=null&&memberJKDO.getBirthdayDay()!=null)
                 birthdayDay=sdf.parse(birthdayDayString);
+                memberJKDO.setBirthday(birthdayDay);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            MemberJKDO.setBirthday(birthdayDay);
-            map.put("error_code",0);
-            map.put("date",MemberJKDO);
         }
+        map.put("error_code",0);
+        map.put("date",MemberJKDOs);
+
         return map;
     }
 

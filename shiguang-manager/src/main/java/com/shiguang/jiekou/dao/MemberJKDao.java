@@ -11,7 +11,7 @@ import java.util.Map;
 @Repository("MemberJKDao")
 public interface MemberJKDao {
 
-    MemberJKDO getCardNumber(String cardNumber);
+    List<MemberJKDO> getCardNumber(Map<String,Object> map1);
 
     List<MemberJKDO> list(Map<String,Object> map);
 
