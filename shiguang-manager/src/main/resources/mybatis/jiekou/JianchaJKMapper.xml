@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shiguang.jiekou.dao.JianchaJKDao">
+	<select id="getygRoom" resultType="String">
+		select room from optician where DATE_FORMAT(create_time, "%Y-%m-%d") = #{value}
+	</select>
+
     <select id="yanguangListShuju" resultType="com.shiguang.jiekou.domain.TryresultJKDO">
 		select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,`chief_complaint`,`sphere_righttry`,
 			   `sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,`axial_lefttry`,`dva_righttry`,`dva_lefttry`,`nva_righttry`,`nva_lefttry`,
@@ -214,6 +218,25 @@
 			#{memberName},
 			#{sex},
 			#{lineTime},#{companyId},#{consultRoom}
+		)
+	</insert>
+
+	<insert id="lineJKSaveOld" parameterType="com.shiguang.jiekou.domain.YgLineJKDO" useGeneratedKeys="true" keyProperty="id">
+		insert into yglineold
+		(
+			`member_number`,
+			`call_status`,
+			`member_name`,
+			`sex`,
+			`line_time`,`consult_room`
+		)
+		values
+		(
+			#{memberNumber},
+			#{callStatus},
+			#{memberName},
+			#{sex},
+			#{lineTime},#{consultRoom}
 		)
 	</insert>
 

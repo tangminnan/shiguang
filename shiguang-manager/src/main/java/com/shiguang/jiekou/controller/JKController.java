@@ -273,24 +273,57 @@ public class JKController {
     @ResponseBody
     @PostMapping("/optometryline/lineHis")
     public Map<String,Object> lineHis(@RequestBody JSONObject obj){
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         Map<String,Object> map=new HashMap<>();
         YgLineJKDO ygLineJKDO=new YgLineJKDO();
         String memberName=obj.getString("memberName");
         String cardNumber=obj.getString("cardNumber");
         Long sex=obj.getLong("sex");
-        String consultRoom=obj.getString("consultRoom");
-        if(memberName.equals("")||cardNumber.equals("")||consultRoom.equals("")||sex==null){
+        List<String> ygRooms=jianchaJKService.getygRoom(sdf.format(new Date()));
+        int num=(int)(Math.random()*ygRooms.size());
+        System.out.println(num);
+        if(memberName.equals("")||cardNumber.equals("")||sex==null){
             map.put("msg","排队失败");
             map.put("code",1);
         }else{
             ygLineJKDO.setMemberName(memberName);
             ygLineJKDO.setMemberNumber(cardNumber);
             ygLineJKDO.setSex(sex);
-            ygLineJKDO.setConsultRoom(consultRoom);
+            ygLineJKDO.setConsultRoom(ygRooms.get(num));
             ygLineJKDO.setCallStatus("0");
             ygLineJKDO.setCompanyId("1");
             ygLineJKDO.setLineTime(new Date());
             int lineJKSave=jianchaJKService.lineJKSave(ygLineJKDO);
+            if (lineJKSave>0){
+                map.put("msg","排队成功");
+                map.put("code",0);
+            }else{
+                map.put("msg","排队失败");
+                map.put("code",1);
+            }
+        }
+        return map;
+    }
+
+    @ResponseBody
+    @PostMapping("/optometryline/lineHisOld")
+    public Map<String,Object> lineHisOld(@RequestBody JSONObject obj){
+        Map<String,Object> map=new HashMap<>();
+        YgLineJKDO ygLineJKDO=new YgLineJKDO();
+        String memberName=obj.getString("memberName");
+        String cardNumber=obj.getString("cardNumber");
+        Long sex=obj.getLong("sex");
+        if(memberName.equals("")||cardNumber.equals("")||sex==null){
+            map.put("msg","排队失败");
+            map.put("code",1);
+        }else{
+            ygLineJKDO.setMemberName(memberName);
+            ygLineJKDO.setMemberNumber(cardNumber);
+            ygLineJKDO.setSex(sex);
+            ygLineJKDO.setCallStatus("0");
+            ygLineJKDO.setCompanyId("1");
+            ygLineJKDO.setLineTime(new Date());
+            int lineJKSave=jianchaJKService.lineJKSaveOld(ygLineJKDO);
             if (lineJKSave>0){
                 map.put("msg","排队成功");
                 map.put("code",0);

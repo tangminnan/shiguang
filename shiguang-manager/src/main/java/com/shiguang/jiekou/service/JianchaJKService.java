@@ -37,4 +37,8 @@ public interface JianchaJKService {
     int lineJKSave(YgLineJKDO ygLineJKDO);
 
     List<lastResultJKDO> getYanguangLast(String cardNumber);
+
+    int lineJKSaveOld(YgLineJKDO ygLineJKDO);
+
+    List<String> getygRoom(String format);
 }

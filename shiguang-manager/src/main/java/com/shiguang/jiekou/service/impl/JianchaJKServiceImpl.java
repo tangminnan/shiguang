@@ -76,4 +76,14 @@ public class JianchaJKServiceImpl implements JianchaJKService {
         return jianchaJKDao.getYanguangLast(cardNumber);
     }
 
+    @Override
+    public int lineJKSaveOld(YgLineJKDO ygLineJKDO) {
+        return jianchaJKDao.lineJKSaveOld(ygLineJKDO);
+    }
+
+    @Override
+    public List<String> getygRoom(String format) {
+        return jianchaJKDao.getygRoom(format);
+    }
+
 }
