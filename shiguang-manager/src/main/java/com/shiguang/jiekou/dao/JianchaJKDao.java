@@ -42,4 +42,6 @@ public interface JianchaJKDao {
     int lineJKSaveOld(YgLineJKDO ygLineJKDO);
 
     List<String> getygRoom(String format);
+
+    int getRoomNUM(Map<String, Object> tiaojian);
 }

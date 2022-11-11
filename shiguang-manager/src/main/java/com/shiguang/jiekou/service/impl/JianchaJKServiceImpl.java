@@ -86,4 +86,9 @@ public class JianchaJKServiceImpl implements JianchaJKService {
         return jianchaJKDao.getygRoom(format);
     }
 
+    @Override
+    public int getRoomNUM(Map<String, Object> tiaojian) {
+        return jianchaJKDao.getRoomNUM(tiaojian);
+    }
+
 }

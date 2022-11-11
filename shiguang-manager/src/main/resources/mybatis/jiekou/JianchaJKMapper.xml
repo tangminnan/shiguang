@@ -6,6 +6,14 @@
 		select room from optician where DATE_FORMAT(create_time, "%Y-%m-%d") = #{value}
 	</select>
 
+	<select id="getRoomNUM" resultType="int">
+		select count(*) from ygline
+		<where>
+			<if test="date != null and date != ''"> and DATE_FORMAT(line_time, "%Y-%m-%d") = #{date}</if>
+			<if test="ygRoom != null and ygRoom != ''"> and consult_room = #{ygRoom}</if>
+		</where>
+	</select>
+
     <select id="yanguangListShuju" resultType="com.shiguang.jiekou.domain.TryresultJKDO">
 		select `id`,`card_number`,`ptometry_number`,`optometry_name`,`create_time`,`referral_doctor`,`referral`,`chief_complaint`,`sphere_righttry`,
 			   `sphere_lefttry`,`cylinder_righttry`,`cylinder_lefttry`,`axial_righttry`,`axial_lefttry`,`dva_righttry`,`dva_lefttry`,`nva_righttry`,`nva_lefttry`,
