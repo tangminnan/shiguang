@@ -275,13 +275,23 @@ public class JKController {
     public Map<String,Object> lineHis(@RequestBody JSONObject obj){
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         Map<String,Object> map=new HashMap<>();
+        Map<String,Object> tiaojian=new HashMap<>();
+        tiaojian.put("date",sdf.format(new Date()));
         YgLineJKDO ygLineJKDO=new YgLineJKDO();
         String memberName=obj.getString("memberName");
         String cardNumber=obj.getString("cardNumber");
         Long sex=obj.getLong("sex");
         List<String> ygRooms=jianchaJKService.getygRoom(sdf.format(new Date()));
-        int num=(int)(Math.random()*ygRooms.size());
-        System.out.println(num);
+        String yyygRoom="";
+        int num=10000;
+        for(String ygRoom:ygRooms){
+            tiaojian.put("ygRoom",ygRoom);
+            int roomNum=jianchaJKService.getRoomNUM(tiaojian);
+            if(roomNum<num){
+                num=roomNum;
+                yyygRoom=ygRoom;
+            }
+        }
         if(memberName.equals("")||cardNumber.equals("")||sex==null){
             map.put("msg","排队失败");
             map.put("code",1);
@@ -289,7 +299,7 @@ public class JKController {
             ygLineJKDO.setMemberName(memberName);
             ygLineJKDO.setMemberNumber(cardNumber);
             ygLineJKDO.setSex(sex);
-            ygLineJKDO.setConsultRoom(ygRooms.get(num));
+            ygLineJKDO.setConsultRoom(yyygRoom);
             ygLineJKDO.setCallStatus("0");
             ygLineJKDO.setCompanyId("1");
             ygLineJKDO.setLineTime(new Date());
