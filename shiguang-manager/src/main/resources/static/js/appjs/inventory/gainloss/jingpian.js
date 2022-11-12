@@ -34,7 +34,9 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
                                 goodsType:$("#goodsType").val(),
-                                dzType:$("#dzType").val()
+                                dzType:$("#dzType").val(),
+                                producNum:$("#producNum").val(),
+                                producName:$("#producName").val(),
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
