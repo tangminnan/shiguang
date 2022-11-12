@@ -24,6 +24,7 @@
 		<where>
 			<if test="name != null and name != ''"> and m.`name` like concat('%', #{name},'%') </if>
 			<if test="cardsNumber != null and cardsNumber != ''"> and m.card_number = #{cardsNumber} </if>
+			<if test="identityId != null and identityId != ''"> and m.identity_id = #{identityId} </if>
 			<if test="phone1 != null and phone1 != ''"> and (m.phone_1 = #{phone1} or m.phone_2 = #{phone1} or m.phone_3 = #{phone1} ) </if>
 			<if test="startTime != null and startTime !=''"> and DATE_FORMAT(m.register_time,'%Y-%m-%d') >= #{startTime} </if>
 			<if test="endTime != null and endTime != ''"> and DATE_FORMAT(m.register_time,'%Y-%m-%d') &lt;= #{endTime} </if>

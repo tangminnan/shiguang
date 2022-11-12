@@ -120,9 +120,10 @@ public class JKController {
 
         Map<String, Object> map1 = new HashMap<>();
         map1.put("cardsNumber",member.getCardNumber());
+        map1.put("identityId",member.getIdentityId());
         List<MemberJKDO> list = memberJkService.list(map1);
         if (list.size() > 0){
-            map.put("msg","会员卡号已存在");
+            map.put("msg","会员已存在");
             map.put("code",1);
         }else if(memberJkService.save(member)>0){
             map.put("msg","保存数据成功");
