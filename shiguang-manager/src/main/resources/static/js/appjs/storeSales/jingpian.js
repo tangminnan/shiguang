@@ -263,7 +263,6 @@ function batchSelect() {
     var jp = "";
     var rowsRight = window.localStorage.getItem("rowsRight");
     var rowsLeft = window.localStorage.getItem("rowsLeft");
-    alert(JSON.stringify(rows));
     if ('0' == jingpianType){
         window.localStorage.setItem("rowsRight",JSON.stringify(rows))
         if ('1' == dzType) {
