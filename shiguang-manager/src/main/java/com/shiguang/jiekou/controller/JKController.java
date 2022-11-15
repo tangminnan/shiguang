@@ -102,6 +102,9 @@ public class JKController {
         member.setStatus(obj.getLong("status"));
         member.setState(obj.getLong("state"));
 
+        member.setDepartNumber("01");
+        member.setMemberOption(Long.valueOf("0"));
+
         Date birthdayDay=obj.getDate("birthdayDay");
         if(birthdayDay!=null){
             SimpleDateFormat sdfYear=new SimpleDateFormat("yyyy");
@@ -109,12 +112,12 @@ public class JKController {
             member.setBirthdayYear(Long.valueOf(sdfYearString));
 
             SimpleDateFormat sdfMonth=new SimpleDateFormat("MM");
-            String sdfMonthString=sdfYear.format(sdfMonth);
-            member.setBirthdayYear(Long.valueOf(sdfMonthString));
+            String sdfMonthString=sdfMonth.format(birthdayDay);
+            member.setBirthdayMonth(Long.valueOf(sdfMonthString));
 
             SimpleDateFormat sdfDay=new SimpleDateFormat("dd");
-            String sdfDayString=sdfYear.format(sdfDay);
-            member.setBirthdayYear(Long.valueOf(sdfDayString));
+            String sdfDayString=sdfDay.format(birthdayDay);
+            member.setBirthdayDay(Long.valueOf(sdfDayString));
         }
 
 
