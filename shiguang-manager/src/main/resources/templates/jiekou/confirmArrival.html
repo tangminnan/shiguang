@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="ibox">
+                <div class="ibox-body">
+                    <div class="fixed-table-toolbar">
+
+                        <form class="form-horizontal m-t" style="width: 80%;margin:0px auto" id="signupForm">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"></label>
+                                <div class="col-sm-8">
+                                    <label th:each="line:${lines}" class="checkbox-inline">
+                                        <input name="role" type="radio" th:value="${line.memberNum}"
+                                               th:text="${line.memberName}">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div >
+                                    <button type="submit" style="display:block;margin:0px auto" class="btn btn-primary" onclick="tijiao()">确认到场</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    function tijiao() {
+        var liner=$("input[name='role']:checked").val();;
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url : "/informationJK/member/updateLine",
+            data : {
+                'liner' : liner
+            },// 你的formid
+            async : false,
+            error : function(request) {
+                parent.layer.alert("Connection error");
+            },
+            success : function(data) {
+                if (data.code == 0) {
+                    parent.layer.msg("操作成功");
+                    location.reload();
+                } else {
+                    parent.layer.alert(data.msg)
+                }
+
+            }
+        });
+    }
+</script>
+</body>
+</html>

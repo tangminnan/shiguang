@@ -3,6 +3,7 @@ package com.shiguang.jiekou.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.shiguang.common.utils.GuuidUtil;
+import com.shiguang.common.utils.R;
 import com.shiguang.jiekou.domain.*;
 import com.shiguang.jiekou.service.JianchaJKService;
 import com.shiguang.jiekou.service.MemberJKService;
@@ -13,10 +14,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
@@ -122,7 +121,7 @@ public class JKController {
 
 
         Map<String, Object> map1 = new HashMap<>();
-        map1.put("cardsNumber",member.getCardNumber());
+//        map1.put("cardsNumber",member.getCardNumber());
         map1.put("identityId",member.getIdentityId());
         map1.put("name",member.getName());
         List<MemberJKDO> list = memberJkService.list(map1);
@@ -305,7 +304,7 @@ public class JKController {
             ygLineJKDO.setMemberNumber(cardNumber);
             ygLineJKDO.setSex(sex);
             ygLineJKDO.setConsultRoom(yyygRoom);
-            ygLineJKDO.setCallStatus("0");
+            ygLineJKDO.setCallStatus("5");
             ygLineJKDO.setCompanyId("1");
             ygLineJKDO.setLineTime(new Date());
             int lineJKSave=jianchaJKService.lineJKSave(ygLineJKDO);
@@ -400,6 +399,32 @@ public class JKController {
         map.put("data",AllData);
         map.put("error_code",0);
         return map;
+    }
+
+    /**
+     * 综合验光室排队确认到场
+     * @param
+     * @return
+     */
+    @GetMapping("/member/confirmArrival")
+    public String confirmArrival(Model model){
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        String now=sdf.format(new Date());
+        List<Map> lines=memberJkService.getLine(now);
+        model.addAttribute("lines",lines);
+        return "jiekou/confirmArrival";
+    }
+
+    /**
+     * 综合验光室排队确认到场更新
+     * @param
+     * @return
+     */
+    @PostMapping("/member/updateLine")
+    @ResponseBody
+    public R updateLine(String liner){
+        memberJkService.updateLine(liner);
+        return R.ok();
     }
 
 }

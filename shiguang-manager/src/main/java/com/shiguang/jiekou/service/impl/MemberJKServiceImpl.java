@@ -35,5 +35,15 @@ public class MemberJKServiceImpl implements MemberJKService {
         return memberJKDao.update(member);
     }
 
+    @Override
+    public List<Map> getLine(String now) {
+        return memberJKDao.getLine(now);
+    }
+
+    @Override
+    public void updateLine(String liner) {
+        memberJKDao.updateLine(liner);
+    }
+
 
 }

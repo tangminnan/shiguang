@@ -3,6 +3,10 @@
 
 <mapper namespace="com.shiguang.jiekou.dao.MemberJKDao">
 
+	<select id="getLine" resultType="Map">
+		select id,company_id,member_number memberNum,member_name memberName,sex,consult_room,line_time from ygline where call_status=5 and DATE_FORMAT(line_time, "%Y-%m-%d") = #{value}
+	</select>
+
 	<select id="getCardNumber" resultType="com.shiguang.jiekou.domain.MemberJKDO">
 		select `id`,`name`,`member_option`,`card_number`,`sex`,`depart_number`,`company_id`,`birthday_year`,`birthday_month`,`birthday_day`,`age`,`phone_1`,`phone_2`,`phone_3`,`province_code`,`province_name`,`city_code`,`city_name`,`area_code`,`area_name`,`card_type`,`master_card`,`minor_name`,`crowd_type`,`exclusive_customer`,`exclusive_customer_id`,`identity_type`,`identity_id`,`vocation`,`school`,`qq_number`,`email`,`address`,`postal_code`,`interest`,`source`,`integral_pasd`,`remark`,`register_time`,`integral`,`status`,`state` from member
 		<where>
@@ -169,5 +173,14 @@
         </set>
         where id = #{id}
     </update>
+
+
+	<update id="updateLine" parameterType="String">
+		update ygline
+		<set>
+			call_status=0
+		</set>
+		where member_number = #{liner}
+	</update>
 
 </mapper>

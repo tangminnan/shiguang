@@ -19,4 +19,7 @@ public interface MemberJKDao {
 
     int update(MemberJKDO member);
 
+    List<Map> getLine(String now);
+
+    void updateLine(String liner);
 }

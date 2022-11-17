@@ -14,4 +14,7 @@ public interface MemberJKService {
 
     int update(MemberJKDO member);
 
+    List<Map> getLine(String now);
+
+    void updateLine(String liner);
 }
