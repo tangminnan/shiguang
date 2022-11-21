@@ -80,7 +80,15 @@ public class OptometryNewController {
         Query query = new Query(params);
         query.put("status", 0);
         query.put("state", 1);
-        List<MemberDO> memberDOList = memberService.yanguangList(query);
+        List<MemberDO> memberDOList=new ArrayList<>();
+        if(query.get("page").toString().equals("1")&&query.get("cardNumber").toString().equals("")
+                &&query.get("name").toString().equals("")&&query.get("phone1").toString().equals("")
+                &&query.get("optometryName").toString().equals("")&&query.get("dateStart").toString().equals("")
+                &&query.get("dateEnd").toString().equals("")){memberDOList = memberService.lineList(query);}
+        List<MemberDO> memberDOS = memberService.yanguangList(query);
+        for(MemberDO memberDO:memberDOS){
+            memberDOList.add(memberDO);
+        }
         int total = memberService.yanguangCount(query);
         PageUtils pageUtils = new PageUtils(memberDOList, total);
         return pageUtils;

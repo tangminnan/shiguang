@@ -1,5 +1,6 @@
 package com.shiguang.member.service;
 
+import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.settlement.domain.JieKuanMoneyDO;
@@ -43,4 +44,8 @@ public interface MemberService {
     //视光检查用户List
     List<MemberDO> yanguangList(Map<String, Object> map);
     int yanguangCount(Map<String, Object> map);
+
+    List<MemberDO> lineList(Query query);
+
+    int listCount(Query query);
 }

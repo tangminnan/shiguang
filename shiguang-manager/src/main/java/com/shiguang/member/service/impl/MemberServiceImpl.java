@@ -1,9 +1,6 @@
 package com.shiguang.member.service.impl;
 
-import com.shiguang.common.utils.GuuidUtil;
-import com.shiguang.common.utils.R;
-import com.shiguang.common.utils.ShiroUtils;
-import com.shiguang.common.utils.isIDCardUtil;
+import com.shiguang.common.utils.*;
 import com.shiguang.member.dao.MemberDao;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
@@ -271,5 +268,15 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int yanguangCount(Map<String, Object> map) {
         return memberDao.yanguangCount(map);
+    }
+
+    @Override
+    public List<MemberDO> lineList(Query query) {
+        return memberDao.lineList(query);
+    }
+
+    @Override
+    public int listCount(Query query) {
+        return memberDao.listCount(query);
     }
 }

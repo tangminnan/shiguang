@@ -1,5 +1,6 @@
 package com.shiguang.member.dao;
 
+import com.shiguang.common.utils.Query;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.settlement.domain.JieKuanMoneyDO;
 import org.apache.ibatis.annotations.Mapper;
@@ -46,4 +47,8 @@ public interface MemberDao {
     //视光检查用户List
     List<MemberDO> yanguangList(Map<String, Object> map);
     int yanguangCount(Map<String, Object> map);
+
+    List<MemberDO> lineList(Query query);
+
+    int listCount(Query query);
 }
