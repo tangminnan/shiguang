@@ -769,8 +769,8 @@ public class StoreSalesController {
             map.put("companyId",ShiroUtils.getUser().getCompanyId());
         }
         if (null != departNumber) {
-            map.put("departNumber", departNumber);
             if("3".equals(ShiroUtils.getUser().getCompanyId())){
+                map.put("departNumber", departNumber);
                 map.put("positionId","7");
             }
             PositionDO positionDO = stockService.findHegePosition(map);

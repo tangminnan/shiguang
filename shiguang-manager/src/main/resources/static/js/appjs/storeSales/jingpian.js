@@ -46,7 +46,7 @@ function load() {
                                 goodsName:$('#goodsName').val(),
                                 goodsCode:$("#goodsCode").val(),
                                 goodsNum:$('#goodsNum').val(),
-                                brandName:$("#brandName").val(),
+                                //brandName:$("#brandName").val(),
                                 jingpianType:$("#jingpianType").val(),
                                 rightYuanYongQJ:$("#rightYuanYongQJ").val(),
                                 rightYuanYongZJ:$("#rightYuanYongZJ").val(),
