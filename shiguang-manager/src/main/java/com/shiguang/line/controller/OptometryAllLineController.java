@@ -193,6 +193,37 @@ public class OptometryAllLineController {
         return resultMap;
     }
 
+    /**
+     * 随机叫号
+     * @param id
+     * @param consultRoom
+     * @return
+     */
+    @PostMapping( "/randomCall")
+    @ResponseBody
+    @RequiresPermissions("information:optometryAllline:randomCall")
+    public R randomCall(Long id,String consultRoom){
+        YgLineDO lineDOs = optometryLineService.get(id);
+        int callStatus = 0;
+        if (Integer.parseInt(lineDOs.getCallStatus())<4){
+            callStatus = Integer.parseInt(lineDOs.getCallStatus()) + 1;
+        } else {
+            callStatus = 4;
+        }
+        YgLineDO lineDO = new YgLineDO();
+        lineDO.setId(id);
+        lineDO.setConsultRoom(consultRoom);
+        lineDO.setCallStatus(String.valueOf(callStatus));
+        optometryLineService.update(lineDO);
+        YgLineMemberDO lineMemberDO = new YgLineMemberDO();
+        lineMemberDO.setConsultRoom(consultRoom);
+        lineMemberDO.setMemberName(lineDOs.getMemberName());
+        lineMemberDO.setSex(lineDOs.getSex());
+        if(optometryLineService.saveLineMember(lineMemberDO)>0){
+            return R.ok();
+        }
+        return R.error();
+    }
 
     /**
      * 删除
