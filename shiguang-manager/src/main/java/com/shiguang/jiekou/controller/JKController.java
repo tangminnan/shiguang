@@ -285,6 +285,8 @@ public class JKController {
         String memberName=obj.getString("memberName");
         String cardNumber=obj.getString("cardNumber");
         Long sex=obj.getLong("sex");
+        String HISZS=obj.getString("HISZS");
+        //获取当日验光室开放信息
         List<String> ygRooms=jianchaJKService.getygRoom(sdf.format(new Date()));
         String yyygRoom="";
         int num=10000;
@@ -300,20 +302,22 @@ public class JKController {
             map.put("msg","排队失败");
             map.put("code",1);
         }else{
-            ygLineJKDO.setMemberName(memberName);
-            ygLineJKDO.setMemberNumber(cardNumber);
-            ygLineJKDO.setSex(sex);
-            ygLineJKDO.setConsultRoom(yyygRoom);
-            ygLineJKDO.setCallStatus("5");
-            ygLineJKDO.setCompanyId("1");
-            ygLineJKDO.setLineTime(new Date());
-            int lineJKSave=jianchaJKService.lineJKSave(ygLineJKDO);
-            if (lineJKSave>0){
-                map.put("msg","排队成功");
-                map.put("code",0);
-            }else{
-                map.put("msg","排队失败");
-                map.put("code",1);
+            if(!HISZS.equals("416诊室")){
+                ygLineJKDO.setMemberName(memberName);
+                ygLineJKDO.setMemberNumber(cardNumber);
+                ygLineJKDO.setSex(sex);
+                ygLineJKDO.setConsultRoom(yyygRoom);
+                ygLineJKDO.setCallStatus("5");
+                ygLineJKDO.setCompanyId("1");
+                ygLineJKDO.setLineTime(new Date());
+                int lineJKSave=jianchaJKService.lineJKSave(ygLineJKDO);
+                if (lineJKSave>0){
+                    map.put("msg","排队成功");
+                    map.put("code",0);
+                }else{
+                    map.put("msg","排队失败");
+                    map.put("code",1);
+                }
             }
         }
         return map;
