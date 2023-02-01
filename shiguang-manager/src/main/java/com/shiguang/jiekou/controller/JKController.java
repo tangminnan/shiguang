@@ -302,7 +302,23 @@ public class JKController {
             map.put("msg","排队失败");
             map.put("code",1);
         }else{
-            if(!HISZS.equals("416诊室")){
+            if(HISZS.equals("416诊室")){
+                ygLineJKDO.setMemberName(memberName);
+                ygLineJKDO.setMemberNumber(cardNumber);
+                ygLineJKDO.setSex(sex);
+                ygLineJKDO.setConsultRoom("416诊室");
+                ygLineJKDO.setCallStatus("4");
+                ygLineJKDO.setCompanyId("1");
+                ygLineJKDO.setLineTime(new Date());
+                int lineJKSave=jianchaJKService.lineJKSave(ygLineJKDO);
+                if (lineJKSave>0){
+                    map.put("msg","排队成功");
+                    map.put("code",0);
+                }else{
+                    map.put("msg","排队失败");
+                    map.put("code",1);
+                }
+            }else{
                 ygLineJKDO.setMemberName(memberName);
                 ygLineJKDO.setMemberNumber(cardNumber);
                 ygLineJKDO.setSex(sex);
