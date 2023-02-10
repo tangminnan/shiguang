@@ -306,7 +306,7 @@ public class JKController {
                 ygLineJKDO.setMemberName(memberName);
                 ygLineJKDO.setMemberNumber(cardNumber);
                 ygLineJKDO.setSex(sex);
-                ygLineJKDO.setConsultRoom("302诊室");
+                ygLineJKDO.setConsultRoom(HISZS);
                 ygLineJKDO.setCallStatus("4");
                 ygLineJKDO.setCompanyId("1");
                 ygLineJKDO.setLineTime(new Date());
