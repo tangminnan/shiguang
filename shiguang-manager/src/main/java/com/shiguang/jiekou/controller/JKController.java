@@ -302,11 +302,11 @@ public class JKController {
             map.put("msg","排队失败");
             map.put("code",1);
         }else{
-            if(HISZS.equals("416诊室")){
+            if(HISZS.equals("302诊室")&&getWeekOfDate(new Date()).equals("日")){
                 ygLineJKDO.setMemberName(memberName);
                 ygLineJKDO.setMemberNumber(cardNumber);
                 ygLineJKDO.setSex(sex);
-                ygLineJKDO.setConsultRoom("416诊室");
+                ygLineJKDO.setConsultRoom("302诊室");
                 ygLineJKDO.setCallStatus("4");
                 ygLineJKDO.setCompanyId("1");
                 ygLineJKDO.setLineTime(new Date());
@@ -337,6 +337,23 @@ public class JKController {
             }
         }
         return map;
+    }
+
+    /**
+     * 获取指定日期是星期几<br>
+     *
+     * @param date
+     * @return 指定日期是星期几
+     */
+    public static String getWeekOfDate(Date date) {
+        String[] weekDays = { "日", "一", "二", "三", "四", "五", "六" };
+        //String[] weekDays = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+        return weekDays[w];
     }
 
     @ResponseBody
