@@ -1,6 +1,7 @@
 package com.shiguang.mfrs.service.impl;
 
 import com.shiguang.mfrs.domain.BrandDO;
+import com.shiguang.mfrs.domain.HospitalEyeDO;
 import com.shiguang.system.domain.UserDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,4 +66,7 @@ public class CompanyServiceImpl implements CompanyService {
 	public int newOlds(UserDO userDO) {
 		return companyDao.newOlds(userDO);
 	}
+
+	@Override
+	public List<HospitalEyeDO> findHospital(String companyId){ return companyDao.findHospital(companyId); }
 }

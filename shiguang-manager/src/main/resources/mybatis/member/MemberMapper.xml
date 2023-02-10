@@ -743,6 +743,7 @@
         <where>
             <if test="optometryName != null and optometryName != ''"> and try.optometry_name = #{optometryName} </if>
             <if test="dateStart !=null and dateStart != ''"> and date_format( try.create_time ,'%Y-%m-%d' ) >= (#{dateStart})</if>
+            <if test="companyId != null and companyId != ''">and FIND_IN_SET(m.company_id,#{companyId})</if>
             <if test="dateEnd !=null and dateEnd != ''"> and date_format( try.create_time ,'%Y-%m-%d' ) &lt;= (#{dateEnd})</if>
             and DATE_FORMAT(line_time, "%Y-%m-%d")=DATE_FORMAT(NOW(), "%Y-%m-%d") and call_status&lt;4
         </where>

@@ -293,14 +293,16 @@ public String Brand(String settleDateStart, String settleDateEnd,
                         String count = storeCounts[i];
                         String goodNum = goodsNum[i];
                         ProducaDO producaDO = saleReportService.findJj(goodNum);
-                        String goodsBrandNum = producaDO.getBrandnum();
-                        String goodsBrandName = producaDO.getBrandname();
-                        Map<String, Object> listmap = new HashMap<>();
-                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
-                        listmap.put("count", count);
-                        listmap.put("goodsBrandNum", goodsBrandNum);
-                        listmap.put("goodsBrandName", goodsBrandName);
-                        listBrand.add(listmap);
+                        if (null != producaDO){
+                            String goodsBrandNum = producaDO.getBrandnum();
+                            String goodsBrandName = producaDO.getBrandname();
+                            Map<String, Object> listmap = new HashMap<>();
+                            listmap.put("money", new BigDecimal(money.trim()).setScale(2, RoundingMode.HALF_UP));
+                            listmap.put("count", count);
+                            listmap.put("goodsBrandNum", goodsBrandNum);
+                            listmap.put("goodsBrandName", goodsBrandName);
+                            listBrand.add(listmap);
+                        }
                     }
                 } else if ("配件".equals(selectGoods)) {
                     if ("配件".equals(goodstype) || "镜架配件".equals(goodstype)) {
@@ -311,7 +313,7 @@ public String Brand(String settleDateStart, String settleDateEnd,
                         String goodsBrandNum = partsDO.getBrandnum();
                         String goodsBrandName = partsDO.getBrandname();
                         Map<String, Object> listmap = new HashMap<>();
-                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("money", new BigDecimal(money.trim()).setScale(2, RoundingMode.HALF_UP));
                         listmap.put("count", count);
                         listmap.put("goodsBrandNum", goodsBrandNum);
                         listmap.put("goodsBrandName", goodsBrandName);
@@ -326,7 +328,7 @@ public String Brand(String settleDateStart, String settleDateEnd,
                         String goodsBrandNum = jpcpDO.getBrandnum();
                         String goodsBrandName = jpcpDO.getBrandname();
                         Map<String, Object> listmap = new HashMap<>();
-                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("money", new BigDecimal(money.trim()).setScale(2, RoundingMode.HALF_UP));
                         listmap.put("count", count);
                         listmap.put("goodsBrandNum", goodsBrandNum);
                         listmap.put("goodsBrandName", goodsBrandName);
@@ -341,7 +343,7 @@ public String Brand(String settleDateStart, String settleDateEnd,
                         String goodsBrandNum = jpdzDO.getBrandnum();
                         String goodsBrandName = jpdzDO.getBrandname();
                         Map<String, Object> listmap = new HashMap<>();
-                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("money", new BigDecimal(money.trim()).setScale(2, RoundingMode.HALF_UP));
                         listmap.put("count", count);
                         listmap.put("goodsBrandNum", goodsBrandNum);
                         listmap.put("goodsBrandName", goodsBrandName);
@@ -356,7 +358,7 @@ public String Brand(String settleDateStart, String settleDateEnd,
                         String goodsBrandNum = yxcpDO.getBrandnum();
                         String goodsBrandName = yxcpDO.getBrandname();
                         Map<String, Object> listmap = new HashMap<>();
-                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("money", new BigDecimal(money.trim()).setScale(2, RoundingMode.HALF_UP));
                         listmap.put("count", count);
                         listmap.put("goodsBrandNum", goodsBrandNum);
                         listmap.put("goodsBrandName", goodsBrandName);
@@ -371,7 +373,7 @@ public String Brand(String settleDateStart, String settleDateEnd,
                         String goodsBrandNum = yxdzDO.getBrandnum();
                         String goodsBrandName = yxdzDO.getBrandname();
                         Map<String, Object> listmap = new HashMap<>();
-                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("money", new BigDecimal(money.trim()).setScale(2, RoundingMode.HALF_UP));
                         listmap.put("count", count);
                         listmap.put("goodsBrandNum", goodsBrandNum);
                         listmap.put("goodsBrandName", goodsBrandName);
@@ -386,7 +388,7 @@ public String Brand(String settleDateStart, String settleDateEnd,
                         String goodsBrandNum = hlyDO.getBrandnum();
                         String goodsBrandName = hlyDO.getBrandname();
                         Map<String, Object> listmap = new HashMap<>();
-                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("money", new BigDecimal(money.trim()).setScale(2, RoundingMode.HALF_UP));
                         listmap.put("count", count);
                         listmap.put("goodsBrandNum", goodsBrandNum);
                         listmap.put("goodsBrandName", goodsBrandName);
@@ -401,7 +403,7 @@ public String Brand(String settleDateStart, String settleDateEnd,
                         String goodsBrandNum = tyjDO.getBrandnum();
                         String goodsBrandName = tyjDO.getBrandname();
                         Map<String, Object> listmap = new HashMap<>();
-                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("money", new BigDecimal(money.trim()).setScale(2, RoundingMode.HALF_UP));
                         listmap.put("count", count);
                         listmap.put("goodsBrandNum", goodsBrandNum);
                         listmap.put("goodsBrandName", goodsBrandName);
@@ -416,7 +418,7 @@ public String Brand(String settleDateStart, String settleDateEnd,
                         String goodsBrandNum = oldlensDO.getBrandnum();
                         String goodsBrandName = oldlensDO.getBrandname();
                         Map<String, Object> listmap = new HashMap<>();
-                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("money", new BigDecimal(money.trim()).setScale(2, RoundingMode.HALF_UP));
                         listmap.put("count", count);
                         listmap.put("goodsBrandNum", goodsBrandNum);
                         listmap.put("goodsBrandName", goodsBrandName);
@@ -431,7 +433,7 @@ public String Brand(String settleDateStart, String settleDateEnd,
                         String goodsBrandNum = hcDO.getBrandnum();
                         String goodsBrandName = hcDO.getBrandname();
                         Map<String, Object> listmap = new HashMap<>();
-                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("money", new BigDecimal(money.trim()).setScale(2, RoundingMode.HALF_UP));
                         listmap.put("count", count);
                         listmap.put("goodsBrandNum", goodsBrandNum);
                         listmap.put("goodsBrandName", goodsBrandName);
@@ -446,7 +448,7 @@ public String Brand(String settleDateStart, String settleDateEnd,
                         String goodsBrandNum = shiguangDO.getBrandnum();
                         String goodsBrandName = shiguangDO.getBrandname();
                         Map<String, Object> listmap = new HashMap<>();
-                        listmap.put("money", new BigDecimal(money).setScale(2, RoundingMode.HALF_UP));
+                        listmap.put("money", new BigDecimal(money.trim()).setScale(2, RoundingMode.HALF_UP));
                         listmap.put("count", count);
                         listmap.put("goodsBrandNum", goodsBrandNum);
                         listmap.put("goodsBrandName", goodsBrandName);

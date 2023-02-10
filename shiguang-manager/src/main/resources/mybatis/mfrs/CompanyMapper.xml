@@ -219,4 +219,8 @@
     <update id="newOlds" parameterType="com.shiguang.system.domain.UserDO">
     update sys_user set new_old = #{newOld} where username = #{username} and password=#{password}
     </update>
+
+    <select id="findHospital" resultType="com.shiguang.mfrs.domain.HospitalEyeDO">
+		select `id`,`name`,`company_id` from hospital_eye where FIND_IN_SET(company_id,#{companyId})
+	</select>
 </mapper>

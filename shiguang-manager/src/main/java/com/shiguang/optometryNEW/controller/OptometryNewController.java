@@ -9,6 +9,7 @@ import com.shiguang.jiancha.service.*;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.member.service.MemberService;
 import com.shiguang.mfrs.domain.*;
+import com.shiguang.mfrs.service.CompanyService;
 import com.shiguang.optometry.domain.OcularEyesDO;
 import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.service.OcularEyesService;
@@ -54,6 +55,8 @@ public class OptometryNewController {
     private ShiguangService shiguangService;
     @Autowired
     private ShiguangdzService shiguangdzService;
+    @Autowired
+    private CompanyService companyService;
 
     @Autowired
     UserService userService;
@@ -78,6 +81,11 @@ public class OptometryNewController {
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        String companyId = ShiroUtils.getUser().getCompanyId();
+        List<HospitalEyeDO> hospitalEyeDOList = companyService.findHospital(companyId);
+        if (hospitalEyeDOList.size() > 0){
+            query.put("companyId",companyId);
+        }
         query.put("status", 0);
         query.put("state", 1);
         List<MemberDO> memberDOList=new ArrayList<>();

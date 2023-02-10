@@ -6,6 +6,7 @@ import com.shiguang.mfrs.domain.CompanyDO;
 import java.util.List;
 import java.util.Map;
 
+import com.shiguang.mfrs.domain.HospitalEyeDO;
 import com.shiguang.system.domain.UserDO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -35,4 +36,6 @@ public interface CompanyDao {
 	int updateState(CompanyDO companyDO);
 
 	int newOlds(UserDO userDO);
+
+	List<HospitalEyeDO> findHospital(String companyId);
 }

@@ -2,6 +2,7 @@ package com.shiguang.mfrs.service;
 
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.mfrs.domain.CompanyDO;
+import com.shiguang.mfrs.domain.HospitalEyeDO;
 import com.shiguang.system.domain.UserDO;
 
 import java.util.List;
@@ -34,4 +35,6 @@ public interface CompanyService {
 	int updateState(CompanyDO companyDO);
 
 	int newOlds(UserDO userDO);
+
+	List<HospitalEyeDO> findHospital(String companyId);
 }
