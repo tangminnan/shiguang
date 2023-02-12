@@ -1,0 +1,566 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>库存查询</title>
+    <link rel="stylesheet" href="/css/css.css" type="text/css">
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+    <style type="text/css">
+        .fixed-table-pagination{height: 60px;}
+        .pull-left{float: left; margin-top: 10px;margin-bottom: 10px;}
+        .pull-right{float: right; margin-top: 10px;margin-bottom: 10px;}
+
+        .pagination > li {
+            display: inline;
+            font-size: 12px;
+        }
+
+        .pagination-info {
+            line-height: 34px;
+            margin-right: 5px;
+        }
+        .btn-group {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .pagination {
+            display: inline-block;
+            padding-left: 0px;
+            border-radius: 4px;
+        }
+
+        .pagination>li>a, .pagination>li>span {
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #337ab7;
+            text-decoration: none;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+        .pagination>li>a, .pagination>li>span {
+            background-color: #FFFFFF;
+            border: 1px solid #DDDDDD;
+            color: inherit;
+            float: left;
+            line-height: 1.42857;
+            margin-left: -1px;
+            padding: 4px 10px;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+            color: #777;
+            cursor: not-allowed;
+            background-color: #fff;
+            border-color: #ddd;
+        }
+
+        .fixed-table-pagination .pagination a {
+            padding: 6px 12px;
+            line-height: 1.428571429;
+        }
+
+        .pagination>li:first-child>a, .pagination>li:first-child>span {
+            margin-left: 0;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .fixed-table-pagination li.disabled a {
+            pointer-events: none;
+            cursor: default;
+        }
+
+
+
+        .btn-default {
+            color: #333;
+            background-color: #fff;
+            border-color: #ccc;
+        }
+
+        .btn-default {
+            background-color: #c2c2c2;
+            border-color: #c2c2c2;
+            color: #FFFFFF;
+        }
+
+        .btn-outline {
+            color: inherit;
+            background-color: transparent;
+            -webkit-transition: all .5s;
+            transition: all .5s;
+            border: 1px solid #c2c2c2;
+            padding: 5px 10px;
+            outline: none;
+        }
+
+        .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+            background-color: #f4f4f4;
+            border-color: #DDDDDD;
+            color: inherit;
+            cursor: default;
+            z-index: 2;
+        }
+
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            display: none;
+            float: left;
+            min-width: 160px;
+            padding: 5px 0;
+            margin: 2px 0 0;
+            font-size: 14px;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0,0,0,.15);
+            border-radius: 4px;
+            -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+            box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        }
+
+        .dropdown-menu {
+            border: medium none;
+            display: none;
+            float: left;
+            font-size: 12px;
+            left: 0;
+            list-style: none outside none;
+            padding: 0;
+            position: absolute;
+            text-shadow: none;
+            top: 100%;
+            z-index: 1000;
+            border-radius: 0;
+            box-shadow: 0 0 3px rgba(86, 96, 117, 0.3);
+        }
+
+        .dropup .dropdown-menu, .navbar-fixed-bottom .dropdown .dropdown-menu {
+            top: auto;
+            bottom: 100%;
+            margin-bottom: 2px;
+        }
+        .ibox .open>.dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+        .open>.dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu>li>a {
+            display: block;
+            padding: 3px 20px;
+            clear: both;
+            font-weight: 400;
+            line-height: 1.42857143;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu>li>a {
+            border-radius: 3px;
+            color: inherit;
+            line-height: 25px;
+            margin: 4px;
+            text-align: left;
+            font-weight: normal;
+        }
+        .dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+            color: #fff;
+            text-decoration: none;
+            background-color: #337ab7;
+            outline: 0;
+        }
+    </style>
+</head>
+<body>
+<!--查询条件-->
+<div class="m40 tabS msgBox">
+    <h3>查询条件</h3>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>商品代码：</td>
+            <td>
+                <input id="goodsNum" name="goodsNum" type="text">
+            </td>
+            <td>商品条码：</td>
+            <td>
+                <input id="goodsCode" name="goodsCode" type="text"/>
+            </td>
+            <td>商品名称：</td>
+            <td>
+                <input id="goodsName" name="goodsName" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>商品类型：</td>
+            <td>
+                <select id="goodsType" name="goodsType" onchange="selectgoods()">
+                    <option value="">--请选择--</option>
+                    <option th:each="ls:${goodsDOList}"
+                            th:text="${ls.goodsname}"
+                            th:value="${ls.goodsid}"></option>
+                </select>
+                <div id="jp" style="display: none">
+                    <label class="radio-inline">
+                        <input type="radio" name="classtype"  value="1" /> 成品片
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="classtype" value="2" /> 订做片
+                    </label>
+                </div>
+                <input type="hidden" id="classtype" value="" />
+
+            </td>
+            <td>制造商：</td>
+            <td>
+                <input id="mfrsname" name="mfrsname" type="text" readonly/>
+                <input type="button" class="XZ-btn" value="选择" onclick="choiceMfrs()"/>
+            </td>
+            <td>商品品种：</td>
+            <td>
+                <input id="brandname" name="brandname" type="text" readonly style="background-color: #e4e4e4" />
+                <input type="button" class="XZ-btn" value="选择" onclick="choiceBrand()"/>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>厂家型号:</td>
+            <td>
+                <input id="factory" name="factory" type="text"/>
+            </td>
+            <td>厂家色号:</td>
+            <td>
+                <input id="factoryColor" name="factoryColor" type="text"/>
+            </td>
+            <td>仓位名称：</td>
+            <td>
+                <div class="col-sm-8">
+                    <label class="radio-inline">
+                        <input type="radio" name="xsstate" value="0" checked onchange="positionChange()"/> 启用仓
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="xsstate" value="1" onchange="positionChange()"/> 停用仓
+                    </label>
+                </div>
+                <span>
+					<select id="positionId" name="positionId">
+                        <option value="">--请选择--</option>
+                    </select>
+				</span>
+            </td>
+        </tr>
+
+    </table>
+    <!--保存/清空-->
+    <div class="BQ-btn">
+        <input type="button" value="查询" onclick="reLoad()"/>
+        <input type="button" class="empty" value="清空" onclick="clearText()"/>
+        <input type="button" value="条码打印" onclick="print()"/>
+    </div>
+</div>
+
+<!--商品信息-->
+<div class="m40 tabS msgBoxDD">
+    <table id="exampleTable" data-mobile-responsive="true"></table>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var xsstate=$("input[name='xsstate']:checked").val();
+        $(".cw").remove();
+        $.ajax({
+            url: '/kucun/stock/selectPosion',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'xsstate': xsstate
+            },
+            success: function (position) {
+                for (var i = 0; i < position.length; i++) {
+                    $("#positionId").append("" +
+                        "<option class='cw' value='"+ position[i].positionId +"'>" + position[i].positionName + "</option>");
+                }
+            }
+        });
+
+
+        $(function () {
+            load();
+            countall();
+        });
+
+        function load() {
+            $('#exampleTable')
+                .bootstrapTable(
+                    {
+                        method: 'get', // 服务器数据的请求方式 get or post
+                        url: '/print/print/batchCode', // 服务器数据的加载地址
+                        iconSize: 'outline',
+                        toolbar: '#exampleToolbar',
+                        striped: true, // 设置为true会有隔行变色效果
+                        dataType: "json", // 服务器返回的数据类型
+                        pagination: true, // 设置为true会在底部显示分页条
+                        // queryParamsType : "limit",
+                        // //设置为limit则会发送符合RESTFull格式的参数
+                        singleSelect: false, // 设置为true将禁止多选
+                        // contentType : "application/x-www-form-urlencoded",
+                        // //发送到服务器的数据编码类型
+                        pageSize: 50, // 如果设置了分页，每页数据条数
+                        pageNumber: 1, // 如果设置了分布，首页页码
+                        pageList:[50,100,500,1200,1500,2000],
+                        //search : true, // 是否显示搜索框
+                        showColumns: false, // 是否显示内容下拉框（选择显示的列）
+                        sidePagination: "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+                        queryParams: function (params) {
+                            return {
+                                //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                limit: params.limit,
+                                offset: params.offset,
+                                positionId: $('#positionId').val().trim(),
+                                goodsNum : $("#goodsNum").val().trim(),
+                                goodsCode : $("#goodsCode").val().trim(),
+                                goodsName : $("#goodsName").val().trim(),
+                                goodsType : $("#goodsType option:selected").val().trim(),
+                                mfrsname : $("#mfrsname").val().trim(),
+                                brandname : $("#brandname").val().trim(),
+                                xsstate: $("input[name='xsstate']:checked").val().trim(),
+                                classtype : $("#classtype").val().trim(),
+                                factory:$('#factory').val().trim(),
+                                factoryColor:$('#factoryColor').val().trim(),
+                            };
+                        },
+                        columns: [
+                            {
+                            	checkbox : true
+                            },
+                            {
+                                field : 'goodsNum',
+                                title : '商品代码'
+                            },
+                            {
+                                field: 'goodsCode',
+                                title: '商品条码'
+                            },
+                            {
+                                field: 'goodsName',
+                                title: '商品名称'
+                            },
+
+                            {
+                                field: 'goodsCount',
+                                title: '数量'
+                            },
+
+                            {
+                                field: 'gdname',
+                                title: '商品类别'
+                            },
+                            {
+                                field: 'mfrsname',
+                                title: '制造商'
+                            },{
+                                field: 'positionName',
+                                title: '仓位'
+                            },
+                        ]
+                    });
+        }
+
+
+    });
+
+
+
+
+    document.onkeydown = function(e){
+        if((e||event).keyCode==13)
+            reLoad();
+    };
+
+
+
+
+    <!--选择制造商-->
+    function choiceMfrs() {
+        $("#brandname").val("");
+        var goodsid = document.getElementById('goodsType').value;
+        if (goodsid == "") {
+            layer.alert("请选择商品类型！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '制造商',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/product/produca/findmfrs/" + goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#mfrsname").val(rows[i].mfrsname);
+                        $("#mfrsid").val(rows[i].mfrsnum);
+                        // alert(rows[i].mfrsnum)
+                        // $("#mfrsNames").val(rows[i].mfrsname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+    function choiceBrand() {
+        var goodsid = document.getElementById('goodsType').value;
+        var mfrsname = document.getElementById('mfrsname').value;
+        if (mfrsname == "") {
+            layer.alert("请选择制造商！");
+        } else {
+            //选择镜架
+            var toIndex = layer.open({
+                type: 2,
+                title: '商品品种',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['800px', '520px'],
+                content: "/kucun/stock/findbrand/" + mfrsname+"/"+goodsid,// iframe的url
+                cancel: function (index, layero) {
+                    var rows = $(layero).find("iframe")[0].contentWindow.batchSelect();
+                    for (var i = 0; i < rows.length; i++) {
+                        $("#brandname").val(rows[i].brandname);
+                        $("#brandnum").val(rows[i].brandnum);
+                        // $("#brandNames").val(rows[i].brandname);
+                    }
+                }
+            });
+            layer.full(toIndex);
+        }
+    }
+    function selectgoods() {
+        var goodsType = $("#goodsType option:selected").val();
+        if (goodsType == ""){
+            jp.style = "display: none";
+            JJ.style = "display: none";
+        }if (goodsType == 1){
+            jp.style = "display: none";
+            JJ.style = "display: block";
+
+        }else if (goodsType == 2){
+            jp.style = "display: none";
+            JJ.style = "display: none";
+        }else if (goodsType == 3){
+            $("#classtype").val("") ;
+            jp.style = "display: block";
+            JJ.style = "display: none";
+        }else if (goodsType == 4){
+            $("#classtype").val("") ;
+            jp.style = "display: block";
+            JJ.style = "display: none";
+        }else if (goodsType == 5){
+            jp.style = "display: none";
+            JJ.style = "display: none";
+        }else if (goodsType == 6){
+            jp.style = "display: none";
+            JJ.style = "display: block";
+        }else if (goodsType == 7){
+            jp.style = "display: none";
+            JJ.style = "display: block";
+        }else if (goodsType == 8){
+            jp.style = "display: none";
+            JJ.style = "display: none";
+        }else if (goodsType == 9){
+            jp.style = "display: none";
+            JJ.style = "display: none";
+        }
+    }
+    function reLoad() {
+        var goodsType=$("#goodsType").val();
+        if (goodsType== ""){
+            $("#classtype").val("") ;
+        }else {
+            $("#classtype").val("1") ;
+        }
+        if (goodsType == 3 || goodsType == 4) {
+            $("#classtype").val($("input[name='classtype']:checked").val());
+        }
+        $(".val").remove();
+        $('#exampleTable').bootstrapTable('refresh');
+        countall();
+    }
+    function positionChange() {
+        var xsstate=$("input[name='xsstate']:checked").val();
+        $(".cw").remove();
+        $.ajax({
+            url: '/kucun/stock/selectPosion',
+            type: 'post',
+            dataType: "json",
+            data: {
+                'xsstate': xsstate
+            },
+            success: function (datajson) {
+                $(datajson).each(function (key) {  //循环读取后台传来的Json数据
+                    var id = datajson[key].positionId;   //角色id
+                    var roleName = datajson[key].positionName; //角色名称
+                    $("#positionId").append("<option class='cw' value='" + id + "'>" + roleName + "</option>");
+                });
+            }
+        });
+    }
+    //清空
+    function clearText() {
+        var controls = document.getElementsByTagName('input');
+        for (var i = 0; i < controls.length; i++) {
+            if (controls[i].type == 'text') {
+                controls[i].value = '';
+            }
+        }
+    }
+    //条码打印
+    function print(){
+        var rows = $('#exampleTable').bootstrapTable('getSelections');
+        alert(rows.length);
+        var nums = new Array();
+        // 遍历所有选择的行数据，取每条数据对应的ID
+        $.each(rows, function(i, row) {
+            nums[i] = row['goodsNum'];
+        });
+        alert(nums);
+        $.ajax({
+            url: '/print/print/selectCode',
+            type: 'POST',
+            data: {
+                "goodsNum": nums
+            },
+            success: function (datajson) {
+                $(datajson).each(function (key) {  //循环读取后台传来的Json数据
+                    var id = datajson[key].positionId;   //角色id
+                    var roleName = datajson[key].positionName; //角色名称
+                    $("#positionId").append("<option class='cw' value='" + id + "'>" + roleName + "</option>");
+                });
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>

@@ -270,6 +270,17 @@ public class StockDO implements Serializable {
     //左右眼
     private String leftRight;
 
+    //条码
+    private String QRCode;
+
+    public String getQRCode() {
+        return QRCode;
+    }
+
+    public void setQRCode(String QRCode) {
+        this.QRCode = QRCode;
+    }
+
     public String getClasstype() {
         return classtype;
     }
