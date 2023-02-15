@@ -91,4 +91,14 @@ public class JianchaJKServiceImpl implements JianchaJKService {
         return jianchaJKDao.getRoomNUM(tiaojian);
     }
 
+    @Override
+    public List<String> getjyRoom() {
+        return jianchaJKDao.getjyRoom();
+    }
+
+    @Override
+    public String getjyWeek(String hiszs) {
+        return jianchaJKDao.getjyWeek(hiszs);
+    }
+
 }

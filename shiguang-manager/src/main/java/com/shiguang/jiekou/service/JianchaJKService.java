@@ -43,4 +43,8 @@ public interface JianchaJKService {
     List<String> getygRoom(String format);
 
     int getRoomNUM(Map<String, Object> tiaojian);
+
+    List<String> getjyRoom();
+
+    String getjyWeek(String hiszs);
 }

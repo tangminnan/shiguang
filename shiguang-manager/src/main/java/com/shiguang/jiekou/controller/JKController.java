@@ -302,22 +302,44 @@ public class JKController {
             map.put("msg","排队失败");
             map.put("code",1);
         }else{
-            if(HISZS.equals("302诊室")&&getWeekOfDate(new Date()).equals("日")){
-                ygLineJKDO.setMemberName(memberName);
-                ygLineJKDO.setMemberNumber(cardNumber);
-                ygLineJKDO.setSex(sex);
-                ygLineJKDO.setConsultRoom(HISZS);
-                ygLineJKDO.setCallStatus("4");
-                ygLineJKDO.setCompanyId("1");
-                ygLineJKDO.setLineTime(new Date());
-                int lineJKSave=jianchaJKService.lineJKSave(ygLineJKDO);
-                if (lineJKSave>0){
-                    map.put("msg","排队成功");
-                    map.put("code",0);
+            List<String> jinyongRoom=jianchaJKService.getjyRoom();
+
+            if(jinyongRoom.contains(HISZS)){
+                String jinyongWeek=jianchaJKService.getjyWeek(HISZS);
+                if(jinyongWeek.indexOf(getWeekOfDate(new Date()))!=-1){
+                    ygLineJKDO.setMemberName(memberName);
+                    ygLineJKDO.setMemberNumber(cardNumber);
+                    ygLineJKDO.setSex(sex);
+                    ygLineJKDO.setConsultRoom(HISZS);
+                    ygLineJKDO.setCallStatus("4");
+                    ygLineJKDO.setCompanyId("1");
+                    ygLineJKDO.setLineTime(new Date());
+                    int lineJKSave=jianchaJKService.lineJKSave(ygLineJKDO);
+                    if (lineJKSave>0){
+                        map.put("msg","排队成功");
+                        map.put("code",0);
+                    }else{
+                        map.put("msg","排队失败");
+                        map.put("code",1);
+                    }
                 }else{
-                    map.put("msg","排队失败");
-                    map.put("code",1);
+                    ygLineJKDO.setMemberName(memberName);
+                    ygLineJKDO.setMemberNumber(cardNumber);
+                    ygLineJKDO.setSex(sex);
+                    ygLineJKDO.setConsultRoom(yyygRoom);
+                    ygLineJKDO.setCallStatus("5");
+                    ygLineJKDO.setCompanyId("1");
+                    ygLineJKDO.setLineTime(new Date());
+                    int lineJKSave=jianchaJKService.lineJKSave(ygLineJKDO);
+                    if (lineJKSave>0){
+                        map.put("msg","排队成功");
+                        map.put("code",0);
+                    }else{
+                        map.put("msg","排队失败");
+                        map.put("code",1);
+                    }
                 }
+
             }else{
                 ygLineJKDO.setMemberName(memberName);
                 ygLineJKDO.setMemberNumber(cardNumber);

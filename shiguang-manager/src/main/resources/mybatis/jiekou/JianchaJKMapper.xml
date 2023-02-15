@@ -6,6 +6,14 @@
 		select room from optician where DATE_FORMAT(create_time, "%Y-%m-%d") = #{value}
 	</select>
 
+	<select id="getjyRoom" resultType="String">
+		select room from optician_jinyong
+	</select>
+
+	<select id="getjyWeek" resultType="String">
+		select week from optician_jinyong where room=#{value}
+	</select>
+
 	<select id="getRoomNUM" resultType="int">
 		select count(*) from ygline
 		<where>
