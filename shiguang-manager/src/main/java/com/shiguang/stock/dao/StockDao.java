@@ -6,6 +6,7 @@ import com.shiguang.product.domain.*;
 import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -141,6 +142,7 @@ public interface StockDao {
     List<StockDO> kccxList(Map<String, Object> map);
     int countall(Map<String, Object> map);
     int kccxListCount(Map<String, Object> map);
+    List<StockDO> codeBatch(String num);
 
     int updateStatus(StockDO stock);
 

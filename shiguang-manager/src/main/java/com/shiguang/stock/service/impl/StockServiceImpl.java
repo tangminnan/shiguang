@@ -380,6 +380,11 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
+    public List<StockDO> codeBatch(String num){
+        return stockDao.codeBatch(num);
+    }
+
+    @Override
     public int countall(Map<String, Object> map) {
         return stockDao.countall(map);
     }
