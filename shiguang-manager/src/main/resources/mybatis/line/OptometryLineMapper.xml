@@ -20,10 +20,10 @@
             <choose>
                 <when test="consultRoom != null and consultRoom != ''">
                     and consult_room = #{consultRoom}
-                    and (call_status in ('1','2','3') or call_status = '0')
+                    and  call_status = '0'
                 </when>
                 <otherwise>
-                    and (call_status in ('1','2','3') or call_status = '0')
+                    and  call_status = '0'
                 </otherwise>
             </choose>
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
@@ -121,7 +121,7 @@
             <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
             <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
-            and (consult_room is not null or consult_room !='') and call_status != '4'
+            and (consult_room is not null or consult_room !='') and call_status != '4' and call_status != '1'
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

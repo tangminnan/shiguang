@@ -320,15 +320,15 @@
         <!--war包部署需要-->
         <!--&lt;!&ndash; 移除嵌入式tomcat插件 &ndash;&gt;-->
         <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-web</artifactId>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.springframework.boot</groupId>-->
-                    <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-web</artifactId>-->
+        <!--<exclusions>-->
+            <!--<exclusion>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+            <!--</exclusion>-->
+        <!--</exclusions>-->
+    <!--</dependency>-->
         <!--<dependency>-->
             <!--<groupId>javax.servlet</groupId>-->
             <!--<artifactId>javax.servlet-api</artifactId>-->

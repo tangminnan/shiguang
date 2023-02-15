@@ -112,9 +112,14 @@ function batchSelect() {
 };
 
 // 选择单品
+var objArray = [];
 function showCol() {
     var check = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-    var objArray = [];
+    // objArray.push(check);
+    // var objArray = [];
+    windows.localStorage.setItem("435",JSON.stringify(check));
+    alert(JSON.parse(check));
+    alert(JSON.stringify(check));
     $.each(check, function(i, row) {
         // alert(JSON.stringify(row));
         // ids[i] = row['id'];
@@ -485,8 +490,9 @@ function showCol() {
 
         objArray.push(obj);
     });
+     window.localStorage.setItem("key",JSON.stringify(objArray));
     // hejiadd();
-    return objArray;
+    //return objArray;
 }
 
 function save() {

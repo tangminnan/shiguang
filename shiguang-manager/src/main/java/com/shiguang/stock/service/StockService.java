@@ -142,7 +142,7 @@ public interface StockService {
     int kccxListCount(Map<String, Object> map);
     int updateStatus(StockDO stock);
     int outPosionJ(StockDO stockDO);
-    List<StockDO> codeBatch(String num);
+    List<StockDO> codeBatch(Map<String, Object> map);
 
     OrderDO getOeder(String danjuNumber);
     List<OrderDO> getOederList(Map<String, Object> map);

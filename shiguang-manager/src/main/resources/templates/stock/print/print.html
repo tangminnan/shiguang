@@ -307,7 +307,6 @@
 
         $(function () {
             load();
-            countall();
         });
 
         function load() {
@@ -504,7 +503,6 @@
         }
         $(".val").remove();
         $('#exampleTable').bootstrapTable('refresh');
-        countall();
     }
     function positionChange() {
         var xsstate=$("input[name='xsstate']:checked").val();
@@ -537,27 +535,27 @@
     //条码打印
     function print(){
         var rows = $('#exampleTable').bootstrapTable('getSelections');
-        alert(rows.length);
         var nums = new Array();
         // 遍历所有选择的行数据，取每条数据对应的ID
         $.each(rows, function(i, row) {
             nums[i] = row['goodsNum'];
         });
-        alert(nums);
-        $.ajax({
-            url: '/print/print/selectCode',
-            type: 'POST',
-            data: {
-                "goodsNum": nums
-            },
-            success: function (datajson) {
-                $(datajson).each(function (key) {  //循环读取后台传来的Json数据
-                    var id = datajson[key].positionId;   //角色id
-                    var roleName = datajson[key].positionName; //角色名称
-                    $("#positionId").append("<option class='cw' value='" + id + "'>" + roleName + "</option>");
-                });
-            }
-        });
+        window.open("/print/print/selectCode?goodsNum="+nums);
+        // alert(nums);
+        // $.ajax({
+        //     url: '/stock/stock/selectCode',
+        //     type: 'get',
+        //     data: {
+        //         "goodsNum": nums
+        //     },
+        //     success: function (datajson) {
+        //         $(datajson).each(function (key) {  //循环读取后台传来的Json数据
+        //             var id = datajson[key].positionId;   //角色id
+        //             var roleName = datajson[key].positionName; //角色名称
+        //             $("#positionId").append("<option class='cw' value='" + id + "'>" + roleName + "</option>");
+        //         });
+        //     }
+        // });
     }
 
 </script>

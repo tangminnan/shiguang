@@ -2742,7 +2742,7 @@ FROM
         where a.produc_num=#{goodsNum}
     </select>
     <!-- 批量打印条码 -->
-    <select id="codeBatch" parameterType="string" resultType="com.shiguang.stock.domain.StockDO">
+    <select id="codeBatch" resultType="com.shiguang.stock.domain.StockDO">
             SELECT
     s.danju_number,
     s.goods_num,
@@ -2801,7 +2801,12 @@ FROM
     LEFT JOIN aa_tyj tyj ON tyj.produc_num = s.goods_num
     LEFT JOIN aa_oldlens lhj ON lhj.produc_num = s.goods_num
     <where>
-        <if test="num != null and num != ''">and  s.goods_num in ( #{num} ) </if>
+        <if test="goodsNum != null and goodsNum != ''">and  s.goods_num in
+            <foreach item="item" collection="goodsNum" open="(" separator="," close=")" index="index">
+                #{item}
+            </foreach>
+        </if>
     </where>
+        GROUP BY s.goods_num
     </select>
 </mapper>

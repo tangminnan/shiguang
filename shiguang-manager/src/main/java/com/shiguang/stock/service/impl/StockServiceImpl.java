@@ -380,8 +380,8 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public List<StockDO> codeBatch(String num){
-        return stockDao.codeBatch(num);
+    public List<StockDO> codeBatch(Map<String, Object> map){
+        return stockDao.codeBatch(map);
     }
 
     @Override

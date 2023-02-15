@@ -812,7 +812,10 @@
                 area: ['800px', '520px'],
                 content: "/stock/stock/jingjia/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
-                    var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    //var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    var rows = window.localStorage.getItem("key");
+                    window.localStorage.clear();
+                    rows = JSON.parse(rows);
                     lable:
                     {
                         for (var i = 0; i < rows.length; i++) {
@@ -908,7 +911,10 @@
                 area: ['800px', '520px'],
                 content: "/stock/stock/peijian/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
-                    var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    //var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    var rows = window.localStorage.getItem("key");
+                    window.localStorage.clear();
+                    rows = JSON.parse(rows);
                     lable:
                     {
                         for (var i = 0; i < rows.length; i++) {
@@ -991,7 +997,10 @@
                 area: ['800px', '520px'],
                 content: "/stock/stock/jingpian/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
-                    var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    //var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    var rows = window.localStorage.getItem("key");
+                    window.localStorage.clear();
+                    rows = JSON.parse(rows);
                     lable:
                     {
                         for (var i = 0; i < rows.length; i++) {
@@ -1079,7 +1088,10 @@
                 area: ['800px', '520px'],
                 content: "/stock/stock/yinxing/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
-                    var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    //var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    var rows = window.localStorage.getItem("key");
+                    window.localStorage.clear();
+                    rows = JSON.parse(rows);
                     lable:
                     {
                         for (var i = 0; i < rows.length; i++) {
@@ -1168,7 +1180,10 @@
                 area: ['800px', '520px'],
                 content: "/stock/stock/hly/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
-                    var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    //var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    var rows = window.localStorage.getItem("key");
+                    window.localStorage.clear();
+                    rows = JSON.parse(rows);
                     lable:
                     {
                         for (var i = 0; i < rows.length; i++) {
@@ -1253,7 +1268,10 @@
                 area: ['800px', '520px'],
                 content: "/stock/stock/tyj/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
-                    var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    //var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    var rows = window.localStorage.getItem("key");
+                    window.localStorage.clear();
+                    rows = JSON.parse(rows);
                     lable:
                     {
                         for (var i = 0; i < rows.length; i++) {
@@ -1337,7 +1355,10 @@
                 area: ['800px', '520px'],
                 content: "/stock/stock/lhj/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
-                    var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    //var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    var rows = window.localStorage.getItem("key");
+                    window.localStorage.clear();
+                    rows = JSON.parse(rows);
                     lable:
                     {
                         for (var i = 0; i < rows.length; i++) {
@@ -1423,7 +1444,10 @@
                 area: ['800px', '520px'],
                 content: "/stock/stock/hc/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
-                    var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    //var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    var rows = window.localStorage.getItem("key");
+                    window.localStorage.clear();
+                    rows = JSON.parse(rows);
                     lable:
                     {
                         for (var i = 0; i < rows.length; i++) {
@@ -1506,7 +1530,10 @@
                 area: ['800px', '520px'],
                 content: "/stock/stock/sg/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
-                    var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    //var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    var rows = window.localStorage.getItem("key");
+                    window.localStorage.clear();
+                    rows = JSON.parse(rows);
                     lable:
                     {
                         for (var i = 0; i < rows.length; i++) {
@@ -1587,9 +1614,10 @@
                 area: ['800px', '520px'],
                 content: "/stock/stock/sgdz/" + mfrsid + "/" + mfrsname,// iframe的url
                 cancel: function (index, layero) {
-                    var rows = window[layero.find('iframe')[0]['name']].showCol();
-                    alert(rows);
-                    alert(JSON.stringify(rows));
+                    //var rows = window[layero.find('iframe')[0]['name']].showCol();
+                    var rows = window.localStorage.getItem("key");
+                    window.localStorage.clear();
+                    rows = JSON.parse(rows);
                     lable:
                     {
                         for (var i = 0; i < rows.length; i++) {

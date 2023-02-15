@@ -999,6 +999,11 @@ public class StoreSalesController {
                     }
                 } else {
                     for (StockDO stockDO : jpdzDOList){
+                        if ("0".equals(params.get("jingpianType").toString())) {
+                            stockDO.setLeftRight("右");
+                        } else if ("1".equals(params.get("jingpianType").toString())) {
+                            stockDO.setLeftRight("左");
+                        }
                         newJpdzList.add(stockDO);
                     }
                 }

@@ -110,16 +110,19 @@ public class OptometryLineController {
             lineDO.setConsultRoom(consultRoom);
             lineDO.setCallStatus(String.valueOf(callStatus));
             optometryLineService.update(lineDO);
-            YgLineMemberDO lineMemberDO = new YgLineMemberDO();
-            lineMemberDO.setConsultRoom(consultRoom);
-            lineMemberDO.setMemberName(lineDOs.getMemberName());
-            lineMemberDO.setSex(lineDOs.getSex());
-            lineMemberDO.setLineTime(lineDOs.getLineTime());
-            if(optometryLineService.saveLineMember(lineMemberDO)>0){
-                return R.ok();
+            for (int i=0;i<2;i++){
+                YgLineMemberDO lineMemberDO = new YgLineMemberDO();
+                lineMemberDO.setConsultRoom(consultRoom);
+                lineMemberDO.setMemberName(lineDOs.getMemberName());
+                lineMemberDO.setSex(lineDOs.getSex());
+                lineMemberDO.setLineTime(lineDOs.getLineTime());
+                optometryLineService.saveLineMember(lineMemberDO);
+//                if(optometryLineService.saveLineMember(lineMemberDO)>0){
+//                    return R.ok();
+//                }
             }
         }
-        return R.error();
+        return R.ok();
     }
 
     /**

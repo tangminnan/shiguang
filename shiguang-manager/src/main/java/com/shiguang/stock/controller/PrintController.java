@@ -34,6 +34,7 @@ public class PrintController {
     //批量打印
     @ResponseBody
     @RequestMapping("/batchCode")
+    @RequiresPermissions("print:print:print")
     public PageUtils batchCode(@RequestParam Map<String, Object> params, Model model){
         //查询列表数据
         Query query = new Query(params);
@@ -43,21 +44,18 @@ public class PrintController {
         return pageUtils;
     }
 
-    @PostMapping("/selectCode")
-    @ResponseBody
-    public String selectCode(@RequestParam("goodsNum[]") String[] goodsNum, Model model){
-        StringBuilder builder = new StringBuilder();
-        for (int a=0;a<goodsNum.length;a++){
-            builder.append(goodsNum[a]);
-        }
-        String num = builder.toString();
-        List<StockDO> stockDOList = stockService.codeBatch(num);
+    @GetMapping("/selectCode")
+    @RequiresPermissions("print:print:selectCode")
+    public String selectCode(String[] goodsNum, Model model){
+        Map<String,Object> map = new HashMap<>();
+        map.put("goodsNum",goodsNum);
+        List<StockDO> stockDOList = stockService.codeBatch(map);
         for (StockDO stockDO : stockDOList){
             String code = QRCodeUtil.creatRrCode(stockDO.getGoodsCode(), 200,200);
             code = "data:image/png;base64," + code;
             stockDO.setQRCode(code);
         }
         model.addAttribute("stockDOList", stockDOList);
-        return "/stock/print/codePrint";
+        return "/stock/print/code";
     }
 }

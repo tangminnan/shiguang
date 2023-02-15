@@ -142,7 +142,7 @@ public interface StockDao {
     List<StockDO> kccxList(Map<String, Object> map);
     int countall(Map<String, Object> map);
     int kccxListCount(Map<String, Object> map);
-    List<StockDO> codeBatch(String num);
+    List<StockDO> codeBatch(Map<String, Object> map);
 
     int updateStatus(StockDO stock);
 
