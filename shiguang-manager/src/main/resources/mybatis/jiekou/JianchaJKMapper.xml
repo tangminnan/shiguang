@@ -17,7 +17,7 @@
 	<select id="getRoomNUM" resultType="int">
 		select count(*) from ygline
 		<where>
-			<if test="date != null and date != ''"> and DATE_FORMAT(line_time, "%Y-%m-%d") = #{date}</if>
+			and DATE_FORMAT(line_time, "%Y-%m-%d %H") = DATE_FORMAT(NOW(), "%Y-%m-%d %H")
 			<if test="ygRoom != null and ygRoom != ''"> and consult_room = #{ygRoom}</if>
 		</where>
 	</select>

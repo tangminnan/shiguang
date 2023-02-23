@@ -278,9 +278,10 @@ public class JKController {
     @PostMapping("/optometryline/lineHis")
     public Map<String,Object> lineHis(@RequestBody JSONObject obj){
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+//        SimpleDateFormat sdfHour=new SimpleDateFormat("yyyy-MM-dd HH");
         Map<String,Object> map=new HashMap<>();
         Map<String,Object> tiaojian=new HashMap<>();
-        tiaojian.put("date",sdf.format(new Date()));
+//        tiaojian.put("date",sdfHour.format(new Date()));
         YgLineJKDO ygLineJKDO=new YgLineJKDO();
         String memberName=obj.getString("memberName");
         String cardNumber=obj.getString("cardNumber");
