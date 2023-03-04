@@ -12,6 +12,10 @@ public interface OptometryLineService {
 
     int count(Map<String, Object> map);
 
+    List<YgLineDO> overList(Map<String,Object> map);
+
+    int overCount(Map<String,Object> map);
+
     int update(YgLineDO line);
 
     int updateStatus(YgLineDO ygLineDO);

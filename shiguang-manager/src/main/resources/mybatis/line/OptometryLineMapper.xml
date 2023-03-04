@@ -20,10 +20,10 @@
             <choose>
                 <when test="consultRoom != null and consultRoom != ''">
                     and consult_room = #{consultRoom}
-                    and  call_status = '0'
+                    and  (call_status !='4' and call_status !='5' and call_status !='6')
                 </when>
                 <otherwise>
-                    and  call_status = '0'
+                    and  (call_status !='4' and call_status !='5' and call_status !='6')
                 </otherwise>
             </choose>
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
@@ -73,16 +73,55 @@
             <if test="callStatus != null and callStatus != ''"> and call_status = #{callStatus} </if>
             <choose>
                 <when test="consultRoom != null and consultRoom != ''">
-                    and (consult_room = #{consultRoom} and call_status in ('1','2','3') or call_status = '0')
+                    and consult_room = #{consultRoom} and (call_status !='4' and call_status !='5' and call_status !='6')
                 </when>
                 <otherwise>
-                   and (call_status in ('1','2','3') or call_status = '0')
+                   and (call_status !='4' and call_status !='5' and call_status !='6')
                 </otherwise>
             </choose>
 
             <!--<if test="consultRoom != null and consultRoom != ''">and (consult_room = #{consultRoom} and call_status in ('1','2','3'))</if>-->
              <!--or call_status = '0'-->
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+        </where>
+    </select>
+
+    <select id="overList" resultType="com.shiguang.line.domain.YgLineDO">
+        select `id`,`sex`,`company_id`,`member_name`,`call_status`,`consult_room`,`line_time` from ygline
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="companyId != null and companyId != ''"> and company_id = #{companyId} </if>
+            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+            and call_status = '6'
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by line_time ASC
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="overCount" resultType="int">
+        select count(*) from ygline
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="memberNumber != null and memberNumber != ''"> and member_number = #{memberNumber} </if>
+            <if test="companyId != null and companyId != ''"> and company_id = #{companyId} </if>
+            <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
+            <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
+            <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
+            and call_status = '6'
         </where>
     </select>
 
@@ -96,7 +135,7 @@
             <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
             <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
-            and (consult_room is not null or consult_room !='') and call_status != '4'
+            and (consult_room is not null or consult_room !='') and call_status != '4' and call_status != '6' and call_status != '5' and call_status != '0'
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -121,7 +160,7 @@
             <if test="memberName != null and memberName != ''"> and member_name = #{memberName} </if>
             <!--<if test="consultRoom != null and consultRoom != ''">and consult_room = #{consultRoom}</if>-->
             <if test="lineTime != null and lineTime != ''"> and date_format(line_time ,'%Y-%m-%d') = #{lineTime} </if>
-            and (consult_room is not null or consult_room !='') and call_status != '4' and call_status != '1'
+            and (consult_room is not null or consult_room !='') and call_status != '4' and call_status not in ('1','2','3') and call_status != '5'
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -176,7 +215,7 @@
         <set>
             <if test="callStatus != null">`call_status` = #{callStatus} </if>
         </set>
-        where member_number = #{memberNumber} and date_format(line_time ,'%Y-%m-%d') = #{lineDate}
+        where (member_number = #{memberNumber} or member_name = #{memberName}) and date_format(line_time ,'%Y-%m-%d') = #{lineDate}
     </update>
 
     <select id="listMember" resultType="com.shiguang.line.domain.YgLineMemberDO">

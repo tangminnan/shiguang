@@ -74,7 +74,10 @@ function load() {
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
 												+ row.id
 												+ '\')"><i class="fa fa-key"></i></a> ';
-										return d;
+                                        var g = '<a class="btn btn-primary btn-xs" href="#" title="过号"  mce_href="#" onclick="overLine(\''
+                                            + row.id
+                                            + '\')" style="text-decoration: none;">过号</a>';
+										return d + g;
 									}
 								}
 								]
@@ -125,6 +128,25 @@ function add() {
 	// 	content : prefix + '/add' // iframe的url
 	// });
 }
+
+function overLine(id){
+    $.ajax({
+        url : prefix+"/overLine",
+        type : "post",
+        data : {
+            'id' : id
+        },
+        success : function(r) {
+            if (r.code==0) {
+                layer.msg(r.msg);
+                reLoad();
+            }else{
+                layer.msg(r.msg);
+            }
+        }
+    });
+}
+
 function randomCall(id) {
     var consultRoom = $("#consultRoom").val();
     $.ajax({

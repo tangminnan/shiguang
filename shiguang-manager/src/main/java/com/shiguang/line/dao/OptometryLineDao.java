@@ -12,8 +12,11 @@ public interface OptometryLineDao {
 
     List<YgLineDO> list(Map<String, Object> map);
 
-
     int count(Map<String, Object> map);
+
+    List<YgLineDO> overList(Map<String,Object> map);
+
+    int overCount(Map<String,Object> map);
 
     int update(YgLineDO line);
 
