@@ -17,7 +17,7 @@ public class YgLineMemberDO implements Serializable {
 
     private Date lineTime;
 
-    private String lineDate;
+//    private String lineDate;
 
     /**
      * 设置：
@@ -48,9 +48,9 @@ public class YgLineMemberDO implements Serializable {
 
     public Date getLineTime(){return lineTime;}
 
-    public void setLineDate(String lineDate){this.lineDate = lineDate;}
-
-    public String getLineDate(){return lineDate;}
+//    public void setLineDate(String lineDate){this.lineDate = lineDate;}
+//
+//    public String getLineDate(){return lineDate;}
 
 
 }

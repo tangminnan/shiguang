@@ -138,6 +138,13 @@ public class OptometryLineController {
         map.put("lineTime",simpleDateFormat.format(new Date()));
         List<YgLineDO> lineDOList = optometryLineService.linesList(map);
         //排队的
+        for (YgLineDO ygLineDO : lineDOList){
+            if ("0".equals(ygLineDO.getCallStatus())){
+                ygLineDO.setCallStatus("排队中");
+            } else if ("6".equals(ygLineDO.getCallStatus())){
+                ygLineDO.setCallStatus("已过号");
+            }
+        }
         resultMap.put("lineDOList",lineDOList);
         List<YgLineMemberDO> lineMemberDOList = new ArrayList<>();
         List<YgLineMemberDO> lineMemberDOS = optometryLineService.listMember(map);
@@ -179,6 +186,42 @@ public class OptometryLineController {
             optometryLineService.removeMember(lineMemberDOS.get(0).getId());
         }
         return resultMap;
+    }
+
+    /**
+     * 患者已过号
+     * @param id
+     * @return
+     */
+    @PostMapping( "/overLine")
+    @ResponseBody
+    @RequiresPermissions("information:optometryline:overLine")
+    public R overLine(Long id){
+        YgLineDO ygLineDO = new YgLineDO();
+        ygLineDO.setId(id);
+        ygLineDO.setCallStatus("6");
+        optometryLineService.update(ygLineDO);
+        return R.ok();
+    }
+
+    /**
+     * 查询排队情况
+     */
+    @GetMapping("/listLine")
+    @ResponseBody
+    public Map<String,Object> listLine(){
+        Map<String,Object> resultMap = new HashMap<>();
+        Map<String,Object> map = new HashMap<>();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        map.put("lineTime",simpleDateFormat.format(new Date()));
+        List<YgLineDO> lineDOList = optometryLineService.linesList(map);
+        //排队的人员信息
+        resultMap.put("lineDOList",lineDOList);
+        //被叫人的信息
+        List<YgLineMemberDO> ygLineMemberDOList = optometryLineService.linememberList(map);
+        resultMap.put("ygLineMemberDOList",ygLineMemberDOList);
+        //正在问诊的
+        return map;
     }
 
 
@@ -379,7 +422,7 @@ public class OptometryLineController {
 //				lineDO.setMemberNumber(lineMemberDO.getMemberNumber());
 //				lineDO.setLineDate(simpleDateFormat.format(new Date()));
 //				lineService.removeMember(lineDO);
-            optometryLineService.removeMember(lineMemberDOS.get(0).getId());
+            optometryLineService.removeold(lineMemberDOS.get(0).getId());
         }
         return resultMap;
     }
