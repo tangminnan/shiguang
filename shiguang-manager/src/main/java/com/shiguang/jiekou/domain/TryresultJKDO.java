@@ -300,6 +300,25 @@ public class TryresultJKDO implements Serializable {
     private String remarks;
     //删除状态
     private String status;
+    //
+    private String optometryId;
+    private String referralDoctorId;
+
+    public String getOptometryId() {
+        return optometryId;
+    }
+
+    public void setOptometryId(String optometryId) {
+        this.optometryId = optometryId;
+    }
+
+    public String getReferralDoctorId() {
+        return referralDoctorId;
+    }
+
+    public void setReferralDoctorId(String referralDoctorId) {
+        this.referralDoctorId = referralDoctorId;
+    }
 
     public Long getId() {
         return id;

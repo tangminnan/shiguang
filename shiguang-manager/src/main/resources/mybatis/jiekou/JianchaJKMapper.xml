@@ -39,7 +39,7 @@
 			   `sgn_ciss`,`sgn_fardot`,`sgn_neardot`,`sgn_farsp1`,`sgn_farsp2`,`sgn_farcz1`,`sgn_farcz2`,`sgn_nearsp1`,`sgn_nearsp2`,`sgn_nearcz1`,`sgn_nearcz2`,
 			   `sgn_vgfarsp1`,`sgn_vgfarsp2`,`sgn_vgnearsp1`,`sgn_vgnearsp2`,`sgn_vgfarcz1`,`sgn_vgfarcz2`,`sgn_vgnearcz1`,`sgn_vgnearcz2`,`sgn_allygytj1`,
 			   `sgn_allygytj2`,`sgn_ac`,`sgn_acway`,`sgn_tjfy`,`sgn_tjfyou`,`sgn_tjfyod`,`sgn_tjfyos`,`sgn_pra`,`sgn_nra`,`sgn_zfsf`,`sphere_right2`,`sphere_left2`,
-			   `cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`,`tjod`,`tjos`,jc.`status`,`litishi`
+			   `cylinder_right2`,`cylinder_left2`,`axial_right2`,`axial_left2`,`tjod`,`tjos`,jc.`status`,`litishi`,su.username optometry_id
 		from jc_tryresults jc
 		inner join sys_user su on jc.optometry_name=su.name
 		<where>

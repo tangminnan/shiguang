@@ -149,16 +149,6 @@ public class JKController {
         map1.put("phone1",obj.getString("phone1"));
         map1.put("startTime",obj.getString("startTime"));
         map1.put("endTime",obj.getString("endTime"));
-//        if(obj.getLong("offset")==null){
-//            map1.put("offset",0);
-//        }else {
-//            map1.put("offset",obj.getLong("offset"));
-//        }
-//        if(obj.getLong("limit")==null){
-//            map1.put("limit",1000);
-//        }else {
-//            map1.put("limit",obj.getLong("limit"));
-//        }
 
         List<MemberJKDO> MemberJKDOS = memberJkService.list(map1);
         List<Map> list= new ArrayList<>();
