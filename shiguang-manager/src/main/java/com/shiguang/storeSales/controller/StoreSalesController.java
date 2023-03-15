@@ -146,6 +146,8 @@ public class StoreSalesController {
     private IntegralService integralService;
     @Autowired
     private InfoService infoService;
+    @Autowired
+    private TryresultsService tryresultsService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -399,6 +401,15 @@ public class StoreSalesController {
             model.addAttribute("newOlds","老院区");
         }
         model.addAttribute("newOld",newOld);
+        String companyId = null;
+        if (null != ShiroUtils.getUser().getCompanyId()) {
+            companyId = ShiroUtils.getUser().getCompanyId();
+        }
+        Map<String,Object> doctorMap=new HashMap<>();
+        doctorMap.put("roleName","医生");
+        doctorMap.put("companyId",companyId);
+        List<TryresultsDO> listDoctor = tryresultsService.listDoctor(doctorMap);
+        model.addAttribute("listDoctor",listDoctor);
         return "storeSales/edit";
     }
 

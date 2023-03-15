@@ -24,6 +24,7 @@ public class YgLineDO implements Serializable {
     private Date lineTime;
 
     private String lineDate;
+    private Integer num;
 
     /**
      * 设置：
@@ -78,5 +79,11 @@ public class YgLineDO implements Serializable {
 
     public String getLineDate(){return lineDate;}
 
+    public Integer getNum() {
+        return num;
+    }
 
+    public void setNum(Integer num) {
+        this.num = num;
+    }
 }

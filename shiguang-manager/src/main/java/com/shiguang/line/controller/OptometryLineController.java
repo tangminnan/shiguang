@@ -209,19 +209,37 @@ public class OptometryLineController {
      */
     @GetMapping("/listLine")
     @ResponseBody
-    public Map<String,Object> listLine(){
+    public Map<String,Object> listLine(Integer offset,Integer limit){
         Map<String,Object> resultMap = new HashMap<>();
         Map<String,Object> map = new HashMap<>();
+        Map<String,Object> pagemap = new HashMap<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         map.put("lineTime",simpleDateFormat.format(new Date()));
+        if(offset == 0){
+            map.put("offset",offset);
+        } else {
+            map.put("offset",offset * 8);
+        }
+
+        map.put("limit",limit);
         List<YgLineDO> lineDOList = optometryLineService.linesList(map);
+        pagemap.put("lineTime",simpleDateFormat.format(new Date()));
+        List<YgLineDO> lineDOPageList = optometryLineService.linesList(pagemap);
         //排队的人员信息
+        int i=0;
+        for (YgLineDO ygLineDO : lineDOList){
+            ygLineDO.setNum(i+1);
+            if ("0".equals(ygLineDO.getCallStatus())){
+                ygLineDO.setCallStatus("排队中");
+            } else if ("6".equals(ygLineDO.getCallStatus())){
+                ygLineDO.setCallStatus("已过号");
+            }
+        }
+        int size = lineDOPageList.size();
+        int pages = size / 8 + (size % 8 != 0 ? 1 : 0);
         resultMap.put("lineDOList",lineDOList);
-        //被叫人的信息
-        List<YgLineMemberDO> ygLineMemberDOList = optometryLineService.linememberList(map);
-        resultMap.put("ygLineMemberDOList",ygLineMemberDOList);
-        //正在问诊的
-        return map;
+        resultMap.put("pages",pages ==0?1:pages);
+        return resultMap;
     }
 
 

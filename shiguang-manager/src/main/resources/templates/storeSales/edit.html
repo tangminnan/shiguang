@@ -101,6 +101,19 @@
 						<em></em>
 					</td>
 				</tr>
+				<tr id="tab12" style="display:none;">
+					<td>医生</td>
+					<td>
+						<select id="doctora" name="doctorName" style="width: 100px;">
+							<option value="">--请选择--</option>
+							<option th:each="ls:${listDoctor}"
+									th:text="${ls.name}"
+									th:value="${ls.name}"></option>
+						</select>
+						<!--<input name="doctorName" id="doctorName" type="hidden">-->
+						<em></em>
+					</td>
+				</tr>
 				<tr id="tab111" style="display:none;">
 					<td>外来处方</td>
 					<td class="wailai">
@@ -1453,6 +1466,7 @@
 		if (value ==2){
 		    tab1.style="display:''";
             tab11.style="display:''";
+            tab12.style="display:''";
             tab111.style="display:''";
             tab1111.style="display:''";
             tab11111.style="display:''";
@@ -1461,9 +1475,11 @@
             tab2.style="display:none";
             tab22.style="display:none";
             document.getElementById("disaa").value="";
+            document.getElementById("doctora").value="";
 		} else if (value ==1){
             tab1.style="display:none";
             tab11.style="display:none";
+            tab12.style="display:none";
             tab111.style="display:none";
             tab1111.style="display:none";
             tab11111.style="display:none";
@@ -1683,9 +1699,11 @@
 	function check(a){
 		if (a.checked == true){
             document.getElementById('disaa').readOnly = true;
+            document.getElementById('doctora').readOnly=true;
             outRecipel.style = "display:''";
 		} else if (a.checked == false){
             document.getElementById('disaa').readOnly = false;
+            document.getElementById('doctora').readOnly = false;
             outRecipel.style = "display:none;";
 		}
 	}

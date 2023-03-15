@@ -118,6 +118,8 @@ public class SalesDO implements Serializable {
 	private String settleTime;
 	//验光师
 	private String optometryName;
+	//医生
+	private String doctorName;
 	//右眼瞳高
 	private String righttg;
 	//左眼瞳高
@@ -1190,6 +1192,14 @@ public class SalesDO implements Serializable {
 	 */
 	public void setOptometryName(String optometryName) {
 		this.optometryName = optometryName;
+	}
+
+	public String getDoctorName() {
+		return doctorName;
+	}
+
+	public void setDoctorName(String doctorName) {
+		this.doctorName = doctorName;
 	}
 
 	/**

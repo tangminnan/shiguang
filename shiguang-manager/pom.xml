@@ -352,7 +352,7 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <compilerArguments>
-                        <extdirs>F:\shiguangnew\shiguang\shiguang-manager\lib</extdirs>
+                        <extdirs>E:\shiguangnew\shiguang\shiguang-manager\lib</extdirs>
                     </compilerArguments>
                 </configuration>
             </plugin>
