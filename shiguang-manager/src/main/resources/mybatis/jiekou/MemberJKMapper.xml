@@ -4,7 +4,7 @@
 <mapper namespace="com.shiguang.jiekou.dao.MemberJKDao">
 
 	<select id="getLine" resultType="Map">
-		select id,company_id,member_number memberNum,member_name memberName,sex,consult_room,line_time from ygline where call_status=5 and DATE_FORMAT(line_time, "%Y-%m-%d") = #{value}
+		select id,company_id,member_number memberNum,member_name memberName,sex,consult_room,line_time from ygline where call_status=55 and DATE_FORMAT(line_time, "%Y-%m-%d") = #{value}
 	</select>
 
 	<select id="getCardNumber" resultType="com.shiguang.jiekou.domain.MemberJKDO">

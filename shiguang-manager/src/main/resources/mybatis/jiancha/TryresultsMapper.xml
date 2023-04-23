@@ -991,6 +991,7 @@
             <if test="cardNumber != null and cardNumber != ''"> and card_number = #{value} </if>
             <if test="ptometryNumber != null and ptometryNumber != ''"> and ptometry_number = #{ptometryNumber} </if>
         </where>
+        GROUP BY ptometry_number
 		order by id desc
 	</select>
 

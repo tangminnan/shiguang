@@ -751,6 +751,7 @@ public class SettlementController {
 		map2.put("ptometryNumber",settlementDO.getPtometryNumber());
 		if (!"".equals(settlementDO.getOptometrywlName()) && null != settlementDO.getOptometrywlName()){
 			model.addAttribute("optometryName",settlementDO.getOptometrywlName());
+			conclusion.setDoctorName(settlementDO.getDoctorName());
 			if (1 == settlementDO.getRecipelwlType()){
 				List<KjjyDO> kjjyDOList = kjjyService.list(map2);
 				if (null != kjjyDOList && kjjyDOList.size() > 0){
@@ -1043,6 +1044,7 @@ public class SettlementController {
 						conclusion.setRightsph(conclusion1.getRightsph());
 						conclusion.setRightcyl(conclusion1.getRightcyl());
 						conclusion.setRightzx(conclusion1.getRightzx());
+						conclusion.setDoctorName(conclusion1.getDoctorName());
 						if (null != conclusion1.getRightva() && !"".equals(conclusion1.getRightva()) ){
 							conclusion.setRightva(conclusion1.getRightva());
 						}else {

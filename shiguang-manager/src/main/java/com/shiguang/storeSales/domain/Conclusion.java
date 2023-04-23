@@ -24,6 +24,8 @@ public class Conclusion implements Serializable {
     private String yangsName;
     //验光师
     private String yanguangName;
+    //医生
+    private String doctorName;
     //球镜OD
     private String rightsph;
     //球镜OS
@@ -144,6 +146,10 @@ public class Conclusion implements Serializable {
     public void setYanguangName(String yanguangName){this.yanguangName = yanguangName;}
 
     public String getYanguangName() {return yanguangName;}
+
+    public void setDoctorName(String doctorName){this.doctorName = doctorName;}
+
+    public String getDoctorName() {return doctorName;}
 
     public void setRightsph(String rightsph) {this.rightsph = rightsph;}
 

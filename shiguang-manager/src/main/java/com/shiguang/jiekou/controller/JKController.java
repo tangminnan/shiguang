@@ -302,7 +302,7 @@ public class JKController {
                     ygLineJKDO.setMemberNumber(cardNumber);
                     ygLineJKDO.setSex(sex);
                     ygLineJKDO.setConsultRoom(HISZS);
-                    ygLineJKDO.setCallStatus("4");
+                    ygLineJKDO.setCallStatus("44");
                     ygLineJKDO.setCompanyId("1");
                     ygLineJKDO.setLineTime(new Date());
                     int lineJKSave=jianchaJKService.lineJKSave(ygLineJKDO);
@@ -318,7 +318,7 @@ public class JKController {
                     ygLineJKDO.setMemberNumber(cardNumber);
                     ygLineJKDO.setSex(sex);
                     ygLineJKDO.setConsultRoom(yyygRoom);
-                    ygLineJKDO.setCallStatus("5");
+                    ygLineJKDO.setCallStatus("55");
                     ygLineJKDO.setCompanyId("1");
                     ygLineJKDO.setLineTime(new Date());
                     int lineJKSave=jianchaJKService.lineJKSave(ygLineJKDO);
@@ -336,7 +336,7 @@ public class JKController {
                 ygLineJKDO.setMemberNumber(cardNumber);
                 ygLineJKDO.setSex(sex);
                 ygLineJKDO.setConsultRoom(yyygRoom);
-                ygLineJKDO.setCallStatus("5");
+                ygLineJKDO.setCallStatus("55");
                 ygLineJKDO.setCompanyId("1");
                 ygLineJKDO.setLineTime(new Date());
                 int lineJKSave=jianchaJKService.lineJKSave(ygLineJKDO);

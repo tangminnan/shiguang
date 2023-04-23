@@ -108,7 +108,7 @@ public class TryresultsController {
         ygLineDO.setLineDate(simpleDateFormat.format(new Date()));
         ygLineDO.setMemberNumber(tryresults.getCardNumber());
         ygLineDO.setMemberName(tryresults.getName());
-        ygLineDO.setCallStatus("4");
+        ygLineDO.setCallStatus("44");
         optometryLineService.updateStatus(ygLineDO);
 //        }
       String ptometryNumber= tryresults.getPtometryNumber();

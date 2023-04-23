@@ -141,7 +141,7 @@ public class OptometryLineController {
         for (YgLineDO ygLineDO : lineDOList){
             if ("0".equals(ygLineDO.getCallStatus())){
                 ygLineDO.setCallStatus("排队中");
-            } else if ("6".equals(ygLineDO.getCallStatus())){
+            } else if ("66".equals(ygLineDO.getCallStatus())){
                 ygLineDO.setCallStatus("已过号");
             }
         }
@@ -199,7 +199,7 @@ public class OptometryLineController {
     public R overLine(Long id){
         YgLineDO ygLineDO = new YgLineDO();
         ygLineDO.setId(id);
-        ygLineDO.setCallStatus("6");
+        ygLineDO.setCallStatus("66");
         optometryLineService.update(ygLineDO);
         return R.ok();
     }
@@ -231,7 +231,7 @@ public class OptometryLineController {
             ygLineDO.setNum(i+1);
             if ("0".equals(ygLineDO.getCallStatus())){
                 ygLineDO.setCallStatus("排队中");
-            } else if ("6".equals(ygLineDO.getCallStatus())){
+            } else if ("66.".equals(ygLineDO.getCallStatus())){
                 ygLineDO.setCallStatus("已过号");
             }
         }
