@@ -394,13 +394,13 @@
 	</select>
 	<!-- 查询自片和自架 -->
 	<select id="findZpian" resultType="com.shiguang.storeSales.domain.ZipianDO">
-		select `id`,`produc_num`,`produc_code`,`produc_name`,`retail_price`,`sph`,`cyl`,`lightbelow`,`refractivity`,`light`,`lens` from zipian
+		select `id`,`produc_num`,`produc_code`,`produc_name`,`brandname`,`retail_price`,`sph`,`cyl`,`lightbelow`,`refractivity`,`light`,`lens` from zipian
 	</select>
 	<select id="countZpian" resultType="int">
 		select count(*) from zipian
 	</select>
 	<select id="findZjia" resultType="com.shiguang.storeSales.domain.ZijiaDO">
-		select `id`,`produc_num`,`produc_code`,`produc_name`,`produc_factory`,`retail_price`,`produc_color` from zijia
+		select `id`,`produc_num`,`produc_code`,`produc_name`,`brandname`,`produc_factory`,`retail_price`,`produc_color` from zijia
 	</select>
 	<select id="countZjia" resultType="int">
 		select count(*) from zijia
@@ -938,5 +938,6 @@
 		from store_sales s
 		join member m on s.member_number = m.card_number and m.state = 1 and m.`status` = 0
 		where sale_number = #{value}
+		group by sale_number
 	</select>
 </mapper>

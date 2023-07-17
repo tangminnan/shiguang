@@ -181,7 +181,6 @@
 		FROM
 		settlement s
 		JOIN member m ON m.card_number = s.member_number
-		JOIN department dt ON dt.company_id = m.company_id
 		join sys_user su on su.username = s.sale_acount
 		LEFT JOIN drawback d ON d.sale_number = s.sale_number
 		<where>
@@ -194,7 +193,6 @@
 			<if test="saleAccount != null and saleAccount != ''">and s.`sale_acount` = #{saleAccount}</if>
 		</where>
 		GROUP BY s.sale_number
-		order by dt.depart_number
 	</select>
 	<select id="findSaleReportFormsCount" resultType="com.shiguang.settlement.domain.SettlementDO">
 		select count (*)
@@ -216,8 +214,9 @@
 		s.`store_name`,s.`store_describe`,s.`store_unit`,s.`store_count`,s.`remark`,s.`saleremark`,s.`give_name`,s.`peijing_time`,s.`optometry_name`,s.`out_recipel`,s.jj_goods_name,s.`brand_name`,
 		s.`recipel_type`,s.`optometrywl_name`,s.`recipelwl_type`,s.`taocan_name`,s.`classtype`,s.`additional_price`,s.`additional_count`,s.`unit`,s.`batch`,s.`left_right`,s.`righttg`,s.`lefttg`
 		from store_sales s join settlement st on st.sale_number = s.sale_number join member m on m.card_number = s.member_number
+		<!--
 		join sys_user su on su.username = s.user_name
-		join department d on d.company_id = m.company_id
+		join department d on d.company_id = m.company_id -->
 		<where>
 			<if test="settleDateStart !=null and settleDateStart != ''">and date_format(st.settle_date ,'%Y-%m-%d' ) >= (#{settleDateStart})</if>
 			<if test="settleDateEnd !=null and settleDateEnd != ''">and date_format(st.settle_date ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>

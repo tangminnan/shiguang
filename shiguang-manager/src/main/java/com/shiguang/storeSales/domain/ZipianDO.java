@@ -23,6 +23,8 @@ public class ZipianDO implements Serializable {
 	private String producCode;
 	//商品名称
 	private String producName;
+	//品牌
+	private String brandname;
 	//零售价格
 	private Double retailPrice;
 	//球镜
@@ -171,5 +173,13 @@ public class ZipianDO implements Serializable {
 	 */
 	public String getLens() {
 		return lens;
+	}
+
+	public String getBrandname() {
+		return brandname;
+	}
+
+	public void setBrandname(String brandname) {
+		this.brandname = brandname;
 	}
 }

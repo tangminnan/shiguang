@@ -1,5 +1,6 @@
 package com.shiguang.member.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.shiguang.baseinfomation.domain.*;
 import com.shiguang.baseinfomation.service.*;
 import com.shiguang.common.utils.*;
@@ -26,9 +27,14 @@ import com.shiguang.system.domain.UserDO;
 import com.shiguang.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.jws.WebParam;
@@ -90,6 +96,8 @@ public class MemberController {
     private OptometryLineService optometryLineService;
     @Autowired
     private AdditionalService additionalService;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @GetMapping()
     @RequiresPermissions("information:member:member")
@@ -273,16 +281,16 @@ public class MemberController {
         List<SalesDO> salesDOList = new ArrayList<>();
         PageUtils pageUtils = null;
         Long userId = ShiroUtils.getUser().getUserId();
-        Map<String,Object> map = new HashMap<>();
-        map.put("userId",userId);
-        List<UserDO> userDOList = userService.getRoleList(map);
-        if (null != userDOList && userDOList.size() > 0){
-            for (UserDO userDO : userDOList){
-                if ("验光师".equals(userDO.getRoleName())){
-                    return pageUtils;
-                }
-            }
-        }
+//        Map<String,Object> map = new HashMap<>();
+//        map.put("userId",userId);
+//        List<UserDO> userDOList = userService.getRoleList(map);
+//        if (null != userDOList && userDOList.size() > 0){
+//            for (UserDO userDO : userDOList){
+//                if ("验光师".equals(userDO.getRoleName())){
+//                    return pageUtils;
+//                }
+//            }
+//        }
         Query query = new Query(params);
         query.put("status","1");
         query.put("memberNumber",query.get("cardNumber"));
@@ -1662,7 +1670,16 @@ public class MemberController {
             member.setDepartNumber(ShiroUtils.getUser().getStoreNum());
         }
         member.setCompanyId(ShiroUtils.getUser().getCompanyId());
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
         if(memberService.save(member)>0){
+            List<MemberDO> memberDOList = new ArrayList<>();
+            memberDOList.add(member);
+            HttpEntity<List<MemberDO>> entity = new HttpEntity<>(memberDOList, httpHeaders);
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveMember", entity, String.class);
+            String response = responseEntity.getBody();
+            Map returnMap = JSON.parseObject(response, Map.class);
+            System.out.println("接口返回数据："+returnMap);
             return R.ok();
         }
         return R.error();

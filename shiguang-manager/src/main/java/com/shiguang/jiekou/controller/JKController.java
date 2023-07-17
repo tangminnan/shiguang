@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.shiguang.common.utils.GuuidUtil;
 import com.shiguang.common.utils.R;
+import com.shiguang.jiancha.domain.ResultDO;
 import com.shiguang.jiekou.domain.*;
 import com.shiguang.jiekou.service.JianchaJKService;
 import com.shiguang.jiekou.service.MemberJKService;
 import com.shiguang.jiekou.service.SettlementJKService;
+import com.shiguang.member.domain.MemberDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -119,7 +121,8 @@ public class JKController {
             member.setBirthdayDay(Long.valueOf(sdfDayString));
         }
 
-
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
         Map<String, Object> map1 = new HashMap<>();
 //        map1.put("cardsNumber",member.getCardNumber());
         map1.put("identityId",member.getIdentityId());
@@ -129,6 +132,13 @@ public class JKController {
             map.put("msg","会员已存在");
             map.put("code",1);
         }else if(memberJkService.save(member)>0){
+            List<MemberJKDO> memberJKDOList = new ArrayList<>();
+            memberJKDOList.add(member);
+            HttpEntity<List<MemberJKDO>> entity = new HttpEntity<>(memberJKDOList, httpHeaders);
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity("/http://111.41.199.127:8066/jiekou/saveMember", entity, String.class);
+            String response = responseEntity.getBody();
+            Map returnMap = JSON.parseObject(response, Map.class);
+            System.out.println("接口返回数据："+returnMap);
             map.put("msg","保存数据成功");
             map.put("code",0);
         }else{
@@ -443,7 +453,7 @@ public class JKController {
 
         httpHeadersR.setContentType(MediaType.APPLICATION_JSON_UTF8);
         HttpEntity<Map<String, Object>> entityR = new HttpEntity<>(data, httpHeadersR);
-        ResponseEntity<String> responseEntityR = restTemplate.postForEntity("http://124.71.227.53:8081/jiekou/getshaicha", entityR, String.class);
+        ResponseEntity<String> responseEntityR = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/getshaicha", entityR, String.class);
         String responseR = responseEntityR.getBody();
         List<Map<String,Object>> AllData = JSON.parseObject(responseR, List.class);
         map.put("data",AllData);

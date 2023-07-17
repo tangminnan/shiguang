@@ -23,6 +23,8 @@ public class ZijiaDO implements Serializable {
 	private String producCode;
 	//商品名称
 	private String producName;
+	//品牌
+	private String brandname;
 	//型号
 	private String producFactory;
 	//零售价格
@@ -113,5 +115,13 @@ public class ZijiaDO implements Serializable {
 	 */
 	public String getProducColor() {
 		return producColor;
+	}
+
+	public String getBrandname() {
+		return brandname;
+	}
+
+	public void setBrandname(String brandname) {
+		this.brandname = brandname;
 	}
 }

@@ -366,6 +366,7 @@
         left join c_brand b on j.brandnum=b.brandnum AND j.`mfrsid`=b.`mfrsid`
         left join c_unit u on u.unitid=j.unitid
         where j.`produc_num` = #{value}
+        GROUP BY j.`produc_num`
     </select>
 
     <delete id="batchRemove">

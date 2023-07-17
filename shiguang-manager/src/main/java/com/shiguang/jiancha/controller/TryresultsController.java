@@ -1,5 +1,6 @@
 package com.shiguang.jiancha.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.R;
@@ -18,9 +19,14 @@ import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.service.OptometryService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,6 +55,8 @@ public class TryresultsController {
     private PharmacyService pharmacyService;
     @Autowired
     private OptometryService optometryService;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @GetMapping()
     @RequiresPermissions("jiancha:tryresults:tryresults")
@@ -93,6 +101,8 @@ public class TryresultsController {
         if (newOld==null || newOld==""){
             tryresults.setNewOld(null);
         }
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        LineDO lineDO = new LineDO();
 //        lineDO.setMemberNumber(tryresults.getCardNumber());
@@ -153,8 +163,18 @@ public class TryresultsController {
         }
         if (list.size() > 0) {
             tryresultsService.updateTry(tryresults);
+            HttpEntity<TryresultsDO> entity = new HttpEntity<>(tryresults, httpHeaders);
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateTryresults", entity, String.class);
+            String response = responseEntity.getBody();
+            Map returnMap = JSON.parseObject(response, Map.class);
+            System.out.println("接口返回数据："+returnMap);
             return R.ok();
         }else if (tryresultsService.save(tryresults) > 0) {
+            HttpEntity<TryresultsDO> entity = new HttpEntity<>(tryresults, httpHeaders);
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveTryresults", entity, String.class);
+            String response = responseEntity.getBody();
+            Map returnMap = JSON.parseObject(response, Map.class);
+            System.out.println("接口返回数据："+returnMap);
             return R.ok();
         }
         return R.error();
@@ -253,6 +273,8 @@ public class TryresultsController {
     @ResponseBody
     @RequestMapping("/updateTry")
     public R updateTry(TryresultsDO tryresults) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
         if ("".equals(tryresults.getSphereRightz())) {
             tryresults.setSphereRightz("0.00");
         }
@@ -290,6 +312,11 @@ public class TryresultsController {
             tryresults.setAddLefttry("0.00");
         }
         tryresultsService.updateTry(tryresults);
+        HttpEntity<TryresultsDO> entity = new HttpEntity<>(tryresults, httpHeaders);
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateTryresults", entity, String.class);
+        String response = responseEntity.getBody();
+        Map returnMap = JSON.parseObject(response, Map.class);
+        System.out.println("接口返回数据："+returnMap);
         return R.ok();
     }
 }

@@ -1,7 +1,9 @@
 package com.shiguang.storeSales.controller;
 
 import com.shiguang.baseinfomation.domain.AdditionalDO;
+import com.shiguang.baseinfomation.domain.DepartmentDO;
 import com.shiguang.baseinfomation.service.AdditionalService;
+import com.shiguang.baseinfomation.service.DepartmentService;
 import com.shiguang.checkout.domain.CostDO;
 import com.shiguang.checkout.service.CostService;
 import com.shiguang.common.utils.*;
@@ -109,45 +111,19 @@ public class StoreSalesController {
     @Autowired
     private ResultService resultService;
     @Autowired
-    private KjjyService kjjyService;
-    @Autowired
-    private KjyyService kjyyService;
-    @Autowired
-    private SgjjService sgjjService;
-    @Autowired
-    private ZyService zyService;
-    @Autowired
-    private RxjmjcjService rxjmjcjService;
-    @Autowired
-    private SjxlService sjxlService;
-    @Autowired
-    private VstService vstService;
-    @Autowired
-    private CrtService crtService;
-    @Autowired
-    private RgpService rgpService;
-    @Autowired
-    private YaopinService yaopinService;
-    @Autowired
     private PackageInfoService packageInfoService;
     @Autowired
     private LogStatusService logStatusService;
     @Autowired
     private GoodsService goodsService;
     @Autowired
-    private WeiwaishujuService weiwaishujuService;
-    @Autowired
-    private WeiwaiService weiwaiService;
-    @Autowired
-    private MfrsService mfrsService;
-    @Autowired
     private CardService cardService;
-    @Autowired
-    private IntegralService integralService;
     @Autowired
     private InfoService infoService;
     @Autowired
     private TryresultsService tryresultsService;
+    @Autowired
+    private DepartmentService departmentService;
 
     @GetMapping()
     @RequiresPermissions("information:store:storeSales")
@@ -1461,6 +1437,13 @@ public class StoreSalesController {
         Long positionId = null;
         if (null != departNumber) {
             map.put("departNumber", departNumber);
+            PositionDO positionDO = stockService.findPosition(map);
+            if (null != positionDO) {
+                positionId = positionDO.getPositionId();
+            }
+        } else {
+            List<DepartmentDO> departmentDOList =departmentService.list(map);
+            map.put("departNumber", departmentDOList.get(0).getDepartNumber());
             PositionDO positionDO = stockService.findPosition(map);
             if (null != positionDO) {
                 positionId = positionDO.getPositionId();

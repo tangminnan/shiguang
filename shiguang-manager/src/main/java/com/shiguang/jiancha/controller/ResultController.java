@@ -1,5 +1,6 @@
 package com.shiguang.jiancha.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.shiguang.common.utils.R;
 import com.shiguang.common.utils.StringUtils;
 import com.shiguang.jiancha.domain.*;
@@ -7,9 +8,14 @@ import com.shiguang.jiancha.service.*;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 
 import java.text.SimpleDateFormat;
@@ -52,6 +58,8 @@ public class ResultController {
     private TryresultsService tryresultsService;
     @Autowired
     private PharmacyService pharmacyService;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @GetMapping()
     @RequiresPermissions("jiancha:result:result")
@@ -102,8 +110,15 @@ public class ResultController {
         List<ResultDO> rgpYgnum = rgpService.haveYanguangNum(map);
         List<ResultDO> yaopinYgnum = yaopinService.haveYanguangNum(map);
         List<ResultDO> resultYgnum = resultService.haveYanguangNum(map);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
         if (resultYgnum.size() > 0) {
             if (resultService.update(result) > 0) {
+                HttpEntity<ResultDO> entityR = new HttpEntity<>(result, httpHeaders);
+                ResponseEntity<String> responseEntityR = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateResult", entityR, String.class);
+                String responseR = responseEntityR.getBody();
+                Map returnMapR = JSON.parseObject(responseR, Map.class);
+                System.out.println("接口返回数据："+returnMapR);
                 tryresultsDO.setStatus("0");
                 if ("".equals(tryresultsDO.getSphereRightz())) {
                     tryresultsDO.setSphereRightz("0.00");
@@ -160,8 +175,18 @@ public class ResultController {
                         }
                         if (kjyyYgnum.size() > 0) {
                             kjyyServce.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateKjyy", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             kjyyServce.savekjyy(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveKjyy", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -184,8 +209,18 @@ public class ResultController {
                         }
                         if (kjjyYgnum.size() > 0) {
                             kjjyService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateKjjy", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             kjjyService.savekjjy(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveKjjy", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -208,8 +243,18 @@ public class ResultController {
                         }
                         if (sgjjYgnum.size() > 0) {
                             sgjjService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateSgjj", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             sgjjService.savesgjj(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveSgjj", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -232,8 +277,18 @@ public class ResultController {
                         }
                         if (rxjmjcjYgnum.size() > 0) {
                             rxjmjcjService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateRxjmjcj", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             rxjmjcjService.saveRxjmjcj(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveRxjmjcj", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -256,8 +311,18 @@ public class ResultController {
                         }
                         if (zyYgnum.size() > 0) {
                             zyService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateZy", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             zyService.saveZY(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveZy", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -280,8 +345,18 @@ public class ResultController {
                         }
                         if (sjxlYgnum.size() > 0) {
                             sjxlService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateSjxl", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             sjxlService.saveSjxl(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveSjxl", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -304,8 +379,18 @@ public class ResultController {
                         }
                         if (vstYgnum.size() > 0) {
                             vstService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateVst", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             vstService.saveVst(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveVst", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -328,8 +413,18 @@ public class ResultController {
                         }
                         if (crtYgnum.size() > 0) {
                             crtService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateCrt", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             crtService.saveCrt(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveCrt", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -352,8 +447,18 @@ public class ResultController {
                         }
                         if (rgpYgnum.size() > 0) {
                             rgpService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateRgp", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             rgpService.saveRgp(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveRgp", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -364,8 +469,18 @@ public class ResultController {
                     } else {
                         if (yaopinYgnum.size() > 0) {
                             yaopinService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateYaopin", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             yaopinService.saveYaopin(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveYaopin", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -375,6 +490,11 @@ public class ResultController {
             return R.error();
         } else {
             if (resultService.save(result) > 0) {
+                HttpEntity<ResultDO> entityR = new HttpEntity<>(result, httpHeaders);
+                ResponseEntity<String> responseEntityR = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveResult", entityR, String.class);
+                String responseR = responseEntityR.getBody();
+                Map returnMapR = JSON.parseObject(responseR, Map.class);
+                System.out.println("接口返回数据："+returnMapR);
                 tryresultsDO.setStatus("0");
 
                 if ("".equals(tryresultsDO.getSphereRightz())) {
@@ -433,8 +553,18 @@ public class ResultController {
                         }
                         if (kjyyYgnum.size() > 0) {
                             kjyyServce.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateKjyy", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             kjyyServce.savekjyy(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveKjyy", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -457,8 +587,18 @@ public class ResultController {
                         }
                         if (kjjyYgnum.size() > 0) {
                             kjjyService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateKjjy", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             kjjyService.savekjjy(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveKjjy", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -481,8 +621,18 @@ public class ResultController {
                         }
                         if (sgjjYgnum.size() > 0) {
                             sgjjService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateSgjj", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             sgjjService.savesgjj(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveSgjj", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -505,8 +655,18 @@ public class ResultController {
                         }
                         if (rxjmjcjYgnum.size() > 0) {
                             rxjmjcjService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateRxjmjcj", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             rxjmjcjService.saveRxjmjcj(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveRxjmjcj", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -529,8 +689,18 @@ public class ResultController {
                         }
                         if (zyYgnum.size() > 0) {
                             zyService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateZy", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             zyService.saveZY(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveZy", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -553,8 +723,18 @@ public class ResultController {
                         }
                         if (sjxlYgnum.size() > 0) {
                             sjxlService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateSjxl", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             sjxlService.saveSjxl(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveSjxl", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -577,8 +757,18 @@ public class ResultController {
                         }
                         if (vstYgnum.size() > 0) {
                             vstService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateVst", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             vstService.saveVst(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveVst", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -601,8 +791,18 @@ public class ResultController {
                         }
                         if (crtYgnum.size() > 0) {
                             crtService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateCrt", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             crtService.saveCrt(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveCrt", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -625,8 +825,18 @@ public class ResultController {
                         }
                         if (rgpYgnum.size() > 0) {
                             rgpService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateRgp", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             rgpService.saveRgp(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveRgp", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
 
                     }
@@ -637,8 +847,18 @@ public class ResultController {
                     } else {
                         if (yaopinYgnum.size() > 0) {
                             yaopinService.update(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/updateYaopin", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         } else {
                             yaopinService.saveYaopin(result);
+                            HttpEntity<ResultDO> entity = new HttpEntity<>(result, httpHeaders);
+                            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveYaopin", entity, String.class);
+                            String response = responseEntity.getBody();
+                            Map returnMap = JSON.parseObject(response, Map.class);
+                            System.out.println("接口返回数据："+returnMap);
                         }
                     }
                 }
