@@ -1,5 +1,6 @@
 package com.shiguang.report.service.impl;
 
+import com.shiguang.member.domain.MemberDO;
 import com.shiguang.product.domain.*;
 import com.shiguang.report.dao.SaleReportDao;
 import com.shiguang.report.domain.SaleReportDO;
@@ -200,5 +201,25 @@ public class SaleReportServiceImpl implements SaleReportService {
     @Override
     public List<SalesDO> YgUse(Map<String, Object> map) {
         return saleReportDao.YgUse(map);
+    }
+
+    @Override
+    public List<Map> vistList(Map<String,Object> map){
+        return saleReportDao.vistList(map);
+    }
+
+    @Override
+    public List<Map> followList(Map<String,Object> map){
+        return saleReportDao.followList(map);
+    }
+
+    @Override
+    public List<MemberDO> visitDetailList(Map<String,Object> map) {
+        return saleReportDao.visitDetailList(map);
+    }
+
+    @Override
+    public List<MemberDO> followDetailList(Map<String,Object> map) {
+        return saleReportDao.followDetailList(map);
     }
 }

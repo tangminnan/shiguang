@@ -6,7 +6,7 @@
     <groupId>com.shiguang</groupId>
     <artifactId>shiguang-manager</artifactId>
     <version>1.6.9</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>shiguang-manager</name>
     <description>Demo project for Spring Boot</description>

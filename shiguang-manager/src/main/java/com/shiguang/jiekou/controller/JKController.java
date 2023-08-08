@@ -41,12 +41,13 @@ public class JKController {
     private JianchaJKService jianchaJKService;
     @Autowired
     private SettlementJKService settlementJKService;
-    @Autowired
-    private RestTemplate restTemplate;
+//    @Autowired
+//    private RestTemplate restTemplate;
 
     @ResponseBody
     @PostMapping("/member/savehis")
-    public Map<String,Object> savehis(@RequestBody JSONObject obj){
+    public Map<String,Object> savehis(@RequestBody(required=false) JSONObject obj){
+        System.out.println("传参得参数："+obj);
         MemberJKDO member = new MemberJKDO();
         Map<String,Object> map=new HashMap<>();
         member.setName(obj.getString("name"));
@@ -132,13 +133,18 @@ public class JKController {
             map.put("msg","会员已存在");
             map.put("code",1);
         }else if(memberJkService.save(member)>0){
-            List<MemberJKDO> memberJKDOList = new ArrayList<>();
-            memberJKDOList.add(member);
-            HttpEntity<List<MemberJKDO>> entity = new HttpEntity<>(memberJKDOList, httpHeaders);
-            ResponseEntity<String> responseEntity = restTemplate.postForEntity("/http://111.41.199.127:8066/jiekou/saveMember", entity, String.class);
-            String response = responseEntity.getBody();
-            Map returnMap = JSON.parseObject(response, Map.class);
-            System.out.println("接口返回数据："+returnMap);
+            try {
+                List<MemberJKDO> memberJKDOList = new ArrayList<>();
+                memberJKDOList.add(member);
+                HttpEntity<List<MemberJKDO>> entity = new HttpEntity<>(memberJKDOList, httpHeaders);
+                RestTemplate restTemplate = new RestTemplate();
+                ResponseEntity<String> responseEntity = restTemplate.postForEntity("/http://111.41.199.127:8066/jiekou/saveMember", entity, String.class);
+                String response = responseEntity.getBody();
+                Map returnMap = JSON.parseObject(response, Map.class);
+                System.out.println("接口返回数据："+returnMap);
+            }catch (Exception e) {
+                System.out.println("接口返回数据报错");
+            }
             map.put("msg","保存数据成功");
             map.put("code",0);
         }else{
@@ -453,6 +459,7 @@ public class JKController {
 
         httpHeadersR.setContentType(MediaType.APPLICATION_JSON_UTF8);
         HttpEntity<Map<String, Object>> entityR = new HttpEntity<>(data, httpHeadersR);
+        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> responseEntityR = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/getshaicha", entityR, String.class);
         String responseR = responseEntityR.getBody();
         List<Map<String,Object>> AllData = JSON.parseObject(responseR, List.class);

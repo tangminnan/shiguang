@@ -2523,8 +2523,79 @@
             AND (sale_type = 1)
         </where>
 
-
-
     </select>
 
+	<select id="vistList" resultType="map">
+		SELECT
+			jc.card_number
+		FROM
+			jc_tryresults jc
+		JOIN member m ON m.card_number = jc.card_number
+		<where>
+			<if test="yearMonth != null and yearMonth !='' ">
+				and date_format(m.register_time, '%Y-%m') = #{yearMonth}
+			</if>
+			<if test="startDate != null and startDate !=''">and jc.create_time >= #{startDate}</if>
+			<if test="endDate != null and endDate !=''">and jc.create_time &lt;= #{endDate}</if>
+		</where>
+		GROUP BY
+			jc.card_number
+	</select>
+	<select id="followList" resultType="map">
+		SELECT
+			jc.card_number
+		FROM
+			jc_tryresults jc
+		JOIN member m ON m.card_number = jc.card_number
+		<where>
+			<if test="yearMonth != null and yearMonth !='' ">
+				and date_format(m.register_time, '%Y-%m') != #{yearMonth}
+			</if>
+			<if test="startDate != null and startDate !=''">and jc.create_time >= #{startDate}</if>
+			<if test="endDate != null and endDate !=''">and jc.create_time &lt;= #{endDate}</if>
+		</where>
+		GROUP BY
+			jc.card_number
+	</select>
+	<select id="visitDetailList" resultType="com.shiguang.member.domain.MemberDO">
+		SELECT
+		m.card_number,
+		m.`name`,
+		m.`sex`,
+		m.`age`,
+		m.`phone_1`
+		FROM
+		jc_tryresults jc
+		JOIN member m ON m.card_number = jc.card_number
+		<where>
+			<if test="yearMonth != null and yearMonth !='' ">
+				and date_format(m.register_time, '%Y-%m') = #{yearMonth}
+			</if>
+			<if test="startDate != null and startDate !=''">and jc.create_time >= #{startDate}</if>
+			<if test="endDate != null and endDate !=''">and jc.create_time &lt;= #{endDate}</if>
+		</where>
+		GROUP BY
+		jc.card_number
+	</select>
+
+	<select id="followDetailList" resultType="com.shiguang.member.domain.MemberDO">
+		SELECT
+		m.card_number,
+		m.`name`,
+		m.`sex`,
+		m.`age`,
+		m.`phone_1`
+		FROM
+		jc_tryresults jc
+		JOIN member m ON m.card_number = jc.card_number
+		<where>
+			<if test="yearMonth != null and yearMonth !='' ">
+				and date_format(m.register_time, '%Y-%m') != #{yearMonth}
+			</if>
+			<if test="startDate != null and startDate !=''">and jc.create_time >= #{startDate}</if>
+			<if test="endDate != null and endDate !=''">and jc.create_time &lt;= #{endDate}</if>
+		</where>
+		GROUP BY
+		jc.card_number
+	</select>
 </mapper>

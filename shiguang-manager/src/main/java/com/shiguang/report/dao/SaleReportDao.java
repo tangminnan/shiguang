@@ -1,5 +1,6 @@
 package com.shiguang.report.dao;
 
+import com.shiguang.member.domain.MemberDO;
 import com.shiguang.product.domain.*;
 import com.shiguang.report.domain.SaleReportDO;
 import com.shiguang.settlement.domain.SettlementDO;
@@ -66,7 +67,13 @@ public interface SaleReportDao {
     List<SalesDO> Yg(Map<String,Object> map);
     List<SalesDO> YgUse(Map<String,Object> map);
 
+    List<Map> vistList(Map<String,Object> map);
 
+    List<Map> followList(Map<String,Object> map);
+
+    List<MemberDO> visitDetailList(Map<String,Object> map);
+
+    List<MemberDO> followDetailList(Map<String,Object> map);
 
 
 }

@@ -481,6 +481,7 @@ public class MemberController {
         map2.put("ptometryNumber",settlementDO.getPtometryNumber());
         if (!"".equals(settlementDO.getOptometrywlName()) && null != settlementDO.getOptometrywlName()){
             model.addAttribute("optometryName",settlementDO.getOptometrywlName());
+            conclusion.setDoctorName(settlementDO.getDoctorName());
             if (1 == settlementDO.getRecipelwlType()){
                 List<KjjyDO> kjjyDOList = kjjyService.list(map2);
                 if (null != kjjyDOList && kjjyDOList.size() > 0){
@@ -773,6 +774,7 @@ public class MemberController {
                         conclusion.setRightsph(conclusion1.getRightsph());
                         conclusion.setRightcyl(conclusion1.getRightcyl());
                         conclusion.setRightzx(conclusion1.getRightzx());
+                        conclusion.setDoctorName(conclusion1.getDoctorName());
                         if (null != conclusion1.getRightva() && !"".equals(conclusion1.getRightva()) ){
                             conclusion.setRightva(conclusion1.getRightva());
                         }else {
@@ -1673,14 +1675,19 @@ public class MemberController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
         if(memberService.save(member)>0){
-            List<MemberDO> memberDOList = new ArrayList<>();
-            memberDOList.add(member);
-            HttpEntity<List<MemberDO>> entity = new HttpEntity<>(memberDOList, httpHeaders);
-            ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveMember", entity, String.class);
-            String response = responseEntity.getBody();
-            Map returnMap = JSON.parseObject(response, Map.class);
-            System.out.println("接口返回数据："+returnMap);
-            return R.ok();
+            try {
+                List<MemberDO> memberDOList = new ArrayList<>();
+                memberDOList.add(member);
+                HttpEntity<List<MemberDO>> entity = new HttpEntity<>(memberDOList, httpHeaders);
+                ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://111.41.199.127:8066/jiekou/saveMember", entity, String.class);
+                String response = responseEntity.getBody();
+                Map returnMap = JSON.parseObject(response, Map.class);
+                System.out.println("接口返回数据："+returnMap);
+                return R.ok();
+            }catch (Exception e) {
+                System.out.println("接口返回数据报错");
+            }
+
         }
         return R.error();
     }

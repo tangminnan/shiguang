@@ -17,7 +17,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping("/information/saleName")
-public class SaleNameController {
+public class   SaleNameController {
     @Autowired
     private SaleReportService saleReportService;
 
