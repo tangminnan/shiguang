@@ -173,9 +173,15 @@ public class MemberController {
         model.addAttribute("interestDOList",interestDOList);
         model.addAttribute("companyId",ShiroUtils.getUser().getCompanyId());
         DepartmentDO departmentDO = departmentService.getDepartName(ShiroUtils.getUser().getStoreNum());
-        model.addAttribute("provice",departmentDO.getProviceName());
-        model.addAttribute("city",departmentDO.getCityName());
-        model.addAttribute("area",departmentDO.getAreaName());
+        if (null != departmentDO){
+            model.addAttribute("provice",departmentDO.getProviceName());
+            model.addAttribute("city",departmentDO.getCityName());
+            model.addAttribute("area",departmentDO.getAreaName());
+        } else {
+            model.addAttribute("provice","");
+            model.addAttribute("city","");
+            model.addAttribute("area","");
+        }
         return "member/add";
     }
 

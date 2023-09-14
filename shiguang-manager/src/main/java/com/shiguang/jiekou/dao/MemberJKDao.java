@@ -22,4 +22,5 @@ public interface MemberJKDao {
     List<Map> getLine(String now);
 
     void updateLine(String liner);
+
 }

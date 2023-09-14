@@ -494,4 +494,14 @@ public class JKController {
         return R.ok();
     }
 
+    @GetMapping("/member/signed")
+    public String signed(String name,Model model){
+        if (null != name){
+            model.addAttribute("name",name);
+        } else {
+            model.addAttribute("name","");
+        }
+        return "jiekou/success";
+    }
+
 }

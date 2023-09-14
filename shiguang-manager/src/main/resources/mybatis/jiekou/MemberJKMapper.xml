@@ -184,4 +184,5 @@
 		where member_number = #{liner}
 	</update>
 
+
 </mapper>

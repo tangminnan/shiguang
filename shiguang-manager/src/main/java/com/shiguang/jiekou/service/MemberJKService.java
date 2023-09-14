@@ -17,4 +17,5 @@ public interface MemberJKService {
     List<Map> getLine(String now);
 
     void updateLine(String liner);
+
 }

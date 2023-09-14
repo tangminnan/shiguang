@@ -1004,7 +1004,14 @@
 		jc_tryresults  t
 		LEFT JOIN jc_result r ON t.ptometry_number = r.ptometry_number
 		LEFT JOIN store_sales s ON r.ptometry_number = s.ptometry_number
-        where  t.card_number=#{cardNumber}
+		<where>
+            <if test="cardNumber != null and cardNumber !=''">
+                and t.card_number=#{cardNumber}
+            </if>
+            <if test="optometryName != null and optometryName != ''">
+                and t.optometry_name = #{optometryName}
+            </if>
+        </where>
         group by t.ptometry_number
         order by  t.id desc
 	</select>

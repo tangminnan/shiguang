@@ -17,6 +17,7 @@ import com.shiguang.line.service.OptometryLineService;
 import com.shiguang.mfrs.domain.BrandDO;
 import com.shiguang.optometry.domain.OptometryDO;
 import com.shiguang.optometry.service.OptometryService;
+import com.shiguang.system.domain.UserDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -220,6 +221,10 @@ public class TryresultsController {
         //查询列表数据
         Map<String, Object> map = new HashMap<>();
         map.put("cardNumber", cardNumber);
+        UserDO userDO = ShiroUtils.getUser();
+        if (!"超级管理员".equals(userDO.getName())){
+            map.put("optometryName",userDO.getName());
+        }
         List<TryresultsDO> tryresultsDOList = tryresultsService.yanguangListShuju(map);
         model.addAttribute("tryresultsDOList", tryresultsDOList);
         if (null != tryresultsDOList){

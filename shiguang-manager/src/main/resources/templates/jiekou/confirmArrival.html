@@ -22,7 +22,7 @@
                             </div>
                             <div class="form-group">
                                 <div >
-                                    <button type="submit" style="display:block;margin:0px auto" class="btn btn-primary" onclick="tijiao()">确认到场</button>
+                                    <button type="button" style="display:block;margin:0px auto" class="btn btn-primary" onclick="tijiao()">确认到场</button>
                                 </div>
                             </div>
                         </form>
@@ -35,7 +35,13 @@
 <div th:include="include::footer"></div>
 <script type="text/javascript">
     function tijiao() {
-        var liner=$("input[name='role']:checked").val();;
+        var liner=$("input[name='role']:checked").val();
+        var name = "";
+        if ($("input[name='role']:checked")[0] != undefined){
+            name = $("input[name='role']:checked")[0].nextSibling.nodeValue;
+        } else {
+            return layer.alert("请选择签到的姓名");
+        }
         $.ajax({
             cache : true,
             type : "POST",
@@ -49,8 +55,7 @@
             },
             success : function(data) {
                 if (data.code == 0) {
-                    parent.layer.msg("操作成功");
-                    location.reload();
+                    location.href='/informationJK/member/signed?name='+name;
                 } else {
                     parent.layer.alert(data.msg)
                 }
