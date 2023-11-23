@@ -110,6 +110,39 @@ public class PeiJingSingleController {
         return pageUtils;
     }
 
+    @ResponseBody
+    @GetMapping("/peijingCeshilist")
+    public PageUtils peijingCeshilist(@RequestParam Map<String, Object> params){
+        //查询列表数据
+        Query query = new Query(params);
+        query.put("companyid","1");
+        List<SalesDO> salesDOList = statusService.findSalePeijingAll(query);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for (SalesDO salesDO : salesDOList){
+            salesDO.setMirrorDate(simpleDateFormat.format(salesDO.getMirrorTime()));
+            salesDO.setPeijingDate(simpleDateFormat.format(salesDO.getPeijingTime()));
+            if (null == salesDO.getLogStatus() || "".equals(salesDO.getLogStatus())){
+                if ("辅料".equals(salesDO.getEyeType()) || "隐形(成品)".equals(salesDO.getEyeType())){
+                    salesDO.setLogStatus("销售完成");
+                } else {
+                    salesDO.setLogStatus("委外配送");
+                }
+            }
+            if ("1".equals(salesDO.getSaleType())){
+                salesDO.setSaleType("已缴费");
+            }else if ("3".equals(salesDO.getSaleType())){
+                salesDO.setSaleType("已退款");
+            }else if ("0".equals(salesDO.getSaleType())){
+                salesDO.setSaleType("未缴费");
+            } else if ("2".equals(salesDO.getSaleType())){
+                salesDO.setSaleType("已付定金");
+            }
+        }
+        int total = statusService.findSalePeijingCount(query);
+        PageUtils pageUtils = new PageUtils(salesDOList, total);
+        return pageUtils;
+    }
+
     /**
      * 制造商
      */

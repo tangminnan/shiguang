@@ -1,6 +1,8 @@
 package com.shiguang.report.controller;
 
 import com.shiguang.baseinfomation.service.DepartmentService;
+import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.common.utils.StringUtils;
 import com.shiguang.member.domain.MemberDO;
 import com.shiguang.report.service.SaleReportService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -37,6 +39,9 @@ public class VisualExaminationController {
         map.put("yearMonth",startDate.substring(0,7));
         map.put("startDate",startDate);
         map.put("endDate",endDate);
+        if (StringUtils.isNotEmpty(ShiroUtils.getUser().getCompanyId())){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         List<Map> visitList = saleReportService.vistList(map);
         List<Map> followList = saleReportService.followList(map);
         model.addAttribute("visitCount",visitList.size());
@@ -61,6 +66,9 @@ public class VisualExaminationController {
         map.put("yearMonth",yearMonth);
         map.put("startDate",startDate);
         map.put("endDate",endDate);
+        if (StringUtils.isNotEmpty(ShiroUtils.getUser().getCompanyId())){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         List<MemberDO> memberDOList = saleReportService.visitDetailList(map);
         for (MemberDO m : memberDOList){
             if (m.getSex() == 0){
@@ -89,6 +97,9 @@ public class VisualExaminationController {
         map.put("yearMonth",yearMonth);
         map.put("startDate",startDate);
         map.put("endDate",endDate);
+        if (StringUtils.isNotEmpty(ShiroUtils.getUser().getCompanyId())){
+            map.put("companyId",ShiroUtils.getUser().getCompanyId());
+        }
         List<MemberDO> memberDOList = saleReportService.followDetailList(map);
         for (MemberDO m : memberDOList){
             if (m.getSex() == 0){

@@ -6,13 +6,13 @@
 	<select id="get" resultType="com.shiguang.system.domain.MenuDO">
 		select
 		`menu_id`,`parent_id`,`name`,`url`,`perms`,`type`,`icon`,`order_num`,`gmt_create`,`gmt_modified`
-		from sys_menu where menu_id = #{value}
+		from sys_menu_copy where menu_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.shiguang.system.domain.MenuDO">
 		select
 		`menu_id`,`parent_id`,`name`,`url`,`perms`,`type`,`icon`,`order_num`,`gmt_create`,`gmt_modified`
-		from sys_menu
+		from sys_menu_copy
 		<where>
 			<if test="menuId != null and menuId != ''"> and menu_id = #{menuId} </if>
 			<if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
@@ -39,7 +39,7 @@
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*) from sys_menu
+		select count(*) from sys_menu_copy
 		<where>
 			<if test="menuId != null and menuId != ''"> and menu_id = #{menuId} </if>
 			<if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
@@ -56,7 +56,7 @@
 
 	<insert id="save" parameterType="com.shiguang.system.domain.MenuDO"
 		useGeneratedKeys="true" keyProperty="menuId">
-		insert into sys_menu
+		insert into sys_menu_copy
 		(
 		`parent_id`,
 		`name`,
@@ -83,7 +83,7 @@
 	</insert>
 
 	<update id="update" parameterType="com.shiguang.system.domain.MenuDO">
-		update sys_menu
+		update sys_menu_copy
 		<set>
 			<if test="parentId != null">`parent_id` = #{parentId}, </if>
 			<if test="name != null">`name` = #{name}, </if>
@@ -99,11 +99,11 @@
 	</update>
 
 	<delete id="remove">
-		delete from sys_menu where menu_id = #{value}
+		delete from sys_menu_copy where menu_id = #{value}
 	</delete>
 
 	<delete id="batchRemove">
-		delete from sys_menu where menu_id in
+		delete from sys_menu_copy where menu_id in
 		<foreach item="menuId" collection="array" open="(" separator=","
 			close=")">
 			#{menuId}
@@ -114,7 +114,7 @@
 		select distinct
 		m.menu_id , parent_id, name, url,
 		perms,`type`,icon,order_num,gmt_create, gmt_modified
-		from sys_menu m
+		from sys_menu_copy m
 		left
 		join sys_role_menu rm on m.menu_id = rm.menu_id left join
 		sys_user_role ur
@@ -127,7 +127,7 @@
 
 	<select id="listUserPerms" resultType="string">
 		select distinct m.perms
-		from sys_menu m left join
+		from sys_menu_copy m left join
 		sys_role_menu rm on m.menu_id = rm.menu_id
 		left join sys_user_role ur
 		on rm.role_id = ur.role_id where ur.user_id

@@ -161,7 +161,6 @@ function batchInitial() {
            layer.close(index);//需要手动关闭窗口
            layer.confirm("确认要加工初检选中的数据吗?", {
                btn : [ '确定', '取消' ]
-
                // 按钮
            }, function() {
                var ids = new Array();

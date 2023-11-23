@@ -85,6 +85,8 @@ public class OptometryNewController {
         List<HospitalEyeDO> hospitalEyeDOList = companyService.findHospital(companyId);
         if (hospitalEyeDOList.size() > 0){
             query.put("companyId",companyId);
+        } else {
+            query.put("companyId",companyId);
         }
         query.put("status", 0);
         query.put("state", 1);

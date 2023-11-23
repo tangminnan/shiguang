@@ -45,13 +45,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 结款管理
@@ -61,7 +55,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date 2021-06-17 11:27:49
  */
  
-@Controller
+@RestController
 @RequestMapping("/information/settlement")
 public class SettlementController {
 	@Autowired
@@ -159,6 +153,19 @@ public class SettlementController {
 		//int total = memberService.payCount(query);
 		List<JieKuanMoneyDO> memberCountDOList = memberService.payCountList(query);
 		PageUtils pageUtils = new PageUtils(memberDOList, memberCountDOList.size());
+		return pageUtils;
+	}
+
+
+	@GetMapping("/settleList")
+	public PageUtils settleList(Long limit){
+		Integer offset = new Random().nextInt(100);
+		Map<String,Object> param = new HashMap<>();
+		param.put("offset",offset);
+		param.put("limit",limit);
+		param.put("saleName","尤政雨");
+		List<SettlementDO> settlementDOList = settlementService.list(param);
+		PageUtils pageUtils = new PageUtils(settlementDOList, settlementDOList.size());
 		return pageUtils;
 	}
 	
@@ -527,6 +534,102 @@ public class SettlementController {
 //			costDO.setType("定金单");
 //		}
 //		costService.updateMember(costDO);
+		settlement.setSaleName(ShiroUtils.getUser().getName());
+		settlement.setSaleAcount(ShiroUtils.getUser().getUsername());
+		settlement.setSettleDate(new Date());
+		String[] paymodel = settlement.getPayModel().split(",");
+		String[] modelMoney = settlement.getModelMoney().split(",");
+		java.text.NumberFormat numberformat=java.text.NumberFormat.getInstance();
+		numberformat.setMaximumFractionDigits(1);
+		for (int i = 0;i<paymodel.length;i++){
+			if ("6".equals(paymodel[i])){
+				String cardNumber = settlement.getChuzhiNumber();
+				CardDO cardDO = cardService.getCardNum(cardNumber);
+				if (null != cardDO){
+					if (cardDO.getPassword().equals(settlement.getChuzhiPasd())){
+						if (Double.valueOf(cardDO.getCardMoney()) >= Double.valueOf(modelMoney[i])){
+							double money = Double.valueOf(cardDO.getCardMoney()) - Double.valueOf(modelMoney[i]);
+							cardDO.setCardMoney(money+"");
+							cardService.update(cardDO);
+							if(settlementService.save(settlement)>0){
+								return R.ok();
+							}
+						} else {
+							return R.error("余额不足");
+						}
+
+					} else {
+						return R.error("密码输入错误");
+					}
+				} else{
+					return R.error("该用户没有绑定储值卡");
+				}
+			}
+			else if ("9".equals(paymodel[i])){
+				double jifenMoney = Double.valueOf(modelMoney[i]) * 20;
+				int integral = (int) jifenMoney;
+				MemberDO memberDO = memberService.getCardNumber(settlement.getMemberNumber());
+				if (null != memberDO.getIntegral()){
+					Integer integralnew = Integer.parseInt(memberDO.getIntegral()) - integral;
+					memberDO.setIntegral(String.valueOf(integralnew));
+					memberService.updateInteger(memberDO);
+				}
+			}
+		}
+		InfoDO infoDO = new InfoDO();
+		infoDO.setSaleNumber(settlement.getSaleNumber());
+		infoDO.setTrainStatus("银台结款");
+		infoDO.setTrainTime(new Date());
+		infoDO.setTrainName(ShiroUtils.getUser().getName());
+		infoService.save(infoDO);
+		if(settlementService.save(settlement)>0){
+			return R.ok();
+		}
+		return R.error();
+	}
+
+	@Transactional
+	@PostMapping("/saveCeshi")
+	public R saveCeshi(@RequestBody SettlementDO settlement){
+		SalesDO salesDO = new SalesDO();
+		SalesDO salesDO1 = salesService.getSaleNumber(settlement.getSaleNumber());
+		if (null != salesDO1){
+			if ("定金".equals(settlement.getPayWay())){
+				salesDO.setSaleType("2");
+				settlement.setFrontMoney(settlement.getPayMoney());
+			} else {
+				salesDO.setSaleType("1");
+			}
+			salesDO.setSaleNumber(settlement.getSaleNumber());
+			salesService.updateSale(salesDO);
+			if (null != salesDO1.getClasstype()){
+				String[] classArray = salesDO1.getClasstype().split(",");
+				String[] storeDescribe = salesDO1.getStoreDescribe().split(",");
+				boolean resultLeft = false;
+				boolean jpresult = false;
+				resultLeft = Arrays.asList(classArray).contains("2");
+				jpresult = Arrays.asList(storeDescribe).contains("镜片");
+				if (resultLeft == false && jpresult == true){
+					LogStatusDO logStatusDO = new LogStatusDO();
+					logStatusDO.setSaleNumber(settlement.getSaleNumber());
+					logStatusDO.setLogisticStatus("销售完成");
+					logStatusService.save(logStatusDO);
+				}
+			}
+		} else {
+			Map<String,Object> map = new HashMap<>();
+			map.put("saleNumber",settlement.getSaleNumber());
+			List<CostDO> costDOList = costService.list(map);
+			if(null != costDOList && costDOList.size() > 0){
+				for (CostDO costDO : costDOList) {
+					CostDO costDO1 = new CostDO();
+					costDO1.setId(costDO.getId());
+					costDO1.setIsSale(1L);
+					costService.update(costDO1);
+				}
+			}
+		}
+
 		settlement.setSaleName(ShiroUtils.getUser().getName());
 		settlement.setSaleAcount(ShiroUtils.getUser().getUsername());
 		settlement.setSettleDate(new Date());

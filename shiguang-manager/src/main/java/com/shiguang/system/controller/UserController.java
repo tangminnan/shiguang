@@ -68,11 +68,23 @@ public class UserController extends BaseController {
 		List<UserDO> sysUserList = new ArrayList<>();
 		int total = 0;
 		if (null != ShiroUtils.getUser().getCompanyId()){
+			Map<String,Object> map = new HashMap<>();
 			query.put("roleType",5);
 			String companyIds = ShiroUtils.getUser().getCompanyId();
 			query.put("companyId",companyIds);
-			sysUserList = userService.listManage(query);
-			total = userService.countManage(query);
+			sysUserList = userService.list(query);
+			for(UserDO udo:sysUserList){
+				List<RoleDO> rdol =roleService.listbyid(udo.getUserId(),map);
+				for(int i=0;i<rdol.size();i++){
+					rname =rname+ rdol.get(i).getRoleName();
+					if(i<rdol.size()-1){
+						rname =rname+",";
+					}
+				}
+				udo.setRoleName(rname);
+				rname = "";
+			}
+			total = userService.count(query);
 		} else {
 			sysUserList = userService.list(query);
 			Map<String,Object> map = new HashMap<>();
