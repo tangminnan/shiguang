@@ -4,7 +4,11 @@ import com.shiguang.common.utils.PageUtils;
 import com.shiguang.common.utils.QRCodeUtil;
 import com.shiguang.common.utils.Query;
 import com.shiguang.common.utils.ShiroUtils;
+import com.shiguang.mfrs.domain.GoodsDO;
 import com.shiguang.mfrs.domain.PositionDO;
+import com.shiguang.mfrs.domain.RefractivityDO;
+import com.shiguang.mfrs.service.GoodsService;
+import com.shiguang.mfrs.service.RefractivityService;
 import com.shiguang.stock.domain.OrderDO;
 import com.shiguang.stock.domain.StockDO;
 import com.shiguang.stock.service.StockService;
@@ -24,10 +28,22 @@ import java.util.Map;
 public class PrintController {
     @Autowired
     private StockService stockService;
+    @Autowired
+    private GoodsService goodsService;
+    @Autowired
+    private RefractivityService refractivityService;
 
     @GetMapping()
     @RequiresPermissions("print:print:print")
     String Print(Model model) {
+        Map<String, Object> map = new HashMap<>();
+        //商品
+//        map.put("goodstypeName", "隐形");
+        List<GoodsDO> goodsDOList = goodsService.list(map);
+        model.addAttribute("goodsDOList", goodsDOList);
+        //折射率
+        List<RefractivityDO> refractivityDOList = refractivityService.list(map);
+        model.addAttribute("refractivityDOList", refractivityDOList);
         return "stock/print/print";
     }
 

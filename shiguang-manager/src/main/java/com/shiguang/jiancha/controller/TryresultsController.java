@@ -222,9 +222,9 @@ public class TryresultsController {
         Map<String, Object> map = new HashMap<>();
         map.put("cardNumber", cardNumber);
         UserDO userDO = ShiroUtils.getUser();
-        if (!"超级管理员".equals(userDO.getName())){
-            map.put("optometryName",userDO.getName());
-        }
+//        if (!"超级管理员".equals(userDO.getName())){
+//            map.put("optometryName",userDO.getName());
+//        }
         List<TryresultsDO> tryresultsDOList = tryresultsService.yanguangListShuju(map);
         model.addAttribute("tryresultsDOList", tryresultsDOList);
         if (null != tryresultsDOList){

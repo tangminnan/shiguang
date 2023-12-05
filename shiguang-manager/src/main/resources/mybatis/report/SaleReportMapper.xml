@@ -297,7 +297,7 @@
 		<where>
 			<if test="companyId !=null and companyId != ''">and u.company_id in (#{companyId})</if>
 			<if test="department !=null and department != ''">and u.store = #{department}</if>
-			and (ur.role_id = 7)
+			and (ur.role_id = 7) and u.new_old is not null and u.new_old != ''
 		</where>
 		GROUP BY u.username
 	</select>
@@ -312,7 +312,8 @@
 	<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format(try.create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 	<if test="department !=null and department != ''">and u.store = #{department}</if>
 	<if test="username !=null and username != ''">and u.username = #{username}</if>
-	and (ur.role_id = 7)
+		<if test="newOld !=null and newOld != ''">and try.new_old = #{newOld}</if>
+	and (ur.role_id = 7) and u.new_old is not null and u.new_old != ''
 	</where>
 	</select>
 
@@ -348,7 +349,11 @@
 		jc_kjyy kjyy
 		JOIN sys_user u ON kjyy.kjyy_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON kjyy.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON kjyy.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  kjyy.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		kjjy.ptometry_number,
 		u.company_id,
@@ -362,7 +367,11 @@
 		jc_kjjy kjjy
 		JOIN sys_user u ON kjjy.kjjy_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON kjjy.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON kjjy.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  kjjy.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		sgjj.ptometry_number,
 		u.company_id,
@@ -376,7 +385,11 @@
 		jc_sgjj sgjj
 		JOIN sys_user u ON sgjj.sgjj_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON sgjj.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON sgjj.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  sgjj.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		rx.ptometry_number,
 		u.company_id,
@@ -390,7 +403,11 @@
 		jc_rxjmjcj rx
 		JOIN sys_user u ON rx.rx_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON rx.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON rx.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  rx.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		zy.ptometry_number,
 		u.company_id,
@@ -404,7 +421,11 @@
 		jc_zy zy
 		JOIN sys_user u ON zy.zy_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON zy.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON zy.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  zy.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		sjxl.ptometry_number,
 		u.company_id,
@@ -418,7 +439,11 @@
 		jc_sjxl sjxl
 		JOIN sys_user u ON sjxl.sjxl_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON sjxl.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON sjxl.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  sjxl.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		vst.ptometry_number,
 		u.company_id,
@@ -432,7 +457,11 @@
 		jc_vst vst
 		JOIN sys_user u ON vst.vst_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON vst.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON vst.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  vst.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		crt.ptometry_number,
 		u.company_id,
@@ -446,7 +475,11 @@
 		jc_crt crt
 		JOIN sys_user u ON crt.crt_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON crt.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON crt.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  crt.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		rgp.ptometry_number,
 		u.company_id,
@@ -460,7 +493,11 @@
 		jc_rgp rgp
 		JOIN sys_user u ON rgp.rgp_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON rgp.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON rgp.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  rgp.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		yp.ptometry_number,
 		u.company_id,
@@ -475,6 +512,9 @@
 		JOIN sys_user u ON yp.yp_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
 		JOIN store_sales s ON yp.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  yp.new_old = #{newOld}</if>
+		</where>
 		) aia
 		<where>
 			<if test="companyId !=null and companyId != ''">and  company_id in (#{companyId})</if>
@@ -482,7 +522,7 @@
 			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="department !=null and department != ''">and  store = #{department}</if>
 			<if test="username !=null and username != ''">and  username = #{username}</if>
-			<if test="newOld !=null and newOld != ''">and  new_old = #{newOld}</if>
+
 			and ( role_id = 7)and ( sale_type=1)
 		</where>
         GROUP BY sale_number
@@ -521,7 +561,11 @@
 		jc_kjyy kjyy
 		JOIN sys_user u ON kjyy.kjyy_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON kjyy.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON kjyy.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  kjyy.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		kjjy.ptometry_number,
 		u.company_id,
@@ -536,7 +580,11 @@
 		jc_kjjy kjjy
 		JOIN sys_user u ON kjjy.kjjy_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON kjjy.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON kjjy.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  kjjy.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		sgjj.ptometry_number,
 		u.company_id,
@@ -551,7 +599,11 @@
 		jc_sgjj sgjj
 		JOIN sys_user u ON sgjj.sgjj_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON sgjj.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON sgjj.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  sgjj.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		rx.ptometry_number,
 		u.company_id,
@@ -566,7 +618,11 @@
 		jc_rxjmjcj rx
 		JOIN sys_user u ON rx.rx_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON rx.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON rx.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  rx.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		zy.ptometry_number,
 		u.company_id,
@@ -581,7 +637,11 @@
 		jc_zy zy
 		JOIN sys_user u ON zy.zy_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON zy.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON zy.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  zy.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		sjxl.ptometry_number,
 		u.company_id,
@@ -596,7 +656,11 @@
 		jc_sjxl sjxl
 		JOIN sys_user u ON sjxl.sjxl_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON sjxl.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON sjxl.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  sjxl.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		vst.ptometry_number,
 		u.company_id,
@@ -611,7 +675,11 @@
 		jc_vst vst
 		JOIN sys_user u ON vst.vst_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON vst.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON vst.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  vst.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		crt.ptometry_number,
 		u.company_id,
@@ -626,7 +694,11 @@
 		jc_crt crt
 		JOIN sys_user u ON crt.crt_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON crt.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON crt.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  crt.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		rgp.ptometry_number,
 		u.company_id,
@@ -641,7 +713,11 @@
 		jc_rgp rgp
 		JOIN sys_user u ON rgp.rgp_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON rgp.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON rgp.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  rgp.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		yp.ptometry_number,
 		u.company_id,
@@ -657,6 +733,9 @@
 		JOIN sys_user u ON yp.yp_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
 		JOIN store_sales s ON yp.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  yp.new_old = #{newOld}</if>
+		</where>
 		) aia
 		<where>
 			<if test="companyId !=null and companyId != ''">and  company_id in (#{companyId})</if>
@@ -664,7 +743,6 @@
 			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="department !=null and department != ''">and  store = #{department}</if>
 			<if test="username !=null and username != ''">and  username = #{username}</if>
-			<if test="newOld !=null and newOld != ''">and  new_old = #{newOld}</if>
 			and ( role_id = 7)and ( sale_type=1)
 		</where>
 		GROUP BY
@@ -712,7 +790,11 @@
 		jc_kjyy kjyy
 		JOIN sys_user u ON kjyy.kjyy_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON kjyy.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON kjyy.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  kjyy.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		u.company_id,
 		u.store,
@@ -734,7 +816,11 @@
 		jc_kjjy kjjy
 		JOIN sys_user u ON kjjy.kjjy_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON kjjy.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON kjjy.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  kjjy.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		u.company_id,
 		u.store,
@@ -756,7 +842,11 @@
 		jc_sgjj sgjj
 		JOIN sys_user u ON sgjj.sgjj_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON sgjj.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON sgjj.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  sgjj.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		u.company_id,
 		u.store,
@@ -778,7 +868,11 @@
 		jc_rxjmjcj rx
 		JOIN sys_user u ON rx.rx_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON rx.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON rx.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  rx.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		u.company_id,
 		u.store,
@@ -800,7 +894,11 @@
 		jc_zy zy
 		JOIN sys_user u ON zy.zy_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON zy.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON zy.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  zy.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		u.company_id,
 		u.store,
@@ -822,7 +920,11 @@
 		jc_sjxl sjxl
 		JOIN sys_user u ON sjxl.sjxl_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON sjxl.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON sjxl.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  sjxl.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		u.company_id,
 		u.store,
@@ -844,7 +946,11 @@
 		jc_vst vst
 		JOIN sys_user u ON vst.vst_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON vst.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON vst.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  vst.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		u.company_id,
 		u.store,
@@ -866,7 +972,11 @@
 		jc_crt crt
 		JOIN sys_user u ON crt.crt_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON crt.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON crt.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  crt.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		u.company_id,
 		u.store,
@@ -888,7 +998,11 @@
 		jc_rgp rgp
 		JOIN sys_user u ON rgp.rgp_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
-		JOIN store_sales s ON rgp.ptometry_number = s.ptometry_number UNION ALL
+		JOIN store_sales s ON rgp.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  rgp.new_old = #{newOld}</if>
+		</where>
+		UNION ALL
 		SELECT
 		u.company_id,
 		u.store,
@@ -911,6 +1025,9 @@
 		JOIN sys_user u ON yp.yp_optometry_name = u.
 		NAME JOIN sys_user_role ur ON u.user_id = ur.user_id
 		JOIN store_sales s ON yp.ptometry_number = s.ptometry_number
+		<where>
+			<if test="newOld !=null and newOld != ''">and  yp.new_old = #{newOld}</if>
+		</where>
 		) aia
 		<where>
 			<if test="companyId !=null and companyId != ''">and  company_id in (#{companyId})</if>
@@ -918,7 +1035,6 @@
 			<if test="settleDateEnd !=null and settleDateEnd != ''"> and date_format( create_time ,'%Y-%m-%d' ) &lt;= (#{settleDateEnd})</if>
 			<if test="department !=null and department != ''">and  store = #{department}</if>
 			<if test="username !=null and username != ''">and  username = #{username}</if>
-			<if test="newOld !=null and newOld != ''">and  new_old = #{newOld}</if>
 			<if test="storeDescribe != null and storeDescribe != ''">and  store_describe LIKE concat(concat('%', #{storeDescribe}),'%')</if>
 			<if test="brandname != null and brandname != ''">and   store_name LIKE concat(concat('%', #{brandname}),'%')</if>
 			and ( role_id = 7) and ( sale_type=1)
